@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+header {
+	font-size: 200%;
+	margin: 2% auto;
+	width: 100%;
+	text-align: center;
+}
+
+.welcome {
+	margin: 2% auto;
+	width: 60%;
+}
+
+.begin_enrollment {
+	width: 60%;
+	margin: 1% auto;
+}
