@@ -1,4 +1,3 @@
 class WelcomeMessage < ActiveRecord::Base
-    t.string :message, null: false
-    t.string :language
+  belongs_to :district
 end
