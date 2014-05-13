@@ -11,10 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512202635) do
+ActiveRecord::Schema.define(version: 20140512235001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contact_people", force: true do |t|
+    t.string  "relationship"
+    t.string  "language"
+    t.string  "mailing_street_address_1"
+    t.string  "mailing_street_address_2"
+    t.string  "mailing_zip_code"
+    t.string  "phone"
+    t.boolean "can_pickup_child",         default: false
+  end
+
+  create_table "guardians", force: true do |t|
+    t.string  "first_name",                                 null: false
+    t.string  "middle_name",                                null: false
+    t.string  "last_name",                                  null: false
+    t.string  "mailing_street_address_1",                   null: false
+    t.string  "mailing_street_address_2",                   null: false
+    t.string  "mailing_zip_code",                           null: false
+    t.string  "cell_phone"
+    t.string  "alt_phone"
+    t.string  "alt_phone_type"
+    t.string  "email"
+    t.boolean "receive_emails",             default: true
+    t.boolean "receive_sms",                default: true
+    t.boolean "receive_postal_mail",        default: true
+    t.boolean "receive_grade_notices",      default: true
+    t.boolean "receive_conduct_notices",    default: true
+    t.boolean "restricted",                 default: false
+    t.string  "armed_service_branch"
+    t.string  "armed_service_rank"
+    t.string  "armed_service_duty_station"
+  end
+
+  create_table "schools", force: true do |t|
+    t.string "mailing_street_address_1", null: false
+    t.string "mailing_street_address_2", null: false
+    t.string "mailing_zip_code",         null: false
+    t.string "phone",                    null: false
+    t.date   "first_day_of_school"
+  end
 
   create_table "students", force: true do |t|
     t.string  "lasid"
@@ -39,6 +79,12 @@ ActiveRecord::Schema.define(version: 20140512202635) do
     t.string  "mailing_street_address_1",                   null: false
     t.string  "mailing_street_address_2"
     t.string  "mailing_zip_code",                           null: false
+  end
+
+  create_table "welcome_messages", force: true do |t|
+    t.string  "message",   null: false
+    t.string  "language"
+    t.integer "school_id"
   end
 
 end
