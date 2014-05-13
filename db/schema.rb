@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512235001) do
+ActiveRecord::Schema.define(version: 20140513181607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20140512235001) do
     t.string  "mailing_zip_code"
     t.string  "phone"
     t.boolean "can_pickup_child",         default: false
+  end
+
+  create_table "district", force: true do |t|
+    t.string "mailing_street_address_1", null: false
+    t.string "mailing_street_address_2", null: false
+    t.string "mailing_zip_code",         null: false
+    t.string "phone",                    null: false
+    t.date   "first_day_of_school"
   end
 
   create_table "guardians", force: true do |t|
@@ -46,14 +54,6 @@ ActiveRecord::Schema.define(version: 20140512235001) do
     t.string  "armed_service_branch"
     t.string  "armed_service_rank"
     t.string  "armed_service_duty_station"
-  end
-
-  create_table "schools", force: true do |t|
-    t.string "mailing_street_address_1", null: false
-    t.string "mailing_street_address_2", null: false
-    t.string "mailing_zip_code",         null: false
-    t.string "phone",                    null: false
-    t.date   "first_day_of_school"
   end
 
   create_table "students", force: true do |t|
