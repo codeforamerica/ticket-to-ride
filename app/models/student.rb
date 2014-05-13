@@ -1,3 +1,4 @@
 class Student < ActiveRecord::Base
-	acts_as_birthday :birthday
+    has_many :guardians
+	  acts_as_birthday :birthday
 end
