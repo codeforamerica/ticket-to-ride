@@ -63,10 +63,13 @@ ActiveRecord::Schema.define(version: 20140513181607) do
     t.string  "first_name",                                 null: false
     t.string  "middle_name"
     t.string  "last_name",                                  null: false
-    t.date    "birth_date",                                 null: false
+    t.date    "birthday",                                   null: false
     t.string  "first_language"
     t.string  "second_language"
     t.date    "enrollment_date"
+    t.date    "enrollment_confirm_date"
+    t.date    "school_start_date"
+    t.date    "estimated_graduation_date"
     t.boolean "iep",                        default: false
     t.boolean "p504",                       default: false
     t.boolean "bus_required",               default: false
