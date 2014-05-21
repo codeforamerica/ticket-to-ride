@@ -24,12 +24,22 @@ body, html {
 }
 
 .welcome-container {
-  background-image: url(<%= asset_path 'guardian/trains01.png' %>);
-  background-size: 100% 100%;
+  /*background-image: url(<%= asset_path 'guardian/trains01.png' %>);*/
+  background: image-url('guardian/trains01.png') no-repeat center center,
+              image-url('guidepost.png') no-repeat;
+              ;
+  /*background-size: 100% 100%;*/
+  /*background-size: auto 97% !important;*/
+  /*background-position: 100% 100%;*/
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, bottom left;
+  background-size: 100% 100%, 80% 80%;
 /*  background-position: 70% 100%;
   background-repeat: no-repeat;*/
 }
 
+
+/*background: image-url('clarity/curriculum-info-clean.png') no-repeat center center;*/
 header {
 /*	font-size: 200%;
 	margin: 2% auto;
@@ -38,21 +48,29 @@ header {
 }
 
 .logo {
-  background-image: url(<%= asset_path 'school-ticket-logo-green.png' %>);
-  background-size: 129px 120px;
+  background-image: url(<%= asset_path 'vintage-logo.png' %>);
+  background-size: 200px;
   background-repeat: no-repeat;
-  background-position: 1% 0;
-  min-height: 120px;
-/*  position: absolute;
-  position: 0 0;*/
+  /*background-position: 1% 0;*/
+  min-height: 148px;
+  max-height: 150px;
+  /*position: absolute;*/
+  /*position: fixed;*/
+  transform:rotate(-4deg);
+  -ms-transform:rotate(-4deg); /* IE 9 */
+  -webkit-transform:rotate(-4deg); /* Opera, Chrome, and Safari */
 }
+
 .welcome {
-	margin: 2% auto;
-	width: 60%;
+  max-width: 960px;
+	margin: 2% 27%;
+	width: 50%;
   margin-top: -10%;
+  font-size: 110%;
+  line-height: 150%;
 }
 
 .begin_enrollment {
-	width: 60%;
-	margin: 1% auto;
+	max-width: 960px;
+	margin: 1% 26.5%;
 }
