@@ -189,7 +189,7 @@ mail_zip_seed = mail_zip.each_line.to_a
 student_firsts_seed.each do |u|
   student = Student.create(
     first_name: u.strip,
-    last_name: student_lasts_seed.shift.strip,
+    last_name: student_lasts_seed.shuffle.shift.strip,
     lasid: lasid_seed.shift.strip,
     birthday: birthday_seed.sample.strip,
     home_street_address_1: home_addr_seed.sample.strip,
