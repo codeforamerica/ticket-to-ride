@@ -42,6 +42,3 @@ gem 'birthday', '~> 0.3.0'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# Active Admin - Authentication, Authorization, and Administration
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'devise'
