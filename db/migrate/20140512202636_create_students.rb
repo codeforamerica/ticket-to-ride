@@ -8,7 +8,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string  :first_name, null: false # student name
       t.string  :middle_name
       t.string  :last_name, null: false
-      t.date    :birthday, null: false
+      t.date    :birth_date, null: false
       t.string  :first_language # the language a student speaks primarily
       t.string  :second_language # another language a student speaks
 
