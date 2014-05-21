@@ -1,0 +1,76 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/*html * {
+  border: 1px solid green;
+}
+*/
+body, html {
+  height: 100%;
+  /*width: 100%;*/
+}
+
+.welcome-container {
+  /*background-image: url(<%= asset_path 'guardian/trains01.png' %>);*/
+  background: image-url('guardian/trains01.png') no-repeat center center,
+              image-url('guidepost.png') no-repeat;
+              ;
+  /*background-size: 100% 100%;*/
+  /*background-size: auto 97% !important;*/
+  /*background-position: 100% 100%;*/
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, bottom left;
+  background-size: 100% 100%, 80% 80%;
+/*  background-position: 70% 100%;
+  background-repeat: no-repeat;*/
+}
+
+
+/*background: image-url('clarity/curriculum-info-clean.png') no-repeat center center;*/
+header {
+/*	font-size: 200%;
+	margin: 2% auto;
+	width: 100%;
+	text-align: center;*/
+}
+
+.logo {
+  background-image: url(<%= asset_path 'vintage-logo.png' %>);
+  background-size: 200px;
+  background-repeat: no-repeat;
+  /*background-position: 1% 0;*/
+  min-height: 148px;
+  max-height: 150px;
+  /*position: absolute;*/
+  /*position: fixed;*/
+  transform:rotate(-4deg);
+  -ms-transform:rotate(-4deg); /* IE 9 */
+  -webkit-transform:rotate(-4deg); /* Opera, Chrome, and Safari */
+}
+
+.welcome {
+  max-width: 960px;
+	margin: 2% 27%;
+	width: 50%;
+  margin-top: -10%;
+  font-size: 110%;
+  line-height: 150%;
+}
+
+.begin_enrollment {
+	max-width: 960px;
+	margin: 1% 26.5%;
+}
