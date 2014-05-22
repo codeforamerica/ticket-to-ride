@@ -45,15 +45,38 @@ p, h2 {
   color: $john-lennon;
 }
 
-.welcome-container {
-  /*background-image: url(<%= asset_path 'guardian/trains01.png' %>);*/
-  // background: image-url('sailing-three-landscapes.svg') no-repeat 50% 50%,
-  background: image-url('guardian/trains01.png') no-repeat,
-              image-url('guidepost.png') no-repeat;
-              ;
-  background-repeat: no-repeat, no-repeat;
-  background-position: 100% 100%, left;
-  background-size: cover, 90% 90%;
+// .welcome-container {
+//   background: /*image-url('guardian/trains01.png') no-repeat center center,*/
+//               image-url('guidepost.png') no-repeat;
+//               ;
+//   /*background-size: 100% 100%;*/
+//   /*background-size: auto 97% !important;*/
+//   /*background-position: 100% 100%;*/
+//   background-repeat: /*no-repeat,*/ no-repeat;
+//   background-position: /*center,*/ bottom left;
+//   background-size: /*100% 100%,*/ 80% 80%;
+// /*  background-position: 70% 100%;
+//   background-repeat: no-repeat;*/
+// }
+
+#scenery {
+  position: absolute;
+  bottom: -276px;
+}
+
+#guidepost {
+  z-index: -100;
+  position: absolute;
+  bottom: -142px;
+  max-width: 345px;
+}
+
+/*background: image-url('clarity/curriculum-info-clean.png') no-repeat center center;*/
+header {
+/*	font-size: 200%;
+	margin: 2% auto;
+	width: 100%;
+	text-align: center;*/
 }
 
 .logo {
