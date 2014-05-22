@@ -21,3 +21,6 @@
 
 # Ignore source files
 /source-files
+
+# Ignore .DS_store
+.DS_Store
