@@ -64,6 +64,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (5.3.3)
+    modernizr-rails (2.7.1)
     multi_json (1.10.0)
     pg (0.17.1)
     polyglot (0.3.4)
@@ -132,6 +133,7 @@ DEPENDENCIES
   compass-rails
   jbuilder (~> 2.0)
   jquery-rails
+  modernizr-rails
   pg
   rails (= 4.1.1)
   sass-rails (~> 4.0.3)

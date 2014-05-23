@@ -943,10 +943,10 @@
 //
 // Tooltip Variables
 //
-// $has-tip-border-bottom: dotted 1px #ccc;
+$has-tip-border-bottom: dotted 2px red;
 // $has-tip-font-weight: bold;
 // $has-tip-font-color: #333;
-// $has-tip-border-bottom-hover: dotted 1px darken($primary-color, 20%);
+$has-tip-border-bottom-hover: dotted 2px darken($primary-color, 20%);
 // $has-tip-font-color-hover: $primary-color;
 // $has-tip-cursor-type: help;
 
