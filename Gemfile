@@ -30,11 +30,6 @@ gem 'spring',        group: :development
 
 gem 'birthday', '~> 0.3.0'
 
-# Foundation framework for tooltips
-gem 'compass-rails' # you need this or you get an err
-gem 'zurb-foundation', '~> 4.0.0'
-gem 'modernizr-rails'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
