@@ -1,17 +1,11 @@
 <body class="student-container">
   <div class="student-madlib">
     <div>
-      My name is <span data-tooltip class="has-tip" title="Guardian's First Name">George</span> <span data-tooltip class="has-tip" title="Guardian's Last Name">Harrison</span> and I am enrolling <span data-tooltip class="has-tip" title="Student's First Name">Dhani</span> <span data-tooltip class="has-tip" title="Student's Last Name">Harrison</span> in the <span data-tooltip class="has-tip" title="District Name">Newport</span> Public School System. <span data-tooltip class="has-tip" title="student gender">He</span> was born on <span data-tooltip class="has-tip" title="Student birthdate">August 10, 2010</span>.
-    </div>
-    <div class="js-child-count-tooltip-trigger js-tooltip-trigger tooltip-trigger highlight" data-tooltipoptions='{"template":"tooltip-child-count","triggertype":"click","tipclass":"plan-chooser-tooltip","template_data":{"child_under_count":0,"child_over_count":0}}'>
-      <span class="js-child-count-value" data-zero-label="no">0</span>
-      <span class="js-label" data-single-label="kid" data-multiple-label="kids">kids</span>
+      My name is <a href="#" data-bind="tooltip: {title: 'Guardian First Name'}">George</a> Harrison and I am enrolling Dhani Harrison in the Newport Public School System. He was born on August 10, 2010.
     </div>
   </div>
 
-
 <%= render 'shared/scenery' %>
 <%= render 'shared/guidepost' %>
-
 
 </body>
