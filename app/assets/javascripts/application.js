@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min
+//= require twitter/bootstrap
 //= require knockout
 //= require knockout-bootstrap.min
 //= require turbolinks
