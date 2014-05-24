@@ -4,9 +4,22 @@ var personViewModel = function () {
     self.persons = ko.observableArray();
     self.persons.push({
         id: 1,
-        firstName: ko.observable('John' + ' '),
-        lastName: ko.observable('Lennon')
+        firstName: ko.observable('John'),
+        lastName: ko.observable('Lennon'),
+        email: ko.observable('john@beatles.com')
     })
+    // self.persons.push({
+    //     id: 2,
+    //     firstName: ko.observable('Ringo'),
+    //     lastName: ko.observable('Starr'),
+    //     email: ko.observable('ringo@beatles.com')
+    // })
+    // self.persons.push({
+    //     id: 3,
+    //     firstName: ko.observable('Paul'),
+    //     lastName: ko.observable('McCartney'),
+    //     email: ko.observable('paul@beatles.com')
+    // });
 
     self.closePopover = function(person) {
         $('#popover' + person.id + '_click').popover('hide');

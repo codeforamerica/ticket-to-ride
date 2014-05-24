@@ -1,21 +1,30 @@
-<div class="student-madlib" data-bind="foreach: persons">
-    <div>
-        My name is <div class="student-info-container">
-          <a href="#" data-bind="popUp: {content: '#guardian_firstName-template', id: id}"><span data-bind="text: firstName" class="pseudo-tooltip"></span></a>
-          <a href="#" data-bind="popUp: {content: '#guardian_lastName-template', id: id}"><span data-bind="text: lastName" class="pseudo-tooltip"></span></a> </div>
-           and I am enrolling Dhani Harrison in the Newport Public School System. He was born on August 10, 2010.
-    </div>
+<div class="beatle-madlib">
+<table border="1" cellpadding="10" cellspacing="0" data-bind="foreach: persons">
+    <tr>
+        <td><span data-bind="text: firstName"></span></td>
+        <td><span data-bind="text: lastName"></span></td>
+        <td><span data-bind="text: email"></span></td>
+        <td><a href="#" data-bind="popUp: {content: '#person-template', id: id}">Edit</a></td>
+    </tr>
+</table>
 </div>
-<script type="text/html" id="guardian_firstName-template">
-<div class="madlib-title">First Name <span class="pull-right"><a href="#" data-bind="click:$root.closePopover">x</a></span>
-      </div>
-<div class="madlib-input"><input type="text" data-bind="value: firstName, valueUpdate:'afterkeydown'" /></div>
-<br>
-</script>
-
-<script type="text/html" id="guardian_lastName-template">
-<div class="madlib-title">Last name <span class="pull-right"><a href="#" data-bind="click:$root.closePopover">x</a></span>
-      </div>
-<div class="madlib-input"><input type="text" data-bind="value: lastName, valueUpdate:'afterkeydown'" /></div>
-<br>
+<script type="text/html" id="person-template">
+    <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" data-bind="value: firstName, valueUpdate:'keyup'" /></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" data-bind="value: lastName, valueUpdate:'keyup'" /></td>
+         </tr>
+    </table>
+    <br>
+    <div class="row-fluid">
+        <center>
+            <div class="span3 offset1">
+                <button class="btn btn-small btn-danger" data-bind="click:$root.closePopover">Close</button>
+            </div>
+        </center>
+    </div>
 </script>
