@@ -13,7 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require knockout
-//= require knockout-bootstrap.min
-//= require turbolinks
+//= require knockout-3.1.0
 //= require_tree .
+
+// $(function () {
+//   $(".btn").popover(
+//     {
+//       offset: 5,
+//       placement: 'top'
+//     }
+//   );
+// });
