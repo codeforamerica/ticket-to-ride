@@ -1,7 +1,7 @@
 <div class="student-madlib">
   <div>
-    My name is <div class="example-container">
-      <span data-placement="top" data-title="First Name" data-bind="popover: '#editTemplate', text:exampleText" class="pseudo-tooltip"></span></div> Harrison and I am enrolling Dhani Harrison in the Newport Public School System. He was born on August 10, 2010.
+    My name is <div class="student-info-container">
+      <span data-placement="top" data-title="First name" data-bind="popover: '#editGuardianFirstName', text:guardianFirstName" class="pseudo-tooltip"></span> <span data-placement="top" data-title="Last name" data-bind="popover: '#editGuardianLastName', text:guardianLastName" class="pseudo-tooltip"></span></div> and I am enrolling Dhani Harrison in the Newport Public School System. He was born on August 10, 2010.
   </div>
 
   <!-- <p>My name is <span data-bind="text: fullName"></span>.</p> -->
@@ -9,20 +9,6 @@
   <!-- <button class="btn" id="button1" data-content="First Name">Hi</button> -->
 </div>
 
-<div class="push_down"></div>
+<!-- <div class="push_down"></div> -->
 <%= render 'shared/scenery' %>
-
-  <!-- This is the popover template  -->
-  <script type="html/text" id="editTemplate">
-    <form>
-    <input class="input-small" data-bind="value: $data.exampleText, valueUpdate: 'afterkeydown'" type="text" />
-    </form>
-  </script >
-
-
-
-
-
-
-
-
+<%= render 'popover' %>

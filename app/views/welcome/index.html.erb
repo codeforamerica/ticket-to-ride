@@ -9,10 +9,7 @@
 </div>
 
 <div class="begin_enrollment">
-  <button>Begin</button>
+  <%= button_to "Begin", students_path, :method => "get", :class => "btn btn-success pull-right" %>
 </div>
 
 <%= render 'shared/scenery' %>
-
-
-

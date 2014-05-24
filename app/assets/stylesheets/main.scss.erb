@@ -8,8 +8,7 @@
 }
 
 @import "common/variables";
-
-.container { width: 1024px; border: 1px solid black; height: 768px; margin: 0 auto;}
+.container { width: 1024px; border: 1px solid black; min-height: 768px; max-height: 768px; margin: 0 auto;}
 
 // /* colors */
 // $john-lennon: #424343; // primary color
@@ -32,7 +31,7 @@ body, html {
 }
 
 p, h2 {
-  font-family: "Aileron-Regular";
+  font-family: $please-please-me;
   font-size: 90%;
   letter-spacing: 1px;
   color: $john-lennon;

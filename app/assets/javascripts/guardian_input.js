@@ -13,7 +13,8 @@ $(document).ready(function() {
   // ko.applyBindings(GuardianModel);
 
   var ViewModel = function() {
-      this.exampleText = ko.observable("George");
+      this.guardianFirstName = ko.observable("George");
+      this.guardianLastName = ko.observable(' ' + "Harrison");
   };
 
 
@@ -21,19 +22,24 @@ $(document).ready(function() {
       init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
           var cssSelectorForPopoverTemplate = ko.utils.unwrapObservable(valueAccessor());
           var popOverTemplate = "<div id='my-knockout-popver'>" + $(cssSelectorForPopoverTemplate).html() + "</div>";
+          var popOverTitle = "<a href='#' id='popCancel' class='pull-right'>x</a>";
+
           $(element).popover({
-              content: popOverTemplate,
-              html: true,
-              trigger: 'manual'
+            title: $(this).title + popOverTitle, // fix the undefined call for .title
+            content: popOverTemplate,
+            html: true,
+            trigger: 'manual'
           });
 
           $(element).click(function() {
-              $(this).popover('toggle');
-              var thePopover = document.getElementById("my-knockout-popver");
-              ko.applyBindings(viewModel, thePopover);
+            $(this).popover('toggle');
+            var thePopover = document.getElementById("my-knockout-popver");
+            ko.applyBindings(viewModel, thePopover);
           });
+
       },
   };
 
   ko.applyBindings(new ViewModel());
+
 });
