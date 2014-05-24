@@ -1,45 +1,43 @@
-$(document).ready(function() {
+// $(document).ready(function() {
 
-  // var GuardianModel = function(name){
-  //   var self = this;
-  //   self.firstName = ko.observable('George');
-  //   self.lastName = ko.observable('Harrison');
+//   $("#tooltip").tooltip();
+//   $("#popover").popover();
 
-  //   self.fullName = ko.computed(function() {
-  //     return self.firstName() + " " + self.lastName();
-  //   }, this);
-  // }
+//   var guardianViewModel = function() {
+//     this.id: 1;
+//     this.guardianFirstName = ko.observable("George");
+//     this.guardianLastName = ko.observable(' ' + "Harrison");
 
-  // ko.applyBindings(GuardianModel);
-
-  var ViewModel = function() {
-      this.guardianFirstName = ko.observable("George");
-      this.guardianLastName = ko.observable(' ' + "Harrison");
-  };
+//     this.closePopover = function(person){
+//       $('#popover' + person.id + '_click').popover('hide');
+//     };
+//   }
 
 
-  ko.bindingHandlers.popover = {
-      init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-          var cssSelectorForPopoverTemplate = ko.utils.unwrapObservable(valueAccessor());
-          var popOverTemplate = "<div id='my-knockout-popver'>" + $(cssSelectorForPopoverTemplate).html() + "</div>";
-          var popOverTitle = "<a href='#' id='popCancel' class='pull-right'>x</a>";
+//   ko.bindingHandlers.popUp = {
+//       init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+//           var attribute = ko.utils.unwrapObservable(valueAccessor());
+//           var templateContent = attribute.content;
+//           var popOverTemplate = "<div class='popOverClass' id=''>" + attribute.id + "-popover'>" + $(templateContent).html() + "</div>";
+//           // var popOverTitle = "<a href='#' id='popCancel' class='pull-right'>x</a>";
 
-          $(element).popover({
-            title: $(this).title + popOverTitle, // fix the undefined call for .title
-            content: popOverTemplate,
-            html: true,
-            trigger: 'manual'
-          });
+//           $(element).popover({
+//             // title: $(this).title + popOverTitle, // fix the undefined call for .title
+//             content: popOverTemplate,
+//             html: true,
+//             trigger: 'manual'
+//           });
+//           $(element).attr('id', "popover" + attribute.id + "_click");
+//           $(element).click(function() {
+//             $(".popoverClass").popover('hide');
+//             $(this).popover('toggle');
+//             var thePopover = document.getElementById(attribute.id + "-popover");
+//             childBindingContext = bindingContext.createChildContext(viewModel);
+//             ko.applyBindingsToDescendants(childBindingContext, thePopover)
+//           })
+//       }
+//   }
 
-          $(element).click(function() {
-            $(this).popover('toggle');
-            var thePopover = document.getElementById("my-knockout-popver");
-            ko.applyBindings(viewModel, thePopover);
-          });
+//   ko.applyBindings(new guardianViewModel());
 
-      },
-  };
-
-  ko.applyBindings(new ViewModel());
-
-});
+// });

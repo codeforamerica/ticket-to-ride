@@ -1,0 +1,91 @@
+<h2>Some Glyphicons</h2>
+
+<%= button_tag(type: 'button', class: 'btn btn-default btn-lg' ) do %>
+  Star <%= content_tag(:span, '', class: 'glyphicon glyphicon-star') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-default' ) do %>
+  Star <%= content_tag(:span, '', class: 'glyphicon glyphicon-star') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-default btn-sm' ) do %>
+  Star <%= content_tag(:span, '', class: 'glyphicon glyphicon-star') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-default btn-xs' ) do %>
+  Star <%= content_tag(:span, '', class: 'glyphicon glyphicon-star') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary btn-lg' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-user') %> User
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-user') %> User
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary btn-sm' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-user') %> User
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary btn-xs' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-user') %> User
+<% end %>
+
+<br><br>
+
+<%= button_tag(type: 'button', class: 'btn btn-default btn-lg' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-default' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-default btn-sm' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-default btn-xs' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary btn-lg' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary btn-sm' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-primary btn-xs' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-warning btn-lg' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-warning' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-warning btn-sm' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<%= button_tag(type: 'button', class: 'btn btn-warning btn-xs' ) do %>
+  <%= content_tag(:span, '', class: 'glyphicon glyphicon-align-justify') %>
+<% end %>
+
+<h2>A Javascript Tooltip</h2>
+
+<%= button_tag('Tooltip on the right', type: 'button', class: 'btn btn-default', id: 'tooltip', data: {toggle: 'tooltip', placement: 'right'}, :'data-original-title' => 'Tooltip on the right' )%>
+
+<h2>A Javascript Popover</h2>
+
+<%= button_tag('popover on the top', type: 'button', class: 'btn btn-default', id: 'popover', data: {container: 'body', toggle: 'popover', placement: 'top', content: 'Yo make it work' }) %>

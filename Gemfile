@@ -35,6 +35,8 @@ gem 'knockoutjs-rails', '~> 3.1.0.1'
 
 gem 'anjlab-bootstrap-rails', '~> 3.0.0.3', :require => 'bootstrap-rails'
 
+gem 'high_voltage', '~> 2.1.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
