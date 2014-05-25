@@ -1,28 +1,18 @@
 // $(document).ready(function() {
-// var personViewModel = function () {
-//     var self = this;
-//     self.persons = ko.observableArray();
-//     self.persons.push({
-//         id: 1,
-//         firstName: ko.observable('John'),
-//         lastName: ko.observable('Lennon'),
-//         email: ko.observable('john@beatles.com')
-//     })
-//     // self.persons.push({
-//     //     id: 2,
-//     //     firstName: ko.observable('Ringo'),
-//     //     lastName: ko.observable('Starr'),
-//     //     email: ko.observable('ringo@beatles.com')
-//     // })
-//     // self.persons.push({
-//     //     id: 3,
-//     //     firstName: ko.observable('Paul'),
-//     //     lastName: ko.observable('McCartney'),
-//     //     email: ko.observable('paul@beatles.com')
-//     // });
+//     $(function () { $("[data-toggle='popover']").popover(); });
 
-//     self.closePopover = function(person) {
-//         $('#popover' + person.id + '_click').popover('hide');
+// var ViewModel = function () {
+//     var self = this;
+//     self.guardians = ko.observableArray();
+//     self.guardians.push({
+//         id: 1,
+//         firstName: ko.observable('George'),
+//         lastName: ko.observable('Harrison'),
+//         email: ko.observable('george@beatles.com')
+//     })
+
+//     self.closePopover = function(guardian) {
+//         $('#popover' + guardian.id + '_click').popover('hide');
 //     };
 // }
 
@@ -48,6 +38,6 @@
 //     }
 // }
 
-//   ko.applyBindings(new personViewModel());
+//   ko.applyBindings(new ViewModel());
 
 // });

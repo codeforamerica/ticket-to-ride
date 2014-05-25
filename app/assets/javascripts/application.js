@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap.min
 //= require knockout-3.1.0
+//= require knockout-bootstrap.min
 //= require_tree .
 
 // $(function () {
