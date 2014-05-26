@@ -15,6 +15,7 @@
 //= require bootstrap.min
 //= require knockout-3.1.0
 //= require knockout-bootstrap.min
+//= require bootstrap3-editable/bootstrap-editable
 //= require_tree .
 
 // $(function () {
@@ -25,3 +26,4 @@
 //     }
 //   );
 // });
+
