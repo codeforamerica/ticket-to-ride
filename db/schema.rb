@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513215219) do
+ActiveRecord::Schema.define(version: 20140527222228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clerks", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contact_people", force: true do |t|
     t.string  "relationship"
@@ -24,9 +36,10 @@ ActiveRecord::Schema.define(version: 20140513215219) do
     t.string  "mailing_zip_code"
     t.string  "phone"
     t.boolean "can_pickup_child",         default: false
+    t.integer "guardian_id"
   end
 
-  create_table "district", force: true do |t|
+  create_table "districts", force: true do |t|
     t.string "mailing_street_address_1", null: false
     t.string "mailing_street_address_2", null: false
     t.string "mailing_zip_code",         null: false
@@ -54,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140513215219) do
     t.string  "armed_service_branch"
     t.string  "armed_service_rank"
     t.string  "armed_service_duty_station"
+    t.integer "student_id"
   end
 
   create_table "schools", force: true do |t|
@@ -75,6 +89,9 @@ ActiveRecord::Schema.define(version: 20140513215219) do
     t.string  "first_language"
     t.string  "second_language"
     t.date    "enrollment_date"
+    t.date    "enrollment_confirm_date"
+    t.date    "school_start_date"
+    t.date    "estimated_graduation_date"
     t.boolean "iep",                        default: false
     t.boolean "p504",                       default: false
     t.boolean "bus_required",               default: false
@@ -87,12 +104,14 @@ ActiveRecord::Schema.define(version: 20140513215219) do
     t.string  "mailing_street_address_1",                   null: false
     t.string  "mailing_street_address_2"
     t.string  "mailing_zip_code",                           null: false
+    t.integer "school_id"
   end
 
   create_table "welcome_messages", force: true do |t|
-    t.string  "message",   null: false
+    t.string  "message",     null: false
     t.string  "language"
     t.integer "school_id"
+    t.integer "district_id"
   end
 
 end
