@@ -18,12 +18,3 @@
 //= require bootstrap3-editable/bootstrap-editable
 //= require_tree .
 
-// $(function () {
-//   $(".btn").popover(
-//     {
-//       offset: 5,
-//       placement: 'top'
-//     }
-//   );
-// });
-
