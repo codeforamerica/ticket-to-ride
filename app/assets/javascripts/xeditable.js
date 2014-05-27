@@ -3,35 +3,42 @@ $(document).ready(function() {
 
   $(function(){
     $('#guardianFirstName').editable({
-        url:'',
-        title: 'What is your first name?'
+      url:'',
+      title: 'What is your first name?'
     });
     $('#guardianLastName').editable({
-        url:'',
-        title: 'What is your last name?'
+      url:'',
+      title: 'What is your last name?'
     });
     $('#studentFirstName').editable({
-        url:'',
-        title: 'Student\'s first name?'
+      url:'',
+      title: 'Student\'s first name?'
     });
     $('#studentLastName').editable({
-        url:'',
-        title: 'Student\'s last name?'
+      url:'',
+      title: 'Student\'s last name?'
     });
     $('#schoolDistrict').editable({
-           value: 2,    
-           source: [
-                 {value: 1, text: 'Cranston'},
-                 {value: 2, text: 'Newport'},
-                 {value: 3, text: 'Warwick'},
-                 {value: 4, text: 'West Warwick'}]
-       });
+      value: 2,    
+      source: [
+        {value: 1, text: 'Cranston'},
+        {value: 2, text: 'Newport'},
+        {value: 3, text: 'Warwick'},
+        {value: 4, text: 'West Warwick'}]
+    });
     $('#studentGender').editable({
-           value: 2,    
-           source: [
-                 {value: 1, text: 'He'},
-                 {value: 2, text: 'She'}]
-       });
+       value: 2,    
+       source: [
+         {value: 1, text: 'He'},
+         {value: 2, text: 'She'}]
+    });
+    $('#dob').editable({
+      format: 'yyyy-mm-dd',    
+      viewformat: 'dd/mm/yyyy',    
+      datepicker: {
+        firstDay: 1
+      }
+    });
   }); /* end editable */
 
 }); //end document ready
