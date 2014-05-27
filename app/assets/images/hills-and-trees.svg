@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="763.5px" height="148.5px" viewBox="0 0 763.5 148.5" enable-background="new 0 0 763.5 148.5" xml:space="preserve">
+	 width="100%" viewBox="0 0 763.5 148.5" enable-background="new 0 0 1024" xml:space="preserve">
 <g id="hills">
 	<path id="hill-3" fill="#E2EDCE" d="M368,9.9c-54,0-97.7,52.7-97.7,117.7h195.4C465.7,62.6,422,9.9,368,9.9z"/>
 	<path id="hill-4" fill="#B6CCB1" d="M464.9,73.2c-41,0-74.2,24.3-74.2,54.4h148.4C539.1,97.6,505.9,73.2,464.9,73.2z"/>
@@ -136,7 +134,7 @@
 		</g>
 	</g>
 </g>
-<g id="train">
+<a xlink:href=“http://beatles.com”><g id="train">
 	<polygon id="wheel-top-1" fill="#707070" points="243.7,125.1 230.2,125.1 228.5,121.8 245.4,121.8 	"/>
 	<g id="wheels-1">
 		<ellipse fill="#707070" cx="233.3" cy="125.9" rx="1.6" ry="1.4"/>
@@ -166,7 +164,7 @@
 		<ellipse fill="#707070" cx="327.3" cy="125.9" rx="1.6" ry="1.4"/>
 		<path fill="#707070" d="M336.3,125.9c0,0.8-0.7,1.4-1.6,1.4c-0.9,0-1.6-0.6-1.6-1.4c0-0.8,0.7-1.4,1.6-1.4
 			C335.5,124.5,336.3,125.1,336.3,125.9z"/>
-	</g>
+	</g></a>
 	<polygon id="topper-3" fill="#707070" points="304.3,105.7 293.7,105.7 292.4,109 305.6,109 	"/>
 	<polygon id="topper-4" fill="#707070" points="336.3,105.7 325.7,105.7 324.4,109 337.6,109 	"/>
 	<rect id="car-2" x="285.9" y="107.4" fill="#FFE2AE" width="58.2" height="15.9"/>

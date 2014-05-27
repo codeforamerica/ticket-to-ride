@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :students
 
+  # get 'pages/home' => 'high_voltage/pages#show', id: 'home'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

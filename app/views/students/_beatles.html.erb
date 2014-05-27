@@ -1,0 +1,30 @@
+<div class="beatle-madlib">
+<table border="1" cellpadding="10" cellspacing="0" data-bind="foreach: persons">
+    <tr>
+        <td><span data-bind="text: firstName"></span></td>
+        <td><span data-bind="text: lastName"></span></td>
+        <td><span data-bind="text: email"></span></td>
+        <td><a href="#" data-bind="popUp: {content: '#person-template', id: id}">Edit</a></td>
+    </tr>
+</table>
+</div>
+<script type="text/html" id="person-template">
+    <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" data-bind="value: firstName, valueUpdate:'keyup'" /></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" data-bind="value: lastName, valueUpdate:'keyup'" /></td>
+         </tr>
+    </table>
+    <br>
+    <div class="row-fluid">
+        <center>
+            <div class="span3 offset1">
+                <button class="btn btn-small btn-danger" data-bind="click:$root.closePopover">Close</button>
+            </div>
+        </center>
+    </div>
+</script>

@@ -1,17 +1,2 @@
-<!-- Temporary listing of all students -->
-
-<table>
-  <tr>
-    <td>Last name</td>
-    <td>First name</td>
-    <td>LASID</td>
-    <td>Birthday</td></tr>
-    <% @students.each do |student| %>
-  <tr>
-    <td><%= student.last_name %></td>
-    <td><%= student.first_name %></td>
-    <td><%= student.lasid %></td>
-    <td><%= student.birthday %></td>
-  <% end %>
-  </tr>
-</table>
+<%= render 'xeditable' %>
+<%= render 'shared/scenery' %>

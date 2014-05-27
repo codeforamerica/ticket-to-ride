@@ -1,0 +1,22 @@
+<div class="madlib" data-bind="foreach: guardians">
+    <div>
+        My name is <div class="student-info-container">
+          <a href="#" data-toggle="popover" data-bind="popUp: {content: '#guardian_firstName-template', id: id}"> <span data-bind="text: firstName" class="pseudo-tooltip"></span></a> <span class="namespace">&nbsp;</span>
+          <a href="#" class="pseudo-tooltip" data-toggle="popover" data-bind="popUp: {content: '#guardian_lastName-template', id: id}"><span data-bind="text: lastName" class="pseudo-tooltip"></span></a> </div>
+           and I am enrolling Dhani Harrison in the Newport Public School System. He was born on August 10, 2010.
+    </div>
+</div>
+<script type="text/html" id="guardian_firstName-template">
+<div class="madlib-title">First Name <span class="pull-right"><a href="#" data-bind="click:$root.closePopover">x</a></span>
+      </div>
+<div class="madlib-input"><input type="text" data-bind="value: firstName, valueUpdate:'afterkeydown'" /></div>
+<br>
+</script>
+
+<script type="text/html" id="guardian_lastName-template">
+<div class="madlib-title">Last name <span class="pull-right"></span>
+      </div>
+<div class="madlib-input"><input type="text" data-bind="value: lastName, valueUpdate:'afterkeydown'" /></div>
+<br>
+</script>
+

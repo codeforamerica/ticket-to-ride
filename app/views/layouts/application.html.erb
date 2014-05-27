@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>TicketToRide</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-</head>
-<header><div class="logo"><!--<h1>Ticket to RIDE</h1>--></div>
-</header>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Ticket to Ride</title>
+      <%= stylesheet_link_tag 'application', media: 'all' %>
+      <%= javascript_include_tag 'application' %>
+      <%= csrf_meta_tags %>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  </head>
 
-<%= yield %>
+  <body>
+    <div class="container">
+      <header><div class="logo"></div></header>
+      <%= yield %>
+    </div>
+  </body>
 
 </html>

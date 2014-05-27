@@ -12,8 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
-//= require turbolinks
+//= require bootstrap.min
+//= require knockout-3.1.0
+//= require knockout-bootstrap.min
+//= require bootstrap3-editable/bootstrap-editable
 //= require_tree .
 
-$(document).foundation();
+// $(function () {
+//   $(".btn").popover(
+//     {
+//       offset: 5,
+//       placement: 'top'
+//     }
+//   );
+// });
+
