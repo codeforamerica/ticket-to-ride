@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527222228) do
+ActiveRecord::Schema.define(version: 20140527234553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,12 +48,12 @@ ActiveRecord::Schema.define(version: 20140527222228) do
   end
 
   create_table "guardians", force: true do |t|
-    t.string  "first_name",                                 null: false
-    t.string  "middle_name",                                null: false
-    t.string  "last_name",                                  null: false
-    t.string  "mailing_street_address_1",                   null: false
-    t.string  "mailing_street_address_2",                   null: false
-    t.string  "mailing_zip_code",                           null: false
+    t.string  "first_name"
+    t.string  "middle_name"
+    t.string  "last_name"
+    t.string  "mailing_street_address_1"
+    t.string  "mailing_street_address_2"
+    t.string  "mailing_zip_code"
     t.string  "cell_phone"
     t.string  "alt_phone"
     t.string  "alt_phone_type"
@@ -82,10 +82,10 @@ ActiveRecord::Schema.define(version: 20140527222228) do
     t.string  "lasid"
     t.string  "ssid"
     t.string  "application_id"
-    t.string  "first_name",                                 null: false
+    t.string  "first_name"
     t.string  "middle_name"
-    t.string  "last_name",                                  null: false
-    t.date    "birthday",                                   null: false
+    t.string  "last_name"
+    t.date    "birthday"
     t.string  "first_language"
     t.string  "second_language"
     t.date    "enrollment_date"
@@ -98,12 +98,12 @@ ActiveRecord::Schema.define(version: 20140527222228) do
     t.boolean "birth_certificate_verified", default: false
     t.boolean "residency_verified",         default: false
     t.boolean "lunch_provided",             default: false
-    t.string  "home_street_address_1",                      null: false
+    t.string  "home_street_address_1"
     t.string  "home_street_address_2"
-    t.string  "home_zip_code",                              null: false
-    t.string  "mailing_street_address_1",                   null: false
+    t.string  "home_zip_code"
+    t.string  "mailing_street_address_1"
     t.string  "mailing_street_address_2"
-    t.string  "mailing_zip_code",                           null: false
+    t.string  "mailing_zip_code"
     t.integer "school_id"
   end
 
