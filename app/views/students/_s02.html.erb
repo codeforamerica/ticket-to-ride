@@ -14,6 +14,8 @@ of Hispanic or Latino descent and identifies as
 <!-- <a href="#" id="studentFirstName" data-type="text" data-pk="2" placement="top">Dhani</a> is most comfortable speaking in {{ }}. <a href="#" id="studentGender" data-type="select" data-pk="1" data-url="" data-title="Student gender">She</a> also speaks {{ language }}. -->
 </div>
 
-<div class="next_student">
-  <%= button_to "Next", page_path('student/student03'), :method => "get", :class => "btn btn-success pull-right" %>
-</div>
+<ul class="pager">
+  <li><%= link_to "Previous", page_path('student/student01') %></li>
+  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><%= link_to "Next", page_path('student/student03'), :class => "pull-right" %></li>
+</ul>

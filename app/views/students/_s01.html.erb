@@ -7,6 +7,8 @@
 I am enrolling <a href="#" id="studentFirstName" data-type="text" data-pk="1" placement="top">Dhani</a> <a href="#" id="studentLastName" data-type="text" data-pk="1" placement="top">Harrison</a> in the <a href="#" id="schoolDistrict" data-type="select" data-pk="1" data-url="" data-title="Select district"></a> Public School System. <a href="#" id="studentGender" data-type="select" data-pk="1" data-url="" data-title="Student gender"></a> was born on <a href="#" id="dob" data-type="date" data-pk="1" data-url="" data-title="Select date" placement="bottom">10/08/2010</a>.</div>
 </div>
 
-<div class="next_student">
-  <%= button_to "Next", page_path('student/student02'), :method => "get", :class => "btn btn-success pull-right" %>
-</div>
+<ul class="pager">
+  <li><%= link_to "Previous", :root %></li>
+  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><%= link_to "Next", page_path('student/student02'), :class => "pull-right" %></li>
+</ul>
