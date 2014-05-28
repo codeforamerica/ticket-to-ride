@@ -8,7 +8,11 @@
 }
 
 @import "common/variables";
-.container { width: 1024px; border: 1px solid black; min-height: 768px; max-height: 768px; margin: 0 auto;}
+.container { width: 1024px; border: 1px solid white; min-height: 658px; max-height: 658px; margin: 0 auto;}
+
+// body * {
+//   border: 1px solid red;
+// }
 
 body, html {
   height: 100%;
@@ -18,6 +22,8 @@ body, html {
   color: $john-lennon;
   /*width: 100%;*/
 }
+
+header { max-width: 250px;  }
 
 @font-face {
   font-family: "Aileron-Black";
@@ -49,9 +55,18 @@ p, h2 {
   -webkit-transform:rotate(-4deg); /* Opera, Chrome, and Safari */
 }
 
+.background {
+  min-height: 284.5px;
+  max-height: 284.5px;
+  position: absolute;
+  bottom: 0px;
+}
+
 #scenery {
+  margin-left: -12px;
   // position: absolute;
-  // bottom: -276px;
+  // bottom: -376px;
+  // max-width: 1024;
 }
 
 #guidepost {
