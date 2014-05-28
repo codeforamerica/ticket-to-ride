@@ -17,6 +17,14 @@
   font-size: 1%;
 }
 
+.instructions {
+  font-size: 67%;
+  font-weight: 400; 
+  color: $george-harrison;
+  line-height: 130%;
+  margin-bottom: 2%;
+}
+
 .beatle-madlib{
   max-width: 960px;
   margin: 2% 30%;
@@ -57,10 +65,58 @@ a.editable-click {
   max-height: 125px;
 }
 
-.next_student {
-  max-width: 960px;
-  margin: 1% 10.5%;
+
+.navigation_buttons *{
+  max-width: 50%;
+  margin: 1% 10%;
+  z-index: 100;
+  border: 1px solid blue;
 }
 
+.navigation_buttons form .btn{
+  display: inline;
+  max-width: 100%;
+  float: right;
 
+}
 
+.next_student {
+  display: inline;
+  // margin: 1% 10.5%;
+  // z-index: 100;
+  // display: inline;
+}
+
+.prev_student {
+  display: inline;
+  // max-width: 960px;
+  // margin: 1% 0;
+  // z-index: 100;
+  // display: inline;
+}
+
+.pager {
+  margin-left: -7%;
+  width: 96%;
+}
+
+.pager li * {
+  display: block;
+  width: 10%;
+  padding-left: -10%;
+
+}
+
+.pager li > a {
+  background-color: $ringo-starr;
+  color: $yoko-ono;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+.pager li > a:hover {
+  color: white;
+  background-color: $paul-mccartney;
+}
