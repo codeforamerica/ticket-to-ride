@@ -1,8 +1,7 @@
 $.fn.extend({
-  popoverClosable: function (options) {
-    var defaults = {
-    template:
-              '<div class="popover">\
+    popoverClosable: function (options) {
+        var defaults = {
+            template: '<div class="popover">\
               <div class="arrow"></div>\
               <div class="popover-header">\
               <button type="button" class="close" data-dismiss="popover" aria-hidden="true">&times;</button>\
@@ -10,24 +9,24 @@ $.fn.extend({
               </div>\
               <div class="popover-content"></div>\
               </div>'
-    };
-    options = $.extend({}, defaults, options);
-    
-    var $popover_togglers = this;
-    $popover_togglers.popover(options);
-    
-    $popover_togglers.on('click', function (e) {
-    e.preventDefault();
+        };
+        options = $.extend({}, defaults, options);
 
-    $popover_togglers.not(this).popover('hide');
-  });
+        var $popover_togglers = this;
+        $popover_togglers.popover(options);
 
-    $('html').on('click', '[data-dismiss="popover"]', function (e) {
-      $popover_togglers.popover('hide');
-    });
-  }
+        $popover_togglers.on('click', function (e) {
+            e.preventDefault();
+
+            $popover_togglers.not(this).popover('hide');
+        });
+
+        $('html').on('click', '[data-dismiss="popover"]', function (e) {
+            $popover_togglers.popover('hide');
+        });
+    }
 });
 
 $(function () {
-  $('[data-toggle="popover"]').popoverClosable();
+    $('[data-toggle="popover"]').popoverClosable();
 });

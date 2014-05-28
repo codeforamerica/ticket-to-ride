@@ -1,7 +1,122 @@
-<div class="madlib">
+<script>
+    // These are the fields on the page, in the order in which they are filled.
+    var fieldIds = [
+            'guardianFirstName',
+            'guardianLastName',
+            'studentFirstName',
+            'studentLastName',
+            'schoolDistrict',
+            'studentGender',
+            'dob'
+    ];
 
-My name is <a href="#" id="guardianFirstName" data-type="text" data-pk="1" placement="top">George</a> <a href="#" id="guardianLastName" data-type="text" data-pk="1" placement="top">Harrison</a>
-   and I am enrolling <a href="#" id="studentFirstName" data-type="text" data-pk="1" placement="top">Dhani</a> <a href="#" id="studentLastName" data-type="text" data-pk="1" placement="top">Harrison</a> in the <a href="#" id="schoolDistrict" data-type="select" data-pk="1" data-url="" data-title="Select status"></a> Public School System. <a href="#" id="studentGender" data-type="select" data-pk="1" data-url="" data-title="Student gender"></a> was born on <a href="#" id="dob" data-type="date" data-pk="1" data-url="" data-title="Select date" placement="bottom">10/08/2010</a>.
+    // Properties for the fields on the page (X-Editable)
+    $(document).ready(function () {
+        $(function () {
+            $('#guardianFirstName').editable({
+                title: 'What is your first name?',
+                emptytext: '(first name)',
+                type: 'text',
+                placement: 'top'
+            });
+            $('#guardianLastName').editable({
+                title: 'What is your last name?',
+                emptytext: '(last name)',
+                type: 'text',
+                placement: 'top'
+            });
+            $('#studentFirstName').editable({
+                title: 'Student\'s first name?',
+                emptytext: '(first name)',
+                type: 'text',
+                placement: 'top'
+            });
+            $('#studentLastName').editable({
+                title: 'Student\'s last name?',
+                emptytext: '(last name)',
+                type: 'text',
+                placement: 'top'
+            });
+            $('#schoolDistrict').editable({
+                title: 'Choose your city or town',
+                type: 'select',
+                source: [
+                    {value: 1, text: 'Cranston'},
+                    {value: 2, text: 'Newport'},
+                    {value: 3, text: 'Warwick'},
+                    {value: 4, text: 'West Warwick'}
+                ],
+                emptytext: '(city/town)'
+            });
+            $('#studentGender').editable({
+                title: 'Choose based on the student\'s gender',
+                type: 'select',
+                source: [
+                    {value: 1, text: 'He'},
+                    {value: 2, text: 'She'}
+                ],
+                emptytext: '(He/She)'
+            });
+            $('#dob').editable({
+                title: 'What is the student\'s birthday?',
+                type: 'combodate'
+            });
+//            $('#birthCountry').editable({
+//                url: '',
+//                title: 'In what country was your child born?'
+//            });
+//            $('#hispanicLatino').editable({
+//                value: 2,
+//                source: [
+//                    {value: 1, text: 'is'},
+//                    {value: 2, text: 'is not'}
+//                ]
+//            });
+//            $('#studentRace').editable({
+//                value: 1,
+//                source: [
+//                    {value: 1, text: 'White'},
+//                    {value: 2, text: 'Black/African American'},
+//                    {value: 1, text: 'Asian'},
+//                    {value: 2, text: 'American Indian/Alaska Native'},
+//                    {value: 1, text: 'Native Hawaiian/other Pacific Islander'}
+//                ]
+//            });
+
+            $('.editable').on('hidden', function (e, reason) {
+                if (reason === 'save' || reason === 'nochange') {
+                    var currentId = $(this).closest().context.id;
+                    var nextIdIndex = fieldIds.indexOf(currentId) + 1;
+                    if (nextIdIndex < fieldIds.length) {
+                        var next = $('#' + order[nextIdIndex]);
+                        setTimeout(function () {
+                            next.editable('show');
+                        }, 300);
+                    }
+                }
+            });
+        });
+    }); //end document ready
+
+
+</script>
+
+<div class="madlib">
+  My name is
+  <a href="#" id="guardianFirstName"></a>
+  <a href="#" id="guardianLastName"></a>
+
+  and I am enrolling
+  <a href="#" id="studentFirstName"></a>
+  <a href="#" id="studentLastName"></a>
+
+  in the
+  <a href="#" id="schoolDistrict"></a>
+  Public School System.
+
+  <a href="#" id="studentGender"></a> <!-- Gender pronoun (He/She) -->
+  was born on
+  <a href="#" id="dob"></a>.
 </div>
 
 <div class="next_student">
