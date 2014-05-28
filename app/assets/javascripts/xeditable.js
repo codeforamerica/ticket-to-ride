@@ -39,6 +39,25 @@ $(document).ready(function() {
         firstDay: 1
       }
     });
+    $('#birthCountry').editable({
+      url:'',
+      title: 'In what country was your child born?'
+    });
+    $('#hispanicLatino').editable({
+       value: 2,    
+       source: [
+         {value: 1, text: 'is'},
+         {value: 2, text: 'is not'}]
+    });
+    $('#studentRace').editable({
+       value: 1,    
+       source: [
+         {value: 1, text: 'White'},
+         {value: 2, text: 'Black/African American'},
+         {value: 1, text: 'Asian'},
+         {value: 2, text: 'American Indian/Alaska Native'},
+         {value: 1, text: 'Native Hawaiian/other Pacific Islander'}]
+    });
   }); /* end editable */
 
 }); //end document ready
