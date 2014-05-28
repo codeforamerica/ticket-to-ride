@@ -59,7 +59,8 @@
             });
             $('#dob').editable({
                 title: 'What is the student\'s birthday?',
-                type: 'combodate'
+                type: 'combodate',
+                emptytext: '(birthday)'
             });
 //            $('#birthCountry').editable({
 //                url: '',
@@ -88,7 +89,7 @@
                     var currentId = $(this).closest().context.id;
                     var nextIdIndex = fieldIds.indexOf(currentId) + 1;
                     if (nextIdIndex < fieldIds.length) {
-                        var next = $('#' + order[nextIdIndex]);
+                        var next = $('#' + fieldIds[nextIdIndex]);
                         setTimeout(function () {
                             next.editable('show');
                         }, 300);
