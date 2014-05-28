@@ -63,6 +63,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (5.3.4)
+    momentjs-rails (2.6.0)
+      railties (>= 3.1)
     multi_json (1.10.1)
     pg (0.17.1)
     polyglot (0.3.4)
@@ -130,6 +132,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   knockoutjs-rails (~> 3.1.0.1)
+  momentjs-rails
   pg
   rails (= 4.1.1)
   sass-rails (~> 4.0.3)
