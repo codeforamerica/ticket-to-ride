@@ -4,4 +4,4 @@ $.fn.editableform.buttons =
   '</button>'+
   '<button type="button" class="btn btn-default btn-sm editable-cancel">'+
     '<i class="glyphicon glyphicon-remove"></i>'+
-  '</button>';   
+  '</button>';
