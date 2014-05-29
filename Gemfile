@@ -43,6 +43,9 @@ gem 'high_voltage', '~> 2.1.0'
 
 gem 'bootstrap-x-editable-rails'
 
+# Wicked: Used for created wizard-like form progression
+gem 'wicked'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
