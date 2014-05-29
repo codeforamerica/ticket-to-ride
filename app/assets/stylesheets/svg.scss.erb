@@ -1,14 +1,15 @@
-.svg-container {
-  padding-bottom: 27.320503%%;
-  position: relative;
-  z-index: 0;
-}
+// .svg-container {
+//   padding-top: 27.320503%;
+//   position: relative;
+//   z-index: 0;
+// }
 .svg-container__content {
   position:absolute;
-  width:100%;
-  height:100%;
+  // width:100%;
+  // height:100%;
   overflow:hidden;
   z-index: 0;
+  bottom: 0;
 }
 .svg-container__content svg {
   width:100%;
@@ -16,7 +17,7 @@
   z-index: 0;
 }
 
-#scenery_welcome, #scenery_student {
+#scenery_welcome {
     .st0{fill:#E4E5E6;}
     .st1{fill:#8D9293;}
     .st2{fill:none;}
@@ -44,3 +45,7 @@
     .st24{fill:#BFAF97;}
 }
 
+
+#scenery_student{
+    @extend #scenery_welcome;
+}
