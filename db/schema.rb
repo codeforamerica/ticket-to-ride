@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529231347) do
+ActiveRecord::Schema.define(version: 20140529232018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,14 @@ ActiveRecord::Schema.define(version: 20140529231347) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",     default: false
   end
 
   create_table "clerks", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",     default: false
   end
 
   create_table "contact_people", force: true do |t|
@@ -39,16 +41,18 @@ ActiveRecord::Schema.define(version: 20140529231347) do
     t.integer  "guardian_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                   default: false
   end
 
   create_table "districts", force: true do |t|
-    t.string   "mailing_street_address_1", null: false
-    t.string   "mailing_street_address_2", null: false
-    t.string   "mailing_zip_code",         null: false
-    t.string   "phone",                    null: false
+    t.string   "mailing_street_address_1",                 null: false
+    t.string   "mailing_street_address_2",                 null: false
+    t.string   "mailing_zip_code",                         null: false
+    t.string   "phone",                                    null: false
     t.date     "first_day_of_school"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                   default: false
   end
 
   create_table "guardians", force: true do |t|
@@ -74,16 +78,18 @@ ActiveRecord::Schema.define(version: 20140529231347) do
     t.integer  "student_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                     default: false
   end
 
   create_table "schools", force: true do |t|
-    t.string   "mailing_street_address_1", null: false
-    t.string   "mailing_street_address_2", null: false
-    t.string   "mailing_zip_code",         null: false
-    t.string   "phone",                    null: false
+    t.string   "mailing_street_address_1",                 null: false
+    t.string   "mailing_street_address_2",                 null: false
+    t.string   "mailing_zip_code",                         null: false
+    t.string   "phone",                                    null: false
     t.integer  "district_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                   default: false
   end
 
   create_table "students", force: true do |t|
@@ -116,15 +122,17 @@ ActiveRecord::Schema.define(version: 20140529231347) do
     t.integer  "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                     default: false
   end
 
   create_table "welcome_messages", force: true do |t|
-    t.string   "message",     null: false
+    t.string   "message",                     null: false
     t.string   "language"
     t.integer  "school_id"
     t.integer  "district_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",      default: false
   end
 
 end
