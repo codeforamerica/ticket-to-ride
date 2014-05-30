@@ -2,17 +2,13 @@
 $(document).ready(function () {
 
     // Reset mad libs fields (for example, when going BACK in the flow)
-    $('#hiddenFormFields input').each(function(){
+    $('#hidden-form-fields input').each(function(){
         var value = $(this).val();
         if(value != null || value != ""){
             var aId = '#a_' + $(this).attr('id');
             $(aId).text(value);
         }
     });
-
-//    $(function () {
-//        $("[data-toggle='popover']").popover();
-//    });
 
     $(function () {
         // Field configurations
