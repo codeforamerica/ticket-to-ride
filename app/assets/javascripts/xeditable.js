@@ -5,14 +5,10 @@ $(document).ready(function () {
 
     $(function () {
         // Field configurations
-        $('#a_guardian_first_name').editable({
-        });
-        $('#a_guardian_last_name').editable({
-        });
-        $('#a_student_first_name').editable({
-        });
-        $('#a_student_last_name').editable({
-        });
+        $('#a_guardian_first_name').editable();
+        $('#a_guardian_last_name').editable();
+        $('#a_student_first_name').editable();
+        $('#a_student_last_name').editable();
         $('#a_student_home_city').editable({
             source: [
                 {value: 1, text: 'Cranston'},
