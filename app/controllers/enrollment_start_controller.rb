@@ -2,10 +2,12 @@ require 'student_params'
 require 'guardian_params'
 
 class EnrollmentStartController < ApplicationController
+  include StudentParams
+  include GuardianParams
 
   def start
-    @student = Student.new(student_params)
-    @guardian = Guardian.new(guardian_params)
+    @student = Student.new()
+    @guardian = Guardian.new()
 
     if @student.save && @guardian.save
       session[:guardian_id] = @guardian.id

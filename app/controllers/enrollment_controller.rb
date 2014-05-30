@@ -10,10 +10,10 @@ class EnrollmentController < ApplicationController
 
   def show
     @student = Student.find(session[:student_id])
-    # @student.update!(student_params)
+    @student.update!(student_params)
 
     @guardian = Guardian.find(session[:guardian_id])
-    # @guardian.update!(guardian_params)
+    @guardian.update!(guardian_params)
 
     case step
 
@@ -22,9 +22,8 @@ class EnrollmentController < ApplicationController
 
         @guardian.student_id = @student.id
 
-    # this should work, but doesn't ... fix this, but until then, use manual hack around (manual assignment)
-    #     @student.update_attributes(params[:student])
-    #     @guardian.update_attributes(params[:guardian])
+        # @student.update_attributes(params[:student])
+        # @guardian.update_attributes(params[:guardian])
 
         @student.first_name = params[:student][:first_name]
         @student.last_name = params[:student][:last_name]
