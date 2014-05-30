@@ -1,0 +1,41 @@
+<div class="madlib">
+  <div class="instructions">Begin by clicking on the underlined words and answering the prompts.</div>
+
+  <div>
+    My name is
+    <a href="#" id="a_guardian_first_name" data-title="What is your first name?" data-emptytext="(first name)" data-type="text" data-placement="top"></a>
+    <a href="#" id="a_guardian_last_name" data-title="What is your last name?" data-emptytext="(last name)" data-type="text" data-placement="top"></a>.<br/>
+
+    I am enrolling
+    <a href="#" id="a_student_first_name" data-title="What is the student's first name?" data-emptytext="(first name)" data-type="text" data-placement="top"></a>
+    <a href="#" id="a_student_last_name" data-title="What is the student's last name?" data-emptytext="(last name)" data-type="text" data-placement="top"></a>
+    in the
+    <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select" data-emptytext="(city/town)"></a>
+    Public School System.
+  </div>
+</div>
+
+<%= form_for(@student, url: '/enrollment', method: :put) do |s| %>
+    <div id="hiddenFormFields">
+      <%= s.text_field :first_name %>
+      <%= s.text_field :last_name %>
+      <%= s.text_field :home_city %>
+
+      <%= fields_for(@guardian) do |g| %>
+          <%= g.text_field :first_name %>
+          <%= g.text_field :last_name %>
+      <% end %>
+    </div>
+
+    <%= s.submit 'Submit' %>
+
+<% end %>
+
+<ul class="pager">
+  <li><%= link_to "Previous", :root %></li>
+  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><%= link_to "Next", page_path('student/student02'), :class => "pull-right" %></li>
+</ul>
+
+
+<%= render 'shared/scenery_student' %>
