@@ -6,35 +6,26 @@ class EnrollmentController < ApplicationController
   include StudentParams
   include GuardianParams
 
-  steps :student_birth_gender_and_ethnicity
+  steps :student_birth_gender_and_ethnicity, :student_language
 
   def show
     @student = Student.find(session[:student_id])
-    @student.update!(student_params)
-
     @guardian = Guardian.find(session[:guardian_id])
-    @guardian.update!(guardian_params)
 
     case step
 
-      # This is a unique case, where the `show` has to save something
-      when :student_birth_gender_and_ethnicity
+    # This is a unique case, where the `show` has to save something
+    when :student_birth_gender_and_ethnicity
+      # @student.update!(student_params)
+      @guardian.student_id = @student.id
+      # @guardian.update!(guardian_params)
 
-        @guardian.student_id = @student.id
+      @student.update_attributes(student_params)
+      @guardian.update_attributes(guardian_params)
 
-        # @student.update_attributes(params[:student])
-        # @guardian.update_attributes(params[:guardian])
-
-        @student.first_name = params[:student][:first_name]
-        @student.last_name = params[:student][:last_name]
-        @student.home_city = params[:student][:home_city]
-
-        @guardian.first_name = params[:guardian][:first_name]
-        @guardian.last_name = params[:guardian][:last_name]
-
-        if !@student.save || !@guardian.save
-          redirect_to URI(request.referer).path
-        end
+      if !@student.save || !@guardian.save
+        redirect_to URI(request.referer).path
+      end
     end
 
     render_wizard
@@ -43,6 +34,9 @@ class EnrollmentController < ApplicationController
   def update
     @guardian = Guardian.find(session[:guardian_id])
     @student = Student.find(session[:student_id])
+
+
+
     render_wizard
   end
 
