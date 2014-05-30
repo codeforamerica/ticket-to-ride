@@ -1,13 +1,13 @@
-class EnrollmentStarterController < ApplicationController
+class EnrollmentStartController < ApplicationController
 
-  def index
+  def start
     @student = Student.new
     @guardian = Guardian.new
 
     if @student.save && @guardian.save
       session[:guardian_id] = @guardian.id
       session[:student_id] = @student.id
-      render 'index'
+      render 'enrollment_start'
     end
   end
 

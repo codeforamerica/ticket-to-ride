@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   root :to => 'welcome#index-newport'
 
+  get 'start' => 'enrollment_start#start'
+  resources :enrollment
+
   resources :students
 
   # get 'pages/home' => 'high_voltage/pages#show', id: 'home'
