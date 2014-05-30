@@ -5,40 +5,21 @@ $(document).ready(function () {
 
     $(function () {
         // Field configurations
-        $('#guardianFirstName').editable({
-            title: 'What is your first name?',
-            emptytext: '(first name)',
-            type: 'text',
-            placement: 'top'
+        $('#a_guardian_first_name').editable({
         });
-        $('#guardianLastName').editable({
-            title: 'What is your last name?',
-            emptytext: '(last name)',
-            type: 'text',
-            placement: 'top'
+        $('#a_guardian_last_name').editable({
         });
-        $('#studentFirstName').editable({
-            title: 'Student\'s first name?',
-            emptytext: '(first name)',
-            type: 'text',
-            placement: 'top'
+        $('#a_student_first_name').editable({
         });
-        $('#studentLastName').editable({
-            title: 'Student\'s last name?',
-            emptytext: '(last name)',
-            type: 'text',
-            placement: 'top'
+        $('#a_student_last_name').editable({
         });
-        $('#schoolDistrict').editable({
-            title: 'Choose your city or town',
-            type: 'select',
+        $('#a_student_home_city').editable({
             source: [
                 {value: 1, text: 'Cranston'},
                 {value: 2, text: 'Newport'},
                 {value: 3, text: 'Warwick'},
                 {value: 4, text: 'West Warwick'}
-            ],
-            emptytext: '(city/town)'
+            ]
         });
         $('#studentGender').editable({
             title: 'Choose based on the student\'s gender',
@@ -81,6 +62,10 @@ $(document).ready(function () {
             if (reason === 'save' || reason === 'nochange') {
                 // Get info about the currently selected editable field
                 var currentId = $(this).closest().context.id;
+                var hashCurrentId = '#' + currentId;
+
+                // Copy value to form field
+                copyATextToInputValue(hashCurrentId);
 
                 // Get the index of the next editable field
                 var editableFields = $('.editable');
@@ -122,3 +107,41 @@ function getIndexOfElementById(elements, id) {
 
     return -1;
 };
+
+/**
+ * Removes "a_" from the beginning of strings. Works
+ * with hashed tagged values too. Examples:
+ *
+ * "a_rub_a_dub_dub" => "rub_a_dub_dub"
+ * "#a_rub_a_dub_dub" => "#rub_a_dub_dub"
+ *
+ * @param str A string
+ * @returns The string, minus a lead "a_"
+ */
+function stripAUnderscoreFrom(str) {
+    var match = /^(#?)a_(.*)/.exec(str);
+    if(match != null){
+        return match[1] + match[2];
+    }
+}
+
+/**
+ * Copies the `text` attribute from an `a` tag to
+ * an `input` tag's `value` attribute. The
+ * `a` tag's ID must be the same as the `input` tag's, except
+ * with a leading "a_".
+ *
+ * For example, if argument `aId` is
+ * "a_field", then the text will be copied from
+ *
+ * <a id="a_field">
+ * to
+ * <input id="field">
+ *
+ * @param aId An ID of an `a` tag with a corresponding `input` tag
+ */
+function copyATextToInputValue(aId){
+    var aValue = $(aId).text();
+    var formId = stripAUnderscoreFrom(aId);
+    $(formId).val(aValue);
+}
