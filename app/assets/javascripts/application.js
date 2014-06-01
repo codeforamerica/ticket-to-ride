@@ -17,5 +17,6 @@
 //= require knockout-bootstrap.min
 //= require bootstrap3-editable/bootstrap-editable
 //= require moment
+//= require select2
 //= require_tree .
 

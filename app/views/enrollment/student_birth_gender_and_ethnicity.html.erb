@@ -1,3 +1,38 @@
-<h1>Stuff will go on this page</h1>
+<div class="madlib">
+  <div>
+    <%= @student.first_name %>
+    was born on
+    <a href="#" id="a_student_birthday" data-title="What is <%= @student.first_name %>'s birthday?" data-emptytext="(birthday)" data-type="combodate" data-placement="top"></a>
+    in
+    <a href="#" id="a_student_birth_country" data-title="What is <%= @student.first_name %>'s birth country?" data-emptytext="(birth country)" data-type="text" data-placement="top"></a>.
+
+    <a href="#" id="a_student_gender_pronoun" data-title="He or She?" data-emptytext="(He/She)" data-type="select" data-placement="top"></a>
+    <a href="#" id="a_student_is_hispanic" data-title="Is <%= @student.first_name %> Hispanic?" data-emptytext="(is/isnt)" data-type="select" data-placement="top"></a>
+    of Hispanic or Latin descent and identifies as
+    <a href="#" id="a_student_student_race" data-title="Races <%= @student.first_name %> identifies as:" data-emptytext="(races)" data-type="select" data-placement="top"></a>.
+
+  </div>
+</div>
+
+<!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+    <div id="hidden-form-fields">
+      <%= s.text_field :birthday %>
+      <%= s.text_field :birth_country %>
+      <%= s.text_field :gender %>
+      <%= s.text_field :is_hispanic %>
+
+      <%= fields_for StudentRace.new do |r|%>
+        <%= r.text_field :race %>
+      <% end %>
+      <!-- TODO: Return to figure out how to populate student race -->
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
 
 <%= render 'shared/scenery_student' %>

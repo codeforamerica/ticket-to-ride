@@ -1,10 +1,12 @@
 require 'guardian_params'
 require 'student_params'
+require 'student_race_params'
 
 class EnrollmentController < ApplicationController
   include Wicked::Wizard
   include StudentParams
   include GuardianParams
+  include StudentRaceParams
 
   steps :student_birth_gender_and_ethnicity, :student_language
 
@@ -35,9 +37,18 @@ class EnrollmentController < ApplicationController
     @guardian = Guardian.find(session[:guardian_id])
     @student = Student.find(session[:student_id])
 
+    case step
+      when :student_birth_gender_and_ethnicity
+        params[:student][:is_hispanic] == isIsntToBoolean(params[:student][:is_hispanic])
 
+        @student_race = StudentRace.create(student_race_params)
+        @student_race.student = @student
+        @student_race.save
+    end
 
-    render_wizard
+    @student.update_attributes(student_params)
+
+    render_wizard @student
   end
 
 end

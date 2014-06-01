@@ -24,39 +24,25 @@ $(document).ready(function () {
                 {value: 4, text: 'West Warwick'}
             ]
         });
-        $('#studentGender').editable({
-            title: 'Choose based on the student\'s gender',
-            type: 'select',
+        $('#a_student_gender_pronoun').editable({
             source: [
                 {value: 1, text: 'He'},
                 {value: 2, text: 'She'}
-            ],
-            emptytext: '(He/She)'
-        });
-        $('#dob').editable({
-            title: 'What is the student\'s birthday?',
-            type: 'combodate',
-            emptytext: '(birthday)'
-        });
-        $('#birthCountry').editable({
-            url: '',
-            title: 'In what country was your child born?'
-        });
-        $('#hispanicLatino').editable({
-            value: 2,
-            source: [
-                {value: 1, text: 'is'},
-                {value: 2, text: 'is not'}
             ]
         });
-        $('#studentRace').editable({
-            value: 1,
+        $('#a_student_birthday').editable();
+        $('#a_student_birth_country').editable();
+        $('#a_student_is_hispanic').editable({
+            source: ["is", "isn't"],
+            emptytext: "blarg"
+        });
+        $('#a_student_student_race').editable({
             source: [
                 {value: 1, text: 'White'},
                 {value: 2, text: 'Black/African American'},
-                {value: 1, text: 'Asian'},
-                {value: 2, text: 'American Indian/Alaska Native'},
-                {value: 1, text: 'Native Hawaiian/other Pacific Islander'}
+                {value: 3, text: 'Asian'},
+                {value: 4, text: 'American Indian/Alaska Native'},
+                {value: 5, text: 'Native Hawaiian/other Pacific Islander'}
             ]
         });
 
