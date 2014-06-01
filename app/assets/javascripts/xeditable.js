@@ -45,6 +45,14 @@ $(document).ready(function () {
                 {value: 5, text: 'Native Hawaiian/other Pacific Islander'}
             ]
         });
+        $('#a_student_first_language').editable({
+            // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
+            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
+        });
+        $('#a_student_second_language').editable({
+            // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
+            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer", "(No Other Language)"].sort()
+        });
 
         // Enables auto progression of fields
         $('.editable').on('hidden', function (e, reason) {

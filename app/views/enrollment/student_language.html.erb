@@ -1,3 +1,26 @@
+<div class="madlib">
+  <div>
+    <%= @student.first_name %>
+    is most comfortable speaking
+    <a href="#" id="a_student_first_language" data-emptytext="(language)" data-title="What is <%= @student.first_name %>'s first language?" data-type="select" data-placement="top"></a>.
 
+    <%= @gender_pronoun.capitalize %>
+    also speaks
+    <a href="#" id="a_student_second_language" data-emptytext="(language)" data-title="What is <%= @student.first_name %>'s second language?" data-type="select" data-placement="top"></a>.
+  </div>
+</div>
+
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+    <div id="hidden-form-fields">
+      <%= s.text_field :first_language %>
+      <%= s.text_field :second_language %>
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
 
 <%= render 'shared/scenery_student' %>

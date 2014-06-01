@@ -8,7 +8,8 @@ class EnrollmentController < ApplicationController
   include GuardianParams
   include StudentRaceParams
 
-  steps :student_birth_gender_and_ethnicity, :student_language
+  steps :student_birth_gender_and_ethnicity, :student_language, :student_address
+
 
   def show
     @student = Student.find(session[:student_id])
@@ -28,6 +29,9 @@ class EnrollmentController < ApplicationController
       if !@student.save || !@guardian.save
         redirect_to URI(request.referer).path
       end
+      else
+        @gender_pronoun = genderEnumToPronoun(@student.gender)
+        @gender_possessive = genderEnumToPossessivePronoun(@student.gender)
     end
 
     render_wizard
@@ -45,6 +49,10 @@ class EnrollmentController < ApplicationController
         @student_race = StudentRace.create(student_race_params)
         @student_race.student = @student
         @student_race.save
+      when :student_language
+        if params[:student][:secondary_language] == "(No Other Language)"
+          params[:student][:secondary_language] = nil
+        end
     end
 
     @student.update_attributes(student_params)
