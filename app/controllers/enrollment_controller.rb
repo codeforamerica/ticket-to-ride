@@ -39,7 +39,8 @@ class EnrollmentController < ApplicationController
 
     case step
       when :student_birth_gender_and_ethnicity
-        params[:student][:is_hispanic] == isIsntToBoolean(params[:student][:is_hispanic])
+        params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
+        params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
 
         @student_race = StudentRace.create(student_race_params)
         @student_race.student = @student

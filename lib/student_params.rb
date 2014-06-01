@@ -29,8 +29,9 @@ module StudentParams
         :mailing_zip_code,
         :gender,
         :home_city,
-        :mailing_city
-
+        :mailing_city,
+        :is_hispanic,
+        :birth_country
     )
   end
 end

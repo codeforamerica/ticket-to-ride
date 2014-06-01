@@ -24,7 +24,7 @@ $(document).ready(function () {
                 {value: 4, text: 'West Warwick'}
             ]
         });
-        $('#a_student_gender_pronoun').editable({
+        $('#a_student_gender').editable({
             source: [
                 {value: 1, text: 'He'},
                 {value: 2, text: 'She'}
@@ -36,7 +36,7 @@ $(document).ready(function () {
             source: ["is", "isn't"],
             emptytext: "blarg"
         });
-        $('#a_student_student_race').editable({
+        $('#a_student_race_race').editable({
             source: [
                 {value: 1, text: 'White'},
                 {value: 2, text: 'Black/African American'},

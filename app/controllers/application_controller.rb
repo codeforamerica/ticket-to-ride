@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def genderPronounToEnum(pronoun)
     pronoun_uppercase =  pronoun.upcase
 
-    if pronoun_uppercase == 'MALE'
+    if pronoun_uppercase == 'HE'
       return :male
     end
     #TODO: Raise exception if unknown detected
