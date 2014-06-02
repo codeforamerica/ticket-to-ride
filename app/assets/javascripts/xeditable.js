@@ -21,19 +21,11 @@ $(document).ready(function () {
         $('#a_student_last_name').editable();
 
         $('#a_student_home_city').editable({
-            source: [
-                {value: 1, text: 'Cranston'},
-                {value: 2, text: 'Newport'},
-                {value: 3, text: 'Warwick'},
-                {value: 4, text: 'West Warwick'}
-            ]
+            source: [ 'Cranston', 'Newport', 'Warwick', 'West Warwick'].sort()
         });
 
         $('#a_student_gender').editable({
-            source: [
-                {value: 1, text: 'He'},
-                {value: 2, text: 'She'}
-            ]
+            source: ['He','She']
         });
 
         $('#a_student_birthday').editable();
@@ -47,12 +39,12 @@ $(document).ready(function () {
 
         $('#a_student_race_race').editable({
             source: [
-                {value: 1, text: 'White'},
-                {value: 2, text: 'Black/African American'},
-                {value: 3, text: 'Asian'},
-                {value: 4, text: 'American Indian/Alaska Native'},
-                {value: 5, text: 'Native Hawaiian/other Pacific Islander'}
-            ]
+                'Caucasian',
+                'Black/African American',
+                'Asian',
+                'American Indian/Alaska Native',
+                'Native Hawaiian/other Pacific Islander'
+            ].sort()
         });
 
         $('#a_student_first_language').editable({
@@ -62,7 +54,7 @@ $(document).ready(function () {
 
         $('#a_student_second_language').editable({
             // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
-            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer", "(No Other Language)"].sort()
+            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
         });
 
         $('#a_student_home_street_address_1').editable();
@@ -95,7 +87,7 @@ $(document).ready(function () {
         $('#a_student_alt_home_zip_code').editable();
 
         $('#a_guardian_relationship').editable({
-            source: ["Parent", "Grandparent", "Relative", "Other"]
+            source: ["Mother", "Father", "Grandparent", "Relative", "Other"]
         });
 
         $('#a_guardian_is_custody_shared').editable({
@@ -107,14 +99,17 @@ $(document).ready(function () {
             var sharedCustodyDiv = $('#shared-custody-div');
 //            var sharedPronounSpan = $('#shared-pronoun-span');
             var sharedCustodyDiffAddressDiv = $('#shared-custody-different-address-div');
+            var sharedCustodyPeriodSpan = $('#shared-custody-period-span');
 
 
             if(value === 'do') {
                 sharedCustodyDiv.show();
+                sharedCustodyPeriodSpan.hide();
             }
             else {
                 sharedCustodyDiv.hide();
                 sharedCustodyDiffAddressDiv.hide();
+                sharedCustodyPeriodSpan.show();
                 //TODO: Also clear form values for shared custody address, not just hide
             }
         });
