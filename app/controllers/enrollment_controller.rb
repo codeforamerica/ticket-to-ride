@@ -12,20 +12,24 @@ class EnrollmentController < ApplicationController
 
   # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
   steps :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
-        :guardian_custody_and_address
+        :guardian_custody_and_address, :guardian_second_guardian_address, :guardian_first_guardian_contact_info, :guardian_second_guardian_contact_info, :guardian_complete,
+        :contact_person_contact_info,
+        :enrollment_complete
 
 
   def show
     @student = Student.find(session[:student_id])
     @guardian = Guardian.find(session[:guardian_id])
 
+    if session[:second_guardian_id]
+      @second_guardian = ContactPerson.find(session[:second_guardian_id])
+    end
+
     case step
 
     # This is a unique case, where the `show` has to save something
     when :student_birth_gender_and_ethnicity
-      # @student.update!(student_params)
       @guardian.student_id = @student.id
-      # @guardian.update!(guardian_params)
 
       @student.update_attributes(student_params)
       @guardian.update_attributes(guardian_params)
@@ -61,8 +65,12 @@ class EnrollmentController < ApplicationController
         end
       when :guardian_custody_and_address
         if params[:contact_person][:first_name]
-          @other_guardian = ContactPerson.create(contact_person_params)
-          @other_guardian.save
+          @second_guardian = ContactPerson.create(contact_person_params)
+          @second_guardian.guardian = @guardian
+          @second_guardian.save
+          session[:second_guardian_id] = @second_guardian.id
+        else
+          skip_step # this is allows a double skip (i.e. skip two steps forward)
         end
     end
 
