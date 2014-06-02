@@ -4,11 +4,12 @@
     currently lives at
     <a href="#" id="a_student_home_street_address_1" data-emptytext="(street address)" data-title="What is <%= @student.first_name %>'s home street address?" data-type="text" data-placement="top"></a>
     in
-    <a href="#" id="a_student_home_city" data-emptytext="(city)" data-title="What is <%= @student.first_name %>'s home city?" data-type="text" data-placement="top"><%= @student.home_city %></a>
+    <a href="#" id="a_student_home_city" data-emptytext="(city)" data-title="What is <%= @student.first_name %>'s home city?" data-type="text" data-placement="top"><%= @student.home_city %></a>,
+    RI,
     <a href="#" id="a_student_home_zip_code" data-emptytext="(zip)" data-title="What is <%= @student.first_name %>'s home zip code?" data-type="text" data-placement="top"></a>.
 
     <%= @gender_pronoun.capitalize %>
-    <a href="#" id="a_student_other_home_status" data-emptytext="(lives/doesn't live)" data-title="Does <%= @student.first_name %> lives at another home?" data-type="select" data-showbuttons="false" onchange=""></a>
+    <a href="#" id="a_student_alt_home_status" data-emptytext="(lives/doesn't live)" data-title="Does <%= @student.first_name %> lives at another home?" data-type="select" data-showbuttons="false" onblur="alert('sup')"></a>
     at another home.
 
     <div id="alt-address-div" style="display: none">
@@ -22,13 +23,15 @@
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
     <div id="hidden-form-fields">
-      <%= s.text_field :home_address_1 %>
+      <%= s.text_field :home_street_address_1 %>
       <%= s.text_field :home_city %>
       <%= s.text_field :home_zip_code %>
 
+      <input id="student_alt_home_status" type="text"/>
+
       <%= s.text_field :alt_home_street_address_1 %>
       <%= s.text_field :alt_home_city %>
-      <%= s.text_field :alt_zip_code %>
+      <%= s.text_field :alt_home_zip_code %>
     </div>
 
     <ul class="pager">

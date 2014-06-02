@@ -13,9 +13,13 @@ $(document).ready(function () {
     $(function () {
         // Field configurations
         $('#a_guardian_first_name').editable();
+
         $('#a_guardian_last_name').editable();
+
         $('#a_student_first_name').editable();
+
         $('#a_student_last_name').editable();
+
         $('#a_student_home_city').editable({
             source: [
                 {value: 1, text: 'Cranston'},
@@ -24,18 +28,23 @@ $(document).ready(function () {
                 {value: 4, text: 'West Warwick'}
             ]
         });
+
         $('#a_student_gender').editable({
             source: [
                 {value: 1, text: 'He'},
                 {value: 2, text: 'She'}
             ]
         });
+
         $('#a_student_birthday').editable();
+
         $('#a_student_birth_country').editable();
+
         $('#a_student_is_hispanic').editable({
             source: ["is", "isn't"],
             emptytext: "blarg"
         });
+
         $('#a_student_race_race').editable({
             source: [
                 {value: 1, text: 'White'},
@@ -45,20 +54,42 @@ $(document).ready(function () {
                 {value: 5, text: 'Native Hawaiian/other Pacific Islander'}
             ]
         });
+
         $('#a_student_first_language').editable({
             // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
             source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
         });
+
         $('#a_student_second_language').editable({
             // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
             source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer", "(No Other Language)"].sort()
         });
 
-        $('#a_student_home_address_1').editable();
+        $('#a_student_home_street_address_1').editable();
+
         $('#a_student_home_city').editable();
+
         $('#a_student_home_zip_code').editable();
-        $('#a_student_alt_home_address_1').editable();
+
+        $('#a_student_alt_home_status').editable({
+            source: ["lives", "doesn't live"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+            var altAddressDiv = $('#alt-address-div');
+            if(value === "lives"){
+                altAddressDiv.show();
+            }
+            else {
+                altAddressDiv.hide();
+                //TODO: Clear the alt address form fields
+            }
+        });
+
+        $('#a_student_alt_home_street_address_1').editable();
+
         $('#a_student_alt_home_city').editable();
+
         $('#a_student_alt_home_zip_code').editable();
 
         // Enables auto progression of fields
