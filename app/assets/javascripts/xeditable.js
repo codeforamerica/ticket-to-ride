@@ -92,6 +92,10 @@ $(document).ready(function () {
 
         $('#a_student_alt_home_zip_code').editable();
 
+        $('#a_guardian_relationship').editable({
+            source: ["Parent", "Grandparent", "Relative", "Other"]
+        });
+
         // Enables auto progression of fields
         $('.editable').on('hidden', function (e, reason) {
             if (reason === 'save' || reason === 'nochange') {

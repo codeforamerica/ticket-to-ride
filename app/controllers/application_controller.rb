@@ -34,6 +34,15 @@ class ApplicationController < ActionController::Base
     return 'hers'
   end
 
+  def genderEnumToObjectivePronoun(gender_enum)
+    if gender_enum == :male
+      return 'him'
+    end
+    #TODO: Raise exception if unknown detected
+
+    return 'her'
+  end
+
   def isIsntToBoolean(isOrIsnt)
     if isOrIsnt.upcase == 'IS'
       return true

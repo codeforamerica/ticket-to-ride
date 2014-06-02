@@ -8,7 +8,8 @@ class EnrollmentController < ApplicationController
   include GuardianParams
   include StudentRaceParams
 
-  steps :student_birth_gender_and_ethnicity, :student_language, :student_address
+  steps :student_birth_gender_and_ethnicity, :student_language, :student_address,
+        :guardian_custody_and_address
 
 
   def show
@@ -32,6 +33,7 @@ class EnrollmentController < ApplicationController
       else
         @gender_pronoun = genderEnumToPronoun(@student.gender)
         @gender_possessive = genderEnumToPossessivePronoun(@student.gender)
+        @gender_objective = genderEnumToObjectivePronoun(@student.gender)
     end
 
     render_wizard

@@ -1,12 +1,26 @@
-@import "common/variables";
+/* @override http://localhost:3000/assets/madlib.css?body=1 */
 
-.madlib{
+
+
+div.container header{
+	position: absolute;
+	left: -20px;
+	top: 10px;
+	height: 155px;
+	width: 226px;
+	
+}
+
+.madlib,
+ul.pager{
   max-width: 960px;
-  margin: -8% 30% 5%;
-  width: 71%;
+  margin: 0 auto;
   font-size: 200%;
   line-height: 175%;
-  min-height: 173px;
+}
+
+.madlib{
+	margin-top: 3em;	
 }
 
 .madlib_para {
@@ -32,7 +46,7 @@
 .instructions {
   font-size: 67%;
   font-weight: 400; 
-  color: $george-harrison;
+  color: #9e2626;
   line-height: 130%;
   margin-bottom: 2%;
 }
@@ -51,13 +65,13 @@
 }
 
 .pseudo-tooltip {
-  color: $paul-mccartney;
-  border-bottom: 3px dotted $paul-mccartney;
+  color: #6aba5b;
+  border-bottom: 3px dotted #6aba5b;
 }
 
 a.editable-click {
-  color: $paul-mccartney;
-  border-color: $paul-mccartney;
+  color: #6aba5b;
+  border-color: #6aba5b;
 }
 
 .input-small {
@@ -78,31 +92,42 @@ a.editable-click {
 }
 
 .pager {
-  margin-left: -10%;
-  margin-top: -1%;
-  width: 90%;
-  position: absolute;
-  z-index: 100;
+	position: relative;
+	z-index: 1;
+	text-align: left;
+	padding-top: 1em;
 }
 
-.pager li * {
-  // display: block;
-  width: 10%;
+.pager li{
+	float: left;
+	line-height: 1.5;
 }
+
+.pager li:last-of-type{
+	float: right;
+}
+
 
 .pager li > a,
 .nav-button {
-  background-color: $paul-mccartney;
+	display: block;
+  background-color: #6aba5b;
   color: white;
   border-radius: 4px;
   font-size: 14px;
-  line-height: 1.42857143;
+  border: none;
+  height: 2em;
+  line-height: 1.4em;
+  	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    min-width: 6em;
+
 }
 
 .pager li > a:hover,
 .nav-button:hover {
-  color: $paul-mccartney;
-  background-color: white;
+  background-color: #549448;
 }
 
 #hidden-form-fields {

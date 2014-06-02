@@ -1,0 +1,53 @@
+<div class="madlib">
+  <div>
+    My name is
+    <%= @guardian.first_name %>
+    <%= @guardian.last_name %>
+    and I am
+    <%= @student.first_name %>'s
+    <a href="#" id="a_guardian_relationship" data-emptytext="(relationship)" data-title="What is your relationship to <%= @student.first_name %>?" data-type="text" data-placement="top"></a>.
+
+    I
+    <a href="#" id="a_guardian_is_custody_shared" data-emptytext="(do/don't)" data-title="Do you share custody of <%= @student.first_name %>?" data-type="select" data-placement="top"></a>
+    share custody of
+    <%= @gender_objective %>
+
+
+    <span id="shared-custody-div">
+      with
+      <a href="#" id="a_contact_person_first_name" data-emptytext="(first_name)" data-title="What is the first name of the other guardian?" data-type="text" data-placement="top"></a>
+      <a href="#" id="a_contact_person_last_name" data-emptytext="(first_name)" data-title="What is the last name of the other guardian?" data-type="text" data-placement="top"></a>.
+    </span>
+
+    <span id="shared-pronoun-span">My</span>
+    address is
+    <a href="#" id="a_guardian_mailing_address_1" data-title="What is your address?" data-type="text" data-placement="top"><%= @student.home_street_address_1 %></a>,
+    <a href="#" id="a_guardian_mailing_city" data-title="What is your city?" data-type="text" data-placement="top"><%= @student.home_city %></a>,
+    RI,
+    <a href="#" id="a_guardian_mailing_zip_code" data-title="What is your zip code?" data-type="text" data-placement="top"><%= @student.home_zip_code %></a>.
+
+    <div class="shared-custody-different-address-div">
+      <span id="other-guardian-first-name"></span>
+      lives at
+      <a href="#" id="a_contact_person_mailing_address_1" data-title="What is the other guardian's address?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_contact_person_mailing_city" data-title="What is the other guardian's city?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_contact_person_mailing_state" data-title="What is the other guardian's state?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_contact_person_mailing_zip_code" data-title="What is the other guardian's zip code?" data-type="text" data-placement="top"></a>.
+    </div>
+
+  </div>
+</div>
+
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+    <div id="hidden-form-fields">
+
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_student' %>
