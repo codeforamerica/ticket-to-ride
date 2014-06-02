@@ -101,8 +101,8 @@ $(document).ready(function () {
             var value = $('#'+currentId).text();
 
             var sharedCustodyDiv = $('#shared-custody-div');
-//            var sharedPronounSpan = $('#shared-pronoun-span');
             var sharedCustodyPeriodSpan = $('#shared-custody-period-span');
+            var sharedPronounSpan = $('#shared-pronoun-span');
 
 
             if(value === 'do') {
@@ -112,6 +112,7 @@ $(document).ready(function () {
             else {
                 sharedCustodyDiv.hide();
                 sharedCustodyPeriodSpan.show();
+                sharedPronounSpan.text('My');
                 //TODO: Also clear form values for shared custody address, not just hide
             }
         });
