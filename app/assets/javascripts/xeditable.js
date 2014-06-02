@@ -90,6 +90,8 @@ $(document).ready(function () {
 
         $('#a_student_alt_home_city').editable();
 
+        $('#a_student_alt_home_state').editable();
+
         $('#a_student_alt_home_zip_code').editable();
 
         $('#a_guardian_relationship').editable({

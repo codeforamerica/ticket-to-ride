@@ -16,6 +16,7 @@
       The address for the other home is
       <a href="#" id="a_student_alt_home_street_address_1" data-emptytext="(street address)" data-title="What is <%= @student.first_name %>'s other home street address?" data-type="text" data-placement="top"></a>,
       <a href="#" id="a_student_alt_home_city" data-emptytext="(city)" data-title="What is <%= @student.first_name %>'s other home city?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_student_alt_home_state" data-emptytext="(state)" data-title="What is <%= @student.first_name %>'s other home state?" data-type="text" data-placement="top"></a>,
       <a href="#" id="a_student_alt_home_zip_code" data-emptytext="(zip)" data-title="What is <%= @student.first_name %>'s other home zip code?" data-type="text" data-placement="top"></a>.
     </div>
   </div>
@@ -31,6 +32,7 @@
 
       <%= s.text_field :alt_home_street_address_1 %>
       <%= s.text_field :alt_home_city %>
+      <%= s.text_field :alt_home_state %>
       <%= s.text_field :alt_home_zip_code %>
     </div>
 
