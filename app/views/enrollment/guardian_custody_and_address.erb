@@ -33,15 +33,6 @@
     RI,
     <a href="#" id="a_guardian_mailing_zip_code" data-emptytext="(zip code)" data-title="What is your zip code?" data-type="text" data-placement="top" data-value="<%= @student.home_zip_code %>"></a>.
 
-    <div id="shared-custody-different-address-div" style="display: none"> <!-- TODO: Don't have the display:none inline, move to CSS file -->
-      <span id="other-guardian-first-name"></span>
-      lives at
-      <a href="#" id="a_contact_person_mailing_street_address_1" data-emptytext="(street address)" data-title="What is the other guardian's address?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_street_address_1 %>"></a>,
-      <a href="#" id="a_contact_person_mailing_city" data-emptytext="(city)" data-title="What is the other guardian's city?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_city %>">></a>,
-      <a href="#" id="a_contact_person_mailing_state" data-emptytext="(state)" data-title="What is the other guardian's state?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_state %>">></a>,
-      <a href="#" id="a_contact_person_mailing_zip_code" data-emptytext="(zip code)" data-title="What is the other guardian's zip code?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_zip_code %>">></a>.
-    </div>
-
   </div>
 </div>
 
@@ -55,13 +46,14 @@
       <%= g.text_field :mailing_zip_code %>
       <input type="text" id="guardian_other_guardian_cohabitates"/> <!-- TODO: This should be a checkbox -->
 
+      <!-- TODO: If other guardian cohabitates, populate the second guardian's address info and skip the next page -->
       <%= fields_for(ContactPerson.new) do |c| %>
           <%= c.text_field :first_name %>
           <%= c.text_field :last_name %>
-          <%= c.text_field :mailing_street_address_1 %>
-          <%= c.text_field :mailing_city %>
-          <%= c.text_field :mailing_state %>
-          <%= c.text_field :mailing_zip_code %>
+          <!--<%= c.text_field :mailing_street_address_1 %>-->
+          <!--<%= c.text_field :mailing_city %>-->
+          <!--<%= c.text_field :mailing_state %>-->
+          <!--<%= c.text_field :mailing_zip_code %>-->
           <%= c.text_field :relationship %>
       <% end %>
 

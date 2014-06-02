@@ -102,7 +102,6 @@ $(document).ready(function () {
 
             var sharedCustodyDiv = $('#shared-custody-div');
 //            var sharedPronounSpan = $('#shared-pronoun-span');
-            var sharedCustodyDiffAddressDiv = $('#shared-custody-different-address-div');
             var sharedCustodyPeriodSpan = $('#shared-custody-period-span');
 
 
@@ -112,7 +111,6 @@ $(document).ready(function () {
             }
             else {
                 sharedCustodyDiv.hide();
-                sharedCustodyDiffAddressDiv.hide();
                 sharedCustodyPeriodSpan.show();
                 //TODO: Also clear form values for shared custody address, not just hide
             }
@@ -125,15 +123,12 @@ $(document).ready(function () {
             var value = $('#'+currentId).text();
 
             var sharedPronounSpan = $('#shared-pronoun-span');
-            var sharedCustodyDiffAddressDiv = $('#shared-custody-different-address-div');
 
 
             if(value === 'do') {
-                sharedCustodyDiffAddressDiv.hide();
                 sharedPronounSpan.text('Our');
             }
             else {
-                sharedCustodyDiffAddressDiv.show();
                 sharedPronounSpan.text('My');
             }
         });
