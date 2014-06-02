@@ -1,0 +1,39 @@
+<div class="madlib">
+  <div>
+    <!-- TODO: Connect these fields to the backend -->
+    My
+    <a href="#" id="a_guardian_phone_1_type" data-emptytext="(phone type)" data-title="What type of phone is this?" data-type="select" data-placement="top"></a>
+    phone number is
+    <a href="#" id="a_guardian_phone_1_number" data-emptytext="(phone number)" data-title="What's your phone number?" data-type="text" data-placement="top"></a>.
+
+    This phone number changes
+    <a href="#" id="a_guardian_phone_1_change_frequency" data-emptytext="(change frequency)" data-title="How often does this phone number change?" data-type="select" data-placement="top"></a>.
+
+    Another phone number you can reach me at is
+    <a href="#" id="a_guardian_phone_2_number" data-emptytext="(phone number)" data-title="What's your phone number?" data-type="text" data-placement="top"></a>,
+    which is a
+    <a href="#" id="a_guardian_phone_2_type" data-emptytext="(phone type)" data-title="What type of phone is this?" data-type="select" data-placement="top"></a>
+    and it changes
+    <a href="#" id="a_guardian_phone_2_change_frequency" data-emptytext="(change frequency)" data-title="How often does this phone number change?" data-type="select" data-placement="top"></a>.
+
+    My e-mail address is
+    <a href="#" id="a_guardian_email" data-emptytext="(email address)" data-title="What is your e-mail address?" data-type="text" data-placement="top"></a>.
+
+    The best way to contact me is by
+    <a href="#" id="a_guardian_contact_preference" data-emptytext="(contact preference)" data-title="What is the preferred way to contact you?" data-type="select" data-placement="top"></a>.
+  </div>
+</div>
+
+<%= form_for(@guardian, url: wizard_path, method: :put) do |g| %>
+    <div id="hidden-form-fields">
+
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_guardian' %>
