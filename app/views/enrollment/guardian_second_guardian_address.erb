@@ -1,0 +1,27 @@
+<div class="madlib">
+  <div>
+      <%= @second_guardian.first_name %>
+      lives at
+      <a href="#" id="a_contact_person_mailing_street_address_1" data-emptytext="(street address)" data-title="What is the other guardian's address?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_street_address_1 %>"></a>,
+      <a href="#" id="a_contact_person_mailing_city" data-emptytext="(city)" data-title="What is the other guardian's city?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_city %>">></a>,
+      <a href="#" id="a_contact_person_mailing_state" data-emptytext="(state)" data-title="What is the other guardian's state?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_state %>">></a>,
+      <a href="#" id="a_contact_person_mailing_zip_code" data-emptytext="(zip code)" data-title="What is the other guardian's zip code?" data-type="text" data-placement="top" data-value="<%= @student.alt_home_zip_code %>">></a>.
+  </div>
+</div>
+
+<%= form_for(@second_guardian, url: wizard_path, method: :put) do |c| %>
+    <div id="hidden-form-fields">
+        <%= c.text_field :mailing_street_address_1 %>
+        <%= c.text_field :mailing_city %>
+        <%= c.text_field :mailing_state %>
+        <%= c.text_field :mailing_zip_code %>
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_guardian' %>

@@ -50,6 +50,7 @@ class EnrollmentController < ApplicationController
   def update
     @guardian = Guardian.find(session[:guardian_id])
     @student = Student.find(session[:student_id])
+    set_next_step = next_step
 
     case step
       when :student_birth_gender_and_ethnicity
@@ -64,14 +65,18 @@ class EnrollmentController < ApplicationController
           params[:student][:secondary_language] = nil
         end
       when :guardian_custody_and_address
-        if params[:contact_person][:first_name]
+        if params[:contact_person][:first_name] != ''
           @second_guardian = ContactPerson.create(contact_person_params)
           @second_guardian.guardian = @guardian
           @second_guardian.save
           session[:second_guardian_id] = @second_guardian.id
         else
-          skip_step # this is allows a double skip (i.e. skip two steps forward)
+          set_next_step = :guardian_first_guardian_contact_info
         end
+      when :guardian_second_guardian_address
+        @second_guardian = ContactPerson.find(session[:second_guardian_id])
+        @second_guardian.update_attributes(params[:contact_person])
+        @second_guardian.save
     end
 
     if params[:student]
@@ -84,7 +89,7 @@ class EnrollmentController < ApplicationController
       @guardian.save
     end
 
-    skip_step
+    jump_to set_next_step
     render_wizard
   end
 
