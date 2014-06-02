@@ -8,7 +8,7 @@ class EnrollmentController < ApplicationController
   include GuardianParams
   include StudentRaceParams
 
-  steps :student_birth_gender_and_ethnicity, :student_language, :student_address,
+  steps :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
         :guardian_custody_and_address
 
 
@@ -61,9 +61,18 @@ class EnrollmentController < ApplicationController
         end
     end
 
-    @student.update_attributes(student_params)
+    if params[:student]
+      @student.update_attributes(student_params)
+      @student.save
+    end
 
-    render_wizard @student
+    if params[:guardian]
+      @guardian.update_attributes(guardian_params)
+      @guardian.save
+    end
+
+    skip_step
+    render_wizard
   end
 
 end
