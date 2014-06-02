@@ -10,15 +10,17 @@
     I
     <a href="#" id="a_guardian_is_custody_shared" data-emptytext="(do/don't)" data-title="Do you share custody of <%= @student.first_name %>?" data-type="select" data-placement="top"></a>
     share custody of
-    <%= @gender_objective %>
+    <%= @gender_objective_pronoun %>
     <span id="shared-custody-period-span">.</span>
 
 
     <span id="shared-custody-div" style="display: none"> <!-- TODO: Don't have the display:none inline, move to CSS file -->
       with
       <a href="#" id="a_contact_person_first_name" data-emptytext="(first name)" data-title="What is the first name of the other guardian?" data-type="text" data-placement="top"></a>
-      &nbsp;
-      <a href="#" id="a_contact_person_last_name" data-emptytext="(last name)" data-title="What is the last name of the other guardian?" data-type="text" data-placement="top"></a>.
+      <a href="#" id="a_contact_person_last_name" data-emptytext="(last name)" data-title="What is the last name of the other guardian?" data-type="text" data-placement="top"></a>
+      (who is <%= @gender_possessive_adjective %>
+      <a href="#" id="a_contact_person_relationship" data-emptytext="(relationship)" data-title="What is <%= @student.first_name %>'s relationship to this guardian?" data-type="select" data-placement="top"></a>
+      ).
       We
       <a href="#" id="a_guardian_other_guardian_cohabitates" data-emptytext="(do/don't)" data-title="Do you live with the other guardian?" data-type="select" data-placement="top"></a>
       live together.
@@ -60,6 +62,7 @@
           <%= c.text_field :mailing_city %>
           <%= c.text_field :mailing_state %>
           <%= c.text_field :mailing_zip_code %>
+          <%= c.text_field :relationship %>
       <% end %>
 
     </div>

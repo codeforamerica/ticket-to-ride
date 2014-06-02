@@ -90,6 +90,10 @@ $(document).ready(function () {
             source: ["Mother", "Father", "Grandparent", "Relative", "Other"]
         });
 
+        $('#a_contact_person_relationship').editable({
+            source: ["Mother", "Father", "Grandparent", "Relative", "Other"]
+        });
+
         $('#a_guardian_is_custody_shared').editable({
             source: ["do", "don't"]
         }).on('hidden', function(){

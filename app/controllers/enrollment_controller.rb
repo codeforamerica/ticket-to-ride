@@ -1,13 +1,16 @@
 require 'guardian_params'
 require 'student_params'
 require 'student_race_params'
+require 'contact_person_params'
 
 class EnrollmentController < ApplicationController
   include Wicked::Wizard
   include StudentParams
   include GuardianParams
   include StudentRaceParams
+  include ContactPersonParams
 
+  # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
   steps :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
         :guardian_custody_and_address
 
@@ -31,9 +34,10 @@ class EnrollmentController < ApplicationController
         redirect_to URI(request.referer).path
       end
       else
-        @gender_pronoun = genderEnumToPronoun(@student.gender)
-        @gender_possessive = genderEnumToPossessivePronoun(@student.gender)
-        @gender_objective = genderEnumToObjectivePronoun(@student.gender)
+        @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
+        @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
+        @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
+        @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
     end
 
     render_wizard
@@ -57,7 +61,8 @@ class EnrollmentController < ApplicationController
         end
       when :guardian_custody_and_address
         if params[:contact_person][:first_name]
-
+          @other_guardian = ContactPerson.create(contact_person_params)
+          @other_guardian.save
         end
     end
 
