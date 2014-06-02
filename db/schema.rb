@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140602031545) do
+ActiveRecord::Schema.define(version: 20140602040135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 20140602031545) do
     t.string   "alt_home_street_address_2"
     t.string   "alt_home_city"
     t.string   "alt_home_zip_code"
+    t.string   "alt_home_state"
   end
 
   create_table "welcome_messages", force: true do |t|
