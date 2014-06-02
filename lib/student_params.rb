@@ -31,7 +31,11 @@ module StudentParams
         :home_city,
         :mailing_city,
         :is_hispanic,
-        :birth_country
+        :birth_country,
+        :alt_home_street_address_1,
+        :alt_home_street_address_2,
+        :alt_home_city,
+        :alt_home_zip_code
     )
   end
 end

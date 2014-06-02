@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530203808) do
+ActiveRecord::Schema.define(version: 20140601225103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,10 @@ ActiveRecord::Schema.define(version: 20140530203808) do
     t.string   "mailing_city"
     t.string   "birth_country"
     t.boolean  "is_hispanic"
+    t.string   "alt_home_street_address_1"
+    t.string   "alt_home_street_address_2"
+    t.string   "alt_home_city"
+    t.string   "alt_home_zip_code"
   end
 
   create_table "welcome_messages", force: true do |t|

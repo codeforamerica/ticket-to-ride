@@ -54,6 +54,13 @@ $(document).ready(function () {
             source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer", "(No Other Language)"].sort()
         });
 
+        $('#a_student_home_address_1').editable();
+        $('#a_student_home_city').editable();
+        $('#a_student_home_zip_code').editable();
+        $('#a_student_alt_home_address_1').editable();
+        $('#a_student_alt_home_city').editable();
+        $('#a_student_alt_home_zip_code').editable();
+
         // Enables auto progression of fields
         $('.editable').on('hidden', function (e, reason) {
             if (reason === 'save' || reason === 'nochange') {
