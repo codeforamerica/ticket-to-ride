@@ -55,6 +55,10 @@ class EnrollmentController < ApplicationController
         if params[:student][:secondary_language] == "(No Other Language)"
           params[:student][:secondary_language] = nil
         end
+      when :guardian_custody_and_address
+        if params[:contact_person][:first_name]
+
+        end
     end
 
     @student.update_attributes(student_params)

@@ -35,6 +35,7 @@ module StudentParams
         :alt_home_street_address_1,
         :alt_home_street_address_2,
         :alt_home_city,
+        :alt_home_state,
         :alt_home_zip_code
     )
   end

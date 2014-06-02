@@ -5,7 +5,7 @@
     <%= @guardian.last_name %>
     and I am
     <%= @student.first_name %>'s
-    <a href="#" id="a_guardian_relationship" data-emptytext="(relationship)" data-title="What is your relationship to <%= @student.first_name %>?" data-type="text" data-placement="top"></a>.
+    <a href="#" id="a_guardian_relationship" data-emptytext="(relationship)" data-title="What is your relationship to <%= @student.first_name %>?" data-type="select" data-placement="top"></a>.
 
     I
     <a href="#" id="a_guardian_is_custody_shared" data-emptytext="(do/don't)" data-title="Do you share custody of <%= @student.first_name %>?" data-type="select" data-placement="top"></a>
@@ -15,37 +15,57 @@
 
     <span id="shared-custody-div">
       with
-      <a href="#" id="a_contact_person_first_name" data-emptytext="(first_name)" data-title="What is the first name of the other guardian?" data-type="text" data-placement="top"></a>
-      <a href="#" id="a_contact_person_last_name" data-emptytext="(first_name)" data-title="What is the last name of the other guardian?" data-type="text" data-placement="top"></a>.
+      <a href="#" id="a_contact_person_first_name" data-emptytext="(first name)" data-title="What is the first name of the other guardian?" data-type="text" data-placement="top"></a>
+      <a href="#" id="a_contact_person_last_name" data-emptytext="(first name)" data-title="What is the last name of the other guardian?" data-type="text" data-placement="top"></a>.
+      We
+      <a href="#" id="a_guardian_other_guardian_cohabitates" data-emptytext="(do/don't)" data-title="Do you live with the other guardian?" data-type="select" data-placement="top"></a>
+      live together.
     </span>
 
-    <span id="shared-pronoun-span">My</span>
+    <span id="shared-pronoun-span">(My/Our)</span>
     address is
-    <a href="#" id="a_guardian_mailing_address_1" data-title="What is your address?" data-type="text" data-placement="top"><%= @student.home_street_address_1 %></a>,
-    <a href="#" id="a_guardian_mailing_city" data-title="What is your city?" data-type="text" data-placement="top"><%= @student.home_city %></a>,
+    <a href="#" id="a_guardian_mailing_street_address_1" data-emptytext="(street address)" data-title="What is your address?" data-type="text" data-placement="top"><%= @student.home_street_address_1 %></a>,
+    <a href="#" id="a_guardian_mailing_city" data-emptytext="(city)" data-title="What is your city?" data-type="text" data-placement="top"><%= @student.home_city %></a>,
     RI,
-    <a href="#" id="a_guardian_mailing_zip_code" data-title="What is your zip code?" data-type="text" data-placement="top"><%= @student.home_zip_code %></a>.
+    <a href="#" id="a_guardian_mailing_zip_code" data-emptytext="(zip code)" data-title="What is your zip code?" data-type="text" data-placement="top"><%= @student.home_zip_code %></a>.
 
-    <div class="shared-custody-different-address-div">
+    <div id="shared-custody-different-address-div">
       <span id="other-guardian-first-name"></span>
       lives at
-      <a href="#" id="a_contact_person_mailing_address_1" data-title="What is the other guardian's address?" data-type="text" data-placement="top"></a>,
-      <a href="#" id="a_contact_person_mailing_city" data-title="What is the other guardian's city?" data-type="text" data-placement="top"></a>,
-      <a href="#" id="a_contact_person_mailing_state" data-title="What is the other guardian's state?" data-type="text" data-placement="top"></a>,
-      <a href="#" id="a_contact_person_mailing_zip_code" data-title="What is the other guardian's zip code?" data-type="text" data-placement="top"></a>.
+      <a href="#" id="a_contact_person_mailing_street_address_1" data-emptytext="(street address)" data-title="What is the other guardian's address?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_contact_person_mailing_city" data-emptytext="(city)" data-title="What is the other guardian's city?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_contact_person_mailing_state" data-emptytext="(state)" data-title="What is the other guardian's state?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_contact_person_mailing_zip_code" data-emptytext="(zip code)" data-title="What is the other guardian's zip code?" data-type="text" data-placement="top"></a>.
     </div>
 
   </div>
 </div>
 
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+<%= form_for(@guardian, url: wizard_path, method: :put) do |g| %>
     <div id="hidden-form-fields">
+      <%= g.text_field :relationship %>
+      <input type="text" id="guardian_is_custody_shared"/> <!-- TODO: This should be a checkbox -->
+      <%= g.text_field :mailing_street_address_1 %>
+      <%= g.text_field :mailing_city %>
+      <!-- TODO: Add a mailing state for guardian #1 -->
+      <%= g.text_field :mailing_zip_code %>
+      <input type="text" id="guardian_other_guardian_cohabitates"/> <!-- TODO: This should be a checkbox -->
+
+
+      <%= fields_for(ContactPerson.new) do |c| %>
+          <%= c.text_field :first_name %>
+          <%= c.text_field :last_name %>
+          <%= c.text_field :mailing_street_address_1 %>
+          <%= c.text_field :mailing_city %>
+          <%= c.text_field :mailing_state %>
+          <%= c.text_field :mailing_zip_code %>
+      <% end %>
 
     </div>
 
     <ul class="pager">
       <li><%= link_to "Previous", :root %></li>
-      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
 
 <% end %>

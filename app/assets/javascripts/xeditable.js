@@ -98,6 +98,68 @@ $(document).ready(function () {
             source: ["Parent", "Grandparent", "Relative", "Other"]
         });
 
+        $('#a_guardian_is_custody_shared').editable({
+            source: ["do", "don't"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+
+            var sharedCustodyDiv = $('#shared-custody-div');
+//            var sharedPronounSpan = $('#shared-pronoun-span');
+            var sharedCustodyDiffAddressDiv = $('#shared-custody-different-address-div');
+
+
+            if(value === 'do') {
+                sharedCustodyDiv.show();
+            }
+            else {
+                sharedCustodyDiv.hide();
+                sharedCustodyDiffAddressDiv.hide();
+                //TODO: Also clear form values for shared custody address, not just hide
+            }
+        });
+
+        $('#a_guardian_other_guardian_cohabitates').editable({
+            source: ["do", "don't"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+
+            var sharedPronounSpan = $('#shared-pronoun-span');
+            var sharedCustodyDiffAddressDiv = $('#shared-custody-different-address-div');
+
+
+            if(value === 'do') {
+                sharedCustodyDiffAddressDiv.hide();
+                sharedPronounSpan.text('Our');
+            }
+            else {
+                sharedCustodyDiffAddressDiv.show();
+                sharedPronounSpan.text('My');
+            }
+        });
+
+        $('#a_contact_person_first_name').editable().on('hidden', function(){
+            var otherGuardianFirstName = $('#a_contact_person_first_name').text();
+            $('#other-guardian-first-name').text(otherGuardianFirstName);
+        });
+
+        $('#a_contact_person_last_name').editable();
+
+        $('#a_guardian_mailing_street_address_1').editable();
+
+        $('#a_guardian_mailing_city').editable();
+
+        $('#a_guardian_mailing_zip_code').editable();
+
+        $('#a_contact_person_mailing_street_address_1').editable();
+
+        $('#a_contact_person_mailing_city').editable();
+
+        $('#a_contact_person_mailing_state').editable();
+
+        $('#a_contact_person_mailing_zip_code').editable();
+
         // Enables auto progression of fields
         $('.editable').on('hidden', function (e, reason) {
             if (reason === 'save' || reason === 'nochange') {
