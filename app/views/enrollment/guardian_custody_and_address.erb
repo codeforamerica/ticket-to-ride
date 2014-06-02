@@ -10,7 +10,8 @@
     I
     <a href="#" id="a_guardian_is_custody_shared" data-emptytext="(do/don't)" data-title="Do you share custody of <%= @student.first_name %>?" data-type="select" data-placement="top"></a>
     share custody of
-    <%= @gender_objective %>.
+    <%= @gender_objective %>
+    <span id="shared-custody-period-span">.</span>
 
 
     <span id="shared-custody-div" style="display: none"> <!-- TODO: Don't have the display:none inline, move to CSS file -->
@@ -70,4 +71,4 @@
 
 <% end %>
 
-<%= render 'shared/scenery_student' %>
+<%= render 'shared/scenery_guardian' %>
