@@ -1,6 +1,4 @@
-/* @override http://localhost:3000/assets/madlib.css?body=1 */
-
-
+@import "common/variables";
 
 div.container header{
 	position: absolute;
@@ -134,4 +132,18 @@ a.editable-click {
     display: none;
 }
 
+.editable-empty, .editable-empty:hover, .editable-empty:focus {
+  color: $richard-starkey;
+  font-style: normal;
+}
+
+.editable-click, a.editable-click  {
+  border-bottom: dashed 2px $paul-mccartney;
+  margin-right: 8px;
+}
+
+a.editable-click:hover {
+  border-bottom: dashed 2px $richard-starkey;
+  margin-right: 8px;
+}
 

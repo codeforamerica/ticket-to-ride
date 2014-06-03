@@ -1,0 +1,44 @@
+@import "common/variables";
+
+div.container{
+	padding-left: 220px;
+	position: relative;
+	height: 100%;
+	width: 900px; 
+	margin: 0 auto;
+		-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+}
+
+body, html {
+  height: 100%;
+  font-family: $please-please-me;
+  font-size: 16px;
+  color: #424343;
+  /*width: 100%;*/
+}
+
+p, h2 {
+  font-family: $please-please-me;
+}
+
+.logo {
+  width: 226px;
+  background-image: url('/assets/vintage-logo.png');
+  background-size: 229px;
+  background-repeat: no-repeat;
+  height: 155px;
+  transform:rotate(-4deg);
+  -ms-transform:rotate(-4deg); /* IE 9 */
+  -webkit-transform:rotate(-4deg); /* Opera, Chrome, and Safari */
+}
+
+.background {
+  position: absolute;
+  bottom: 0;
+  left: -80px;
+  z-index: 0;
+  opacity: .99;
+}
