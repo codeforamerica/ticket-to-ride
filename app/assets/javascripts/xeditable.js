@@ -155,6 +155,34 @@ $(document).ready(function () {
 
         $('#a_contact_person_mailing_zip_code').editable();
 
+        $('#a_guardian_phone_1_number').editable();
+
+        $('#a_guardian_phone_2_number').editable();
+
+        $('#a_guardian_phone_1_type').editable({
+            source: ['Cell', 'Home', 'Work']
+        });
+
+        $('#a_guardian_phone_2_type').editable({
+            source: ['Cell', 'Home', 'Work']
+        });
+
+        $('#a_guardian_phone_1_frequency').editable({
+            source: ['Monthly', 'Yearly', 'Rarely']
+        });
+
+        $('#a_guardian_phone_2_frequency').editable({
+            source: ['Monthly', 'Yearly', 'Rarely']
+        });
+
+        $('#a_guardian_contact_preference').editable({
+           source: ['E-mail', 'Phone', 'Mail']
+        });
+
+        $('#a_contact_person_notifications').editable({
+            source: ['Behavior', 'Grades', 'Health']
+        });
+
         // Enables auto progression of fields
         $('.editable').on('hidden', function (e, reason) {
             if (reason === 'save' || reason === 'nochange') {
