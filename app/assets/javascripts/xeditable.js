@@ -64,15 +64,17 @@ $(document).ready(function () {
         $('#a_student_home_zip_code').editable();
 
         $('#a_student_alt_home_status').editable({
-            source: ["lives", "doesn't live"]
+            source: ["yes", "no"]
         }).on('hidden', function(){
             var currentId = $(this).closest().context.id;
             var value = $('#'+currentId).text();
             var altAddressDiv = $('#alt-address-div');
-            if(value === "lives"){
+            if(value === "yes"){
                 altAddressDiv.show();
+                $('#'+currentId).text('lives');
             }
             else {
+                $('#'+currentId).text('doesn\'t live');
                 altAddressDiv.hide();
                 //TODO: Clear the alt address form fields
             }
