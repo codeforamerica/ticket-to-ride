@@ -1,16 +1,16 @@
 <div class="madlib">
   <div>
     My name is
-    <%= @guardian.first_name %>
-    <%= @guardian.last_name %>
+    <span class="edited_text"><%= @guardian.first_name %>
+    <%= @guardian.last_name %></span>
     and I am
-    <%= @student.first_name %>'s
+    <span class="edited_text"><%= @student.first_name %></span>'s
     <a href="#" id="a_guardian_relationship" data-emptytext="(relationship)" data-title="What is your relationship to <%= @student.first_name %>?" data-type="select" data-placement="top"></a>.
 
     I
     <a href="#" id="a_guardian_is_custody_shared" data-emptytext="(do/don't)" data-title="Do you share custody of <%= @student.first_name %>?" data-type="select" data-placement="top"></a>
     share custody of
-    <%= @gender_objective_pronoun %>
+    <span class="edited_text"><%= @gender_objective_pronoun %></span>
     <span id="shared-custody-period-span">.</span>
 
 
@@ -18,7 +18,7 @@
       with
       <a href="#" id="a_contact_person_first_name" data-emptytext="(first name)" data-title="What is the first name of the other guardian?" data-type="text" data-placement="top"></a>
       <a href="#" id="a_contact_person_last_name" data-emptytext="(last name)" data-title="What is the last name of the other guardian?" data-type="text" data-placement="top"></a>
-      (who is <%= @gender_possessive_adjective %>
+      (who is <span class="edited_text"><%= @gender_possessive_adjective %></span>
       <a href="#" id="a_contact_person_relationship" data-emptytext="(relationship)" data-title="What is <%= @student.first_name %>'s relationship to this guardian?" data-type="select" data-placement="top"></a>
       ).
       We
