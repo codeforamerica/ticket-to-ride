@@ -75,7 +75,7 @@ class EnrollmentController < ApplicationController
         end
       when :guardian_second_guardian_address
         @second_guardian = ContactPerson.find(session[:second_guardian_id])
-        @second_guardian.update_attributes(params[:contact_person])
+        @second_guardian.update_attributes(contact_person_params)
         @second_guardian.save
     end
 
