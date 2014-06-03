@@ -5,10 +5,16 @@
   <p>We look forward to partnering with you and your child as we embark on this very special journey. We welcome your input. Please know our doors are always open.</p>
   <p>Sincerely,<br/>
   Colleen B. Jermain, Superintendent of Schools</p>
-</div>
+  </div>
 
-<div class="begin_enrollment">
-  <%= button_to "Begin enrollment", page_path('student/student01'), :method => "get", :class => "btn btn-success pull-right" %>
-</div>
+  <div class="background">
 
-<%= render 'shared/scenery_welcome' %>
+  <%= render 'shared/scenery_welcome' %>
+
+  </div>
+
+    <div class="begin_enrollment">
+    <%= button_to "Begin enrollment", '/start', :method => "get", :class => "btn btn-success pull-right" %>
+  </div>
+
+

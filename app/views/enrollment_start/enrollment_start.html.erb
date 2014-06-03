@@ -1,0 +1,39 @@
+<div class="madlib">
+  <div class="instructions">Begin by clicking on the underlined words and answering the prompts.</div>
+
+  <div>
+    Hello, my name is
+    <a href="#" id="a_guardian_first_name" data-title="What is your first name?" data-emptytext="(first name)" data-type="text" data-placement="top"></a>
+    <a href="#" id="a_guardian_last_name" data-title="What is your last name?" data-emptytext="(last name)" data-type="text" data-placement="top"></a>
+
+    and I'd like to enroll
+    <a href="#" id="a_student_first_name" data-title="What is the student's first name?" data-emptytext="(first name)" data-type="text" data-placement="top"></a>
+    <a href="#" id="a_student_last_name" data-title="What is the student's last name?" data-emptytext="(last name)" data-type="text" data-placement="top"></a>
+    in the
+    <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select" data-emptytext="(city/town)"></a>
+    Public School System.
+  </div>
+</div>
+
+<!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
+<%= form_for(@student, url: 'enrollment', method: :get) do |s| %>
+    <div id="hidden-form-fields">
+      <%= s.text_field :first_name %>
+      <%= s.text_field :last_name %>
+      <%= s.text_field :home_city %>
+
+      <%= fields_for(@guardian) do |g| %>
+          <%= g.text_field :first_name %>
+          <%= g.text_field :last_name %>
+      <% end %>
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+
+<%= render 'shared/scenery_student' %>

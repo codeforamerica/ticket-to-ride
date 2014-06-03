@@ -1,0 +1,15 @@
+<div class="madlib">
+  <div>
+    Congrats! You've completed the first section of your child's enrollment.
+    In the next section you will fill out information about yourself.
+  </div>
+</div>
+
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+<% end %>
+
+<%= render 'shared/scenery_student' %>

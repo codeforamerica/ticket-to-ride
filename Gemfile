@@ -23,6 +23,9 @@ gem 'jquery-rails'
 # Moment JS (needed for X-Editable combodate fields)
 gem 'momentjs-rails'
 
+# select2 JS library (needed for X-Editable select2 fields)
+gem 'select2-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -42,6 +45,9 @@ gem 'anjlab-bootstrap-rails', '~> 3.0.0.3', :require => 'bootstrap-rails'
 gem 'high_voltage', '~> 2.1.0'
 
 gem 'bootstrap-x-editable-rails'
+
+# Wicked: Used for created wizard-like form progression
+gem 'wicked'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

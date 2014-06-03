@@ -1,89 +1,44 @@
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('../assets/glyphicons-halflings-regular.eot');
-  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
-       url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
-       url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
-       url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
-
 @import "common/variables";
-.container { width: 1024px; border: 1px solid white; min-height: 658px; max-height: 658px; margin: 0 auto;}
 
-// body * {
-//   border: 1px solid red;
-// }
+div.container{
+	padding-left: 220px;
+	position: relative;
+	height: 100%;
+	width: 900px; 
+	margin: 0 auto;
+		-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+}
 
 body, html {
   height: 100%;
   font-family: $please-please-me;
-  font-size: 90%;
-  letter-spacing: 1px;
+  font-size: 16px;
   color: $john-lennon;
   /*width: 100%;*/
 }
 
-header { max-width: 250px;  }
-
-@font-face {
-  font-family: "Aileron-Black";
-  src: url('../assets/fonts/aileron/Aileron-Black.otf') format("truetype");
-}
-
-@font-face {
-  font-family: "Aileron-Regular";
-  src: url('../assets/fonts/aileron/Aileron-Regular.otf') format("truetype");
-}
-
 p, h2 {
   font-family: $please-please-me;
-  font-size: 90%;
-  letter-spacing: 1px;
-  color: $john-lennon;
 }
 
 .logo {
-  max-width: 226px;
-  background-image: url(<%= asset_path 'vintage-logo.png' %>);
+  width: 226px;
+  background-image: url('/assets/vintage-logo.png');
   background-size: 229px;
   background-repeat: no-repeat;
-  min-height: 155px;
-  max-height: 150px;
-  top: 1%;
+  height: 155px;
   transform:rotate(-4deg);
   -ms-transform:rotate(-4deg); /* IE 9 */
   -webkit-transform:rotate(-4deg); /* Opera, Chrome, and Safari */
 }
 
 .background {
-  min-height: 284.5px;
-  max-height: 284.5px;
   position: absolute;
-  bottom: 0px;
-  z-index: 500;
-}
-
-.guidepost_signage_welcome{
-  z-index: 100;
-  position: fixed;
-  padding-top: 2.7%;
-  padding-left: 8.75%;
-  font-weight: 400;
-
-}
-
-#scenery {
-  margin-left: -12px;
-  z-index: -100;
-  // position: absolute;
-  // bottom: -376px;
-  // max-width: 1024;
-}
-
-#guidepost {
-  z-index: -100;
-  // position: fixed;
-  // bottom: 0px;
-  // left: 35px;
-  // max-width: 345px;
+  bottom: 0;
+  left: -80px;
+  z-index: 0;
+  opacity: .99;
 }

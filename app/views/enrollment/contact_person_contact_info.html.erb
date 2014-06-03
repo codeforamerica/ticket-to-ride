@@ -1,0 +1,20 @@
+<div class="madlib">
+  <div>
+    <!-- TODO: This page isn't complete, just a copy of guardian_second_guardian_address.html.erb -->
+    This page is just filler for now, but should be where contact person information gets filled out.
+  </div>
+</div>
+
+<%= form_for(@guardian, url: wizard_path, method: :put) do |g| %>
+    <div id="hidden-form-fields">
+
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", :root %></li>
+      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_contact' %>
