@@ -29,19 +29,25 @@ class EnrollmentController < ApplicationController
 
     # This is a unique case, where the `show` has to save something
     when :student_birth_gender_and_ethnicity
-      @guardian.student_id = @student.id
 
-      @student.update_attributes(student_params)
-      @guardian.update_attributes(guardian_params)
+      # Skip saving if this step has already been completed...done to support the 'Previous' button
+      if session[:first_step_completed]
+        @guardian.student_id = @student.id
+        @student.update_attributes(student_params)
+        @guardian.update_attributes(guardian_params)
 
-      if !@student.save || !@guardian.save
-        redirect_to URI(request.referer).path
+        if !@student.save || !@guardian.save
+          redirect_to URI(request.referer).path
+        end
+
+        # This is here to support the navigation via the 'Previous' button
+        session[:first_step_completed] = true
       end
-      else
-        @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
-        @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
-        @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
-        @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
+    else
+      @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
+      @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
+      @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
+      @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
     end
 
     render_wizard
