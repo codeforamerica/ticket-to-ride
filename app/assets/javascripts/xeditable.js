@@ -48,6 +48,146 @@ $(document).ready(function () {
                 {value: 1, text: 'is'},
                 {value: 2, text: 'is not'}
             ]
+                'Caucasian',
+                'Black/African American',
+                'Asian',
+                'American Indian/Alaska Native',
+                'Native Hawaiian/other Pacific Islander'
+            ].sort()
+        });
+
+        $('#a_student_first_language').editable({
+            // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
+            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
+        });
+
+        $('#a_student_second_language').editable({
+            // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
+            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
+        });
+
+        $('#a_student_home_street_address_1').editable();
+
+        $('#a_student_home_city').editable();
+
+        $('#a_student_home_zip_code').editable();
+
+        $('#a_student_alt_home_status').editable({
+            source: ["yes", "no"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+            var altAddressDiv = $('#alt-address-div');
+            if(value === "yes"){
+                altAddressDiv.show();
+                $('#'+currentId).text('lives');
+            }
+            else {
+                $('#'+currentId).text('doesn\'t live');
+                altAddressDiv.hide();
+                //TODO: Clear the alt address form fields
+            }
+        });
+
+        $('#a_student_alt_home_street_address_1').editable();
+
+        $('#a_student_alt_home_city').editable();
+
+        $('#a_student_alt_home_state').editable();
+
+        $('#a_student_alt_home_zip_code').editable();
+
+        $('#a_guardian_relationship').editable({
+            source: ["Mother", "Father", "Grandparent", "Relative", "Other"]
+        });
+
+        $('#a_contact_person_relationship').editable({
+            source: ["Mother", "Father", "Grandparent", "Relative", "Other"]
+        });
+
+        $('#a_guardian_is_custody_shared').editable({
+            source: ["do", "don't"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+
+            var sharedCustodyDiv = $('#shared-custody-div');
+            var sharedCustodyPeriodSpan = $('#shared-custody-period-span');
+            var sharedPronounSpan = $('#shared-pronoun-span');
+
+
+            if(value === 'do') {
+                sharedCustodyDiv.show();
+                sharedCustodyPeriodSpan.hide();
+            }
+            else {
+                sharedCustodyDiv.hide();
+                sharedCustodyPeriodSpan.show();
+                sharedPronounSpan.text('My');
+                //TODO: Also clear form values for shared custody address, not just hide
+            }
+        });
+
+        $('#a_guardian_other_guardian_cohabitates').editable({
+            source: ["do", "don't"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+
+            var sharedPronounSpan = $('#shared-pronoun-span');
+
+
+            if(value === 'do') {
+                sharedPronounSpan.text('Our');
+            }
+            else {
+                sharedPronounSpan.text('My');
+            }
+        });
+
+        $('#a_contact_person_first_name').editable().on('hidden', function(){
+            var otherGuardianFirstName = $('#a_contact_person_first_name').text();
+            $('#other-guardian-first-name').text(otherGuardianFirstName);
+        });
+
+        $('#a_contact_person_last_name').editable();
+
+        $('#a_guardian_mailing_street_address_1').editable();
+
+        $('#a_guardian_mailing_city').editable();
+
+        $('#a_guardian_mailing_zip_code').editable();
+
+        $('#a_contact_person_mailing_street_address_1').editable();
+
+        $('#a_contact_person_mailing_city').editable();
+
+        $('#a_contact_person_mailing_state').editable();
+
+        $('#a_contact_person_mailing_zip_code').editable();
+
+        $('#a_guardian_phone_1_number').editable();
+
+        $('#a_guardian_phone_2_number').editable();
+
+        $('#a_guardian_phone_1_type').editable({
+            source: ['Cell', 'Home', 'Work']
+        });
+
+        $('#a_guardian_phone_2_type').editable({
+            source: ['Cell', 'Home', 'Work']
+        });
+
+        $('#a_guardian_phone_1_frequency').editable({
+            source: ['Monthly', 'Yearly', 'Rarely']
+        });
+
+        $('#a_guardian_phone_2_frequency').editable({
+            source: ['Monthly', 'Yearly', 'Rarely']
+        });
+
+        $('#a_guardian_contact_preference').editable({
+           source: ['E-mail', 'Phone', 'Mail']
         });
         $('#studentRace').editable({
             value: 1,
