@@ -1,10 +1,10 @@
 <div class="madlib">
   <div>
-    <%= @student.first_name %>
+    <span class="edited_text"><%= @student.first_name %></span>
     is most comfortable speaking
     <a href="#" id="a_student_first_language" data-emptytext="(language)" data-title="What is <%= @student.first_name %>'s first language?" data-type="select" data-placement="top"></a>.
 
-    <%= @gender_pronoun.capitalize %>
+    <span class="edited_text"><%= @gender_pronoun.capitalize %></span>
     also speaks
     <a href="#" id="a_student_second_language" data-emptytext="(language)" data-title="What is <%= @student.first_name %>'s second language?" data-type="select" data-placement="top"></a>.
   </div>

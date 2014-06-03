@@ -1,6 +1,6 @@
 <div class="madlib">
   <div>
-    <%= @student.first_name %>
+    <span class="edited_text"><%= @student.first_name %></span>
     currently lives at
     <a href="#" id="a_student_home_street_address_1" data-emptytext="(street address)" data-title="What is <%= @student.first_name %>'s home street address?" data-type="text" data-placement="top"></a>
     in
@@ -8,8 +8,8 @@
     RI,
     <a href="#" id="a_student_home_zip_code" data-emptytext="(zip)" data-title="What is <%= @student.first_name %>'s home zip code?" data-type="text" data-placement="top"></a>.
 
-    <%= @gender_pronoun.capitalize %>
-    <a href="#" id="a_student_alt_home_status" data-emptytext="(lives/doesn't live)" data-title="Does <%= @student.first_name %> lives at another home?" data-type="select" data-showbuttons="false" onblur="alert('sup')"></a>
+    <span class="edited_text"><%= @gender_pronoun.capitalize %></span>
+    <a href="#" id="a_student_alt_home_status" data-emptytext="(lives/doesn't live)" data-title="Does <%= @student.first_name %> live at another home?" data-type="select" data-showbuttons="false" onblur="alert('sup')"></a>
     at another home.
 
     <div id="alt-address-div" style="display: none">
