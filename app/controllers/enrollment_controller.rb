@@ -11,7 +11,8 @@ class EnrollmentController < ApplicationController
   include ContactPersonParams
 
   # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
-  steps :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
+  steps :student_and_guardian_names,
+        :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
         :guardian_custody_and_address, :guardian_second_guardian_address, :guardian_first_guardian_contact_info, :guardian_second_guardian_contact_info, :guardian_complete,
         :contact_person_contact_info,
         :enrollment_complete
@@ -27,22 +28,8 @@ class EnrollmentController < ApplicationController
 
     case step
 
-    # This is a unique case, where the `show` has to save something
     when :student_birth_gender_and_ethnicity
-
-      # Skip saving if this step has already been completed...done to support the 'Previous' button
-      if !session[:first_step_completed]
-        @guardian.student_id = @student.id
-        @student.update_attributes(student_params)
-        @guardian.update_attributes(guardian_params)
-
-        if !@student.save || !@guardian.save
-          redirect_to URI(request.referer).path
-        end
-
-        # This is here to support the navigation via the 'Previous' button
-        session[:first_step_completed] = true
-      end
+      # do nothing, just skip the gender variables
     else
       @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
       @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
@@ -54,8 +41,19 @@ class EnrollmentController < ApplicationController
   end
 
   def update
-    @guardian = Guardian.find(session[:guardian_id])
-    @student = Student.find(session[:student_id])
+
+    # Handle the first step creation
+    if step == :student_and_guardian_names
+      @guardian = Guardian.create(guardian_params)
+      @student = Student.create(student_params)
+
+      session[:guardian_id] = @guardian.id
+      session[:student_id] = @student.id
+    else
+      @guardian = Guardian.find(session[:guardian_id])
+      @student = Student.find(session[:student_id])
+    end
+
     set_next_step = next_step
 
     case step
