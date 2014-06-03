@@ -31,7 +31,7 @@ class EnrollmentController < ApplicationController
     when :student_birth_gender_and_ethnicity
 
       # Skip saving if this step has already been completed...done to support the 'Previous' button
-      if session[:first_step_completed]
+      if !session[:first_step_completed]
         @guardian.student_id = @student.id
         @student.update_attributes(student_params)
         @guardian.update_attributes(guardian_params)
