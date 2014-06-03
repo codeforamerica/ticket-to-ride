@@ -13,51 +13,174 @@ $(document).ready(function () {
     $(function () {
         // Field configurations
         $('#a_guardian_first_name').editable();
+
         $('#a_guardian_last_name').editable();
+
         $('#a_student_first_name').editable();
+
         $('#a_student_last_name').editable();
+
         $('#a_student_home_city').editable({
+            source: [ 'Cranston', 'Newport', 'Warwick', 'West Warwick'].sort()
+        });
+
+        $('#a_student_gender').editable({
+            source: ['He','She']
+        });
+
+        $('#a_student_birthday').editable();
+
+        $('#a_student_birth_country').editable();
+
+        $('#a_student_is_hispanic').editable({
+            source: ["is", "isn't"],
+            emptytext: "blarg"
+        });
+
+        $('#a_student_race_race').editable({
             source: [
-                {value: 1, text: 'Cranston'},
-                {value: 2, text: 'Newport'},
-                {value: 3, text: 'Warwick'},
-                {value: 4, text: 'West Warwick'}
-            ]
+                'Caucasian',
+                'Black/African American',
+                'Asian',
+                'American Indian/Alaska Native',
+                'Native Hawaiian/other Pacific Islander'
+            ].sort()
         });
-        $('#studentGender').editable({
-            title: 'Choose based on the student\'s gender',
-            type: 'select',
-            source: [
-                {value: 1, text: 'He'},
-                {value: 2, text: 'She'}
-            ],
-            emptytext: '(He/She)'
+
+        $('#a_student_first_language').editable({
+            // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
+            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
         });
-        $('#dob').editable({
-            title: 'What is the student\'s birthday?',
-            type: 'combodate',
-            emptytext: '(birthday)'
+
+        $('#a_student_second_language').editable({
+            // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
+            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
         });
-        $('#birthCountry').editable({
-            url: '',
-            title: 'In what country was your child born?'
+
+        $('#a_student_home_street_address_1').editable();
+
+        $('#a_student_home_city').editable();
+
+        $('#a_student_home_zip_code').editable();
+
+        $('#a_student_alt_home_status').editable({
+            source: ["lives", "doesn't live"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+            var altAddressDiv = $('#alt-address-div');
+            if(value === "lives"){
+                altAddressDiv.show();
+            }
+            else {
+                altAddressDiv.hide();
+                //TODO: Clear the alt address form fields
+            }
         });
-        $('#hispanicLatino').editable({
-            value: 2,
-            source: [
-                {value: 1, text: 'is'},
-                {value: 2, text: 'is not'}
-            ]
+
+        $('#a_student_alt_home_street_address_1').editable();
+
+        $('#a_student_alt_home_city').editable();
+
+        $('#a_student_alt_home_state').editable();
+
+        $('#a_student_alt_home_zip_code').editable();
+
+        $('#a_guardian_relationship').editable({
+            source: ["Mother", "Father", "Grandparent", "Relative", "Other"]
         });
-        $('#studentRace').editable({
-            value: 1,
-            source: [
-                {value: 1, text: 'White'},
-                {value: 2, text: 'Black/African American'},
-                {value: 1, text: 'Asian'},
-                {value: 2, text: 'American Indian/Alaska Native'},
-                {value: 1, text: 'Native Hawaiian/other Pacific Islander'}
-            ]
+
+        $('#a_contact_person_relationship').editable({
+            source: ["Mother", "Father", "Grandparent", "Relative", "Other"]
+        });
+
+        $('#a_guardian_is_custody_shared').editable({
+            source: ["do", "don't"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+
+            var sharedCustodyDiv = $('#shared-custody-div');
+            var sharedCustodyPeriodSpan = $('#shared-custody-period-span');
+            var sharedPronounSpan = $('#shared-pronoun-span');
+
+
+            if(value === 'do') {
+                sharedCustodyDiv.show();
+                sharedCustodyPeriodSpan.hide();
+            }
+            else {
+                sharedCustodyDiv.hide();
+                sharedCustodyPeriodSpan.show();
+                sharedPronounSpan.text('My');
+                //TODO: Also clear form values for shared custody address, not just hide
+            }
+        });
+
+        $('#a_guardian_other_guardian_cohabitates').editable({
+            source: ["do", "don't"]
+        }).on('hidden', function(){
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+
+            var sharedPronounSpan = $('#shared-pronoun-span');
+
+
+            if(value === 'do') {
+                sharedPronounSpan.text('Our');
+            }
+            else {
+                sharedPronounSpan.text('My');
+            }
+        });
+
+        $('#a_contact_person_first_name').editable().on('hidden', function(){
+            var otherGuardianFirstName = $('#a_contact_person_first_name').text();
+            $('#other-guardian-first-name').text(otherGuardianFirstName);
+        });
+
+        $('#a_contact_person_last_name').editable();
+
+        $('#a_guardian_mailing_street_address_1').editable();
+
+        $('#a_guardian_mailing_city').editable();
+
+        $('#a_guardian_mailing_zip_code').editable();
+
+        $('#a_contact_person_mailing_street_address_1').editable();
+
+        $('#a_contact_person_mailing_city').editable();
+
+        $('#a_contact_person_mailing_state').editable();
+
+        $('#a_contact_person_mailing_zip_code').editable();
+
+        $('#a_guardian_phone_1_number').editable();
+
+        $('#a_guardian_phone_2_number').editable();
+
+        $('#a_guardian_phone_1_type').editable({
+            source: ['Cell', 'Home', 'Work']
+        });
+
+        $('#a_guardian_phone_2_type').editable({
+            source: ['Cell', 'Home', 'Work']
+        });
+
+        $('#a_guardian_phone_1_frequency').editable({
+            source: ['Monthly', 'Yearly', 'Rarely']
+        });
+
+        $('#a_guardian_phone_2_frequency').editable({
+            source: ['Monthly', 'Yearly', 'Rarely']
+        });
+
+        $('#a_guardian_contact_preference').editable({
+           source: ['E-mail', 'Phone', 'Mail']
+        });
+
+        $('#a_contact_person_notifications').editable({
+            source: ['Behavior', 'Grades', 'Health']
         });
 
         // Enables auto progression of fields

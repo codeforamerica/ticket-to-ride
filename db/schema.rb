@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529233936) do
+ActiveRecord::Schema.define(version: 20140602041905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,10 @@ ActiveRecord::Schema.define(version: 20140529233936) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",                   default: false
+    t.string   "mailing_city"
+    t.string   "mailing_state"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   create_table "districts", force: true do |t|
@@ -81,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140529233936) do
     t.datetime "updated_at"
     t.boolean  "active",                     default: false
     t.string   "mailing_city"
+    t.string   "relationship"
   end
 
   create_table "schools", force: true do |t|
@@ -93,6 +98,14 @@ ActiveRecord::Schema.define(version: 20140529233936) do
     t.datetime "updated_at"
     t.boolean  "active",                   default: false
     t.string   "mailing_city"
+  end
+
+  create_table "student_races", force: true do |t|
+    t.integer  "student_id"
+    t.string   "race"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "students", force: true do |t|
@@ -128,6 +141,13 @@ ActiveRecord::Schema.define(version: 20140529233936) do
     t.boolean  "active",                     default: false
     t.string   "home_city"
     t.string   "mailing_city"
+    t.string   "birth_country"
+    t.boolean  "is_hispanic"
+    t.string   "alt_home_street_address_1"
+    t.string   "alt_home_street_address_2"
+    t.string   "alt_home_city"
+    t.string   "alt_home_zip_code"
+    t.string   "alt_home_state"
   end
 
   create_table "welcome_messages", force: true do |t|
