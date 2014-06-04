@@ -16,15 +16,6 @@
     <a href="#" id="a_guardian_phone_2_type" data-emptytext="(phone type)" data-title="What type of phone is this?" data-type="select" data-placement="top"></a>
     and it changes
     <a href="#" id="a_guardian_phone_2_change_frequency" data-emptytext="(change frequency)" data-title="How often does this phone number change?" data-type="select" data-placement="top"></a>.
-
-    <%= @second_guardian.first_name %>'s e-mail address is
-    <a href="#" id="a_guardian_email" data-emptytext="(email address)" data-title="What is <%= @second_guardian.first_name %>'s e-mail address?" data-type="text" data-placement="top"></a>.
-
-    The best way to contact <%= @second_guardian.first_name %> is by
-    <a href="#" id="a_guardian_contact_preference" data-emptytext="(contact preference)" data-title="What is the preferred way to contact <%= @second_guardian.first_name %>?" data-type="select" data-placement="top"></a>.
-
-    I would like <%= @second_guardian.first_name %> to be notified of
-    <a href="#" id="a_contact_person_notifications" data-emptytext="(notifications)" data-title="What <%= @second_guardian.first_name %> be notified of?" data-type="checklist" data-placement="top"></a>.
   </div>
 </div>
 
@@ -35,7 +26,7 @@
 
     <ul class="pager">
       <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
 
 <% end %>

@@ -13,7 +13,7 @@ class EnrollmentController < ApplicationController
   # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
   steps :student_and_guardian_names,
         :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
-        :guardian_custody_and_address, :guardian_second_guardian_address, :guardian_first_guardian_contact_info, :guardian_second_guardian_contact_info, :guardian_complete,
+        :guardian_custody_and_address, :guardian_second_guardian_address, :guardian_first_guardian_phone, :guardian_first_guardian_email_and_contact_prefs, :guardian_second_guardian_phone, :guardian_second_guardian_email_and_contact_prefs, :guardian_complete,
         :contact_person_1_contact_info, :contact_person_2_contact_info,
         :enrollment_complete
 
@@ -80,16 +80,16 @@ class EnrollmentController < ApplicationController
           @second_guardian.save
           session[:second_guardian_id] = @second_guardian.id
         else
-          set_next_step = :guardian_first_guardian_contact_info
+          set_next_step = :guardian_first_guardian_phone
         end
-      when :guardian_first_guardian_contact_info
+      when :guardian_first_guardian_email_and_contact_prefs
         if !session[:second_guardian_id]
           set_next_step = :guardian_complete
         end
-      when :guardian_second_guardian_address
-        @second_guardian = ContactPerson.find(session[:second_guardian_id])
-        @second_guardian.update_attributes(contact_person_params)
-        @second_guardian.save
+      when :guardian_second_guardian_phone, :guardian_second_guardian_email_and_contact_prefs
+        # @second_guardian = ContactPerson.find(session[:second_guardian_id])
+        # @second_guardian.update_attributes(contact_person_params)
+        # @second_guardian.save
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create(contact_person_params)
         @contact_person.guardian = @guardian
