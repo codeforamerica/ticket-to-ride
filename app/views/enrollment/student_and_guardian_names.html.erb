@@ -16,20 +16,19 @@
 </div>
 
 <!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
-<%= form_for(@student, url: 'enrollment', method: :get) do |s| %>
+<%= form_for(Student.new, url: wizard_path, method: :put) do |s| %>
     <div id="hidden-form-fields">
       <%= s.text_field :first_name %>
       <%= s.text_field :last_name %>
       <%= s.text_field :home_city %>
 
-      <%= fields_for(@guardian) do |g| %>
+      <%= fields_for(Guardian.new) do |g| %>
           <%= g.text_field :first_name %>
           <%= g.text_field :last_name %>
       <% end %>
     </div>
 
     <ul class="pager">
-      <li><%= link_to "Previous", :root %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
 
