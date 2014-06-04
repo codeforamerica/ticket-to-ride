@@ -14,7 +14,7 @@ class EnrollmentController < ApplicationController
   steps :student_and_guardian_names,
         :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
         :guardian_custody_and_address, :guardian_second_guardian_address, :guardian_first_guardian_contact_info, :guardian_second_guardian_contact_info, :guardian_complete,
-        :contact_person_contact_info,
+        :contact_person_1_contact_info, :contact_person_2_contact_info
         :enrollment_complete
 
 
@@ -26,20 +26,25 @@ class EnrollmentController < ApplicationController
       @second_guardian = ContactPerson.find(session[:second_guardian_id])
     end
 
-    case step
-
-    when :student_birth_gender_and_ethnicity
-      # do nothing, just skip the gender variables
-    else
+    # Handle gender pronouns, but not for first step
+    if step != :student_birth_gender_and_ethnicity
       @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
       @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
       @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
       @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
     end
 
+    # Handle contact person
+    if step == :contact_person_2_contact_info
+      @contact_person = ContactPerson.find(session[:contact_person_1_id])
+    end
+
     render_wizard
   end
 
+  ##
+  # Where forms PUT to in the Wizard flow
+  ##
   def update
 
     # Handle the first step creation
@@ -77,10 +82,21 @@ class EnrollmentController < ApplicationController
         else
           set_next_step = :guardian_first_guardian_contact_info
         end
+      when :guardian_first_guardian_contact_info
+        if !session[:second_guardian_id]
+          set_next_step = :guardian_complete
+        end
       when :guardian_second_guardian_address
         @second_guardian = ContactPerson.find(session[:second_guardian_id])
         @second_guardian.update_attributes(contact_person_params)
         @second_guardian.save
+      when :contact_person_1_contact_info, :contact_person_2_contact_info
+        @contact_person = ContactPerson.create(contact_person_params)
+        @contact_person.guardian = @guardian
+        @contact_person.save
+        session[:contact_person_1_id] = @contact_person.id
+
+        # TODO: For final completion, set all linked records to active
     end
 
     if params[:student]

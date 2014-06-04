@@ -159,6 +159,8 @@ $(document).ready(function () {
 
         $('#a_guardian_phone_1_number').editable();
 
+        $('#a_guardian_email').editable();
+
         $('#a_guardian_phone_2_number').editable();
 
         $('#a_guardian_phone_1_type').editable({
@@ -184,6 +186,33 @@ $(document).ready(function () {
         $('#a_contact_person_notifications').editable({
             source: ['Behavior', 'Grades', 'Health']
         });
+
+
+        $('#a_contact_person_first_name').editable().on('hidden', function(){
+            // TODO: This is sloppy, but probably works okay for now. Better to segregate these.
+
+            // Contact Person Flow
+            var currentId = $(this).closest().context.id;
+            var value = $('#'+currentId).text();
+            var contactPersonFirstNameSpans = $('.contact-person-first-name-span');
+            for(var i = 0; i < contactPersonFirstNameSpans.length; i++) {
+               contactPersonFirstNameSpans[i].textContent = value;
+            }
+
+            // Guardian Flow
+            var otherGuardianFirstNameElement = $('#a_contact_person_first_name');
+            if(otherGuardianFirstNameElement) {
+                value = otherGuardianFirstNameElement.text();
+                $('#other-guardian-first-name').text(value);
+            }
+        });
+
+        $('#a_contact_person_last_name').editable();
+
+        $('#a_contact_person_phone').editable();
+
+        $('#a_contact_person_email').editable();
+
 
         // Enables auto progression of fields
         $('.editable').on('hidden', function (e, reason) {
