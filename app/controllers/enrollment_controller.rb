@@ -14,7 +14,7 @@ class EnrollmentController < ApplicationController
   steps :student_and_guardian_names,
         :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
         :guardian_custody_and_address, :guardian_second_guardian_address, :guardian_first_guardian_contact_info, :guardian_second_guardian_contact_info, :guardian_complete,
-        :contact_person_1_contact_info, :contact_person_2_contact_info
+        :contact_person_1_contact_info, :contact_person_2_contact_info,
         :enrollment_complete
 
 
