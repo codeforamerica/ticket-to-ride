@@ -196,7 +196,7 @@ $(document).ready(function () {
             var value = $('#'+currentId).text();
             var contactPersonFirstNameSpans = $('.contact-person-first-name-span');
             for(var i = 0; i < contactPersonFirstNameSpans.length; i++) {
-                contactPersonFirstNameSpans[i].text(value);
+               contactPersonFirstNameSpans[i].textContent = value;
             }
 
             // Guardian Flow

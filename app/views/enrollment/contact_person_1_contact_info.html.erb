@@ -1,0 +1,34 @@
+<div class="madlib">
+  <div class="instructions">Tell us about the people who can find you in case of an emergency.</div>
+  <div>
+    A person that can reach me during an emergency is
+    <a href="#" id="a_contact_person_first_name" data-title="What is his/her first name?" data-emptytext="(first name)" data-type="text" data-placement="top"></a>
+    <a href="#" id="a_contact_person_last_name" data-title="What is his/her last name?" data-emptytext="(first name)" data-type="text" data-placement="top"></a>.
+
+    The best phone number to reach
+    <span class="contact-person-first-name-span edited_text">(Name)</span> <!-- TODO: Standardize CSS naming style -->
+    is
+    <a href="#" id="a_contact_person_phone" data-title="What is his/her phone number?" data-emptytext="(phone number)" data-type="text" data-placement="top"></a>.
+
+    <span class="contact-person-first-name-span edited_text">(Name)</span>'s
+    e-mail address is
+    <a href="#" id="a_contact_person_email" data-title="What is his/her e-mail address?" data-emptytext="(e-mail address)" data-type="text" data-placement="top"></a>.
+  </div>
+</div>
+
+<%= form_for(ContactPerson.new, url: wizard_path, method: :put) do |c| %>
+    <div id="hidden-form-fields">
+      <%= c.text_field :first_name %>
+      <%= c.text_field :last_name %>
+      <%= c.text_field :phone %>
+      <%= c.text_field :email %>
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_contact' %>
