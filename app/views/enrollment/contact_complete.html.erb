@@ -1,0 +1,55 @@
+<div class="madlib">
+  <div class="madlib_para">Congratulations! You've completed the online portion of {{ student's name }}'s Kindergarten enrollment.</div>
+
+  <div><span class="instructions">Please bring the following documents with you to finalize your application:</span>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox">
+          </span>
+          <span class="form-control">Student birth certificate</span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox">
+          </span>
+          <span class="form-control">Student immunization form</span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox">
+          </span>
+          <span class="form-control">Your state photo I.D.</span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox">
+          </span>
+          <span class="form-control">Proof of residence</span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div>
+  </div>
+</div>
+
+
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= link_to 'Finish', :root, class: 'nav-button pull-right' %></li>
+    </ul>
+<% end %>
+
+<%= render 'shared/scenery_contact_confirmation' %>
