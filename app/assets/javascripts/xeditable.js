@@ -171,11 +171,11 @@ $(document).ready(function () {
             source: ['Cell', 'Home', 'Work']
         });
 
-        $('#a_guardian_phone_1_frequency').editable({
+        $('#a_guardian_phone_1_change_frequency').editable({
             source: ['Monthly', 'Yearly', 'Rarely']
         });
 
-        $('#a_guardian_phone_2_frequency').editable({
+        $('#a_guardian_phone_2_change_frequency').editable({
             source: ['Monthly', 'Yearly', 'Rarely']
         });
 
