@@ -87,6 +87,7 @@ class EnrollmentController < ApplicationController
           set_next_step = :guardian_complete
         end
       when :guardian_second_guardian_phone, :guardian_second_guardian_email_and_contact_prefs
+        # TODO: Re-enable this
         # @second_guardian = ContactPerson.find(session[:second_guardian_id])
         # @second_guardian.update_attributes(contact_person_params)
         # @second_guardian.save
