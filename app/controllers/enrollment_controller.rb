@@ -19,8 +19,13 @@ class EnrollmentController < ApplicationController
 
 
   def show
-    @student = Student.find(session[:student_id])
-    @guardian = Guardian.find(session[:guardian_id])
+    begin
+      @student = Student.find(session[:student_id])
+      @guardian = Guardian.find(session[:guardian_id])
+    rescue
+      @student = Student.new
+      @guardian = Guardian.new
+    end
 
     if session[:second_guardian_id]
       @second_guardian = ContactPerson.find(session[:second_guardian_id])
