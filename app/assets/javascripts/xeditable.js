@@ -54,7 +54,7 @@ $(document).ready(function () {
 
         $('#a_student_second_language').editable({
             // Languages spoken by more than 0.6% of the population of RI (80% speak English, 20% other, all other than Mon-Khmer are above 1%)
-            source: ["English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
+            source: ["None", "English", "Spanish",  "Portugese", "Italian", "French", "Mon-Khmer"].sort()
         });
 
         $('#a_student_home_street_address_1').editable();
