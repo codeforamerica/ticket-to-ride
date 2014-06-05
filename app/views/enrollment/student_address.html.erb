@@ -2,11 +2,11 @@
   <div>
     <span class="edited_text"><%= @student.first_name %></span>
     currently lives at
-    <a href="#" id="a_student_home_street_address_1" data-emptytext="(street address)" data-title="What is <%= @student.first_name %>'s home street address?" data-type="text" data-placement="top"></a>
+    <a href="#" id="a_student_home_street_address_1" data-emptytext="123 Main St" data-title="What is <%= @student.first_name %>'s home street address?" data-type="text" data-placement="top"></a>
     in
-    <a href="#" id="a_student_home_city" data-emptytext="(city)" data-title="What is <%= @student.first_name %>'s home city?" data-type="text" data-placement="top"><%= @student.home_city %></a>,
+    <a href="#" id="a_student_home_city" data-emptytext="Metropolis" data-title="What is <%= @student.first_name %>'s home city?" data-type="text" data-placement="top"><%= @student.home_city %></a>,
     RI,
-    <a href="#" id="a_student_home_zip_code" data-emptytext="(zip)" data-title="What is <%= @student.first_name %>'s home zip code?" data-type="text" data-placement="top"></a>.
+    <a href="#" id="a_student_home_zip_code" data-emptytext="02020" data-title="What is <%= @student.first_name %>'s home zip code?" data-type="text" data-placement="top"></a>.
 
     <span class="edited_text"><%= @gender_pronoun.capitalize %></span>
     <a href="#" id="a_student_alt_home_status" data-emptytext="(lives/doesn't live)" data-title="Does <%= @student.first_name %> live at another home?" data-type="select" data-showbuttons="false" onblur="alert('sup')"></a>
@@ -14,10 +14,10 @@
 
     <div id="alt-address-div" style="display: none">
       The address for the other home is
-      <a href="#" id="a_student_alt_home_street_address_1" data-emptytext="(street address)" data-title="What is <%= @student.first_name %>'s other home street address?" data-type="text" data-placement="top"></a>,
-      <a href="#" id="a_student_alt_home_city" data-emptytext="(city)" data-title="What is <%= @student.first_name %>'s other home city?" data-type="text" data-placement="top"></a>,
-      <a href="#" id="a_student_alt_home_state" data-emptytext="(state)" data-title="What is <%= @student.first_name %>'s other home state?" data-type="text" data-placement="top"></a>,
-      <a href="#" id="a_student_alt_home_zip_code" data-emptytext="(zip)" data-title="What is <%= @student.first_name %>'s other home zip code?" data-type="text" data-placement="top"></a>.
+      <a href="#" id="a_student_alt_home_street_address_1" data-emptytext="987 S Main St" data-title="What is <%= @student.first_name %>'s other home street address?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_student_alt_home_city" data-emptytext="Metropolis" data-title="What is <%= @student.first_name %>'s other home city?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_student_alt_home_state" data-emptytext="RI" data-title="What is <%= @student.first_name %>'s other home state?" data-type="text" data-placement="top"></a>,
+      <a href="#" id="a_student_alt_home_zip_code" data-emptytext="02020" data-title="What is <%= @student.first_name %>'s other home zip code?" data-type="text" data-placement="top"></a>.
     </div>
   </div>
 </div>
