@@ -2,16 +2,16 @@
   <div>
     <!-- TODO: Connect these fields to the backend -->
     <!-- TODO: Rename these fields to not be duplicates of the guardian flow -->
-    <%= @second_guardian.first_name %>'s e-mail address is
-    <a href="#" id="a_guardian_email" data-emptytext="john@orangeseed.me" data-title="What is <%= @second_guardian.first_name %>'s e-mail address?" data-type="text" data-placement="top"></a>.
+    <span class="edited_text"><%= @second_guardian.first_name %></span>'s e-mail address is
+    <a href="#" id="a_guardian_email" data-emptytext="(paul@abc.com)" data-title="What is <%= @second_guardian.first_name %>'s e-mail address?" data-type="text" data-placement="top"></a>.
 
     <br/>
-    The best way to contact <%= @second_guardian.first_name %> is by
-    <a href="#" id="a_guardian_contact_preference" data-emptytext="Phone" data-title="What is the preferred way to contact <%= @second_guardian.first_name %>?" data-type="select" data-placement="top"></a>.
+    The best way to contact <span class="edited_text"><%= @second_guardian.first_name %></span> is by
+    <a href="#" id="a_guardian_contact_preference" data-emptytext="(home phone)" data-title="What is the preferred way to contact <%= @second_guardian.first_name %>?" data-type="select" data-placement="top"></a>.
 
     <br/>
-    I would like <%= @second_guardian.first_name %> to be notified of
-    <a href="#" id="a_contact_person_notifications" data-emptytext="(notifications)" data-title="What <%= @second_guardian.first_name %> be notified of?" data-type="checklist" data-placement="top"></a>.
+    I would like <span class="edited_text"><%= @second_guardian.first_name %></span> to be notified of the student's
+    <a href="#" id="a_contact_person_notifications" data-emptytext="(grades)" data-title="What <%= @second_guardian.first_name %> be notified of?" data-type="checklist" data-placement="top"></a>.
   </div>
 </div>
 
