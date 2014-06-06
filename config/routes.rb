@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root :to => 'welcome#index-west-warwick'
+  root :to => 'welcome#index-warwick'
 
   resources :enrollment
 
