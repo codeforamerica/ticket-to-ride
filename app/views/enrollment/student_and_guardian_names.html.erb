@@ -2,17 +2,26 @@
   <div class="instructions">We need a little info to get started.</div>
 
   <div>
-    Your name: <div class="madlib-editable" id="guardian1_firstname" contenteditable="true">First Name</div> <div class="madlib-editable" id="guardian1_lastname" contenteditable="true">Last Name</div>
+    Your name: 
+    <div class="madlib-editable" id="a_guardian1_firstname" contenteditable="true">First Name</div> 
+    <div class="madlib-editable" id="a_guardian1_lastname" contenteditable="true">Last Name</div>
+  </div>
    <!--  <a href="#" id="a_guardian_first_name" data-title="What is your first name?" data-emptytext="(Florence)" data-type="text" data-placement="top"></a>
     <a href="#" id="a_guardian_last_name" data-title="What is your last name?" data-emptytext="(Murray)" data-type="text" data-placement="top"></a> -->
 
-    <div>Student's name: <div class="madlib-editable" id="child_firstname" contenteditable="true">First Name</div> <div class="madlib-editable" id="child_lastname" contenteditable="true">Last Name</div></div>
+    <div>
+      Student's name: 
+      <div class="madlib-editable" id="student_first_name" contenteditable="true">First Name</div> 
+      <div class="madlib-editable" id="student_last_name" contenteditable="true">Last Name</div>
+    </div>
+
+    <div>Student's birthday: <%= date_field_tag :birthday %> </div>
     <!-- <a href="#" id="a_student_first_name" data-title="What is the student's first name?" data-emptytext="(Paul Jr.)" data-type="text" data-placement="top"></a>
     <a href="#" id="a_student_last_name" data-title="What is the student's last name?" data-emptytext="(Murray)" data-type="text" data-placement="top"></a>
     in the
     <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select" data-emptytext="(Portsmouth)"></a>
     Public School System. -->
-  </div>
+  <!-- </div> -->
 </div>
 
 <!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
