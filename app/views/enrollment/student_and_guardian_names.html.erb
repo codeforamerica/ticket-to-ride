@@ -5,21 +5,15 @@
 <!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
 <%= form_for(Student.new, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
     <div>
-      Student's name: 
+      Student's legal name:  <!-- TODO: Add tooltip that says this is the name on birth certificate -->
       <span><%= s.text_field :first_name, class: 'madlib-input', id: 'student_firstname', contenteditable: 'true', placeholder: 'First name' %></span>
       <span><%= s.text_field :last_name, class: 'madlib-input', id: 'student_lastname', contenteditable: 'true', placeholder: 'Last name' %></span></div>
-      <div>Gender:
-        <span class="btn-group">
-          <button type="button" class="btn btn-default">Female</button>
-          <button type="button" class="btn btn-default">Male</button>
-        </span>
-      </div>
-      <div>Birthdate:<span><%= s.date_field :birthday, class: 'madlib-input', id: 'student_birthday' %></span></div>
-      <div>Birthplace:<span><%= s.text_field :birth_country, class: 'madlib-input', id: 'student_birthplace', placeholder: 'Country' %></span></div>
-      <div>School District: <span><%= s.text_field :home_city, class: 'madlib-input', id: 'student_home_city', contenteditable: 'true', placeholder: 'School District' %></span></div>
+      <div>
+        Student's nickname:  <!-- TODO: Add tooltip that says this is the name the student goes by -->
+        <span><%= s.text_field :nickname, class: 'madlib-input', id: 'student_nickname', contenteditable: 'true', placeholder: 'Nickname' %></span></div>
 
       <%= fields_for(Guardian.new) do |g| %>
-      <div class="section-break"><span>Your name: <%= g.text_field :first_name, class: 'madlib-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'First name' %></span>
+      <div class="section-break"><span>Your legal name: <%= g.text_field :first_name, class: 'madlib-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'First name' %></span>
       <span><%= g.text_field :last_name, class: 'madlib-input', id: 'guardian_lastname', contenteditable: 'true', placeholder: 'Last name' %></span>
       <% end %>
     </div>
