@@ -40,7 +40,7 @@ $(document).ready(function () {
 // });
 
 // Passing edited value contenteditable field from view to controller in Rails
-var form = $('#my_form');
+var form = $('#editable_fields');
 var element;
 $('[contenteditable=true]').each(function(){
   element = $(this);

@@ -1,39 +1,26 @@
 <div class="madlib">
   <div class="instructions">We need a little info to get started.</div>
-
-  <div>
-    Your name: 
-    <div class="madlib-editable" id="a_guardian1_firstname" contenteditable="true">First Name</div> 
-    <div class="madlib-editable" id="a_guardian1_lastname" contenteditable="true">Last Name</div>
-  </div>
-   <!--  <a href="#" id="a_guardian_first_name" data-title="What is your first name?" data-emptytext="(Florence)" data-type="text" data-placement="top"></a>
-    <a href="#" id="a_guardian_last_name" data-title="What is your last name?" data-emptytext="(Murray)" data-type="text" data-placement="top"></a> -->
-
-    <div>
-      Student's name: 
-      <div class="madlib-editable" id="student_first_name" contenteditable="true">First Name</div> 
-      <div class="madlib-editable" id="student_last_name" contenteditable="true">Last Name</div>
-    </div>
-
-    <div>Student's birthday: <%= date_field_tag :birthday %> </div>
-    <!-- <a href="#" id="a_student_first_name" data-title="What is the student's first name?" data-emptytext="(Paul Jr.)" data-type="text" data-placement="top"></a>
-    <a href="#" id="a_student_last_name" data-title="What is the student's last name?" data-emptytext="(Murray)" data-type="text" data-placement="top"></a>
-    in the
-    <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select" data-emptytext="(Portsmouth)"></a>
-    Public School System. -->
-  <!-- </div> -->
 </div>
 
 <!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
-<%= form_for(Student.new, url: wizard_path, method: :put) do |s| %>
-    <div id="hidden-form-fields">
-      <%= s.text_field :first_name %>
-      <%= s.text_field :last_name %>
-      <%= s.text_field :home_city %>
+<%= form_for(Student.new, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
+    <div>
+      Student's name: 
+      <span><%= s.text_field :first_name, class: 'madlib-input', id: 'student_firstname', contenteditable: 'true', placeholder: 'First name' %></span>
+      <span><%= s.text_field :last_name, class: 'madlib-input', id: 'student_lastname', contenteditable: 'true', placeholder: 'Last name' %></span></div>
+      <div>Gender:
+        <span class="btn-group">
+          <button type="button" class="btn btn-default">Female</button>
+          <button type="button" class="btn btn-default">Male</button>
+        </span>
+      </div>
+      <div>Birthdate:<span><%= s.date_field :birthday, class: 'madlib-input', id: 'student_birthday' %></span></div>
+      <div>Birthplace:<span><%= s.text_field :birth_country, class: 'madlib-input', id: 'student_birthplace', placeholder: 'Country' %></span></div>
+      <div>School District: <span><%= s.text_field :home_city, class: 'madlib-input', id: 'student_home_city', contenteditable: 'true', placeholder: 'School District' %></span></div>
 
       <%= fields_for(Guardian.new) do |g| %>
-          <%= g.text_field :first_name %>
-          <%= g.text_field :last_name %>
+      <div class="section-break"><span>Your name: <%= g.text_field :first_name, class: 'madlib-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'First name' %></span>
+      <span><%= g.text_field :last_name, class: 'madlib-input', id: 'guardian_lastname', contenteditable: 'true', placeholder: 'Last name' %></span>
       <% end %>
     </div>
 
