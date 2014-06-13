@@ -11,6 +11,19 @@
       <div>
         Student's nickname:  <!-- TODO: Add tooltip that says this is the name the student goes by -->
         <span><%= s.text_field :nickname, class: 'madlib-input', id: 'student_nickname', contenteditable: 'true', placeholder: 'Nickname' %></span></div>
+      <div>
+        School District:
+        <span class="dropdown">
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">District<span class="caret"></span></button>
+          <span class="dropdown-arrow"></span>
+          <ul class="dropdown-menu">
+            <li><a href="#">Cranston</a></li>
+            <li><a href="#">Newport</a></li>
+            <li><a href="#">Warwick</a></li>
+            <li><a href="#">West Warwick</a></li>
+          </u>
+        </span>
+      </div>
 
       <%= fields_for(Guardian.new) do |g| %>
       <div class="section-break"><span>Your legal name: <%= g.text_field :first_name, class: 'madlib-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'First name' %></span>
