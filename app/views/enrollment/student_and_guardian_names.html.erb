@@ -1,12 +1,11 @@
 <div class="madlib">
   <div class="instructions">We need a little info to get started.</div>
-</div>
 
 <!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
 <%= form_for(Student.new, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
     <div>
       <%= fields_for(Guardian.new) do |g| %>
-      <div class="section-break"><span>Hello, my name is <%= g.text_field :first_name, class: 'madlib-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'Roger' %></span>
+      <div><span>Hello, my name is <%= g.text_field :first_name, class: 'madlib-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'Roger' %></span>
       <span><%= g.text_field :last_name, class: 'madlib-input', id: 'guardian_lastname', contenteditable: 'true', placeholder: 'Williams' %></span>
       <% end %>
     </div>
@@ -15,11 +14,11 @@
       <span><%= s.text_field :first_name, class: 'madlib-input', id: 'student_firstname', contenteditable: 'true', placeholder: 'Charles' %></span>
       <span><%= s.text_field :last_name, class: 'madlib-input', id: 'student_lastname', contenteditable: 'true', placeholder: 'Williams' %></span></div>
       <div>
-        who also goes by  <!-- TODO: Add tooltip that says this is the name the student goes by -->
-        <span><%= s.text_field :nickname, class: 'madlib-input', id: 'student_nickname', contenteditable: 'true', placeholder: 'Charlie' %></span></div>
+        whose nickname is  <!-- TODO: Add tooltip that says this is the name the student goes by -->
+        <span><%= s.text_field :nickname, class: 'madlib-input', id: 'student_nickname', contenteditable: 'true', placeholder: 'Chuckie' %></span></div>
       <div>
         in the 
-        <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select" data-emptytext="(Portsmouth)"><%= s.text_field :home_city, class: 'madlib-input', id: 'home_city', contenteditable: 'true', placeholder: 'Portsmouth' %></a>
+        <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select"><%= s.text_field :home_city, class: 'madlib-input', id: 'home_city', contenteditable: 'true', placeholder: 'Portsmouth' %></a>
         Public School System.<!-- <span class="dropdown"> -->
           <!-- <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">City<span class="caret"></span></button> -->
           <!-- <span class="dropdown-arrow"></span>
@@ -39,6 +38,6 @@
     </ul>
 
 <% end %>
-
+</div>
 
 <%= render 'shared/scenery_student' %>
