@@ -78,3 +78,13 @@ west_warwick_high_school = School.create(
     active: true,
     district: west_warick_district
 )
+
+west_warwick_admin = Admin.create(
+    name: 'Jim Monti',
+    active: true
+)
+
+west_warwick_clerk = Admin.create(
+    name: 'Toni Mouat',
+    active: true
+)
