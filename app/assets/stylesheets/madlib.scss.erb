@@ -177,21 +177,23 @@ input[type=date] {
   color: $paul-mccartney;
   font-weight: 600;
   border-bottom: 1.7px dashed $paul-mccartney;
+  width: 42%;
 }
 
 .madlib-input {
   border: 0;
   color: $paul-mccartney;
   font-weight: 600;
-  border-bottom: 1.7px dashed $paul-mccartney;
+  border-bottom: 2px dashed $paul-mccartney;
   font-size: 89%;
   margin: 0 1% 0 1%;
   width: 25%;
   text-align: center;
 }
 
-.madlib span {
-
+.filler-text {
+  position: relative;
+  top: 5px;
 }
 
 form div {
@@ -204,7 +206,7 @@ form div {
 }
 
 #student_birth_state {
-  width: 10%;
+  width: 11%;
 }
 
 #student_address1 {
@@ -213,4 +215,20 @@ form div {
 
 button {
   margin-left: 2%;
+}
+
+::-webkit-input-placeholder {
+   color: $yoko-ono;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $yoko-ono;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $yoko-ono;  
+}
+
+:-ms-input-placeholder {  
+   color: $yoko-ono;  
 }

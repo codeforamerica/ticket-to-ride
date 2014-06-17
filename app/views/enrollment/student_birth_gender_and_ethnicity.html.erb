@@ -1,6 +1,5 @@
 <div class="madlib">
   <div class="instructions">Tell us more about <%= @student.first_name %>.</div>
-</div>
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
@@ -29,5 +28,6 @@
     </ul>
 
 <% end %>
+</div>
 
 <%= render 'shared/scenery_student' %>
