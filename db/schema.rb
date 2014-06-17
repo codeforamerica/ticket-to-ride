@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611095648) do
+ActiveRecord::Schema.define(version: 20140617214228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140611095648) do
 
   create_table "districts", force: true do |t|
     t.string   "mailing_street_address_1",                 null: false
-    t.string   "mailing_street_address_2",                 null: false
+    t.string   "mailing_street_address_2"
     t.string   "mailing_zip_code",                         null: false
     t.string   "phone",                                    null: false
     t.date     "first_day_of_school"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20140611095648) do
   create_table "students", force: true do |t|
     t.string   "lasid"
     t.string   "ssid"
-    t.string   "application_id"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
@@ -152,6 +151,8 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.string   "nickname"
     t.string   "birth_city"
     t.string   "birth_state"
+    t.datetime "guardian_complete_time"
+    t.datetime "export_time"
   end
 
   create_table "welcome_messages", force: true do |t|
