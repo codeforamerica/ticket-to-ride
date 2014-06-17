@@ -45,19 +45,10 @@ ul.pager{
 .instructions {
   font-size: 56%;
   font-weight: 400; 
-  color: #9e2626;
+  color: $george-harrison;
   line-height: 145%;
   margin-bottom: 2%;
   margin-top: -6%;
-}
-
-.beatle-madlib{
-  max-width: 960px;
-  margin: 2% 30%;
-  width: 62%;
-  font-size: 150%;
-  line-height: 175%;
-  min-height: 273px;
 }
 
 .student-info-container{
@@ -140,7 +131,7 @@ a.editable-click {
 }
 
 .editable-click, a.editable-click  {
-  border-bottom: dashed 2px $paul-mccartney;
+  border-bottom: dashed 2px $george-harrison;
   margin-right: 8px;
 }
 
@@ -159,3 +150,89 @@ a.editable-click:hover {
   font-weight: 700;
 }
 
+
+/* content editable */
+.madlib-editable {
+  display: inline;
+  border-bottom: 1px dashed $paul-mccartney;
+  // background-color: gray;
+  // opacity: 80%;
+  color: $paul-mccartney;
+  font-weight: 700;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+input[type=date] {
+  border: 0;
+  color: $paul-mccartney;
+  font-weight: 600;
+  border-bottom: 2px dashed $george-harrison;
+  width: 38%;
+  text-align: center;
+}
+
+.madlib-input {
+  border: 0;
+  color: $paul-mccartney;
+  font-weight: 600;
+  border-bottom: 2px dashed $george-harrison;
+  font-size: 89%;
+  margin: 0 1% 0 1%;
+  width: 25%;
+  text-align: center;
+  line-height: 1.5em;
+  position: relative;
+  top: -7px;
+}
+
+// .filler-text {
+//   position: relative;
+//   top: 5px;
+// }
+
+form div {
+  margin-bottom: 2%;
+  // margin-left: 3.5%;
+}
+
+.section-break {
+  margin-top: 10%;
+}
+
+#student_birth_state {
+  width: 11%;
+}
+
+#student_address1 {
+  width: 17%;
+}
+
+button {
+  margin-left: 2%;
+}
+
+::-webkit-input-placeholder {
+   color: $yoko-ono;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $yoko-ono;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $yoko-ono;  
+}
+
+:-ms-input-placeholder {  
+   color: $yoko-ono;  
+}
+
+#a_student_home_city.editable.editable-click {
+  border-bottom: dashed 2px #FFF;
+}
+
+#a_student_home_city.editable.editable-unsaved {
+  border-bottom: dashed 2px $george-harrison;
+  font-size: 90%;
+}

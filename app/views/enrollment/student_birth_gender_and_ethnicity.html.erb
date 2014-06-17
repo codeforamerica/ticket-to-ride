@@ -1,20 +1,15 @@
 <div class="madlib">
-  <div>
-    <span class="edited_text"><%= @student.first_name %></span>
-    was born on
-    <a href="#" id="a_student_birthday" data-title="What is <%= @student.first_name %>'s birthday?" data-emptytext="DD-MM-YYYY" data-type="combodate" data-placement="top"></a>
-    in
-    <a href="#" id="a_student_birth_country" data-title="What is <%= @student.first_name %>'s birth country?" data-emptytext="(Canada)" data-type="text" data-placement="top"></a>.
-
-    <a href="#" id="a_student_gender" data-title="He or She?" data-emptytext="(He)" data-type="select" data-placement="top"></a>
-    <a href="#" id="a_student_is_hispanic" data-title="Is <%= @student.first_name %> Hispanic?" data-emptytext="(is)" data-type="select" data-placement="top"></a>
-    of Hispanic or Latin descent and identifies as
-    <a href="#" id="a_student_race_race" data-title="Races <%= @student.first_name %> identifies as:" data-emptytext="(Asian)" data-type="select" data-placement="top"></a>.
-
-  </div>
-</div>
+  <div class="instructions">Tell us more about <%= @student.first_name %>.</div>
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+
+<div><%= @student.first_name %> was born on <span><%= s.date_field :birthday, class: 'madlib-input', id: 'student_birthday' %></span> in <span><%= s.text_field :birth_city, class: 'madlib-input', id: 'student_birth_city', placeholder: 'City' %></span>, 
+  <%= s.text_field :birth_state, class: 'madlib-input', id: 'student_birth_state', placeholder: 'State' %></span><%= s.text_field :birth_country, class: 'madlib-input', id: 'student_birth_country', placeholder: 'Country' %></span></div>
+  <div><a href="#" id="a_student_gender" data-title="He or She?" data-emptytext="( She )" data-type="select" data-placement="top"></a> <a href="#" id="a_student_is_hispanic" data-title="Is <%= @student.first_name %> Hispanic?" data-emptytext="( is )" data-type="select" data-placement="top"></a>
+    of Hispanic or Latin descent and identifies as
+    <a href="#" id="a_student_race_race" data-title="Races <%= @student.first_name %> identifies as:" data-emptytext="(Asian)" data-type="select" data-placement="top"></a>.
+</div>
+
     <div id="hidden-form-fields">
       <%= s.text_field :birthday %>
       <%= s.text_field :birth_country %>
@@ -33,5 +28,6 @@
     </ul>
 
 <% end %>
+</div>
 
 <%= render 'shared/scenery_student' %>

@@ -1,32 +1,36 @@
 <div class="madlib">
-  <div class="instructions">Begin by clicking the first underlined word (Florence). Type your answer then click the green checkbox or hit enter for the next prompt. Some prompts will include a dropdown for you to make a selection rather than type an answer.<br/><br/>
-  When all the underlined text is green, click the next button.</div>
-
-  <div>
-    Hello, my name is
-    <a href="#" id="a_guardian_first_name" data-title="What is your first name?" data-emptytext="(Florence)" data-type="text" data-placement="top"></a>
-    <a href="#" id="a_guardian_last_name" data-title="What is your last name?" data-emptytext="(Murray)" data-type="text" data-placement="top"></a>
-
-    and I'd like to enroll
-    <a href="#" id="a_student_first_name" data-title="What is the student's first name?" data-emptytext="(Paul Jr.)" data-type="text" data-placement="top"></a>
-    <a href="#" id="a_student_last_name" data-title="What is the student's last name?" data-emptytext="(Murray)" data-type="text" data-placement="top"></a>
-    in the
-    <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select" data-emptytext="(Portsmouth)"></a>
-    Public School System.
-  </div>
-</div>
+  <div class="instructions">We need a little info to get started.</div>
 
 <!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
-<%= form_for(Student.new, url: wizard_path, method: :put) do |s| %>
-    <div id="hidden-form-fields">
-      <%= s.text_field :first_name %>
-      <%= s.text_field :last_name %>
-      <%= s.text_field :home_city %>
-
+<%= form_for(Student.new, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
+    <div>
       <%= fields_for(Guardian.new) do |g| %>
-          <%= g.text_field :first_name %>
-          <%= g.text_field :last_name %>
+      <div><span class="filler-text">Hello, my name is</span> <span><%= g.text_field :first_name, class: 'madlib-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'Roger' %></span>
+      <span><%= g.text_field :last_name, class: 'madlib-input', id: 'guardian_lastname', contenteditable: 'true', placeholder: 'Williams' %> </span><span class="filler-text">.</span>
       <% end %>
+    </div>
+      
+      <div><span class="filler-text">I'd like to enroll</span> <!-- TODO: Add tooltip that says this is the name on birth certificate -->
+      <span><%= s.text_field :first_name, class: 'madlib-input', id: 'student_firstname', contenteditable: 'true', placeholder: 'Charles' %></span>
+      <span><%= s.text_field :last_name, class: 'madlib-input', id: 'student_lastname', contenteditable: 'true', placeholder: 'Williams' %></span></div>
+      <div>
+        <span class="filler-text">(whose nickname is</span>  <!-- TODO: Add tooltip that says this is the name the student goes by -->
+        <span><%= s.text_field :nickname, class: 'madlib-input', id: 'student_nickname', contenteditable: 'true', placeholder: 'Chuckie' %></span><span class="filler-text">)</span></div>
+      <div>
+        <span class="filler-text">in the</span> 
+        <a href="#" id="a_student_home_city" data-title="What is the student's home city/town?" data-type="select"><%= s.text_field :home_city, class: 'madlib-input', id: 'home_city', contenteditable: 'true', placeholder: 'Portsmouth' %></a>
+        <span class="filler-text">Public School System.</span><!-- <span class="dropdown"> -->
+          <!-- <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">City<span class="caret"></span></button> -->
+          <!-- <span class="dropdown-arrow"></span>
+          <ul class="dropdown-menu">
+            <li><a href="#">Cranston</a></li>
+            <li><a href="#">Newport</a></li>
+            <li><a href="#">Warwick</a></li>
+            <li><a href="#">West Warwick</a></li>
+          </ul>
+        </span> -->
+      </div>
+
     </div>
 
     <ul class="pager">
@@ -34,6 +38,6 @@
     </ul>
 
 <% end %>
-
+</div>
 
 <%= render 'shared/scenery_student' %>
