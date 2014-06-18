@@ -88,3 +88,35 @@ west_warwick_clerk = Admin.create(
     name: 'Toni Mouat',
     active: true
 )
+
+guardian_complete_west_warwick_student = Student.create(
+    first_name: 'Jimmy',
+    middle_name: 'Michael',
+    last_name: 'Miller',
+    birthday: '2008-01-01',
+    first_language: 'english',
+    second_language: 'spanish',
+    school_start_date: '2014-09-01',
+    iep: true,
+    p504: true,
+    bus_required: true,
+    birth_certificate_verified: false,
+    residency_verified: false,
+    lunch_provided: true,
+    home_street_address_1: '60 Coit Ave',
+    home_street_address_2: 'Apt 4',
+    home_city: 'West Warwick',
+    home_state: 'RI',
+    home_zip_code: '02893',
+    mailing_street_address_1: '71 Coit Ave',
+    mailing_street_address_2: 'Backdoor',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    school: greenbush_elementary_school,
+    gender: :male,
+
+
+
+
+)
