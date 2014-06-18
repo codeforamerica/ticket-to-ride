@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618230144) do
+ActiveRecord::Schema.define(version: 20140618231031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20140618230144) do
     t.datetime "export_time"
     t.integer  "estimated_graduation_year"
     t.integer  "grade"
+    t.string   "home_state"
   end
 
   create_table "welcome_messages", force: true do |t|
