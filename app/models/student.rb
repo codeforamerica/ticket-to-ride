@@ -1,5 +1,5 @@
 class Student < ActiveRecord::Base
-  has_one :guardian
+  has_many :guardian
   has_many :student_races
   belongs_to :school
   acts_as_birthday :birthday
