@@ -22,7 +22,7 @@ CustomRequirement.create(
 
 # West Warwick School District
 
-west_warick_district = District.create(
+west_warwick_district = District.create(
   name: 'West Warwick Public Schools',
   mailing_street_address_1: "10 Harris Ave",
   mailing_city: 'West Warwick',
@@ -35,14 +35,14 @@ west_warick_district = District.create(
 WelcomeMessage.create(
     message: "<p>Welcome to West Warwick Public Schools!</p><p>Please register!</p>",
     language: 'en',
-    district: west_warick_district
+    district: west_warwick_district
 )
 
 CustomRequirement.create(
     name: 'Release Authorization',
     description: 'Permission to release records',
     req_type: :file,
-    district: west_warick_district,
+    district: west_warwick_district,
     authority_level: :district
 )
 
@@ -54,7 +54,7 @@ greenbush_elementary_school = School.create(
     mailing_zip_code: '02893',
     phone: '4018228454',
     active: true,
-    district: west_warick_district
+    district: west_warwick_district
 )
 
 john_f_horgan_elementary_school = School.create(
@@ -65,7 +65,7 @@ john_f_horgan_elementary_school = School.create(
     mailing_zip_code: '02893',
     phone: '4018028450',
     active: true,
-    district: west_warick_district
+    district: west_warwick_district
 )
 
 wakefield_hills_elementary_school = School.create(
@@ -76,7 +76,7 @@ wakefield_hills_elementary_school = School.create(
     mailing_zip_code: '02893',
     phone: '4018228452',
     active: true,
-    district: west_warick_district
+    district: west_warwick_district
 )
 
 john_f_deering_middle_school = School.create(
@@ -87,7 +87,7 @@ john_f_deering_middle_school = School.create(
     mailing_zip_code: '02893',
     phone: '4018228445',
     active: true,
-    district: west_warick_district
+    district: west_warwick_district
 )
 
 west_warwick_high_school = School.create(
@@ -98,18 +98,18 @@ west_warwick_high_school = School.create(
     mailing_zip_code: '02893',
     phone: '4018216596',
     active: true,
-    district: west_warick_district
+    district: west_warwick_district
 )
 
 Admin.create(
     name: 'Jim Monti',
-    district: west_warick_district,
+    district: west_warwick_district,
     active: true
 )
 
 Admin.create(
     name: 'Toni Mouat',
-    district: west_warick_district,
+    district: west_warwick_district,
     active: true
 )
 
