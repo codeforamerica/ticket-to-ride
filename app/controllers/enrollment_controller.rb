@@ -37,6 +37,8 @@ class EnrollmentController < ApplicationController
       @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
       @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
       @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
+
+
     end
 
     # Handle contact person
@@ -71,9 +73,11 @@ class EnrollmentController < ApplicationController
         params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
         params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
 
-        @student_race = StudentRace.create(student_race_params)
-        @student_race.student = @student
-        @student_race.save
+
+        # TODO: Enable this later after we convert this a non-X-Editable format
+        # @student_race = StudentRace.create(student_race_params)
+        # @student_race.student = @student
+        # @student_race.save
       when :student_language
         if params[:student][:secondary_language] == "(No Other Language)"
           params[:student][:secondary_language] = nil
