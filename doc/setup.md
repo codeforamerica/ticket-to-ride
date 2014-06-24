@@ -27,6 +27,10 @@ The keys can be generated using the terminal command:
 
 `rake secret`
 
+## Database configuration
+
+Add your Postgres database's username and password to the `config/database.yml` file.
+
 ## Start the server
 
 `rails server`
