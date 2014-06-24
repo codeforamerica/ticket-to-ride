@@ -49,6 +49,9 @@ gem 'bootstrap-x-editable-rails'
 # Wicked: Used for created wizard-like form progression
 gem 'wicked'
 
+# Added for Windows timezone support
+gem 'tzinfo-data'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
