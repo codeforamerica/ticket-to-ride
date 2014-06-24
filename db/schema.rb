@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611095648) do
+ActiveRecord::Schema.define(version: 20140619153526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,14 +20,23 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",      default: false
+    t.integer  "district_id"
+  end
+
+  create_table "central_admins", force: true do |t|
+    t.string   "name"
     t.boolean  "active",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "clerks", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",     default: false
+    t.boolean  "active",      default: false
+    t.integer  "district_id"
   end
 
   create_table "contact_people", force: true do |t|
@@ -49,9 +58,20 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.string   "email"
   end
 
+  create_table "custom_requirements", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "uri"
+    t.integer  "req_type"
+    t.integer  "district_id"
+    t.integer  "authority_level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "districts", force: true do |t|
     t.string   "mailing_street_address_1",                 null: false
-    t.string   "mailing_street_address_2",                 null: false
+    t.string   "mailing_street_address_2"
     t.string   "mailing_zip_code",                         null: false
     t.string   "phone",                                    null: false
     t.date     "first_day_of_school"
@@ -59,6 +79,8 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.datetime "updated_at"
     t.boolean  "active",                   default: false
     t.string   "mailing_city"
+    t.string   "mailing_state"
+    t.string   "name"
   end
 
   create_table "guardians", force: true do |t|
@@ -70,7 +92,6 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.string   "mailing_zip_code"
     t.string   "cell_phone"
     t.string   "alt_phone"
-    t.string   "alt_phone_type"
     t.string   "email"
     t.boolean  "receive_emails",             default: true
     t.boolean  "receive_sms",                default: true
@@ -87,11 +108,13 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.boolean  "active",                     default: false
     t.string   "mailing_city"
     t.string   "relationship"
+    t.integer  "alt_phone_type"
+    t.string   "mailing_state"
   end
 
   create_table "schools", force: true do |t|
     t.string   "mailing_street_address_1",                 null: false
-    t.string   "mailing_street_address_2",                 null: false
+    t.string   "mailing_street_address_2"
     t.string   "mailing_zip_code",                         null: false
     t.string   "phone",                                    null: false
     t.integer  "district_id"
@@ -99,30 +122,26 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.datetime "updated_at"
     t.boolean  "active",                   default: false
     t.string   "mailing_city"
+    t.string   "mailing_state"
+    t.string   "name"
   end
 
   create_table "student_races", force: true do |t|
     t.integer  "student_id"
-    t.string   "race"
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "race"
   end
 
   create_table "students", force: true do |t|
-    t.string   "lasid"
-    t.string   "ssid"
-    t.string   "application_id"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
     t.date     "birthday"
     t.string   "first_language"
     t.string   "second_language"
-    t.date     "enrollment_date"
-    t.date     "enrollment_confirm_date"
     t.date     "school_start_date"
-    t.date     "estimated_graduation_date"
     t.boolean  "iep",                        default: false
     t.boolean  "p504",                       default: false
     t.boolean  "bus_required",               default: false
@@ -152,6 +171,12 @@ ActiveRecord::Schema.define(version: 20140611095648) do
     t.string   "nickname"
     t.string   "birth_city"
     t.string   "birth_state"
+    t.datetime "guardian_complete_time"
+    t.datetime "export_time"
+    t.integer  "estimated_graduation_year"
+    t.integer  "grade"
+    t.string   "home_state"
+    t.string   "mailing_state"
   end
 
   create_table "welcome_messages", force: true do |t|

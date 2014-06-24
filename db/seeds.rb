@@ -10,245 +10,217 @@
 #!/bin/env ruby
 # encoding: utf-8
 
-firstnames = <<-STUDENTS_FIRST
-Anna Marie
-Jeff
-Andrew
-Thom
-Jeramia
-Wendy
-Peter
-Tom
-Becky
-Drew
-Kavi
-Giselle
-Tiffani
-Maya
-Tiffany
-Jason
-Lyzi
-Rhys
-Daniel
-Clara
-Danny
-Andi
-Sam 
-David
-Molly
-Amy
-Maksim
-Erik
-Ainsley
-Livien
-Alex
-STUDENTS_FIRST
+# Central requirements
 
+CustomRequirement.create(
+    name: 'Physical Exam',
+    description: 'Checkup by a doctor',
+    uri: 'http://www.health.ri.gov/forms/school/Physical.pdf',
+    req_type: :url,
+    authority_level: :central
+)
 
-lastnames = <<-STUDENTS_LAST
-Panlilio
-Maher
-Maier
-Yin
-Wilson
-Whalen
-Welte
-Wagoner
-Sperber
-Schwartz
-Pecherskiy
-Mok
-McLeod
-Leonard
-Kimelman
-Hashemi
-Harshawat
-Hansen
-Gonzalez-Sueyro
-Getelman
-Fureigh
-Fong
-Douglass
-Diamond
-Guertin
-Denizac
-Chu
-Buckley
-Boone
-Benari
-Bell
-STUDENTS_LAST
+# West Warwick School District
 
+west_warwick_district = District.create(
+  name: 'West Warwick Public Schools',
+  mailing_street_address_1: "10 Harris Ave",
+  mailing_city: 'West Warwick',
+  mailing_state: 'RI',
+  mailing_zip_code: '02984',
+  phone: '4018211180',
+  active: true
+)
 
-lasid = <<-LASID
-cfa2014
-cfa2015
-cfa2016
-cfa2017
-cfa2018
-cfa2019
-cfa2020
-cfa2021
-cfa2022
-cfa2023
-cfa2024
-cfa2025
-cfa2026
-cfa2027
-cfa2028
-cfa2029
-cfa2030
-cfa2031
-cfa2032
-cfa2033
-cfa2034
-cfa2035
-cfa2036
-cfa2037
-cfa2038
-cfa2039
-cfa2040
-cfa2041
-cfa2042
-cfa2043
-cfa2044
-cfa2045
-cfa2046
-cfa2047
-LASID
+WelcomeMessage.create(
+    message: "<p>Welcome to West Warwick Public Schools!</p><p>Please register!</p>",
+    language: 'en',
+    district: west_warwick_district
+)
 
-birthdays = <<-BIRTHDATE
-1996-06-01
-1996-03-30
-1996-09-19
-1996-01-08
-2010-06-01
-2010-03-30
-2010-09-19
-2010-01-08
-1997-06-01
-1997-03-30
-1997-09-19
-1997-01-08
-2009-06-01
-2009-03-30
-2009-09-19
-2009-01-08
-BIRTHDATE
+CustomRequirement.create(
+    name: 'Release Authorization',
+    description: 'Permission to release records',
+    req_type: :file,
+    district: west_warwick_district,
+    authority_level: :district
+)
 
+greenbush_elementary_school = School.create(
+    name: 'Greenbush Elementary School',
+    mailing_street_address_1: '127 Greenbush Road',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018228454',
+    active: true,
+    district: west_warwick_district
+)
 
-home_addr = <<-HOME_ADDR
-250 Webster Knight Drive
-1994 Dexter Street
-2014 Peacedale Drive
-1244 Cranston Way
-345 Avenger Drive
-HOME_ADDR
+john_f_horgan_elementary_school = School.create(
+    name: 'John F Horgan Elementary School',
+    mailing_street_address_1: '124 Providence St',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018028450',
+    active: true,
+    district: west_warwick_district
+)
 
+wakefield_hills_elementary_school = School.create(
+    name: 'Wakefield Hills Elementary School',
+    mailing_street_address_1: '',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018228452',
+    active: true,
+    district: west_warwick_district
+)
 
-home_zip = <<-HOME_ZIP
-02905
-02840
-02893 
-02818
-HOME_ZIP
+john_f_deering_middle_school = School.create(
+    name: 'John F. Deering Middle School',
+    mailing_street_address_1: '2 Webster Knight Drive',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018228445',
+    active: true,
+    district: west_warwick_district
+)
 
-mail_addr = <<-MAIL_ADDR
-155 9th Street
-156 10th Street
-157 11th Street
-158 12th Street
-159 Franklin Ave
-160 Code Street
-255 9th Street
-256 10th Street
-257 11th Street
-258 12th Street
-259 Franklin Ave
-260 Code Island
-MAIL_ADDR
+west_warwick_high_school = School.create(
+    name: '',
+    mailing_street_address_1: '1 Webster Knight Dr',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018216596',
+    active: true,
+    district: west_warwick_district
+)
 
+Admin.create(
+    name: 'Jim Monti',
+    district: west_warwick_district,
+    active: true
+)
 
-mail_zip = <<-MAIL_ZIP
-94114
-94112
-94103
-94107
-94112  
-MAIL_ZIP
+Admin.create(
+    name: 'Toni Mouat',
+    district: west_warwick_district,
+    active: true
+)
 
-student_firsts_seed = firstnames.each_line.to_a
-student_lasts_seed = lastnames.each_line.to_a
-lasid_seed = lasid.each_line.to_a
-birthday_seed = birthdays.each_line.to_a
-home_addr_seed = home_addr.each_line.to_a
-home_zip_seed = home_zip.each_line.to_a
-mail_addr_seed = mail_addr.each_line.to_a
-mail_zip_seed = mail_zip.each_line.to_a
+guardian_complete_west_warwick_student = Student.create(
+    first_name: 'Jimmy',
+    middle_name: 'Michael',
+    last_name: 'Miller',
+    birthday: '2008-01-01',
+    first_language: 'english',
+    second_language: 'spanish',
+    school_start_date: '2014-09-01',
+    iep: true,
+    p504: true,
+    bus_required: true,
+    birth_certificate_verified: false,
+    residency_verified: false,
+    lunch_provided: true,
+    home_street_address_1: '60 Coit Ave',
+    home_street_address_2: 'Apt 4',
+    home_city: 'West Warwick',
+    home_state: 'RI',
+    home_zip_code: '02893',
+    mailing_street_address_1: 'P.O. Box 14',
+    mailing_street_address_2: 'Lockbox 18',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    school: greenbush_elementary_school,
+    gender: :male,
+    birth_city: 'West Warwick',
+    birth_state: 'RI',
+    birth_country: 'USA',
+    is_hispanic: false,
+    alt_home_street_address_1: '71 Coit Ave',
+    alt_home_street_address_2: 'Backdoor',
+    alt_home_city: 'West Warwick',
+    alt_home_state: 'RI',
+    alt_home_zip_code: '02893',
+    nickname: 'Jimbo',
+    guardian_complete_time: '2013-06-18',
+    estimated_graduation_year: 2027,
+    active: true,
+    grade: :kindergarten
+)
 
-student_firsts_seed.each do |u|
-  student = Student.create(
-    first_name: u.strip,
-    last_name: student_lasts_seed.shuffle.shift.strip,
-    lasid: lasid_seed.shift.strip,
-    birthday: birthday_seed.sample.strip,
-    home_street_address_1: home_addr_seed.sample.strip,
-    home_zip_code: home_zip_seed.sample.strip,
-    mailing_street_address_1: mail_addr_seed.sample.strip,
-    mailing_zip_code: mail_zip_seed.sample.strip
-    )
-end
+StudentRace.create(
+    student: guardian_complete_west_warwick_student,
+    race: :white,
+    active: true
+)
 
-# allusers = ((1..12).to_a).shuffle
-# question_titles_seed.each do |qt|
-#   question= Question.create(
-#     content: quest_content_seed.sample.strip,
-#     user_id: allusers.pop,
-#     path: paths_seed.sample.strip,
-#     title: qt.strip
-#     )
-# end
+StudentRace.create(
+    student: guardian_complete_west_warwick_student,
+    race: :black,
+    active: true
+)
 
-# allusers = ((1..12).to_a).shuffle
-# allqs = ((1..11).to_a).shuffle
-# 11.times do
-#   answer = Answer.create(
-#     # path: answer_urls_seed.sample.strip,
-#     question_id: allqs.pop,
-#     user_id: allusers.sample,
-#     content: answers_content_seed.sample.strip
-#     )
-# end
+guardian_complete_west_warwick_guardian = Guardian.create(
+    first_name: 'Linda',
+    middle_name: 'Belinda',
+    last_name: 'Miller',
+    mailing_street_address_1: 'P.O. Box 14',
+    mailing_street_address_2: 'Lockbox 18',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    cell_phone: '4011234567',
+    alt_phone: '4018901234',
+    alt_phone_type: :work,
+    email: 'linda@codeisland.org',
+    receive_emails: true,
+    receive_sms: true,
+    receive_postal_mail: true,
+    receive_grade_notices: true,
+    receive_conduct_notices: true,
+    restricted: false,
+    student: guardian_complete_west_warwick_student,
+    active: true,
+    relationship: 'mother'
+)
 
-# someqs = ((1..5).to_a).shuffle
-# 5.times do
-#   answer = Answer.create(
-#     question_id: someqs.pop,
-#     user_id: allusers.sample,
-#     path: answer_urls_seed.sample.strip,
-#     content: answers_content_seed.sample.strip
-#     )
-# end
+ContactPerson.create(
+    relationship: 'uncle',
+    language: 'en',
+    mailing_street_address_1: '95 Factory St',
+    mailing_street_address_2: 'Back door',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4019876543',
+    can_pickup_child: true,
+    guardian: guardian_complete_west_warwick_guardian,
+    active: true,
+    first_name: 'Terry',
+    last_name: 'Mooler',
+    email: 'terry@codeisland.org'
+)
 
-# allusers = ((1..12).to_a).shuffle
-# allas = ((1..11).to_a).shuffle
-# 5.times do 
-#   comment = Comment.create(
-#      user_id: allusers.sample,
-#      content: comment_content_seed.sample.strip,
-#      commentable_type: "Answer",
-#      commentable_id: allas.pop
-#     )
-# end
-
-
-# allusers = ((1..12).to_a).shuffle
-# allas = ((1..11).to_a).shuffle
-# 8.times do 
-#   comment = Comment.create(
-#      user_id: allusers.sample,
-#      content: comment_content_seed.sample.strip,
-#      commentable_type: "Question",
-#      commentable_id: allas.pop
-#     )
-# end
+ContactPerson.create(
+    relationship: 'aunt',
+    language: 'en',
+    mailing_street_address_1: '95 Factory St',
+    mailing_street_address_2: 'Back door',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4019876543',
+    can_pickup_child: false,
+    guardian: guardian_complete_west_warwick_guardian,
+    active: true,
+    first_name: 'Rita',
+    last_name: 'Mooler',
+    email: 'rita@codeisland.org'
+)
