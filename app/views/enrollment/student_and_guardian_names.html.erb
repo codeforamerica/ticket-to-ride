@@ -7,11 +7,11 @@
       <%= fields_for(Guardian.new) do |g| %>
       <table>
         <tr><td><span class="filler-text">Guardian</span></td></tr>
-        <tr><td><span>First Name:</span> <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', contenteditable: 'true', placeholder: 'Roger' %></span></td><td><span>Last Name:</span> <%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', contenteditable: 'true', placeholder: 'Williams' %> </span></td></tr>
+        <tr><td><span>First Name:</span> <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', placeholder: 'Roger' %></span></td><td><span>Last Name:</span> <%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams' %> </span></td></tr>
       <% end %>
       <tr><td class="row-break"><span class="filler-text">Student</span></td></tr>
-        <tr><td><span>First Name:</span> <span><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', contenteditable: 'true', placeholder: 'Charles' %></span></td><td><span>Last name:</span><span><%= s.text_field :last_name, class: 'enrollment-form-input', id: 'student_lastname', contenteditable: 'true', placeholder: 'Williams' %></span></td></tr>
-        <tr><td colspan="2"><span>Student nickname:</span> <span><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_nickname', contenteditable: 'true', placeholder: 'Chuckie' %></span></td></tr>
+        <tr><td><span>First Name:</span> <span><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', placeholder: 'Mary' %></span></td><td><span>Middle name:</span><span><%= s.text_field :middle_name, class: 'enrollment-form-input', id: 'student_middlename', placeholder: 'Sayles' %></span></td></tr>
+        <tr><td><span>Last Name: </span> <span><%= s.text_field :last_name, class: 'enrollment-form-input', id: 'student_lastname', placeholder: 'Williams' %></span></td><td><span>Nickname:</span> <span data-toggle="tooltip" title="Leave blank if no nickname" id="nickname-tooltip"><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_nickname', placeholder: 'Mae' %></span></td></tr>
         <tr><td colspan="2"><span>Birthdate:</span> <span><%= s.date_field :birthday, class: 'madlib-input', id: 'student_birthday' %></span> </td></tr>
           <tr><td colspan="2"> <span>Birthplace:</span><span><%= s.text_field :birth_city, class: 'madlib-input', id: 'student_birth_city', placeholder: 'City' %></span>, 
   <%= s.text_field :birth_state, class: 'madlib-input', id: 'student_birth_state', placeholder: 'State' %></span><%= s.text_field :birth_country, class: 'madlib-input', id: 'student_birth_country', placeholder: 'Country' %></span></td></tr>

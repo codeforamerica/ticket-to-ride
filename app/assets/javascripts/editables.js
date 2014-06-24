@@ -7,6 +7,7 @@ $.fn.editableform.buttons =
   '</button>';   
 
 $(document).ready(function () {
+    $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
     $('.madlib-editable').focus(function (event) {
     
             $(this).bind("mouseup",function(event){
