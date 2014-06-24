@@ -1,0 +1,248 @@
+@import "common/variables";
+
+div.container header{
+  position: absolute;
+  left: -20px;
+  top: 10px;
+  height: 155px;
+  width: 226px;
+  
+}
+
+.enrollment-form,
+ul.pager{
+  max-width: 960px;
+  margin: 0 auto;
+  font-size: 150%;
+  line-height: 175%;
+}
+
+.enrollment-form{
+  margin-top: 3em;  
+  padding-left: 3%;
+}
+
+.enrollment-form_para {
+  margin-bottom: 3%;
+}
+
+.enrollment-form div .row {
+  margin-bottom: 1%;
+}
+
+.enrollment-form div .col-lg-6 {
+  margin-bottom: 1%;
+}
+
+.enrollment-form a:hover {
+  text-decoration: none;
+}
+
+.namespace {
+  font-size: 1%;
+}
+
+.enrollment-form td {
+  margin-right: -10px;
+}
+
+div.enrollment-form .instructions {
+  font-size: 68%;
+  font-weight: 400; 
+  color: $george-harrison;
+  line-height: 145%;
+  margin-bottom: 2%;
+  margin-top: -6%;
+}
+
+.student-info-container{
+  display: inline;
+}
+
+.pseudo-tooltip {
+  color: $paul-mccartney;
+  border-bottom: 3px dotted $paul-mccartney;
+}
+
+a.editable-click {
+  color: $yoko-ono;
+  border-color: $yoko-ono;
+}
+
+.input-small {
+  max-width: 150px;
+}
+
+.enrollment-form-title{
+  font-size:50%;
+}
+
+.enrollment-form-input{
+  font-size:50%;
+  max-height: 100px;
+}
+
+.popOverClass {
+  max-height: 125px;
+}
+
+.pager {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  padding-top: 1em;
+}
+
+.pager li{
+  float: left;
+  line-height: 1.5;
+}
+
+.pager li:last-of-type{
+  float: right;
+}
+
+
+.pager li > a,
+.nav-button {
+  display: block;
+  background-color: $paul-mccartney;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  border: none;
+  height: 2em;
+  line-height: 1.4em;
+    -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+    min-width: 6em;
+
+}
+
+.pager li > a:hover,
+.nav-button:hover {
+  background-color: #549448;
+}
+
+#hidden-form-fields {
+    display: none;
+}
+
+.editable-empty, .editable-empty:hover, .editable-empty:focus {
+  color: $john-lennon;
+  font-style: normal;
+}
+
+.editable-click, a.editable-click  {
+  border-bottom: dashed 2px $george-harrison;
+  margin-right: 8px;
+}
+
+.editable-unsaved {
+  color: #6aba5b !important;
+}
+
+a.editable-click:hover {
+  border-bottom: dashed 2px $paul-mccartney;
+  margin-right: 8px;
+}
+
+.edited_text {
+  color: $john-lennon;
+  font-family: $with-the-beatles;
+  font-weight: 700;
+}
+
+
+/* content editable */
+.enrollment-form-editable {
+  display: inline;
+  border-bottom: 1px dashed $paul-mccartney;
+  // background-color: gray;
+  // opacity: 80%;
+  color: $paul-mccartney;
+  font-weight: 700;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+input[type=date] {
+  border: 0;
+  color: $paul-mccartney;
+  font-weight: 600;
+  border-bottom: 2px dashed $george-harrison;
+  width: 38%;
+  text-align: center;
+}
+
+.enrollment-form-input {
+  border: 0;
+  color: $paul-mccartney;
+  font-weight: 600;
+  border-bottom: 2px dashed $george-harrison;
+  font-size: 89%;
+  margin: 0 1% 0 1%;
+  width: 40%;
+  text-align: center;
+  line-height: 1.5em;
+  position: relative;
+  top: -7px;
+}
+
+.enrollment-form .filler-text {
+  font-size: 90%;
+  text-transform: uppercase; 
+}
+
+.row-break {
+    padding-top: 5%;
+}
+
+form div {
+  margin-bottom: 2%;
+  // margin-left: 3.5%;
+}
+
+.section-break {
+  margin-top: 10%;
+}
+
+#student_birth_state {
+  width: 11%;
+}
+
+#student_address1 {
+  width: 17%;
+}
+
+button {
+  margin-left: 2%;
+}
+
+::-webkit-input-placeholder {
+   color: $yoko-ono;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $yoko-ono;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $yoko-ono;  
+}
+
+:-ms-input-placeholder {  
+   color: $yoko-ono;  
+}
+
+#a_student_home_city.editable.editable-click {
+  border-bottom: dashed 2px #FFF;
+}
+
+#a_student_home_city.editable.editable-unsaved {
+  border-bottom: dashed 2px $george-harrison;
+  font-size: 90%;
+}// Place all the styles related to the enrollment controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
