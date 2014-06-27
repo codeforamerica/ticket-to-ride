@@ -1,0 +1,25 @@
+<div class="madlib">
+  <div>
+    <!-- TODO: Connect these fields to the backend -->
+    My e-mail address is
+    <a href="#" id="a_guardian_email" data-emptytext="(florence@email.com)" data-title="What is your e-mail address?" data-type="text" data-placement="top"></a>.
+
+    <br/>
+    The best way to contact me is by
+    <a href="#" id="a_guardian_contact_preference" data-emptytext="(email)" data-title="What is the preferred way to contact you?" data-type="select" data-placement="top"></a>.
+  </div>
+</div>
+
+<%= form_for(@guardian, url: wizard_path, method: :put) do |g| %>
+    <div id="hidden-form-fields">
+
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_guardian' %>

@@ -1,40 +1,40 @@
 @import "common/variables";
 
 div.container header{
-	position: absolute;
-	left: -20px;
-	top: 10px;
-	height: 155px;
-	width: 226px;
-	
+  position: absolute;
+  left: -20px;
+  top: 10px;
+  height: 155px;
+  width: 226px;
+  
 }
 
-.madlib,
+.enrollment-form,
 ul.pager{
   max-width: 960px;
   margin: 0 auto;
-  font-size: 200%;
+  font-size: 150%;
   line-height: 175%;
 }
 
-.madlib{
-	margin-top: 3em;	
+.enrollment-form{
+  margin-top: 3em;  
   padding-left: 3%;
 }
 
-.madlib_para {
+.enrollment-form_para {
   margin-bottom: 3%;
 }
 
-.madlib div .row {
+.enrollment-form div .row {
   margin-bottom: 1%;
 }
 
-.madlib div .col-lg-6 {
+.enrollment-form div .col-lg-6 {
   margin-bottom: 1%;
 }
 
-.madlib a:hover {
+.enrollment-form a:hover {
   text-decoration: none;
 }
 
@@ -42,8 +42,12 @@ ul.pager{
   font-size: 1%;
 }
 
-.instructions {
-  font-size: 56%;
+.enrollment-form td {
+  margin-right: -10px;
+}
+
+div.enrollment-form .instructions {
+  font-size: 68%;
   font-weight: 400; 
   color: $george-harrison;
   line-height: 145%;
@@ -69,11 +73,11 @@ a.editable-click {
   max-width: 150px;
 }
 
-.madlib-title{
+.enrollment-form-title{
   font-size:50%;
 }
 
-.madlib-input{
+.enrollment-form-input{
   font-size:50%;
   max-height: 100px;
 }
@@ -83,25 +87,25 @@ a.editable-click {
 }
 
 .pager {
-	position: relative;
-	z-index: 1;
-	text-align: left;
-	padding-top: 1em;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  padding-top: 1em;
 }
 
 .pager li{
-	float: left;
-	line-height: 1.5;
+  float: left;
+  line-height: 1.5;
 }
 
 .pager li:last-of-type{
-	float: right;
+  float: right;
 }
 
 
 .pager li > a,
 .nav-button {
-	display: block;
+  display: block;
   background-color: $paul-mccartney;
   color: white;
   border-radius: 4px;
@@ -109,9 +113,9 @@ a.editable-click {
   border: none;
   height: 2em;
   line-height: 1.4em;
-  	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
     min-width: 6em;
 
 }
@@ -152,7 +156,7 @@ a.editable-click:hover {
 
 
 /* content editable */
-.madlib-editable {
+.enrollment-form-editable {
   display: inline;
   border-bottom: 1px dashed $paul-mccartney;
   // background-color: gray;
@@ -172,24 +176,28 @@ input[type=date] {
   text-align: center;
 }
 
-.madlib-input {
+.enrollment-form-input {
   border: 0;
   color: $paul-mccartney;
   font-weight: 600;
   border-bottom: 2px dashed $george-harrison;
   font-size: 89%;
   margin: 0 1% 0 1%;
-  width: 25%;
+  width: 40%;
   text-align: center;
   line-height: 1.5em;
   position: relative;
   top: -7px;
 }
 
-// .filler-text {
-//   position: relative;
-//   top: 5px;
-// }
+.enrollment-form .filler-text {
+  font-size: 90%;
+  text-transform: uppercase; 
+}
+
+.row-break {
+    padding-top: 5%;
+}
 
 form div {
   margin-bottom: 2%;
@@ -235,4 +243,6 @@ button {
 #a_student_home_city.editable.editable-unsaved {
   border-bottom: dashed 2px $george-harrison;
   font-size: 90%;
-}
+}// Place all the styles related to the enrollment controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/

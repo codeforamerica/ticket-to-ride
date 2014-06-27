@@ -1,0 +1,16 @@
+<div class="madlib">
+  <div>
+    Congrats <span class="edited_text"><%= @guardian.first_name %></span>
+    You've completed two out of three sections of your child's registration.
+    In the next section you will fill out information about emergency contacts.
+  </div>
+</div>
+
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+<% end %>
+
+<%= render 'shared/scenery_guardian_confirmation' %>

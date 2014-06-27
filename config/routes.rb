@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :enrollment
 
+  resources :madlibs
+
   resources :students
 
   # get 'pages/home' => 'high_voltage/pages#show', id: 'home'
