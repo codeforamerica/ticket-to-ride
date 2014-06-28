@@ -38,6 +38,17 @@ ul.pager{
   text-decoration: none;
 }
 
+.enrollment-form .btn-primary {
+  background-color: $yoko-ono;
+  border-color: #FFF;
+  color: $john-lennon;
+}
+
+.enrollment-form .btn-primary.active {
+  background-color: $paul-mccartney;
+  color: #FFF;
+}
+
 .namespace {
   font-size: 1%;
 }
@@ -154,7 +165,6 @@ a.editable-click:hover {
   font-weight: 700;
 }
 
-
 /* content editable */
 .enrollment-form-editable {
   display: inline;
@@ -190,6 +200,22 @@ input[type=date] {
   top: -7px;
 }
 
+.enrollment-form-popover {
+  border: 0;
+  padding-left: 5%;
+  padding-right: 5%;
+  color: $paul-mccartney;
+  font-weight: 600;
+  border-bottom: 2px dashed $george-harrison;
+  margin: 0 1% 0 1%;
+  width: 60%;
+  text-align: center;
+  line-height: 1.5em;
+  position: relative;
+  top: 0;
+  font-size: 100%;
+}
+
 .enrollment-form .filler-text {
   font-size: 90%;
   text-transform: uppercase; 
@@ -201,7 +227,6 @@ input[type=date] {
 
 form div {
   margin-bottom: 2%;
-  // margin-left: 3.5%;
 }
 
 .section-break {
@@ -243,6 +268,4 @@ button {
 #a_student_home_city.editable.editable-unsaved {
   border-bottom: dashed 2px $george-harrison;
   font-size: 90%;
-}// Place all the styles related to the enrollment controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+}

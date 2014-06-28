@@ -1,33 +1,158 @@
-<div class="madlib">
+<div class="enrollment-form">
   <div class="instructions">Tell us more about <%= @student.first_name %>.</div>
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
-<div><%= @student.first_name %> was born on <span><%= s.date_field :birthday, class: 'madlib-input', id: 'student_birthday' %></span> in <span><%= s.text_field :birth_city, class: 'madlib-input', id: 'student_birth_city', placeholder: 'City' %></span>, 
-  <%= s.text_field :birth_state, class: 'madlib-input', id: 'student_birth_state', placeholder: 'State' %></span><%= s.text_field :birth_country, class: 'madlib-input', id: 'student_birth_country', placeholder: 'Country' %></span></div>
-  <div><a href="#" id="a_student_gender" data-title="He or She?" data-emptytext="( She )" data-type="select" data-placement="top"></a> <a href="#" id="a_student_is_hispanic" data-title="Is <%= @student.first_name %> Hispanic?" data-emptytext="( is )" data-type="select" data-placement="top"></a>
-    of Hispanic or Latin descent and identifies as
-    <a href="#" id="a_student_race_race" data-title="Races <%= @student.first_name %> identifies as:" data-emptytext="(Asian)" data-type="select" data-placement="top"></a>.
-</div>
+    <table>
+      <tr><td colspan="2">
+        <span>Gender:</span> 
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <%= s.radio_button :gender, :male %>Male</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :gender, :female %>Female</label>
+        </div></td></tr>
 
-    <div id="hidden-form-fields">
-      <%= s.text_field :birthday %>
-      <%= s.text_field :birth_country %>
-      <%= s.text_field :gender %>
-      <%= s.text_field :is_hispanic %>
+
+      <tr><td class="row-break"><span class="filler-text">Ethnicity</span></td></tr>
+      <tr><td colspan="2"><span>Hispanic or Latino descent?</span> 
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, true %>Yes</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, false %>No</label>
+        </div></td></tr>
 
       <%= fields_for StudentRace.new do |r|%>
-        <%= r.text_field :race %>
-      <% end %>
-      <!-- TODO: Return to figure out how to populate student race -->
-    </div>
+      <tr><td class="row-break"><span class="filler-text">Race</span></td></tr>
+      <tr><td colspan="2"><span>Primary race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#primaryRaceModal">Asian</a></span></td></tr>
+      <tr><td colspan="2"><span>Additional race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#additionalRaceModal">White</a></span></td></tr>
+
+
+    </table>
 
     <ul class="pager">
       <li><%= link_to "Previous", '/enrollment' %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
 
-<% end %>
+  <div class="modal fade" id="primaryRaceModal" tabindex="-1" role="dialog" aria-labelledby="primaryRaceModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title" id="myModalLabel">Select <%= @student.first_name %>'s primary race</h4>
+        </div>
+        <div class="modal-body single-col-modal">
+          <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary">
+            <%= r.radio_button :race, :native_american %>American Indian/Alaskan Native
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= r.radio_button :race, :asian %>Asian
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= r.radio_button :race, :white %>White
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= r.radio_button :race, :pacific_islander %>Pacific Islander
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= r.radio_button :race, :native_american %>American Indian/Alaskan Native
+          </label><br/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          <button type="button" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="additionalRaceModal" tabindex="-1" role="dialog" aria-labelledby="additionalRaceModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title" id="additionalRaceModalLabel">Select <%= @student.first_name %>'s other race(s) if applicable</h4>
+        </div>
+        <div class="modal-body single-col-modal double-col-modal">
+          <table>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">African American or Black</a>
+              </td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">American Indian or Alaska Native</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">White</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Asian Indian</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Cambodian</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Chinese</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Filipino</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Hmong</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Japanese</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Korean</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Laotian</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Vietnamese</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Guamanian</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Native Hawaiian</a>
+              </td>
+            </tr>
+          <tr>
+            <td>
+              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Samoan</a></td>
+            <td>
+              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Tahitian</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Other Pacific Islander</a></td>
+          </tr>
+        </table>
+      </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          <button type="button" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <% end %> 
+
+  <% end %>
 </div>
 
 <%= render 'shared/scenery_student' %>
+
