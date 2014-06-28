@@ -8,6 +8,16 @@ $.fn.editableform.buttons =
 
 $(document).ready(function () {
     $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
+    $('#basicModal').modal(options);
+      var options = { "backdrop" : "static", "keyboard" : true }
+
+    $("[data-toggle=popover]").popover({ 
+        html : true, 
+        placement: 'top',
+        content: function() {
+          return $('#content_popover').html();
+        });
+
     $('.madlib-editable').focus(function (event) {
     
             $(this).bind("mouseup",function(event){
