@@ -1,29 +1,41 @@
 <div class="enrollment-form">
-  <div class="instructions">Tell us more about <%= @student.first_name %>.</div>
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
-      <tr><td colspan="2">
-        <span>Gender:</span> 
+      <tr><td class="row-break"><span class="filler-text">Previous Schooling</span></td></tr>
+      <tr><td colspan="2"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
         <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary">
+              <%= s.radio_button :is_hispanic, false %>None</label>   
             <label class="btn btn-primary">
-                <%= s.radio_button :gender, :female %>Female</label>
+                <%= s.radio_button :is_hispanic, true %>Pre-K</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :gender, :male %>Male</label>
+                <%= s.radio_button :is_hispanic, false %>K</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, true %>1</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, false %>2</label>  
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, true %>3</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, false %>4</label>   
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, true %>5</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, false %>6</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, true %>7</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, false %>8</label>  
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, true %>9</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, false %>10</label> 
+            <label class="btn btn-primary">
+                <%= s.radio_button :is_hispanic, true %>11</label>   
         </div></td></tr>
 
-      <tr><td class="row-break"><span class="filler-text">Ethnicity</span></td></tr>
-      <tr><td colspan="2"><span>Hispanic or Latino descent?</span> 
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>Yes</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>No</label>
-        </div></td></tr>
-
-      <%= fields_for StudentRace.new do |r|%>
-      <tr><td class="row-break"><span class="filler-text">Race</span></td></tr>
       <tr><td colspan="2"><span>Primary race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#primaryRaceModal">Choose</a></span></td></tr>
       <tr><td colspan="2"><span>Additional race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#additionalRaceModal">Choose</a></span></td></tr>
 
@@ -34,40 +46,6 @@
       <li><%= link_to "Previous", '/enrollment' %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
-
-  <div class="modal fade" id="primaryRaceModal" tabindex="-1" role="dialog" aria-labelledby="primaryRaceModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h4 class="modal-title" id="myModalLabel">Select <%= @student.first_name %>'s primary race</h4>
-        </div>
-        <div class="modal-body single-col-modal">
-          <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary">
-            <%= r.radio_button :race, :native_american %>American Indian/Alaskan Native
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :race, :asian %>Asian
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :race, :white %>White
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :race, :pacific_islander %>Pacific Islander
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :race, :native_american %>American Indian/Alaskan Native
-          </label><br/>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-          <button type="button" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- TODO: Add additional races to database -->
 
@@ -153,7 +131,6 @@
       </div>
     </div>
   </div>
-    <% end %> 
 
   <% end %>
 </div>

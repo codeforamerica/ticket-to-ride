@@ -1,12 +1,19 @@
-<div class="madlib">
+<div class="enrollment-form">
   <div>
-    <span class="edited_text"><%= @student.first_name %>'s</span>
-    primary language is
-    <a href="#" id="a_student_first_language" data-emptytext="( Chinese )" data-title="What is <%= @student.first_name %>'s first language?" data-type="select" data-placement="top"></a>.
+    <table>
+      <tr><td><span class="filler-text">Language</span></td></tr>
 
-    <span class="edited_text"><%= @gender_pronoun.capitalize %></span>
-    also speaks
-    <a href="#" id="a_student_second_language" data-emptytext="( French )" data-title="What is <%= @student.first_name %>'s second language?" data-type="select" data-placement="top"></a> fluently.
+    <tr><td><span>What did <%= @student.first_name %> learn when <%= @gender_pronoun %> first began to talk?</span>
+    <a href="#" id="a_student_first_language" data-emptytext="Choose" data-title="What is <%= @student.first_name %>'s first language?" data-type="select" data-placement="top"></a>.</td></tr>
+
+    <tr><td><span>What does <%= @gender_pronoun %> most frequently use at home?</span>
+    <a href="#" id="a_student_second_language" data-emptytext="French" data-type="select" data-placement="top"></a>.</td></tr>
+
+    <tr><td><span>What do you use most frequently to speak with <%= @student.first_name || 'the student' %>?</span>
+    <a href="#" id="language_with_guardian" data-emptytext="French" data-type="select" data-placement="top"></a></td></tr>
+
+    <tr><td><span>Has <%= @student.first_name %> received any formal English language instruction (listening, speaking, reading, or writing)?</span></td></tr>
+        </table>
   </div>
 </div>
 
@@ -24,3 +31,9 @@
 <% end %>
 
 <%= render 'shared/scenery_student' %>
+
+
+<!-- Which language does this student most frequently use at home?
+Which language do you use most frequently to speak to this student?
+Which language is most often used by the adults at home?
+Has this student received any formal English language instruction (listening, speaking, reading, or writing)? -->

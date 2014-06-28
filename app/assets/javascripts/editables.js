@@ -37,19 +37,6 @@ $(document).ready(function () {
 }
 });
 
-
-// $(function(){
-     
-//     $("span[contenteditable=true]").blur(function(){
-//         var field = $(this).attr("id") ;
-//         var value = $(this).text() ;
-//         $.post('http://localhost/your_ajaxhandler_page' , field + "=" + value, function(data){
-//             // display your result data here
-//         });
-//     });
- 
-// });
-
 // Passing edited value contenteditable field from view to controller in Rails
 var form = $('#editable_fields');
 var element;
