@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :students
 
+  resources :schools
+
   # get 'pages/home' => 'high_voltage/pages#show', id: 'home'
 
   # Example of regular route:
