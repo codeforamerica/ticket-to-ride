@@ -8,7 +8,9 @@ After cloning the project, open a terminal / command prompt and navigate into th
 
 Use the following command:
 
-`bundle install`
+```
+    $ bundle install
+```
 
 ## Configure the secrets file
 
@@ -25,7 +27,9 @@ production:
 
 The keys can be generated using the terminal command:
 
-`rake secret`
+```
+    $ rake secret
+```
 
 ## Database configuration
 
@@ -53,4 +57,6 @@ Add your Postgres database's username and password to the `config/database.yml` 
 
 ## Start the server
 
-`rails server`
+```
+    $ rails server
+```
