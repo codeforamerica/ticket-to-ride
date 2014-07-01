@@ -3,7 +3,7 @@
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
-      <tr><td class="row-break"><span class="filler-text">Previous Schooling</span></td></tr>
+      <tr><td class="row-break" colspan="2"><span class="filler-text">Previous Schooling</span></td></tr>
       <tr><td colspan="2"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
@@ -36,7 +36,18 @@
                 <%= s.radio_button :is_hispanic, true %>11</label>   
         </div></td></tr>
 
-      <tr><td colspan="2"><span>Primary race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#primaryRaceModal">Choose</a></span></td></tr>
+      <tr>
+        <td class="col-narrow">Prior School: </td>
+        <td class="col-wide">
+          <div class="form-group">
+          <%= form_tag schools_path, { method: :get } do %>
+            <%= select_tag :lea_code, options_from_collection_for_select(Lea.all, "lea_code", "lea_name"), prompt: "Select a Rhode Island school district", class: "form-control" %>
+          </div>
+        <% end %>
+        </td>
+      </tr>
+
+
       <tr><td colspan="2"><span>Additional race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#additionalRaceModal">Choose</a></span></td></tr>
 
 
