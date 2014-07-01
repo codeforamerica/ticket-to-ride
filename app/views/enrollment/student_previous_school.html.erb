@@ -3,41 +3,41 @@
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
-      <tr><td class="row-break" colspan="2"><span class="filler-text">Previous Schooling</span></td></tr>
+      <tr><td colspan="2"><span class="filler-text">Previous Schooling</span></td></tr>
       <tr><td colspan="2"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
-              <%= s.radio_button :is_hispanic, false %>None</label>   
+              <%= s.radio_button :grade, '0' %>None</label>   
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>Pre-K</label>
+                <%= s.radio_button :grade, :pre_kindergarten %>Pre-K</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>K</label>
+                <%= s.radio_button :grade, :kindergarten %>K</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>1</label>
+                <%= s.radio_button :grade, :grade_1 %>1</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>2</label>  
+                <%= s.radio_button :grade, :grade_2 %>2</label>  
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>3</label>
+                <%= s.radio_button :grade, :grade_3 %>3</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>4</label>   
+                <%= s.radio_button :grade, :grade_4 %>4</label>   
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>5</label>
+                <%= s.radio_button :grade, :grade_5 %>5</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>6</label>
+                <%= s.radio_button :grade, :grade_6 %>6</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>7</label>
+                <%= s.radio_button :grade, :grade_7 %>7</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>8</label>  
+                <%= s.radio_button :grade, :grade_8 %>8</label>  
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>9</label>
+                <%= s.radio_button :grade, :grade_9 %>9</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>10</label> 
+                <%= s.radio_button :grade, :grade_10 %>10</label> 
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>11</label>   
+                <%= s.radio_button :grade, :grade_11 %>11</label>   
         </div></td></tr>
 
       <tr>
-        <td class="col-narrow">Prior School: </td>
+        <td class="col-narrow">Prior District: </td>
         <td class="col-wide">
           <div class="form-group">
           <%= form_tag schools_path, { method: :get } do %>
@@ -47,11 +47,19 @@
         </td>
       </tr>
 
-
-      <tr><td colspan="2"><span>Additional race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#additionalRaceModal">Choose</a></span></td></tr>
-
-
+      <tr>
+        <td class="col-narrow">Prior School: </td>
+        <td class="col-wide">
+          <div class="form-group">
+          <%= form_tag schools_path, { method: :get } do %>
+            <%= select_tag :lea_code, options_from_collection_for_select(School.all, "lea_code", "name"), prompt: "Select a Rhode Island school", class: "form-control" %>
+          </div>
+        <% end %>
+        </td>
+      </tr>
     </table>
+
+    <!--TODO: Add fields for out-of-state school, city, state -->
 
     <ul class="pager">
       <li><%= link_to "Previous", '/enrollment' %></li>
