@@ -31,6 +31,26 @@ The keys can be generated using the terminal command:
 
 Add your Postgres database's username and password to the `config/database.yml` file.
 
+## Database setup
+
+```
+    $ rake db:create && rake db:migrate
+```
+
+## Load CSV
+
+ Load CSV files into your local database. When it's done, you should have 69 Local Education Agencies (LEAs) and over 300 schools:
+
+```
+    $ rake import:all
+```
+
+## Seed the Database
+
+```
+    $ rake db:seed
+```
+
 ## Start the server
 
 `rails server`

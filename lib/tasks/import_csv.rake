@@ -19,3 +19,7 @@ namespace :import do
     end
   end
 end
+
+task :all => [:csv_leas, :csv_schools] do
+  puts "Import all"
+end
