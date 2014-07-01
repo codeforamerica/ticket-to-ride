@@ -2,22 +2,63 @@
   <div>
     <table>
       <tr><td><span class="filler-text">Language</span></td></tr>
+      <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
-    <tr><td><span>What did <%= @student.first_name %> learn when <%= @gender_pronoun %> first began to talk?</span>
-    <a href="#" id="a_student_first_language" data-emptytext="Choose" data-title="What is <%= @student.first_name %>'s first language?" data-type="select" data-placement="top"></a>.</td></tr>
+    <tr><td>What did <%= @student.first_name %> learn when <%= @gender_pronoun %> first began to talk?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
 
-    <tr><td><span>What does <%= @gender_pronoun %> most frequently use at home?</span>
-    <a href="#" id="a_student_second_language" data-emptytext="French" data-type="select" data-placement="top"></a>.</td></tr>
+    <tr><td>What does <%= @gender_pronoun %> most frequently use at home?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
 
-    <tr><td><span>What do you use most frequently to speak with <%= @student.first_name || 'the student' %>?</span>
-    <a href="#" id="language_with_guardian" data-emptytext="French" data-type="select" data-placement="top"></a></td></tr>
+    <tr><td>What do you use most frequently to speak with <%= @student.first_name || 'the student' %>?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
 
-    <tr><td><span>Has <%= @student.first_name %> received any formal English language instruction (listening, speaking, reading, or writing)?</span></td></tr>
-        </table>
+    <tr><td>Has <%= @student.first_name %> received any formal English language instruction (listening, speaking, reading, or writing)?</td><td>
+      <div class="btn-group" data-toggle="buttons">
+        <button type="button" class="btn btn-primary">Yes</button>
+        <button type="button" class="btn btn-primary">No</button>
+      </div></td></tr>
+  </table>
+  </div>
+
+
+  <div class="modal fade" id="firstLanguageModal" tabindex="-1" role="dialog" aria-labelledby="firstLanguageModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title" id="firstLanguageLabel">Select a language</h4>
+        </div>
+        <div class="modal-body single-col-modal">
+          <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary">
+            <%= s.radio_button :first_language, 'English' %>English
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= s.radio_button :first_language, 'Spanish' %>Spanish
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= s.radio_button :first_language, 'Portuguese' %>Portuguese
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= s.radio_button :first_language, 'Italian' %>Italian
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= s.radio_button :first_language, 'French' %>French
+          </label><br/>
+          <label class="btn btn-primary">
+            <%= s.radio_button :first_language, 'Mon-Khmer' %>Mon-Khmer
+          </label><br/>
+          <%= s.text_field :first_language, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
+          <br/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          <button type="button" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
     <div id="hidden-form-fields">
       <%= s.text_field :first_language %>
       <%= s.text_field :second_language %>
