@@ -1,0 +1,36 @@
+<table>
+  <tr>
+    <td>Pilot District</td>
+    <td>&nbsp; &nbsp;</td>
+    <td>School</td>
+    <td>&nbsp; &nbsp;</td>
+    <td>Grade level</td>
+  </tr>
+    <% @cranston_schools.each do |school| %>
+  <tr>
+    <td>Cranston</td>
+    <td>&nbsp; &nbsp;</td>
+    <td><%= school.name %></td>
+    <td>&nbsp; &nbsp;</td>
+    <td><%= school.level %></td>
+  <% end %>
+  </tr>
+    <% @newport_schools.each do |school| %>
+  <tr>
+    <td>Newport</td>
+    <td>&nbsp; &nbsp;</td>
+    <td><%= school.name %></td>
+    <td>&nbsp; &nbsp;</td>
+    <td><%= school.level %></td>
+  <% end %>
+  </tr>
+    <% @westwarwick_schools.each do |school| %>
+  <tr>
+    <td>West Warwick</td>
+    <td>&nbsp; &nbsp;</td>
+    <td><%= school.name %></td>
+    <td>&nbsp; &nbsp;</td>
+    <td><%= school.level %></td>
+  <% end %>
+  </tr>
+</table>
