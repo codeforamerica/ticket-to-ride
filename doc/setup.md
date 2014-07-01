@@ -8,7 +8,9 @@ After cloning the project, open a terminal / command prompt and navigate into th
 
 Use the following command:
 
-`bundle install`
+```
+    $ bundle install
+```
 
 ## Configure the secrets file
 
@@ -25,12 +27,36 @@ production:
 
 The keys can be generated using the terminal command:
 
-`rake secret`
+```
+    $ rake secret
+```
 
 ## Database configuration
 
 Add your Postgres database's username and password to the `config/database.yml` file.
 
+## Database setup
+
+```
+    $ rake db:create && rake db:migrate
+```
+
+## Load CSV
+
+ Load CSV files into your local database. When it's done, you should have 69 Local Education Agencies (LEAs) and over 300 schools:
+
+```
+    $ rake import:all
+```
+
+## Seed the Database
+
+```
+    $ rake db:seed
+```
+
 ## Start the server
 
-`rails server`
+```
+    $ rails server
+```
