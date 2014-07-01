@@ -46,60 +46,60 @@ CustomRequirement.create(
     authority_level: :district
 )
 
-greenbush_elementary_school = School.create(
-    name: 'Greenbush Elementary School',
-    mailing_street_address_1: '127 Greenbush Road',
-    mailing_city: 'West Warwick',
-    mailing_state: 'RI',
-    mailing_zip_code: '02893',
-    phone: '4018228454',
-    active: true,
-    district: west_warwick_district
-)
+# greenbush_elementary_school = School.create(
+#     name: 'Greenbush Elementary School',
+#     mailing_street_address_1: '127 Greenbush Road',
+#     mailing_city: 'West Warwick',
+#     mailing_state: 'RI',
+#     mailing_zip_code: '02893',
+#     phone: '4018228454',
+#     active: true,
+#     district: west_warwick_district
+# )
 
-john_f_horgan_elementary_school = School.create(
-    name: 'John F Horgan Elementary School',
-    mailing_street_address_1: '124 Providence St',
-    mailing_city: 'West Warwick',
-    mailing_state: 'RI',
-    mailing_zip_code: '02893',
-    phone: '4018028450',
-    active: true,
-    district: west_warwick_district
-)
+# john_f_horgan_elementary_school = School.create(
+#     name: 'John F Horgan Elementary School',
+#     mailing_street_address_1: '124 Providence St',
+#     mailing_city: 'West Warwick',
+#     mailing_state: 'RI',
+#     mailing_zip_code: '02893',
+#     phone: '4018028450',
+#     active: true,
+#     district: west_warwick_district
+# )
 
-wakefield_hills_elementary_school = School.create(
-    name: 'Wakefield Hills Elementary School',
-    mailing_street_address_1: '',
-    mailing_city: 'West Warwick',
-    mailing_state: 'RI',
-    mailing_zip_code: '02893',
-    phone: '4018228452',
-    active: true,
-    district: west_warwick_district
-)
+# wakefield_hills_elementary_school = School.create(
+#     name: 'Wakefield Hills Elementary School',
+#     mailing_street_address_1: '',
+#     mailing_city: 'West Warwick',
+#     mailing_state: 'RI',
+#     mailing_zip_code: '02893',
+#     phone: '4018228452',
+#     active: true,
+#     district: west_warwick_district
+# )
 
-john_f_deering_middle_school = School.create(
-    name: 'John F. Deering Middle School',
-    mailing_street_address_1: '2 Webster Knight Drive',
-    mailing_city: 'West Warwick',
-    mailing_state: 'RI',
-    mailing_zip_code: '02893',
-    phone: '4018228445',
-    active: true,
-    district: west_warwick_district
-)
+# john_f_deering_middle_school = School.create(
+#     name: 'John F. Deering Middle School',
+#     mailing_street_address_1: '2 Webster Knight Drive',
+#     mailing_city: 'West Warwick',
+#     mailing_state: 'RI',
+#     mailing_zip_code: '02893',
+#     phone: '4018228445',
+#     active: true,
+#     district: west_warwick_district
+# )
 
-west_warwick_high_school = School.create(
-    name: '',
-    mailing_street_address_1: '1 Webster Knight Dr',
-    mailing_city: 'West Warwick',
-    mailing_state: 'RI',
-    mailing_zip_code: '02893',
-    phone: '4018216596',
-    active: true,
-    district: west_warwick_district
-)
+# west_warwick_high_school = School.create(
+#     name: '',
+#     mailing_street_address_1: '1 Webster Knight Dr',
+#     mailing_city: 'West Warwick',
+#     mailing_state: 'RI',
+#     mailing_zip_code: '02893',
+#     phone: '4018216596',
+#     active: true,
+#     district: west_warwick_district
+# )
 
 Admin.create(
     name: 'Jim Monti',
@@ -137,7 +137,7 @@ guardian_complete_west_warwick_student = Student.create(
     mailing_city: 'West Warwick',
     mailing_state: 'RI',
     mailing_zip_code: '02893',
-    school: greenbush_elementary_school,
+    # school: greenbush_elementary_school,
     gender: :male,
     birth_city: 'West Warwick',
     birth_state: 'RI',
