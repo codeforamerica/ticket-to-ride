@@ -9,6 +9,7 @@ class EnrollmentController < ApplicationController
   include GuardianParams
   include StudentRaceParams
   include ContactPersonParams
+  helper EnrollmentHelper
 
   # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
   steps :student_and_guardian_names,
@@ -30,6 +31,8 @@ class EnrollmentController < ApplicationController
         :enrollment_complete
 
   def show
+    @allsteps = wizard_steps
+    
     begin
       @student = Student.find(session[:student_id])
       @guardian = Guardian.find(session[:guardian_id])

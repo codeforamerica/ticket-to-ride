@@ -1,3 +1,4 @@
+<%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
   <div class="instructions">We need a little info to get started.</div>
 
@@ -15,15 +16,6 @@
         <tr><td colspan="2"><span>Birthdate:</span> <span><%= s.date_field :birthday, class: 'madlib-input', id: 'student_birthday' %></span> </td></tr>
           <tr><td colspan="2"> <span>Birthplace:</span><span><%= s.text_field :birth_city, class: 'madlib-input', id: 'student_birth_city', placeholder: 'City' %></span>, 
   <%= s.text_field :birth_state, class: 'madlib-input', id: 'student_birth_state', placeholder: 'State' %></span><%= s.text_field :birth_country, class: 'madlib-input', id: 'student_birth_country', placeholder: 'Country' %></span></td></tr>
-  <tr><td colspan="2">
-    <span>Gender:</span> 
-    <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
-            <%= s.radio_button :gender, :female %>Female</label>
-        <label class="btn btn-primary">
-            <%= s.radio_button :gender, :male %>Male</label>
-    </div></td></tr>
-
       </table>
     </div>
 

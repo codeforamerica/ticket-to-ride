@@ -1,9 +1,10 @@
+<%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
-      <tr><td colspan="2"><span class="filler-text">Previous Schooling</span></td></tr>
+      <tr><td colspan="2"><span class="instructions">Previous Schooling</span></td></tr>
       <tr><td colspan="2"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
