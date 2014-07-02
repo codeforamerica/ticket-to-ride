@@ -9,7 +9,6 @@ class EnrollmentController < ApplicationController
   include GuardianParams
   include StudentRaceParams
   include ContactPersonParams
-  helper EnrollmentHelper
 
   # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
   steps :student_name,
