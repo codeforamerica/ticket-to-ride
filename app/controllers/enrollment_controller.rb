@@ -14,7 +14,8 @@ class EnrollmentController < ApplicationController
   steps :student_and_guardian_names,
         :student_birth_gender_and_ethnicity, 
         :student_language, 
-        :student_previous_school, 
+        :student_previous_school,
+        :student_special_services,
         :student_address, 
         :student_complete,
         :guardian_custody_and_address, 
@@ -80,8 +81,8 @@ class EnrollmentController < ApplicationController
       when :student_birth_gender_and_ethnicity
 
         #temporarily disabling these lines while prototyping
-        params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
-        params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
+        # params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
+        # params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
 
 
         # TODO: Enable this later after we convert this a non-X-Editable format
@@ -93,6 +94,7 @@ class EnrollmentController < ApplicationController
           params[:student][:secondary_language] = nil
         end
       when :student_previous_school  
+      when :student_special_services
       when :guardian_custody_and_address
         if params[:contact_person][:first_name] != ''
           @second_guardian = ContactPerson.create(contact_person_params)

@@ -4,18 +4,18 @@
       <tr><td><span class="filler-text">Language</span></td></tr>
       <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
-    <tr><td>What did <%= @student.first_name %> learn when <%= @gender_pronoun %> first began to talk?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
+    <tr><td>What language did <%= @student.first_name %> learn when <%= @gender_pronoun %> first began to talk?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
 
-    <tr><td>What does <%= @gender_pronoun %> most frequently use at home?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
+    <tr><td>What language does <%= @gender_pronoun %> most frequently use at home?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
 
-    <tr><td>What do you use most frequently to speak with <%= @student.first_name || 'the student' %>?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
+    <tr><td>What language do you use most frequently to speak with <%= @student.first_name || 'the student' %>?</td><td><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal">Choose</a></td></tr>
 
     <tr><td>Has <%= @student.first_name %> received any formal English language instruction (listening, speaking, reading, or writing)?</td><td>
       <div class="btn-group" data-toggle="buttons">
         <button type="button" class="btn btn-primary">Yes</button>
         <button type="button" class="btn btn-primary">No</button>
       </div></td></tr>
-  </table>
+    </table>
   </div>
 
 

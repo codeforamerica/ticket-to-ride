@@ -4,15 +4,6 @@
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
-      <tr><td colspan="2">
-        <span>Gender:</span> 
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary">
-                <%= s.radio_button :gender, :female %>Female</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :gender, :male %>Male</label>
-        </div></td></tr>
-
       <tr><td class="row-break"><span class="filler-text">Ethnicity</span></td></tr>
       <tr><td colspan="2"><span>Hispanic or Latino descent?</span> 
         <div class="btn-group" data-toggle="buttons">
