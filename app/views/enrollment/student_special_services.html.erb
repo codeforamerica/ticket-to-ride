@@ -1,0 +1,54 @@
+<div class="enrollment-form">
+
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+
+    <table>
+      <tr><td colspan="2"><span class="filler-text">Special Services</span></td></tr>
+      <tr>
+        <td colspan="2">Was <%= @student.first_name %> receiving special education services at <%= @gender_objective_pronoun %> previous school?           
+          <div class="btn-group pull-right" data-toggle="buttons">
+            <label class="btn btn-primary">
+              <%= s.radio_button :needs_special_services, true %>Yes</label>
+            <label class="btn btn-primary">
+              <%= s.radio_button :needs_special_services, false %>No</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Did <%= @gender_pronoun %> have a current Individualized Education Program (IEP) at the previous school?
+        <div class="btn-group pull-right" data-toggle="buttons">
+          <label class="btn btn-primary">
+              <%= s.radio_button :iep, true %>Yes</label>
+          <label class="btn btn-primary">
+              <%= s.radio_button :iep, false %>No</label>
+        </div></td>
+      </tr> <!-- this should trigger "Bring copy of IEP" on final screen -->
+      <tr>
+        <td colspan="2">Did <%= @student.first_name %> have a Section 504 Plan at <%= @gender_objective_pronoun %> prior school?
+        <div class="btn-group pull-right" data-toggle="buttons">
+          <label class="btn btn-primary">
+              <%= s.radio_button :p504, true %>Yes</label>
+          <label class="btn btn-primary">
+              <%= s.radio_button :p504, false %>No</label>
+        </div></td>
+      </tr> <!-- this should trigger "Bring copy of student's Section 504 Plan" on final screen -->
+      <tr>
+        <td colspan="2">Does <%= @student.first_name %> have difficulties that interfere with <%= @gender_objective_pronoun %> ability to go to school or to learn? 
+          <div class="btn-group pull-right" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <%= s.radio_button :has_learning_difficulties, true %>Yes</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :has_learning_difficulties, false %>No</label>
+          </div></td>
+      </tr>
+    </table>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", '/enrollment' %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+  <% end %>
+</div>
+
+<%= render 'shared/scenery_student' %>
