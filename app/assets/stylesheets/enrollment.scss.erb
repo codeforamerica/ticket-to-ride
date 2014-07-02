@@ -274,7 +274,7 @@ input[type=date] {
 }
 
 .row-break {
-    padding-top: 5%;
+    padding-top: 1%;
 }
 
 form div {
@@ -343,7 +343,40 @@ button {
   font-size: 80%;
 }
 
-.numberCircle {
+.pastCircle {
+  display: inline-block;
+  border-radius: 50%;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  background-color: $yoko-ono;
+  text-align: center;
+  font-size: 70%;
+  margin-right: 6px;
+  padding: 5px 3px 0 3px;
+  color: $john-lennon;
+}
+
+.pastCircle a {
+  color: #FFF;
+}
+
+.pastCircle a:hover {
+  color: #FFF;
+}
+
+.pastCircle:hover {
+  background-color: $paul-mccartney;
+}
+
+.currentCircle {
+  @extend .pastCircle;
+  background-color: $paul-mccartney;
+  color: #FFF;
+}
+
+.futureCircle {
   display: inline-block;
   border-radius: 50%;
   min-width: 24px;
@@ -355,16 +388,5 @@ button {
   font-size: 70%;
   margin-right: 6px;
   padding: 5px 3px 0 3px;
-}
-
-.numberCircle a {
   color: #FFF;
-}
-
-.numberCircle a:hover {
-  color: #FFF;
-}
-
-.numberCircle:hover {
-  background-color: $paul-mccartney;
 }
