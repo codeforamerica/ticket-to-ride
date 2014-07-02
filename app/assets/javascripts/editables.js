@@ -9,7 +9,7 @@ $.fn.editableform.buttons =
 $(document).ready(function () {
     $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
     $('#basicModal').modal(options);
-      var options = { "backdrop" : "static", "keyboard" : true }
+      var options = { "backdrop" : "static", "keyboard" : true };
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
