@@ -10,13 +10,19 @@ $(document).ready(function () {
     $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
     $('#basicModal').modal(options);
       var options = { "backdrop" : "static", "keyboard" : true };
+    $('#btnGuardian1Relationship').on("click", function (){
+        var relationship = $('input[name="guardian[relationship]"]:checked').val();
+        $('#guardian1RelationshipSelected').text(relationship);
+    });
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
         placement: 'top',
         content: function() {
           return $('#content_popover').html();
-        });
+        }
+      });
+
 
     $('.madlib-editable').focus(function (event) {
     

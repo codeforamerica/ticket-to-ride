@@ -8,7 +8,7 @@
         <%= fields_for(Guardian.new) do |g| %>
         <table>
           <tr><td class="row-break"><span>First Name:</span> <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', placeholder: 'Roger' %></span></td><td><span>Last Name:</span> <%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams' %></span></td></tr>
-          <tr><td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal">Choose</a></td></tr>
+          <tr><td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a></td></tr>
           <tr><td colspan="2">Does <%= @student.first_name %> live with you? <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
               <%= g.radio_button :lives_with_student, true %>Yes</label>
@@ -48,7 +48,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        <button type="button" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
+        <button type="button" id="btnGuardian1Relationship" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
