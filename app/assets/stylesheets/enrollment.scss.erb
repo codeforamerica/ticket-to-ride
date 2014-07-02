@@ -1,16 +1,14 @@
 @import "common/variables";
 
-div.container header{
+div.container header {
   position: absolute;
   left: -20px;
   top: 10px;
   height: 155px;
   width: 226px;
-  
 }
 
-.enrollment-form,
-ul.pager{
+.enrollment-form, ul.pager {
   max-width: 960px;
   margin: 0 auto;
   font-size: 150%;
@@ -36,6 +34,15 @@ ul.pager{
 
 .enrollment-form a:hover {
   text-decoration: none;
+}
+
+a.enrollment-form-popover {
+  color: $yoko-ono;
+  font-size: 95%;
+}
+
+a:hover.enrollment-form-popover {
+  color: $paul-mccartney;
 }
 
 .enrollment-form .btn-primary {
@@ -69,7 +76,7 @@ ul.pager{
   padding-bottom: 2.5%;
 }
 
-.enrollment-form table td:last-child {
+.enrollment-form table td.no-padding {
   padding-bottom: 0;
 }
 
@@ -90,8 +97,8 @@ div.enrollment-form .instructions {
   font-weight: 400; 
   color: $george-harrison;
   line-height: 145%;
-  margin-bottom: 2%;
-  margin-top: -6%;
+  margin-bottom: -1%;
+  margin-top: -2%;
 }
 
 .student-info-container{
@@ -103,10 +110,10 @@ div.enrollment-form .instructions {
   border-bottom: 3px dotted $paul-mccartney;
 }
 
-a.editable-click {
-  color: $yoko-ono;
-  border-color: $yoko-ono;
-}
+// a.editable-click {
+//   color: $yoko-ono;
+//   border-color: $yoko-ono;
+// }
 
 .input-small {
   max-width: 150px;
@@ -124,6 +131,10 @@ a.editable-click {
 .popOverClass {
   max-height: 125px;
 }
+
+/* ========================== */ 
+/*    Next & Prev buttons     */
+/* ========================== */
 
 .pager {
   position: relative;
@@ -163,6 +174,11 @@ a.editable-click {
 .nav-button:hover {
   background-color: #549448;
 }
+
+
+/* ========================== */ 
+/*                            */
+/* ========================== */
 
 #hidden-form-fields {
     display: none;
@@ -244,6 +260,14 @@ input[type=date] {
   font-size: 100%;
 }
 
+// .enrollment-form-popover a{
+//   color: $yoko-ono;
+// }
+
+// .enrollment-form-popover a:hover {
+//   color: $paul-mccartney;
+// }
+
 .enrollment-form .filler-text {
   font-size: 90%;
   text-transform: uppercase; 
@@ -289,14 +313,9 @@ button {
    color: $yoko-ono;  
 }
 
-#a_student_home_city.editable.editable-click {
-  border-bottom: dashed 2px #FFF;
-}
-
-#a_student_home_city.editable.editable-unsaved {
-  border-bottom: dashed 2px $george-harrison;
-  font-size: 90%;
-}
+/* ========================== */ 
+/*        Navigation          */
+/* ========================== */
 
 .enrollment-navigation {
   max-width: 960px;
@@ -304,6 +323,7 @@ button {
   text-align: center;
   color: $ringo-starr;
 }
+
 
 .enrollment-navigation a {
   color: $yoko-ono;
@@ -321,4 +341,30 @@ button {
 .navigator li {
   display: inline;
   font-size: 80%;
+}
+
+.numberCircle {
+  display: inline-block;
+  border-radius: 50%;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  background-color: #CCC;
+  text-align: center;
+  font-size: 70%;
+  margin-right: 6px;
+  padding: 5px 3px 0 3px;
+}
+
+.numberCircle a {
+  color: #FFF;
+}
+
+.numberCircle a:hover {
+  color: #FFF;
+}
+
+.numberCircle:hover {
+  background-color: $paul-mccartney;
 }

@@ -1,5 +1,7 @@
 <div class="enrollment-navigation">
   <% @allsteps.each_with_index do |step, index| %>
-  <%= link_to index+1, wizard_path(step) %> |
+    <div class='numberCircle'>
+      <%= link_to index+1, wizard_path(step) %>
+    </div>
   <% end %>
 </div>
