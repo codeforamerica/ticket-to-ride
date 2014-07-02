@@ -12,13 +12,14 @@ class EnrollmentController < ApplicationController
   helper EnrollmentHelper
 
   # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
-  steps :student_and_guardian_names,
+  steps :student_name,
         :student_birth_gender_and_ethnicity, 
         :student_language, 
         :student_previous_school,
         :student_special_services,
         :student_address, 
         :student_complete,
+        :guardian_name,
         :guardian_custody_and_address, 
         :guardian_second_guardian_address, 
         :guardian_first_guardian_phone, 
@@ -32,13 +33,14 @@ class EnrollmentController < ApplicationController
 
   def show
     @allsteps = wizard_steps
+    @current_step = step
     
     begin
       @student = Student.find(session[:student_id])
-      @guardian = Guardian.find(session[:guardian_id])
+      # @guardian = Guardian.find(session[:guardian_id])
     rescue
       @student = Student.new
-      @guardian = Guardian.new
+      # @guardian = Guardian.new
     end
 
     if session[:second_guardian_id]
@@ -67,14 +69,14 @@ class EnrollmentController < ApplicationController
   def update
 
     # Handle the first step creation
-    if step == :student_and_guardian_names
-      @guardian = Guardian.create(guardian_params)
+    if step == :student_name
+      # @guardian = Guardian.create(guardian_params)
       @student = Student.create(student_params)
 
-      session[:guardian_id] = @guardian.id
+      # session[:guardian_id] = @guardian.id
       session[:student_id] = @student.id
     else
-      @guardian = Guardian.find(session[:guardian_id])
+      # @guardian = Guardian.find(session[:guardian_id])
       @student = Student.find(session[:student_id])
     end
 
@@ -85,7 +87,7 @@ class EnrollmentController < ApplicationController
 
         #temporarily disabling these lines while prototyping
         # params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
-        # params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
+        params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
 
 
         # TODO: Enable this later after we convert this a non-X-Editable format

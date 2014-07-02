@@ -9,10 +9,8 @@ class ApplicationController < ActionController::Base
 
     if pronoun_uppercase == 'HE'
       return :male
-    elsif pronoun_uppercase == 'SHE'
-      return :female
     else 
-      return 'The student'
+      return :female
     end
     #TODO: Raise exception if unknown detected
   end
@@ -21,10 +19,8 @@ class ApplicationController < ActionController::Base
 
     if gender_enum == :male
       return 'he'
-    elsif gender_enum == :female
-      return 'she'
     else 
-      return 'the student'
+      return 'she'
     end
   end
     #TODO: Raise exception if unknown detected
@@ -32,10 +28,8 @@ class ApplicationController < ActionController::Base
   def genderEnumToPossessivePronoun(gender_enum)
     if gender_enum == :male
       return 'his'
-    elsif gender_enum == :female 
-      return 'her'
     else 
-      return 'the student\'s'
+      return 'her'
     end
   end
     #TODO: Raise exception if unknown detected
@@ -43,10 +37,8 @@ class ApplicationController < ActionController::Base
   def genderEnumToPossessiveAdjective(gender_enum)
     if gender_enum == :male
       return 'his'
-    elsif gender_enum == :female
-      return 'her'
     else 
-      return 'the student\'s'
+      return 'her'
     end
   end
     #TODO: Raise exception if unknown detected
@@ -54,10 +46,8 @@ class ApplicationController < ActionController::Base
   def genderEnumToObjectivePronoun(gender_enum)
     if gender_enum == :male
       return 'him'
-    elsif gender_enum == :female
-      return 'her'
     else
-      return 'the student\'s'
+      return 'her'
     end
     #TODO: Raise exception if unknown detected
   end
