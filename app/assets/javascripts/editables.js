@@ -10,10 +10,23 @@ $(document).ready(function () {
     $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
     $('#basicModal').modal(options);
       var options = { "backdrop" : "static", "keyboard" : true };
+
+    $('#btnPrimaryRace').on("click", function (){
+        var primaryRace = $('input[name="student_race[primary_race]"]:checked').val();
+        $('#primaryRaceSelected').text(primaryRace);
+    });      
+
+    $('#btnAdditionalRace').on("click", function (){
+        var primaryRace = $('input[name="student_race[additional_races]"]:checked').val();
+        $('#additionalRaceSelected').text(primaryRace);
+    }); 
     $('#btnGuardian1Relationship').on("click", function (){
         var relationship = $('input[name="guardian[relationship]"]:checked').val();
         $('#guardian1RelationshipSelected').text(relationship);
     });
+
+
+
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
