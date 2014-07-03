@@ -1,0 +1,31 @@
+<%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
+  <div class="instructions">Let's get started. Please tell us about your child.</div>
+
+<!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
+<%= form_for(Student.new, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
+    <div>
+      <table>
+        <tr><td class="row-break"><span>First name:</span> <span><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', placeholder: 'Mary' %></span></td>
+        <td><span>Last name: </span> <span><%= s.text_field :last_name, class: 'enrollment-form-input', id: 'student_lastname', placeholder: 'Williams' %></span></td></tr>
+        <tr>
+          <td><span>Middle name:</span><span><%= s.text_field :middle_name, class: 'enrollment-form-input', id: 'student_middlename', placeholder: 'Sayles' %></span></td>
+
+          <td><span>Nickname:</span> <span data-toggle="tooltip" title="Leave blank if no nickname" id="nickname-tooltip"><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_nickname', placeholder: 'Mae' %></span></td></tr>
+        <tr><td colspan="2"><span>Birthdate:</span> <span><%= s.date_field :birthday, class: 'madlib-input', id: 'student_birthday' %></span> </td></tr>
+          <tr><td colspan="2"> <span>Birthplace:</span><span><%= s.text_field :birth_city, class: 'madlib-input', id: 'student_birth_city', placeholder: 'City' %></span>, 
+  <%= s.text_field :birth_state, class: 'madlib-input', id: 'student_birth_state', placeholder: 'State' %></span><%= s.text_field :birth_country, class: 'madlib-input', id: 'student_birth_country', placeholder: 'Country' %></span></td></tr>
+      </table>
+    </div>
+
+    <ul class="pager">
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+</div>
+
+<%= render 'shared/scenery_student' %>
+
+
+

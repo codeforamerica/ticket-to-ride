@@ -11,20 +11,35 @@ class EnrollmentController < ApplicationController
   include ContactPersonParams
 
   # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
-  steps :student_and_guardian_names,
-        :student_birth_gender_and_ethnicity, :student_language, :student_address, :student_complete,
-        :guardian_custody_and_address, :guardian_second_guardian_address, :guardian_first_guardian_phone, :guardian_first_guardian_email_and_contact_prefs, :guardian_second_guardian_phone, :guardian_second_guardian_email_and_contact_prefs, :guardian_complete,
-        :contact_person_1_contact_info, :contact_person_2_contact_info,
+  steps :student_name,
+        :student_birth_gender_and_ethnicity, 
+        :student_language, 
+        :student_previous_school,
+        :student_special_services,
+        :student_address, 
+        :student_complete,
+        :guardian_name,
+        :guardian_custody_and_address, 
+        :guardian_second_guardian_address, 
+        :guardian_first_guardian_phone, 
+        :guardian_first_guardian_email_and_contact_prefs, 
+        :guardian_second_guardian_phone, 
+        :guardian_second_guardian_email_and_contact_prefs, 
+        :guardian_complete,
+        :contact_person_1_contact_info, 
+        :contact_person_2_contact_info,
         :enrollment_complete
 
-
   def show
+    @allsteps = wizard_steps
+    @current_step = step
+    
     begin
       @student = Student.find(session[:student_id])
-      @guardian = Guardian.find(session[:guardian_id])
+      # @guardian = Guardian.find(session[:guardian_id])
     rescue
       @student = Student.new
-      @guardian = Guardian.new
+      # @guardian = Guardian.new
     end
 
     if session[:second_guardian_id]
@@ -37,8 +52,6 @@ class EnrollmentController < ApplicationController
       @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
       @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
       @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
-
-
     end
 
     # Handle contact person
@@ -55,14 +68,14 @@ class EnrollmentController < ApplicationController
   def update
 
     # Handle the first step creation
-    if step == :student_and_guardian_names
-      @guardian = Guardian.create(guardian_params)
+    if step == :student_name
+      # @guardian = Guardian.create(guardian_params)
       @student = Student.create(student_params)
 
-      session[:guardian_id] = @guardian.id
+      # session[:guardian_id] = @guardian.id
       session[:student_id] = @student.id
     else
-      @guardian = Guardian.find(session[:guardian_id])
+      # @guardian = Guardian.find(session[:guardian_id])
       @student = Student.find(session[:student_id])
     end
 
@@ -70,7 +83,9 @@ class EnrollmentController < ApplicationController
 
     case step
       when :student_birth_gender_and_ethnicity
-        params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
+
+        #temporarily disabling these lines while prototyping
+        # params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
         params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
 
 
@@ -82,6 +97,8 @@ class EnrollmentController < ApplicationController
         if params[:student][:secondary_language] == "(No Other Language)"
           params[:student][:secondary_language] = nil
         end
+      when :student_previous_school  
+      when :student_special_services
       when :guardian_custody_and_address
         if params[:contact_person][:first_name] != ''
           @second_guardian = ContactPerson.create(contact_person_params)

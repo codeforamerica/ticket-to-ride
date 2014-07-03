@@ -1,0 +1,159 @@
+<%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
+
+<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+
+    <table>
+      <tr><td colspan="2"><span class="instructions">Previous Schooling</span></td></tr>
+      <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary">
+              <%= s.radio_button :grade, '0' %>None</label>   
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :pre_kindergarten %>Pre-K</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :kindergarten %>K</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_1 %>1</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_2 %>2</label>  
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_3 %>3</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_4 %>4</label>   
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_5 %>5</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_6 %>6</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_7 %>7</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_8 %>8</label>  
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_9 %>9</label>
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_10 %>10</label> 
+            <label class="btn btn-primary">
+                <%= s.radio_button :grade, :grade_11 %>11</label>   
+        </div></td></tr>
+
+      <tr>
+        <td class="col-narrow">Prior District: </td>
+        <td class="col-wide">
+          <div class="form-group">
+          <%= form_tag schools_path, { method: :get } do %>
+            <%= select_tag :lea_code, options_from_collection_for_select(Lea.all, "lea_code", "lea_name"), prompt: "Select a Rhode Island school district", class: "form-control" %>
+          </div>
+        <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="col-narrow">Prior School: </td>
+        <td class="col-wide">
+          <div class="form-group">
+          <%= form_tag schools_path, { method: :get } do %>
+            <%= select_tag :lea_code, options_from_collection_for_select(School.all, "lea_code", "name"), prompt: "Select a Rhode Island school", class: "form-control" %>
+          </div>
+        <% end %>
+        </td>
+      </tr>
+    </table>
+
+    <!--TODO: Add fields for out-of-state school, city, state -->
+
+    <ul class="pager">
+      <li><%= link_to "Previous", '/enrollment' %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+  <!-- TODO: Add additional races to database -->
+
+  <div class="modal fade" id="additionalRaceModal" tabindex="-1" role="dialog" aria-labelledby="additionalRaceModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title" id="additionalRaceModalLabel">Select <%= @student.first_name %>'s other race(s) if applicable</h4>
+        </div>
+        <div class="modal-body single-col-modal double-col-modal">
+          <table>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">African American or Black</a>
+              </td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">American Indian or Alaska Native</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">White</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Asian Indian</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Cambodian</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Chinese</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Filipino</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Hmong</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Japanese</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Korean</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Laotian</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Vietnamese</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Guamanian</a></td>
+              <td>
+                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Native Hawaiian</a>
+              </td>
+            </tr>
+          <tr>
+            <td>
+              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Samoan</a></td>
+            <td>
+              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Tahitian</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Other Pacific Islander</a></td>
+            <td>
+              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Not Applicable</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          <button type="button" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+</div>
+
+<%= render 'shared/scenery_student' %>
+

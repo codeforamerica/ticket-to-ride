@@ -1,0 +1,60 @@
+<%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
+  <div class="instructions">Tell us about you.</div>
+
+<%= form_for(Student.new, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
+    <div>
+      <table>
+        <%= fields_for(Guardian.new) do |g| %>
+        <table>
+          <tr><td class="row-break"><span>First Name:</span> <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', placeholder: 'Roger' %></span></td><td><span>Last Name:</span> <%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams' %></span></td></tr>
+          <tr><td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a></td></tr>
+          <tr><td colspan="2">Does <%= @student.first_name %> live with you? <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+              <%= g.radio_button :lives_with_student, true %>Yes</label>
+            <label class="btn btn-primary">
+              <%= g.radio_button :lives_with_student, false %>No</label>
+          </div></td></tr>
+
+      </table>
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<div class="modal fade" id="guardian1RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="guardian1RelationshipModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h4 class="modal-title" id="firstLanguageLabel">How are you related to <%= @student.first_name %>?</h4>
+      </div>
+      <div class="modal-body single-col-modal">
+        <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary">
+          <%= g.radio_button :relationship, 'Mother' %>Mother
+        </label><br/>
+        <label class="btn btn-primary">
+          <%= g.radio_button :relationship, 'Father' %>Father
+        </label><br/>
+        <label class="btn btn-primary">
+          <%= g.radio_button :relationship, 'Guardian' %>Guardian
+        </label><br/>
+        <%= g.text_field :relationship, class: 'enrollment-form-input', id: 'other_relationship', placeholder: 'Other' %>
+        <br/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <button type="button" id="btnGuardian1Relationship" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  <% end %>
+<% end %>
+
+<%= render 'shared/scenery_guardian' %>

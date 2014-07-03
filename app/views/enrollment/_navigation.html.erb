@@ -1,0 +1,17 @@
+<div class="enrollment-navigation">
+  <% @allsteps.each_with_index do |step, index| %>
+    <% if past_step?(step) %>
+      <div class='pastCircle' id='<%=step%>'>
+        <%= link_to index+1, wizard_path(step) %>
+      </div>
+    <% elsif @current_step == step%>
+      <div class='currentCircle' id='<%=step%>'> <%= index+1 %>
+      </div>
+    <% else %>
+      <div class='futureCircle' id='<%=step%>'> <%= index+1 %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- TODO: refactor this into helper method -->

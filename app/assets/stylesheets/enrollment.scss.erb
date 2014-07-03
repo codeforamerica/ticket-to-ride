@@ -1,16 +1,14 @@
 @import "common/variables";
 
-div.container header{
+div.container header {
   position: absolute;
   left: -20px;
   top: 10px;
   height: 155px;
   width: 226px;
-  
 }
 
-.enrollment-form,
-ul.pager{
+.enrollment-form, ul.pager {
   max-width: 960px;
   margin: 0 auto;
   font-size: 150%;
@@ -18,7 +16,7 @@ ul.pager{
 }
 
 .enrollment-form{
-  margin-top: 3em;  
+  margin-top: 2em;  
   padding-left: 3%;
 }
 
@@ -38,15 +36,48 @@ ul.pager{
   text-decoration: none;
 }
 
+a.enrollment-form-popover {
+  color: $yoko-ono;
+  font-size: 95%;
+}
+
+a:hover.enrollment-form-popover {
+  color: $paul-mccartney;
+}
+
 .enrollment-form .btn-primary {
   background-color: $yoko-ono;
   border-color: #FFF;
   color: $john-lennon;
+  z-index: 3;
 }
 
 .enrollment-form .btn-primary.active {
   background-color: $paul-mccartney;
   color: #FFF;
+}
+
+.enrollment-form .col-narrow {
+  width: 30%;
+}
+
+.enrollment-form .col-wide {
+  width: 70%;
+}
+
+.enrollment-form .form-group {
+  width: 80%;
+  padding-top: 1%;
+}
+
+.enrollment-form table td {
+  vertical-align: text-bottom;
+  line-height: 135%;
+  padding-bottom: 2.5%;
+}
+
+.enrollment-form table td.no-padding {
+  padding-bottom: 0;
 }
 
 .namespace {
@@ -57,13 +88,17 @@ ul.pager{
   margin-right: -10px;
 }
 
+.enrollment-form td.padding-right {
+  padding-right: 1%;
+}
+
 div.enrollment-form .instructions {
   font-size: 68%;
   font-weight: 400; 
   color: $george-harrison;
   line-height: 145%;
-  margin-bottom: 2%;
-  margin-top: -6%;
+  // margin-bottom: -1%;
+  margin-top: -2%;
 }
 
 .student-info-container{
@@ -75,10 +110,10 @@ div.enrollment-form .instructions {
   border-bottom: 3px dotted $paul-mccartney;
 }
 
-a.editable-click {
-  color: $yoko-ono;
-  border-color: $yoko-ono;
-}
+// a.editable-click {
+//   color: $yoko-ono;
+//   border-color: $yoko-ono;
+// }
 
 .input-small {
   max-width: 150px;
@@ -96,6 +131,10 @@ a.editable-click {
 .popOverClass {
   max-height: 125px;
 }
+
+/* ========================== */ 
+/*    Next & Prev buttons     */
+/* ========================== */
 
 .pager {
   position: relative;
@@ -135,6 +174,11 @@ a.editable-click {
 .nav-button:hover {
   background-color: #549448;
 }
+
+
+/* ========================== */ 
+/*                            */
+/* ========================== */
 
 #hidden-form-fields {
     display: none;
@@ -216,13 +260,21 @@ input[type=date] {
   font-size: 100%;
 }
 
+// .enrollment-form-popover a{
+//   color: $yoko-ono;
+// }
+
+// .enrollment-form-popover a:hover {
+//   color: $paul-mccartney;
+// }
+
 .enrollment-form .filler-text {
   font-size: 90%;
   text-transform: uppercase; 
 }
 
 .row-break {
-    padding-top: 5%;
+    padding-top: 1%;
 }
 
 form div {
@@ -261,11 +313,80 @@ button {
    color: $yoko-ono;  
 }
 
-#a_student_home_city.editable.editable-click {
-  border-bottom: dashed 2px #FFF;
+/* ========================== */ 
+/*        Navigation          */
+/* ========================== */
+
+.enrollment-navigation {
+  max-width: 960px;
+  margin: 1% auto;
+  text-align: center;
+  color: $ringo-starr;
 }
 
-#a_student_home_city.editable.editable-unsaved {
-  border-bottom: dashed 2px $george-harrison;
-  font-size: 90%;
+
+.enrollment-navigation a {
+  color: $yoko-ono;
+}
+
+.enrollment-navigation a:hover {
+  text-decoration: none;
+  color: $paul-mccartney;
+}
+
+.navigator ol {
+  margin-left: -12px;
+}
+
+.navigator li {
+  display: inline;
+  font-size: 80%;
+}
+
+.pastCircle {
+  display: inline-block;
+  border-radius: 50%;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  background-color: $yoko-ono;
+  text-align: center;
+  font-size: 70%;
+  margin-right: 6px;
+  padding: 5px 3px 0 3px;
+  color: $john-lennon;
+}
+
+.pastCircle a {
+  color: #FFF;
+}
+
+.pastCircle a:hover {
+  color: #FFF;
+}
+
+.pastCircle:hover {
+  background-color: $paul-mccartney;
+}
+
+.currentCircle {
+  @extend .pastCircle;
+  background-color: $paul-mccartney;
+  color: #FFF;
+}
+
+.futureCircle {
+  display: inline-block;
+  border-radius: 50%;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  background-color: #CCC;
+  text-align: center;
+  font-size: 70%;
+  margin-right: 6px;
+  padding: 5px 3px 0 3px;
+  color: #FFF;
 }

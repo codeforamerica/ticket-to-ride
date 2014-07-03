@@ -34,3 +34,9 @@
   <% end %>
   </tr>
 </table>
+
+
+<%= form_tag schools_path, {:method => :get, :class => "school_search_form"} do %>
+      <%= select_tag :lea_code, options_from_collection_for_select(Lea.all, "lea_code", "lea_name"), :prompt => "Select a school district" %>
+      <%= submit_tag "Choose" %>
+  <% end %>

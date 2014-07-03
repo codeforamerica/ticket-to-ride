@@ -9,14 +9,33 @@ $.fn.editableform.buttons =
 $(document).ready(function () {
     $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
     $('#basicModal').modal(options);
-      var options = { "backdrop" : "static", "keyboard" : true }
+      var options = { "backdrop" : "static", "keyboard" : true };
+
+    $('#btnPrimaryRace').on("click", function (){
+        var primaryRace = $('input[name="student_race[primary_race]"]:checked').val();
+        $('#primaryRaceSelected').text(primaryRace);
+    });      
+
+    $('#btnAdditionalRace').on("click", function (){
+        var primaryRace = $('input[name="student_race[additional_races]"]:checked').val();
+        $('#additionalRaceSelected').text(primaryRace);
+    }); 
+    $('#btnGuardian1Relationship').on("click", function (){
+        var relationship = $('input[name="guardian[relationship]"]:checked').val();
+        $('#guardian1RelationshipSelected').text(relationship);
+    });
+
+
+
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
         placement: 'top',
         content: function() {
           return $('#content_popover').html();
-        });
+        }
+      });
+
 
     $('.madlib-editable').focus(function (event) {
     
@@ -36,19 +55,6 @@ $(document).ready(function () {
     sel.addRange(range);
 }
 });
-
-
-// $(function(){
-     
-//     $("span[contenteditable=true]").blur(function(){
-//         var field = $(this).attr("id") ;
-//         var value = $(this).text() ;
-//         $.post('http://localhost/your_ajaxhandler_page' , field + "=" + value, function(data){
-//             // display your result data here
-//         });
-//     });
- 
-// });
 
 // Passing edited value contenteditable field from view to controller in Rails
 var form = $('#editable_fields');
