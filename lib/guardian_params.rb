@@ -21,7 +21,8 @@ module GuardianParams
         :armed_service_rank,
         :armed_service_duty_station,
         :student_id,
-        :mailing_city
+        :mailing_city,
+        :lives_with_student
     )
   end
 end
