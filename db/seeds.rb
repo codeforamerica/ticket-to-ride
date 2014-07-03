@@ -158,14 +158,14 @@ guardian_complete_west_warwick_student = Student.create(
 StudentRace.create(
     student: guardian_complete_west_warwick_student,
     primary_race: :white,
-    additional_race: 'Asian',
+    additional_races: 'Asian',
     active: true
 )
 
 StudentRace.create(
     student: guardian_complete_west_warwick_student,
     primary_race: :black,
-    additional_race: 'White',
+    additional_races: 'White',
     active: true
 )
 
