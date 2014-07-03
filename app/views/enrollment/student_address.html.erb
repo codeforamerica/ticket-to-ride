@@ -5,11 +5,11 @@
         <tr>
           <td><span class="instructions"><%= @student.first_name %>'s Home Address</span></td></tr>
         <tr>
-          <td class="row-break" colspan="2"><span>Street address:</span> <span><%= s.text_field :home_street_address_1, class: 'enrollment-form-input', id: 'student_home_address_1', placeholder: '123 Providence Way' %></span> </td>
+          <td class="row-break" colspan="2"><span>Street address:</span> <span><%= s.text_field :home_street_address_1, class: 'enrollment-form-input', id: 'student_home_address_1', placeholder: '123 Providence Way', required: true %></span> </td>
         </tr>
         <tr>
-          <td colspan="2"> <span>City:</span><span><%= s.text_field :home_city, class: 'enrollment-form-input', id: 'student_home_city', placeholder: 'Providence' %></span>, RI
-          <%= s.text_field :home_zip_code, class: 'enrollment-form-input', id: 'student_zip_code', placeholder: '02905' %></span></span>
+          <td colspan="2"> <span>City:</span><span><%= s.text_field :home_city, class: 'enrollment-form-input', id: 'student_home_city', placeholder: 'Providence', required: true %></span>, RI
+          <%= s.text_field :home_zip_code, class: 'enrollment-form-input', id: 'student_zip_code', placeholder: '02905', required: true %></span></span>
           </td>
         </tr>
       </table>     

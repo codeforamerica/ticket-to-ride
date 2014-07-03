@@ -1,0 +1,41 @@
+<%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
+
+<%= form_for(@guardian, url: wizard_path, method: :put) do |g| %>
+
+  <table>
+    <tr><td colspan="2"><span class="instructions">Your contact information</span></td></tr>
+
+  <tr><td class="row-break"><span>Main phone:</span> <span><%= g.telephone_field :cell_phone, class: 'enrollment-form-input', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span></td>
+    <td>
+    <div class="btn-group pul-right" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <%= g.radio_button :cell_phone, 'Cell' %>SMS-enabled</label>
+            <label class="btn btn-primary">
+                <%= g.radio_button :cell_phone, 'Landline' %>Landline</label>
+        </div>
+      </td>
+    </tr>
+    <tr><td><span>Secondary phone:</span> <span><%= g.telephone_field :alt_phone, class: 'enrollment-form-input', id: 'guardian_alt_phone', placeholder: '401-111-2222'%></span></td>
+      <td>
+        <div class="btn-group pul-right" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <%= g.radio_button :alt_phone, 'Cell' %>SMS-enabled</label>
+            <label class="btn btn-primary">
+                <%= g.radio_button :alt_phone, 'Landline' %>Landline</label>
+        </div>
+      </td>
+    </tr>
+    <tr><td colspan="2"><span>Email address:</span> <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
+    </tr>
+  </table>
+</div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_guardian' %>
