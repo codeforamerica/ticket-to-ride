@@ -20,14 +20,12 @@ class EnrollmentController < ApplicationController
         :student_complete,
         :guardian_name_and_address,
         :guardian_phone_and_email, 
-        # :guardian_custody, 
-        :guardian_second_name_and_address, 
-        # :guardian_first_guardian_email_and_contact_prefs, 
-        :guardian_second_guardian_phone, 
-        :guardian_second_guardian_email_and_contact_prefs, 
+        :guardian_second_name_and_relationship,
+        :guardian_second_address_and_contact_info, 
         :guardian_complete,
         :contact_person_1_contact_info, 
         :contact_person_2_contact_info,
+        :permissions, 
         :enrollment_complete
 
   def show
@@ -57,6 +55,12 @@ class EnrollmentController < ApplicationController
     # Handle contact person
     if step == :contact_person_2_contact_info
       @contact_person = ContactPerson.find(session[:contact_person_1_id])
+    end
+
+    if step == :permissions
+      @all_contacts = ContactPerson.where(guardian_id:@guardian.id)
+      @all_contacts << @guardian
+      @all_contacts.reverse
     end
 
     render_wizard
@@ -97,7 +101,7 @@ class EnrollmentController < ApplicationController
         end
       when :student_previous_school  
       when :student_special_services
-      when :guardian_custody
+      when :guardian_second_name_and_relationship
         if params[:contact_person][:first_name] != ''
           @second_guardian = ContactPerson.create(contact_person_params)
           @second_guardian.guardian = @guardian
@@ -106,15 +110,10 @@ class EnrollmentController < ApplicationController
         else
           set_next_step = :guardian_first_guardian_phone
         end
-      when :guardian_first_guardian_email_and_contact_prefs
+      when :guardian_phone_and_email
         if !session[:second_guardian_id]
           set_next_step = :guardian_complete
         end
-      when :guardian_second_guardian_phone, :guardian_second_guardian_email_and_contact_prefs
-        # TODO: Re-enable this
-        # @second_guardian = ContactPerson.find(session[:second_guardian_id])
-        # @second_guardian.update_attributes(contact_person_params)
-        # @second_guardian.save
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create(contact_person_params)
         @contact_person.guardian = @guardian

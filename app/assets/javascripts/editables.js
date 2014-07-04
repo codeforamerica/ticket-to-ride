@@ -8,6 +8,11 @@ $.fn.editableform.buttons =
 
 $(document).ready(function () {
     $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
+    $('#lives_with_g2_slider').slider();
+    $("#lives_with_g2_slider").on('slide', function(slideEvt) {
+      $("#lives_with_g2_val").text(slideEvt.value);
+    });
+
     $('#basicModal').modal(options);
       var options = { "backdrop" : "static", "keyboard" : true };
 

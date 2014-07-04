@@ -52,6 +52,9 @@ gem 'wicked'
 # Added for Windows timezone support
 gem 'tzinfo-data'
 
+# Used for Bootstrap Slider
+gem 'bootstrap-slider-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

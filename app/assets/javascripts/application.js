@@ -18,5 +18,6 @@
 //= require bootstrap3-editable/bootstrap-editable
 //= require moment
 //= require select2
+//= require bootstrap-slider
 //= require_tree .
 

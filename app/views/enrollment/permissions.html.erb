@@ -1,0 +1,59 @@
+<%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
+  <div class="instructions">Permissions and authorizations</div>
+  <!-- TODO: Add tooltip saying this is other than the parent/guardians -->
+
+  <%= form_for(@student, url: wizard_path, method: :put) do |c| %>
+  <table>
+    <tr>
+      <td class="row-break minimize-padding" colspan="2">Who may pick up <%= @student.first_name %> from school?</td>
+    </tr>
+    <tr><td colspan="2" class="minimize-padding"> 
+      <div class ="checkbox inline-checkbox">
+      <% @all_contacts.reverse.each do |person| %>
+          <div class ="checkbox inline-checkboxes">
+            <label>
+              <input type="checkbox"> <%= person.first_name.titlecase %>
+            </label>
+          </div>
+      <% end %>
+    </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" class="minimize-padding">Who may receive information about <%= @gender_possessive_pronoun %> school records?</td>
+    </tr>
+    <tr><td colspan="2" class="minimize-padding"> 
+      <div class ="checkbox inline-checkbox">
+      <% @all_contacts.reverse.each do |person| %>
+          <div class ="checkbox inline-checkboxes">
+            <label>
+              <input type="checkbox"> <%= person.first_name.titlecase %>
+            </label>
+          </div>
+      <% end %>
+    </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"  class="minimize-padding"><span>Are there any court orders regarding legal custody, physical custody or restricted contact with the school or with <%= @student.first_name %>?</span> 
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary">
+              <input type="radio" name="has_court_order" value="true">Yes</label>
+          <label class="btn btn-primary">
+              <input type="radio" name="has_court_order" value="false">No</label>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+</div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+
+<% end %>
+
+<%= render 'shared/scenery_contact' %>

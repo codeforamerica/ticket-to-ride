@@ -34,6 +34,8 @@ GEM
     birthday (0.3.1)
       activerecord
       activesupport
+    bootstrap-slider-rails (1.9.0)
+      railties (>= 3.2, < 5.0)
     bootstrap-x-editable-rails (1.5.1.1)
       railties (>= 3.0)
     builder (3.2.2)
@@ -134,6 +136,7 @@ PLATFORMS
 DEPENDENCIES
   anjlab-bootstrap-rails (~> 3.0.0.3)
   birthday (~> 0.3.0)
+  bootstrap-slider-rails
   bootstrap-x-editable-rails
   coffee-rails (~> 4.0.0)
   high_voltage (~> 2.1.0)
