@@ -18,12 +18,16 @@ $(document).ready(function () {
 
     $('#btnPrimaryRace').on("click", function (){
         var primaryRace = $('input[name="student_race[primary_race]"]:checked').val();
-        $('#primaryRaceSelected').text(primaryRace);
+        var primaryRaceTitleized = primaryRace.toProperCase();
+        var selectedRace = $('#primaryRaceSelected').text(primaryRaceTitleized);
+        selectedRace.removeClass('enrollment-form-popover');
+
     });      
 
     $('#btnAdditionalRace').on("click", function (){
         var primaryRace = $('input[name="student_race[additional_races]"]:checked').val();
-        $('#additionalRaceSelected').text(primaryRace);
+        var selectedAdditionalRace = $('#additionalRaceSelected').text(primaryRace);
+        selectedAdditionalRace.removeClass('enrollment-form-popover');
     }); 
     $('#btnGuardian1Relationship').on("click", function (){
         var relationship = $('input[name="guardian[relationship]"]:checked').val();
@@ -58,7 +62,20 @@ $(document).ready(function () {
     var sel = window.getSelection();
     sel.removeAllRanges();
     sel.addRange(range);
-}
+   }
+
+   // String.prototype.toProperCase = function () {
+   //     return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+   // };
+   String.prototype.toProperCase = function() {
+     var words = this.split('_');
+     var results = [];
+     for (var i=0; i < words.length; i++) {
+         var letter = words[i].charAt(0).toUpperCase();
+         results.push(letter + words[i].slice(1));
+     }
+     return results.join(' ');
+   };
 });
 
 // Passing edited value contenteditable field from view to controller in Rails

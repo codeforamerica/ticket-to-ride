@@ -17,15 +17,15 @@
       <tr><td colspan="2"><span>Hispanic or Latino descent?</span> 
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true %>Yes</label>
+                <%= s.radio_button :is_hispanic, true, presence: { message: "Selection required" } %>Yes</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false %>No</label>
+                <%= s.radio_button :is_hispanic, false, presence: { message: "Selection required" }%>No</label>
         </div></td></tr>
 
       <%= fields_for StudentRace.new do |r|%>
       <tr><td class="row-break"><span class="instructions">Race</span></td></tr>
       <tr><td colspan="2"><span>Primary race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#primaryRaceModal" id="primaryRaceSelected">Choose</a></span></td></tr>
-      <tr><td colspan="2"><span>Additional race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#additionalRaceModal" id="additionalRaceSelected">Choose</a></span></td></tr>
+      <tr><td colspan="2"><span>Additional race: </span> <span><a href="#" class="enrollment-form-popover chooseLink" data-toggle="modal" data-target="#additionalRaceModal" id="additionalRaceSelected">Choose</a></span></td></tr>
 
 
     </table>
