@@ -21,21 +21,18 @@ $(document).ready(function () {
         var primaryRaceTitleized = primaryRace.toProperCase();
         var selectedRace = $('#primaryRaceSelected').text(primaryRaceTitleized);
         selectedRace.removeClass('enrollment-form-popover');
-
+        selectedRace.addClass('enrollment-form-modal-selection');
     });      
 
-    $('#btnAdditionalRace').on("click", function (){
-        var primaryRace = $('input[name="student_race[additional_races]"]:checked').val();
-        var selectedAdditionalRace = $('#additionalRaceSelected').text(primaryRace);
-        selectedAdditionalRace.removeClass('enrollment-form-popover');
-    }); 
-    $('#btnGuardian1Relationship').on("click", function (){
-        var relationship = $('input[name="guardian[relationship]"]:checked').val();
-        $('#guardian1RelationshipSelected').text(relationship);
-    });
+    getSelectionFromModal('#btnAdditionalRace', 'input[name="student_race[additional_races]"]:checked', '#additionalRaceSelected');
 
+    getSelectionFromModal('#btnGuardian1Relationship', 'input[name="guardian[relationship]"]:checked', '#guardian1RelationshipSelected');
 
+    getSelectionFromModal('#btnFirstLanguage', 'input[name="student[first_language]"]:checked', '#firstLanguageSelected');
 
+    getSelectionFromModal('#btnHomeLanguage', 'input[name="student[home_language]"]:checked', '#homeLanguageSelected');
+
+    getSelectionFromModal('#btnGuardianLanguage', 'input[name="student[guardian_language]"]:checked', '#guardianLanguageSelected');
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
@@ -64,9 +61,15 @@ $(document).ready(function () {
     sel.addRange(range);
    }
 
-   // String.prototype.toProperCase = function () {
-   //     return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-   // };
+   function getSelectionFromModal(btnName, inputName, linkToUpdate) {
+    $(btnName).on("click", function () {
+      var selection = $(inputName).val();
+      var showSelection = $(linkToUpdate).text(selection);
+      showSelection.removeClass('enrollment-form-popover');
+      showSelection.addClass('enrollment-form-modal-selection');
+    });
+   };
+
    String.prototype.toProperCase = function() {
      var words = this.split('_');
      var results = [];
