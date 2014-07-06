@@ -16,7 +16,7 @@ $(document).ready(function () {
     $('#basicModal').modal(options);
       var options = { "backdrop" : "static", "keyboard" : true };
 
-    $('#btnPrimaryRace').on("click", function (){
+    $('#btnPrimaryRace').click(function (){
         var primaryRace = $('input[name="student_race[primary_race]"]:checked').val();
         var primaryRaceTitleized = primaryRace.toProperCase();
         var selectedRace = $('#primaryRaceSelected').text(primaryRaceTitleized);
@@ -33,6 +33,20 @@ $(document).ready(function () {
     getSelectionFromModal('#btnHomeLanguage', 'input[name="student[home_language]"]:checked', '#homeLanguageSelected');
 
     getSelectionFromModal('#btnGuardianLanguage', 'input[name="student[guardian_language]"]:checked', '#guardianLanguageSelected');
+
+    $("form input:radio").change(function() {
+      if ($(this).val() == 'true'){
+        $('#guardian1_shared_street').removeClass('hidden');
+        $('#guardian1_shared_city').removeClass('hidden');
+        $('#guardian1_unshared_street').addClass('hidden');
+        $('#guardian1_unshared_city').addClass('hidden');
+      } else {
+        $('#guardian1_shared_street').addClass('hidden');
+        $('#guardian1_shared_city').addClass('hidden');
+        $('#guardian1_unshared_street').removeClass('hidden');
+        $('#guardian1_unshared_city').removeClass('hidden');
+      }
+    });
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
@@ -62,7 +76,7 @@ $(document).ready(function () {
    }
 
    function getSelectionFromModal(btnName, inputName, linkToUpdate) {
-    $(btnName).on("click", function () {
+    $(btnName).click(function () {
       var selection = $(inputName).val();
       var showSelection = $(linkToUpdate).text(selection);
       showSelection.removeClass('enrollment-form-popover');

@@ -9,28 +9,37 @@
           <tr><td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a></td></tr>
           <tr><td colspan="2">Does <%= @student.first_name %> live with you? <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
-              <%= g.radio_button :lives_with_student, true, required: true %>Yes</label>
+              <%= g.radio_button :lives_with_student, true, required: true%>Yes</label>
             <label class="btn btn-primary">
               <%= g.radio_button :lives_with_student, false, required: true %>No</label>
           </div></td></tr>
-          <div class="guardian1_alt_address">
+
+          <div id="guardian1_address" aria-hidden="true">
+            <tr><td class="row-break hidden" colspan="2" id="guardian1_shared_street"><span>Street address:</span> <span class="enrollment-form-answered"><%= @student.home_street_address_1 %></td></tr>
             <tr>
-              <td class="row-break" colspan="2"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', id: 'guardian_street_address_1', placeholder: '456 Newport Avenue' %></span> </td>
-            </tr>
-            <tr>
-              <td colspan="2"> <span>City:</span><span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', id: 'guardian1_city', placeholder: 'Newport' %></span>, RI
-              <%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span></span>
+              <td colspan="2" class="hidden" id="guardian1_shared_city"> <span>City:</span><span class="enrollment-form-answered"><%= @student.home_city %></span>, RI <span class="enrollment-form-answered"><%= @student.home_zip_code %></span></span>
               </td>
             </tr>
           </div>
 
+          <div id="guardian1_alt_address">
+            <tr>
+              <td class="row-break hidden" colspan="2" id="guardian1_unshared_street"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Way' %></span> </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="hidden" id="guardian1_unshared_city"> <span>City:</span><span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', placeholder: 'Newport' %></span>, RI
+              <%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span></span>
+              </td>
+            </tr>
+          </div>
       </table>
     </div>
 
     <ul class="pager">
       <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
+      <li><%= g.submit 'Next', class: 'nav-button pull-right', id: 'submitGuardian1' %></li>
     </ul>
+
 
 <div class="modal fade" id="guardian1RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="guardian1RelationshipModal" aria-hidden="true">
   <div class="modal-dialog modal-sm">
