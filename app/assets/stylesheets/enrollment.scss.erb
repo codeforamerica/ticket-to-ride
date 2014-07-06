@@ -89,7 +89,8 @@ a:hover.enrollment-form-popover {
 }
 
 .enrollment-form td.padding-right {
-  padding-right: 1%;
+  padding-right: 1.5%;
+  max-width: 540px;
 }
 
 div.enrollment-form .instructions {
@@ -109,6 +110,8 @@ div.enrollment-form .instructions {
   color: $paul-mccartney;
   border-bottom: 3px dotted $paul-mccartney;
 }
+
+
 
 // a.editable-click {
 //   color: $yoko-ono;
@@ -130,6 +133,15 @@ div.enrollment-form .instructions {
 
 .popOverClass {
   max-height: 125px;
+}
+
+/* ========================== */ 
+/*        Hidden divs         */
+/* ========================== */
+
+
+.guardian1_alt_address {
+  display: none;
 }
 
 /* ========================== */ 
@@ -179,6 +191,43 @@ div.enrollment-form .instructions {
 /* ========================== */ 
 /*                            */
 /* ========================== */
+
+
+.slider.slider-horizontal {
+  float: right;
+}
+
+.slider-handle {
+  background-color: $paul-mccartney;
+  background-image: -webkit-linear-gradient(top, #FFF 0%, $paul-mccartney 100%);
+  background-image: linear-gradient(to bottom, #FFF 0%, $paul-mccartney 100%);
+
+}
+.slider-result {
+  font-size: 90%;
+  color: $yoko-ono;
+  padding-left: 4%;
+  vertical-align: text-top !important;
+}
+
+.inline-checkboxes {
+  display: inline-block;
+  font-size: 80%;
+  padding-right: 2%;
+  margin-top: -5px;
+}
+
+.inline-checkboxes label{
+  padding-left: 2px;
+}
+
+.enrollment-form input[type=checkbox] {
+  margin: 9px 0 0;
+}
+
+.minimize-padding {
+  padding-bottom: 0 !important;
+}
 
 #hidden-form-fields {
     display: none;
@@ -259,14 +308,6 @@ input[type=date] {
   top: 0;
   font-size: 100%;
 }
-
-// .enrollment-form-popover a{
-//   color: $yoko-ono;
-// }
-
-// .enrollment-form-popover a:hover {
-//   color: $paul-mccartney;
-// }
 
 .enrollment-form .filler-text {
   font-size: 90%;

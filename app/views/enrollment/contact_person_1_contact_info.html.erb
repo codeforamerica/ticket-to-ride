@@ -1,28 +1,44 @@
-<div class="madlib">
+<%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
   <div class="instructions">Tell us about the people who can find you in case of an emergency.</div>
-  <div>
-    A person that can reach me during an emergency is
-    <a href="#" id="a_contact_person_first_name" data-title="What is his/her first name?" data-emptytext="(Roger)" data-type="text" data-placement="top"></a>
-    <a href="#" id="a_contact_person_last_name" data-title="What is his/her last name?" data-emptytext="(Williams)" data-type="text" data-placement="top"></a>.
+  <!-- TODO: Add tooltip saying this is other than the parent/guardians -->
 
-    The best phone number to reach
-    <span class="contact-person-first-name-span edited_text">(Roger)</span> <!-- TODO: Standardize CSS naming style -->
-    is
-    <a href="#" id="a_contact_person_phone" data-title="What is his/her phone number?" data-emptytext="(401-123-4567)" data-type="text" data-placement="top"></a>.
+  <%= form_for(ContactPerson.new, url: wizard_path, method: :put) do |c| %>
+  <table>
+    <tr>
+      <td class="row-break"><span>First Name:</span> <span><%= c.text_field :first_name, class: 'enrollment-form-input', id: 'contact1_firstname', placeholder: 'John', required: true %></span></td>
+      <td><span>Last Name:</span> <%= c.text_field :last_name, class: 'enrollment-form-input', id: 'contact1_lastname', placeholder: 'Lennon', required: true %></span></td>
+    </tr>
+    <tr>
+      <td class="padding-right" colspan="2">Contact's relationship to you: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#contact1RelationshipModal" id="guardian1RelationshipSelected">Choose</a>
+      </td>
+    </tr>
 
-    <span class="contact-person-first-name-span edited_text">(Roger)</span>'s
-    e-mail address is
-    <a href="#" id="a_contact_person_email" data-title="What is his/her e-mail address?" data-emptytext="(roger@yoohoo.com)" data-type="text" data-placement="top"></a>.
-  </div>
+    <tr><td class="row-break"><span>Main phone:</span> <span><%= c.telephone_field :phone, class: 'enrollment-form-input', id: 'contact1_phone', placeholder: '401-111-2222', required: true %></span></td>
+      <td>
+      <div class="btn-group pull-right" data-toggle="buttons">
+              <label class="btn btn-primary">
+                  <%= c.radio_button :phone, 'Cell' %>SMS-enabled</label>
+              <label class="btn btn-primary">
+                  <%= c.radio_button :phone, 'Landline' %>Landline</label>
+          </div>
+        </td>
+      </tr>
+      <tr><td><span>Secondary phone:</span> <span><%= c.telephone_field :phone, class: 'enrollment-form-input', id: 'contact1_alt_phone', placeholder: '401-111-2222'%></span></td>
+        <td>
+          <div class="btn-group pull-right" data-toggle="buttons">
+              <label class="btn btn-primary">
+                  <%= c.radio_button :phone, 'Cell' %>SMS-enabled</label>
+              <label class="btn btn-primary">
+                  <%= c.radio_button :phone, 'Landline' %>Landline</label>
+          </div>
+        </td>
+      </tr>
+      <tr><td colspan="2"><span>Email address:</span> <span><%= c.email_field :email, class: 'enrollment-form-input', id: 'contact1_email', placeholder: 'john@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
+      </tr>
+
+  </table>
 </div>
-
-<%= form_for(ContactPerson.new, url: wizard_path, method: :put) do |c| %>
-    <div id="hidden-form-fields">
-      <%= c.text_field :first_name %>
-      <%= c.text_field :last_name %>
-      <%= c.text_field :phone %>
-      <%= c.text_field :email %>
-    </div>
 
     <ul class="pager">
       <li><%= link_to "Previous", previous_wizard_path %></li>
