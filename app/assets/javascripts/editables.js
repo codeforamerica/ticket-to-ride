@@ -84,6 +84,17 @@ $(document).ready(function () {
 
     /* end TODO Guardian name and address */
 
+    getSelectionFromModal('#btnGuardian2Relationship', 'input[name="contact_person[relationship]"]:checked', '#guardian2RelationshipSelected');
+
+    $('#btnGuardian2Relationship').click(function() {
+      var otherRelationship = $('#other_relationship');
+      if (otherRelationship.val()) {
+        var selectedRelationship = $('#guardian2RelationshipSelected').text(otherRelationship.val());
+      }
+      selectedRelationship.removeClass('enrollment-form-popover');
+      selectedRelationship.addClass('enrollment-form-modal-selection');
+    });
+
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
