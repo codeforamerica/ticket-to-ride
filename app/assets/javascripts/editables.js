@@ -16,25 +16,84 @@ $(document).ready(function () {
     $('#basicModal').modal(options);
       var options = { "backdrop" : "static", "keyboard" : true };
 
-    $('#btnPrimaryRace').on("click", function (){
+    $('#btnPrimaryRace').click(function (){
         var primaryRace = $('input[name="student_race[primary_race]"]:checked').val();
         var primaryRaceTitleized = primaryRace.toProperCase();
         var selectedRace = $('#primaryRaceSelected').text(primaryRaceTitleized);
         selectedRace.removeClass('enrollment-form-popover');
-
+        selectedRace.addClass('enrollment-form-modal-selection');
     });      
 
-    $('#btnAdditionalRace').on("click", function (){
-        var primaryRace = $('input[name="student_race[additional_races]"]:checked').val();
-        var selectedAdditionalRace = $('#additionalRaceSelected').text(primaryRace);
-        selectedAdditionalRace.removeClass('enrollment-form-popover');
-    }); 
-    $('#btnGuardian1Relationship').on("click", function (){
-        var relationship = $('input[name="guardian[relationship]"]:checked').val();
-        $('#guardian1RelationshipSelected').text(relationship);
+    getSelectionFromModal('#btnAdditionalRace', 'input[name="student_race[additional_races]"]:checked', '#additionalRaceSelected');
+
+
+    getSelectionFromModal('#btnFirstLanguage', 'input[name="student[first_language]"]:checked', '#firstLanguageSelected');
+
+    getSelectionFromModal('#btnHomeLanguage', 'input[name="student[home_language]"]:checked', '#homeLanguageSelected');
+
+    getSelectionFromModal('#btnGuardianLanguage', 'input[name="student[guardian_language]"]:checked', '#guardianLanguageSelected');
+
+    $("form input:radio").change(function() {
+      if ($(this).val() == 'true'){
+        $('#guardian1_shared_street').removeClass('hidden');
+        $('#guardian1_shared_city').removeClass('hidden');
+        $('#guardian1_unshared_street').addClass('hidden');
+        $('#guardian1_unshared_city').addClass('hidden');
+      } else if ($(this).val() == 'false') {
+        $('#guardian1_shared_street').addClass('hidden');
+        $('#guardian1_shared_city').addClass('hidden');
+        $('#guardian1_unshared_street').removeClass('hidden');
+        $('#guardian1_unshared_city').removeClass('hidden');
+      }
     });
 
+    /* start TODO: Make these cancel each other out. Guardian name and address */
 
+    getSelectionFromModal('#btnGuardian1Relationship', 'input[name="guardian[relationship]"]:checked', '#guardian1RelationshipSelected');
+
+    $('#btnGuardian1Relationship').click(function() {
+      var otherRelationship = $('#other_relationship');
+      if (otherRelationship.val()) {
+        var selectedRelationship = $('#guardian1RelationshipSelected').text(otherRelationship.val());
+      }
+      selectedRelationship.removeClass('enrollment-form-popover');
+      selectedRelationship.addClass('enrollment-form-modal-selection');
+    });
+
+      // if ($('#other_relationship'.val()) { 
+      //   $(':radio').attr('disabled', true);
+      // }
+      // else
+      // {
+      //  $(':radio').attr('disabled', false);
+      // }
+
+      // $('input:radio').change(function(e) {
+      //  e.preventDefault;
+      //   $('input[type="text"]').attr('disabled', true);
+      // })
+
+      // $('input[name="guardian[relationship]"]').change(function(e) {
+      //   e.preventDefault;
+      //   $('input[type="text"]').attr('disabled', true);
+      // });
+
+      // $('input[type="text"]').change(function() {
+      // alert("Change called");
+      // e.preventDefault;
+
+    /* end TODO Guardian name and address */
+
+    getSelectionFromModal('#btnGuardian2Relationship', 'input[name="contact_person[relationship]"]:checked', '#guardian2RelationshipSelected');
+
+    $('#btnGuardian2Relationship').click(function() {
+      var otherRelationship = $('#other_relationship');
+      if (otherRelationship.val()) {
+        var selectedRelationship = $('#guardian2RelationshipSelected').text(otherRelationship.val());
+      }
+      selectedRelationship.removeClass('enrollment-form-popover');
+      selectedRelationship.addClass('enrollment-form-modal-selection');
+    });
 
 
     $("[data-toggle=popover]").popover({ 
@@ -64,9 +123,16 @@ $(document).ready(function () {
     sel.addRange(range);
    }
 
-   // String.prototype.toProperCase = function () {
-   //     return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-   // };
+   function getSelectionFromModal(btnName, inputName, linkToUpdate) {
+    $(btnName).click(function () {
+      var selection = $(inputName).val();
+      var showSelection = $(linkToUpdate).text(selection);
+      showSelection.removeClass('enrollment-form-popover');
+      showSelection.addClass('enrollment-form-modal-selection');
+    });
+   };
+
+
    String.prototype.toProperCase = function() {
      var words = this.split('_');
      var results = [];

@@ -28,7 +28,7 @@ class MadlibsController < ApplicationController
     end
 
     if session[:second_guardian_id]
-      @second_guardian = ContactPerson.find(session[:second_guardian_id])
+      # @second_guardian = ContactPerson.find(session[:second_guardian_id])
     end
 
     # Handle gender pronouns, but not for first step

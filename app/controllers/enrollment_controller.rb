@@ -34,23 +34,24 @@ class EnrollmentController < ApplicationController
     
     begin
       @student = Student.find(session[:student_id])
-      @guardian = Guardian.find(session[:guardian_id])
+      # @guardian = Guardian.find(session[:guardian_id])
     rescue
       @student = Student.new
-      @guardian = Guardian.new
+      # @guardian = Guardian.new
     end
 
     if session[:second_guardian_id]
-      @second_guardian = ContactPerson.find(session[:second_guardian_id])
+      # @second_guardian = ContactPerson.find(session[:second_guardian_id])
     end
 
-    # Handle gender pronouns, but not for first step
+    #Handle gender pronouns, but not for first step
     if step != :student_birth_gender_and_ethnicity
       @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
       @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
       @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
       @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
     end
+
 
     # Handle contact person
     if step == :contact_person_2_contact_info
@@ -60,7 +61,7 @@ class EnrollmentController < ApplicationController
     if step == :permissions
       @all_contacts = ContactPerson.where(guardian_id:@guardian.id)
       @all_contacts << @guardian
-      @all_contacts.reverse
+      @guardian_and_contacts = @all_contacts.reverse
     end
 
     render_wizard
@@ -79,8 +80,15 @@ class EnrollmentController < ApplicationController
       # session[:guardian_id] = @guardian.id
       session[:student_id] = @student.id
     else
-      @guardian = Guardian.find(session[:guardian_id])
+      # @guardian = Guardian.find(session[:guardian_id])
       @student = Student.find(session[:student_id])
+    end
+
+    if step == :guardian_name_and_address
+      @guardian = Guardian.create(guardian_params)
+      session[:guardian_id] = @guardian.id
+    else
+      @guardian = Guardian.find(session[:guardian_id])
     end
 
     set_next_step = next_step
@@ -89,7 +97,7 @@ class EnrollmentController < ApplicationController
       when :student_birth_gender_and_ethnicity
 
         params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
-        params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
+        # params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
 
         # TODO: Enable this later after we convert this a non-X-Editable format
         # @student_race = StudentRace.create(student_race_params)
@@ -99,8 +107,11 @@ class EnrollmentController < ApplicationController
         if params[:student][:secondary_language] == "(No Other Language)"
           params[:student][:secondary_language] = nil
         end
-      when :student_previous_school  
-      when :student_special_services
+      when :guardian_phone_and_email
+        @guardian = Guardian.find(session[:guardian_id])
+        if !session[:second_guardian_id]
+          set_next_step = :guardian_complete
+        end
       when :guardian_second_name_and_relationship
         if params[:contact_person][:first_name] != ''
           @second_guardian = ContactPerson.create(contact_person_params)
@@ -108,11 +119,7 @@ class EnrollmentController < ApplicationController
           @second_guardian.save
           session[:second_guardian_id] = @second_guardian.id
         else
-          set_next_step = :guardian_first_guardian_phone
-        end
-      when :guardian_phone_and_email
-        if !session[:second_guardian_id]
-          set_next_step = :guardian_complete
+          set_next_step = :guardian_second_address_and_contact_info
         end
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create(contact_person_params)
