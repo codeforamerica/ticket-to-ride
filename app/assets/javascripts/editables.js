@@ -26,7 +26,6 @@ $(document).ready(function () {
 
     getSelectionFromModal('#btnAdditionalRace', 'input[name="student_race[additional_races]"]:checked', '#additionalRaceSelected');
 
-    getSelectionFromModal('#btnGuardian1Relationship', 'input[name="guardian[relationship]"]:checked', '#guardian1RelationshipSelected');
 
     getSelectionFromModal('#btnFirstLanguage', 'input[name="student[first_language]"]:checked', '#firstLanguageSelected');
 
@@ -40,13 +39,51 @@ $(document).ready(function () {
         $('#guardian1_shared_city').removeClass('hidden');
         $('#guardian1_unshared_street').addClass('hidden');
         $('#guardian1_unshared_city').addClass('hidden');
-      } else {
+      } else if ($(this).val() == 'false') {
         $('#guardian1_shared_street').addClass('hidden');
         $('#guardian1_shared_city').addClass('hidden');
         $('#guardian1_unshared_street').removeClass('hidden');
         $('#guardian1_unshared_city').removeClass('hidden');
       }
     });
+
+    /* start TODO: Make these cancel each other out. Guardian name and address */
+
+    getSelectionFromModal('#btnGuardian1Relationship', 'input[name="guardian[relationship]"]:checked', '#guardian1RelationshipSelected');
+
+    $('#btnGuardian1Relationship').click(function() {
+      var otherRelationship = $('#other_relationship');
+      if (otherRelationship.val()) {
+        var selectedRelationship = $('#guardian1RelationshipSelected').text(otherRelationship.val());
+      }
+      selectedRelationship.removeClass('enrollment-form-popover');
+      selectedRelationship.addClass('enrollment-form-modal-selection');
+    });
+
+      // if ($('#other_relationship'.val()) { 
+      //   $(':radio').attr('disabled', true);
+      // }
+      // else
+      // {
+      //  $(':radio').attr('disabled', false);
+      // }
+
+      // $('input:radio').change(function(e) {
+      //  e.preventDefault;
+      //   $('input[type="text"]').attr('disabled', true);
+      // })
+
+      // $('input[name="guardian[relationship]"]').change(function(e) {
+      //   e.preventDefault;
+      //   $('input[type="text"]').attr('disabled', true);
+      // });
+
+      // $('input[type="text"]').change(function() {
+      // alert("Change called");
+      // e.preventDefault;
+
+    /* end TODO Guardian name and address */
+
 
     $("[data-toggle=popover]").popover({ 
         html : true, 
@@ -83,6 +120,7 @@ $(document).ready(function () {
       showSelection.addClass('enrollment-form-modal-selection');
     });
    };
+
 
    String.prototype.toProperCase = function() {
      var words = this.split('_');

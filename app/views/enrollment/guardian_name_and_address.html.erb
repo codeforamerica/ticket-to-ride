@@ -2,7 +2,7 @@
 <div class="enrollment-form">
   <div class="instructions">Tell us about you.</div>
 
-<%= form_for(Guardian.new, url: wizard_path, method: :put, id: 'editable-fields') do |g| %>
+<%= form_for(Guardian.new, url: wizard_path, method: :put, :html=> {:name => 'guardian1_name_form'}, id: 'editable-fields') do |g| %>
     <div>
         <table>
           <tr><td class="row-break"><span>First Name:</span> <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', placeholder: 'Roger', required: true %></span></td><td><span>Last Name:</span> <%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams', required: true %></span></td></tr>
@@ -51,13 +51,13 @@
       <div class="modal-body single-col-modal">
         <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Mother' %>Mother
+          <%= g.radio_button :relationship, 'Mother', class: 'second' %>Mother
         </label><br/>
         <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Father' %>Father
+          <%= g.radio_button :relationship, 'Father', class: 'second' %>Father
         </label><br/>
         <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Guardian' %>Guardian
+          <%= g.radio_button :relationship, 'Guardian', class: 'second' %>Guardian
         </label><br/>
         <%= g.text_field :relationship, class: 'enrollment-form-input', id: 'other_relationship', placeholder: 'Other' %>
         <br/>
