@@ -1,4 +1,3 @@
-require 'guardian_params'
 require 'student_params'
 require 'student_race_params'
 require 'contact_person_params'
@@ -6,7 +5,6 @@ require 'contact_person_params'
 class EnrollmentController < ApplicationController
   include Wicked::Wizard
   include StudentParams
-  include GuardianParams
   include StudentRaceParams
   include ContactPersonParams
 
@@ -59,7 +57,7 @@ class EnrollmentController < ApplicationController
     end
 
     if step == :permissions
-      @all_contacts = ContactPerson.where(guardian_id:@guardian.id)
+      @all_contacts = ContactPerson.where(contact_person_id:@guardian.id)
       @all_contacts << @guardian
       @guardian_and_contacts = @all_contacts.reverse
     end
@@ -85,10 +83,10 @@ class EnrollmentController < ApplicationController
     end
 
     if step == :guardian_name_and_address
-      @guardian = Guardian.create(guardian_params)
+      @guardian = ContactPerson.create(contact_person_params)
       session[:guardian_id] = @guardian.id
     else
-      @guardian = Guardian.find(session[:guardian_id])
+      # @guardian = ContactPerson.find(session[:contact_person_id])
     end
 
     set_next_step = next_step
@@ -108,7 +106,7 @@ class EnrollmentController < ApplicationController
           params[:student][:secondary_language] = nil
         end
       when :guardian_phone_and_email
-        @guardian = Guardian.find(session[:guardian_id])
+        @guardian = ContactPerson.find(session[:guardian_id])
         if !session[:second_guardian_id]
           set_next_step = :guardian_complete
         end
@@ -136,7 +134,7 @@ class EnrollmentController < ApplicationController
     end
 
     if params[:guardian]
-      @guardian.update_attributes(guardian_params)
+      @guardian.update_attributes(contact_person_params)
       @guardian.save
     end
 
