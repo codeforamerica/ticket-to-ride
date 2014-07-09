@@ -32,14 +32,18 @@ class EnrollmentController < ApplicationController
     
     begin
       @student = Student.find(session[:student_id])
-      # @guardian = Guardian.find(session[:guardian_id])
+      @guardian = ContactPerson.find(session[:guardian_id]) # TODO Placeholder for getting through UI
     rescue
       @student = Student.new
-      # @guardian = Guardian.new
+      @guardian = ContactPerson.create # TODO Placeholder for getting through UI
     end
 
     if session[:second_guardian_id]
       # @second_guardian = ContactPerson.find(session[:second_guardian_id])
+    end
+
+    if step == :guardian_phone_and_email
+
     end
 
     #Handle gender pronouns, but not for first step
@@ -57,9 +61,14 @@ class EnrollmentController < ApplicationController
     end
 
     if step == :permissions
-      @all_contacts = ContactPerson.where(contact_person_id:@guardian.id)
-      @all_contacts << @guardian
-      @guardian_and_contacts = @all_contacts.reverse
+      contact_1 = ContactPerson.new(first_name: 'John')
+      contact_2 = ContactPerson.new(first_name: 'Ginger')
+      contact_3 = ContactPerson.new(first_name: 'Bambi')
+      @all_contacts = [contact_1, contact_2, contact_3]
+
+      # @all_contacts = ContactPerson.where(contact_person_id:@guardian.id)
+      # @all_contacts << @guardian
+      # @guardian_and_contacts = @all_contacts.reverse
     end
 
     render_wizard
@@ -113,7 +122,6 @@ class EnrollmentController < ApplicationController
       when :guardian_second_name_and_relationship
         if params[:contact_person][:first_name] != ''
           @second_guardian = ContactPerson.create(contact_person_params)
-          @second_guardian.guardian = @guardian
           @second_guardian.save
           session[:second_guardian_id] = @second_guardian.id
         else
@@ -121,7 +129,6 @@ class EnrollmentController < ApplicationController
         end
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create(contact_person_params)
-        @contact_person.guardian = @guardian
         @contact_person.save
         session[:contact_person_1_id] = @contact_person.id
 

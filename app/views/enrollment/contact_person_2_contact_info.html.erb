@@ -4,47 +4,54 @@
   <!-- TODO: Add tooltip saying this is other than the parent/guardians -->
 
   <%= form_for(ContactPerson.new, url: wizard_path, method: :put) do |c| %>
-  <table>
-    <tr>
-      <td class="row-break"><span>First Name:</span> <span><%= c.text_field :first_name, class: 'enrollment-form-input', id: 'contact2_firstname', placeholder: 'Nancy', required: true %></span></td>
-      <td><span>Last Name:</span> <%= c.text_field :last_name, class: 'enrollment-form-input', id: 'contact2_lastname', placeholder: 'McCartney', required: true %></span></td>
-    </tr>
-    <tr>
-      <td class="padding-right" colspan="2">Contact's relationship to you: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#contact2RelationshipModal" id="guardian1RelationshipSelected">Choose</a>
-      </td>
-    </tr>
+      <table>
+        <tr>
+          <td class="row-break"><span>First Name:</span> <span><%= c.text_field :first_name, class: 'enrollment-form-input', id: 'contact1_firstname', placeholder: 'John', required: true %></span></td>
+          <td><span>Last Name:</span> <%= c.text_field :last_name, class: 'enrollment-form-input', id: 'contact1_lastname', placeholder: 'Lennon', required: true %></span></td>
+        </tr>
+        <tr>
+          <td class="padding-right" colspan="2">Contact's relationship to you: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#contact1RelationshipModal" id="guardian1RelationshipSelected">Choose</a>
+          </td>
+        </tr>
 
-    <tr><td class="row-break"><span>Main phone:</span> <span><%= c.telephone_field :phone, class: 'enrollment-form-input', id: 'contact2_phone', placeholder: '333-333-3333', required: true %></span></td>
-      <td>
-      <div class="btn-group pull-right" data-toggle="buttons">
-              <label class="btn btn-primary">
-                  <%= c.radio_button :phone, 'Cell' %>SMS-enabled</label>
-              <label class="btn btn-primary">
-                  <%= c.radio_button :phone, 'Landline' %>Landline</label>
-          </div>
-        </td>
-      </tr>
-      <tr><td><span>Secondary phone:</span> <span><%= c.telephone_field :phone, class: 'enrollment-form-input', id: 'contact2_alt_phone', placeholder: '222-222-2222'%></span></td>
-        <td>
-          <div class="btn-group pull-right" data-toggle="buttons">
-              <label class="btn btn-primary">
-                  <%= c.radio_button :phone, 'Cell' %>SMS-enabled</label>
-              <label class="btn btn-primary">
-                  <%= c.radio_button :phone, 'Landline' %>Landline</label>
-          </div>
-        </td>
-      </tr>
-      <tr><td colspan="2"><span>Email address:</span> <span><%= c.email_field :email, class: 'enrollment-form-input', id: 'contact2_email', placeholder: 'nancy@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
-      </tr>
+        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
+        <%= fields_for(PhoneNumber.new) do |p| %>
+            <tr><td class="row-break"><span>Main phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'contact1_phone', placeholder: '401-111-2222', required: true %></span></td>
+              <td>
+                <div class="btn-group pull-right" data-toggle="buttons">
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
+                </div>
+              </td>
+            </tr>
+        <% end %>
 
-  </table>
-</div>
+        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
+        <%= fields_for(PhoneNumber.new) do |p| %>
+            <tr><td><span>Secondary phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'contact1_alt_phone', placeholder: '401-111-2222'%></span></td>
+              <td>
+                <div class="btn-group pull-right" data-toggle="buttons">
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+        <tr><td colspan="2"><span>Email address:</span> <span><%= c.email_field :email, class: 'enrollment-form-input', id: 'contact1_email', placeholder: 'john@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
+        </tr>
 
-    <ul class="pager">
-      <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
-    </ul>
+      </table>
+      </div>
 
-<% end %>
+      <ul class="pager">
+        <li><%= link_to "Previous", previous_wizard_path %></li>
+        <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
+      </ul>
 
-<%= render 'shared/scenery_contact' %>
+  <% end %>
+
+  <%= render 'shared/scenery_contact' %>
