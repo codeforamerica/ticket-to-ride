@@ -6,25 +6,34 @@
   <table>
     <tr><td colspan="2"><span class="instructions">Your contact information</span></td></tr>
 
-  <tr><td class="row-break"><span>Main phone:</span> <span><%= g.telephone_field :cell_phone, class: 'enrollment-form-input', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span></td>
+    <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
+    <%= fields_for(PhoneNumber.new) do |p| %>
+  <tr><td class="row-break"><span>Main phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span></td>
     <td>
     <div class="btn-group pul-right" data-toggle="buttons">
+
+            <label class="btn btn-primary"> <!-- TODO Labels can use the Rails tags and link rather than surrounding the radio elements -->
+                <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
             <label class="btn btn-primary">
-                <%= g.radio_button :cell_phone, 'Cell' %>SMS-enabled</label>
-            <label class="btn btn-primary">
-                <%= g.radio_button :cell_phone, 'Landline' %>Landline</label>
+                <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
+
         </div>
       </td>
     </tr>
-    <tr><td><span>Secondary phone:</span> <span><%= g.telephone_field :alt_phone, class: 'enrollment-form-input', id: 'guardian_alt_phone', placeholder: '401-111-2222'%></span></td>
+    <% end %>
+
+    <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
+    <%= fields_for(PhoneNumber.new) do |p| %>
+    <tr><td><span>Secondary phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_alt_phone', placeholder: '401-111-2222'%></span></td>
       <td>
         <div class="btn-group pul-right" data-toggle="buttons">
             <label class="btn btn-primary">
-                <%= g.radio_button :alt_phone, 'Cell' %>SMS-enabled</label>
+                <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
             <label class="btn btn-primary">
-                <%= g.radio_button :alt_phone, 'Landline' %>Landline</label>
+                <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
         </div>
       </td>
+    <% end %>
     </tr>
     <tr><td colspan="2"><span>Email address:</span> <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
     </tr>
