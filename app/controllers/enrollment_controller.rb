@@ -29,6 +29,10 @@ class EnrollmentController < ApplicationController
   def show
     @allsteps = wizard_steps
     @current_step = step
+    @student_start = :student_name
+    @guardian_start = :guardian_name_and_address
+    @contact_start = :contact_person_1_contact_info
+    @permissions = :permissions
     
     begin
       @student = Student.find(session[:student_id])
