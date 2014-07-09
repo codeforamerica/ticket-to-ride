@@ -1,7 +1,6 @@
 class Student < ActiveRecord::Base
-  has_many :guardians
   has_many :student_races
-  has_many :contact_persons, through: :guardians
+  has_and_belongs_to_many :contact_people
   belongs_to :school
   acts_as_birthday :birthday
   enum gender: [:male, :female]

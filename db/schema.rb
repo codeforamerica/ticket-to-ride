@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705215525) do
+ActiveRecord::Schema.define(version: 20140709001543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,17 +45,30 @@ ActiveRecord::Schema.define(version: 20140705215525) do
     t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
     t.string   "mailing_zip_code"
-    t.string   "phone"
-    t.boolean  "can_pickup_child",         default: false
-    t.integer  "guardian_id"
+    t.boolean  "can_pickup_child",           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                   default: false
+    t.boolean  "active",                     default: false
     t.string   "mailing_city"
     t.string   "mailing_state"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
+    t.string   "middle_name"
+    t.boolean  "receive_grade_notices",      default: false
+    t.boolean  "receive_conduct_notices",    default: false
+    t.boolean  "receive_other_mail",         default: true
+    t.boolean  "restricted",                 default: false
+    t.string   "armed_service_branch"
+    t.string   "armed_service_rank"
+    t.string   "armed_service_duty_station"
+    t.boolean  "lives_with_student",         default: false
+    t.boolean  "has_custody",                default: false
+  end
+
+  create_table "contact_people_phone_numbers", id: false, force: true do |t|
+    t.integer "contact_person_id"
+    t.integer "phone_number_id"
   end
 
   create_table "custom_requirements", force: true do |t|
@@ -83,39 +96,11 @@ ActiveRecord::Schema.define(version: 20140705215525) do
     t.string   "name"
   end
 
-  create_table "guardians", force: true do |t|
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "mailing_street_address_1"
-    t.string   "mailing_street_address_2"
-    t.string   "mailing_zip_code"
-    t.string   "cell_phone"
-    t.string   "alt_phone"
-    t.string   "email"
-    t.boolean  "receive_emails",             default: true
-    t.boolean  "receive_sms",                default: true
-    t.boolean  "receive_postal_mail",        default: true
-    t.boolean  "receive_grade_notices",      default: true
-    t.boolean  "receive_conduct_notices",    default: true
-    t.boolean  "restricted",                 default: false
-    t.string   "armed_service_branch"
-    t.string   "armed_service_rank"
-    t.string   "armed_service_duty_station"
-    t.integer  "student_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",                     default: false
-    t.string   "mailing_city"
-    t.string   "relationship"
-    t.integer  "alt_phone_type"
-    t.string   "mailing_state"
-    t.boolean  "lives_with_student"
-  end
-
-  create_table "leas", force: true do |t|
-    t.string  "lea_name"
-    t.integer "lea_code"
+  create_table "phone_numbers", force: true do |t|
+    t.string  "number"
+    t.string  "extension"
+    t.boolean "receives_sms",   default: false
+    t.string  "priority_level"
   end
 
   create_table "schools", force: true do |t|
@@ -130,8 +115,6 @@ ActiveRecord::Schema.define(version: 20140705215525) do
     t.string   "mailing_city"
     t.string   "mailing_state"
     t.string   "name"
-    t.string   "level"
-    t.integer  "lea_code"
   end
 
   create_table "student_races", force: true do |t|
@@ -191,6 +174,11 @@ ActiveRecord::Schema.define(version: 20140705215525) do
     t.string   "home_language"
     t.string   "guardian_language"
     t.boolean  "had_english_instruction"
+  end
+
+  create_table "students_contact_people", force: true do |t|
+    t.integer "student_id"
+    t.integer "contact_person_id"
   end
 
   create_table "welcome_messages", force: true do |t|

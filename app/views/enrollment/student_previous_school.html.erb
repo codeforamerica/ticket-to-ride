@@ -38,25 +38,12 @@
         </div></td></tr>
 
       <tr>
-        <td class="col-narrow">Prior District: </td>
-        <td class="col-wide">
-          <div class="form-group">
-          <%= form_tag schools_path, { method: :get } do %>
-            <%= select_tag :lea_code, options_from_collection_for_select(Lea.all, "lea_code", "lea_name"), prompt: "Select a Rhode Island school district", class: "form-control" %>
-          </div>
-        <% end %>
-        </td>
+        <td colspan="2"><span>Prior school:</span><span><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_previous_school', placeholder: 'Bay School' %></span>
       </tr>
 
       <tr>
-        <td class="col-narrow">Prior School: </td>
-        <td class="col-wide">
-          <div class="form-group">
-          <%= form_tag schools_path, { method: :get } do %>
-            <%= select_tag :lea_code, options_from_collection_for_select(School.all, "lea_code", "name"), prompt: "Select a Rhode Island school", class: "form-control" %>
-          </div>
-        <% end %>
-        </td>
+        <td colspan="2">Prior school city and state: <span><%= s.text_field :birth_city, class: 'enrollment-form-input', id: 'student_previous_school_city', placeholder: 'Providence' %></span>, 
+  <%= s.text_field :birth_state, class: 'enrollment-form-input', id: 'student_previous_school_state', placeholder: 'RI' %></span></td>
       </tr>
     </table>
 
@@ -66,91 +53,6 @@
       <li><%= link_to "Previous", '/enrollment' %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
-
-  <!-- TODO: Add additional races to database -->
-
-  <div class="modal fade" id="additionalRaceModal" tabindex="-1" role="dialog" aria-labelledby="additionalRaceModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h4 class="modal-title" id="additionalRaceModalLabel">Select <%= @student.first_name %>'s other race(s) if applicable</h4>
-        </div>
-        <div class="modal-body single-col-modal double-col-modal">
-          <table>
-            <tr>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">African American or Black</a>
-              </td>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">American Indian or Alaska Native</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">White</a></td>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Asian Indian</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Cambodian</a></td>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Chinese</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Filipino</a></td>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Hmong</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Japanese</a></td>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Korean</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Laotian</a></td>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Vietnamese</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Guamanian</a></td>
-              <td>
-                <a class="btn btn-small btn-primary data-toggle="button"" href="#">Native Hawaiian</a>
-              </td>
-            </tr>
-          <tr>
-            <td>
-              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Samoan</a></td>
-            <td>
-              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Tahitian</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Other Pacific Islander</a></td>
-            <td>
-              <a class="btn btn-small btn-primary data-toggle="button"" href="#">Not Applicable</a>
-            </td>
-          </tr>
-        </table>
-      </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-          <button type="button" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <% end %>
 </div>
