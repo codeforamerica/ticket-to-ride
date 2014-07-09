@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708223532) do
+ActiveRecord::Schema.define(version: 20140709001543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(version: 20140708223532) do
   create_table "phone_numbers", force: true do |t|
     t.string  "number"
     t.string  "extension"
-    t.string  "level"
-    t.boolean "receives_sms", default: false
+    t.boolean "receives_sms",   default: false
+    t.string  "priority_level"
   end
 
   create_table "schools", force: true do |t|
