@@ -15,7 +15,8 @@
           </div></td></tr>
 
           <div id="guardian1_address" aria-hidden="true">
-            <tr><td class="row-break hidden" colspan="2" id="guardian1_shared_street"><span>Street address:</span> <span class="enrollment-form-answered"><%= @student.home_street_address_1 %></td></tr>
+            <tr><td class="row-break hidden" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span> <span class="enrollment-form-answered"><%= @student.home_street_address_1 %></td></tr>
+            <tr><td class="hidden" colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span> <span class="enrollment-form-answered"><%= @student.home_street_address_2 %></td></tr>
             <tr>
               <td colspan="2" class="hidden" id="guardian1_shared_city"> <span>City:</span><span class="enrollment-form-answered"><%= @student.home_city %></span>, RI <span class="enrollment-form-answered"><%= @student.home_zip_code %></span></span>
               </td>
@@ -24,10 +25,13 @@
 
           <div id="guardian1_alt_address">
             <tr>
-              <td class="row-break hidden" colspan="2" id="guardian1_unshared_street"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Way' %></span> </td>
+              <td class="row-break hidden" colspan="2" id="guardian1_unshared_street1"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Way' %></span> </td>
             </tr>
             <tr>
-              <td colspan="2" class="hidden" id="guardian1_unshared_city"> <span>City:</span><span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', placeholder: 'Newport' %></span>, RI
+              <td class="hidden" colspan="2" id="guardian1_unshared_street2"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', placeholder: '#123' %></span> </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="hidden" id="guardian1_unshared_city"> <span>City:</span><span><%= g.text_field :mailing_city, class: 'enrollment-form-input', placeholder: 'Newport' %></span>, RI
               <%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span></span>
               </td>
             </tr>

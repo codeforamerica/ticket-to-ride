@@ -35,14 +35,18 @@ $(document).ready(function () {
 
   $("form input:radio").change(function() {
     if ($(this).val() == 'true'){
-      $('#guardian1_shared_street').removeClass('hidden');
+      $('#guardian1_shared_street1').removeClass('hidden');
+      $('#guardian1_shared_street2').removeClass('hidden');
       $('#guardian1_shared_city').removeClass('hidden');
-      $('#guardian1_unshared_street').addClass('hidden');
+      $('#guardian1_unshared_street1').addClass('hidden');
+      $('#guardian1_unshared_street2').addClass('hidden');
       $('#guardian1_unshared_city').addClass('hidden');
     } else if ($(this).val() == 'false') {
-      $('#guardian1_shared_street').addClass('hidden');
+      $('#guardian1_shared_street1').addClass('hidden');
+      $('#guardian1_shared_street2').addClass('hidden');
       $('#guardian1_shared_city').addClass('hidden');
-      $('#guardian1_unshared_street').removeClass('hidden');
+      $('#guardian1_unshared_street1').removeClass('hidden');
+      $('#guardian1_unshared_street2').removeClass('hidden');
       $('#guardian1_unshared_city').removeClass('hidden');
     }
   });
