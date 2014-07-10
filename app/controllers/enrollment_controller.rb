@@ -43,7 +43,9 @@ class EnrollmentController < ApplicationController
     end
 
     if session[:second_guardian_id]
-      # @second_guardian = ContactPerson.find(session[:second_guardian_id])
+      @second_guardian = ContactPerson.find(session[:second_guardian_id])
+    else
+      @second_guardian = ContactPerson.new
     end
 
     if step == :guardian_phone_and_email
