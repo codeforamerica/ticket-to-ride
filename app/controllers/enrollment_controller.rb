@@ -8,7 +8,6 @@ class EnrollmentController < ApplicationController
   include StudentRaceParams
   include ContactPersonParams
 
-  # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
   steps :student_name,
         :student_birth_gender_and_ethnicity, 
         :student_language, 
