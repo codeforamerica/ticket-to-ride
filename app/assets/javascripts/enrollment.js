@@ -34,14 +34,21 @@ $(document).ready(function () {
   getSelectionFromModal('#btnGuardianLanguage', 'input[name="student[guardian_language]"]:checked', '#guardianLanguageSelected');
 
   $("form input:radio").change(function() {
-    if ($(this).val() == 'true'){
+    var radio = $(this).val();
+    toggleGuardian1Address(radio);
+    toggleGuardian2Name(radio);
+  });
+
+
+  function toggleGuardian1Address(radio){
+    if (radio == 'true'){
       $('#guardian1_shared_street1').removeClass('hidden');
       $('#guardian1_shared_street2').removeClass('hidden');
       $('#guardian1_shared_city').removeClass('hidden');
       $('#guardian1_unshared_street1').addClass('hidden');
       $('#guardian1_unshared_street2').addClass('hidden');
       $('#guardian1_unshared_city').addClass('hidden');
-    } else if ($(this).val() == 'false') {
+    } else if (radio == 'false') {
       $('#guardian1_shared_street1').addClass('hidden');
       $('#guardian1_shared_street2').addClass('hidden');
       $('#guardian1_shared_city').addClass('hidden');
@@ -49,8 +56,26 @@ $(document).ready(function () {
       $('#guardian1_unshared_street2').removeClass('hidden');
       $('#guardian1_unshared_city').removeClass('hidden');
     }
-  });
+  };
 
+  function toggleGuardian2Name(radio){
+    if (radio == 'true') {
+      $('#guardian2_first_name').removeClass('hidden');
+      $('#guardian2_last_name').removeClass('hidden');
+      $('#guardian2_relationship').removeClass('hidden');
+      $('#guardian2_lives_with_question').removeClass('hidden');
+      $('#guardian2_lives_with_slider').removeClass('hidden');
+      $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
+    } else if (radio == 'false') {
+      $('#guardian2_first_name').addClass('hidden');
+      $('#guardian2_last_name').addClass('hidden');
+      $('#guardian2_relationship').addClass('hidden');
+      $('#guardian2_lives_with_question').addClass('hidden');
+      $('#guardian2_lives_with_slider').addClass('hidden');
+      $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
+      $('.slider-result').addClass('hidden');
+    }
+  };
   /* start TODO: Make these cancel each other out. Guardian name and address */
 
   getSelectionFromModal('#btnGuardian1Relationship', 'input[name="contact_person[relationship]"]:checked', '#guardian1RelationshipSelected');

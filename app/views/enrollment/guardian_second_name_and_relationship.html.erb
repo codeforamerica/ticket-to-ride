@@ -17,19 +17,19 @@
           </tr>
 
           <tr>
-            <td class="row-break"><span>First Name:</span> <span><%= c.text_field :first_name, class: 'enrollment-form-input', id: 'guardian2_firstname', placeholder: 'Alice', required: true %></span></td>
-            <td><span>Last Name:</span> <%= c.text_field :last_name, class: 'enrollment-form-input', id: 'guardian2_lastname', placeholder: 'Williams', required: true %></span></td>
+            <td class="row-break hidden" id="guardian2_first_name"><span>First Name:</span> <span><%= c.text_field :first_name, class: 'enrollment-form-input', id: 'guardian2_firstname', placeholder: 'Alice'%></span></td>
+            <td class="hidden" id="guardian2_last_name"><span>Last Name:</span> <%= c.text_field :last_name, class: 'enrollment-form-input', id: 'guardian2_lastname', placeholder: 'Williams' %></span></td>
           </tr>
           <tr>
-            <td class="padding-right" colspan="2">Individual's relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian2RelationshipModal" id="guardian2RelationshipSelected">Choose</a>
+            <td class="padding-right hidden" colspan="2" id="guardian2_relationship">Individual's relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian2RelationshipModal" id="guardian2RelationshipSelected">Choose</a>
             </td>
           </tr>
           <tr>
-            <td colspan="2">How often does <%= @student.first_name %> live with this individual?</td>
+            <td colspan="2" class="hidden" id="guardian2_lives_with_question">How often does <%= @student.first_name %> live with this individual?</td>
           </tr>
           <tr>
-            <td><input id="lives_with_g2_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="50" class="pull-right"></td>
-            <td class="slider-result"><span id="lives_with_g2_val">50</span>%</td>
+            <td class="hidden" id="guardian2_lives_with_slider"><input id="lives_with_g2_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="50" class="pull-right"></td>
+            <td class="slider-result hidden" id="guardian2_slider_result"><span id="lives_with_g2_val">50</span>%</td>
           </tr>
         </div>
       </table>
@@ -37,6 +37,8 @@
 
     <ul class="pager">
       <li><%= link_to "Previous", previous_wizard_path %></li>
+      
+<!-- TODO: Make this link skip to Guardian Complete if no is selected -->
       <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
 

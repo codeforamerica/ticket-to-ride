@@ -130,6 +130,9 @@ class EnrollmentController < ApplicationController
           @second_guardian = ContactPerson.create(contact_person_params)
           @second_guardian.save
           session[:second_guardian_id] = @second_guardian.id
+          if @second_guardian.first_name = ''
+            set_next_step = :guardian_complete
+          end
         else
           set_next_step = :guardian_second_address_and_contact_info
         end
