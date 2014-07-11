@@ -2,7 +2,6 @@
 <div class="enrollment-form">
   <div class="instructions">Let's get started. Please tell us about your child.</div>
 
-  <!-- Figure out how to make this a post or put, rather than a get...currently results in a routing issue -->
   <%= form_for(Student.new, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
       <div>
         <table>
