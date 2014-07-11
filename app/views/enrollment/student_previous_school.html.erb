@@ -8,46 +8,44 @@
       <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
-              <%= s.radio_button :grade, '0' %>None</label>   
+              <%= s.radio_button :last_completed_grade, '0' %>None</label>   
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :pre_kindergarten %>Pre-K</label>
+                <%= s.radio_button :last_completed_grade, :pre_k %>Pre-K</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :kindergarten %>K</label>
+                <%= s.radio_button :last_completed_grade, :k %>K</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_1 %>1</label>
+                <%= s.radio_button :last_completed_grade, :first_grade %>1</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_2 %>2</label>  
+                <%= s.radio_button :last_completed_grade, :second_grade %>2</label>  
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_3 %>3</label>
+                <%= s.radio_button :last_completed_grade, :third_grade %>3</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_4 %>4</label>   
+                <%= s.radio_button :last_completed_grade, :fourth_grade %>4</label>   
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_5 %>5</label>
+                <%= s.radio_button :last_completed_grade, :fifth_grade %>5</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_6 %>6</label>
+                <%= s.radio_button :last_completed_grade, :sixth_grade %>6</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_7 %>7</label>
+                <%= s.radio_button :last_completed_grade, :seventh_grade %>7</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_8 %>8</label>  
+                <%= s.radio_button :last_completed_grade, :eighth_grade %>8</label>  
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_9 %>9</label>
+                <%= s.radio_button :last_completed_grade, :freshman %>9</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_10 %>10</label> 
+                <%= s.radio_button :last_completed_grade, :sophomore %>10</label> 
             <label class="btn btn-primary">
-                <%= s.radio_button :grade, :grade_11 %>11</label>   
+                <%= s.radio_button :last_completed_grade, :junior %>11</label>   
         </div></td></tr>
 
       <tr>
-        <td colspan="2"><span>Prior school:</span><span><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_previous_school', placeholder: 'Bay School' %></span>
+        <td colspan="2"><span>Prior school:</span><span><%= s.text_field :prior_school_name, class: 'enrollment-form-input', id: 'student_previous_school', placeholder: 'Bay School' %></span>
       </tr>
 
       <tr>
-        <td colspan="2">Prior school city and state: <span><%= s.text_field :birth_city, class: 'enrollment-form-input', id: 'student_previous_school_city', placeholder: 'Providence' %></span>, 
-  <%= s.text_field :birth_state, class: 'enrollment-form-input', id: 'student_previous_school_state', placeholder: 'RI' %></span></td>
+        <td colspan="2">Prior school city and state: <span><%= s.text_field :prior_school_city, class: 'enrollment-form-input', id: 'student_previous_school_city', placeholder: 'Providence' %></span>, 
+  <%= s.text_field :prior_school_state, class: 'enrollment-form-input', id: 'student_previous_school_state', placeholder: 'RI' %></span></td>
       </tr>
     </table>
-
-    <!--TODO: Add fields for out-of-state school, city, state -->
 
     <ul class="pager">
       <li><%= link_to "Previous", '/enrollment' %></li>
