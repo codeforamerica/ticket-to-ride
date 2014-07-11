@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'welcome/warwick', to: 'welcome#warwick', as: :warwick_intro
   get 'welcome/west-warwick', to: 'welcome#west-warwick', as: :west_warwick_intro 
   get 'welcome/newport', to: 'welcome#newport', as: :newport_intro
+  get 'enrollment/summary', to: 'enrollment#summary', as: :happy_libs_summary
 
   resources :enrollment
 

@@ -1,0 +1,88 @@
+<%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Student</a></li>
+    <li class="instructions"><a href="#summaryGuardian" role="tab" data-toggle="tab">Guardian</a></li>
+    <li class="instructions"><a href="#summaryContacts" role="tab" data-toggle="tab">Contacts</a></li>
+    <li class="instructions"><a href="#summaryPermissions" role="tab" data-toggle="tab">Permissions</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="summaryStudent">
+        <table class="summaryTable">
+          <tr><td colspan="3">&nbsp;</td></tr>
+          <% @summary_student=Student.where(id:7)[0] %>
+          <% @summary_race=StudentRace.where(student_id:7)[0] %>
+          <% @summary_guardian1=ContactPerson.where(student_id:7)[0] %>
+          <tr>
+            <td class="summaryText">
+              <%= @summary_student.first_name %> <%= @summary_student.last_name %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">Nickname: <%= @summary_student.nickname %></td>
+          </tr>
+          <tr>
+            <td class="summaryText">Born <%= @summary_student.birthday %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">
+              in <%= @summary_student.birth_city %>, <%= @summary_student.birth_state %> &nbsp; <%= @summary_student.birth_country %></td>
+          </tr>
+          <tr>
+            <td class="summaryText">Gender: <%= @summary_student.gender.titlecase %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">
+              Hispanic or Latino descent? 
+              <% if @summary_student.is_hispanic == false %>
+                <%= 'No' %>
+                <% elsif @summary_student.is_hispanic == true %>
+                  <%= 'Yes' %>
+                  <% end %> </td>
+          </tr>
+          <tr>
+            <td class="summaryText">Primary race: <%= @summary_race.primary_race.titlecase %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">
+              Additional race: <%= @summary_race.additional_races %> </td>
+          </tr>
+          <tr>
+            <td class="summaryText">Home language: <%= @summary_student.home_language.titlecase %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">
+              Language spoken with <%= @summary_guardian1.first_name %>: <%= @summary_student.guardian_language.titlecase %> </td>
+          </tr>
+          <tr>
+            <td class="summaryText">Previous grade: <%= @summary_student.last_completed_grade %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">
+              Previous school: <%= @summary_student.prior_school_name.titlecase %> </td>
+          </tr>
+          <tr>
+            <td class="summaryText">Special services? <%= @summary_student.needs_special_services %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">
+              IEP? <%= @summary_student.iep %> </td>
+          </tr>
+          <tr>
+            <td class="summaryText">Section 504? <%= @summary_student.p504 %></td>
+            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="summaryText">
+              Learning difficulties? <%= @summary_student.has_learning_difficulties %> </td>
+          </tr>
+          <tr>
+            <td class="summaryText" colspan="3">Address: <%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %>&nbsp; &nbsp;<%= @summary_student.home_city %>, <%= @summary_student.home_state %>  </td>
+          </tr>
+
+
+      <!--     home_language: "english", guardian_language: "spanish", had_english_instruction: false -->
+
+        </table>
+    </div>
+    <div class="tab-pane" id="summaryGuardian">...</div>
+    <div class="tab-pane" id="summaryContacts">...</div>
+    <div class="tab-pane" id="summaryPermissions">...</div>
+  </div>
+  
+</div>
+
+<%= render 'shared/scenery_contact_confirmation' %>
