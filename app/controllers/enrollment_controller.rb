@@ -8,7 +8,7 @@ class EnrollmentController < ApplicationController
   include StudentRaceParams
   include ContactPersonParams
 
-  # TODO: Break these flows into separate Wicked Wizards (Example: student, guardian, etc.)
+  # This is the order in which the views get rendered
   steps :student_name,
         :student_birth_gender_and_ethnicity, 
         :student_language, 
@@ -26,14 +26,16 @@ class EnrollmentController < ApplicationController
         :permissions, 
         :enrollment_complete
 
+  # SHOW
+  # This is contains the logic used to prep variables for the
+  # views based on the current step in the flow
   def show
-    @allsteps = wizard_steps
-    @current_step = step
+    # Variables for navigation purposes
     @student_start = :student_name
     @guardian_start = :guardian_name_and_address
     @contact_start = :contact_person_1_contact_info
     @permissions = :permissions
-    
+
     begin
       @student = Student.find(session[:student_id])
       @guardian = ContactPerson.find(session[:guardian_id]) # TODO Placeholder for getting through UI

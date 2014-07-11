@@ -1,14 +1,21 @@
 <div class="enrollment-navigation">
-  <% @allsteps.each_with_index do |step, index| %>
-    <% if past_step?(step) %>
-      <div class='pastCircle' id='<%=step%>'>
-        <%= link_to index+1, wizard_path(step) %>
+
+  <%
+    # For the navigation spheres, indicate which is the currently viewed, and
+    # which ones are still to come, and the ones that have been completed already.
+    #
+    # Note: `wizard_steps` and `step` variables are available from Wicked wizard in the controller
+  %>
+  <% wizard_steps.each_with_index do |step_name, index| %>
+    <% if past_step?(step_name) %>
+      <div class='pastCircle' id='<%=step_name%>'>
+        <%= link_to index+1, wizard_path(step_name) %>
       </div>
-    <% elsif @current_step == step%>
-      <div class='currentCircle' id='<%=step%>'> <%= index+1 %>
+    <% elsif step == step_name%>
+      <div class='currentCircle' id='<%=step_name%>'> <%= index+1 %>
       </div>
     <% else %>
-      <div class='futureCircle' id='<%=step%>'> <%= index+1 %>
+      <div class='futureCircle' id='<%=step_name%>'> <%= index+1 %>
       </div>
     <% end %>
   <% end %>
