@@ -15,18 +15,28 @@ class ApplicationController < ActionController::Base
     #TODO: Raise exception if unknown detected
   end
 
-  def genderEnumToPronoun(gender_enum)
+  def genderEnumToPronoun(gender)
 
-    if gender_enum == :male
+    if gender == nil
+      return '(unknown gender)'
+    end #TODO: Raise exception if unknown detected
+
+    if gender == :male || gender.downcase == 'male'
       return 'he'
     else 
       return 'she'
     end
-  end
-    #TODO: Raise exception if unknown detected
 
-  def genderEnumToPossessivePronoun(gender_enum)
-    if gender_enum == :male
+
+  end
+
+
+  def genderEnumToPossessivePronoun(gender)
+    if gender == nil
+      return '(unknown gender)'
+    end #TODO: Raise exception if unknown detected
+
+    if gender == :male || gender.downcase == 'male'
       return 'his'
     else 
       return 'her'
@@ -34,8 +44,12 @@ class ApplicationController < ActionController::Base
   end
     #TODO: Raise exception if unknown detected
 
-  def genderEnumToPossessiveAdjective(gender_enum)
-    if gender_enum == :male
+  def genderEnumToPossessiveAdjective(gender)
+    if gender == nil
+      return '(unknown gender)'
+    end #TODO: Raise exception if unknown detected
+
+    if gender == :male || gender.downcase == 'male'
       return 'his'
     else 
       return 'her'
@@ -43,8 +57,12 @@ class ApplicationController < ActionController::Base
   end
     #TODO: Raise exception if unknown detected
 
-  def genderEnumToObjectivePronoun(gender_enum)
-    if gender_enum == :male
+  def genderEnumToObjectivePronoun(gender)
+    if gender == nil
+      return '(unknown gender)'
+    end #TODO: Raise exception if unknown detected
+
+    if gender == :male || gender.downcase == 'male'
       return 'him'
     else
       return 'her'
@@ -52,8 +70,12 @@ class ApplicationController < ActionController::Base
     #TODO: Raise exception if unknown detected
   end
 
-  def isIsntToBoolean(isOrIsnt)
-    if isOrIsnt.upcase == 'IS'
+  def isIsntToBoolean(is_or_isnt)
+    if is_or_isnt == nil
+      return "(unknown is/isn't)"
+    end #TODO: Raise exception if unknown detected
+
+    if is_or_isnt.downcase == 'is'
       return true
     end
     #TODO: Raise exception if unknown detected
