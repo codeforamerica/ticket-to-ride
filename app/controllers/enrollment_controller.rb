@@ -10,7 +10,7 @@ class EnrollmentController < ApplicationController
 
   # This is the order in which the views get rendered
   steps :student_name,
-        :student_birth_gender_and_ethnicity, 
+        :student_gender_and_ethnicity, 
         :student_language, 
         :student_previous_school,
         :student_special_services,
@@ -24,6 +24,7 @@ class EnrollmentController < ApplicationController
         :contact_person_1_contact_info, 
         :contact_person_2_contact_info,
         :permissions, 
+        :summary,
         :enrollment_complete
 
   # SHOW
@@ -55,7 +56,7 @@ class EnrollmentController < ApplicationController
     end
 
     #Handle gender pronouns, but not for first step
-    if step != :student_birth_gender_and_ethnicity
+    if step != :student_gender_and_ethnicity
       @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
       @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
       @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
