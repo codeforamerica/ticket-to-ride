@@ -38,9 +38,13 @@ class EnrollmentController < ApplicationController
 
     begin
       @student = Student.find(session[:student_id])
-      @guardian = ContactPerson.find(session[:guardian_id]) # TODO Placeholder for getting through UI
     rescue
       @student = Student.new
+    end
+
+    begin
+      @guardian = ContactPerson.find(session[:guardian_id]) # TODO Placeholder for getting through UI
+    rescue
       @guardian = ContactPerson.create # TODO Placeholder for getting through UI
     end
 
@@ -56,10 +60,10 @@ class EnrollmentController < ApplicationController
 
     #Handle gender pronouns, but not for first step
     if step != :student_birth_gender_and_ethnicity
-      @gender_pronoun = genderEnumToPronoun(@student.gender.to_enum)
-      @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender.to_enum)
-      @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender.to_enum)
-      @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender.to_enum)
+      @gender_pronoun = genderEnumToPronoun(@student.gender)
+      @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender)
+      @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender)
+      @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender)
     end
 
 
@@ -112,7 +116,6 @@ class EnrollmentController < ApplicationController
       when :student_birth_gender_and_ethnicity
 
         params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
-        # params[:student][:gender] = genderPronounToEnum(params[:student][:gender])
 
         # TODO: Enable this later after we convert this a non-X-Editable format
         # @student_race = StudentRace.create(student_race_params)
