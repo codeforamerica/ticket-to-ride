@@ -41,7 +41,11 @@ module StudentParams
         :alt_home_street_address_2,
         :alt_home_city,
         :alt_home_state,
-        :alt_home_zip_code
+        :alt_home_zip_code,
+        :prior_school_name,
+        :prior_school_city,
+        :prior_school_state,
+        :last_completed_grade
     )
   end
 end

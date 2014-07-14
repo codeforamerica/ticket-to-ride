@@ -21,7 +21,9 @@ module ContactPersonParams
       :armed_service_rank,
       :armed_service_duty_station,
       :lives_with_student,
-      :has_custody
+      :has_custody,
+      :has_court_order,
+      :court_order_description
     )
   end
 end

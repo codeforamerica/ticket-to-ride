@@ -39,6 +39,15 @@ $(document).ready(function () {
     toggleGuardian2Name(radio);
   });
 
+  // Change the color of the birthdate field
+
+  $("input[type=date]").change(function(){
+    var birthdaySubmitted = $(this);
+    if (birthdaySubmitted.val() != '') {
+      birthdaySubmitted.css("color", "#6aba5b");
+    }
+  });
+
 
   function toggleGuardian1Address(radio){
     if (radio == 'true'){
