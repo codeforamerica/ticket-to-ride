@@ -12,65 +12,104 @@
   <div class="tab-content">
     <div class="tab-pane active" id="summaryStudent">
         <table class="summaryTable">
-          <tr><td colspan="3">&nbsp;</td></tr>
-          <% @summary_student=Student.where(id:7)[0] %>
-          <% @summary_race=StudentRace.where(student_id:7)[0] %>
-          <% @summary_guardian1=ContactPerson.where(student_id:7)[0] %>
+          <% @summary_student=Student.where(first_name:'Jimmy')[0] %>
+          <% @summary_race=StudentRace.where(student:@summary_student)[0] %>
+          <% @summary_guardian1=ContactPerson.where(first_name:'Linda')[0] %>
+          <% @summary_guardian2=ContactPerson.where(email:'terry@codeisland.org')[0]%>
+          <% @summary_contact1=ContactPerson.where(email:'rita@codeisland.org')[0]%>
           <tr>
-            <td class="summaryText">
-              <%= @summary_student.first_name %> <%= @summary_student.last_name %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">Nickname: <%= @summary_student.nickname %></td>
+            <td class="summaryText section-break" colspan="3">
+              The student you are registering is <span class="summaryAnswers"><%= @summary_student.first_name %> <%= @summary_student.middle_name %> <%= @summary_student.last_name %></span>, who was born on <span class="summaryAnswers"><%= @summary_student.birthday %></span> in <span class="summaryAnswers"><%= @summary_student.birth_city %>, <%= @summary_student.birth_state %> <%= @summary_student.birth_country %></span>.</td>
           </tr>
           <tr>
-            <td class="summaryText">Born <%= @summary_student.birthday %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">
-              in <%= @summary_student.birth_city %>, <%= @summary_student.birth_state %> &nbsp; <%= @summary_student.birth_country %></td>
-          </tr>
-          <tr>
-            <td class="summaryText">Gender: <%= @summary_student.gender.titlecase %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">
-              Hispanic or Latino descent? 
+            <td class="summaryText" colspan="3"> 
+              <% if @summary_student.gender == 'male' %>
+              <span class="summaryAnswers">  <%= 'He' %>
+              <% elsif @summary_student.gender == 'female' %>
+                <%= 'She' %>
+                <% end %>
+
               <% if @summary_student.is_hispanic == false %>
-                <%= 'No' %>
-                <% elsif @summary_student.is_hispanic == true %>
-                  <%= 'Yes' %>
-                  <% end %> </td>
+                   <%= 'is not' %>
+                   <% elsif @summary_student.is_hispanic == true %>
+                     <%= 'is' %>
+                     <% end %>  </span> Hispanic or Latino descent. 
+              <% if @summary_student.gender == 'male' %>
+                <%= 'His' %>
+              <% elsif @summary_student.gender == 'female' %>
+                <%= 'Her' %>
+                <% end %> primary race is <span class="summaryAnswers"><%= @summary_race.primary_race.titlecase %></span>, and               
+                <% if @summary_student.gender == 'male' %>
+                  <%= 'he' %>
+              <% elsif @summary_student.gender == 'female' %>
+                <%= 'she' %>
+                <% end %> is also <span class="summaryAnswers"><%= @summary_race.additional_races %></span>.
+            </td>
           </tr>
           <tr>
-            <td class="summaryText">Primary race: <%= @summary_race.primary_race.titlecase %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">
-              Additional race: <%= @summary_race.additional_races %> </td>
+           <td class="summaryText" colspan="3"><%= @summary_student.first_name %>'s primary language is <%= @summary_student.home_language.titlecase %>. At home,  
+              <% if @summary_student.gender == 'male' %>
+                <%= 'he' %>
+              <% elsif @summary_student.gender == 'female' %>
+                <%= 'she' %>
+              <% end %>
+              speaks <span class="summaryAnswers">
+               <%= @summary_student.guardian_language.titlecase %></span>. </td>
           </tr>
           <tr>
-            <td class="summaryText">Home language: <%= @summary_student.home_language.titlecase %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">
-              Language spoken with <%= @summary_guardian1.first_name %>: <%= @summary_student.guardian_language.titlecase %> </td>
+            <td class="summaryText" colspan="3"><%= @summary_student.first_name %> most recently attended <span class="summaryAnswers"><%= @summary_student.prior_school_name.titlecase %></span> in <span class="summaryAnswers"><%= @summary_student.prior_school_city.titlecase %>, <%= @summary_student.prior_school_state.upcase %></span>. The last grade   
+              <% if @summary_student.gender == 'male' %>
+                <%= 'he' %>
+              <% elsif @summary_student.gender == 'female' %>
+                <%= 'she' %>
+              <% end %>
+                completed was <span class="summaryAnswers"> <%= @summary_student.last_completed_grade %></span>.</td>
           </tr>
           <tr>
-            <td class="summaryText">Previous grade: <%= @summary_student.last_completed_grade %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">
-              Previous school: <%= @summary_student.prior_school_name.titlecase %> </td>
+            <td class="summaryText" colspan="3">
+              <%= @summary_student.first_name %>
+
+              <span class="summaryAnswers">  
+                <% if @summary_student.needs_special_services == true %>
+                  <%= 'needs' %>
+                <% elsif @summary_student.needs_special_services == false || @summary_student.needs_special_services.nil? == true %>
+                  <%= 'does not need' %>
+                <% end %>
+              </span> special services.   
+               
+                <% if @summary_student.gender == 'male' %>
+                  <%= 'He' %>
+                <% elsif @summary_student.gender == 'female' %>
+                  <%= 'She' %>
+                <% end %>
+              
+              <span class="summaryAnswers">  
+                <% if @summary_student.p504 == true %>
+                  <%= 'has' %>
+                <% elsif @summary_student.p504 == false || @summary_student.p504.nil? == true %>
+                  <%= 'does not have' %>
+                <% end %>
+              </span> Section 504.
+
+             
+              <% if @summary_student.gender == 'male' %>
+                <%= 'He' %>
+              <% elsif @summary_student.gender == 'female' %>
+                <%= 'She' %>
+              <% end %>
+            
+          <span class="summaryAnswers">  
+            <% if @summary_student.has_learning_difficulties == true %>
+              <%= 'has' %>
+            <% elsif @summary_student.has_learning_difficulties == false || @summary_student.has_learning_difficulties.nil? == true %>
+              <%= 'does not have' %>
+            <% end %>
+          </span> learning difficulties.</td>
           </tr>
           <tr>
-            <td class="summaryText">Special services? <%= @summary_student.needs_special_services %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">
-              IEP? <%= @summary_student.iep %> </td>
-          </tr>
-          <tr>
-            <td class="summaryText">Section 504? <%= @summary_student.p504 %></td>
-            <td class="summaryText">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td class="summaryText">
-              Learning difficulties? <%= @summary_student.has_learning_difficulties %> </td>
-          </tr>
-          <tr>
-            <td class="summaryText" colspan="3">Address: <%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %>&nbsp; &nbsp;<%= @summary_student.home_city %>, <%= @summary_student.home_state %>  </td>
+            <td class="summaryText" colspan="3">  
+                <%= @summary_student.first_name %> lives at
+              <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.</td>
           </tr>
 
 
@@ -78,8 +117,40 @@
 
         </table>
     </div>
-    <div class="tab-pane" id="summaryGuardian">...</div>
-    <div class="tab-pane" id="summaryContacts">...</div>
+    <div class="tab-pane" id="summaryGuardian">
+      <table class="summaryTable">
+          <td class="summaryText section-break">
+            Your name is <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span>, and you are <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_guardian1.relationship %><span class="summaryAnswers">.</td>
+        </tr>
+        <tr>
+          <td class="summaryText">You and <%= @summary_student.first_name %> live at <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.</td>
+        </tr>
+        <tr>
+          <td class="summaryText">Your primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-111-9999</span> which <span class="summaryAnswers">receives text messages</span>. <br/><br/>
+            A second phone number for you is <!--TODO get this from database --><span class="summaryAnswers">401-222-2222</span> which <span class="summaryAnswers">does not receive text messages</span>.<br/><br/>
+            Your work phone is <span class="summaryAnswers">401-222-2222</span>.</td>
+        </tr>
+        <tr>
+          <td class="summaryText">Your email is <span class="summaryAnswers"><%= @summary_guardian1.email %></span>.</td>
+        </tr>
+      </table>
+ 
+    </div>
+    <div class="tab-pane" id="summaryContacts">
+    <table class="summaryTable">
+        <td class="summaryText section-break">
+          Someone who can contact you during an emergency is <span class="summaryAnswers"><%= @summary_contact1.first_name %> <%= @summary_guardian1.last_name %></span>, who is <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_contact1.relationship %></span>.</td>
+      </tr>
+      <tr>
+        <td class="summaryText"><%= @summary_contact1.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-333-6666</span> which <span class="summaryAnswers">receives text messages</span>. <br/><br/>
+          A second phone number for <%= @summary_contact1.first_name %> is <!--TODO get this from database --><span class="summaryAnswers">401-908-9999</span> which <span class="summaryAnswers">receives text messages</span>.<br/><br/>
+          <%= @summary_contact1.first_name %>'s work phone is <span class="summaryAnswers">401-111-2222</span>.</td>
+      </tr>
+      <tr>
+        <td class="summaryText"><%= @summary_contact1.first_name %>'s email is <span class="summaryAnswers"><%= @summary_contact1.email %></span>.</td>
+      </tr>
+    </table>
+    </div>
     <div class="tab-pane" id="summaryPermissions">...</div>
   </div>
   
