@@ -1,5 +1,6 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Student</a></li>
@@ -205,6 +206,11 @@
     </div>
   </div>
   
+
+    <ul class="pager">
+      <li><%= link_to 'Next', next_wizard_path, class: 'nav-button pull-right' %></li>
+    </ul>
 </div>
+
 
 <%= render 'shared/scenery_contact_confirmation' %>
