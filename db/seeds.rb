@@ -46,60 +46,60 @@ CustomRequirement.create(
     authority_level: :district
 )
 
-# greenbush_elementary_school = School.create(
-#     name: 'Greenbush Elementary School',
-#     mailing_street_address_1: '127 Greenbush Road',
-#     mailing_city: 'West Warwick',
-#     mailing_state: 'RI',
-#     mailing_zip_code: '02893',
-#     phone: '4018228454',
-#     active: true,
-#     district: west_warwick_district
-# )
+greenbush_elementary_school = School.create(
+    name: 'Greenbush Elementary School',
+    mailing_street_address_1: '127 Greenbush Road',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018228454',
+    active: true,
+    district: west_warwick_district
+)
 
-# john_f_horgan_elementary_school = School.create(
-#     name: 'John F Horgan Elementary School',
-#     mailing_street_address_1: '124 Providence St',
-#     mailing_city: 'West Warwick',
-#     mailing_state: 'RI',
-#     mailing_zip_code: '02893',
-#     phone: '4018028450',
-#     active: true,
-#     district: west_warwick_district
-# )
+john_f_horgan_elementary_school = School.create(
+    name: 'John F Horgan Elementary School',
+    mailing_street_address_1: '124 Providence St',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018028450',
+    active: true,
+    district: west_warwick_district
+)
 
-# wakefield_hills_elementary_school = School.create(
-#     name: 'Wakefield Hills Elementary School',
-#     mailing_street_address_1: '',
-#     mailing_city: 'West Warwick',
-#     mailing_state: 'RI',
-#     mailing_zip_code: '02893',
-#     phone: '4018228452',
-#     active: true,
-#     district: west_warwick_district
-# )
+wakefield_hills_elementary_school = School.create(
+    name: 'Wakefield Hills Elementary School',
+    mailing_street_address_1: '',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018228452',
+    active: true,
+    district: west_warwick_district
+)
 
-# john_f_deering_middle_school = School.create(
-#     name: 'John F. Deering Middle School',
-#     mailing_street_address_1: '2 Webster Knight Drive',
-#     mailing_city: 'West Warwick',
-#     mailing_state: 'RI',
-#     mailing_zip_code: '02893',
-#     phone: '4018228445',
-#     active: true,
-#     district: west_warwick_district
-# )
+john_f_deering_middle_school = School.create(
+    name: 'John F. Deering Middle School',
+    mailing_street_address_1: '2 Webster Knight Drive',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018228445',
+    active: true,
+    district: west_warwick_district
+)
 
-# west_warwick_high_school = School.create(
-#     name: '',
-#     mailing_street_address_1: '1 Webster Knight Dr',
-#     mailing_city: 'West Warwick',
-#     mailing_state: 'RI',
-#     mailing_zip_code: '02893',
-#     phone: '4018216596',
-#     active: true,
-#     district: west_warwick_district
-# )
+west_warwick_high_school = School.create(
+    name: '',
+    mailing_street_address_1: '1 Webster Knight Dr',
+    mailing_city: 'West Warwick',
+    mailing_state: 'RI',
+    mailing_zip_code: '02893',
+    phone: '4018216596',
+    active: true,
+    district: west_warwick_district
+)
 
 Admin.create(
     name: 'Jim Monti',
@@ -118,8 +118,8 @@ guardian_complete_west_warwick_student = Student.create(
     middle_name: 'Michael',
     last_name: 'Miller',
     birthday: '2008-01-01',
-    first_language: 'english',
-    second_language: 'spanish',
+    home_language: 'english',
+    guardian_language: 'spanish',
     school_start_date: '2014-09-01',
     iep: true,
     p504: true,
@@ -137,7 +137,7 @@ guardian_complete_west_warwick_student = Student.create(
     mailing_city: 'West Warwick',
     mailing_state: 'RI',
     mailing_zip_code: '02893',
-    # school: greenbush_elementary_school,
+    school: greenbush_elementary_school,
     gender: :male,
     birth_city: 'West Warwick',
     birth_state: 'RI',
@@ -152,7 +152,12 @@ guardian_complete_west_warwick_student = Student.create(
     guardian_complete_time: '2013-06-18',
     estimated_graduation_year: 2027,
     active: true,
-    grade: :kindergarten
+    grade: :kindergarten,
+    prior_school_name: 'Lighthouse Montessori',
+    prior_school_city: 'West Warwick',
+    prior_school_state: 'RI',
+    last_completed_grade: :pre_k,
+    had_english_instruction: :false
 )
 
 StudentRace.create(
@@ -169,7 +174,7 @@ StudentRace.create(
     active: true
 )
 
-guardian_complete_west_warwick_guardian = Guardian.create(
+guardian_complete_west_warwick_guardian = ContactPerson.create(
     first_name: 'Linda',
     middle_name: 'Belinda',
     last_name: 'Miller',
@@ -178,39 +183,47 @@ guardian_complete_west_warwick_guardian = Guardian.create(
     mailing_city: 'West Warwick',
     mailing_state: 'RI',
     mailing_zip_code: '02893',
-    cell_phone: '4011234567',
-    alt_phone: '4018901234',
-    alt_phone_type: :work,
     email: 'linda@codeisland.org',
-    receive_emails: true,
-    receive_sms: true,
-    receive_postal_mail: true,
+    receive_other_mail: true,
     receive_grade_notices: true,
     receive_conduct_notices: true,
     restricted: false,
     student: guardian_complete_west_warwick_student,
     active: true,
-    relationship: 'mother'
+    relationship: 'mother',
+    language: 'english',
+    can_pickup_child: true,
+    lives_with_student: true,
+    has_custody: true,
+    has_court_order: false
+
 )
 
-ContactPerson.create(
-    relationship: 'uncle',
+guardian2_west_warwick = ContactPerson.create(
+    relationship: 'father',
     language: 'en',
     mailing_street_address_1: '95 Factory St',
     mailing_street_address_2: 'Back door',
     mailing_city: 'West Warwick',
     mailing_state: 'RI',
     mailing_zip_code: '02893',
-    phone: '4019876543',
     can_pickup_child: true,
-    guardian: guardian_complete_west_warwick_guardian,
+    student: guardian_complete_west_warwick_student,
     active: true,
     first_name: 'Terry',
     last_name: 'Mooler',
-    email: 'terry@codeisland.org'
+    email: 'terry@codeisland.org',
+    can_pickup_child: true,
+    receive_other_mail: true,
+    receive_grade_notices: true,
+    receive_conduct_notices: true,
+    lives_with_student: false,
+    has_custody: false,
+    has_court_order: false
+
 )
 
-ContactPerson.create(
+contact1_west_warwick = ContactPerson.create(
     relationship: 'aunt',
     language: 'en',
     mailing_street_address_1: '95 Factory St',
@@ -218,11 +231,46 @@ ContactPerson.create(
     mailing_city: 'West Warwick',
     mailing_state: 'RI',
     mailing_zip_code: '02893',
-    phone: '4019876543',
-    can_pickup_child: false,
-    guardian: guardian_complete_west_warwick_guardian,
+    can_pickup_child: true,
+    receive_grade_notices: true,
+    receive_conduct_notices: false,
+    receive_other_mail: false,
+    student: guardian_complete_west_warwick_student,
     active: true,
     first_name: 'Rita',
     last_name: 'Mooler',
     email: 'rita@codeisland.org'
 )
+
+# guardian1_phone = PhoneNumber.create(
+#     number:'4012223333',
+#     receives_sms: true
+# )  
+
+# guardian2_phone = PhoneNumber.create(
+#     number:'4013333333',
+#     receives_sms: true
+# )  
+
+# contact1_phone = PhoneNumber.create(
+#     number:'4014443333',
+#     receives_sms: false
+# )  
+
+# ContactPersonPhoneNumber.create(
+#     contact_person: guardian_complete_west_warwick_guardian,
+#     phone_number: guardian1_phone
+# )  
+
+# ContactPersonPhoneNumber.create(
+#     contact_person: guardian2_west_warwick,
+#     phone_number: guardian2_phone
+# ) 
+
+# ContactPersonPhoneNumber.create(
+#     contact_person: contact1_west_warwick,
+#     phone_number: contact1_phone
+# ) 
+
+
+
