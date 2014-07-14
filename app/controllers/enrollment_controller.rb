@@ -36,6 +36,7 @@ class EnrollmentController < ApplicationController
     @guardian_start = :guardian_name_and_address
     @contact_start = :contact_person_1_contact_info
     @permissions = :permissions
+    @summary = :summary
 
     begin
       @student = Student.find(session[:student_id])
@@ -114,7 +115,7 @@ class EnrollmentController < ApplicationController
     set_next_step = next_step
 
     case step
-      when :student_birth_gender_and_ethnicity
+      when :student_gender_and_ethnicity
 
         params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
 
