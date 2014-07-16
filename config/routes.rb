@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  # root :to => 'welcome#newport'
+  root :to => 'welcome#newport'
 
-  root :to => 'intro#index'
+  # root :to => 'intro#index'
+
+  get 'intro', to: 'intro#index', as: :landing_page
 
   get 'welcome/warwick', to: 'welcome#warwick', as: :warwick_intro
   get 'welcome/west-warwick', to: 'welcome#west-warwick', as: :west_warwick_intro 
