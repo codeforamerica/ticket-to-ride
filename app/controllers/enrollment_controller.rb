@@ -27,6 +27,19 @@ class EnrollmentController < ApplicationController
         :summary,
         :enrollment_complete
 
+  # Variables for navigation
+  STUDENT_START_STEP = :student_name
+  GUARDIAN_START_STEP = :guardian_name_and_address
+  CONTACT_START_STEP = :contact_person_1_contact_info
+  PERMISSIONS_STEP = :permissions
+  SUMMARY_STEP = :summary
+
+  # Steps where student gender pronouns need to be rendered
+  STUDENT_GENDER_PRONOUN_STEPS = [
+      :student_language,
+      :student_special_services
+  ]
+
   # SHOW
   # This is contains the logic used to prep variables for the
   # views based on the current step in the flow
@@ -62,10 +75,10 @@ class EnrollmentController < ApplicationController
 
     #Handle gender pronouns, but not for first step
     if step != :student_gender_and_ethnicity
-      @gender_pronoun = genderEnumToPronoun(@student.gender)
-      @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender)
-      @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender)
-      @gender_possessive_adjective = genderEnumToPossessiveAdjective(@student.gender)
+      @gender_pronoun = genderToPronoun(@student.gender)
+      @gender_possessive_pronoun = genderToPossessivePronoun(@student.gender)
+      @gender_objective_pronoun = genderToObjectivePronoun(@student.gender)
+      @gender_possessive_adjective = genderToPossessiveAdjective(@student.gender)
     end
 
 
@@ -163,6 +176,56 @@ class EnrollmentController < ApplicationController
 
     jump_to set_next_step
     render_wizard
+  end
+
+
+  # -------------------------------------------------------------------------------------------------------------------------
+  # ------ In process of replace the show() and update() ... putting here since merging has been rough with this file -------
+  #        These methods are not currently in use by default in the committed copy. Will remove old
+  #        methods after they're fully functional.
+
+  # ---------
+  # SHOW
+  # This is contains the logic used to prep variables for the
+  # views based on the current step in the flow
+  #
+  def new_show
+
+    # Clear the session on the first step, otherwise, load the Student
+    if step == steps[0]
+      reset_session
+      @student = Student.create
+      session[:student_id] = @student.id
+    else
+      @student = session[:student_id]
+    end
+
+    # Render student gender pronouns
+    if STUDENT_GENDER_PRONOUN_STEPS.include?(step)
+      @student_gender_pronoun = genderToPronoun(@student.gender) # He/She
+      @student_gender_possessive_pronoun = genderToPossessivePronoun(@student.gender) # His/Hers
+      @student_gender_objective_pronoun = genderToObjectivePronoun(@student.gender) # Him/Her
+      @student_gender_possessive_adjective = genderToPossessiveAdjective(@student.gender) # His/Her
+    end
+
+    render_wizard
+  end
+
+
+  # ------
+  # UPDATE
+  # Saves form submissions and manages session variables
+  #
+  def new_update
+
+    @student = Student.find(session[:student_id])
+    @student.update_attributes(student_params)
+
+    @is_valid = @student.valid?
+
+    # set_next_step = next_step
+    # jump_to set_next_step
+    render_wizard @student
   end
 
 end

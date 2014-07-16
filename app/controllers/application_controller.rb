@@ -9,13 +9,13 @@ class ApplicationController < ActionController::Base
 
     if pronoun_uppercase == 'HE'
       return :male
-    else 
+    else
       return :female
     end
     #TODO: Raise exception if unknown detected
   end
 
-  def genderEnumToPronoun(gender)
+  def genderToPronoun(gender)
 
     if gender == nil
       return '(unknown gender)'
@@ -23,44 +23,42 @@ class ApplicationController < ActionController::Base
 
     if gender == :male || gender.downcase == 'male'
       return 'he'
-    else 
+    else
       return 'she'
     end
-
-
   end
 
 
-  def genderEnumToPossessivePronoun(gender)
+  def genderToPossessivePronoun(gender)
     if gender == nil
       return '(unknown gender)'
     end #TODO: Raise exception if unknown detected
 
     if gender == :male || gender.downcase == 'male'
       return 'his'
-    else 
+    else
       return 'her'
     end
   end
-    #TODO: Raise exception if unknown detected
+  #TODO: Raise exception if unknown detected
 
-  def genderEnumToPossessiveAdjective(gender)
+  def genderToPossessiveAdjective(gender)
     if gender == nil
       return '(unknown gender)'
     end #TODO: Raise exception if unknown detected
 
     if gender == :male || gender.downcase == 'male'
       return 'his'
-    else 
+    else
       return 'her'
     end
   end
-    #TODO: Raise exception if unknown detected
+  #TODO: Raise exception if unknown detected
 
-  def genderEnumToObjectivePronoun(gender)
+  def genderToObjectivePronoun(gender)
     if gender == nil
       return '(unknown gender)'
-    end #TODO: Raise exception if unknown detected
+    end #TODO: Raise exception if unknown  detected
 
     if gender == :male || gender.downcase == 'male'
       return 'him'
