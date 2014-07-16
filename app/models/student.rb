@@ -2,6 +2,7 @@ class Student < ActiveRecord::Base
   include ModelConstants
 
   # Relationships
+  has_many :student_races
   has_many :races, through: :student_races
   has_many :contact_people
   belongs_to :school
