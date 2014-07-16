@@ -33,7 +33,6 @@
     </table>
 
     <div>
-      <%= hidden_field_tag 'student[race_ids][]', nil %>
       <% Race.all.each do |race| %>
           <%= check_box_tag 'student[race_ids][]', race.id, @student.race_ids.include?(race.id), id: dom_id(race) %>
           <%= label_tag dom_id(race), t('race_' + race.race) %>

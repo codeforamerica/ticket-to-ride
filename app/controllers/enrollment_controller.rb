@@ -237,22 +237,22 @@ class EnrollmentController < ApplicationController
     # Student name and birth info
     if step == :student_name
 
-      if does_param_exist?(:student, :first_name)
+      if param_does_not_exist(:student, :first_name)
         @student.errors.add(:first_name, 'First name is a required field')
       end
-      if does_param_exist?(:student, :last_name)
+      if param_does_not_exist(:student, :last_name)
         @student.errors.add(:last_name, 'Last name is a required field')
       end
-      if does_param_exist?(:student, :birthday)
+      if param_does_not_exist(:student, :birthday)
         @student.errors.add(:birthday, 'Birthday is a required field')
       end
-      if does_param_exist?(:student, :birth_city)
+      if param_does_not_exist(:student, :birth_city)
         @student.errors.add(:birth_city, 'Birth city is a required field')
       end
-      if does_param_exist?(:student, :birth_state)
+      if param_does_not_exist(:student, :birth_state)
         @student.errors.add(:birth_state, 'Birth state/province is a required field')
       end
-      if does_param_exist?(:student, :birth_country)
+      if param_does_not_exist(:student, :birth_country)
         @student.errors.add(:birth_country, 'Birth country is a required field')
       end
 
@@ -270,12 +270,12 @@ class EnrollmentController < ApplicationController
       if !params || !params[:student] || !params[:student][:gender]
         @student.errors.add(:gender, 'Gender is a required field')
       end
-      if does_param_exist?(:student, :is_hispanic)
+      if param_does_not_exist(:student, :is_hispanic)
         @student.errors.add(:is_hispanic, 'Is Hispanic? is a required field')
       end
-      # if does_param_exist?(:student, :primary_race)
-      #   @student.errors.add(:primary_race, 'Primary race is a required field')
-      # end
+      if param_does_not_exist(:student, :race_ids)
+        @student.errors.add(:race_ids, 'At least one race needs to be selected')
+      end
 
       begin
         @student.gender = params[:student][:gender]
@@ -287,6 +287,18 @@ class EnrollmentController < ApplicationController
         return render_wizard
       end
 
+
+      # Add all races to student
+      params[:student][:race_ids].each do |race_id|
+        begin
+          StudentRace.create(race_id: race_id, student: @student )
+        rescue
+          @student.errors.add(:race_ids, 'Could not assign race')
+          return render_wizard
+        end
+      end
+
+      # Save the student
       @student.update_attributes(student_params)
       return render_wizard @student
     end
@@ -297,7 +309,7 @@ class EnrollmentController < ApplicationController
   end
 
 
-  def does_param_exist?(model_const, field_const)
+  def param_does_not_exist(model_const, field_const)
     return !params || !params[model_const] || !params[model_const][field_const]
   end
 
