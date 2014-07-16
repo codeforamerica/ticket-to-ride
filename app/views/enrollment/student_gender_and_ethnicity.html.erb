@@ -10,31 +10,40 @@
       </ul>
   <% end %>
 
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+<%= form_for(@student, url: wizard_path, method: :put) do |student| %>
 
     <table>
       <tr><td class="row-break" colspan="2">
         <span>Gender:</span> 
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
-                <%= s.radio_button :gender, :female %>Female</label>
+                <%= student.radio_button :gender, :female %>Female</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :gender, :male %>Male</label>
+                <%= student.radio_button :gender, :male %>Male</label>
         </div></td></tr>
       <tr><td class="row-break"><span class="instructions">Ethnicity</span></td></tr>
       <tr><td colspan="2"><span>Hispanic or Latino descent?</span> 
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true, presence: { message: "Selection required" } %>Yes</label>
+                <%= student.radio_button :is_hispanic, true, presence: { message: "Selection required" } %>Yes</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false, presence: { message: "Selection required" }%>No</label>
+                <%= student.radio_button :is_hispanic, false, presence: { message: "Selection required" }%>No</label>
         </div></td></tr>
 
     </table>
 
+    <div>
+      <%= hidden_field_tag 'student[race_ids][]', nil %>
+      <% Race.all.each do |race| %>
+          <%= check_box_tag 'student[race_ids][]', race.id, @student.race_ids.include?(race.id), id: dom_id(race) %>
+          <%= label_tag dom_id(race), t('race_' + race.race) %>
+      <% end %>
+    </div>
+
+
     <ul class="pager">
-      <li><%= link_to "Previous", '/enrollment' %></li>
-      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= student.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
 
   <% end %>
