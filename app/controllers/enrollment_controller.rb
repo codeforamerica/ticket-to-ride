@@ -149,7 +149,7 @@ class EnrollmentController < ApplicationController
       when :guardian_second_name_and_relationship
         if params[:contact_person][:first_name] != ''
           @second_guardian = ContactPerson.create(contact_person_params)
-          @second_guardian.save
+          @second_guardian.save(validate: false)
           session[:second_guardian_id] = @second_guardian.id
           if @second_guardian.first_name = ''
             set_next_step = :guardian_complete
@@ -159,7 +159,7 @@ class EnrollmentController < ApplicationController
         end
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create(contact_person_params)
-        @contact_person.save
+        @contact_person.save(validate: false)
         session[:contact_person_1_id] = @contact_person.id
 
         # TODO: For final completion, set all linked records to active
@@ -167,12 +167,12 @@ class EnrollmentController < ApplicationController
 
     if params[:student]
       @student.update_attributes(student_params)
-      @student.save
+      @student.save(validate: false)
     end
 
     if params[:guardian]
       @guardian.update_attributes(contact_person_params)
-      @guardian.save
+      @guardian.save(validate: false)
     end
 
     jump_to set_next_step
