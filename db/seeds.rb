@@ -270,5 +270,10 @@ contact1_west_warwick = ContactPerson.create(
 #     phone_number: contact1_phone
 # ) 
 
-
+Race.create([{race: 'black'},
+             {race:'white'},
+             {race: 'asian'},
+             {race:'native_american'},
+             {race: 'pacific_islander'}
+            ])
 

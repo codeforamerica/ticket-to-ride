@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716131920) do
+ActiveRecord::Schema.define(version: 20140716155301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,12 @@ ActiveRecord::Schema.define(version: 20140716131920) do
     t.string  "priority_level"
   end
 
+  create_table "races", force: true do |t|
+    t.string   "race",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "schools", force: true do |t|
     t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
@@ -125,7 +131,7 @@ ActiveRecord::Schema.define(version: 20140716131920) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "race"
+    t.integer  "race_id"
   end
 
   create_table "students", force: true do |t|
