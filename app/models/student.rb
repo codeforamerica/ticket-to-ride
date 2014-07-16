@@ -31,10 +31,10 @@ class Student < ActiveRecord::Base
   }
 
   # Birthday must indicate the student being age 5 to 21
-  validates_date :birthday, between: [6.years.ago, 21.years.ago],
+  validates_date :birthday, between: [21.years.ago, 5.years.ago],
                  allow_nil: true,
-                 on_or_before_message: 'Student must be younger than 21 years',
-                 on_or_after_message: 'Student must be older than 5 years'
+                 on_or_before_message: 'Student must be older than 5 years of age',
+                 on_or_after_message: 'Student must be younger than 21 years of age'
 
   # Birth place values can only be letters, spaces, and dashes
   validates :birth_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
