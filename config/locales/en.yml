@@ -20,4 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  race_black: 'Black'
+  race_white: 'White'
+  race_asian: 'Asian'
+  race_native_american: 'Native American'
+  race_pacific_islander: 'Pacific Islander'
+
+
+

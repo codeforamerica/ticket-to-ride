@@ -2,160 +2,48 @@
 <div class="enrollment-form">
   <div class="instructions">Tell us more about <%= @student.first_name %>.</div>
 
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+  <% if @student.errors %>
+      <ul id="validation-errors">
+        <% @student.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+<%= form_for(@student, url: wizard_path, method: :put) do |student| %>
 
     <table>
       <tr><td class="row-break" colspan="2">
         <span>Gender:</span> 
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
-                <%= s.radio_button :gender, :female %>Female</label>
+                <%= student.radio_button :gender, :female %>Female</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :gender, :male %>Male</label>
+                <%= student.radio_button :gender, :male %>Male</label>
         </div></td></tr>
       <tr><td class="row-break"><span class="instructions">Ethnicity</span></td></tr>
       <tr><td colspan="2"><span>Hispanic or Latino descent?</span> 
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, true, presence: { message: "Selection required" } %>Yes</label>
+                <%= student.radio_button :is_hispanic, true, presence: { message: "Selection required" } %>Yes</label>
             <label class="btn btn-primary">
-                <%= s.radio_button :is_hispanic, false, presence: { message: "Selection required" }%>No</label>
+                <%= student.radio_button :is_hispanic, false, presence: { message: "Selection required" }%>No</label>
         </div></td></tr>
-
-      <%= fields_for StudentRace.new do |r|%>
-      <tr><td class="row-break"><span class="instructions">Race</span></td></tr>
-      <tr><td colspan="2"><span>Primary race: </span> <span><a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#primaryRaceModal" id="primaryRaceSelected">Choose</a></span></td></tr>
-      <tr><td colspan="2"><span>Additional race: </span> <span><a href="#" class="enrollment-form-popover chooseLink" data-toggle="modal" data-target="#additionalRaceModal" id="additionalRaceSelected">Choose</a></span></td></tr>
-
 
     </table>
 
+    <div>
+      <% Race.all.each do |race| %>
+          <%= check_box_tag 'student[race_ids][]', race.id, @student.race_ids.include?(race.id), id: dom_id(race) %>
+          <%= label_tag dom_id(race), t('race_' + race.race) %>
+      <% end %>
+    </div>
+
+
     <ul class="pager">
-      <li><%= link_to "Previous", '/enrollment' %></li>
-      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= student.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
-
-  <div class="modal fade" id="primaryRaceModal" tabindex="-1" role="dialog" aria-labelledby="primaryRaceModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h4 class="modal-title" id="myModalLabel">Select <%= @student.first_name %>'s primary race</h4>
-        </div>
-        <div class="modal-body single-col-modal">
-          <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary">
-            <%= r.radio_button :primary_race, :black %>African American/Black
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :primary_race, :asian %>Asian
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :primary_race, :native_american %>American Indian/Alaskan Native
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :primary_race, :pacific_islander %>Pacific Islander
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :primary_race, :white %>White
-          </label><br/>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-          <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnPrimaryRace">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TODO: Add additional races to database -->
-
-  <div class="modal fade" id="additionalRaceModal" tabindex="-1" role="dialog" aria-labelledby="additionalRaceModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h4 class="modal-title" id="additionalRaceModalLabel">Select <%= @student.first_name %>'s other race(s) if applicable</h4>
-        </div>
-        <div class="modal-body single-col-modal double-col-modal">
-
-          <!--Make this multi-select -->
-          <table>
-            <tr><td>
-            <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'African American or Black' %>African American or Black
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'White' %>White
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'Cambodian' %>Cambodian
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'Filipino' %>Filipino
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'Japanese' %>Japanese
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'Laotian' %>Laotian
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'Guamanian' %>Guamanian
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'Samoan' %>Samoan
-            </label><br/>
-            <label class="btn btn-primary">
-              <%= r.radio_button :additional_races, 'Other Pacific Islander' %>Other Pacific Islander
-            </label>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'American Indian/Alaskan Native' %>American Indian/Alaskan Native
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'Asian Indian' %>Asian Indian
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'Chinese' %>Chinese
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'Hmong' %>Hmong
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'Korean' %>Korean
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'Vietnamese' %>Vietnamese
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'Native Hawaiian' %>Native Hawaiian
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'Tahitian' %>Tahitian
-          </label><br/>
-          <label class="btn btn-primary">
-            <%= r.radio_button :additional_races, 'None' %>Not Applicable
-          </label>
-          </div>
-        </div>
-      </td></tr>
-      </table>
-      </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-          <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnAdditionalRace">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-    <% end %> 
 
   <% end %>
 </div>
