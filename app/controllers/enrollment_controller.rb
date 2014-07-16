@@ -8,6 +8,8 @@ class EnrollmentController < ApplicationController
   include StudentRaceParams
   include ContactPersonParams
 
+  USE_NEW = false
+
   # This is the order in which the views get rendered
   steps :student_name,
         :student_gender_and_ethnicity, 
@@ -44,6 +46,11 @@ class EnrollmentController < ApplicationController
   # This is contains the logic used to prep variables for the
   # views based on the current step in the flow
   def show
+
+    if USE_NEW
+      return new_show
+    end
+
   # def old_show
     # Variables for navigation purposes
     @student_start = :student_name
@@ -107,6 +114,11 @@ class EnrollmentController < ApplicationController
   ##
   def update
   # def old_update
+
+    if USE_NEW
+      return new_update
+    end
+
     # Handle the first step creation
     if step == :student_name
       # @guardian = Guardian.create(guardian_params)
@@ -191,7 +203,7 @@ class EnrollmentController < ApplicationController
   # views based on the current step in the flow
   #
   def new_show
-  #def show
+  # def show
 
     # Clear the session on the first step, otherwise, load the Student
     if step == steps[0]
@@ -219,7 +231,7 @@ class EnrollmentController < ApplicationController
   # Saves form submissions and manages session variables
   #
   def new_update
-  #def update
+  # def update
     @student = Student.find(session[:student_id])
     @student.update_attributes(student_params)
 
