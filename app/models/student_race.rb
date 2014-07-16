@@ -1,4 +1,4 @@
 class StudentRace < ActiveRecord::Base
-  has_many :students
-  has_many :races
+  belongs_to :student
+  belongs_to :race
 end
