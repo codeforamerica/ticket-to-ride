@@ -8,7 +8,7 @@ class EnrollmentController < ApplicationController
   include StudentRaceParams
   include ContactPersonParams
 
-  USE_NEW = true
+  USE_NEW = false
 
   # This is the order in which the views get rendered
   steps :student_name,
