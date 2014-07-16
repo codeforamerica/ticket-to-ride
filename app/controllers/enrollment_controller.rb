@@ -10,7 +10,7 @@ class EnrollmentController < ApplicationController
 
   # This is the order in which the views get rendered
   steps :student_name,
-        :student_birth_gender_and_ethnicity, 
+        :student_gender_and_ethnicity, 
         :student_language, 
         :student_previous_school,
         :student_special_services,
@@ -24,6 +24,7 @@ class EnrollmentController < ApplicationController
         :contact_person_1_contact_info, 
         :contact_person_2_contact_info,
         :permissions, 
+        :summary,
         :enrollment_complete
 
   # SHOW
@@ -35,6 +36,7 @@ class EnrollmentController < ApplicationController
     @guardian_start = :guardian_name_and_address
     @contact_start = :contact_person_1_contact_info
     @permissions = :permissions
+    @summary = :summary
 
     begin
       @student = Student.find(session[:student_id])
@@ -59,7 +61,7 @@ class EnrollmentController < ApplicationController
     end
 
     #Handle gender pronouns, but not for first step
-    if step != :student_birth_gender_and_ethnicity
+    if step != :student_gender_and_ethnicity
       @gender_pronoun = genderEnumToPronoun(@student.gender)
       @gender_possessive_pronoun = genderEnumToPossessivePronoun(@student.gender)
       @gender_objective_pronoun = genderEnumToObjectivePronoun(@student.gender)
@@ -113,7 +115,7 @@ class EnrollmentController < ApplicationController
     set_next_step = next_step
 
     case step
-      when :student_birth_gender_and_ethnicity
+      when :student_gender_and_ethnicity
 
         params[:student][:is_hispanic] = isIsntToBoolean(params[:student][:is_hispanic])
 
