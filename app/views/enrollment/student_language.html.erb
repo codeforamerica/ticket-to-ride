@@ -12,7 +12,7 @@
               when <%= @student_gender_pronoun %> first began to talk?
             </td>
             <td>
-              <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#firstLanguageModal" id="firstLanguageSelected">Choose</a>
+              <%= s.text_field :first_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#firstLanguageModal', id: 'firstLanguageSelected', placeholder: 'Choose' %>
             </td>
           </tr>
 
@@ -20,7 +20,7 @@
             <td class="padding-right">What language does <%= @student_gender_pronoun %> most frequently use at home?
             </td>
             <td>
-              <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#homeLanguageModal" id="homeLanguageSelected">Choose</a>
+              <%= s.text_field :home_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#homeLanguageModal', id: 'homeLanguageSelected', placeholder: 'Choose' %>
             </td>
           </tr>
 
@@ -28,7 +28,7 @@
             <td class="padding-right">What language do you use most frequently to speak with <%= @student.first_name %>?
             </td>
             <td>
-              <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardianLanguageModal" id="guardianLanguageSelected">Choose</a>
+              <%= s.text_field :guardian_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#guardianLanguageModal', id: 'guardianLanguageSelected', placeholder: 'Choose' %>
             </td>
           </tr>
 
@@ -57,24 +57,24 @@
                 <div class="modal-body single-col-modal">
                   <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-primary">
-                      <%= s.radio_button :first_language, 'English' %>English
+                      <%= radio_button_tag 'choose_student_first_language', 'English' %>English
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :first_language, 'Spanish' %>Spanish
+                      <%= radio_button_tag 'choose_student_first_language', 'Spanish' %>Spanish
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :first_language, 'Portuguese' %>Portuguese
+                      <%= radio_button_tag 'choose_student_first_language', 'Portuguese' %>Portuguese
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :first_language, 'Italian' %>Italian
+                      <%= radio_button_tag 'choose_student_first_language', 'Italian' %>Italian
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :first_language, 'French' %>French
+                      <%= radio_button_tag 'choose_student_first_language', 'French' %>French
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :first_language, 'Mon-Khmer' %>Mon-Khmer
+                      <%= radio_button_tag 'choose_student_first_language', 'Mon-Khmer' %>Mon-Khmer
                     </label><br/>
-                    <%= s.text_field :first_language, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
+                    <%= text_field_tag 'choose_student_first_language', nil, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
                     <br/>
                   </div>
                 </div>
@@ -98,24 +98,24 @@
                 <div class="modal-body single-col-modal">
                   <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-primary">
-                      <%= s.radio_button :home_language, 'English' %>English
+                      <%= radio_button_tag 'choose_student_home_language', 'English' %>English
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :home_language, 'Spanish' %>Spanish
+                      <%= radio_button_tag 'choose_student_home_language', 'Spanish' %>Spanish
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :home_language, 'Portuguese' %>Portuguese
+                      <%= radio_button_tag 'choose_student_home_language', 'Portuguese' %>Portuguese
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :home_language, 'Italian' %>Italian
+                      <%= radio_button_tag 'choose_student_home_language', 'Italian' %>Italian
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :home_language, 'French' %>French
+                      <%= radio_button_tag 'choose_student_home_language', 'French' %>French
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :home_language, 'Mon-Khmer' %>Mon-Khmer
+                      <%= radio_button_tag 'choose_student_home_language', 'Mon-Khmer' %>Mon-Khmer
                     </label><br/>
-                    <%= s.text_field :home_language, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
+                    <%= text_field_tag 'choose_student_home_language', nil, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
                     <br/>
                   </div>
                 </div>
@@ -139,24 +139,24 @@
                 <div class="modal-body single-col-modal">
                   <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-primary">
-                      <%= s.radio_button :guardian_language, 'English' %>English
+                      <%= radio_button_tag 'choose_student_guardian_language', 'English' %>English
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :guardian_language, 'Spanish' %>Spanish
+                      <%= radio_button_tag 'choose_student_guardian_language', 'Spanish' %>Spanish
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :guardian_language, 'Portuguese' %>Portuguese
+                      <%= radio_button_tag 'choose_student_guardian_language', 'Portuguese' %>Portuguese
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :guardian_language, 'Italian' %>Italian
+                      <%= radio_button_tag 'choose_student_guardian_language', 'Italian' %>Italian
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :guardian_language, 'French' %>French
+                      <%= radio_button_tag 'choose_student_guardian_language', 'French' %>French
                     </label><br/>
                     <label class="btn btn-primary">
-                      <%= s.radio_button :guardian_language, 'Mon-Khmer' %>Mon-Khmer
+                      <%= radio_button_tag 'choose_student_guardian_language', 'Mon-Khmer' %>Mon-Khmer
                     </label><br/>
-                    <%= s.text_field :guardian_language, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
+                    <%= text_field_tag 'choose_student_guardian_language', nil, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
                     <br/>
                   </div>
                 </div>

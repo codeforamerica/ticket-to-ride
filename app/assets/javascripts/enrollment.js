@@ -27,11 +27,11 @@ $(document).ready(function () {
 
   getSelectionFromModal('#btnAdditionalRace', 'input[name="student_race[additional_races]"]:checked', '#additionalRaceSelected');
 
-  getSelectionFromModal('#btnFirstLanguage', 'input[name="student[first_language]"]:checked', '#firstLanguageSelected');
+  getSelectionFromModalForInput('#btnFirstLanguage', 'input[name="choose_student_first_language"]:checked', '#firstLanguageSelected');
 
-  getSelectionFromModal('#btnHomeLanguage', 'input[name="student[home_language]"]:checked', '#homeLanguageSelected');
+  getSelectionFromModalForInput('#btnHomeLanguage', 'input[name="choose_student_home_language"]:checked', '#homeLanguageSelected');
 
-  getSelectionFromModal('#btnGuardianLanguage', 'input[name="student[guardian_language]"]:checked', '#guardianLanguageSelected');
+  getSelectionFromModalForInput('#btnGuardianLanguage', 'input[name="choose_student_guardian_language"]:checked', '#guardianLanguageSelected');
 
   $("form input:radio").change(function() {
     var radio = $(this).val();
@@ -160,6 +160,15 @@ $(document).ready(function () {
       showSelection.addClass('enrollment-form-modal-selection');
     });
   };
+
+    function getSelectionFromModalForInput(btnName, inputName, linkToUpdate) {
+        $(btnName).click(function () {
+            var selection = $(inputName).val();
+            var showSelection = $(linkToUpdate).val(selection);
+            showSelection.removeClass('enrollment-form-popover');
+            showSelection.addClass('enrollment-form-modal-selection');
+        });
+    };
 
   String.prototype.toProperCase = function() {
     var words = this.split('_');

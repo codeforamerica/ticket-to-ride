@@ -43,7 +43,8 @@ class EnrollmentController < ApplicationController
   # Temporary
   UPDATED_STEPS = [
       :student_name,
-      :student_gender_and_ethnicity
+      :student_gender_and_ethnicity,
+      :student_language
   ]
 
 
@@ -246,6 +247,10 @@ class EnrollmentController < ApplicationController
       # Student name and birth info
       when :student_gender_and_ethnicity
         return update_student_gender_and_ethnicity(@student)
+
+      when :student_language
+        return update_student_language(@student)
+
     end
 
 
@@ -325,8 +330,8 @@ class EnrollmentController < ApplicationController
     return render_wizard @student
   end
 
-  def update_student_language
-
+  def update_student_language(student)
+    return render_wizard student
   end
 
 end
