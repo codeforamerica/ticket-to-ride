@@ -55,6 +55,9 @@ gem 'tzinfo-data'
 # Used for Bootstrap Slider
 gem 'bootstrap-slider-rails'
 
+# Validations for dates
+gem 'validates_timeliness'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
