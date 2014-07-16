@@ -44,6 +44,7 @@ class EnrollmentController < ApplicationController
   # This is contains the logic used to prep variables for the
   # views based on the current step in the flow
   def show
+  # def old_show
     # Variables for navigation purposes
     @student_start = :student_name
     @guardian_start = :guardian_name_and_address
@@ -105,7 +106,7 @@ class EnrollmentController < ApplicationController
   # Where forms PUT to in the Wizard flow
   ##
   def update
-
+  # def old_update
     # Handle the first step creation
     if step == :student_name
       # @guardian = Guardian.create(guardian_params)
