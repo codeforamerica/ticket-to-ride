@@ -1,4 +1,4 @@
 class StudentRace < ActiveRecord::Base
-  belongs_to :student
-  enum race: [:native_american, :asian, :white, :black, :pacific_islander]
+  has_many :students
+  has_many :races
 end
