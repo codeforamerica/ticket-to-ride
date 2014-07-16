@@ -191,6 +191,7 @@ class EnrollmentController < ApplicationController
   # views based on the current step in the flow
   #
   def new_show
+  #def show
 
     # Clear the session on the first step, otherwise, load the Student
     if step == steps[0]
@@ -218,7 +219,7 @@ class EnrollmentController < ApplicationController
   # Saves form submissions and manages session variables
   #
   def new_update
-
+  #def update
     @student = Student.find(session[:student_id])
     @student.update_attributes(student_params)
 
