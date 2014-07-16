@@ -1,6 +1,15 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+
   <div class="instructions">Let's get started. Please tell us about your child.</div>
+
+  <% if @student.errors %>
+      <ul id="validation-errors">
+        <% @student.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
 
   <%= form_for(@student, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
       <div>
