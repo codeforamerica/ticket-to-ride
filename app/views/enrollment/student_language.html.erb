@@ -1,5 +1,17 @@
 <%= render 'enrollment/navigation' %>
+
+
+
 <div class="enrollment-form">
+
+  <% if @student.errors %>
+      <ul id="validation-errors">
+        <% @student.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
   <div>
     <table>
       <tr>
@@ -37,9 +49,13 @@
               (listening, speaking, reading, or writing)?
             </td>
             <td>
+
               <div class="btn-group" data-toggle="buttons">
-                <button type="button" class="btn btn-primary">Yes</button>
-                <button type="button" class="btn btn-primary">No</button>
+                <%= s.radio_button :had_english_instruction, true %>
+                <%= s.label :had_english_instruction_true, 'Yes'%>
+
+                <%= s.radio_button :had_english_instruction, false %>
+                <%= s.label :had_english_instruction_false, 'No'%>
               </div>
             </td>
           </tr>

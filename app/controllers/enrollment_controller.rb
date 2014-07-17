@@ -261,7 +261,7 @@ class EnrollmentController < ApplicationController
 
 
   def param_does_not_exist(model_const, field_const)
-    return !params || !params[model_const] || !params[model_const][field_const]
+    return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
   end
 
   def update_student_name(student)
@@ -331,6 +331,25 @@ class EnrollmentController < ApplicationController
   end
 
   def update_student_language(student)
+    if param_does_not_exist(:student, :first_language)
+      student.errors.add(:first_language, 'First language is a required field')
+    end
+    if param_does_not_exist(:student, :home_language)
+      student.errors.add(:home_language, 'Home language is a required field')
+    end
+    if param_does_not_exist(:student, :guardian_language)
+      student.errors.add(:guardian_language, 'Guardian language is a required field')
+    end
+    if param_does_not_exist(:student, :had_english_instruction)
+      student.errors.add(:had_english_instruction, 'Has English Instruction is a required field')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
     return render_wizard student
   end
 
