@@ -10,6 +10,15 @@
 #!/bin/env ruby
 # encoding: utf-8
 
+# AVTs
+
+race_black = Race.create(race: 'black')
+race_white = Race.create(race: 'white')
+race_asian = Race.create(race: 'asian')
+race_native_america = Race.create(race:'native_american')
+race_pacific_islander = Race.create(race: 'pacific_islander')
+
+
 # Central requirements
 
 CustomRequirement.create(
@@ -157,21 +166,17 @@ guardian_complete_west_warwick_student = Student.create(
     prior_school_city: 'West Warwick',
     prior_school_state: 'RI',
     last_completed_grade: :pre_k,
-    had_english_instruction: :false
+    had_english_instruction: :false,
 )
 
 StudentRace.create(
-    student: guardian_complete_west_warwick_student,
-    primary_race: :white,
-    additional_races: 'Asian',
-    active: true
+    race_id: race_black.id,
+    student_id: guardian_complete_west_warwick_student.id
 )
 
 StudentRace.create(
-    student: guardian_complete_west_warwick_student,
-    primary_race: :black,
-    additional_races: 'White',
-    active: true
+    race_id: race_asian.id,
+    student_id: guardian_complete_west_warwick_student.id
 )
 
 guardian_complete_west_warwick_guardian = ContactPerson.create(
@@ -270,7 +275,5 @@ contact1_west_warwick = ContactPerson.create(
 # ContactPersonPhoneNumber.create(
 #     contact_person: contact1_west_warwick,
 #     phone_number: contact1_phone
-# ) 
-
-
+# )
 
