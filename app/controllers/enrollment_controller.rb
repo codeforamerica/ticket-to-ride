@@ -8,8 +8,6 @@ class EnrollmentController < ApplicationController
   include StudentRaceParams
   include ContactPersonParams
 
-  USE_NEW = false
-
   # This is the order in which the views get rendered
   steps :student_name,
         :student_gender_and_ethnicity, 
@@ -42,12 +40,19 @@ class EnrollmentController < ApplicationController
       :student_special_services
   ]
 
+  # Temporary
+  UPDATED_STEPS = [
+      :student_name,
+      :student_gender_and_ethnicity
+  ]
+
+
   # SHOW
   # This is contains the logic used to prep variables for the
   # views based on the current step in the flow
   def show
 
-    if USE_NEW
+    if UPDATED_STEPS.include?(step)
       return new_show
     end
 
@@ -115,7 +120,7 @@ class EnrollmentController < ApplicationController
   def update
   # def old_update
 
-    if USE_NEW
+    if UPDATED_STEPS.include?(step)
       return new_update
     end
 
