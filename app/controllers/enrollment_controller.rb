@@ -43,7 +43,8 @@ class EnrollmentController < ApplicationController
   # Temporary
   UPDATED_STEPS = [
       :student_name,
-      :student_gender_and_ethnicity
+      :student_gender_and_ethnicity,
+      :student_language
   ]
 
 
@@ -236,77 +237,22 @@ class EnrollmentController < ApplicationController
   # Saves form submissions and manages session variables
   #
   def new_update
-  # def update
     @student = Student.find(session[:student_id])
 
-    # Student name and birth info
-    if step == :student_name
+    case step
+      # Student name and birthplace
+      when :student_name
+        return update_student_name(@student)
 
-      if param_does_not_exist(:student, :first_name)
-        @student.errors.add(:first_name, 'First name is a required field')
-      end
-      if param_does_not_exist(:student, :last_name)
-        @student.errors.add(:last_name, 'Last name is a required field')
-      end
-      if param_does_not_exist(:student, :birthday)
-        @student.errors.add(:birthday, 'Birthday is a required field')
-      end
-      if param_does_not_exist(:student, :birth_city)
-        @student.errors.add(:birth_city, 'Birth city is a required field')
-      end
-      if param_does_not_exist(:student, :birth_state)
-        @student.errors.add(:birth_state, 'Birth state/province is a required field')
-      end
-      if param_does_not_exist(:student, :birth_country)
-        @student.errors.add(:birth_country, 'Birth country is a required field')
-      end
+      # Student name and birth info
+      when :student_gender_and_ethnicity
+        return update_student_gender_and_ethnicity(@student)
 
-      if @student.errors.size > 0
-        return render_wizard
-      end
+      when :student_language
+        return update_student_language(@student)
 
-      @student.update_attributes(student_params)
-      return render_wizard @student
     end
 
-
-    # Student Gender and Ethnicity
-    if step == :student_gender_and_ethnicity
-      if !params || !params[:student] || !params[:student][:gender]
-        @student.errors.add(:gender, 'Gender is a required field')
-      end
-      if param_does_not_exist(:student, :is_hispanic)
-        @student.errors.add(:is_hispanic, 'Is Hispanic? is a required field')
-      end
-      if param_does_not_exist(:student, :race_ids)
-        @student.errors.add(:race_ids, 'At least one race needs to be selected')
-      end
-
-      begin
-        @student.gender = params[:student][:gender]
-      rescue
-        @student.errors.add(:gender, 'Gender must be either Female or Male')
-      end
-
-      if @student.errors.size > 0
-        return render_wizard
-      end
-
-
-      # Add all races to student
-      params[:student][:race_ids].each do |race_id|
-        begin
-          StudentRace.create(race_id: race_id, student: @student )
-        rescue
-          @student.errors.add(:race_ids, 'Could not assign race')
-          return render_wizard
-        end
-      end
-
-      # Save the student
-      @student.update_attributes(student_params)
-      return render_wizard @student
-    end
 
     # set_next_step = next_step
     # jump_to set_next_step
@@ -315,7 +261,96 @@ class EnrollmentController < ApplicationController
 
 
   def param_does_not_exist(model_const, field_const)
-    return !params || !params[model_const] || !params[model_const][field_const]
+    return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
+  end
+
+  def update_student_name(student)
+    if param_does_not_exist(:student, :first_name)
+      student.errors.add(:first_name, 'First name is a required field')
+    end
+    if param_does_not_exist(:student, :last_name)
+      student.errors.add(:last_name, 'Last name is a required field')
+    end
+    if param_does_not_exist(:student, :birthday)
+      student.errors.add(:birthday, 'Birthday is a required field')
+    end
+    if param_does_not_exist(:student, :birth_city)
+      student.errors.add(:birth_city, 'Birth city is a required field')
+    end
+    if param_does_not_exist(:student, :birth_state)
+      student.errors.add(:birth_state, 'Birth state/province is a required field')
+    end
+    if param_does_not_exist(:student, :birth_country)
+      student.errors.add(:birth_country, 'Birth country is a required field')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    student.update_attributes(student_params)
+    return render_wizard student
+  end
+
+
+  def update_student_gender_and_ethnicity(student)
+    if !params || !params[:student] || !params[:student][:gender]
+      student.errors.add(:gender, 'Gender is a required field')
+    end
+    if param_does_not_exist(:student, :is_hispanic)
+      student.errors.add(:is_hispanic, 'Is Hispanic? is a required field')
+    end
+    if param_does_not_exist(:student, :race_ids)
+      student.errors.add(:race_ids, 'At least one race needs to be selected')
+    end
+
+    begin
+      student.gender = params[:student][:gender]
+    rescue
+      student.errors.add(:gender, 'Gender must be either Female or Male')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+
+    # Add all races to student
+    params[:student][:race_ids].each do |race_id|
+      begin
+        StudentRace.create(race_id: race_id, student: @student )
+      rescue
+        student.errors.add(:race_ids, 'Could not assign race')
+        return render_wizard
+      end
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
+    return render_wizard @student
+  end
+
+  def update_student_language(student)
+    if param_does_not_exist(:student, :first_language)
+      student.errors.add(:first_language, 'First language is a required field')
+    end
+    if param_does_not_exist(:student, :home_language)
+      student.errors.add(:home_language, 'Home language is a required field')
+    end
+    if param_does_not_exist(:student, :guardian_language)
+      student.errors.add(:guardian_language, 'Guardian language is a required field')
+    end
+    if param_does_not_exist(:student, :had_english_instruction)
+      student.errors.add(:had_english_instruction, 'Has English Instruction is a required field')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
+    return render_wizard student
   end
 
 end
