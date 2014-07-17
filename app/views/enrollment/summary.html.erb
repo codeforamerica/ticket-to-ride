@@ -15,7 +15,6 @@
     <div class="tab-pane active" id="summaryStudent">
         <table class="summaryTable">
           <% @summary_student=Student.where(first_name:'Jimmy')[0] %>
-          <% @summary_race=StudentRace.where(student:@summary_student)[0] %>
           <% @summary_guardian1=ContactPerson.where(first_name:'Linda')[0] %>
           <% @summary_guardian2=ContactPerson.where(email:'terry@codeisland.org')[0]%>
           <% @summary_contact1=ContactPerson.where(email:'rita@codeisland.org')[0]%>
@@ -37,15 +36,24 @@
                      <%= 'is' %>
                      <% end %>  </span> Hispanic or Latino descent. 
               <% if @summary_student.gender == 'male' %>
-                <%= 'His' %>
+                <%= 'He' %>
               <% elsif @summary_student.gender == 'female' %>
-                <%= 'Her' %>
-                <% end %> primary race is <span class="summaryAnswers"><%= @summary_race.primary_race.titlecase %></span>, and               
-                <% if @summary_student.gender == 'male' %>
-                  <%= 'he' %>
-              <% elsif @summary_student.gender == 'female' %>
-                <%= 'she' %>
-                <% end %> is also <span class="summaryAnswers"><%= @summary_race.additional_races %></span>.
+                <%= 'She' %>
+                <% end %> is
+                    <!-- Let's add/find a function to do comma-ing -->
+                    <% @summary_student.races.each_with_index  do |r, i| %>
+                        <span class="summaryAnswers"><%=t('race_' + r.race)%></span>
+                        <% if (@summary_student.races.size-1) == i %>
+                            .
+                        <% elsif (@summary_student.races.size - 2) == i %>
+                            <% if @summary_student.races.size > 2 %>
+                                ,
+                            <% end %>
+                            and
+                        <% else %>
+                            <%= i %>,
+                        <% end %>
+                    <% end %>
                 <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_gender_and_ethnicity' %></div>
             </td>
           </tr>

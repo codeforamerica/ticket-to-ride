@@ -30,16 +30,18 @@
                 <%= student.radio_button :is_hispanic, false, presence: { message: "Selection required" }%>No</label>
         </div></td></tr>
 
-      <tr><td colspan="2"><span>Race(s)?</span> 
-          <div class="btn-group" data-toggle="buttons">
+      <tr><td colspan="2"><span>Race(s)?</span>
+          <div class="btn-group race-check" data-toggle="checkbox">
           <% Race.all.each do |race| %>
-          
-              <span data-toggle="tooltip" title="You may select more than one." id="nickname-tooltip"><%= check_box_tag 'student[race_ids][]', race.id, @student.race_ids.include?(race.id), id: dom_id(race), class: 'hidden' %>
-              <%= label_tag dom_id(race), t('race_' + race.race), class: 'btn btn-primary' %></span>
+
+              <span data-toggle="tooltip" title="You may select more than one." id="nickname-tooltip">
+                <%= check_box_tag 'student[race_ids][]', race.id, @student.race_ids.include?(race.id), id: dom_id(race), class: 'checkbox' %>
+                <%= label_tag dom_id(race), t('race_' + race.race), class: 'btn btn-primary' %>
+              </span>
           <% end %>
         </div>
       </td>
-      </tr>  
+      </tr>
 
     </table>
 
