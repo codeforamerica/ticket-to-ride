@@ -16,7 +16,7 @@ div.container header {
 }
 
 .enrollment-form{
-  margin-top: 2em;  
+  margin-top: 1em;  
   padding-left: 3%;
 }
 
@@ -88,9 +88,15 @@ a:hover.enrollment-form-popover {
   margin-right: -10px;
 }
 
-.enrollment-form td.padding-right {
+// .enrollment-form td.padding-right {
+//   padding-right: 1.5%;
+//   max-width: 540px;
+// }
+
+.enrollment-form td.language-cell {
   padding-right: 1.5%;
-  max-width: 540px;
+  min-width: 400px;
+  max-width: 400px;
 }
 
 div.enrollment-form .instructions {
@@ -322,7 +328,8 @@ input[type=date] {
   font-weight: 600;
   border-bottom: 2px dashed $george-harrison;
   margin: 0 1% 0 1%;
-  width: 60%;
+  min-width: 200px;
+  max-width: 200px;
   text-align: center;
   line-height: 1.5em;
   position: relative;
@@ -333,6 +340,10 @@ input[type=date] {
 .enrollment-form-modal-selection {
   border-bottom: 2px dashed $george-harrison;
   font-weight: 700;
+  text-align: center;
+  color: $paul-mccartney;
+  min-width: 200px;
+  max-width: 200px;
 }
 
 .enrollment-form .filler-text {
@@ -533,4 +544,8 @@ div.enrollment-form .field_with_errors {
 
 .race-check input[type="checkbox"].checkbox:disabled + label {
     opacity: 0.5;
+}
+
+td div.buttons-center {
+  margin: 0 25% 0 25%;
 }
