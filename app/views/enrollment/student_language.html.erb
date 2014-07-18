@@ -12,7 +12,7 @@
       </ul>
   <% end %>
 
-  <div>
+  <div class="language-table">
     <table>
       <tr>
         <td><span class="instructions">Language</span></td>
@@ -20,43 +20,45 @@
       <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
           <tr>
-            <td class="padding-right">What language did <%= @student.first_name %> learn
+            <td class="language-question-cell">What language did <%= @student.first_name %> learn
               when <%= @student_gender_pronoun %> first began to talk?
             </td>
-            <td>
+            <td class="language-gutter-cell"></td>
+            <td class="language-answer-cell">
               <%= s.text_field :first_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#firstLanguageModal', id: 'firstLanguageSelected', placeholder: 'Choose' %>
             </td>
           </tr>
 
           <tr>
-            <td class="padding-right">What language does <%= @student_gender_pronoun %> most frequently use at home?
+            <td class="language-question-cell">What language does <%= @student_gender_pronoun %> most frequently use at home?
             </td>
-            <td>
+            <td class="language-gutter-cell"></td>
+            <td class="language-answer-cell">
               <%= s.text_field :home_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#homeLanguageModal', id: 'homeLanguageSelected', placeholder: 'Choose' %>
             </td>
           </tr>
 
           <tr>
-            <td class="padding-right">What language do you use most frequently to speak with <%= @student.first_name %>?
+            <td class="language-question-cell">What language do you use most frequently to speak with <%= @student.first_name %>?
             </td>
-            <td>
+            <td class="language-gutter-cell"></td>
+            <td class="language-answer-cell">
               <%= s.text_field :guardian_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#guardianLanguageModal', id: 'guardianLanguageSelected', placeholder: 'Choose' %>
             </td>
           </tr>
 
           <tr>
-            <td class="padding-right">Has <%= @student.first_name %> received any formal English language instruction
+            <td class="language-question-cell">Has <%= @student_gender_pronoun %> received any formal English language instruction
               (listening, speaking, reading, or writing)?
             </td>
-            <td>
-
-              <div class="btn-group" data-toggle="buttons">
-                <%= s.radio_button :had_english_instruction, true %>
-                <%= s.label :had_english_instruction_true, 'Yes'%>
-
-                <%= s.radio_button :had_english_instruction, false %>
-                <%= s.label :had_english_instruction_false, 'No'%>
-              </div>
+            <td class="language-gutter-cell"></td>
+            <td class="language-answer-cell">
+             <div class="btn-group buttons-center" data-toggle="buttons">
+               <label class="btn btn-primary">
+               <%= s.radio_button :had_english_instruction, true %>Yes</label>
+               <label class="btn btn-primary">
+               <%= s.radio_button :had_english_instruction, false %>No</label>
+             </div>
             </td>
           </tr>
           </table>

@@ -16,7 +16,7 @@ div.container header {
 }
 
 .enrollment-form{
-  margin-top: 2em;  
+  margin-top: 1em;  
   padding-left: 3%;
 }
 
@@ -88,10 +88,28 @@ a:hover.enrollment-form-popover {
   margin-right: -10px;
 }
 
-.enrollment-form td.padding-right {
-  padding-right: 1.5%;
-  max-width: 540px;
+// Begin language table formatting
+
+.language-table {
+  width: 656px;
 }
+
+td div.buttons-center {
+  margin: 0 26.55% 0 26.55%;
+}
+
+.enrollment-form td.language-question-cell {
+  width: 67.530487804878%;
+}
+
+.enrollment-form td.language-answer-cell {
+  width: 30.4878049%;
+}
+.enrollment-form td.language-gutter-cell {
+  width: 1.9817073%;
+}
+
+// End language table formatting
 
 div.enrollment-form .instructions {
   font-size: 68%;
@@ -322,10 +340,12 @@ input[type=date] {
   font-weight: 600;
   border-bottom: 2px dashed $george-harrison;
   margin: 0 1% 0 1%;
-  width: 60%;
+  width: 100%;
+  // min-width: 200px;
+  // max-width: 200px;
   text-align: center;
   line-height: 1.5em;
-  position: relative;
+  // position: relative;
   top: 0;
   font-size: 100%;
 }
@@ -333,6 +353,10 @@ input[type=date] {
 .enrollment-form-modal-selection {
   border-bottom: 2px dashed $george-harrison;
   font-weight: 700;
+  text-align: center;
+  color: $paul-mccartney;
+  min-width: 200px;
+  max-width: 200px;
 }
 
 .enrollment-form .filler-text {
