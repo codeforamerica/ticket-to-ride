@@ -51,4 +51,17 @@ class Student < ActiveRecord::Base
                                       allow_nil: true
   }
 
+  # Validate languages
+  validates :first_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                       message: 'First language can only contain letters, spaces, and dashes',
+                                       allow_nil: true
+  }
+  validates :home_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                      message: 'Home language can only contain letters, spaces, and dashes',
+                                      allow_nil: true
+  }
+  validates :guardian_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                          message: 'Guardian language can only contain letters, spaces, and dashes',
+                                          allow_nil: true
+  }
 end
