@@ -12,15 +12,18 @@
   <% end %>
 
   <%= form_for(@student, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">First name:</div>
-          <div class="col-md-3"><%= s.text_field :first_name, class: 'enrollment-grid-input', id: 'student_firstname', placeholder: 'Mary', required: true %></div>
-              <div class="col-md-3">Last name: </div>
-              <div class="col-md-3"><%= s.text_field :last_name, class: 'enrollment-grid-input', id: 'student_lastname', placeholder: 'Williams', required: true %></div>
-      </div>
-    </div>
-          <table>
+      <div>
+        <table>
+          <tr>
+            <td class="row-break">
+              <span>First name:</span>
+              <span><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', placeholder: 'Mary', required: true %></span>
+            </td>
+            <td>
+              <span>Last name: </span>
+              <span><%= s.text_field :last_name, class: 'enrollment-form-input', id: 'student_lastname', placeholder: 'Williams', required: true %></span>
+            </td>
+          </tr>
           <tr>
             <td>
               <span>Middle name:</span><span><%= s.text_field :middle_name, class: 'enrollment-form-input', id: 'student_middlename', placeholder: 'Sayles' %></span>
@@ -53,6 +56,10 @@
       </ul>
 
   <% end %>
+  <%= render 'shared/scenery_student' %>
 </div>
 
-<%= render 'shared/scenery_student' %>
+
+
+
+
