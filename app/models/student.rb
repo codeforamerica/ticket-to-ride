@@ -65,4 +65,18 @@ class Student < ActiveRecord::Base
                                           message: 'Guardian language can only contain letters, spaces, and dashes',
                                           allow_nil: true
   }
+
+  # Prior school information
+  validates :prior_school_name, format: { with: ModelConstants::LETTERS_NUMBERS_SPACES_AND_DASHES_REGEX,
+                                       message: 'Prior school name can only contain letters, numbers, spaces, and dashes',
+                                       allow_nil: true
+  }
+  validates :prior_school_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                      message: 'Prior school city can only contain letters, spaces, and dashes',
+                                      allow_nil: true
+  }
+  validates :prior_school_state, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                          message: 'Prior school state can only contain letters, spaces, and dashes',
+                                          allow_nil: true
+  }
 end
