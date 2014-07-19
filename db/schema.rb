@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716161836) do
+ActiveRecord::Schema.define(version: 20140719033432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,13 @@ ActiveRecord::Schema.define(version: 20140716161836) do
     t.string  "priority_level"
   end
 
+  create_table "previous_grades", force: true do |t|
+    t.string   "code",        null: false
+    t.integer  "grade_level", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "races", force: true do |t|
     t.string   "race",            null: false
     t.datetime "created_at"
@@ -142,8 +149,8 @@ ActiveRecord::Schema.define(version: 20140716161836) do
     t.date     "birthday"
     t.string   "first_language"
     t.date     "school_start_date"
-    t.boolean  "iep",                        default: false
-    t.boolean  "p504",                       default: false
+    t.boolean  "iep"
+    t.boolean  "p504"
     t.boolean  "bus_required",               default: false
     t.boolean  "birth_certificate_verified", default: false
     t.boolean  "residency_verified",         default: false
@@ -174,7 +181,6 @@ ActiveRecord::Schema.define(version: 20140716161836) do
     t.datetime "guardian_complete_time"
     t.datetime "export_time"
     t.integer  "estimated_graduation_year"
-    t.integer  "grade"
     t.string   "home_state"
     t.string   "mailing_state"
     t.boolean  "needs_special_services"
@@ -186,7 +192,7 @@ ActiveRecord::Schema.define(version: 20140716161836) do
     t.string   "prior_school_name"
     t.string   "prior_school_city"
     t.string   "prior_school_state"
-    t.integer  "last_completed_grade"
+    t.integer  "previous_grade_id"
   end
 
   create_table "students_contact_people", force: true do |t|
