@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719015513) do
+ActiveRecord::Schema.define(version: 20140719033432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,8 +149,8 @@ ActiveRecord::Schema.define(version: 20140719015513) do
     t.date     "birthday"
     t.string   "first_language"
     t.date     "school_start_date"
-    t.boolean  "iep",                        default: false
-    t.boolean  "p504",                       default: false
+    t.boolean  "iep"
+    t.boolean  "p504"
     t.boolean  "bus_required",               default: false
     t.boolean  "birth_certificate_verified", default: false
     t.boolean  "residency_verified",         default: false
@@ -181,7 +181,6 @@ ActiveRecord::Schema.define(version: 20140719015513) do
     t.datetime "guardian_complete_time"
     t.datetime "export_time"
     t.integer  "estimated_graduation_year"
-    t.integer  "grade"
     t.string   "home_state"
     t.string   "mailing_state"
     t.boolean  "needs_special_services"
@@ -193,7 +192,6 @@ ActiveRecord::Schema.define(version: 20140719015513) do
     t.string   "prior_school_name"
     t.string   "prior_school_city"
     t.string   "prior_school_state"
-    t.integer  "last_completed_grade"
     t.integer  "previous_grade_id"
   end
 
