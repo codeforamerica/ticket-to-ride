@@ -45,7 +45,8 @@ class EnrollmentController < ApplicationController
       :student_name,
       :student_gender_and_ethnicity,
       :student_language,
-      :student_previous_school
+      :student_previous_school,
+      :student_special_services
   ]
 
   # Grades, sorted by order
@@ -257,6 +258,9 @@ class EnrollmentController < ApplicationController
       when :student_previous_school
         return update_student_previous_school(@student)
 
+      when :student_special_services
+        return update_student_special_services(@student)
+
     end
 
 
@@ -407,6 +411,33 @@ class EnrollmentController < ApplicationController
     # Save the student
     student.update_attributes(student_params)
     student.previous_grade = previous_grade
+    return render_wizard student
+  end
+
+  def update_student_special_services(student)
+
+    if param_does_not_exist(:student, :needs_special_services)
+      student.errors.add(:needs_special_services, 'Special services question must be answered')
+    end
+
+    if param_does_not_exist(:student, :iep)
+      student.errors.add(:iep, 'IEP question must be answered')
+    end
+
+    if param_does_not_exist(:student, :p504)
+      student.errors.add(:p504, '504 question must be answered')
+    end
+
+    if param_does_not_exist(:student, :has_learning_difficulties)
+      student.errors.add(:has_learning_difficulties, 'Learning difficulties question must be answered')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
     return render_wizard student
   end
 

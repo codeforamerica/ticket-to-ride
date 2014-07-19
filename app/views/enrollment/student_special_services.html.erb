@@ -1,12 +1,20 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
 
+  <% if @student.errors %>
+      <ul id="validation-errors">
+        <% @student.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
       <tr><td colspan="2"><span class="instructions">Special Services</span></td></tr>
       <tr>
-        <td class="padding-right">Was <%= @student.first_name %> receiving special education services at <%= @gender_objective_pronoun %> previous school?</td>        
+        <td class="padding-right">Was <%= @student.first_name %> receiving special education services at <%= @gender_possessive_pronoun %> previous school?</td>
         <td><div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
               <%= s.radio_button :needs_special_services, true %>Yes</label>
@@ -25,7 +33,7 @@
         </div></td>
       </tr> <!-- this should trigger "Bring copy of IEP" on final screen -->
       <tr>
-        <td class="padding-right">Did <%= @student.first_name %> have a Section 504 Plan at <%= @gender_objective_pronoun %> prior school?</td>
+        <td class="padding-right">Did <%= @student.first_name %> have a Section 504 Plan at <%= @gender_possessive_pronoun %> prior school?</td>
         <td><div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
               <%= s.radio_button :p504, true %>Yes</label>
