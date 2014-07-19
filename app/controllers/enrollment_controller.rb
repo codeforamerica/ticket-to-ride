@@ -44,9 +44,12 @@ class EnrollmentController < ApplicationController
   UPDATED_STEPS = [
       :student_name,
       :student_gender_and_ethnicity,
-      :student_language
+      :student_language,
+      :student_previous_school
   ]
 
+  # Grades, sorted by order
+  GRADES_IN_ORDER = PreviousGrade.all.sort_by { |g| g.grade_level }
 
   # SHOW
   # This is contains the logic used to prep variables for the
@@ -251,6 +254,9 @@ class EnrollmentController < ApplicationController
       when :student_language
         return update_student_language(@student)
 
+      when :student_previous_school
+        return update_student_previous_school(@student)
+
     end
 
 
@@ -350,6 +356,57 @@ class EnrollmentController < ApplicationController
 
     # Save the student
     student.update_attributes(student_params)
+    return render_wizard student
+  end
+
+  def update_student_previous_school(student)
+
+    # Last completed grade
+    if param_does_not_exist(:student, :previous_grade_id)
+      student.errors.add(:previous_grade, 'Previous grade is a required field')
+    end
+
+    previous_grade_id = params[:student][:previous_grade_id]
+    previous_grade = nil
+    if previous_grade_id
+      begin
+        previous_grade = PreviousGrade.find(previous_grade_id)
+      rescue
+        student.errors.add(:previous_grade, 'Previous grade has an invalid value')
+      end
+    end
+
+    # Only request previous school information when prior schooling isn't equal to none
+    if previous_grade && previous_grade.code != 'none'
+
+      # Prior school name
+      if param_does_not_exist(:student, :prior_school_name)
+        student.errors.add(:prior_school_name, 'Prior school name must be filled in')
+      end
+
+      # Prior school city
+      if param_does_not_exist(:student, :prior_school_city)
+        student.errors.add(:prior_school_city, 'Prior school city must be filled in')
+      end
+
+      # Prior school state
+      if param_does_not_exist(:student, :prior_school_state)
+        student.errors.add(:prior_school_state, 'Prior school state must be filled in')
+      end
+
+    else
+      params[:student].delete(:prior_school_name)
+      params[:student].delete(:prior_school_city)
+      params[:student].delete(:prior_school_state)
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
+    student.previous_grade = previous_grade
     return render_wizard student
   end
 
