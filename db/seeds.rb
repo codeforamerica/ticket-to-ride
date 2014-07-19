@@ -235,12 +235,11 @@ guardian_complete_west_warwick_student = Student.create(
     guardian_complete_time: '2013-06-18',
     estimated_graduation_year: 2027,
     active: true,
-    grade: :kindergarten,
     prior_school_name: 'Lighthouse Montessori',
     prior_school_city: 'West Warwick',
     prior_school_state: 'RI',
-    last_completed_grade: :pre_k,
     had_english_instruction: :false,
+    previous_grade: grade_pre_k
 )
 
 StudentRace.create(
