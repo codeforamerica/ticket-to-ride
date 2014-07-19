@@ -48,7 +48,9 @@ module StudentParams
         :last_completed_grade,
         :birth_city,
         :birth_state,
-        :race_ids
+        :race_ids,
+        :previous_grade,
+        :previous_grade_id
     )
   end
 end

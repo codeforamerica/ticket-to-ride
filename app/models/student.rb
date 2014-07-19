@@ -6,6 +6,7 @@ class Student < ActiveRecord::Base
   has_many :races, through: :student_races
   has_many :contact_people
   belongs_to :school
+  belongs_to :previous_grade
 
   # Behavior
   acts_as_birthday :birthday
@@ -14,8 +15,6 @@ class Student < ActiveRecord::Base
 
   # Enum Validations
   enum gender: [:male, :female]
-  enum grade: [:pre_kindergarten, :kindergarten, :grade_1, :grade_2, :grade_3, :grade_4, :grade_5, :grade_6, :grade_7, :grade_8, :grade_9, :grade_10, :grade_11, :grade_12]
-  enum last_completed_grade: [:pre_k, :k, :first_grade, :second_grade, :third_grade, :fourth_grade, :fifth_grade, :sixth_grade, :seventh_grade, :eighth_grade, :freshman, :sophomore, :junior]
 
   # Names can only be letters, spaces, and dashes
   validates :first_name, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
@@ -51,4 +50,31 @@ class Student < ActiveRecord::Base
                                       allow_nil: true
   }
 
+  # Validate languages
+  validates :first_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                       message: 'First language can only contain letters, spaces, and dashes',
+                                       allow_nil: true
+  }
+  validates :home_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                      message: 'Home language can only contain letters, spaces, and dashes',
+                                      allow_nil: true
+  }
+  validates :guardian_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                          message: 'Guardian language can only contain letters, spaces, and dashes',
+                                          allow_nil: true
+  }
+
+  # Prior school information
+  validates :prior_school_name, format: { with: ModelConstants::LETTERS_NUMBERS_SPACES_AND_DASHES_REGEX,
+                                       message: 'Prior school name can only contain letters, numbers, spaces, and dashes',
+                                       allow_nil: true
+  }
+  validates :prior_school_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                      message: 'Prior school city can only contain letters, spaces, and dashes',
+                                      allow_nil: true
+  }
+  validates :prior_school_state, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                          message: 'Prior school state can only contain letters, spaces, and dashes',
+                                          allow_nil: true
+  }
 end

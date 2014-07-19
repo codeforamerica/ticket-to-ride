@@ -75,7 +75,7 @@
               <% elsif @summary_student.gender == 'female' %>
                 <%= 'she' %>
               <% end %>
-                completed was <span class="summaryAnswers"> <%= @summary_student.last_completed_grade %></span>.
+                completed was <span class="summaryAnswers"> <%= t('grade_' + @summary_student.previous_grade.code %></span>.
                 <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div></td>
           </tr>
           <tr>
