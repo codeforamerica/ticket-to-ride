@@ -77,4 +77,27 @@ class Student < ActiveRecord::Base
                                           message: 'Prior school state can only contain letters, spaces, and dashes',
                                           allow_nil: true
   }
+
+  # Student's home address
+  validates :home_street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
+                                              message: 'Home street address 1 can only have letters, numbers, dashes, and periods',
+                                              allow_nil: true
+  }
+  validates :home_street_address_2, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
+                                              message: 'Home street address 2 can only have letters, numbers, dashes, and periods',
+                                              allow_nil: true
+  }
+  validates :home_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                  message: 'Home city can only contain letters, spaces, and dashes',
+                                  allow_nil: true
+  }
+  validates :home_state, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                   message: 'Home state can only contain letters, spaces, and dashes',
+                                   allow_nil: true
+  }
+  validates :home_zip_code, format: { with: /\A\d{5}(-\d{4})?\z/,
+                                   message: 'Home state can only contain letters, spaces, and dashes',
+                                   allow_nil: true
+  }
+
 end

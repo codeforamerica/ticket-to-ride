@@ -46,7 +46,8 @@ class EnrollmentController < ApplicationController
       :student_gender_and_ethnicity,
       :student_language,
       :student_previous_school,
-      :student_special_services
+      :student_special_services,
+      :student_address
   ]
 
   # Grades, sorted by order
@@ -261,6 +262,9 @@ class EnrollmentController < ApplicationController
       when :student_special_services
         return update_student_special_services(@student)
 
+      when :student_address
+        return update_student_address(@student)
+
     end
 
 
@@ -430,6 +434,30 @@ class EnrollmentController < ApplicationController
 
     if param_does_not_exist(:student, :has_learning_difficulties)
       student.errors.add(:has_learning_difficulties, 'Learning difficulties question must be answered')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
+    return render_wizard student
+  end
+
+  def update_student_address(student)
+
+    if param_does_not_exist(:student, :home_street_address_1)
+      student.errors.add(:home_street_address_1, 'Home street address 1 is a required field')
+    end
+    if param_does_not_exist(:student, :home_city)
+      student.errors.add(:home_city, 'Home city is a required field')
+    end
+    # if param_does_not_exist(:student, :home_state)
+    #   student.errors.add(:home_state, 'Home state is a required field')
+    # end
+    if param_does_not_exist(:student, :home_zip_code)
+      student.errors.add(:home_zip_code, 'Home zip code is a required field')
     end
 
     if student.errors.size > 0
