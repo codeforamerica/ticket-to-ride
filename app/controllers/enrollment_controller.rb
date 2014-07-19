@@ -265,6 +265,9 @@ class EnrollmentController < ApplicationController
       when :student_address
         return update_student_address(@student)
 
+      when :student_complete
+        render_wizard next_step
+
     end
 
 
