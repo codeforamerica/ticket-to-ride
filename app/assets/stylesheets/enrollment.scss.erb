@@ -1,6 +1,6 @@
 @import "common/variables";
 
-div.container header {
+div.container-application header {
   position: absolute;
   left: -20px;
   top: 10px;
@@ -8,16 +8,23 @@ div.container header {
   width: 226px;
 }
 
-.enrollment-form, ul.pager {
-  max-width: 960px;
-  margin: 0 auto;
-  font-size: 150%;
-  line-height: 175%;
-}
+// .enrollment-form *{
+//   border: 1px solid green;
+// }
 
 .enrollment-form{
-  margin-top: 1em;  
-  padding-left: 3%;
+  margin: 1em 5% 0 5%;  
+  // padding-left: 5%;
+  max-width: 960px;
+  font-size: 150%
+}
+
+.enrollment-form .container {
+  width: inherit;
+}
+
+.enrollment-form ul.pager {
+  margin: 0 auto;
 }
 
 .enrollment-form_para {
@@ -90,26 +97,44 @@ a:hover.enrollment-form-popover {
 
 // Begin language table formatting
 
-.language-table {
+.enrollment-qa-table {
   width: 656px;
+  margin-bottom: -2%;
 }
 
 td div.buttons-center {
   margin: 0 26.55% 0 26.55%;
 }
 
-.enrollment-form td.language-question-cell {
+.enrollment-form td.enrollment-qa-question-cell {
   width: 67.530487804878%;
 }
 
-.enrollment-form td.language-answer-cell {
+.enrollment-form td.enrollment-qa-answer-cell {
   width: 30.4878049%;
 }
-.enrollment-form td.language-gutter-cell {
+.enrollment-form td.enrollment-qa-gutter-cell {
   width: 1.9817073%;
 }
 
 // End language table formatting
+
+// Begin table with radio button pair answers formatting
+
+.enrollment-qa-table-radio-only {
+  width: 656px;
+  margin-bottom: -2%;
+}
+
+.enrollment-form td.enrollment-qa-radio-only-question-cell {
+  width: 77.530487804878%;
+}
+
+.enrollment-form td.enrollment-qa-radio-only-answer-cell {
+  width: 25.4878049%;
+}
+
+// End table with radio button pair answers formatting
 
 div.enrollment-form .instructions {
   font-size: 68%;
@@ -117,7 +142,7 @@ div.enrollment-form .instructions {
   color: $george-harrison;
   line-height: 145%;
   // margin-bottom: -1%;
-  margin-top: -2%;
+  margin-top: 0;
 }
 
 .student-info-container{
@@ -307,12 +332,26 @@ input[type=date] {
   font-weight: 600;
   border-bottom: 2px dashed $george-harrison;
   font-size: 89%;
-  margin: 0 1% 0 1%;
-  width: 40%;
+  // margin: 0 1.5% 0 1.5%;
+  width: 48%;
   text-align: center;
   line-height: 1.5em;
   position: relative;
   top: -7px;
+}
+
+.enrollment-grid-input {
+  border: 0;
+  color: $paul-mccartney;
+  font-weight: 600;
+  border-bottom: 2px dashed $george-harrison;
+  font-size: 75%;
+  text-align: center;
+  /* line-height: 1.5em; */
+  position: relative;
+  top: -7px;
+  width: 100%;
+  margin: 0 4.5% 0 -17.5%;
 }
 
 .enrollment-form-answered {
