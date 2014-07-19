@@ -1,40 +1,25 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
 
+  <% if @student.errors %>
+      <ul id="validation-errors">
+        <% @student.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
       <tr><td colspan="2"><span class="instructions">Previous Schooling</span></td></tr>
       <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
         <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary">
-              <%= s.radio_button :last_completed_grade, '0' %>None</label>   
+          <% EnrollmentController::GRADES_IN_ORDER.each do |previous_grade| %>
             <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :pre_k %>Pre-K</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :k %>K</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :first_grade %>1</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :second_grade %>2</label>  
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :third_grade %>3</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :fourth_grade %>4</label>   
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :fifth_grade %>5</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :sixth_grade %>6</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :seventh_grade %>7</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :eighth_grade %>8</label>  
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :freshman %>9</label>
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :sophomore %>10</label> 
-            <label class="btn btn-primary">
-                <%= s.radio_button :last_completed_grade, :junior %>11</label>   
+                <%= s.radio_button :previous_grade_id, previous_grade.id %><%= t('grade_' + previous_grade.code + '_abbrev') %>
+            </label>
+          <% end %>
         </div></td></tr>
 
       <tr>
