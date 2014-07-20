@@ -40,6 +40,14 @@ class EnrollmentController < ApplicationController
       :student_special_services
   ]
 
+  # Steps that nothing needs to be processed in the update phase
+  UPDATE_PASS_STEPS = [
+      :student_complete
+      # :guardian_complete,
+      # :summary,
+      # :enrollment_complete
+  ]
+
   # Temporary
   UPDATED_STEPS = [
       :student_name,
@@ -47,7 +55,8 @@ class EnrollmentController < ApplicationController
       :student_language,
       :student_previous_school,
       :student_special_services,
-      :student_address
+      :student_address,
+      :student_complete
   ]
 
   # Grades, sorted by order
@@ -265,11 +274,10 @@ class EnrollmentController < ApplicationController
       when :student_address
         return update_student_address(@student)
 
-      when :student_complete
+      when UPDATE_PASS_STEPS.include?(step)
         render_wizard next_step
 
     end
-
 
     # set_next_step = next_step
     # jump_to set_next_step
