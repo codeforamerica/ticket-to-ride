@@ -20,11 +20,74 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+
+  # Races
   race_black: 'Black'
   race_white: 'White'
   race_asian: 'Asian'
   race_native_american: 'Native American'
   race_pacific_islander: 'Pacific Islander'
+
+  # Grades
+  grade_none: '(No Prior Grade)'
+  grade_none_abbrev: 'None'
+  grade_none_year: 'Before School'
+
+  grade_pre_k: 'Pre-Kindergarten'
+  grade_pre_k_abbrev: 'Pre-K'
+  grade_pre_k_year: 'Pre-K'
+
+  grade_k: 'Kindergarten'
+  grade_k_abbrev: 'K'
+  grade_k_year: 'Kindergarten'
+
+  grade_1: 'Grade 1'
+  grade_1_abbrev: '1'
+  grade_1_year: 'First Grade'
+
+  grade_2: 'Grade 2'
+  grade_2_abbrev: '2'
+  grade_2_year: 'Second Grade'
+
+  grade_3: 'Grade 3'
+  grade_3_abbrev: '3'
+  grade_3_year: 'Third Grade'
+
+  grade_4: 'Grade 4'
+  grade_4_abbrev: '4'
+  grade_4_year: 'Fourth Grade'
+
+  grade_5: 'Grade 5'
+  grade_5_abbrev: '5'
+  grade_5_year: 'Fifth Grade'
+
+  grade_6: 'Grade 6'
+  grade_6_abbrev: '6'
+  grade_6_year: 'Sixth Grade'
+
+  grade_7: 'Grade 7'
+  grade_7_abbrev: '7'
+  grade_7_year: 'Seventh Grade'
+
+  grade_8: 'Grade 8'
+  grade_8_abbrev: '8'
+  grade_8_year: 'Eigth Grade'
+
+  grade_9: 'Grade 9'
+  grade_9_abbrev: '9'
+  grade_9_year: 'Freshman'
+
+  grade_10: 'Grade 10'
+  grade_10_abbrev: '10'
+  grade_10_year: 'Sophmore'
+
+  grade_11: 'Grade 11'
+  grade_11_abbrev: '11'
+  grade_11_year: 'Junior'
+
+  grade_12: 'Grade 12'
+  grade_12_abbrev: '12'
+  grade_12_year: 'Senior'
 
 
 

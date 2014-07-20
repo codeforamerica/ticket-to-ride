@@ -44,9 +44,14 @@ class EnrollmentController < ApplicationController
   UPDATED_STEPS = [
       :student_name,
       :student_gender_and_ethnicity,
-      :student_language
+      :student_language,
+      :student_previous_school,
+      :student_special_services,
+      :student_address
   ]
 
+  # Grades, sorted by order
+  GRADES_IN_ORDER = PreviousGrade.all.sort_by { |g| g.grade_level }
 
   # SHOW
   # This is contains the logic used to prep variables for the
@@ -251,6 +256,18 @@ class EnrollmentController < ApplicationController
       when :student_language
         return update_student_language(@student)
 
+      when :student_previous_school
+        return update_student_previous_school(@student)
+
+      when :student_special_services
+        return update_student_special_services(@student)
+
+      when :student_address
+        return update_student_address(@student)
+
+      when :student_complete
+        render_wizard next_step
+
     end
 
 
@@ -342,6 +359,108 @@ class EnrollmentController < ApplicationController
     end
     if param_does_not_exist(:student, :had_english_instruction)
       student.errors.add(:had_english_instruction, 'Has English Instruction is a required field')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
+    return render_wizard student
+  end
+
+  def update_student_previous_school(student)
+
+    # Last completed grade
+    if param_does_not_exist(:student, :previous_grade_id)
+      student.errors.add(:previous_grade, 'Previous grade is a required field')
+    end
+
+    previous_grade_id = params[:student][:previous_grade_id]
+    previous_grade = nil
+    if previous_grade_id
+      begin
+        previous_grade = PreviousGrade.find(previous_grade_id)
+      rescue
+        student.errors.add(:previous_grade, 'Previous grade has an invalid value')
+      end
+    end
+
+    # Only request previous school information when prior schooling isn't equal to none
+    if previous_grade && previous_grade.code != 'none'
+
+      # Prior school name
+      if param_does_not_exist(:student, :prior_school_name)
+        student.errors.add(:prior_school_name, 'Prior school name must be filled in')
+      end
+
+      # Prior school city
+      if param_does_not_exist(:student, :prior_school_city)
+        student.errors.add(:prior_school_city, 'Prior school city must be filled in')
+      end
+
+      # Prior school state
+      if param_does_not_exist(:student, :prior_school_state)
+        student.errors.add(:prior_school_state, 'Prior school state must be filled in')
+      end
+
+    else
+      params[:student].delete(:prior_school_name)
+      params[:student].delete(:prior_school_city)
+      params[:student].delete(:prior_school_state)
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
+    student.previous_grade = previous_grade
+    return render_wizard student
+  end
+
+  def update_student_special_services(student)
+
+    if param_does_not_exist(:student, :needs_special_services)
+      student.errors.add(:needs_special_services, 'Special services question must be answered')
+    end
+
+    if param_does_not_exist(:student, :iep)
+      student.errors.add(:iep, 'IEP question must be answered')
+    end
+
+    if param_does_not_exist(:student, :p504)
+      student.errors.add(:p504, '504 question must be answered')
+    end
+
+    if param_does_not_exist(:student, :has_learning_difficulties)
+      student.errors.add(:has_learning_difficulties, 'Learning difficulties question must be answered')
+    end
+
+    if student.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the student
+    student.update_attributes(student_params)
+    return render_wizard student
+  end
+
+  def update_student_address(student)
+
+    if param_does_not_exist(:student, :home_street_address_1)
+      student.errors.add(:home_street_address_1, 'Home street address 1 is a required field')
+    end
+    if param_does_not_exist(:student, :home_city)
+      student.errors.add(:home_city, 'Home city is a required field')
+    end
+    # if param_does_not_exist(:student, :home_state)
+    #   student.errors.add(:home_state, 'Home state is a required field')
+    # end
+    if param_does_not_exist(:student, :home_zip_code)
+      student.errors.add(:home_zip_code, 'Home zip code is a required field')
     end
 
     if student.errors.size > 0
