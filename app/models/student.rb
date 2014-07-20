@@ -96,7 +96,7 @@ class Student < ActiveRecord::Base
                                    allow_nil: true
   }
   validates :home_zip_code, format: { with: /\A\d{5}(-\d{4})?\z/,
-                                   message: 'Home state can only contain letters, spaces, and dashes',
+                                   message: 'Home state can only contain digits and dashes (example: 20930)',
                                    allow_nil: true
   }
 
