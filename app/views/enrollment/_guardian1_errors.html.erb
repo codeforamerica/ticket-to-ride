@@ -1,0 +1,10 @@
+<% if @student.errors || @guardian_1.errors %>
+    <ul id="validation-errors">
+      <% @student.errors.each do |field, message| %>
+          <li>Oops! <%= message %></li>
+      <% end %>
+      <% @guardian_1.errors.each do |field, message| %>
+          <li>Oops! <%= message %></li>
+      <% end %>
+    </ul>
+<% end %>

@@ -26,16 +26,7 @@
 
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
-  <% if @student.errors || @guardian_1.errors %>
-      <ul id="validation-errors">
-        <% @student.errors.each do |field, message| %>
-            <li><%= field %>: <%= message %></li>
-        <% end %>
-        <% @guardian_1.errors.each do |field, message| %>
-            <li><%= field %>: <%= message %></li>
-        <% end %>
-      </ul>
-  <% end %>
+  <%= render 'enrollment/guardian1_errors' %>
 
   <div class="instructions">Tell us about you.</div>
 
@@ -51,12 +42,12 @@
               <span><%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams', required: true %></span>
             </td>
           </tr>
+
           <tr>
-            <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>:
-              <%= g.text_field :relationship, class: 'enrollment-form-popover', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', placeholder: 'Relationship' %>
-              <!-- <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a>-->
+            <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose relationship</a>
             </td>
           </tr>
+          
           <tr>
             <td colspan="2">Does <%= @student.first_name %> live with you?
               <div id="lives-with-student-radio-group" class="btn-group" data-toggle="buttons">
@@ -80,8 +71,8 @@
           <td colspan="2" id="guardian1_shared_city">
             <span>City:</span>
             <%= g.text_field :mailing_city, id: 'contact_person_mailing_city', placeholder: 'City', class: 'enrollment-form-input' %>,
-            <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI', class: 'enrollment-form-input', value: 'RI' %>
-            <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input' %>
+            <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI', class: 'enrollment-form-input guardian_state', value: 'RI' %>
+            <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input guardian_zip' %>
           </td>
         </tr>
         </table>
@@ -91,7 +82,6 @@
         <li><%= link_to "Previous", previous_wizard_path %></li>
         <li><%= g.submit 'Next', class: 'nav-button pull-right', id: 'submitGuardian1' %></li>
       </ul>
-
 
       <div class="modal fade" id="guardian1RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="guardian1RelationshipModal" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -103,13 +93,13 @@
             <div class="modal-body single-col-modal">
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', 'Mother', class: 'second' %>Mother
+                  <%= g.radio_button :relationship, :mother, class: 'second' %>Mother
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', 'Father', class: 'second' %>Father
+                  <%= g.radio_button :relationship, :father, class: 'second' %>Father
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', 'Guardian', class: 'second' %>Guardian
+                  <%= g.radio_button :relationship, :guardian, class: 'second' %>Guardian
                 </label><br/>
                   <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'other_relationship', placeholder: 'Other' %>
                 <br/>
