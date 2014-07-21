@@ -1,5 +1,6 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+  <%= render 'enrollment/guardian1_errors' %>
 
   <%= form_for(@guardian_1, url: wizard_path, method: :put) do |g| %>
 

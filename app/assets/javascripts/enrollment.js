@@ -33,11 +33,11 @@ $(document).ready(function () {
 
   getSelectionFromModalForInput('#btnGuardianLanguage', 'input[name="choose_student_guardian_language"]:checked', '#guardianLanguageSelected');
 
-//  $("form input:radio").change(function() {
-//    var radio = $(this).val();
-//    toggleGuardian1Address(radio);
-//    toggleGuardian2Name(radio);
-//  });
+ $("form input:radio").change(function() {
+   var radio = $(this).val();
+   // toggleGuardian1Address(radio);
+   toggleGuardian2Name(radio);
+ });
 
   // Change the color of the birthdate field
 
@@ -68,6 +68,10 @@ $(document).ready(function () {
     }
   };
 
+  // toggleGuardian2Name(guardian2_existing);
+
+  // var guardian2_existing = $('input[name="has_additional_guardian"]')
+
   function toggleGuardian2Name(radio){
     if (radio == 'true') {
       $('#guardian2_first_name').removeClass('hidden');
@@ -88,7 +92,7 @@ $(document).ready(function () {
   };
   /* start TODO: Make these cancel each other out. Guardian name and address */
 
-  getSelectionFromModalForInput('#btnGuardian1Relationship', 'input[name="choose_relationship"]:checked', '#guardian1RelationshipSelected');
+  getSelectionFromModal('#btnGuardian1Relationship', 'input[name="contact_person[relationship]"]:checked', '#guardian1RelationshipSelected');
 
   $('#btnGuardian1Relationship').click(function() {
     var otherRelationship = $('#other_relationship');
@@ -98,6 +102,15 @@ $(document).ready(function () {
     selectedRelationship.removeClass('enrollment-form-popover');
     selectedRelationship.addClass('enrollment-form-modal-selection');
   });
+
+
+  // $('#btnGuardian1Relationship').click(function(){
+  //   var selectedRelationship = $('input[name="contact_person[relationship]"]:checked');
+  //   alert(selectedRelationship.val());
+
+  //   // data-dismiss="modal"
+  // })
+
 
     // if ($('#other_relationship'.val()) { 
     //   $(':radio').attr('disabled', true);
@@ -155,7 +168,7 @@ $(document).ready(function () {
 
   function getSelectionFromModal(btnName, inputName, linkToUpdate) {
     $(btnName).click(function () {
-      var selection = $(inputName).val();
+      var selection = $(inputName).val().toProperCase();
       var showSelection = $(linkToUpdate).text(selection);
       showSelection.removeClass('enrollment-form-popover');
       showSelection.addClass('enrollment-form-modal-selection');
