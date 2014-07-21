@@ -17,7 +17,7 @@
             </td>
             <td class="enrollment-qa-gutter-cell"></td>
             <td class="enrollment-answer-cell">
-              <%= s.text_field :first_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#firstLanguageModal', id: 'firstLanguageSelected', placeholder: 'Choose' %>
+              <%= s.text_field :first_language, class: 'enrollment-form-popover input-pointer', 'data-toggle'=> 'modal', 'data-target'=> '#firstLanguageModal', id: 'firstLanguageSelected', placeholder: 'Choose', readonly: true %>
             </td>
           </tr>
 
@@ -26,7 +26,7 @@
             </td>
             <td class="enrollment-qa-gutter-cell"></td>
             <td class="enrollment-answer-cell">
-              <%= s.text_field :home_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#homeLanguageModal', id: 'homeLanguageSelected', placeholder: 'Choose' %>
+              <%= s.text_field :home_language, class: 'enrollment-form-popover input-pointer', 'data-toggle'=> 'modal', 'data-target'=> '#homeLanguageModal', id: 'homeLanguageSelected', placeholder: 'Choose', readonly: true %>
             </td>
           </tr>
 
@@ -35,7 +35,7 @@
             </td>
             <td class="enrollment-qa-gutter-cell"></td>
             <td class="enrollment-answer-cell">
-              <%= s.text_field :guardian_language, class: 'enrollment-form-popover', 'data-toggle'=> 'modal', 'data-target'=> '#guardianLanguageModal', id: 'guardianLanguageSelected', placeholder: 'Choose' %>
+              <%= s.text_field :guardian_language, class: 'enrollment-form-popover input-pointer', 'data-toggle'=> 'modal', 'data-target'=> '#guardianLanguageModal', id: 'guardianLanguageSelected', placeholder: 'Choose', readonly: true %>
             </td>
           </tr>
 
@@ -84,7 +84,7 @@
                     <label class="btn btn-primary">
                       <%= radio_button_tag 'choose_student_first_language', 'Mon-Khmer' %>Mon-Khmer
                     </label><br/>
-                    <%= text_field_tag 'choose_student_first_language', nil, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
+                    <%= text_field_tag 'choose_student_first_language', nil, class: 'enrollment-form-input', id: 'choose_student_first_language_input_text', placeholder: 'Other' %>
                     <br/>
                   </div>
                 </div>
@@ -125,7 +125,7 @@
                     <label class="btn btn-primary">
                       <%= radio_button_tag 'choose_student_home_language', 'Mon-Khmer' %>Mon-Khmer
                     </label><br/>
-                    <%= text_field_tag 'choose_student_home_language', nil, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
+                    <%= text_field_tag 'choose_student_home_language', nil, class: 'enrollment-form-input', id: 'choose_student_home_language_input_text', placeholder: 'Other' %>
                     <br/>
                   </div>
                 </div>
@@ -166,7 +166,7 @@
                     <label class="btn btn-primary">
                       <%= radio_button_tag 'choose_student_guardian_language', 'Mon-Khmer' %>Mon-Khmer
                     </label><br/>
-                    <%= text_field_tag 'choose_student_guardian_language', nil, class: 'enrollment-form-input', id: 'student_language', placeholder: 'Other' %>
+                    <%= text_field_tag 'choose_student_guardian_language', nil, class: 'enrollment-form-input', id: 'choose_student_guardian_language_input_text', placeholder: 'Other' %>
                     <br/>
                   </div>
                 </div>
