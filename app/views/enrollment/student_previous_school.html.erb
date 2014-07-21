@@ -1,18 +1,13 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
 
-  <% if @student.errors %>
-      <ul id="validation-errors">
-        <% @student.errors.each do |field, message| %>
-            <li><%= field %>: <%= message %></li>
-        <% end %>
-      </ul>
-  <% end %>
+  <div class="instructions">Previous Schooling</div>
+
+  <%= render 'enrollment/student_errors' %>
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
-      <tr><td colspan="2"><span class="instructions">Previous Schooling</span></td></tr>
       <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
         <div class="btn-group" data-toggle="buttons">
           <% EnrollmentController::GRADES_IN_ORDER.each do |previous_grade| %>
