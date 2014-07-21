@@ -1,13 +1,7 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
 
-  <% if @student.errors %>
-      <ul id="validation-errors">
-        <% @student.errors.each do |field, message| %>
-            <li><%= field %>: <%= message %></li>
-        <% end %>
-      </ul>
-  <% end %>
+  <%= render 'enrollment/student_errors' %>
 
   <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
       <table>
@@ -32,7 +26,7 @@
           </td>
         </tr>
       </table>
-      </div>
+      
 
       <div id="hidden-form-fields">
 
@@ -48,6 +42,7 @@
         <li><%= link_to "Previous", previous_wizard_path %></li>
         <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
       </ul>
+  </div>
 
   <% end %>
 
