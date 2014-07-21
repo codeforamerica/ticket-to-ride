@@ -5,17 +5,17 @@
   <ul class="nav nav-tabs" role="tablist">
     <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Student</a></li>
     <li class="instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Guardian 1</a></li>
-    <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Guardian 2</a></li>
+<!--     <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Guardian 2</a></li>
     <li class="instructions"><a href="#summaryContacts" role="tab" data-toggle="tab">Contacts</a></li>
-    <li class="instructions"><a href="#summaryPermissions" role="tab" data-toggle="tab">Permissions</a></li>
+    <li class="instructions"><a href="#summaryPermissions" role="tab" data-toggle="tab">Permissions</a></li> -->
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
     <div class="tab-pane active" id="summaryStudent">
         <table class="summaryTable">
-          <% @summary_student=Student.where(first_name:'Jimmy')[0] %>
-          <% @summary_guardian1=ContactPerson.where(first_name:'Linda')[0] %>
+          <% @summary_student=Student.find(session[:student_id]) %>
+          <% @summary_guardian1=@summary_student.contact_people[0]%>
           <% @summary_guardian2=ContactPerson.where(email:'terry@codeisland.org')[0]%>
           <% @summary_contact1=ContactPerson.where(email:'rita@codeisland.org')[0]%>
           <tr>
@@ -69,13 +69,13 @@
                <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_language' %></div></td>
           </tr>
           <tr>
-            <td class="summaryText" colspan="3"><%= @summary_student.first_name %> most recently attended <span class="summaryAnswers"><%= @summary_student.prior_school_name.titlecase %></span> in <span class="summaryAnswers"><%= @summary_student.prior_school_city.titlecase %>, <%= @summary_student.prior_school_state.upcase %></span>. The last grade   
+            <td class="summaryText" colspan="3"> The last grade   
               <% if @summary_student.gender == 'male' %>
                 <%= 'he' %>
               <% elsif @summary_student.gender == 'female' %>
                 <%= 'she' %>
               <% end %>
-                completed was <span class="summaryAnswers"> <%= t('grade_' + @summary_student.previous_grade.code %></span>.
+                completed was <span class="summaryAnswers"> <%= t('grade_' + @summary_student.previous_grade.code) %></span>.
                 <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div></td>
           </tr>
           <tr>
