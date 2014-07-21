@@ -27,12 +27,6 @@ $(document).ready(function () {
 
   getSelectionFromModal('#btnAdditionalRace', 'input[name="student_race[additional_races]"]:checked', '#additionalRaceSelected');
 
-  getSelectionFromModalForInput('#btnFirstLanguage', 'input[name="choose_student_first_language"]:checked', '#firstLanguageSelected');
-
-  getSelectionFromModalForInput('#btnHomeLanguage', 'input[name="choose_student_home_language"]:checked', '#homeLanguageSelected');
-
-  getSelectionFromModalForInput('#btnGuardianLanguage', 'input[name="choose_student_guardian_language"]:checked', '#guardianLanguageSelected');
-
  $("form input:radio").change(function() {
    var radio = $(this).val();
    // toggleGuardian1Address(radio);
@@ -175,14 +169,89 @@ $(document).ready(function () {
     });
   };
 
-    function getSelectionFromModalForInput(btnName, inputName, linkToUpdate) {
+    /**
+     * For modal dialog layers with radio buttons
+     * and a single text input (all with the same `name` attribute), this
+     * function registers a `click` action with the `Save` button on the dialog.
+     *
+     * Upon saving, the radio buttons and text input are checked such that the
+     * first checked radio button value is captured and placed as a value into
+     * the element with ID `inputToUpdate`. If no radio button is checked, the value
+     * from the text input is placed there instead.
+     *
+     * @param btnName `Save` button selector
+     * @param inputGroupName The name attribute for the radio buttons and text input
+     * @param inputToUpdate The input tag that receives the value from radio buttons or text input
+     */
+    function getSelectionFromModalForInput(btnName, inputGroupName, inputToUpdate) {
         $(btnName).click(function () {
-            var selection = $(inputName).val();
-            var showSelection = $(linkToUpdate).val(selection);
+            var value = '';
+
+            // Find a selected value (checked or text entered, then exit the each()
+            $(inputGroupName).each(function(){
+                var thisObj = $(this);
+                var thisVal = thisObj.val();
+
+                // Capture value from radio buttons
+                if(thisObj.attr('type') == 'radio' && thisObj.is(':checked')) {
+                    value = thisVal;
+                    return false;
+                }
+
+                // Capture value from text field
+                else if(thisObj.attr('type') == 'text' && thisVal != "") {
+                    value = thisVal;
+                    return false;
+                }
+            });
+
+            // Assign the found value to the designated input
+            var showSelection = $(inputToUpdate).val(value);
             showSelection.removeClass('enrollment-form-popover');
             showSelection.addClass('enrollment-form-modal-selection');
         });
     };
+
+    /**
+     * Registers an click action with element selected by `textInputSelector` to
+     * unchecks a clicked radio button from the group with name `radioGroupName`.
+     * Additionally, it removes the class `active` from the radio buttons parent
+     * `label` element.
+     *
+     * @param textInputSelector jQuery selector for the element that the `click` action is attached to
+     * @param radioGroupName The `name` attribute for the group of radio buttons to unselect upon click
+     */
+    function clearRadioGroupUponTextEntry(textInputSelector, radioGroupName) {
+        $(textInputSelector).click( function(){
+            var radioInputSelector = 'input[name="' + radioGroupName + '"]:checked';
+            var checkedElement = $(radioInputSelector);
+            checkedElement.prop('checked', false);
+            checkedElement.parent().removeClass('active');
+        });
+    }
+
+    /**
+     * Registers a click action with a group of radio buttons (and their parent
+     * `label` elements) to clear the value of a designated text input element
+     * (as indicated by the jQuery selector `textInputSelector`) when they are clicked/selected.
+     *
+     * @param textInputSelector jQuery selector for the text input that should be cleared
+     * @param radioGroupName The `name` attribute for the group of radio buttons to register the event with
+     */
+    function clearTextInputUponRadioCheck(textInputSelector, radioGroupName) {
+        $('input[name="' + radioGroupName + '"]').each(function(){
+           if($(this).attr('type') == 'radio') {
+               $(this).click(function(){
+                   $(textInputSelector).val('');
+               });
+
+               var parentLabel = $('#' + $(this).attr('id')).parent();
+               parentLabel.click(function(){
+                   $(textInputSelector).val('');
+               });
+           }
+        });
+    }
 
   String.prototype.toProperCase = function() {
     var words = this.split('_');
@@ -193,4 +262,19 @@ $(document).ready(function () {
     }
     return results.join(' ');
   };
+
+
+    // Modal Dialog Behavior for Language selection
+    getSelectionFromModalForInput('#btnFirstLanguage', 'input[name="choose_student_first_language"]', '#firstLanguageSelected');
+    clearRadioGroupUponTextEntry('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
+    clearTextInputUponRadioCheck('#choose_student_first_language_input_text', 'choose_student_first_language');
+
+    getSelectionFromModalForInput('#btnHomeLanguage', 'input[name="choose_student_home_language"]', '#homeLanguageSelected');
+    clearRadioGroupUponTextEntry('#choose_student_first_language_input_text', 'choose_student_first_language');
+    clearTextInputUponRadioCheck('#choose_student_home_language_input_text', 'choose_student_home_language');
+
+    getSelectionFromModalForInput('#btnGuardianLanguage', 'input[name="choose_student_guardian_language"]', '#guardianLanguageSelected');
+    clearRadioGroupUponTextEntry('#choose_student_home_language_input_text', 'choose_student_home_language');
+    clearTextInputUponRadioCheck('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
+
 });
