@@ -1,58 +1,72 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
 
-<%= form_for(@guardian, url: wizard_path, method: :put) do |g| %>
+  <%= form_for(@guardian, url: wizard_path, method: :put) do |g| %>
 
-  <table>
-    <tr><td colspan="2"><span class="instructions">Your contact information</span></td></tr>
+      <table>
+        <tr>
+          <td colspan="2"><span class="instructions">Your contact information</span></td>
+        </tr>
 
-    <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
-    <%= fields_for(PhoneNumber.new) do |p| %>
-  <tr><td class="row-break"><span>Main phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', priority_level: 'primary', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span></td>
-    <td>
-    <div class="btn-group pull-right" data-toggle="buttons">
+        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
+        <%= fields_for(PhoneNumber.new) do |p| %>
+            <tr>
+              <td class="row-break"><span>Main phone:</span>
+                <span><%= p.telephone_field :number, class: 'enrollment-form-input', priority_level: 'primary', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span>
+              </td>
+              <td>
+                <div class="btn-group pull-right" data-toggle="buttons">
 
-            <label class="btn btn-primary"> <!-- TODO Labels can use the Rails tags and link rather than surrounding the radio elements -->
-                <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
-            <label class="btn btn-primary">
-                <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
+                  <label class="btn btn-primary"> <!-- TODO Labels can use the Rails tags and link rather than surrounding the radio elements -->
+                    <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
 
-        </div>
-      </td>
-    </tr>
-    <% end %>
+                </div>
+              </td>
+            </tr>
+        <% end %>
 
-    <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
-    <%= fields_for(PhoneNumber.new) do |p| %>
-    <tr><td><span>Secondary phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_alt_phone', priority_level: 'secondary', placeholder: '401-222-3333'%></span></td>
-      <td>
-        <div class="btn-group pull-right" data-toggle="buttons">
-            <label class="btn btn-primary">
-                <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
-            <label class="btn btn-primary">
-                <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
-        </div>
-      </td>
-    <% end %>
-    </tr>
+        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
+        <%= fields_for(PhoneNumber.new) do |p| %>
+            <tr>
+              <td><span>Secondary phone:</span>
+                <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_alt_phone', priority_level: 'secondary', placeholder: '401-222-3333' %></span>
+              </td>
+              <td>
+                <div class="btn-group pull-right" data-toggle="buttons">
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
+                </div>
+              </td>
+        <% end %>
+        </tr>
 
-    <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
-    <%= fields_for(PhoneNumber.new) do |p| %>
-    <tr><td><span>Work phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', priority_level: 'work', id: 'guardian_alt_phone', placeholder: '401-333-4444'%></span></td>
-      <td>
-        <div class="btn-group pull-right" data-toggle="buttons">
-            <label class="btn btn-primary">
-                <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
-            <label class="btn btn-primary">
-                <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
-        </div>
-      </td>
-    <% end %>
-    </tr>
-    <tr><td colspan="2"><span>Email address:</span> <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
-    </tr>
+        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
+        <%= fields_for(PhoneNumber.new) do |p| %>
+            <tr>
+              <td><span>Work phone:</span>
+                <span><%= p.telephone_field :number, class: 'enrollment-form-input', priority_level: 'work', id: 'guardian_alt_phone', placeholder: '401-333-4444' %></span>
+              </td>
+              <td>
+                <div class="btn-group pull-right" data-toggle="buttons">
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
+                  <label class="btn btn-primary">
+                    <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
+                </div>
+              </td>
+        <% end %>
+        </tr>
+        <tr>
+          <td colspan="2"><span>Email address:</span>
+            <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span>
+          </td>
+        </tr>
 
-<!--     <tr>
+        <!--     <tr>
       <td colspan="2" class="row-break"><span>Does <%= @student.first_name %> have another parent or legal guardian?</span> 
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
@@ -62,14 +76,14 @@
         </div>
       </td>
     </tr> -->
-  </table>
-</div>
+      </table>
+      </div>
 
-    <ul class="pager">
-      <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
-    </ul>
+      <ul class="pager">
+        <li><%= link_to "Previous", previous_wizard_path %></li>
+        <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
+      </ul>
 
-<% end %>
+  <% end %>
 
-<%= render 'shared/scenery_guardian' %>
+  <%= render 'shared/scenery_guardian' %>
