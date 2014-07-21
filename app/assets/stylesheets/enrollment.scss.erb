@@ -385,7 +385,7 @@ input[type=date] {
   font-weight: 600;
   border-bottom: 2px dashed $george-harrison;
   margin: 0 1% 0 1%;
-  width: 100%;
+  // width: 100%;
   // min-width: 200px;
   // max-width: 200px;
   text-align: center;
@@ -548,6 +548,7 @@ button {
   border-bottom: 1px solid #ddd;
   width: 100%;
   background-color: $sean-lennon;
+  margin-bottom: 2%;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
@@ -564,9 +565,15 @@ td.summaryText.section-break {
 }
 
 .summaryEdit {
-  font-size: 75%;
+  width: 10%;
+}
+
+.summaryEditBtn {
+  font-size: 60%;
   text-transform: uppercase;
-  padding-right: 3%;
+  padding-right: 35%;
+  vertical-align: text-bottom;
+  line-height: 88%;
 }
 
 div.enrollment-form .field_with_errors {
@@ -635,6 +642,14 @@ div.enrollment-form .field_with_errors input[type=radio]{
   padding-bottom: 2%;
 }
 
+a.toggle_error {
+  color: #FFF;
+}
+
+a:hover.toggle_error {
+  color: #000;
+}
+
 div.enrollment-form .tooltip-inner {
   background-color: $george-harrison;
 }
@@ -646,6 +661,7 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
 
 .completed-section {
   @extend .welcome;
+  margin-bottom: 1em;
 }
 
 .enrollment-modal-select {

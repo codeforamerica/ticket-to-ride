@@ -97,6 +97,21 @@ $(document).ready(function () {
     selectedRelationship.addClass('enrollment-form-modal-selection');
   });
 
+  // checkForRadioSelection();
+
+  // function checkForRadioSelection(btnName) {
+  //   var radioClicked = $('input[name="contact_person[lives_with_student]"]:checked');
+  //   if ($('#validation-errors')) {
+  //     alert(radioClicked.val());
+  //   }
+  // }
+
+  // close error message
+
+  $( 'a.toggle_error' ).on( "click", function( event ) {
+    $( event.target ).closest( "li" ).addClass( "hidden" );
+  });
+
 
   $('.madlib-editable').focus(function (event) {
   
