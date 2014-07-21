@@ -2,7 +2,7 @@
     <ul id="validation-errors">
       <!-- <li>Oops, please try again.</li> -->
       <% @student.errors.each do |field, message| %>
-          <li>Oops! <%= message %></li>
+          <li>Oops! <%= message %> <a href="#" class="toggle_error pull-right" data-dismiss="li">x</a></li>
       <% end %>
     </ul>
 <% end %>
