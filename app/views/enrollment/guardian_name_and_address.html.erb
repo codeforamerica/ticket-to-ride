@@ -44,7 +44,8 @@
           </tr>
 
           <tr>
-            <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose relationship</a>
+            <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>:
+              <%= g.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
             </td>
           </tr>
           
@@ -93,15 +94,15 @@
             <div class="modal-body single-col-modal">
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <%= g.radio_button :relationship, :mother, class: 'second' %>Mother
+                  <%= radio_button_tag 'choose_relationship', :mother, class: 'second' %>Mother
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= g.radio_button :relationship, :father, class: 'second' %>Father
+                  <%= radio_button_tag 'choose_relationship', :father, class: 'second' %>Father
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= g.radio_button :relationship, :guardian, class: 'second' %>Guardian
+                  <%= radio_button_tag 'choose_relationship', :guardian, class: 'second' %>Guardian
                 </label><br/>
-                  <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'other_relationship', placeholder: 'Other' %>
+                  <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'choose_relationship_input_text', placeholder: 'Other' %>
                 <br/>
               </div>
             </div>

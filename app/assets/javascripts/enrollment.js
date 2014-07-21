@@ -25,7 +25,6 @@ $(document).ready(function () {
     selectedRace.addClass('enrollment-form-modal-selection');
   });      
 
-  getSelectionFromModal('#btnAdditionalRace', 'input[name="student_race[additional_races]"]:checked', '#additionalRaceSelected');
 
  $("form input:radio").change(function() {
    var radio = $(this).val();
@@ -84,49 +83,6 @@ $(document).ready(function () {
       $('.slider-result').addClass('hidden');
     }
   };
-  /* start TODO: Make these cancel each other out. Guardian name and address */
-
-  getSelectionFromModal('#btnGuardian1Relationship', 'input[name="contact_person[relationship]"]:checked', '#guardian1RelationshipSelected');
-
-  $('#btnGuardian1Relationship').click(function() {
-    var otherRelationship = $('#other_relationship');
-    if (otherRelationship.val()) {
-      var selectedRelationship = $('#guardian1RelationshipSelected').text(otherRelationship.val());
-    }
-    selectedRelationship.removeClass('enrollment-form-popover');
-    selectedRelationship.addClass('enrollment-form-modal-selection');
-  });
-
-
-  // $('#btnGuardian1Relationship').click(function(){
-  //   var selectedRelationship = $('input[name="contact_person[relationship]"]:checked');
-  //   alert(selectedRelationship.val());
-
-  //   // data-dismiss="modal"
-  // })
-
-
-    // if ($('#other_relationship'.val()) { 
-    //   $(':radio').attr('disabled', true);
-    // }
-    // else
-    // {
-    //  $(':radio').attr('disabled', false);
-    // }
-
-    // $('input:radio').change(function(e) {
-    //  e.preventDefault;
-    //   $('input[type="text"]').attr('disabled', true);
-    // })
-
-    // $('input[name="guardian[relationship]"]').change(function(e) {
-    //   e.preventDefault;
-    //   $('input[type="text"]').attr('disabled', true);
-    // });
-
-    // $('input[type="text"]').change(function() {
-    // alert("Change called");
-    // e.preventDefault;
 
   /* end TODO Guardian name and address */
 
@@ -183,7 +139,7 @@ $(document).ready(function () {
      * @param inputGroupName The name attribute for the radio buttons and text input
      * @param inputToUpdate The input tag that receives the value from radio buttons or text input
      */
-    function getSelectionFromModalForInput(btnName, inputGroupName, inputToUpdate) {
+    function getSelectionFromModalForInput(btnName, inputGroupName, inputToUpdate, processFunc) {
         $(btnName).click(function () {
             var value = '';
 
@@ -276,5 +232,10 @@ $(document).ready(function () {
     getSelectionFromModalForInput('#btnGuardianLanguage', 'input[name="choose_student_guardian_language"]', '#guardianLanguageSelected');
     clearRadioGroupUponTextEntry('#choose_student_home_language_input_text', 'choose_student_home_language');
     clearTextInputUponRadioCheck('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
+
+    // Modal Dialog Behavior for Guardian/Student selection
+    getSelectionFromModalForInput('#btnGuardian1Relationship', 'input[name="choose_relationship"]', '#guardian1RelationshipSelected');
+    clearRadioGroupUponTextEntry('#choose_relationship_input_text', 'choose_relationship');
+    clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
 
 });
