@@ -1,4 +1,5 @@
 @import "common/variables";
+@import "welcome";
 
 div.container-application header {
   position: absolute;
@@ -97,23 +98,24 @@ a:hover.enrollment-form-popover {
 
 // Begin language table formatting
 
-.enrollment-qa-table {
+.language-table {
   width: 656px;
   margin-bottom: -2%;
 }
 
 td div.buttons-center {
-  margin: 0 26.55% 0 26.55%;
+  margin: 0 10% 0 19%;
+  white-space: nowrap;
 }
 
-.enrollment-form td.enrollment-qa-question-cell {
+.edit-student td.enrollment-qa-question-cell {
   width: 67.530487804878%;
 }
 
-.enrollment-form td.enrollment-qa-answer-cell {
+.edit-student td.enrollment-qa-answer-cell {
   width: 30.4878049%;
 }
-.enrollment-form td.enrollment-qa-gutter-cell {
+.edit-student td.enrollment-qa-gutter-cell {
   width: 1.9817073%;
 }
 
@@ -563,6 +565,12 @@ div.enrollment-form .field_with_errors {
   display: inline;
 }
 
+div.enrollment-form .field_with_errors input[type=radio]{
+  display: inline;
+  display: none;
+}
+
+
 .race-check input[type="checkbox"].checkbox {
     display: none;
 }
@@ -596,4 +604,38 @@ div.enrollment-form .field_with_errors {
 
 .race-check input[type="checkbox"].checkbox:disabled + label {
     opacity: 0.5;
+}
+
+
+#validation-errors li {
+  font-size: 60%;
+  color: #FFF;
+  line-height: 110%;
+  background-color: $george-martin;
+  opacity: 0.75;
+  padding: 10px;
+  width: 80%;
+  border-radius: 5px;
+  margin: 0 auto 1%;
+}
+
+#validation-errors li:first-letter{
+  text-transform: capitalize;
+}
+
+#validation-errors {
+  padding-bottom: 2%;
+}
+
+div.enrollment-form .tooltip-inner {
+  background-color: $george-harrison;
+}
+
+div.enrollment-form .tooltip.bottom .tooltip-arrow{
+  border-bottom:5px solid $george-harrison;
+}
+
+
+.completed-section {
+  @extend .welcome;
 }
