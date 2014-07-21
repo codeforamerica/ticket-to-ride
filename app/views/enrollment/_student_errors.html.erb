@@ -1,0 +1,8 @@
+<% if @student.errors %>
+    <ul id="validation-errors">
+      <!-- <li>Oops, please try again.</li> -->
+      <% @student.errors.each do |field, message| %>
+          <li>Oops! <%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
