@@ -19,11 +19,13 @@
           <% @summary_guardian2=ContactPerson.where(email:'terry@codeisland.org')[0]%>
           <% @summary_contact1=ContactPerson.where(email:'rita@codeisland.org')[0]%>
           <tr>
-            <td class="summaryText section-break" colspan="3">
-              The student you are registering is <span class="summaryAnswers"><%= @summary_student.first_name %> <%= @summary_student.middle_name %> <%= @summary_student.last_name %></span>, who was born on <span class="summaryAnswers"><%= @summary_student.birthday %></span> in <span class="summaryAnswers"><%= @summary_student.birth_city %>, <%= @summary_student.birth_state %> <%= @summary_student.birth_country %></span>.<div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_name' %></div></td>
+            <td class="summaryText section-break" colspan="2">
+              The student you are registering is <span class="summaryAnswers"><%= @summary_student.first_name %> <%= @summary_student.middle_name %> <%= @summary_student.last_name %></span>, who was born on <span class="summaryAnswers"><%= @summary_student.birthday %></span> in <span class="summaryAnswers"><%= @summary_student.birth_city %>, <%= @summary_student.birth_state %> <%= @summary_student.birth_country %></span>.</td>
+              <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_name' %></div>
+              </td>
           </tr>
           <tr>
-            <td class="summaryText" colspan="3"> 
+            <td class="summaryText" colspan="2"> 
               <% if @summary_student.gender == 'male' %>
               <span class="summaryAnswers">  <%= 'He' %>
               <% elsif @summary_student.gender == 'female' %>
@@ -53,12 +55,12 @@
                         <% else %>
                             <%= i %>,
                         <% end %>
-                    <% end %>
-                <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_gender_and_ethnicity' %></div>
+                    <% end %></td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_gender_and_ethnicity' %></div>
             </td>
           </tr>
           <tr>
-           <td class="summaryText" colspan="3"><%= @summary_student.first_name %>'s primary language is <%= @summary_student.home_language.titlecase %>. At home,  
+            <td class="summaryText" colspan="2"><%= @summary_student.first_name %>'s primary language is <%= @summary_student.home_language.titlecase %>. At home,  
               <% if @summary_student.gender == 'male' %>
                 <%= 'he' %>
               <% elsif @summary_student.gender == 'female' %>
@@ -66,20 +68,24 @@
               <% end %>
               speaks <span class="summaryAnswers">
                <%= @summary_student.guardian_language.titlecase %></span>. 
-               <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_language' %></div></td>
+            </td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_language' %></div>
+            </td>
           </tr>
           <tr>
-            <td class="summaryText" colspan="3"> The last grade   
+            <td class="summaryText" colspan="2"> The last grade   
               <% if @summary_student.gender == 'male' %>
                 <%= 'he' %>
               <% elsif @summary_student.gender == 'female' %>
                 <%= 'she' %>
               <% end %>
                 completed was <span class="summaryAnswers"> <%= t('grade_' + @summary_student.previous_grade.code) %></span>.
-                <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div></td>
+            </td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div>
+            </td>
           </tr>
           <tr>
-            <td class="summaryText" colspan="3">
+            <td class="summaryText" colspan="2">
               <%= @summary_student.first_name %>
 
               <span class="summaryAnswers">  
@@ -111,20 +117,24 @@
                 <%= 'She' %>
               <% end %>
             
-          <span class="summaryAnswers">  
-            <% if @summary_student.has_learning_difficulties == true %>
-              <%= 'has' %>
-            <% elsif @summary_student.has_learning_difficulties == false || @summary_student.has_learning_difficulties.nil? == true %>
-              <%= 'does not have' %>
-            <% end %>
-          </span> learning difficulties.
-          <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_special_services' %></div></td>
-          </tr>
+              <span class="summaryAnswers">  
+                <% if @summary_student.has_learning_difficulties == true %>
+                  <%= 'has' %>
+                <% elsif @summary_student.has_learning_difficulties == false || @summary_student.has_learning_difficulties.nil? == true %>
+                  <%= 'does not have' %>
+                <% end %>
+              </span> learning difficulties.
+          </td>
+          <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_special_services' %></div>
+          </td>
+        </tr>
           <tr>
-            <td class="summaryText" colspan="3">  
+            <td class="summaryText" colspan="2">  
                 <%= @summary_student.first_name %> lives at
               <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.
-              <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/student_address' %></div></td>
+            </td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_address' %></div>
+            </td>
           </tr>
         </table>
     </div>
