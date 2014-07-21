@@ -1,80 +1,130 @@
+<script>
+
+    var studentHomeStreetAddress1 = '<%= @student.home_street_address_1 %>';
+    var studentHomeStreetAddress2 = '<%= @student.home_street_address_2 %>';
+    var studentHomeCity = '<%= @student.home_city %>';
+    var studentState = '<%= @student.home_state %>';
+    var studentZipCode = '<%= @student.home_zip_code %>';
+
+    function fillStudentAddress() {
+//        var doesContactLiveWithStudent = $("input:radio[name='contact_person[lives_with_student]']").val();
+        $('#contact_person_mailing_street_address_1').val(studentHomeStreetAddress1);
+        $('#contact_person_mailing_street_address_2').val(studentHomeStreetAddress2);
+        $('#contact_person_mailing_city').val(studentHomeCity);
+        $('#contact_person_mailing_state').val(studentState);
+        $('#contact_person_mailing_zip_code').val(studentZipCode);
+    }
+
+    function clearStudentAddress() {
+            $('#contact_person_mailing_street_address_1').val('');
+            $('#contact_person_mailing_street_address_2').val('');
+            $('#contact_person_mailing_city').val('');
+            $('#contact_person_mailing_state').val('');
+            $('#contact_person_mailing_zip_code').val('');
+    }
+</script>
+
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+  <% if @student.errors || @guardian_1.errors %>
+      <ul id="validation-errors">
+        <% @student.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+        <% @guardian_1.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
   <div class="instructions">Tell us about you.</div>
 
-<%= form_for(ContactPerson.new, url: wizard_path, method: :put, :html=> {:name => 'guardian1_name_form'}, id: 'editable-fields') do |g| %>
-    <div>
+  <%= form_for(@guardian_1, url: wizard_path, method: :put, :html => {:name => 'guardian1_name_form'}, id: 'editable-fields') do |g| %>
+      <div>
         <table>
-          <tr><td class="row-break"><span>First Name:</span> <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', placeholder: 'Roger', required: true %></span></td><td><span>Last Name:</span> <%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams', required: true %></span></td></tr>
-          <tr><td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>: <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a></td></tr>
-          <tr><td colspan="2">Does <%= @student.first_name %> live with you? <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary">
-              <%= g.radio_button :lives_with_student, true, required: true%>Yes</label>
-            <label class="btn btn-primary">
-              <%= g.radio_button :lives_with_student, false, required: true %>No</label>
-          </div></td></tr>
+          <tr>
+            <td class="row-break"><span>First Name:</span>
+              <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', placeholder: 'Roger', required: true %></span>
+            </td>
+            <td>
+              <span>Last Name:</span>
+              <span><%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams', required: true %></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>:
+              <%= g.text_field :relationship, class: 'enrollment-form-popover', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', placeholder: 'Relationship' %>
+              <!-- <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a>-->
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">Does <%= @student.first_name %> live with you?
+              <div id="lives-with-student-radio-group" class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                  <%= g.radio_button :lives_with_student, true, required: true, onchange: 'fillStudentAddress()' %>Yes</label>
+                <label class="btn btn-primary">
+                  <%= g.radio_button :lives_with_student, false, required: true, onchange:  'clearStudentAddress()' %>No</label>
+              </div>
+            </td>
+          </tr>
 
-          <div id="guardian1_address" aria-hidden="true">
-            <tr><td class="row-break hidden" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span> <span class="enrollment-form-answered"><%= @student.home_street_address_1 %></td></tr>
-            <tr><td class="hidden" colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span> <span class="enrollment-form-answered"><%= @student.home_street_address_2 %></td></tr>
-            <tr>
-              <td colspan="2" class="hidden" id="guardian1_shared_city"> <span>City:</span><span class="enrollment-form-answered"><%= @student.home_city %></span>, RI <span class="enrollment-form-answered"><%= @student.home_zip_code %></span></span>
-              </td>
-            </tr>
-          </div>
-
-          <div id="guardian1_alt_address">
-            <tr>
-              <td class="row-break hidden" colspan="2" id="guardian1_unshared_street1"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Way' %></span> </td>
-            </tr>
-            <tr>
-              <td class="hidden" colspan="2" id="guardian1_unshared_street2"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', placeholder: '#123' %></span> </td>
-            </tr>
-            <tr>
-              <td colspan="2" class="hidden" id="guardian1_unshared_city"> <span>City:</span><span><%= g.text_field :mailing_city, class: 'enrollment-form-input', placeholder: 'Newport' %></span>, RI
-              <%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span></span>
-              </td>
-            </tr>
-          </div>
-      </table>
-    </div>
-
-    <ul class="pager">
-      <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= g.submit 'Next', class: 'nav-button pull-right', id: 'submitGuardian1' %></li>
-    </ul>
-
-
-<div class="modal fade" id="guardian1RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="guardian1RelationshipModal" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h4 class="modal-title" id="firstLanguageLabel">How are you related to <%= @student.first_name %>?</h4>
+        <tr id="guardian1_address">
+          <td class="row-break" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span>
+            <%= g.text_field :mailing_street_address_1, id:'contact_person_mailing_street_address_1', placeholder: 'Street address 1', class: 'enrollment-form-input' %>
+        </tr>
+        <tr>
+          <td colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span>
+            <%= g.text_field :mailing_street_address_2, id: 'contact_person_mailing_street_address_2', placeholder: 'Street address 2', class: 'enrollment-form-input' %>
+        </tr>
+        <tr>
+          <td colspan="2" id="guardian1_shared_city">
+            <span>City:</span>
+            <%= g.text_field :mailing_city, id: 'contact_person_mailing_city', placeholder: 'City', class: 'enrollment-form-input' %>,
+            <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI', class: 'enrollment-form-input', value: 'RI' %>
+            <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input' %>
+          </td>
+        </tr>
+        </table>
       </div>
-      <div class="modal-body single-col-modal">
-        <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Mother', class: 'second' %>Mother
-        </label><br/>
-        <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Father', class: 'second' %>Father
-        </label><br/>
-        <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Guardian', class: 'second' %>Guardian
-        </label><br/>
-        <%= g.text_field :relationship, class: 'enrollment-form-input', id: 'other_relationship', placeholder: 'Other' %>
-        <br/>
+
+      <ul class="pager">
+        <li><%= link_to "Previous", previous_wizard_path %></li>
+        <li><%= g.submit 'Next', class: 'nav-button pull-right', id: 'submitGuardian1' %></li>
+      </ul>
+
+
+      <div class="modal fade" id="guardian1RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="guardian1RelationshipModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+              <h4 class="modal-title" id="firstLanguageLabel">How are you related to <%= @student.first_name %>?</h4>
+            </div>
+            <div class="modal-body single-col-modal">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                  <%= radio_button_tag 'choose_relationship', 'Mother', class: 'second' %>Mother
+                </label><br/>
+                <label class="btn btn-primary">
+                  <%= radio_button_tag 'choose_relationship', 'Father', class: 'second' %>Father
+                </label><br/>
+                <label class="btn btn-primary">
+                  <%= radio_button_tag 'choose_relationship', 'Guardian', class: 'second' %>Guardian
+                </label><br/>
+                  <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'other_relationship', placeholder: 'Other' %>
+                <br/>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+              <button type="button" id="btnGuardian1Relationship" class="nav-button pull-right" data-dismiss="modal">Save
+                changes
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        <button type="button" id="btnGuardian1Relationship" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
       </div>
-    </div>
-  </div>
-</div>
-</div>
-<% end %>
+  <% end %>
 
-<%= render 'shared/scenery_guardian' %>
+  <%= render 'shared/scenery_guardian' %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719033432) do
+ActiveRecord::Schema.define(version: 20140720180144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140719033432) do
     t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
     t.string   "mailing_zip_code"
-    t.boolean  "can_pickup_child",           default: false
+    t.boolean  "can_pickup_child"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",                     default: false
@@ -55,16 +55,16 @@ ActiveRecord::Schema.define(version: 20140719033432) do
     t.string   "last_name"
     t.string   "email"
     t.string   "middle_name"
-    t.boolean  "receive_grade_notices",      default: false
-    t.boolean  "receive_conduct_notices",    default: false
-    t.boolean  "receive_other_mail",         default: true
-    t.boolean  "restricted",                 default: false
+    t.boolean  "receive_grade_notices"
+    t.boolean  "receive_conduct_notices"
+    t.boolean  "receive_other_mail"
+    t.boolean  "restricted"
     t.string   "armed_service_branch"
     t.string   "armed_service_rank"
     t.string   "armed_service_duty_station"
-    t.boolean  "lives_with_student",         default: false
-    t.boolean  "has_custody",                default: false
-    t.boolean  "has_court_order",            default: false
+    t.boolean  "lives_with_student"
+    t.boolean  "has_custody"
+    t.boolean  "has_court_order"
     t.string   "court_order_description"
     t.integer  "student_id"
   end
