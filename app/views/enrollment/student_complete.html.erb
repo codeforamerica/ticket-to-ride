@@ -1,10 +1,8 @@
 <%= render 'enrollment/navigation' %>
-<div class="enrollment-form">
-  <div>
-    Congrats! You've completed the first section of <span class="edited_text"><%= @student.first_name %></span>'s registration.
-    In the next section you will fill out information about yourself.
+  <div class="completed-section">
+    <p>Congrats! You've completed the first section of <%= @student.first_name %>'s registration.</p>
+    <p>In the next section you will fill out information about yourself.</p>
   </div>
-</div>
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
     <ul class="pager">

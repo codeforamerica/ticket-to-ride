@@ -1,17 +1,11 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
 
-  <% if @student.errors %>
-      <ul id="validation-errors">
-        <% @student.errors.each do |field, message| %>
-            <li><%= field %>: <%= message %></li>
-        <% end %>
-      </ul>
-  <% end %>
+  <%= render 'enrollment/student_errors' %>
 
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+  <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
-<div class="enrollment-qa-table-radio-only">
+  <div class="enrollment-qa-table-radio-only">
     <table>
       <tr><td colspan="2"><span class="instructions">Special Services</span></td></tr>
       <tr>
