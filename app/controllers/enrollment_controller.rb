@@ -275,6 +275,10 @@ class EnrollmentController < ApplicationController
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
         return update_guardian_name_and_address(@student, @guardian_1)
 
+      when :guardian_phone_and_email
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        return update_guardian_phone_and_email(@guardian_1)
+
       # Pass through steps
       when :student_complete
         jump_to next_step
@@ -520,11 +524,17 @@ class EnrollmentController < ApplicationController
     end
 
     # Save the contact person
+    # TODO: Seems like an extra/blank contact person gets created. Investigate.
+    contact_person.update_attributes(contact_person_params)
     contact_person.save
 
     # Associate the guardian, save the student
     student.contact_people << contact_person
     return render_wizard student
+  end
+
+  def update_guardian_phone_and_email(contact_person)
+
   end
 
 end

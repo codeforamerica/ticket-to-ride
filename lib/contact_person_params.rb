@@ -23,7 +23,8 @@ module ContactPersonParams
       :lives_with_student,
       :has_custody,
       :has_court_order,
-      :court_order_description
+      :court_order_description,
+      :student_id
     )
   end
 end
