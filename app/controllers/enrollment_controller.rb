@@ -40,14 +40,6 @@ class EnrollmentController < ApplicationController
       :student_special_services
   ]
 
-  # Steps that nothing needs to be processed in the update phase
-  UPDATE_PASS_STEPS = [
-      :student_complete
-      # :guardian_complete,
-      # :summary,
-      # :enrollment_complete
-  ]
-
   # Temporary
   UPDATED_STEPS = [
       :student_name,
@@ -56,7 +48,8 @@ class EnrollmentController < ApplicationController
       :student_previous_school,
       :student_special_services,
       :student_address,
-      :student_complete
+      :student_complete,
+      :guardian_name_and_address
   ]
 
   # Grades, sorted by order
@@ -71,7 +64,6 @@ class EnrollmentController < ApplicationController
       return new_show
     end
 
-  # def old_show
     # Variables for navigation purposes
     @student_start = :student_name
     @guardian_start = :guardian_name_and_address
@@ -223,7 +215,6 @@ class EnrollmentController < ApplicationController
   # views based on the current step in the flow
   #
   def new_show
-  # def show
 
     # Clear the session on the first step, otherwise, load the Student
     if step == steps[0]
@@ -242,6 +233,11 @@ class EnrollmentController < ApplicationController
       @student_gender_possessive_adjective = genderToPossessiveAdjective(@student.gender) # His/Her
     end
 
+    if :guardian_name_and_address
+      @guardian_1 = ContactPerson.create
+      session[:guardian_1_id] = @guardian_1.id
+    end
+
     render_wizard
   end
 
@@ -254,7 +250,7 @@ class EnrollmentController < ApplicationController
     @student = Student.find(session[:student_id])
 
     case step
-      # Student name and birthplace
+      # Student steps
       when :student_name
         return update_student_name(@student)
 
@@ -274,9 +270,15 @@ class EnrollmentController < ApplicationController
       when :student_address
         return update_student_address(@student)
 
-      when UPDATE_PASS_STEPS.include?(step)
-        render_wizard next_step
+      # Guardian steps
+      when :guardian_name_and_address
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        return update_guardian_name_and_address(@student, @guardian_1)
 
+      # Pass through steps
+      when :student_complete
+        jump_to next_step
+        return render_wizard
     end
 
     # set_next_step = next_step
@@ -475,8 +477,53 @@ class EnrollmentController < ApplicationController
       return render_wizard
     end
 
+    # TODO: Later have this fillable on the form
+    student.home_state = 'RI'
+
     # Save the student
     student.update_attributes(student_params)
+    return render_wizard student
+  end
+
+  def update_guardian_name_and_address(student, contact_person)
+
+    if param_does_not_exist(:contact_person, :first_name)
+      contact_person.errors.add(:first_name, 'First name is a required field')
+    end
+
+    if param_does_not_exist(:contact_person, :last_name)
+      contact_person.errors.add(:last_name, 'Last name is a required field')
+    end
+
+    if param_does_not_exist(:contact_person, :relationship)
+      contact_person.errors.add(:relationship, 'Relationship is a required field')
+    end
+
+    if param_does_not_exist(:contact_person, :mailing_street_address_1)
+      contact_person.errors.add(:mailing_street_address_1, 'Mailing street address is a required field')
+    end
+
+    if param_does_not_exist(:contact_person, :mailing_city)
+      contact_person.errors.add(:mailing_city, 'Mailing city is a required field')
+    end
+
+    if param_does_not_exist(:contact_person, :mailing_state)
+      contact_person.errors.add(:mailing_state, 'Mailing state is a required field')
+    end
+
+    if param_does_not_exist(:contact_person, :mailing_zip_code)
+      contact_person.errors.add(:mailing_zip_code, 'Mailing zip code is a required field')
+    end
+
+    if contact_person.errors.size > 0
+      return render_wizard
+    end
+
+    # Save the contact person
+    contact_person.save
+
+    # Associate the guardian, save the student
+    student.contact_people << contact_person
     return render_wizard student
   end
 

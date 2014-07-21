@@ -1,8 +1,45 @@
+<script>
+
+    var studentHomeStreetAddress1 = '<%= @student.home_street_address_1 %>';
+    var studentHomeStreetAddress2 = '<%= @student.home_street_address_2 %>';
+    var studentHomeCity = '<%= @student.home_city %>';
+    var studentState = '<%= @student.home_state %>';
+    var studentZipCode = '<%= @student.home_zip_code %>';
+
+    function fillStudentAddress() {
+//        var doesContactLiveWithStudent = $("input:radio[name='contact_person[lives_with_student]']").val();
+        $('#contact_person_mailing_street_address_1').val(studentHomeStreetAddress1);
+        $('#contact_person_mailing_street_address_2').val(studentHomeStreetAddress2);
+        $('#contact_person_mailing_city').val(studentHomeCity);
+        $('#contact_person_mailing_state').val(studentState);
+        $('#contact_person_mailing_zip_code').val(studentZipCode);
+    }
+
+    function clearStudentAddress() {
+            $('#contact_person_mailing_street_address_1').val('');
+            $('#contact_person_mailing_street_address_2').val('');
+            $('#contact_person_mailing_city').val('');
+            $('#contact_person_mailing_state').val('');
+            $('#contact_person_mailing_zip_code').val('');
+    }
+</script>
+
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+  <% if @student.errors || @guardian_1.errors %>
+      <ul id="validation-errors">
+        <% @student.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+        <% @guardian_1.errors.each do |field, message| %>
+            <li><%= field %>: <%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
   <div class="instructions">Tell us about you.</div>
 
-  <%= form_for(ContactPerson.new, url: wizard_path, method: :put, :html => {:name => 'guardian1_name_form'}, id: 'editable-fields') do |g| %>
+  <%= form_for(@guardian_1, url: wizard_path, method: :put, :html => {:name => 'guardian1_name_form'}, id: 'editable-fields') do |g| %>
       <div>
         <table>
           <tr>
@@ -16,56 +53,37 @@
           </tr>
           <tr>
             <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>:
-              <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a>
+              <%= g.text_field :relationship, class: 'enrollment-form-popover', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', placeholder: 'Relationship' %>
+              <!-- <a href="#" class="enrollment-form-popover" data-toggle="modal" data-target="#guardian1RelationshipModal" id="guardian1RelationshipSelected">Choose</a>-->
             </td>
           </tr>
           <tr>
             <td colspan="2">Does <%= @student.first_name %> live with you?
-              <div class="btn-group" data-toggle="buttons">
+              <div id="lives-with-student-radio-group" class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <%= g.radio_button :lives_with_student, true, required: true %>Yes</label>
+                  <%= g.radio_button :lives_with_student, true, required: true, onchange: 'fillStudentAddress()' %>Yes</label>
                 <label class="btn btn-primary">
-                  <%= g.radio_button :lives_with_student, false, required: true %>No</label>
+                  <%= g.radio_button :lives_with_student, false, required: true, onchange:  'clearStudentAddress()' %>No</label>
               </div>
             </td>
           </tr>
 
-          <div id="guardian1_address" aria-hidden="true">
-            <tr>
-              <td class="row-break hidden" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span>
-                <span class="enrollment-form-answered"><%= @student.home_street_address_1 %></td>
-            </tr>
-            <tr>
-              <td class="hidden" colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span>
-                <span class="enrollment-form-answered"><%= @student.home_street_address_2 %></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="hidden" id="guardian1_shared_city">
-                <span>City:</span><span class="enrollment-form-answered"><%= @student.home_city %></span>, RI
-                <span class="enrollment-form-answered"><%= @student.home_zip_code %></span></span>
-              </td>
-            </tr>
-          </div>
-
-          <div id="guardian1_alt_address">
-            <tr>
-              <td class="row-break hidden" colspan="2" id="guardian1_unshared_street1"><span>Street address:</span>
-                <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Way' %></span>
-              </td>
-            </tr>
-            <tr>
-              <td class="hidden" colspan="2" id="guardian1_unshared_street2"><span>Street address:</span>
-                <span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', placeholder: '#123' %></span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" class="hidden" id="guardian1_unshared_city">
-                <span>City:</span><span><%= g.text_field :mailing_city, class: 'enrollment-form-input', placeholder: 'Newport' %></span>,
-                RI
-                <%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span></span>
-              </td>
-            </tr>
-          </div>
+        <tr id="guardian1_address">
+          <td class="row-break" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span>
+            <%= g.text_field :mailing_street_address_1, id:'contact_person_mailing_street_address_1', placeholder: 'Street address 1', class: 'enrollment-form-input' %>
+        </tr>
+        <tr>
+          <td colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span>
+            <%= g.text_field :mailing_street_address_2, id: 'contact_person_mailing_street_address_2', placeholder: 'Street address 2', class: 'enrollment-form-input' %>
+        </tr>
+        <tr>
+          <td colspan="2" id="guardian1_shared_city">
+            <span>City:</span>
+            <%= g.text_field :mailing_city, id: 'contact_person_mailing_city', placeholder: 'City', class: 'enrollment-form-input' %>,
+            <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI', class: 'enrollment-form-input', value: 'RI' %>
+            <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input' %>
+          </td>
+        </tr>
         </table>
       </div>
 
@@ -85,15 +103,15 @@
             <div class="modal-body single-col-modal">
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <%= g.radio_button :relationship, 'Mother', class: 'second' %>Mother
+                  <%= radio_button_tag 'choose_relationship', 'Mother', class: 'second' %>Mother
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= g.radio_button :relationship, 'Father', class: 'second' %>Father
+                  <%= radio_button_tag 'choose_relationship', 'Father', class: 'second' %>Father
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= g.radio_button :relationship, 'Guardian', class: 'second' %>Guardian
+                  <%= radio_button_tag 'choose_relationship', 'Guardian', class: 'second' %>Guardian
                 </label><br/>
-                <%= g.text_field :relationship, class: 'enrollment-form-input', id: 'other_relationship', placeholder: 'Other' %>
+                  <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'other_relationship', placeholder: 'Other' %>
                 <br/>
               </div>
             </div>
