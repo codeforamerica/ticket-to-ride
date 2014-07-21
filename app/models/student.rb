@@ -83,7 +83,7 @@ class Student < ActiveRecord::Base
                                               message: 'Home street address 1 can only have letters, numbers, dashes, and periods',
                                               allow_nil: true
   }
-  validates :home_street_address_2, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
+  validates :home_street_address_2, format: { with: ModelConstants::STREET_ADDRESS_OPTIONAL_REGEX,
                                               message: 'Home street address 2 can only have letters, numbers, dashes, and periods',
                                               allow_nil: true
   }
