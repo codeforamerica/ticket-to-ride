@@ -140,23 +140,31 @@
     </div>
     <div class="tab-pane" id="summaryGuardian1">
       <table class="summaryTable">
-          <td class="summaryText section-break">
-            Your name is <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span>, and you are <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_guardian1.relationship %><span class="summaryAnswers">.
-            <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
+          <td class="summaryText section-break" colspan="2">
+            Your name is <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span>, and you are <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_guardian1.relationship %><span class="summaryAnswers">.</td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText">You and <%= @summary_student.first_name %> live at <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.
-          <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
+          <td class="summaryText" colspan="2">You and <%= @summary_student.first_name %> live at <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.</td>
+          <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText">Your primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-111-9999</span> which <span class="summaryAnswers">receives text messages</span>. <br/><br/>
-            A second phone number for you is <!--TODO get this from database --><span class="summaryAnswers">401-222-2222</span> which <span class="summaryAnswers">does not receive text messages</span>.<br/><br/>
-            Your work phone is <span class="summaryAnswers">401-222-2222</span>.
-            <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div></td>
+          <td class="summaryText" colspan="2">Your primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-111-9999</span> which <span class="summaryAnswers">receives text messages</span>.</td>
+          <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div></td>
+        </tr>
+
+        <tr>
+          <td class="summaryText" colspan="2">
+            A second phone number for you is <!--TODO get this from database --><span class="summaryAnswers">401-222-2222</span> which <span class="summaryAnswers">does not receive text messages</span>.</td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div></td>
+          </tr>
+          <td class="summaryText" colspan="2">
+            Your work phone is <span class="summaryAnswers">401-222-2222</span>.</td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText">Your email is <span class="summaryAnswers"><%= @summary_guardian1.email %></span>.
-            <div class="summaryEdit pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div>
+          <td class="summaryText" colspan="2">Your email is <span class="summaryAnswers"><%= @summary_guardian1.email %></span>.</td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div>
           </td>
         </tr>
       </table>
