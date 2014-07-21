@@ -49,7 +49,8 @@ class EnrollmentController < ApplicationController
       :student_special_services,
       :student_address,
       :student_complete,
-      :guardian_name_and_address
+      :guardian_name_and_address,
+      :guardian_phone_and_email
   ]
 
   # Grades, sorted by order
@@ -534,7 +535,9 @@ class EnrollmentController < ApplicationController
   end
 
   def update_guardian_phone_and_email(contact_person)
-
+    # TODO: Validate stuff here
+    contact_person.update_attributes(contact_person_params)
+    return render_wizard contact_person
   end
 
 end
