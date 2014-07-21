@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720180144) do
+ActiveRecord::Schema.define(version: 20140721234659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,11 +67,15 @@ ActiveRecord::Schema.define(version: 20140720180144) do
     t.boolean  "has_court_order"
     t.string   "court_order_description"
     t.integer  "student_id"
-  end
-
-  create_table "contact_people_phone_numbers", id: false, force: true do |t|
-    t.integer "contact_person_id"
-    t.integer "phone_number_id"
+    t.string   "main_phone"
+    t.string   "main_phone_extension"
+    t.boolean  "main_phone_can_sms"
+    t.string   "secondary_phone"
+    t.string   "secondary_phone_ext"
+    t.string   "secondary_phone_can_sms"
+    t.string   "work_phone"
+    t.string   "work_phone_extension"
+    t.string   "work_phone_can_sms"
   end
 
   create_table "custom_requirements", force: true do |t|
@@ -97,13 +101,6 @@ ActiveRecord::Schema.define(version: 20140720180144) do
     t.string   "mailing_city"
     t.string   "mailing_state"
     t.string   "name"
-  end
-
-  create_table "phone_numbers", force: true do |t|
-    t.string  "number"
-    t.string  "extension"
-    t.boolean "receives_sms",   default: false
-    t.string  "priority_level"
   end
 
   create_table "previous_grades", force: true do |t|
