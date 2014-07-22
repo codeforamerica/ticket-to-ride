@@ -119,7 +119,14 @@ $(document).ready(function () {
 
    $('#contact1RelationshipSelected').click(function(){
      $('.edit_contact_person').removeClass('edit_contact_person');
+   }); 
+
+  // Disable z-index so modal works on contact1 page
+
+   $('#contact2RelationshipSelected').click(function(){
+     $('.edit_contact_person').removeClass('edit_contact_person');
    });  
+  
 
   
 
@@ -268,8 +275,13 @@ $(document).ready(function () {
     clearRadioGroupUponTextEntry('#choose_relationship_input_text', 'choose_relationship');
     clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
 
-    // Modal Dialog Behavior for Guardian/Student relationship selection
+    // Modal Dialog Behavior for Contact1/Student relationship selection
     getSelectionFromModalForInput('#btnContact1Relationship', 'input[name="choose_relationship"]', '#contact1RelationshipSelected');
+    clearRadioGroupUponTextEntry('#choose_relationship_input_text', 'choose_relationship');
+    clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
+
+    // Modal Dialog Behavior for Contact1/Student relationship selection
+    getSelectionFromModalForInput('#btnContact2Relationship', 'input[name="choose_relationship"]', '#contact2RelationshipSelected');
     clearRadioGroupUponTextEntry('#choose_relationship_input_text', 'choose_relationship');
     clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
 
