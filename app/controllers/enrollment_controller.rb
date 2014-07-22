@@ -54,7 +54,8 @@ class EnrollmentController < ApplicationController
       :guardian_second_name_and_relationship,
       :guardian_second_address_and_contact_info,
       :guardian_complete,
-      :contact_person_1_contact_info
+      :contact_person_1_contact_info,
+      :contact_person_2_contact_info
   ]
 
   # Grades, sorted by order
@@ -249,7 +250,7 @@ class EnrollmentController < ApplicationController
         session[:guardian_2_id] = @guardian_2.id
       when :guardian_second_address_and_contact_info
         @guardian_2 = ContactPerson.find(session[:guardian_2_id])
-      when :contact_person_1_contact_info
+      when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create
         session[:contact_person_id] = @contact_person.id
     end
@@ -303,7 +304,7 @@ class EnrollmentController < ApplicationController
         return update_guardian_second_address_and_contact_info(@guardian_2)
 
       # Contact Person steps
-      when :contact_person_1_contact_info
+      when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.find(session[:contact_person_id])
         return update_contact_person_contact_info(@student, @contact_person)
 
