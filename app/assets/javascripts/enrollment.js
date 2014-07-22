@@ -108,6 +108,15 @@ $(document).ready(function () {
 
   // close error message
 
+
+ // Disable z-index so modal works on guardian1 page
+
+  $('#guardian1RelationshipSelected').click(function(){
+    $('.edit_contact_person').removeClass('edit_contact_person');
+  })
+
+  
+
   $( 'a.toggle_error' ).on( "click", function( event ) {
     $( event.target ).closest( "li" ).addClass( "hidden" );
   });

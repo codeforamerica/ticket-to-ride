@@ -47,12 +47,13 @@
     </tr>
 
   </table>
+  <ul class="pager">
+    <li><%= link_to "Previous", previous_wizard_path %></li>
+    <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
+  </ul>
 </div>
 
-    <ul class="pager">
-      <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
-    </ul>
+
 
 <% end %>
 

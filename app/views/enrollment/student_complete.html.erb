@@ -1,14 +1,17 @@
 <%= render 'enrollment/navigation' %>
-  <div class="completed-section">
-    <p>Congrats! You've completed the first section of <%= @student.first_name %>'s registration.</p>
-    <p>In the next section you will fill out information about yourself.</p>
-  </div>
+    <div class="completed-section">
+      <p>Congrats! You've completed the first section of <%= @student.first_name %>'s registration.</p>
+      <p>In the next section you will fill out information about yourself.</p>
 
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
-    <ul class="pager">
-      <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
-    </ul>
-<% end %>
+      <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+          <ul class="pager">
+            <li><%= link_to "Previous", previous_wizard_path %></li>
+            <li><%= s.submit 'Next', class: 'nav-button' %></li>
+      <% end %>
+          </ul>
+
+    </div>
+
+
 
 <%= render 'shared/scenery_student_confirmation' %>
