@@ -647,7 +647,6 @@ class EnrollmentController < ApplicationController
     end
 
     contact_people = student.contact_people
-    contact_people = contact_people[1..contact_people.size-1]
     contact_people.each_with_index do |contact, index|
       form_name = 'contact_person_' + index.to_s + '_'
 
