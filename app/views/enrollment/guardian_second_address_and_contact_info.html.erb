@@ -1,85 +1,71 @@
 <%= render 'enrollment/navigation' %>
+<%= render 'enrollment/guardian2_errors' %>
 <div class="enrollment-form">
-  <div class="instructions">Tell us how to contact <%= @second_guardian.first_name %></div>
+  <div class="instructions">Tell us how to contact <%= @guardian_2.first_name %></div>
 
-  <%= form_for(@second_guardian, url: wizard_path, method: :put) do |g| %>
-    <div>
+  <%= form_for(@guardian_2, url: wizard_path, method: :put) do |g| %>
+      <div>
         <table>
           <div class="guardian1_alt_address">
             <tr>
-              <td class="row-break" colspan="2"><span>Street address:</span> <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', id: 'guardian_street_address_1', placeholder: '456 Newport Avenue' %></span> </td>
+              <td class="row-break" colspan="2"><span>Street address 1:</span>
+                <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Avenue' %></span>
+              </td>
             </tr>
             <tr>
-              <td colspan="2"> <span>City:</span><span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', id: 'guardian1_city', placeholder: 'Newport' %></span>, RI
-              <%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span></span>
+              <td class="row-break" colspan="2"><span>Street address 2:</span>
+                <span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', placeholder: 'Apt 8C' %></span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <span>City:</span>
+                <span><%= g.text_field :mailing_city, class: 'enrollment-form-input', placeholder: 'Newport' %></span>,
+                <span><%= g.text_field :mailing_state, class: 'enrollment-form-input', value: 'RI'%></span>
+                <span><%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', placeholder: '02840' %></span>
               </td>
             </tr>
 
-            <%= fields_for(PhoneNumber.new) do |p| %>
-            <tr><td class="row-break"><span>Main phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span></td>
+            <tr>
+              <td class="row-break"><span>Main phone:</span>
+                <span><%= g.telephone_field :main_phone, class: 'enrollment-form-input', placeholder: '401-111-2222', required: true %></span>
+              </td>
               <td>
-              <div class="btn-group pul-right" data-toggle="buttons">
-                      <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
-                      <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
-                  </div>
-                </td>
-              </tr>
-             <% end %>
-            <%= fields_for(PhoneNumber.new) do |p| %>
-              <tr><td><span>Secondary phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_alt_phone', placeholder: '401-111-2222'%></span></td>
-                <td>
-                  <div class="btn-group pul-right" data-toggle="buttons">
-                      <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
-                      <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
-                  </div>
-                </td>
-              </tr>
-            <% end %>
-              <tr><td colspan="2"><span>Email address:</span> <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
-              </tr>
-          </div>
-
-      </table>
-    </div>
-
-    <ul class="pager">
-      <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
-    </ul>
-
-<div class="modal fade" id="guardian1RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="guardian1RelationshipModal" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h4 class="modal-title" id="firstLanguageLabel">How are you related to <%= @student.first_name %>?</h4>
-      </div>
-      <div class="modal-body single-col-modal">
-        <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Mother' %>Mother
-        </label><br/>
-        <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Father' %>Father
-        </label><br/>
-        <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Guardian' %>Guardian
-        </label><br/>
-        <%= g.text_field :relationship, class: 'enrollment-form-input', id: 'other_relationship', placeholder: 'Other' %>
-        <br/>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        <button type="button" id="btnGuardian1Relationship" class="nav-button pull-right" data-dismiss="modal">Save changes</button>
-      </div>
-    </div>
+                <div class="btn-group pul-right" data-toggle="buttons">
+                  <label class="btn btn-primary">
+                    <%= g.radio_button :main_phone_can_sms, true %>Accepts Texts</label>
+                  <label class="btn btn-primary">
+                    <%= g.radio_button :main_phone_can_sms, false %>No Texts</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span>Secondary phone:</span>
+                <span><%= g.telephone_field :secondary_phone, class: 'enrollment-form-input', placeholder: '401-111-2222' %></span>
+              </td>
+              <td>
+                <div class="btn-group pul-right" data-toggle="buttons">
+                  <label class="btn btn-primary">
+                    <%= g.radio_button :secondary_phone_can_sms, true %>Accepts Texts</label>
+                  <label class="btn btn-primary">
+                    <%= g.radio_button :secondary_phone_can_sms, false %>No Texts</label>
+                </div>
+              </td>
+            </tr>
+  <tr>
+    <td colspan="2"><span>Email address:</span>
+      <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com' %></span>
+    </td>
+  </tr>
   </div>
-</div>
+
+  </table>
+  </div>
+
+  <ul class="pager">
+    <li><%= link_to "Previous", previous_wizard_path %></li>
+    <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
+  </ul>
 </div>
 <% end %>
 

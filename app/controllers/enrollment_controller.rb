@@ -50,7 +50,13 @@ class EnrollmentController < ApplicationController
       :student_address,
       :student_complete,
       :guardian_name_and_address,
-      :guardian_phone_and_email
+      :guardian_phone_and_email,
+      :guardian_second_name_and_relationship,
+      :guardian_second_address_and_contact_info,
+      :guardian_complete,
+      :contact_person_1_contact_info,
+      :contact_person_2_contact_info,
+      :permissions
   ]
 
   # Grades, sorted by order
@@ -234,9 +240,20 @@ class EnrollmentController < ApplicationController
       @student_gender_possessive_adjective = genderToPossessiveAdjective(@student.gender) # His/Her
     end
 
-    if :guardian_name_and_address
-      @guardian_1 = ContactPerson.create
-      session[:guardian_1_id] = @guardian_1.id
+    case step
+      when :guardian_name_and_address
+        @guardian_1 = ContactPerson.create
+        session[:guardian_1_id] = @guardian_1.id
+      when :guardian_phone_and_email
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+      when :guardian_second_name_and_relationship
+        @guardian_2 = ContactPerson.create
+        session[:guardian_2_id] = @guardian_2.id
+      when :guardian_second_address_and_contact_info
+        @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+      when :contact_person_1_contact_info, :contact_person_2_contact_info
+        @contact_person = ContactPerson.create
+        session[:contact_person_id] = @contact_person.id
     end
 
     render_wizard
@@ -273,15 +290,32 @@ class EnrollmentController < ApplicationController
 
       # Guardian steps
       when :guardian_name_and_address
-        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id]) # TODO - make a @contact_person variable
         return update_guardian_name_and_address(@student, @guardian_1)
 
       when :guardian_phone_and_email
-        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id]) # TODO - make a @contact_person variable
         return update_guardian_phone_and_email(@guardian_1)
 
+      when :guardian_second_name_and_relationship
+        @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
+        return update_guardian_second_name_and_relationship(@student, @guardian_2)
+      when :guardian_second_address_and_contact_info
+        @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
+        return update_guardian_second_address_and_contact_info(@guardian_2)
+
+      # Contact Person steps
+      when :contact_person_1_contact_info, :contact_person_2_contact_info
+        @contact_person = ContactPerson.find(session[:contact_person_id])
+        return update_contact_person_contact_info(@student, @contact_person)
+
+      # Permissions
+      when :permissions
+        return update_permissions(@student)
+
+
       # Pass through steps
-      when :student_complete
+      when :student_complete, :guardian_complete
         jump_to next_step
         return render_wizard
     end
@@ -490,8 +524,7 @@ class EnrollmentController < ApplicationController
     return render_wizard student
   end
 
-  def update_guardian_name_and_address(student, contact_person)
-
+  def validate_contact_person_name(contact_person)
     if param_does_not_exist(:contact_person, :first_name)
       contact_person.errors.add(:first_name, 'First name is a required field')
     end
@@ -500,10 +533,20 @@ class EnrollmentController < ApplicationController
       contact_person.errors.add(:last_name, 'Last name is a required field')
     end
 
+    return contact_person
+  end
+
+  def validate_contact_person_name_and_relationship(contact_person)
+    validate_contact_person_name(contact_person)
+
     if param_does_not_exist(:contact_person, :relationship)
       contact_person.errors.add(:relationship, 'Relationship is a required field')
     end
 
+    return contact_person
+  end
+
+  def validate_contact_person_address(contact_person)
     if param_does_not_exist(:contact_person, :mailing_street_address_1)
       contact_person.errors.add(:mailing_street_address_1, 'Mailing street address is a required field')
     end
@@ -520,12 +563,35 @@ class EnrollmentController < ApplicationController
       contact_person.errors.add(:mailing_zip_code, 'Mailing zip code is a required field')
     end
 
+    return contact_person
+  end
+
+  def validate_contact_person_phone(contact_person)
+    if param_does_not_exist(:contact_person, :main_phone)
+      contact_person.errors.add(:main_phone, 'Main phone is a required field')
+    end
+    if param_does_not_exist(:contact_person, :main_phone_can_sms)
+      contact_person.errors.add(:main_phone, 'Can the main phone accept text messages?')
+    end
+
+    return contact_person
+  end
+
+  def save_contact_person(contact_person)
+    if contact_person.errors.size > 0
+      return render_wizard
+    end
+
+    contact_person.update_attributes(contact_person_params)
+    return render_wizard contact_person
+  end
+
+  def save_and_associate_contact_person(student, contact_person)
     if contact_person.errors.size > 0
       return render_wizard
     end
 
     # Save the contact person
-    # TODO: Seems like an extra/blank contact person gets created. Investigate.
     contact_person.update_attributes(contact_person_params)
     contact_person.save
 
@@ -534,10 +600,72 @@ class EnrollmentController < ApplicationController
     return render_wizard student
   end
 
+  def update_guardian_name_and_address(student, contact_person)
+
+    validate_contact_person_name_and_relationship(contact_person)
+
+    validate_contact_person_address(contact_person)
+
+    return save_and_associate_contact_person(student, contact_person)
+  end
+
   def update_guardian_phone_and_email(contact_person)
-    # TODO: Validate stuff here
-    contact_person.update_attributes(contact_person_params)
-    return render_wizard contact_person
+
+    validate_contact_person_phone(contact_person)
+
+    return save_contact_person(contact_person)
+  end
+
+  def update_guardian_second_name_and_relationship(student, contact_person)
+    if params['has_additional_guardian'] == "false"
+      jump_to :guardian_complete
+      return render_wizard
+    end
+
+    validate_contact_person_name_and_relationship(contact_person)
+
+    return save_and_associate_contact_person(student, contact_person)
+  end
+
+  def update_guardian_second_address_and_contact_info(contact_person)
+    validate_contact_person_address(contact_person)
+    validate_contact_person_phone(contact_person)
+    return save_contact_person(contact_person)
+  end
+
+  def update_contact_person_contact_info(student, contact_person)
+    validate_contact_person_name(contact_person)
+    validate_contact_person_phone(contact_person)
+    return save_and_associate_contact_person(student, contact_person)
+  end
+
+  def update_permissions(student)
+
+    if params['has_court_order'] == nil
+      student.errors.add('has_court_order', 'Are there any court orders regarding ' + student.first_name + '?')
+      return render_wizard
+    end
+
+    contact_people = student.contact_people
+    contact_people = contact_people[1..contact_people.size-1]
+    contact_people.each_with_index do |contact, index|
+      form_name = 'contact_person_' + index.to_s + '_'
+
+      can_pickup = params[form_name + 'pickup']
+      if can_pickup
+        contact.can_pickup_child = true
+      end
+
+      can_receive_records = params[form_name + 'records']
+      if can_receive_records
+        contact.receive_grade_notices = true
+        contact.receive_conduct_notices = true
+      end
+
+      contact.save #TODO - Error catch
+    end
+
+    return render_wizard student
   end
 
 end

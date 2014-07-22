@@ -1,0 +1,10 @@
+<% if @student.errors || @contact_person.errors %> <!-- TODO: Reuse for guardian 1 and 2 -->
+    <ul id="validation-errors">
+      <% @student.errors.each do |field, message| %>
+          <li>Oops! <%= message %>  <a href="#" class="toggle_error pull-right" data-dismiss="li">x</a> </li>
+      <% end %>
+      <% @contact_person.errors.each do |field, message| %>
+          <li>Oops! <%= message %> <a href="#" class="toggle_error pull-right" data-dismiss="li">x</a></li>
+      <% end %>
+    </ul>
+<% end %>
