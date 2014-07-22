@@ -11,35 +11,33 @@
             </tr>
             <tr>
               <td colspan="2"> <span>City:</span><span><%= g.text_field :mailing_street_address_2, class: 'enrollment-form-input', id: 'guardian1_city', placeholder: 'Newport' %></span>, RI
-              <%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span></span>
+              <span><%= g.text_field :mailing_zip_code, class: 'enrollment-form-input', id: 'guardian_zip_code', placeholder: '02840' %></span>
               </td>
             </tr>
 
-            <%= fields_for(PhoneNumber.new) do |p| %>
-            <tr><td class="row-break"><span>Main phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span></td>
+            <tr><td class="row-break"><span>Main phone:</span> <span><%= g.telephone_field :main_phone, class: 'enrollment-form-input', placeholder: '401-111-2222', required: true %></span></td>
               <td>
               <div class="btn-group pul-right" data-toggle="buttons">
                       <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
+                          <%= g.radio_button :main_phone_can_sms, true %>Accepts Texts</label>
                       <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
+                          <%= g.radio_button :main_phone_can_sms, false %>No Texts</label>
                   </div>
                 </td>
               </tr>
              <% end %>
-            <%= fields_for(PhoneNumber.new) do |p| %>
-              <tr><td><span>Secondary phone:</span> <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_alt_phone', placeholder: '401-111-2222'%></span></td>
+              <tr><td><span>Secondary phone:</span> <span><%= g.telephone_field :secondary_phone, class: 'enrollment-form-input', placeholder: '401-111-2222'%></span></td>
                 <td>
                   <div class="btn-group pul-right" data-toggle="buttons">
                       <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Cell' %>SMS-enabled</label>
+                          <%= p.radio_button :secondary_phone, true %>Accepts Texts</label>
                       <label class="btn btn-primary">
-                          <%= p.radio_button :receives_sms, 'Landline' %>Landline</label>
+                          <%= p.radio_button :secondary_phone, true %>Landline</label>
                   </div>
                 </td>
               </tr>
             <% end %>
-              <tr><td colspan="2"><span>Email address:</span> <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span></td>
+              <tr><td colspan="2"><span>Email address:</span> <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com' %></span></td>
               </tr>
           </div>
 
@@ -61,13 +59,13 @@
       <div class="modal-body single-col-modal">
         <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Mother' %>Mother
+          <%= g.radio_button :relationship, :mother %>Mother
         </label><br/>
         <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Father' %>Father
+          <%= g.radio_button :relationship, :father %>Father
         </label><br/>
         <label class="btn btn-primary">
-          <%= g.radio_button :relationship, 'Guardian' %>Guardian
+          <%= g.radio_button :relationship, :guardian %>Guardian
         </label><br/>
         <%= g.text_field :relationship, class: 'enrollment-form-input', id: 'other_relationship', placeholder: 'Other' %>
         <br/>

@@ -50,7 +50,8 @@ class EnrollmentController < ApplicationController
       :student_address,
       :student_complete,
       :guardian_name_and_address,
-      :guardian_phone_and_email
+      :guardian_phone_and_email,
+      :guardian_second_name_and_relationship
   ]
 
   # Grades, sorted by order
@@ -240,6 +241,9 @@ class EnrollmentController < ApplicationController
         session[:guardian_1_id] = @guardian_1.id
       when :guardian_phone_and_email
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+      when :guardian_second_name_and_relationship
+        @guardian_2 = ContactPerson.create
+        session[:guardian_2_id] = @guardian_2.id
     end
 
     render_wizard
@@ -282,6 +286,10 @@ class EnrollmentController < ApplicationController
       when :guardian_phone_and_email
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
         return update_guardian_phone_and_email(@guardian_1)
+
+      when :guardian_second_name_and_relationship
+        @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+        return update_guardian_second_name_and_relationship(@student, @guardian_2)
 
       # Pass through steps
       when :student_complete
@@ -493,8 +501,7 @@ class EnrollmentController < ApplicationController
     return render_wizard student
   end
 
-  def update_guardian_name_and_address(student, contact_person)
-
+  def validate_contact_person_name_and_relationship(contact_person)
     if param_does_not_exist(:contact_person, :first_name)
       contact_person.errors.add(:first_name, 'First name is a required field')
     end
@@ -507,6 +514,10 @@ class EnrollmentController < ApplicationController
       contact_person.errors.add(:relationship, 'Relationship is a required field')
     end
 
+    return contact_person
+  end
+
+  def validate_contact_person_address(contact_person)
     if param_does_not_exist(:contact_person, :mailing_street_address_1)
       contact_person.errors.add(:mailing_street_address_1, 'Mailing street address is a required field')
     end
@@ -523,12 +534,26 @@ class EnrollmentController < ApplicationController
       contact_person.errors.add(:mailing_zip_code, 'Mailing zip code is a required field')
     end
 
+    return contact_person
+  end
+
+  def validate_contact_person_phone(contact_person)
+    if param_does_not_exist(:contact_person, :main_phone)
+      contact_person.errors.add(:main_phone, 'Main phone is a required field')
+    end
+    if param_does_not_exist(:contact_person, :main_phone_can_sms)
+      contact_person.errors.add(:main_phone, 'Can the main phone accept text messages?')
+    end
+
+    return contact_person
+  end
+
+  def save_and_associate_contact_person(student, contact_person)
     if contact_person.errors.size > 0
       return render_wizard
     end
 
     # Save the contact person
-    # TODO: Seems like an extra/blank contact person gets created. Investigate.
     contact_person.update_attributes(contact_person_params)
     contact_person.save
 
@@ -537,14 +562,18 @@ class EnrollmentController < ApplicationController
     return render_wizard student
   end
 
+  def update_guardian_name_and_address(student, contact_person)
+
+    validate_contact_person_name_and_relationship(contact_person)
+
+    validate_contact_person_address(contact_person)
+
+    return save_and_associate_contact_person(student, contact_person)
+  end
+
   def update_guardian_phone_and_email(contact_person)
 
-    if param_does_not_exist(:contact_person, :main_phone)
-      contact_person.errors.add(:main_phone, 'Main phone is a required field')
-    end
-    if param_does_not_exist(:contact_person, :main_phone_can_sms)
-      contact_person.errors.add(:main_phone, 'Can the main phone accept text messages?')
-    end
+    validate_contact_person_phone(contact_person)
 
     if contact_person.errors.size > 0
       return render_wizard
@@ -552,6 +581,17 @@ class EnrollmentController < ApplicationController
 
     contact_person.update_attributes(contact_person_params)
     return render_wizard contact_person
+  end
+
+  def update_guardian_second_name_and_relationship(student, contact_person)
+    if params['has_additional_guardian'] == "false"
+      jump_to :guardian_complete
+      return render_wizard
+    end
+
+    validate_contact_person_name_and_relationship(contact_person)
+
+    return save_and_associate_contact_person(student, contact_person)
   end
 
 end
