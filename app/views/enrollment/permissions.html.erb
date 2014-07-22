@@ -1,7 +1,13 @@
+<% contacts = @student.contact_people %>
+<% contacts = contacts[1..(contacts.size-1)] %>
+
 <%= render 'enrollment/navigation' %>
+<%= render 'enrollment/student_errors' %>
+
 <div class="enrollment-form">
   <div class="instructions">Permissions and authorizations</div>
   <!-- TODO: Add tooltip saying this is other than the parent/guardians -->
+  <!-- TODO: Enable checkboxes to be populated when the back button, etc. is used -->
 
   <%= form_for(@student, url: wizard_path, method: :put) do |c| %>
   <table>
@@ -10,11 +16,11 @@
     </tr>
     <tr><td colspan="2" class="minimize-padding"> 
       <div class ="checkbox inline-checkbox">
-      <% @all_contacts.reverse.each do |person| %>
+      <% contacts.each_with_index do |contact, index| %>
           <div class ="checkbox inline-checkboxes">
-            <label>
-              <input type="checkbox"> <%= person.first_name.titlecase %>
-            </label>
+            <% contact_name = 'contact_person_' + index.to_s + '_pickup' %>
+            <input id="<%=contact_name%>" name="<%=contact_name%>" type="checkbox">
+            <label for="<%=contact_name%>"><span class="capitalize"><%=contact.first_name%></span></label>
           </div>
       <% end %>
     </td>
@@ -25,13 +31,13 @@
     </tr>
     <tr><td colspan="2" class="minimize-padding"> 
       <div class ="checkbox inline-checkbox">
-      <% @all_contacts.reverse.each do |person| %>
-          <div class ="checkbox inline-checkboxes">
-            <label>
-              <input type="checkbox"> <%= person.first_name.titlecase %>
-            </label>
-          </div>
-      <% end %>
+        <% contacts.each_with_index do |contact, index| %>
+            <div class ="checkbox inline-checkboxes">
+              <% contact_name = 'contact_person_' + index.to_s + '_records' %>
+              <input id="<%=contact_name%>" name="<%=contact_name%>" type="checkbox">
+              <label for="<%=contact_name%>"><span class="capitalize"><%=contact.first_name%></span></label>
+            </div>
+        <% end %>
     </td>
     </tr>
 

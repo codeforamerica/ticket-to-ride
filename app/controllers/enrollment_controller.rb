@@ -55,7 +55,8 @@ class EnrollmentController < ApplicationController
       :guardian_second_address_and_contact_info,
       :guardian_complete,
       :contact_person_1_contact_info,
-      :contact_person_2_contact_info
+      :contact_person_2_contact_info,
+      :permissions
   ]
 
   # Grades, sorted by order
@@ -307,6 +308,11 @@ class EnrollmentController < ApplicationController
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.find(session[:contact_person_id])
         return update_contact_person_contact_info(@student, @contact_person)
+
+      # Permissions
+      when :permissions
+        return update_permissions(@student)
+
 
       # Pass through steps
       when :student_complete, :guardian_complete
@@ -631,6 +637,35 @@ class EnrollmentController < ApplicationController
     validate_contact_person_name(contact_person)
     validate_contact_person_phone(contact_person)
     return save_and_associate_contact_person(student, contact_person)
+  end
+
+  def update_permissions(student)
+
+    if params['has_court_order'] == nil
+      student.errors.add('has_court_order', 'Are there any court orders regarding ' + student.first_name + '?')
+      return render_wizard
+    end
+
+    contact_people = student.contact_people
+    contact_people = contact_people[1..contact_people.size-1]
+    contact_people.each_with_index do |contact, index|
+      form_name = 'contact_person_' + index.to_s + '_'
+
+      can_pickup = params[form_name + 'pickup']
+      if can_pickup
+        contact.can_pickup_child = true
+      end
+
+      can_receive_records = params[form_name + 'records']
+      if can_receive_records
+        contact.receive_grade_notices = true
+        contact.receive_conduct_notices = true
+      end
+
+      contact.save #TODO - Error catch
+    end
+
+    return render_wizard student
   end
 
 end
