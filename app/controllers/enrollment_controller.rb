@@ -234,9 +234,12 @@ class EnrollmentController < ApplicationController
       @student_gender_possessive_adjective = genderToPossessiveAdjective(@student.gender) # His/Her
     end
 
-    if :guardian_name_and_address
-      @guardian_1 = ContactPerson.create
-      session[:guardian_1_id] = @guardian_1.id
+    case step
+      when :guardian_name_and_address
+        @guardian_1 = ContactPerson.create
+        session[:guardian_1_id] = @guardian_1.id
+      when :guardian_phone_and_email
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
     end
 
     render_wizard
