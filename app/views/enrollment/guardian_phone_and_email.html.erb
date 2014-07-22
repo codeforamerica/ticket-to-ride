@@ -9,57 +9,47 @@
           <td colspan="2"><span class="instructions">Your contact information</span></td>
         </tr>
 
-        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
-        <%= fields_for(PhoneNumber.new) do |p| %>
-            <tr>
-              <td class="row-break"><span>Main phone:</span>
-                <span><%= p.telephone_field :number, class: 'enrollment-form-input', priority_level: 'primary', id: 'guardian_main_phone', placeholder: '401-111-2222', required: true %></span>
-              </td>
-              <td>
-                <div class="btn-group pull-right" data-toggle="buttons">
+        <tr>
+          <td class="row-break"><span>Main phone:</span>
+            <span><%= g.telephone_field :main_phone, class: 'enrollment-form-input', placeholder: '401-111-2222', required: true %></span>
+          </td>
+          <td>
+            <div class="btn-group pull-right" data-toggle="buttons">
 
-                  <label class="btn btn-primary"> <!-- TODO Labels can use the Rails tags and link rather than surrounding the radio elements -->
-                    <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
-                  <label class="btn btn-primary">
-                    <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
-
-                </div>
-              </td>
-            </tr>
-        <% end %>
-
-        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
-        <%= fields_for(PhoneNumber.new) do |p| %>
-            <tr>
-              <td><span>Secondary phone:</span>
-                <span><%= p.telephone_field :number, class: 'enrollment-form-input', id: 'guardian_alt_phone', priority_level: 'secondary', placeholder: '401-222-3333' %></span>
-              </td>
-              <td>
-                <div class="btn-group pull-right" data-toggle="buttons">
-                  <label class="btn btn-primary">
-                    <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
-                  <label class="btn btn-primary">
-                    <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
-                </div>
-              </td>
-        <% end %>
+              <label class="btn btn-primary"> <!-- TODO Labels can use the Rails tags and link rather than surrounding the radio elements -->
+                <%= g.radio_button :main_phone_can_sms, true %>Accepts texts</label>
+              <label class="btn btn-primary">
+                <%= g.radio_button :main_phone_can_sms, false %>No texts</label>
+            </div>
+          </td>
         </tr>
 
-        <!-- TODO Phone number: This isn't going work as is, but is a placeholder so that front-end stuff can continue -->
-        <%= fields_for(PhoneNumber.new) do |p| %>
-            <tr>
-              <td><span>Work phone:</span>
-                <span><%= p.telephone_field :number, class: 'enrollment-form-input', priority_level: 'work', id: 'guardian_alt_phone', placeholder: '401-333-4444' %></span>
-              </td>
-              <td>
-                <div class="btn-group pull-right" data-toggle="buttons">
-                  <label class="btn btn-primary">
-                    <%= p.radio_button :receives_sms, 'Cell' %>Accepts texts</label>
-                  <label class="btn btn-primary">
-                    <%= p.radio_button :receives_sms, 'Landline' %>No texts</label>
-                </div>
-              </td>
-        <% end %>
+        <tr>
+          <td><span>Secondary phone:</span>
+            <span><%= g.telephone_field :secondary_phone, class: 'enrollment-form-input', placeholder: '401-222-3333' %></span>
+          </td>
+          <td>
+            <div class="btn-group pull-right" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <%= g.radio_button :secondary_phone_can_sms, true %>Accepts texts</label>
+              <label class="btn btn-primary">
+                <%= g.radio_button :secondary_phone_can_sms, false %>No texts</label>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><span>Work phone:</span>
+            <span><%= g.telephone_field :work_phone, class: 'enrollment-form-input', placeholder: '401-333-4444' %></span>
+          </td>
+          <td>
+            <div class="btn-group pull-right" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <%= g.radio_button :work_phone_can_sms, true %>Accepts texts</label>
+              <label class="btn btn-primary">
+                <%= g.radio_button :work_phone_can_sms, false %>No texts</label>
+            </div>
+          </td>
         </tr>
         <tr>
           <td colspan="2"><span>Email address:</span>
@@ -67,16 +57,6 @@
           </td>
         </tr>
 
-        <!--     <tr>
-      <td colspan="2" class="row-break"><span>Does <%= @student.first_name %> have another parent or legal guardian?</span> 
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary">
-              <input type="radio" name="has_additional_guardian" value="true">Yes</label>
-          <label class="btn btn-primary">
-              <input type="radio" name="has_additional_guardian" value="false">No</label>
-        </div>
-      </td>
-    </tr> -->
       </table>
       </div>
 

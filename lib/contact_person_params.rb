@@ -24,7 +24,16 @@ module ContactPersonParams
       :has_custody,
       :has_court_order,
       :court_order_description,
-      :student_id
+      :student_id,
+      :main_phone,
+      :main_phone_extension,
+      :main_phone_can_sms,
+      :secondary_phone,
+      :secondary_phone_extension,
+      :secondary_phone_can_sms,
+      :work_phone,
+      :work_phone_extension,
+      :work_phone_can_sms
     )
   end
 end
