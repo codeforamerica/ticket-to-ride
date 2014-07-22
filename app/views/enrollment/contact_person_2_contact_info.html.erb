@@ -1,12 +1,14 @@
 <!-- TODO: Find a way to reuse contact_person_1_contact_info better than copy/paste -->
 
 <%= render 'enrollment/navigation' %>
+<div class="enrollment-form">
 <%= render 'enrollment/contact_person_errors' %>
 
-<div class="enrollment-form">
-  <div class="instructions">Tell us about the people who can find you in case of an emergency.</div>
+
+  <div class="instructions">Tell us about another adult who can find you in case of an emergency.</div>
 
   <%= form_for(@contact_person, url: wizard_path, method: :put) do |c| %>
+    <div>
       <table>
         <tr>
           <td class="row-break"><span>First Name:</span>
@@ -18,8 +20,8 @@
           </td>
         </tr>
         <tr>
-          <td class="padding-right" colspan="2">Contact's relationship to the student:
-            <%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
+          <td class="padding-right" colspan="2">Relationship to the <%= @student.first_name %>:
+            <%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#contact2RelationshipModal', id: 'contact2RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
           </td>
         </tr>
 
@@ -57,14 +59,15 @@
         </tr>
 
       </table>
-      </div>
-
       <ul class="pager">
         <li><%= link_to "Previous", previous_wizard_path %></li>
         <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
       </ul>
+    </div>
 
-      <div class="modal fade" id="guardian1RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="guardian1RelationshipModal" aria-hidden="true">
+
+
+      <div class="modal fade" id="contact2RelationshipModal" tabindex="-1" role="dialog" aria-labelledby="contact2RelationshipModal" aria-hidden="true">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
@@ -97,5 +100,6 @@
       </div>
 
   <% end %>
+</div>
 
   <%= render 'shared/scenery_contact' %>
