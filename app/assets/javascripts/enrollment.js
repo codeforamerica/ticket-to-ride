@@ -257,9 +257,10 @@ $(document).ready(function () {
     clearRadioGroupUponTextEntry('#choose_student_home_language_input_text', 'choose_student_home_language');
     clearTextInputUponRadioCheck('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
 
-    // Modal Dialog Behavior for Guardian/Student selection
+    // Modal Dialog Behavior for Guardian/Student relationship selection
     getSelectionFromModalForInput('#btnGuardian1Relationship', 'input[name="choose_relationship"]', '#guardian1RelationshipSelected');
     clearRadioGroupUponTextEntry('#choose_relationship_input_text', 'choose_relationship');
     clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
+
 
 });
