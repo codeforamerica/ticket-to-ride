@@ -538,7 +538,18 @@ class EnrollmentController < ApplicationController
   end
 
   def update_guardian_phone_and_email(contact_person)
-    # TODO: Validate stuff here
+
+    if param_does_not_exist(:contact_person, :main_phone)
+      contact_person.errors.add(:main_phone, 'Main phone is a required field')
+    end
+    if param_does_not_exist(:contact_person, :main_phone_can_sms)
+      contact_person.errors.add(:main_phone, 'Can the main phone accept text messages?')
+    end
+
+    if contact_person.errors.size > 0
+      return render_wizard
+    end
+
     contact_person.update_attributes(contact_person_params)
     return render_wizard contact_person
   end

@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20140721234659) do
     t.string   "main_phone_extension"
     t.boolean  "main_phone_can_sms"
     t.string   "secondary_phone"
-    t.string   "secondary_phone_ext"
+    t.string   "secondary_phone_extension"
     t.string   "secondary_phone_can_sms"
     t.string   "work_phone"
     t.string   "work_phone_extension"

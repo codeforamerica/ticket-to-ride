@@ -39,4 +39,37 @@ class ContactPerson < ActiveRecord::Base
                                         message: 'Relationship can only contain letters, spaces, and dashes',
                                         allow_nil: true
   }
+
+  # Phone number validation
+  validates :main_phone, format: { with: ModelConstants::PHONE_NUMBER_REGEX,
+                                   message: 'Main phone number can only have digits and dashes, and must be 10 digits',
+                                   allow_nil: true
+  }
+  validates :main_phone_extension, format: { with: ModelConstants::PHONE_EXTENSION_REGEX,
+                                             message: 'Main phone extension can only have digits',
+                                             allow_nil: true
+  }
+
+  validates :secondary_phone, format: { with: ModelConstants::PHONE_NUMBER_OPTIONAL_REGEX,
+                                   message: 'Secondary phone number can only have digits and dashes, and must be 10 digits',
+                                   allow_nil: true
+  }
+  validates :secondary_phone_extension, format: { with: ModelConstants::PHONE_EXTENSION_REGEX,
+                                             message: 'Main phone extension can only have digits',
+                                             allow_nil: true
+  }
+
+  validates :work_phone, format: { with: ModelConstants::PHONE_NUMBER_OPTIONAL_REGEX,
+                                   message: 'Work phone number can only have digits and dashes, and must be 10 digits',
+                                   allow_nil: true
+  }
+  validates :work_phone_extension, format: { with: ModelConstants::PHONE_EXTENSION_REGEX,
+                                                message: 'Work phone extension can only have digits',
+                                                allow_nil: true
+  }
+
+  validates :email, format: { with: ModelConstants::EMAIL_REGEX,
+                                             message: 'E-mail address was not valid',
+                                             allow_nil: true
+  }
 end
