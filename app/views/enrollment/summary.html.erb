@@ -73,6 +73,19 @@
             </td>
           </tr>
           <tr>
+            <td class="summaryText" colspan="2">
+              <% if @summary_student.prior_school_name == nil %>
+                <%= @summary_student.first_name %> has not attended another school. 
+                <% else %>
+
+                <%= @summary_student.first_name %> most recently attended <span class="summaryAnswers"><%= @summary_student.prior_school_name %></span> in <span class="summaryAnswers"><%= @summary_student.prior_school_city %>, <%=@summary_student.prior_school_state %></span>.
+          
+                <% end %>
+            </td>
+            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div>
+            </td>
+          </tr>
+          <tr>
             <td class="summaryText" colspan="2"> The last grade   
               <% if @summary_student.gender == 'male' %>
                 <%= 'he' %>
