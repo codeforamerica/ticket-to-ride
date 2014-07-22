@@ -17,7 +17,7 @@ div.container-application header {
   margin: 1em 5% 0 5%;  
   // padding-left: 5%;
   max-width: 960px;
-  font-size: 150%
+  font-size: 150%;
 }
 
 .enrollment-form .container {
@@ -102,28 +102,25 @@ a:hover.enrollment-form-popover {
 
 // Begin language table formatting
 
-.language-table {
+.enrollment-qa-table {
   width: 656px;
   margin-bottom: -2%;
 }
 
 td div.buttons-center {
-  margin: 0 10% 0 19%;
-  white-space: nowrap;
+  margin: 0 23.55% 0 28.55%;
 }
 
-.edit-student td.enrollment-qa-question-cell {
+.enrollment-form td.enrollment-qa-cell {
   width: 67.530487804878%;
 }
 
-.edit-student td.enrollment-qa-answer-cell {
+.enrollment-form td.enrollment-answer-cell {
   width: 30.4878049%;
 }
-.edit-student td.enrollment-qa-gutter-cell {
+.enrollment-form td.enrollment-qa-gutter-cell {
   width: 1.9817073%;
 }
-
-// End language table formatting
 
 // Begin table with radio button pair answers formatting
 
@@ -395,13 +392,18 @@ input[type=date] {
   font-size: 100%;
 }
 
+.enrollment-form-modal-language {
+  @extend .enrollment-form-popover;
+  width: 100%;
+}
+
 .enrollment-form-modal-selection {
   border-bottom: 2px dashed $george-harrison;
   font-weight: 700;
   text-align: center;
   color: $paul-mccartney;
-  min-width: 200px;
-  max-width: 200px;
+  // min-width: 200px;
+  // max-width: 200px;
 }
 
 .enrollment-form .filler-text {
@@ -658,10 +660,13 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   border-bottom:5px solid $george-harrison;
 }
 
-
 .completed-section {
   @extend .welcome;
-  margin-bottom: 1em;
+}
+
+.completed-section ul.pager {
+  margin-top: 1em;
+  width: 660px;
 }
 
 .enrollment-modal-select {
@@ -682,11 +687,25 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   margin-top: 2%;
 }
 
-.guardian_state {
+
+// apply highest z-index for scrolling over background svg
+.edit_contact_person, .edit_student { 
+  z-index: 2;
+  position: absolute;
+  background: #FFF;
+  width: inherit;
+}
+
+.state_input {
   width: 10%;
 }
 
-.guardian_zip {
+.city_input {
+  width: 35%;
+  margin: 0 1% 0 1%;
+}
+
+.zip_input {
   width: 20%;
   margin-left: 1%;
 }
