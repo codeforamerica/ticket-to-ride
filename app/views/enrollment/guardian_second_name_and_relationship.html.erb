@@ -40,8 +40,6 @@
 
     <ul class="pager">
       <li><%= link_to "Previous", previous_wizard_path %></li>
-      
-<!-- TODO: Make this link skip to Guardian Complete if no is selected -->
       <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
 
@@ -76,7 +74,5 @@
           </div>
         </div>
       </div>
-      </div>
 <% end %>
-
 <%= render 'shared/scenery_guardian' %>
