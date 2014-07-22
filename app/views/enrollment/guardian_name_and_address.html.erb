@@ -1,29 +1,3 @@
-<script>
-
-    var studentHomeStreetAddress1 = '<%= @student.home_street_address_1 %>';
-    var studentHomeStreetAddress2 = '<%= @student.home_street_address_2 %>';
-    var studentHomeCity = '<%= @student.home_city %>';
-    var studentState = '<%= @student.home_state %>';
-    var studentZipCode = '<%= @student.home_zip_code %>';
-
-    function fillStudentAddress() {
-//        var doesContactLiveWithStudent = $("input:radio[name='contact_person[lives_with_student]']").val();
-        $('#contact_person_mailing_street_address_1').val(studentHomeStreetAddress1);
-        $('#contact_person_mailing_street_address_2').val(studentHomeStreetAddress2);
-        $('#contact_person_mailing_city').val(studentHomeCity);
-        $('#contact_person_mailing_state').val(studentState);
-        $('#contact_person_mailing_zip_code').val(studentZipCode);
-    }
-
-    function clearStudentAddress() {
-            $('#contact_person_mailing_street_address_1').val('');
-            $('#contact_person_mailing_street_address_2').val('');
-            $('#contact_person_mailing_city').val('');
-            $('#contact_person_mailing_state').val('');
-            $('#contact_person_mailing_zip_code').val('');
-    }
-</script>
-
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
   <%= render 'enrollment/guardian1_errors' %>
@@ -45,37 +19,40 @@
 
           <tr>
             <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>:
-              <%= g.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
+              <%= g.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship' %>
             </td>
           </tr>
-          
+
           <tr>
             <td colspan="2">Does <%= @student.first_name %> live with you?
               <div id="lives-with-student-radio-group" class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <%= g.radio_button :lives_with_student, true, required: true, onchange: 'fillStudentAddress()' %>Yes</label>
+                  <%= g.radio_button :lives_with_student, true, required: true, onchange: 'fillStudentAddress()' %>
+                  Yes</label>
                 <label class="btn btn-primary">
-                  <%= g.radio_button :lives_with_student, false, required: true, onchange:  'clearStudentAddress()' %>No</label>
+                  <%= g.radio_button :lives_with_student, false, required: true, onchange: 'clearStudentAddress()' %>
+                  No</label>
               </div>
             </td>
           </tr>
 
-        <tr id="guardian1_address">
-          <td class="row-break" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span>
-            <%= g.text_field :mailing_street_address_1, id:'contact_person_mailing_street_address_1', placeholder: 'Street address 1', class: 'enrollment-form-input' %>
-        </tr>
-        <tr>
-          <td colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span>
-            <%= g.text_field :mailing_street_address_2, id: 'contact_person_mailing_street_address_2', placeholder: 'Street address 2', class: 'enrollment-form-input' %>
-        </tr>
-        <tr>
-          <td colspan="2" id="guardian1_shared_city">
-            <span>City:</span>
-            <%= g.text_field :mailing_city, id: 'contact_person_mailing_city', placeholder: 'City', class: 'enrollment-form-input city_input' %>,
-            <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI', class: 'enrollment-form-input state_input', value: 'RI' %>
-            <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input zip_input' %>
-          </td>
-        </tr>
+          <tr id="guardian1_address">
+            <td class="row-break" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span>
+              <%= g.text_field :mailing_street_address_1, id: 'contact_person_mailing_street_address_1', placeholder: 'Street address 1', class: 'enrollment-form-input' %>
+          </tr>
+          <tr>
+            <td colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span>
+              <%= g.text_field :mailing_street_address_2, id: 'contact_person_mailing_street_address_2', placeholder: 'Street address 2', class: 'enrollment-form-input' %>
+          </tr>
+          <tr>
+            <td colspan="2" id="guardian1_shared_city">
+              <span>City:</span>
+              <%= g.text_field :mailing_city, id: 'contact_person_mailing_city', placeholder: 'City', class: 'enrollment-form-input city_input' %>
+              ,
+              <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI', class: 'enrollment-form-input state_input', value: 'RI' %>
+              <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input zip_input' %>
+            </td>
+          </tr>
         </table>
       </div>
 
@@ -102,7 +79,7 @@
                 <label class="btn btn-primary">
                   <%= radio_button_tag 'choose_relationship', :guardian, class: 'second' %>Guardian
                 </label><br/>
-                  <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'choose_relationship_input_text', placeholder: 'Other' %>
+                <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'choose_relationship_input_text', placeholder: 'Other' %>
                 <br/>
               </div>
             </div>
