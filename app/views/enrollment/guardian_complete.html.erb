@@ -1,13 +1,15 @@
 <div class="completed-section">
   <p>Great job. You've completed the 2nd section of <%= @student.first_name %>'s registration.</p>
     <p>In the next section we will ask you about whom to contact in case of an emergency.</p>
+
+    <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+        <ul class="pager">
+          <li><%= link_to "Previous", previous_wizard_path %></li>
+          <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+        </ul>
+    <% end %>
 </div>
 
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
-    <ul class="pager">
-      <li><%= link_to "Previous", previous_wizard_path %></li>
-      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
-    </ul>
-<% end %>
+
 
 <%= render 'shared/scenery_guardian_confirmation' %>
