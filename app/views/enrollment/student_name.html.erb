@@ -1,48 +1,50 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+  <div class="language-table">
 
-  <div class="instructions">Let's get started. Please tell us about your child.</div>
+    <div class="instructions">Let's get started. Please tell us about your child.</div>
 
-  <%= render 'enrollment/student_errors' %>
+    <%= render 'enrollment/student_errors' %>
 
-  <%= form_for(@student, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
+    <%= form_for(@student, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
 
-  <table>
-    <tr>
-      <td>
-        <span>First name:</span><span data-toggle="tooltip" title="Name on birth certificate" id="legal-name-tooltip"><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', placeholder: 'Mary', required: true %></span></td>
-      <td><span>Last name: </span>
-        <span><%= s.text_field :last_name, class: 'enrollment-form-input', id: 'student_lastname', placeholder: 'Williams', required: true %></span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span>Middle name:</span><span><%= s.text_field :middle_name, class: 'enrollment-form-input', id: 'student_middlename', placeholder: 'Sayles' %></span>
-      </td>
+    <table>
+      <tr>
+        <td>
+          <span>First name:</span><span data-toggle="tooltip" title="Name on birth certificate" id="legal-name-tooltip"><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', placeholder: 'Mary', required: true %></span></td>
+        <td><span>Last name: </span>
+          <span><%= s.text_field :last_name, class: 'enrollment-form-input', id: 'student_lastname', placeholder: 'Williams', required: true %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>Middle name:</span><span><%= s.text_field :middle_name, class: 'enrollment-form-input', id: 'student_middlename', placeholder: 'Sayles' %></span>
+        </td>
 
-      <td>
-        <span>Nickname:</span>
-        <span data-toggle="tooltip" title="Leave blank if no nickname" id="nickname-tooltip"><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_nickname', placeholder: 'Mae' %></span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <span>Birthdate:</span>
-        <span><%= s.date_field :birthday, class: 'enrollment-form-input', id: 'student_birthday', required: true %></span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <span>Birthplace:</span>
-        <span><%= s.text_field :birth_city, class: 'enrollment-form-input', id: 'student_birth_city', placeholder: 'Providence', required: true %></span>,
-        <span><%= s.text_field :birth_state, class: 'enrollment-form-input', id: 'student_birth_state', placeholder: 'RI' %></span></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <span data-toggle="tooltip" title="Country" id="birth-country-tooltip"><%= s.text_field :birth_country, class: 'enrollment-form-input', id: 'student_birth_country', placeholder: 'USA', required: true %></span>
-      </td>
-    </tr>
-  </table>
+        <td>
+          <span>Nickname:</span>
+          <span data-toggle="tooltip" title="Leave blank if no nickname" id="nickname-tooltip"><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_nickname', placeholder: 'Mae' %></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <span>Birthdate:</span>
+          <span><%= s.date_field :birthday, class: 'enrollment-form-input', id: 'student_birthday', required: true %></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <span>Birthplace:</span>
+          <span><%= s.text_field :birth_city, class: 'enrollment-form-input', id: 'student_birth_city', placeholder: 'Providence', required: true %></span>,
+          <span><%= s.text_field :birth_state, class: 'enrollment-form-input', id: 'student_birth_state', placeholder: 'RI' %></span></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <span data-toggle="tooltip" title="Country" id="birth-country-tooltip"><%= s.text_field :birth_country, class: 'enrollment-form-input', id: 'student_birth_country', placeholder: 'USA', required: true %></span>
+        </td>
+      </tr>
+    </table>
+  </div>
 
   <ul class="pager">
     <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
