@@ -1,3 +1,29 @@
+<script>
+
+    var studentHomeStreetAddress1 = '<%= @student.home_street_address_1 %>';
+    var studentHomeStreetAddress2 = '<%= @student.home_street_address_2 %>';
+    var studentHomeCity = '<%= @student.home_city %>';
+    var studentState = '<%= @student.home_state %>';
+    var studentZipCode = '<%= @student.home_zip_code %>';
+
+    function fillStudentAddress() {
+//        var doesContactLiveWithStudent = $("input:radio[name='contact_person[lives_with_student]']").val();
+        $('#contact_person_mailing_street_address_1').val(studentHomeStreetAddress1);
+        $('#contact_person_mailing_street_address_2').val(studentHomeStreetAddress2);
+        $('#contact_person_mailing_city').val(studentHomeCity);
+        $('#contact_person_mailing_state').val(studentState);
+        $('#contact_person_mailing_zip_code').val(studentZipCode);
+    }
+
+    function clearStudentAddress() {
+        $('#contact_person_mailing_street_address_1').val('');
+        $('#contact_person_mailing_street_address_2').val('');
+        $('#contact_person_mailing_city').val('');
+        $('#contact_person_mailing_state').val('');
+        $('#contact_person_mailing_zip_code').val('');
+    }
+</script>
+
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
   <%= render 'enrollment/guardian1_errors' %>
