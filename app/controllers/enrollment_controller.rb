@@ -53,7 +53,8 @@ class EnrollmentController < ApplicationController
       :guardian_phone_and_email,
       :guardian_second_name_and_relationship,
       :guardian_second_address_and_contact_info,
-      :guardian_complete
+      :guardian_complete,
+      :contact_person_1_contact_info
   ]
 
   # Grades, sorted by order
@@ -248,6 +249,9 @@ class EnrollmentController < ApplicationController
         session[:guardian_2_id] = @guardian_2.id
       when :guardian_second_address_and_contact_info
         @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+      when :contact_person_1_contact_info
+        @contact_person = ContactPerson.create
+        session[:contact_person_id] = @contact_person.id
     end
 
     render_wizard
@@ -284,22 +288,27 @@ class EnrollmentController < ApplicationController
 
       # Guardian steps
       when :guardian_name_and_address
-        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id]) # TODO - make a @contact_person variable
         return update_guardian_name_and_address(@student, @guardian_1)
 
       when :guardian_phone_and_email
-        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id]) # TODO - make a @contact_person variable
         return update_guardian_phone_and_email(@guardian_1)
 
       when :guardian_second_name_and_relationship
-        @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+        @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
         return update_guardian_second_name_and_relationship(@student, @guardian_2)
       when :guardian_second_address_and_contact_info
-        @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @guardian variable
+        @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
         return update_guardian_second_address_and_contact_info(@guardian_2)
 
+      # Contact Person steps
+      when :contact_person_1_contact_info
+        @contact_person = ContactPerson.find(session[:contact_person_id])
+        return update_contact_person_contact_info(@student, @contact_person)
+
       # Pass through steps
-      when :student_complete || :guardian_complete
+      when :student_complete, :guardian_complete
         jump_to next_step
         return render_wizard
     end
@@ -615,6 +624,12 @@ class EnrollmentController < ApplicationController
     validate_contact_person_address(contact_person)
     validate_contact_person_phone(contact_person)
     return save_contact_person(contact_person)
+  end
+
+  def update_contact_person_contact_info(student, contact_person)
+    validate_contact_person_name(contact_person)
+    validate_contact_person_phone(contact_person)
+    return save_and_associate_contact_person(student, contact_person)
   end
 
 end
