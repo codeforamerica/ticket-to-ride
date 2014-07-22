@@ -12,10 +12,10 @@
     <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Student</a></li>
     <li class="instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Guardian1</a></li>
     <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Guardian2</a></li>
-    <li class="instructions"><a href="#summaryContacts" role="tab" data-toggle="tab">Contact1</a></li>
+    <li class="instructions"><a href="#summaryContacts1" role="tab" data-toggle="tab">Contact1</a></li>
     <% if @summary_student.contact_people.size > 3 %>
         <% @summary_contact2 = @summary_student.contact_people[3] %>
-        <li class="instructions"><a href="#summaryContacts" role="tab" data-toggle="tab">Contact2</a></li>
+        <li class="instructions"><a href="#summaryContacts2" role="tab" data-toggle="tab">Contact2</a></li>
     <% end %>
     <li class="instructions"><a href="#summaryPermissions" role="tab" data-toggle="tab">Permissions</a></li>
   </ul>
@@ -224,7 +224,7 @@
       </table>
     
     </div>
-    <div class="tab-pane" id="summaryContacts">
+    <div class="tab-pane" id="summaryContacts1">
       <table class="summaryTable">
         <tr>
           <td class="summaryText section-break" colspan="2">
@@ -244,7 +244,7 @@
       </table>
     </div>
     <% if @summary_student.contact_people.size > 3 %>
-      <div class="tab-pane" id="summaryContacts">
+      <div class="tab-pane" id="summaryContacts2">
         <table class="summaryTable">
           <tr>
             <td class="summaryText section-break" colspan="2">
