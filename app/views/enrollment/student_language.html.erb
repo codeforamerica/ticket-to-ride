@@ -1,3 +1,23 @@
+<script>
+    var firstLanguage = '<%= @student.first_language %>';
+    var homeLanguage = '<%= @student.home_language %>';
+    var guardianLanguage = '<%= @student.guardian_language %>';
+
+    function isNotEnglish(language) {
+        return language != '' && language.toLowerCase() != 'english';
+    }
+
+    function showHideFormalEnglishTraining() {
+        var isNotEnglishSpeaker = isNotEnglish(firstLanguage) || isNotEnglish(homeLanguage) || isNotEnglish(guardianLanguage);
+        if (isNotEnglishSpeaker) {
+            $('#formal-english-training-question').show();
+        }
+        else {
+            $('#formal-english-training-question').hide();
+        }
+    }
+</script>
+
 <%= render 'enrollment/navigation' %>
 
 <div class="enrollment-form">
@@ -90,7 +110,7 @@
                 </div>
                 <div class="modal-footer">
                   <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnFirstLanguage" onclick="showHideFormalEnglishTraining()">Save
+                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnFirstLanguage">Save
                     changes
                   </button>
                 </div>
@@ -131,7 +151,7 @@
                 </div>
                 <div class="modal-footer">
                   <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnHomeLanguage" onclick="showHideFormalEnglishTraining()">Save
+                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnHomeLanguage">Save
                     changes
                   </button>
                 </div>
@@ -172,7 +192,7 @@
                 </div>
                 <div class="modal-footer">
                   <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnGuardianLanguage" onclick="showHideFormalEnglishTraining()">Save
+                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnGuardianLanguage">Save
                     changes
                   </button>
                 </div>
