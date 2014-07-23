@@ -118,8 +118,13 @@ $(document).ready(function () {
   // Disable z-index so modal works on contact1 page
 
    $('#contact1RelationshipSelected').click(function(){
-     $('.edit_contact_person').removeClass('edit_contact_person');
+     $('#contact_table').removeClass('enableZindex');
    }); 
+
+   $('#btnContact1Relationship').click(function(){
+      $('#contact_table').addClass('enableZindex');
+   });
+
 
   // Disable z-index so modal works on contact1 page
 
@@ -205,6 +210,35 @@ $(document).ready(function () {
         });
     };
 
+    function getSelectionNoResize(btnName, inputGroupName, inputToUpdate, processFunc) {
+        $(btnName).click(function () {
+            var value = '';
+
+            // Find a selected value (checked or text entered, then exit the each()
+            $(inputGroupName).each(function(){
+                var thisObj = $(this);
+                var thisVal = thisObj.val();
+
+                // Capture value from radio buttons
+                if(thisObj.attr('type') == 'radio' && thisObj.is(':checked')) {
+                    value = thisVal;
+                    return false;
+                }
+
+                // Capture value from text field
+                else if(thisObj.attr('type') == 'text' && thisVal != "") {
+                    value = thisVal;
+                    return false;
+                }
+            });
+
+            // Assign the found value to the designated input
+            var showSelection = $(inputToUpdate).val(value);
+            showSelection.removeClass('enrollment-form-popover');
+            showSelection.addClass('enrollment-form-modal-selection keep-same-width');
+        });
+    };
+
     /**
      * Registers an click action with element selected by `textInputSelector` to
      * unchecks a clicked radio button from the group with name `radioGroupName`.
@@ -276,7 +310,7 @@ $(document).ready(function () {
     clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
 
     // Modal Dialog Behavior for Contact1/Student relationship selection
-    getSelectionFromModalForInput('#btnContact1Relationship', 'input[name="choose_relationship"]', '#contact1RelationshipSelected');
+    getSelectionNoResize('#btnContact1Relationship', 'input[name="choose_relationship"]', '#contact1RelationshipSelected');
     clearRadioGroupUponTextEntry('#choose_relationship_input_text', 'choose_relationship');
     clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
 

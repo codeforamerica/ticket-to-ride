@@ -705,13 +705,29 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   margin-top: 2%;
 }
 
+#contact_table {
+  width: 600px;
+}
 
-// apply highest z-index for scrolling over background svg
-.edit_contact_person, .edit_student { 
+.enableZindex {
   z-index: 2;
   position: absolute;
   background: #FFF;
-  width: inherit;
+  min-width: 600px;
+  max-width: 600px;
+}
+
+// apply highest z-index for scrolling over background svg
+// .edit_contact_person, .edit_student { 
+//   z-index: 2;
+//   position: absolute;
+//   background: #FFF;
+//   width: inherit;
+// }
+
+.keep-same-width{
+  width: 320px;
+  height: 40px
 }
 
 .state_input {
@@ -726,4 +742,8 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
 .zip_input {
   width: 20%;
   margin-left: 1%;
+}
+
+td.secondary-phone-cell {
+  white-space: nowrap;
 }
