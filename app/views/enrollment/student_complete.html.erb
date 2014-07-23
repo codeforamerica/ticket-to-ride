@@ -1,7 +1,149 @@
 <%= render 'enrollment/navigation' %>
-    <div class="completed-section">
-      <p>Congrats! You've completed the first section of <%= @student.first_name %>'s registration.</p>
-      <p>In the next section you will fill out information about yourself.</p>
+    <div class="enrollment-form">
+
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Review Student Information</a></li>
+        </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="summaryStudent">
+            <table class="summaryTable">
+              <tr>
+                <td class="summaryText section-break" colspan="2">
+                  The student you are registering is <span class="summaryAnswers"><%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %></span>, who was born on <span class="summaryAnswers"><%= @student.birthday %></span> in <span class="summaryAnswers"><%= @student.birth_city %>, <%= @student.birth_state %> <%= @student.birth_country %></span>.</td>
+                  <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_name' %></div>
+                  </td>
+              </tr>
+              <tr>
+                <td class="summaryText" colspan="2"> 
+                  <% if @student.gender == 'male' %>
+                  <span class="summaryAnswers">  <%= 'He' %>
+                  <% elsif @student.gender == 'female' %>
+                    <%= 'She' %>
+                    <% end %>
+
+                  <% if @student.is_hispanic == false %>
+                       <%= 'is not' %>
+                       <% elsif @student.is_hispanic == true %>
+                         <%= 'is' %>
+                         <% end %>  </span> Hispanic or Latino descent. 
+                  <% if @student.gender == 'male' %>
+                    <%= 'He' %>
+                  <% elsif @student.gender == 'female' %>
+                    <%= 'She' %>
+                    <% end %> is
+                        <!-- Let's add/find a function to do comma-ing -->
+                        <% @student.races.each_with_index  do |r, i| %>
+                            <span class="summaryAnswers"><%=t('race_' + r.race)%></span>
+                            <% if (@student.races.size-1) == i %>
+                                .
+                            <% elsif (@student.races.size - 2) == i %>
+                                <% if @student.races.size > 2 %>
+                                    ,
+                                <% end %>
+                                and
+                            <% else %>
+                                <%= i %>,
+                            <% end %>
+                        <% end %></td>
+                <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_gender_and_ethnicity' %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryText" colspan="2"><%= @student.first_name %>'s primary language is <%= @student.home_language.titlecase %>. At home,  
+                  <% if @student.gender == 'male' %>
+                    <%= 'he' %>
+                  <% elsif @student.gender == 'female' %>
+                    <%= 'she' %>
+                  <% end %>
+                  speaks <span class="summaryAnswers">
+                   <%= @student.guardian_language.titlecase %></span>. 
+                </td>
+                <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_language' %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryText" colspan="2">
+                  <% if @student.prior_school_name == nil %>
+                    <%= @student.first_name %> has not attended another school. 
+                    <% else %>
+
+                    <%= @student.first_name %> most recently attended <span class="summaryAnswers"><%= @student.prior_school_name %></span> in <span class="summaryAnswers"><%= @student.prior_school_city %>, <%=@student.prior_school_state %></span>.
+              
+                    <% end %>
+                </td>
+                <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryText" colspan="2"> The last grade   
+                  <% if @student.gender == 'male' %>
+                    <%= 'he' %>
+                  <% elsif @student.gender == 'female' %>
+                    <%= 'she' %>
+                  <% end %>
+                    completed was <span class="summaryAnswers"> <%= t('grade_' + @student.previous_grade.code) %></span>.
+                </td>
+                <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryText" colspan="2">
+                  <%= @student.first_name %>
+
+                  <span class="summaryAnswers">  
+                    <% if @student.needs_special_services == true %>
+                      <%= 'needs' %>
+                    <% elsif @student.needs_special_services == false || @student.needs_special_services.nil? == true %>
+                      <%= 'does not need' %>
+                    <% end %>
+                  </span> special services.   
+                   
+                    <% if @student.gender == 'male' %>
+                      <%= 'He' %>
+                    <% elsif @student.gender == 'female' %>
+                      <%= 'She' %>
+                    <% end %>
+                  
+                  <span class="summaryAnswers">  
+                    <% if @student.p504 == true %>
+                      <%= 'has' %>
+                    <% elsif @student.p504 == false || @student.p504.nil? == true %>
+                      <%= 'does not have' %>
+                    <% end %>
+                  </span> Section 504.
+
+                 
+                  <% if @student.gender == 'male' %>
+                    <%= 'He' %>
+                  <% elsif @student.gender == 'female' %>
+                    <%= 'She' %>
+                  <% end %>
+                
+                  <span class="summaryAnswers">  
+                    <% if @student.has_learning_difficulties == true %>
+                      <%= 'has' %>
+                    <% elsif @student.has_learning_difficulties == false || @student.has_learning_difficulties.nil? == true %>
+                      <%= 'does not have' %>
+                    <% end %>
+                  </span> learning difficulties.
+              </td>
+              <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_special_services' %></div>
+              </td>
+            </tr>
+              <tr>
+                <td class="summaryText" colspan="2">  
+                    <%= @student.first_name %> lives at
+                  <span class="summaryAnswers"><%= @student.home_street_address_1 %> <%= @student.home_street_address_2 %> in <%= @student.home_city %>, <%= @student.home_state %></span>.
+                </td>
+                <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_address' %></div>
+                </td>
+              </tr>
+            </table>
+        </div>
+      </div>
+<!--       <p>Congrats! You've completed the first section of <%= @student.first_name %>'s registration.</p>
+      <p>In the next section you will fill out information about yourself.</p> -->
 
       <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
           <ul class="pager">
