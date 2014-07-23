@@ -1,3 +1,4 @@
+
 <script>
 
     var studentHomeStreetAddress1 = '<%= @student.home_street_address_1 %>';
@@ -27,7 +28,7 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
   <%= render 'enrollment/guardian1_errors' %>
-
+  <h1>Guardian Information</h1>
   <div class="instructions">Tell us about you.</div>
 
   <%= form_for(@guardian_1, url: wizard_path, method: :put, :html => {:name => 'guardian1_name_form'}, id: 'editable-fields') do |g| %>

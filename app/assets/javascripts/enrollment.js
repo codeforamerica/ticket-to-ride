@@ -115,19 +115,6 @@ $(document).ready(function () {
     $('#contact_table').removeClass('enableZindex');
   });
 
-
-  // Disable z-index so email field is clickable on guardian2 page
-  // $('label').click(function(){
-  //   var checkForPhoneNum = $(this).text().trim();
-  //   if (checkForPhoneNum == 'Accepts Texts') {
-  //     $('#guardian2_table').addClass('enableZindex');
-  //   }
-    
-    // parentLabel.click(function(){
-    //   alert(parentLabel);
-    // }
-  });
-
   // Disable z-index so modal works on contact1 page
 
    $('#contact1RelationshipSelected').click(function(){
