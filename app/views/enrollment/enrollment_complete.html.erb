@@ -1,27 +1,28 @@
-<div class="enrollment-form">
-  <div class="enrollment-form_para">Congratulations! You've completed the online portion of <span class="edited_text"><%= @student.first_name %></span>'s school registration.
+<div class="completed-section">
+  <div><p>Congratulations! You've completed the online portion of <%= @student.first_name %>'s school registration.</p>
   </div>
 
-  <div><span class="instructions">Please bring the following documents with you to finalize your application:</span>
+  <div><span class="instructions">Please bring the following documents with you to finalize your application:</div>
+    <div class="container">
 
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-3">
         <div class="input-group">
           <span class="input-group-addon">
-            <input type="checkbox">
+            <!-- <input type="checkbox"> -->
           </span>
-          <span class="form-control">Student birth certificate</span>
+          <span class="form-control"><%= @student.first_name %>'s original birth certificate</span>
         </div>
         <!-- /input-group -->
       </div>
       <!-- /.col-lg-6 -->
 
-      <div class="col-lg-6">
+      <div class="col-lg-3">
         <div class="input-group">
           <span class="input-group-addon">
-            <input type="checkbox">
+            <!-- <input type="checkbox"> -->
           </span>
-          <span class="form-control">Student immunization form</span>
+          <span class="form-control"><%= @student.first_name %>'s immunization form</span>
         </div>
         <!-- /input-group -->
       </div>
@@ -29,10 +30,10 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-3">
         <div class="input-group">
           <span class="input-group-addon">
-            <input type="checkbox">
+            <!-- <input type="checkbox"> -->
           </span>
           <span class="form-control">Your state photo I.D.</span>
         </div>
@@ -40,10 +41,10 @@
       </div>
       <!-- /.col-lg-6 -->
 
-      <div class="col-lg-6">
+      <div class="col-lg-3">
         <div class="input-group">
           <span class="input-group-addon">
-            <input type="checkbox">
+            <!-- <input type="checkbox"> -->
           </span>
           <span class="form-control">Proof of residence</span>
         </div>
