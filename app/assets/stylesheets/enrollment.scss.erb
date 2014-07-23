@@ -716,15 +716,32 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
 }
 
 #contact_table {
-  width: 600px;
+  width: 660px;
+}
+
+#guardian2_table {
+  width: 660px;
 }
 
 .enableZindex {
   z-index: 2;
   position: absolute;
   background: #FFF;
-  min-width: 600px;
-  max-width: 600px;
+  min-width: 660px;
+  max-width: 660px;
+}
+
+.pagerZindex {
+  z-index:2;
+  position: absolute;
+  bottom: 200px;
+  min-width: 660px;
+}
+
+#guardian2_table.enableZindex {
+  @extend .enableZindex;
+  min-width: 660px;
+  max-width: 660px;
 }
 
 // apply highest z-index for scrolling over background svg
