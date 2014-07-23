@@ -1,7 +1,8 @@
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+    <h1>Student Information</h1>
 
-    <div class="instructions">Let's get started. Please tell us about your child.</div>
+    <div class="instructions">To begin, click above the first blue dotted line and start typing.</div>
 
     <%= render 'enrollment/student_errors' %>
 
@@ -16,14 +17,10 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td colspan="2">
           <span>Middle name:</span><span><%= s.text_field :middle_name, class: 'enrollment-form-input', id: 'student_middlename', placeholder: 'Sayles' %></span>
         </td>
 
-        <td>
-          <span>Nickname:</span>
-          <span data-toggle="tooltip" title="Leave blank if no nickname" id="nickname-tooltip"><%= s.text_field :nickname, class: 'enrollment-form-input', id: 'student_nickname', placeholder: 'Mae' %></span>
-        </td>
       </tr>
       <tr>
         <td colspan="2">
@@ -34,12 +31,13 @@
       <tr>
         <td colspan="2">
           <span>Birthplace:</span>
-          <span><%= s.text_field :birth_city, class: 'enrollment-form-input', id: 'student_birth_city', placeholder: 'Providence', required: true %></span>,
+          <span><%= s.text_field :birth_city, class: 'enrollment-form-input city_input', id: 'student_birth_city', placeholder: 'Providence', required: true %></span>,
+          
           <span><%= s.text_field :birth_state, class: 'enrollment-form-input', id: 'student_birth_state', placeholder: 'RI' %></span></td>
       </tr>
       <tr>
         <td colspan="2">
-          <span data-toggle="tooltip" title="Country" id="birth-country-tooltip"><%= s.text_field :birth_country, class: 'enrollment-form-input', id: 'student_birth_country', placeholder: 'USA', required: true %></span>
+          <span data-toggle="tooltip" title="Country" id="birth-country-tooltip"><%= s.text_field :birth_country, class: 'enrollment-form-input country_input', id: 'student_birth_country', placeholder: 'USA', required: true %></span>
         </td>
       </tr>
     </table>

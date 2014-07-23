@@ -2,10 +2,10 @@
 <div class="enrollment-form">
 <%= render 'enrollment/contact_person_errors' %>
 
-  <div class="instructions">Tell us about the people who can find you in case of an emergency.</div>
+  <div class="instructions">Tell us about an adult who can find you in case of an emergency.</div>
 
-  <%= form_for(@contact_person, url: wizard_path, method: :put, id:'editable-fields') do |c| %>
-    <div>
+  <%= form_for(@contact_person, url: wizard_path, method: :put) do |c| %>
+    <div id="contact_table" class="enableZindex">
       <table>
         <tr>
           <td class="row-break"><span>First Name:</span>
@@ -37,7 +37,7 @@
             </tr>
 
             <tr>
-              <td><span>Secondary phone:</span>
+              <td class="secondary-phone-cell"><span>Secondary phone:</span>
                 <span><%= c.telephone_field :secondary_phone, class: 'enrollment-form-input', placeholder: '401-111-2222' %></span>
               </td>
               <td>
@@ -78,7 +78,7 @@
                   <%= radio_button_tag 'choose_relationship', 'sibling', class: 'second' %>Sibling
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', 'guardian', class: 'second' %>Family Friend
+                  <%= radio_button_tag 'choose_relationship', 'family friend', class: 'second' %>Family Friend
                 </label><br/>
                 <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'choose_relationship_input_text', placeholder: 'Other' %>
                 <br/>
