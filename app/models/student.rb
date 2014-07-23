@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Student < ActiveRecord::Base
   include ModelConstants
 
@@ -21,7 +23,7 @@ class Student < ActiveRecord::Base
                                    message: 'First name can only have letters, spaces, and dashes',
                                    allow_nil: true
   }
-  validates :middle_name, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+  validates :middle_name, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_OPTIONAL_REGEX,
                                     message: 'Middle name can only have letters, spaces, and dashes',
                                     allow_nil: true
   }
