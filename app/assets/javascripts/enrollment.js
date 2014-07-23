@@ -115,6 +115,10 @@ $(document).ready(function () {
     $('#contact_table').removeClass('enableZindex');
   });
 
+  $('#btnGuardian1Relationship').click(function(){
+     $('#contact_table').addClass('enableZindex');
+  });
+
   // Disable z-index so modal works on contact1 page
 
    $('#contact1RelationshipSelected').click(function(){

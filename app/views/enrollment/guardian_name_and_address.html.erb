@@ -32,7 +32,7 @@
   <div class="instructions">Tell us about you.</div>
 
   <%= form_for(@guardian_1, url: wizard_path, method: :put, :html => {:name => 'guardian1_name_form'}, id: 'editable-fields') do |g| %>
-      <div>
+      <div class="contact_table enableZindex">
         <table>
           <tr>
             <td class="row-break"><span>First Name:</span>
