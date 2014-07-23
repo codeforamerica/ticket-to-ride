@@ -321,3 +321,16 @@ $(document).ready(function () {
 
 
 });
+
+// Functions following document load
+
+function showHideFormalEnglishTraining() {
+    if ($('#firstLanguageSelected').val() != 'English' ||
+        $('#homeLanguageSelected').val() != 'English' ||
+        $('#guardianLanguageSelected').val() != 'English') {
+        $('#formal-english-training-question').hide();
+    }
+    else {
+        $('#formal-english-training-question').show();
+    }
+}
