@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Student < ActiveRecord::Base
   include ModelConstants
 
