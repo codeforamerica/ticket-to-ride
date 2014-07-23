@@ -2,7 +2,7 @@
 <div class="enrollment-form">
   <%= render 'enrollment/contact_person_errors' %>
 
-  <div class="instructions">Tell us about the people who can find you in case of an emergency.</div>
+  <div class="instructions">Tell us about another person who can find you in case of an emergency.</div>
 
   <%= form_for(@contact_person, url: wizard_path, method: :put, id:'editable-fields') do |c| %>
       <div>
