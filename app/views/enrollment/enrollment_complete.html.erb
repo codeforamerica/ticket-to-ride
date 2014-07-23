@@ -52,12 +52,11 @@
       <!-- /.col-lg-6 -->
     </div>
   </div>
+  <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
+      <ul class="pager">
+        <li><%= s.submit 'Finish', class: 'nav-button pull-right' %></li>
+      </ul>
+  <% end %>
 </div>
-
-<%= form_for(@student, url: wizard_path, method: :put) do |s| %>
-    <ul class="pager">
-      <li><%= s.submit 'Finish', class: 'nav-button pull-right' %></li>
-    </ul>
-<% end %>
 
 <%= render 'shared/scenery_enrollment_complete' %>
