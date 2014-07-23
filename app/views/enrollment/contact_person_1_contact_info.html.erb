@@ -2,6 +2,8 @@
 <div class="enrollment-form">
 <%= render 'enrollment/contact_person_errors' %>
 
+  <h1>Emergency Contact 1</h1>
+
   <div class="instructions">Tell us about an adult who can find you in case of an emergency.</div>
 
   <%= form_for(@contact_person, url: wizard_path, method: :put) do |c| %>
