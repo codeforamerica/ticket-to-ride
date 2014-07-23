@@ -112,7 +112,7 @@ $(document).ready(function () {
  // Disable z-index so modal works on guardian1 page
 
   $('#guardian1RelationshipSelected').click(function(){
-    $('.edit_contact_person').removeClass('edit_contact_person');
+    $('#contact_table').removeClass('enableZindex');
   });
 
   // Disable z-index so modal works on contact1 page
