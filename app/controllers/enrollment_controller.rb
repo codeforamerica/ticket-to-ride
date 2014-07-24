@@ -315,7 +315,7 @@ class EnrollmentController < ApplicationController
 
 
       # Pass through steps
-      when :student_complete, :guardian_complete
+      when :student_complete, :guardian_complete, :enrollment_complete
         jump_to next_step
         return render_wizard
     end
@@ -325,10 +325,21 @@ class EnrollmentController < ApplicationController
     return render_wizard
   end
 
+  # --- Helpers ---
 
   def param_does_not_exist(model_const, field_const)
     return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
   end
+
+  def retainValuesAndErrors(obj, param_updater)
+    messages = obj.errors.messages.clone()
+    obj.update_attributes(param_updater)
+    messages.each do |k,v|
+      v.each {|e| obj.errors.add(k,e)}
+    end
+  end
+
+  # --- End Helpers ---
 
   def update_student_name(student)
     if param_does_not_exist(:student, :first_name)
@@ -351,13 +362,13 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
     student.update_attributes(student_params)
     return render_wizard student
   end
-
 
   def update_student_gender_and_ethnicity(student)
     if !params || !params[:student] || !params[:student][:gender]
@@ -377,6 +388,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
@@ -387,6 +399,7 @@ class EnrollmentController < ApplicationController
         StudentRace.create(race_id: race_id, student: @student )
       rescue
         student.errors.add(:race_ids, 'Could not assign race')
+        retainValuesAndErrors(student, student_params)
         return render_wizard
       end
     end
@@ -411,6 +424,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
@@ -454,19 +468,21 @@ class EnrollmentController < ApplicationController
         student.errors.add(:prior_school_state, 'Prior school state must be filled in')
       end
 
-    else
+    elsif previous_grade != nil
       params[:student].delete(:prior_school_name)
       params[:student].delete(:prior_school_city)
       params[:student].delete(:prior_school_state)
     end
 
+    student.previous_grade = previous_grade
+
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
     # Save the student
     student.update_attributes(student_params)
-    student.previous_grade = previous_grade
     return render_wizard student
   end
 
