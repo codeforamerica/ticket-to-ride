@@ -31,9 +31,8 @@
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_contact1.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-333-6666</span> which <span class="summaryAnswers">receives text messages</span>. <br/><br/>
-            A second phone number for <%= @summary_contact1.first_name %> is <!--TODO get this from database --><span class="summaryAnswers">401-908-9999</span> which <span class="summaryAnswers">receives text messages</span>.<br/><br/>
-            <%= @summary_contact1.first_name %>'s work phone is <span class="summaryAnswers">401-111-2222</span>.
+          <td class="summaryText" colspan="2"><%= @summary_contact1.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_contact1.main_phone %></span><!-- which <span class="summaryAnswers">receives text messages</span>-->. <br/><br/>
+            A second phone number for <%= @summary_contact1.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_contact2.secondary_phone %></span> which <!--<span class="summaryAnswers">receives text messages</span>-->.
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
         </tr>
         <tr>
@@ -56,9 +55,8 @@
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
           </tr>
           <tr>
-            <td class="summaryText" colspan="2"><%= @summary_contact2.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-333-6666</span> which <span class="summaryAnswers">receives text messages</span>. <br/><br/>
-              A second phone number for <%= @summary_contact2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers">401-908-9999</span> which <span class="summaryAnswers">receives text messages</span>.<br/><br/>
-              <%= @summary_contact2.first_name %>'s work phone is <span class="summaryAnswers">401-111-2222</span>.
+            <td class="summaryText" colspan="2"><%= @summary_contact2.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_contact2.main_phone %></span><!-- which <span class="summaryAnswers">receives text messages</span>-->. <br/><br/>
+              A second phone number for <%= @summary_contact2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_contact2.secondary_phone %></span> <!--which <span class="summaryAnswers">receives text messages</span>-->.<br/><br/>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
           </tr>
           <tr>
