@@ -1,7 +1,6 @@
 <% @student=Student.find(session[:student_id]) %>
 <% @summary_guardian1=@student.contact_people[0]%>
 <% @summary_guardian2=@student.contact_people[1]%>
-<% @summary_contact1=@student.contact_people[2]%>
 
 
 <%= render 'enrollment/navigation' %>
@@ -10,7 +9,9 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="active instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Review Guardian 1</a></li>
-    <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review Guardian 2</a></li>
+    <% if @summary_guardian2 %>
+        <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review Guardian 2</a></li>
+    <% end %>
   </ul>
 
   <!-- Tab panes -->
@@ -54,6 +55,7 @@
  
     </div>
 
+<% if @summary_guardian2 %>
     <div class="tab-pane" id="summaryGuardian2">
       <table class="summaryTable">
         <tr>
@@ -88,7 +90,7 @@
       </table>
     </div>
   </div>
-  
+<% end %>
 
     <ul class="pager">
       <li><%= link_to "Previous", previous_wizard_path, class: 'hidden'%></li>
