@@ -51,14 +51,14 @@
 <%= render 'enrollment/guardian2_errors' %>
 
 <div class="enrollment-form">
-  <div class="instructions">Tell us how to contact <%= @guardian_2.first_name %></div>
+  <div class="instructions squish">Tell us how to contact <%= @guardian_2.first_name %></div>
 
   <%= form_for(@guardian_2, url: wizard_path, method: :put) do |g| %>
       <div id="contact_table" class="enableZindex">
         <table>
           <div class="guardian1_alt_address">
             <tr>
-              <td class="row-break" colspan="2"><span>Does this guardian live with you?</span>
+              <td class="row-break" colspan="2"><span>Does <%= @guardian_2.first_name %> live with you and <%= @student.first_name %>?</span>
                 <div class="btn-group pull-right" data-toggle="buttons">
                     <label for="guardian_2_lives_with_yes" class="btn btn-primary" onclick="toggleAddressFields(true)"><input id="guardian_2_lives_with_yes" class="hidden " name="guardian_2_lives_with" type="radio"/>Yes</label>
                     <label for="guardian_2_lives_with_no" class="btn btn-primary" onclick="toggleAddressFields(false)"><input id="guardian_2_lives_with_no" class="hidden" name="guardian_2_lives_with" type="radio"/>No</label>
@@ -66,7 +66,7 @@
               </td>
             </tr>
             <tr>
-              <td class="row-break" colspan="2"><span>Street address 1:</span>
+              <td colspan="2"><span>Street address 1:</span>
                 <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Avenue' %></span>
               </td>
             </tr>
@@ -110,14 +110,13 @@
                 </div>
               </td>
             </tr>
-  <tr>
-    <td colspan="2"><span>Email address:</span>
-      <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com' %></span>
-    </td>
-  </tr>
-  </div>
-
-  </table>
+            <tr>
+              <td colspan="2"><span>Email address:</span>
+                <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com' %></span>
+              </td>
+            </tr>
+          </div>
+        </table>
   </div>
 
   <ul class="pager pagerZindex">
