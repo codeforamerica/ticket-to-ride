@@ -146,12 +146,11 @@
       <p>In the next section you will fill out information about yourself.</p> -->
 
       <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
-          <ul class="pager">
-            <li><%= link_to "Previous", previous_wizard_path %></li>
-            <li><%= s.submit 'Next', class: 'nav-button' %></li>
-      <% end %>
-          </ul>
-
+      <ul class="pager">
+        <li><%= link_to "Previous", previous_wizard_path, class: 'hidden'%></li>
+        <li><%= link_to 'Looks good', next_wizard_path, class: 'nav-button pull-right' %></li>
+      </ul>
+<% end %>
     </div>
 
 
