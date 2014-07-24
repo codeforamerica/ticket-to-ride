@@ -410,12 +410,12 @@ class EnrollmentController < ApplicationController
       student.errors.add(:had_english_instruction, 'Has English Instruction is a required field')
     end
 
+    student.update_attributes(student_params)
     if student.errors.size > 0
       return render_wizard
     end
 
     # Save the student
-    student.update_attributes(student_params)
     return render_wizard student
   end
 
