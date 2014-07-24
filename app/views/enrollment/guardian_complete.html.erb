@@ -5,6 +5,7 @@
 
 <%= render 'enrollment/navigation' %>
 <div class="enrollment-form">
+  <div class="summary_table enableZindex">
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -28,17 +29,17 @@
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2">Your primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-111-9999</span> which <span class="summaryAnswers">receives text messages</span>.</td>
+          <td class="summaryText" colspan="2">Your primary phone number is <span class="summaryAnswers"><%= @summary_guardian1.main_phone %></span><!-- which <span class="summaryAnswers">receives text messages</span>-->.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div></td>
         </tr>
 
         <tr>
           <td class="summaryText" colspan="2">
-            A second phone number for you is <!--TODO get this from database --><span class="summaryAnswers">401-222-2222</span> which <span class="summaryAnswers">does not receive text messages</span>.</td>
+            A second phone number for you is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_guardian1.secondary_phone %></span> <!-- which <span class="summaryAnswers">does not receive text messages</span>-->.</td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div></td>
           </tr>
           <td class="summaryText" colspan="2">
-            Your work phone is <span class="summaryAnswers">401-222-2222</span>.</td>
+            Your work phone is <span class="summaryAnswers"><%= @summary_guardian1.work_phone %></span>.</td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div></td>
         </tr>
         <tr>
@@ -46,11 +47,14 @@
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div>
           </td>
         </tr>
+        <% if @summary_guardian2 %>
         <tr>
           <td class="summaryText" colspan="2">Review <span class="summaryAnswers">Guardian 2</span> by clicking the tab above.</td>
             <td class="summaryEdit"></div>
           </td>
         </tr>
+        <% end %>
+      </div>
       </table>
  
     </div>
@@ -69,19 +73,13 @@
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers">401-333-1313</span> which <span class="summaryAnswers">does not receive text messages</span>.</td>
+          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_guardian2.main_phone %></span><!-- which <span class="summaryAnswers">does not receive text messages</span>-->.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>
           <td class="summaryText" colspan="2">
-            A second phone number for <%= @summary_guardian2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers">401-444-9099</span> which <span class="summaryAnswers">does not receive text messages</span>.</td>
+            A second phone number for <%= @summary_guardian2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_guardian2.main_phone %></span><!-- which <span class="summaryAnswers">does not receive text messages</span>-->.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
-        </tr>
-        <tr>
-          <td class="summaryText" colspan="2">
-            <%= @summary_guardian2.first_name %>'s work phone is <span class="summaryAnswers">N/A</span>.</td>
-        <td class="summaryEdit">  
-          <div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>
           <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %>'s email is <span class="summaryAnswers"><%= @summary_guardian2.email %></span>.</td>
@@ -96,6 +94,7 @@
       <li><%= link_to "Previous", previous_wizard_path, class: 'hidden'%></li>
       <li><%= link_to 'Looks good', next_wizard_path, class: 'nav-button pull-right' %></li>
     </ul>
+  </div>
 </div>
 
 
