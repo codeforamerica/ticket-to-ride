@@ -510,6 +510,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student,student_params)
       return render_wizard
     end
 
@@ -534,6 +535,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student,student_params)
       return render_wizard
     end
 
