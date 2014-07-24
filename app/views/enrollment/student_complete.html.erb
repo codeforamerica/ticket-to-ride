@@ -1,5 +1,6 @@
 <%= render 'enrollment/navigation' %>
     <div class="enrollment-form">
+      <div class="summary_table enableZindex">
 
         <ul class="nav nav-tabs" role="tablist">
           <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Review Student Information</a></li>
@@ -150,8 +151,9 @@
         <li><%= link_to "Previous", previous_wizard_path, class: 'hidden'%></li>
         <li><%= link_to 'Looks good', next_wizard_path, class: 'nav-button pull-right' %></li>
       </ul>
-<% end %>
+      <% end %>
     </div>
+  </div>
 
 
 
