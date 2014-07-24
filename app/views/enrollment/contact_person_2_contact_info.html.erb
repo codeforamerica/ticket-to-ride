@@ -2,6 +2,8 @@
 <div class="enrollment-form">
   <%= render 'enrollment/contact_person_errors' %>
 
+  <h1>Emergency Contact 2</h1>
+
   <div class="instructions">Tell us about another person who can find you in case of an emergency.</div>
 
   <%= form_for(@contact_person, url: wizard_path, method: :put) do |c| %>
@@ -9,11 +11,11 @@
         <table>
           <tr>
             <td class="row-break"><span>First Name:</span>
-              <span><%= c.text_field :first_name, class: 'enrollment-form-input', placeholder: 'John', required: true %></span>
+              <span><%= c.text_field :first_name, class: 'enrollment-form-input', placeholder: 'Paul', required: true %></span>
             </td>
             <td>
               <span>Last Name:</span>
-              <span><%= c.text_field :last_name, class: 'enrollment-form-input', placeholder: 'Lennon', required: true %></span>
+              <span><%= c.text_field :last_name, class: 'enrollment-form-input', placeholder: 'McCartney', required: true %></span>
             </td>
           </tr>
           <tr>
