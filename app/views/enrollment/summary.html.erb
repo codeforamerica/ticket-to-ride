@@ -1,7 +1,17 @@
+<!-- TODO Move this into the controller -->
+
 <% @summary_student=Student.find(session[:student_id]) %>
-<% @summary_guardian1=@summary_student.contact_people[0]%>
-<% @summary_guardian2=@summary_student.contact_people[1]%>
-<% @summary_contact1=@summary_student.contact_people[2]%>
+<% if @summary_student.contact_people.size > 3 %>
+    <% @summary_guardian1 = @summary_student.contact_people[0] %>
+    <% @summary_guardian2 = @summary_student.contact_people[1] %>
+    <% @summary_contact1 = @summary_student.contact_people[2] %>
+    <% @summary_contact2 = @summary_student.contact_people[3] %>
+<% else %>
+    <% @summary_guardian1 = @summary_student.contact_people[0] %>
+    <% @summary_guardian2 = nil %>
+    <% @summary_contact1 = @summary_student.contact_people[1] %>
+    <% @summary_contact2 = @summary_student.contact_people[2] %>
+<% end %>
 
 
 <%= render 'enrollment/navigation' %>
@@ -10,14 +20,8 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="active instructions"><a href="#summaryContacts1" role="tab" data-toggle="tab">Contact1</a></li>
-    <% if @summary_student.contact_people.size > 3 %>
-        <% @summary_contact2 = @summary_student.contact_people[3] %>
-        <li class="instructions"><a href="#summaryContacts2" role="tab" data-toggle="tab">Contact2</a></li>
-    <% end %>
+    <li class="instructions"><a href="#summaryContacts2" role="tab" data-toggle="tab">Contact2</a></li>
     <li class="instructions"><a href="#summaryPermissions" role="tab" data-toggle="tab">Permissions</a></li>
-  <!--   <li class="instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Student</a></li>
-    <li class="instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Guardian1</a></li>
-    <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Guardian2</a></li> -->
   </ul>
 
   <!-- Tab panes -->
@@ -27,12 +31,12 @@
       <table class="summaryTable">
         <tr>
           <td class="summaryText section-break" colspan="2">
-            Someone who can contact you during an emergency is <span class="summaryAnswers"><%= @summary_contact1.first_name %> <%= @summary_guardian1.last_name %></span>, who is <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_contact1.relationship %></span>.
+            Someone who can contact you during an emergency is <span class="summaryAnswers"><%= @summary_contact1.first_name %> <%= @summary_contact1.last_name %></span>, who is <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_contact1.relationship %></span>.
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
         </tr>
         <tr>
           <td class="summaryText" colspan="2"><%= @summary_contact1.first_name %>'s primary phone number is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_contact1.main_phone %></span><!-- which <span class="summaryAnswers">receives text messages</span>-->. <br/><br/>
-            A second phone number for <%= @summary_contact1.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_contact2.secondary_phone %></span> which <!--<span class="summaryAnswers">receives text messages</span>-->.
+            A second phone number for <%= @summary_contact1.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_contact1.secondary_phone %></span> which <!--<span class="summaryAnswers">receives text messages</span>-->.
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
         </tr>
         <tr>
@@ -46,12 +50,11 @@
         </tr>
       </table>
     </div>
-    <% if @summary_student.contact_people.size > 3 %>
       <div class="tab-pane" id="summaryContacts2">
         <table class="summaryTable">
           <tr>
             <td class="summaryText section-break" colspan="2">
-              Another adult who can contact you during an emergency is <span class="summaryAnswers"><%= @summary_contact2.first_name %> <%= @summary_guardian2.last_name %></span>, who is <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_contact2.relationship %></span>.
+              Another adult who can contact you during an emergency is <span class="summaryAnswers"><%= @summary_contact2.first_name %> <%= @summary_contact2.last_name %></span>, who is <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_contact2.relationship %></span>.
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
           </tr>
           <tr>
@@ -70,20 +73,41 @@
           </tr>
         </table>
       </div>
-    <% end %>
     <div class="tab-pane" id="summaryPermissions">
       <table class="summaryTable">
         <tr>
           <td class="summaryText section-break" colspan="2">
-            <%= @summary_student.first_name %> may be picked up from school by <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span>, <span class="summaryAnswers"><%= @summary_guardian2.first_name %> <%= @summary_guardian2.last_name %></span>, and <span class="summaryAnswers"><%= @summary_contact1.first_name %> <%= @summary_contact1.last_name %></span>.</td>
+            <%= @summary_student.first_name %> may be picked up from school by:
+
+            <% @summary_student.contact_people.each do |c| %>
+                <% if c.can_pickup_child %>
+                    <span class="summaryAnswers"><%= c.first_name %> <%= c.last_name %></span>,
+                <% end %>
+            <% end %>
+                <!-- TODO: This should be grammatically correct -->
+            </td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/permissions' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_student.first_name %>'s grades may be sent to <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span> and <span class="summaryAnswers"><%= @summary_guardian2.first_name %> <%= @summary_guardian2.last_name %></span>.</td>
+          <td class="summaryText" colspan="2">
+            <%= @summary_student.first_name %>'s grades may be sent to:
+            <% @summary_student.contact_people.each do |c| %>
+                <% if c.receive_grade_notices %>
+                    <span class="summaryAnswers"><%= c.first_name %> <%= c.last_name %></span>,
+                <% end %>
+            <% end %>
+          </td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/permissions' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_student.first_name %>'s conduct notices may be sent to <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span> and <span class="summaryAnswers"><%= @summary_guardian2.first_name %> <%= @summary_guardian2.last_name %></span>.</td>
+          <td class="summaryText" colspan="2">
+            <%= @summary_student.first_name %>'s conduct notices may be sent to:
+            <% @summary_student.contact_people.each do |c| %>
+                <% if c.receive_conduct_notices %>
+                    <span class="summaryAnswers"><%= c.first_name %> <%= c.last_name %></span>,
+                <% end %>
+            <% end %>
+          </td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/permissions' %></div></td>
         </tr>
       </table>
@@ -256,6 +280,7 @@
  
     </div>
 
+    <% if @summary_guardian2 %>
     <div class="tab-pane" id="summaryGuardian2">
       <table class="summaryTable">
         <tr>
@@ -290,6 +315,7 @@
       </table>
     
     </div>
+    <% end %>
     
   </div>
   

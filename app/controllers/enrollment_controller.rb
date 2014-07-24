@@ -646,7 +646,7 @@ class EnrollmentController < ApplicationController
 
     # Save the contact person
     contact_person.update_attributes(contact_person_params)
-    contact_person.save
+    # contact_person.save
 
     # Associate the guardian, save the student
     student.contact_people << contact_person

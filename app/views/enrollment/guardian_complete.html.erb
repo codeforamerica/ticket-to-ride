@@ -1,7 +1,6 @@
 <% @student=Student.find(session[:student_id]) %>
 <% @summary_guardian1=@student.contact_people[0]%>
 <% @summary_guardian2=@student.contact_people[1]%>
-<% @summary_contact1=@student.contact_people[2]%>
 
 
 <%= render 'enrollment/navigation' %>
@@ -10,7 +9,9 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="active instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Review Guardian 1</a></li>
-    <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review Guardian 2</a></li>
+    <% if @summary_guardian2 %>
+        <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review Guardian 2</a></li>
+    <% end %>
   </ul>
 
   <!-- Tab panes -->
@@ -54,6 +55,7 @@
  
     </div>
 
+<% if @summary_guardian2 %>
     <div class="tab-pane" id="summaryGuardian2">
       <table class="summaryTable">
         <tr>
@@ -63,7 +65,7 @@
            </td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.mailing_street_address_1 %> <%= @student.mailing_street_address_2 %> in <%= @student.mailing_city %>, <%= @student.mailing_state %> <%= @student.mailing_zip_code %></span>.</td>
+          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.mailing_street_address_1 %> <%= @summary_guardian2.mailing_street_address_2 %> in <%= @summary_guardian2.mailing_city %>, <%= @summary_guardian2.mailing_state %> <%= @summary_guardian2.mailing_zip_code %></span>.</td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>
@@ -88,7 +90,7 @@
       </table>
     </div>
   </div>
-  
+<% end %>
 
     <ul class="pager">
       <li><%= link_to "Previous", previous_wizard_path, class: 'hidden'%></li>
