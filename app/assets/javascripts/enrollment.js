@@ -197,12 +197,22 @@ $(document).ready(function () {
                 // Capture value from radio buttons
                 if(thisObj.attr('type') == 'radio' && thisObj.is(':checked')) {
                     value = thisVal;
+
+                    if(processFunc) {
+                        processFunc(thisVal);
+                    }
+
                     return false;
                 }
 
                 // Capture value from text field
                 else if(thisObj.attr('type') == 'text' && thisVal != "") {
                     value = thisVal;
+
+                    if(processFunc) {
+                        processFunc(thisVal);
+                    }
+
                     return false;
                 }
             });
@@ -296,15 +306,15 @@ $(document).ready(function () {
 
 
     // Modal Dialog Behavior for Language selection
-    getSelectionFromModalForInput('#btnFirstLanguage', 'input[name="choose_student_first_language"]', '#firstLanguageSelected');
+    getSelectionFromModalForInput('#btnFirstLanguage', 'input[name="choose_student_first_language"]', '#firstLanguageSelected', function(val){firstLanguage = val; showHideFormalEnglishTraining(); }); // TODO - Make this code cleaner
     clearRadioGroupUponTextEntry('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
     clearTextInputUponRadioCheck('#choose_student_first_language_input_text', 'choose_student_first_language');
 
-    getSelectionFromModalForInput('#btnHomeLanguage', 'input[name="choose_student_home_language"]', '#homeLanguageSelected');
+    getSelectionFromModalForInput('#btnHomeLanguage', 'input[name="choose_student_home_language"]', '#homeLanguageSelected', function(val){homeLanguage = val; showHideFormalEnglishTraining(); }); //TODO - Make this code cleaner
     clearRadioGroupUponTextEntry('#choose_student_first_language_input_text', 'choose_student_first_language');
     clearTextInputUponRadioCheck('#choose_student_home_language_input_text', 'choose_student_home_language');
 
-    getSelectionFromModalForInput('#btnGuardianLanguage', 'input[name="choose_student_guardian_language"]', '#guardianLanguageSelected');
+    getSelectionFromModalForInput('#btnGuardianLanguage', 'input[name="choose_student_guardian_language"]', '#guardianLanguageSelected', function(val){guardianLanguage = val; showHideFormalEnglishTraining(); }); //TODO - Make this code cleaner
     clearRadioGroupUponTextEntry('#choose_student_home_language_input_text', 'choose_student_home_language');
     clearTextInputUponRadioCheck('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
 

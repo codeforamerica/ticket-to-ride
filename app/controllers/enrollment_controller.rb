@@ -251,6 +251,7 @@ class EnrollmentController < ApplicationController
         session[:guardian_2_id] = @guardian_2.id
       when :guardian_second_address_and_contact_info
         @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create
         session[:contact_person_id] = @contact_person.id
@@ -397,6 +398,7 @@ class EnrollmentController < ApplicationController
   end
 
   def update_student_language(student)
+
     if param_does_not_exist(:student, :first_language)
       student.errors.add(:first_language, 'First language is a required field')
     end
@@ -406,8 +408,12 @@ class EnrollmentController < ApplicationController
     if param_does_not_exist(:student, :guardian_language)
       student.errors.add(:guardian_language, 'Guardian language is a required field')
     end
-    if param_does_not_exist(:student, :had_english_instruction)
-      student.errors.add(:had_english_instruction, 'Has English Instruction is a required field')
+
+    # English instruction is only a required question if the student speaks another language
+    if params[:student][:first_language].downcase != 'english' || params[:student][:home_language].downcase != 'english' || params[:student][:guardian_language].downcase != 'english'
+      if param_does_not_exist(:student, :had_english_instruction)
+        student.errors.add(:had_english_instruction, 'Has English Instruction is a required field')
+      end
     end
 
     if student.errors.size > 0

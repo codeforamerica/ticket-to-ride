@@ -1,14 +1,72 @@
+<script>
+    var guardian_1_street_address_1 = '<%= @guardian_1.mailing_street_address_1 %>';
+    var guardian_1_street_address_2 = '<%= @guardian_1.mailing_street_address_2 %>';
+    var guardian_1_city = '<%= @guardian_1.mailing_city %>';
+    var guardian_1_state = '<%= @guardian_1.mailing_state %>';
+    var guardian_1_zip_code = '<%= @guardian_1.mailing_zip_code %>';
+
+
+    function fillGuardian1Address() {
+        $('#contact_person_mailing_street_address_1').val(guardian_1_street_address_1);
+        $('#contact_person_mailing_street_address_2').val(guardian_1_street_address_2);
+        $('#contact_person_mailing_city').val(guardian_1_city);
+        $('#contact_person_mailing_state').val(guardian_1_state);
+        $('#contact_person_mailing_zip_code').val(guardian_1_zip_code);
+
+        makeAddressFieldsReadonly(true);
+    };
+
+    function clearGuardian1Address() {
+        $('#contact_person_mailing_street_address_1').val('');
+        $('#contact_person_mailing_street_address_2').val('');
+        $('#contact_person_mailing_city').val('');
+        $('#contact_person_mailing_state').val('RI');
+        $('#contact_person_mailing_zip_code').val('');
+
+        makeAddressFieldsReadonly(false);
+    };
+
+    function makeAddressFieldsReadonly(isReadOnly) {
+        $('#contact_person_mailing_street_address_1').prop('readonly', isReadOnly);
+        $('#contact_person_mailing_street_address_2').prop('readonly', isReadOnly);
+        $('#contact_person_mailing_city').prop('readonly', isReadOnly);
+        $('#contact_person_mailing_state').prop('readonly', isReadOnly);
+        $('#contact_person_mailing_zip_code').prop('readonly', isReadOnly);
+    };
+
+    function toggleAddressFields(guardian2LivesWith) {
+        if(guardian2LivesWith) {
+            fillGuardian1Address();
+        }
+        else {
+            clearGuardian1Address();
+        }
+    };
+
+
+</script>
+
+
 <%= render 'enrollment/navigation' %>
 <%= render 'enrollment/guardian2_errors' %>
+
 <div class="enrollment-form">
-  <div class="instructions">Tell us how to contact <%= @guardian_2.first_name %></div>
+  <div class="instructions squish">Tell us how to contact <%= @guardian_2.first_name %></div>
 
   <%= form_for(@guardian_2, url: wizard_path, method: :put) do |g| %>
       <div id="contact_table" class="enableZindex">
         <table>
           <div class="guardian1_alt_address">
             <tr>
-              <td class="row-break" colspan="2"><span>Street address 1:</span>
+              <td class="row-break" colspan="2"><span>Does <%= @guardian_2.first_name %> live with you and <%= @student.first_name %>?</span>
+                <div class="btn-group pull-right" data-toggle="buttons">
+                    <label for="guardian_2_lives_with_yes" class="btn btn-primary" onclick="toggleAddressFields(true)"><input id="guardian_2_lives_with_yes" class="hidden " name="guardian_2_lives_with" type="radio"/>Yes</label>
+                    <label for="guardian_2_lives_with_no" class="btn btn-primary" onclick="toggleAddressFields(false)"><input id="guardian_2_lives_with_no" class="hidden" name="guardian_2_lives_with" type="radio"/>No</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><span>Street address 1:</span>
                 <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Avenue' %></span>
               </td>
             </tr>
@@ -52,14 +110,13 @@
                 </div>
               </td>
             </tr>
-  <tr>
-    <td colspan="2"><span>Email address:</span>
-      <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com' %></span>
-    </td>
-  </tr>
-  </div>
-
-  </table>
+            <tr>
+              <td colspan="2"><span>Email address:</span>
+                <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com' %></span>
+              </td>
+            </tr>
+          </div>
+        </table>
   </div>
 
   <ul class="pager pagerZindex">
