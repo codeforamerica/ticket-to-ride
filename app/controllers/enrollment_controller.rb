@@ -602,6 +602,7 @@ class EnrollmentController < ApplicationController
 
   def save_contact_person(contact_person)
     if contact_person.errors.size > 0
+      retainValuesAndErrors(contact_person, contact_person_params)
       return render_wizard
     end
 
@@ -611,6 +612,7 @@ class EnrollmentController < ApplicationController
 
   def save_and_associate_contact_person(student, contact_person)
     if contact_person.errors.size > 0
+      retainValuesAndErrors(contact_person, contact_person_params)
       return render_wizard
     end
 
