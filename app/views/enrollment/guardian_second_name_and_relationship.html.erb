@@ -24,7 +24,7 @@
           </tr>
           <tr>
             <td class="padding-right hidden" colspan="2" id="guardian2_relationship">Individual's relationship to <%= @student.first_name %>:
-              <%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
+              <%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize relationship_input_narrow', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose'  %>
             </td>
           </tr>
           <tr>
@@ -74,5 +74,6 @@
           </div>
         </div>
       </div>
+    </div>
 <% end %>
 <%= render 'shared/scenery_guardian' %>

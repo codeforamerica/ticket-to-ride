@@ -251,6 +251,7 @@ class EnrollmentController < ApplicationController
         session[:guardian_2_id] = @guardian_2.id
       when :guardian_second_address_and_contact_info
         @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
       when :contact_person_1_contact_info, :contact_person_2_contact_info
         @contact_person = ContactPerson.create
         session[:contact_person_id] = @contact_person.id
