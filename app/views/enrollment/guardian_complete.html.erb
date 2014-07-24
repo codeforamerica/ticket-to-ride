@@ -1,7 +1,7 @@
-<% @summary_student=Student.find(session[:student_id]) %>
-<% @summary_guardian1=@summary_student.contact_people[0]%>
-<% @summary_guardian2=@summary_student.contact_people[1]%>
-<% @summary_contact1=@summary_student.contact_people[2]%>
+<% @student=Student.find(session[:student_id]) %>
+<% @summary_guardian1=@student.contact_people[0]%>
+<% @summary_guardian2=@student.contact_people[1]%>
+<% @summary_contact1=@student.contact_people[2]%>
 
 
 <%= render 'enrollment/navigation' %>
@@ -19,11 +19,11 @@
     <div class="tab-pane active" id="summaryGuardian1">
       <table class="summaryTable">
           <td class="summaryText section-break" colspan="2">
-            Your name is <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span>, and you are <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_guardian1.relationship %><span class="summaryAnswers">.</td>
+            Your name is <span class="summaryAnswers"><%= @summary_guardian1.first_name %> <%= @summary_guardian1.last_name %></span>, and you are <%= @student.first_name %>'s <span class="summaryAnswers"><%= @summary_guardian1.relationship %><span class="summaryAnswers">.</td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2">You and <%= @summary_student.first_name %> live at <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.</td>
+          <td class="summaryText" colspan="2">You and <%= @student.first_name %> live at <span class="summaryAnswers"><%= @student.home_street_address_1 %> <%= @student.home_street_address_2 %> in <%= @student.home_city %>, <%= @student.home_state %></span>.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
@@ -58,12 +58,12 @@
       <table class="summaryTable">
         <tr>
           <td class="summaryText section-break" colspan="2">
-           Another guardian for <%= @summary_student.first_name %> is <span class="summaryAnswers"><%= @summary_guardian2.first_name %> <%= @summary_guardian2.last_name %></span>, who is <%= @summary_student.first_name %>'s <span class="summaryAnswers"><%= @summary_guardian2.relationship %></span>.</td>
+           Another guardian for <%= @student.first_name %> is <span class="summaryAnswers"><%= @summary_guardian2.first_name %> <%= @summary_guardian2.last_name %></span>, who is <%= @student.first_name %>'s <span class="summaryAnswers"><%= @summary_guardian2.relationship %></span>.</td>
            <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_name_and_relationship' %></div>
            </td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.mailing_street_address_1 %> <%= @summary_student.mailing_street_address_2 %> in <%= @summary_student.mailing_city %>, <%= @summary_student.mailing_state %> <%= @summary_student.mailing_zip_code %></span>.</td>
+          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.mailing_street_address_1 %> <%= @student.mailing_street_address_2 %> in <%= @student.mailing_city %>, <%= @student.mailing_state %> <%= @student.mailing_zip_code %></span>.</td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>

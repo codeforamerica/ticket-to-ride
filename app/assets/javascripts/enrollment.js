@@ -333,5 +333,7 @@ $(document).ready(function () {
     clearRadioGroupUponTextEntry('#choose_relationship_input_text', 'choose_relationship');
     clearTextInputUponRadioCheck('#choose_relationship_input_text', 'choose_relationship');
 
+    // Shade (mark as checked) all checked radio button labels (radio buttons nested inside label tags)
+    $('input[type="radio"]:checked').each(function(){  $(this).parent().addClass('active')  });
 
 });

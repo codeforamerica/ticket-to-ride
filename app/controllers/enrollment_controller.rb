@@ -302,6 +302,7 @@ class EnrollmentController < ApplicationController
         @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
         return update_guardian_second_name_and_relationship(@student, @guardian_2)
       when :guardian_second_address_and_contact_info
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
         @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
         return update_guardian_second_address_and_contact_info(@guardian_2)
 
@@ -316,7 +317,7 @@ class EnrollmentController < ApplicationController
 
 
       # Pass through steps
-      when :student_complete, :guardian_complete
+      when :student_complete, :guardian_complete, :enrollment_complete
         jump_to next_step
         return render_wizard
     end
@@ -326,12 +327,28 @@ class EnrollmentController < ApplicationController
     return render_wizard
   end
 
+  # --- Helpers ---
 
   def param_does_not_exist(model_const, field_const)
     return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
   end
 
+  def retainValuesAndErrors(obj, param_updater)
+    messages = obj.errors.messages.clone()
+    obj.update_attributes(param_updater)
+    messages.each do |k,v|
+      v.each {|e| obj.errors.add(k,e)}
+    end
+  end
+
+  # --- End Helpers ---
+
   def update_student_name(student)
+    if !params[:student] # TODO: Move this into update() to avoid repeating
+      student.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
+
     if param_does_not_exist(:student, :first_name)
       student.errors.add(:first_name, 'First name is a required field')
     end
@@ -352,6 +369,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
@@ -359,8 +377,12 @@ class EnrollmentController < ApplicationController
     return render_wizard student
   end
 
-
   def update_student_gender_and_ethnicity(student)
+    if !params[:student]
+      student.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
+
     if !params || !params[:student] || !params[:student][:gender]
       student.errors.add(:gender, 'Gender is a required field')
     end
@@ -378,6 +400,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
@@ -388,6 +411,7 @@ class EnrollmentController < ApplicationController
         StudentRace.create(race_id: race_id, student: @student )
       rescue
         student.errors.add(:race_ids, 'Could not assign race')
+        retainValuesAndErrors(student, student_params)
         return render_wizard
       end
     end
@@ -398,6 +422,10 @@ class EnrollmentController < ApplicationController
   end
 
   def update_student_language(student)
+    if !params[:student]
+      student.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
 
     if param_does_not_exist(:student, :first_language)
       student.errors.add(:first_language, 'First language is a required field')
@@ -417,6 +445,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
@@ -426,6 +455,10 @@ class EnrollmentController < ApplicationController
   end
 
   def update_student_previous_school(student)
+    if !params[:student]
+      student.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
 
     # Last completed grade
     if param_does_not_exist(:student, :previous_grade_id)
@@ -460,23 +493,29 @@ class EnrollmentController < ApplicationController
         student.errors.add(:prior_school_state, 'Prior school state must be filled in')
       end
 
-    else
+    elsif previous_grade != nil
       params[:student].delete(:prior_school_name)
       params[:student].delete(:prior_school_city)
       params[:student].delete(:prior_school_state)
     end
 
+    student.previous_grade = previous_grade
+
     if student.errors.size > 0
+      retainValuesAndErrors(student, student_params)
       return render_wizard
     end
 
     # Save the student
     student.update_attributes(student_params)
-    student.previous_grade = previous_grade
     return render_wizard student
   end
 
   def update_student_special_services(student)
+    if !params[:student]
+      student.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
 
     if param_does_not_exist(:student, :needs_special_services)
       student.errors.add(:needs_special_services, 'Special services question must be answered')
@@ -495,6 +534,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student,student_params)
       return render_wizard
     end
 
@@ -504,6 +544,10 @@ class EnrollmentController < ApplicationController
   end
 
   def update_student_address(student)
+    if !params[:student]
+      student.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
 
     if param_does_not_exist(:student, :home_street_address_1)
       student.errors.add(:home_street_address_1, 'Home street address 1 is a required field')
@@ -519,6 +563,7 @@ class EnrollmentController < ApplicationController
     end
 
     if student.errors.size > 0
+      retainValuesAndErrors(student,student_params)
       return render_wizard
     end
 
@@ -585,6 +630,7 @@ class EnrollmentController < ApplicationController
 
   def save_contact_person(contact_person)
     if contact_person.errors.size > 0
+      retainValuesAndErrors(contact_person, contact_person_params)
       return render_wizard
     end
 
@@ -594,6 +640,7 @@ class EnrollmentController < ApplicationController
 
   def save_and_associate_contact_person(student, contact_person)
     if contact_person.errors.size > 0
+      retainValuesAndErrors(contact_person, contact_person_params)
       return render_wizard
     end
 
@@ -607,6 +654,10 @@ class EnrollmentController < ApplicationController
   end
 
   def update_guardian_name_and_address(student, contact_person)
+    if !params[:contact_person]
+      contact_person.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
 
     validate_contact_person_name_and_relationship(contact_person)
 
@@ -616,6 +667,10 @@ class EnrollmentController < ApplicationController
   end
 
   def update_guardian_phone_and_email(contact_person)
+    if !params[:contact_person]
+      contact_person.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
 
     validate_contact_person_phone(contact_person)
 
@@ -623,6 +678,11 @@ class EnrollmentController < ApplicationController
   end
 
   def update_guardian_second_name_and_relationship(student, contact_person)
+    if !params[:contact_person]
+      contact_person.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
+
     if params['has_additional_guardian'] == "false"
       jump_to :guardian_complete
       return render_wizard
@@ -634,19 +694,28 @@ class EnrollmentController < ApplicationController
   end
 
   def update_guardian_second_address_and_contact_info(contact_person)
+    if !params[:contact_person]
+      contact_person.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
+
     validate_contact_person_address(contact_person)
     validate_contact_person_phone(contact_person)
     return save_contact_person(contact_person)
   end
 
   def update_contact_person_contact_info(student, contact_person)
+    if !params[:contact_person]
+      contact_person.errors[:base] = 'Please fill out the form before moving on.'
+      return render_wizard
+    end
+
     validate_contact_person_name(contact_person)
     validate_contact_person_phone(contact_person)
     return save_and_associate_contact_person(student, contact_person)
   end
 
   def update_permissions(student)
-
     if params['has_court_order'] == nil
       student.errors.add('has_court_order', 'Are there any court orders regarding ' + student.first_name + '?')
       return render_wizard
