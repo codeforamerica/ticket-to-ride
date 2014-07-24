@@ -1,3 +1,23 @@
+<script>
+    var firstLanguage = '<%= @student.first_language %>';
+    var homeLanguage = '<%= @student.home_language %>';
+    var guardianLanguage = '<%= @student.guardian_language %>';
+
+    function isNotEnglish(language) {
+        return language != '' && language.toLowerCase() != 'english';
+    }
+
+    function showHideFormalEnglishTraining() {
+        var isNotEnglishSpeaker = isNotEnglish(firstLanguage) || isNotEnglish(homeLanguage) || isNotEnglish(guardianLanguage);
+        if (isNotEnglishSpeaker) {
+            $('#formal-english-training-question').show();
+        }
+        else {
+            $('#formal-english-training-question').hide();
+        }
+    }
+</script>
+
 <%= render 'enrollment/navigation' %>
 
 <div class="enrollment-form">
@@ -39,7 +59,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr id="formal-english-training-question">
             <td class="enrollment-qa-cell">Has <%= @student_gender_pronoun %> received any formal English language instruction
               (listening, speaking, reading, or writing)?
             </td>
@@ -189,9 +209,3 @@
       <% end %>
 
       <%= render 'shared/scenery_student' %>
-
-
-      <!-- Which language does this student most frequently use at home?
-      Which language do you use most frequently to speak to this student?
-      Which language is most often used by the adults at home?
-      Has this student received any formal English language instruction (listening, speaking, reading, or writing)? -->
