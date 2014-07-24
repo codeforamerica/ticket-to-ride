@@ -302,6 +302,7 @@ class EnrollmentController < ApplicationController
         @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
         return update_guardian_second_name_and_relationship(@student, @guardian_2)
       when :guardian_second_address_and_contact_info
+        @guardian_1 = ContactPerson.find(session[:guardian_1_id])
         @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
         return update_guardian_second_address_and_contact_info(@guardian_2)
 
