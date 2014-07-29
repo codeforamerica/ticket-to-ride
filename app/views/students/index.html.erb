@@ -1,0 +1,34 @@
+<!-- Temporary listing of all students -->
+
+ <table class="index_table">
+   <tr>
+     <td class="index_header">Last name</td>
+     <td class="index_header">First name</td>
+     <td class="index_header">Gender</td>
+     <td class="index_header">Age</td>
+     <td class="index_header">Home City</td>
+     <td class="index_header">First Language</td>
+     <td class="index_header">Date created</td>
+   </tr>
+
+     <% @students.each do |student| %>
+       <% if student.last_name != nil %>
+   <tr>
+     <td class="student_listing">
+        
+          <%= student.last_name.titlecase %>
+         
+
+      </td>
+     <td class="student_listing"><%= student.first_name %></td>
+     <td class="student_listing"><%= student.gender[0].titlecase %></td>
+     <td class="student_listing"><%= student.birthday_age %></td>
+     <td class="student_listing"><%= student.home_city %></td>
+     <td class="student_listing"><%= student.first_language %></td>
+     <td class="student_listing"><%= student.updated_at.strftime("%B %-d, %Y") %></td>
+     <% else %>
+     <td class="hidden">student.updated_at</td>
+     <% end %>
+   <% end %>
+   </tr>
+ </table>
