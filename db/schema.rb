@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721234659) do
+ActiveRecord::Schema.define(version: 20140731212435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20140721234659) do
     t.string   "work_phone"
     t.string   "work_phone_extension"
     t.string   "work_phone_can_sms"
+    t.boolean  "is_guardian"
   end
 
   create_table "custom_requirements", force: true do |t|
