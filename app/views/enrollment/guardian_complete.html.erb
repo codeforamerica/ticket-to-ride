@@ -9,9 +9,9 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li class="active instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Review Guardian 1</a></li>
+    <li class="active instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Review <%= @summary_guardian1.first_name %></a></li>
     <% if @summary_guardian2 %>
-        <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review Guardian 2</a></li>
+        <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review <%= @summary_guardian2.first_name %></a></li>
     <% end %>
   </ul>
 
@@ -49,7 +49,7 @@
         </tr>
         <% if @summary_guardian2 %>
         <tr>
-          <td class="summaryText" colspan="2">Review <span class="summaryAnswers">Guardian 2</span> by clicking the tab above.</td>
+          <td class="summaryText" colspan="2">Review <span class="summaryAnswers"><%= @summary_guardian2.first_name %></span> by clicking the tab above.</td>
             <td class="summaryEdit"></div>
           </td>
         </tr>
