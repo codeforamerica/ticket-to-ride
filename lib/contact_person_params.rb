@@ -33,7 +33,8 @@ module ContactPersonParams
       :secondary_phone_can_sms,
       :work_phone,
       :work_phone_extension,
-      :work_phone_can_sms
+      :work_phone_can_sms,
+      :is_guardian
     )
   end
 end

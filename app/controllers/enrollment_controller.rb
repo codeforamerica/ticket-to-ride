@@ -663,6 +663,8 @@ class EnrollmentController < ApplicationController
 
     validate_contact_person_address(contact_person)
 
+    contact_person.is_guardian = true
+
     return save_and_associate_contact_person(student, contact_person)
   end
 
@@ -689,6 +691,8 @@ class EnrollmentController < ApplicationController
     end
 
     validate_contact_person_name_and_relationship(contact_person)
+
+    contact_person.is_guardian = true
 
     return save_and_associate_contact_person(student, contact_person)
   end
