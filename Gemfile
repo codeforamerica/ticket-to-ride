@@ -61,6 +61,9 @@ gem 'bootstrap-slider-rails'
 # Validations for dates
 gem 'validates_timeliness'
 
+# For Heroku static asset serving and logging
+gem 'rails_12factor', group: :production
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -72,4 +75,6 @@ gem 'validates_timeliness'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+ruby '1.9.3'
 
