@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140731212435) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "admins", force: true do |t|
     t.string   "name"
     t.datetime "created_at"

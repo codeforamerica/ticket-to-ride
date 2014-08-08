@@ -25,12 +25,9 @@
 #   database: db/production.sqlite3
 
 development:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: utf-8
-  database: ticket_to_ride_development
-  host: localhost
-  username: 
-  password: 
+  database: db/development.sqlite3
 
 staging:
   adapter: postgresql
@@ -40,10 +37,15 @@ staging:
   username: 
   password: 
 
-test:
+production:
   adapter: postgresql
   encoding: utf-8
-  database: ticket_to_ride_test
+  database: ticket_to_ride_production
   host: localhost
-  username: 
-  password: 
+  username:
+  password:
+
+test:
+  adapter: sqlite3
+  encoding: utf-8
+  database: db/test.sqlite3
