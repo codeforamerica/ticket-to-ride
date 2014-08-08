@@ -7,6 +7,8 @@ These instructions assume  the following:
 - You have the environment requirements setup. If you're working from Windows, please perform the steps documented in [Developer Setup for Windows](developer_windows_setup.md).
 - You've installed PostgreSQL and know the URL, name, and login credentials for the database that will be used.
 
+If you're planning to deploy to Heroku, please see that [set of instructions](deploy_to_heroku.md).
+
 ## Clone the Project
 
 This will download the project from GitHub to your machine.
