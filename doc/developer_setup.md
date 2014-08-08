@@ -25,7 +25,7 @@ $ cd ticket-to-ride
 Use the following command:
 
 ```
-$ bundle install
+$ bundle install --without production
 ```
 
 # Database Setup
