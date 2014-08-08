@@ -24,8 +24,4 @@
 # Ignore .DS_store
 .DS_Store
 
-# Prevents RubyMine files from being committed
 /.idea
-
-# Ignore Gemfile.lock now that Gemfile has set versions and this file will be different depending on production and development machines
-/Gemfile.lock
