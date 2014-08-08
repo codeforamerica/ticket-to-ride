@@ -1,4 +1,4 @@
-# Setup for Production & Staging
+# Setup for Production
 
 ## Assumptions
 
@@ -46,14 +46,6 @@ From here, copy the value and use it to set the environment variable "SECRET_KEY
 First, open the `ticket-to-ride/config/database.yml` file and go to the production or staging areas, adding in the hostname/URL, username, and password for your PostgreSQL database.
 
 ```
-staging:
-  adapter: postgresql
-  encoding: utf-8
-  database: ticket_to_ride_staging
-  host: db.codeforantarctica.org
-  username: dbdude
-  password: greatpassword
-
 production:
   adapter: postgresql
   encoding: utf-8
@@ -81,14 +73,8 @@ $ rake db:migrate
 
 ## Start the Server
 
-Staging:
-
-```
-rails server -e staging
-```
-
-Production:
-
 ```
 rails server -e production
 ```
+
+TODO: Explain how do this in conjunction with Unicorn and Apache. This isn't a tradition production way of starting a server.
