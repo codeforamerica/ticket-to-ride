@@ -1,4 +1,4 @@
-# Setup for Production & Staging
+# Setup for Production
 
 ## Assumptions
 
@@ -6,6 +6,8 @@ These instructions assume  the following:
 
 - You have the environment requirements setup. If you're working from Windows, please perform the steps documented in [Developer Setup for Windows](developer_windows_setup.md).
 - You've installed PostgreSQL and know the URL, name, and login credentials for the database that will be used.
+
+If you're planning to deploy to Heroku, please see that [set of instructions](deploy_to_heroku.md).
 
 ## Clone the Project
 
@@ -46,14 +48,6 @@ From here, copy the value and use it to set the environment variable "SECRET_KEY
 First, open the `ticket-to-ride/config/database.yml` file and go to the production or staging areas, adding in the hostname/URL, username, and password for your PostgreSQL database.
 
 ```
-staging:
-  adapter: postgresql
-  encoding: utf-8
-  database: ticket_to_ride_staging
-  host: db.codeforantarctica.org
-  username: dbdude
-  password: greatpassword
-
 production:
   adapter: postgresql
   encoding: utf-8
@@ -81,14 +75,8 @@ $ rake db:migrate
 
 ## Start the Server
 
-Staging:
-
-```
-rails server -e staging
-```
-
-Production:
-
 ```
 rails server -e production
 ```
+
+TODO: Explain how do this in conjunction with Unicorn and Apache. This isn't a tradition production way of starting a server.

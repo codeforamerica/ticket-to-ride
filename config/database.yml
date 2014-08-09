@@ -29,21 +29,10 @@ development:
   encoding: utf-8
   database: db/development.sqlite3
 
-staging:
-  adapter: postgresql
-  encoding: utf-8
-  database: ticket_to_ride_staging
-  host: localhost
-  username: 
-  password: 
-
 production:
   adapter: postgresql
   encoding: utf-8
-  database: ticket_to_ride_production
-  host: localhost
-  username:
-  password:
+  pool: 5
 
 test:
   adapter: sqlite3
