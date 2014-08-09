@@ -1,0 +1,7 @@
+deploy:
+  provider: heroku
+  api_key:
+    secure: j2in3pdSBwc2+nte7xgElvS3LkB1bhXjVs33xU44UBKkx84C88Wb+fwgaHjY1ZqyxFsVKCUNVXg7I4T1iK6CQQY3l/B6eiWvqwqK9jgucjHSPYpc9vrmJAFExB/i5V2GEkcY7TB09Wu2mNvCKjQ/Uc2lCnhe3X5Q33wPwKoX8pI=
+  app: t2r-ci
+  on:
+    repo: codeforamerica/ticket-to-ride
