@@ -67,7 +67,7 @@ The name of the school that the student went to prior to this registration. In o
 
 Example:
 
-`Classical High School-Providence-RI`
+`Classical High School;Providence;RI`
 
 #### [ 8 | H ] IEP (boolean)
 
@@ -139,7 +139,7 @@ If possible, it would be ideal to treat this as a string in your SIS since there
 
 #### [ 23 | W ] Student birth place (string)
 
-The place that the student was born. This is largely a free form string, but may look something like: `Providence-RI-USA`.
+The place that the student was born. This is largely a free form string, but may look something like: `Providence;RI;USA`.
 
 ### Contact Person #1
 
@@ -181,23 +181,23 @@ The primary phone number for the contact person.
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 33 | AG ] Contact person #1 - Phone number #2 (string)
+#### [ 33 | AG | optional ] Contact person #1 - Phone number #2 (string)
 
 The secondary phone number for the contact person.
 
-#### [ 34 | AH ] Contact person #1 - Permission to send SMS - Phone #2 (boolean)
+#### [ 34 | AH | optional ] Contact person #1 - Permission to send SMS - Phone #2 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 35 | AI ] Contact person #1 - Phone number #3 (string)
+#### [ 35 | AI | optional ] Contact person #1 - Phone number #3 (string)
 
 Another phone number for the contact person. This is often a work phone number, but not necessarily.
 
-#### [ 36 | AJ ] Contact person #1 - Permission to send SMS - Phone #3 (boolean)
+#### [ 36 | AJ | optional ] Contact person #1 - Permission to send SMS - Phone #3 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 37 | AK ] Contact person #1 - Email Address (string)
+#### [ 37 | AK | optional ] Contact person #1 - Email Address (string)
 
 An e-mail address that the contact can be reached at.
 
@@ -221,11 +221,15 @@ An e-mail address that the contact can be reached at.
 
 `1` if the contact can receive other mailings (newsletters, non-sensitive updates, etc). `0` otherwise.
 
-#### [ 43 | AQ ] Contact person #1 - Contact person employer name (string)
+#### [ 43 | AQ ] Contact person #1 - Can pickup (boolean)
+
+`1` if the contact can pickup the student from school. `0` otherwise.
+
+#### [ 44 | AR | optional ] Contact person #1 - Contact person employer name (string)
 
 The name of the company/organization that the contact works for.
 
-#### [ 44 | AR ] Contact person #1 - Relationship to student (string)
+#### [ 45 | AS ] Contact person #1 - Relationship to student (string)
 
 The following options are how a contact person might be related to a student:
 
@@ -242,7 +246,7 @@ The following options are how a contact person might be related to a student:
 - STEPMOTHER
 - UNCLE
 
-#### [ 45 | AS | optional ] Contact person #1 - Military status (string)
+#### [ 46 | AT | optional ] Contact person #1 - Military status (string)
 
 This describes the contact person's relationship to the military. There are the following options:
 
@@ -253,7 +257,7 @@ This describes the contact person's relationship to the military. There are the 
 
 If this field is left blank, it can be assumed that the contact person has no known association with a military.
 
-#### [ 46 | AS ] Contact person #1 - Is legal guardian (boolean)
+#### [ 47 | AU ] Contact person #1 - Is legal guardian (boolean)
 
 Is always `1` for this contact. 
 
@@ -261,87 +265,91 @@ Is always `1` for this contact.
 
 This may or may not be a legal guardian.
 
-#### [ 47 | AT ] Contact person #2 - First name (string)
+#### [ 48 | AV ] Contact person #2 - First name (string)
 
 The first name of the contact.
 
-#### [ 48 | AU ] Contact person #2 - Last name (string)
+#### [ 49 | AW ] Contact person #2 - Last name (string)
 
 The last name of the contact.
 
-#### [ 49 | AV ] Contact person #2 - Street address - Line #1  (string)
+#### [ 50 | AX ] Contact person #2 - Street address - Line #1  (string)
 
 The home street address of the contact. 
 
-#### [ 50 | AW | optional ] Contact person #2 - Street address - Line #2 (string)
+#### [ 51 | AY | optional ] Contact person #2 - Street address - Line #2 (string)
 
 The second line of the contact's home street address.
 
-#### [ 51 | AX ] Contact person #2 - City (string)
+#### [ 52 | AZ ] Contact person #2 - City (string)
 
 The city of the contact's home address.
 
-#### [ 52 | AY ] Contact person #2 - State (string)
+#### [ 53 | BA ] Contact person #2 - State (string)
 
 The state of the contact's home address.
 
-#### [ 53 | AZ ] Contact person #2 - ZIP code (string)
+#### [ 54 | BB ] Contact person #2 - ZIP code (string)
 
 The ZIP code of the contact's home address.
 
-#### [ 54 | BA ] Contact person #2 - Phone number #1 (string)
+#### [ 55 | BC ] Contact person #2 - Phone number #1 (string)
 
 The primary phone number for the contact person.
 
-#### [ 55 | BB ] Contact person #2 - Permission to send SMS - Phone #1 (boolean)
+#### [ 56 | BD ] Contact person #2 - Permission to send SMS - Phone #1 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 56 | BC ] Contact person #2 - Phone number #2 (string)
+#### [ 57 | BE | optional] Contact person #2 - Phone number #2 (string)
 
 The secondary phone number for the contact person.
 
-#### [ 57 | BD ] Contact person #2 - Permission to send SMS - Phone #2 (boolean)
+#### [ 58 | BF | optional ] Contact person #2 - Permission to send SMS - Phone #2 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 58 | BE ] Contact person #2 - Phone number #3 (string)
+#### [ 59 | BG | optional ] Contact person #2 - Phone number #3 (string)
 
 Another phone number for the contact person. This is often a work phone number, but not necessarily.
 
-#### [ 59 | BF ] Contact person #2 - Permission to send SMS - Phone #3 (boolean)
+#### [ 60 | BH | optional ] Contact person #2 - Permission to send SMS - Phone #3 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 60 | BG ] Contact person #2 - Email Address (string)
+#### [ 61 | BI | optional ] Contact person #2 - Email Address (string)
 
 An e-mail address that the contact can be reached at.
 
-#### [ 61 | BH ] Contact person #2 - Lives with student (boolean)
+#### [ 62 | BJ ] Contact person #2 - Lives with student (boolean)
 
 `1` if the student lives with this contact person. `0` otherwise.
 
-#### [ 61 | BI  ] Contact person #2 - Has custody of the student (boolean)
+#### [ 63 | BK  ] Contact person #2 - Has custody of the student (boolean)
 
 `1` if the student lives with this contact person. `0` otherwise.
 
-#### [ 62 | BJ ] Contact person #2 - Can receive grade notifications (boolean)
+#### [ 64 | BL ] Contact person #2 - Can receive grade notifications (boolean)
 
 `1` if the contact can receive information about the student's grades and class performance. `0` otherwise.
 
-#### [ 63 | BK ] Contact person #2 - Can receive conduct notifications (boolean)
+#### [ 65 | BM ] Contact person #2 - Can receive conduct notifications (boolean)
 
 `1` if the contact can receive conduct or behavioral notifications. `0` otherwise.
 
-#### [ 64 | BL ] Contact person #2 - Can receive other mailings (boolean)
+#### [ 66 | BN ] Contact person #2 - Can receive other mailings (boolean)
 
 `1` if the contact can receive other mailings (newsletters, non-sensitive updates, etc). `0` otherwise.
 
-#### [ 65 | BM ] Contact person #2 - Contact person employer name (string)
+#### [ 67 | BO ] Contact person #2 - Can pickup (boolean)
+
+`1` if the contact can pickup the student from school. `0` otherwise.
+
+#### [ 68 | BP ] Contact person #2 - Contact person employer name (string)
 
 The name of the company/organization that the contact works for.
 
-#### [ 66 | BN ] Contact person #2 - Relationship to student (string)
+#### [ 69 | BQ ] Contact person #2 - Relationship to student (string)
 
 The following options are how a contact person might be related to a student:
 
@@ -358,7 +366,7 @@ The following options are how a contact person might be related to a student:
 - STEPMOTHER
 - UNCLE
 
-#### [ 67 | BO | optional ] Contact person #2 - Military status (string)
+#### [ 70 | BR | optional ] Contact person #2 - Military status (string)
 
 This describes the contact person's relationship to the military. There are the following options:
 
@@ -369,7 +377,7 @@ This describes the contact person's relationship to the military. There are the 
 
 If this field is left blank, it can be assumed that the contact person has no known association with a military.
 
-#### [ 68 | BP ] Contact person #2 - Is legal guardian (boolean)
+#### [ 71 | BS ] Contact person #2 - Is legal guardian (boolean)
 
 `1` if this contact is a legal guardian or `0` if not.
 
@@ -377,87 +385,91 @@ If this field is left blank, it can be assumed that the contact person has no kn
 
 This may or may not be a legal guardian, but is often *not*.
 
-#### [ 69 | BQ ] Contact person #3 - First name (string)
+#### [ 72 | BT ] Contact person #3 - First name (string)
 
 The first name of the contact.
 
-#### [ 70 | BR ] Contact person #3 - Last name (string)
+#### [ 73 | BU ] Contact person #3 - Last name (string)
 
 The last name of the contact.
 
-#### [ 71 | BS ] Contact person #3 - Street address - Line #1  (string)
+#### [ 74 | BV ] Contact person #3 - Street address - Line #1  (string)
 
 The home street address of the contact. 
 
-#### [ 72 | BT | optional ] Contact person #3 - Street address - Line #2 (string)
+#### [ 75 | BW | optional ] Contact person #3 - Street address - Line #2 (string)
 
 The second line of the contact's home street address.
 
-#### [ 73 | BU ] Contact person #3 - City (string)
+#### [ 76 | BX ] Contact person #3 - City (string)
 
 The city of the contact's home address.
 
-#### [ 74 | BV ] Contact person #3 - State (string)
+#### [ 77 | BY ] Contact person #3 - State (string)
 
 The state of the contact's home address.
 
-#### [ 75 | BW ] Contact person #3 - ZIP code (string)
+#### [ 78 | BZ ] Contact person #3 - ZIP code (string)
 
 The ZIP code of the contact's home address.
 
-#### [ 76 | BX ] Contact person #3 - Phone number #1 (string)
+#### [ 79 | CA ] Contact person #3 - Phone number #1 (string)
 
 The primary phone number for the contact person.
 
-#### [ 77 | BY ] Contact person #3 - Permission to send SMS - Phone #1 (boolean)
+#### [ 80 | CB ] Contact person #3 - Permission to send SMS - Phone #1 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 78 | BZ ] Contact person #3 - Phone number #2 (string)
+#### [ 81 | CC | optional ] Contact person #3 - Phone number #2 (string)
 
 The secondary phone number for the contact person.
 
-#### [ 79 | CA ] Contact person #3 - Permission to send SMS - Phone #2 (boolean)
+#### [ 82 | CD | optional ] Contact person #3 - Permission to send SMS - Phone #2 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 80 | CB ] Contact person #3 - Phone number #3 (string)
+#### [ 83 | CE | optional ] Contact person #3 - Phone number #3 (string)
 
 Another phone number for the contact person. This is often a work phone number, but not necessarily.
 
-#### [ 81 | CC ] Contact person #3 - Permission to send SMS - Phone #3 (boolean)
+#### [ 84 | CF | optional ] Contact person #3 - Permission to send SMS - Phone #3 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 82 | CD ] Contact person #3 - Email Address (string)
+#### [ 85 | CG | optional ] Contact person #3 - Email Address (string)
 
 An e-mail address that the contact can be reached at.
 
-#### [ 83 | CE ] Contact person #3 - Lives with student (boolean)
+#### [ 86 | CH ] Contact person #3 - Lives with student (boolean)
 
 `1` if the student lives with this contact person. `0` otherwise.
 
-#### [ 84 | CF  ] Contact person #3 - Has custody of the student (boolean)
+#### [ 87 | CI  ] Contact person #3 - Has custody of the student (boolean)
 
 `1` if the student lives with this contact person. `0` otherwise.
 
-#### [ 85 | CG ] Contact person #3 - Can receive grade notifications (boolean)
+#### [ 88 | CJ ] Contact person #3 - Can receive grade notifications (boolean)
 
 `1` if the contact can receive information about the student's grades and class performance. `0` otherwise.
 
-#### [ 86 | CH ] Contact person #3 - Can receive conduct notifications (boolean)
+#### [ 89 | CK ] Contact person #3 - Can receive conduct notifications (boolean)
 
 `1` if the contact can receive conduct or behavioral notifications. `0` otherwise.
 
-#### [ 87 | CI ] Contact person #3 - Can receive other mailings (boolean)
+#### [ 90 | CL ] Contact person #3 - Can receive other mailings (boolean)
 
 `1` if the contact can receive other mailings (newsletters, non-sensitive updates, etc). `0` otherwise.
 
-#### [ 88 | CJ ] Contact person #3 - Contact person employer name (string)
+#### [ 91 | CM ] Contact person #3 - Can pickup (boolean)
+
+`1` if the contact can pickup the student from school. `0` otherwise.
+
+#### [ 92 | CN ] Contact person #3 - Contact person employer name (string)
 
 The name of the company/organization that the contact works for.
 
-#### [ 89 | CK ] Contact person #3 - Relationship to student (string)
+#### [ 93 | CO ] Contact person #3 - Relationship to student (string)
 
 The following options are how a contact person might be related to a student:
 
@@ -474,7 +486,7 @@ The following options are how a contact person might be related to a student:
 - STEPMOTHER
 - UNCLE
 
-#### [ 90 | CL | optional ] Contact person #3 - Military status (string)
+#### [ 94 | CP | optional ] Contact person #3 - Military status (string)
 
 This describes the contact person's relationship to the military. There are the following options:
 
@@ -485,7 +497,7 @@ This describes the contact person's relationship to the military. There are the 
 
 If this field is left blank, it can be assumed that the contact person has no known association with a military.
 
-#### [ 91 | CM ] Contact person #3 - Is legal guardian (boolean)
+#### [ 95 | CQ ] Contact person #3 - Is legal guardian (boolean)
 
 `1` if this contact is a legal guardian or `0` if not.
 
@@ -493,87 +505,91 @@ If this field is left blank, it can be assumed that the contact person has no kn
 
 This may or may not be a legal guardian, but is often *not*. This contact is entirely optional, so the end of the file may end at the prior field.
 
-#### [ 92 | CN ] Contact person #4 - First name (string)
+#### [ 93 | CR ] Contact person #4 - First name (string)
 
 The first name of the contact.
 
-#### [ 93 | CO ] Contact person #4 - Last name (string)
+#### [ 94 | CS ] Contact person #4 - Last name (string)
 
 The last name of the contact.
 
-#### [ 94 | CP ] Contact person #4 - Street address - Line #1  (string)
+#### [ 95 | CT ] Contact person #4 - Street address - Line #1  (string)
 
 The home street address of the contact. 
 
-#### [ 95 | CQ | optional ] Contact person #4 - Street address - Line #2 (string)
+#### [ 96 | CU | optional ] Contact person #4 - Street address - Line #2 (string)
 
 The second line of the contact's home street address.
 
-#### [ 96 | CR ] Contact person #4 - City (string)
+#### [ 97 | CV ] Contact person #4 - City (string)
 
 The city of the contact's home address.
 
-#### [ 97 | CS ] Contact person #4 - State (string)
+#### [ 98 | CW ] Contact person #4 - State (string)
 
 The state of the contact's home address.
 
-#### [ 98 | CT ] Contact person #4 - ZIP code (string)
+#### [ 99 | CX ] Contact person #4 - ZIP code (string)
 
 The ZIP code of the contact's home address.
 
-#### [ 99 | CU ] Contact person #4 - Phone number #1 (string)
+#### [ 100 | CY ] Contact person #4 - Phone number #1 (string)
 
 The primary phone number for the contact person.
 
-#### [ 100 | CV ] Contact person #4 - Permission to send SMS - Phone #1 (boolean)
+#### [ 101 | CZ ] Contact person #4 - Permission to send SMS - Phone #1 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 101 | CW ] Contact person #4 - Phone number #2 (string)
+#### [ 102 | DA | optional ] Contact person #4 - Phone number #2 (string)
 
 The secondary phone number for the contact person.
 
-#### [ 102 | CX ] Contact person #4 - Permission to send SMS - Phone #2 (boolean)
+#### [ 103 | DB | optional ] Contact person #4 - Permission to send SMS - Phone #2 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 103 | CY ] Contact person #4 - Phone number #3 (string)
+#### [ 104 | DC | optional ] Contact person #4 - Phone number #3 (string)
 
 Another phone number for the contact person. This is often a work phone number, but not necessarily.
 
-#### [ 104 | CZ ] Contact person #4 - Permission to send SMS - Phone #3 (boolean)
+#### [ 105 | DD | optional ] Contact person #4 - Permission to send SMS - Phone #3 (boolean)
 
 `1` if the contact person can receive text messages (SMS) at this number. If not, `0` is the value.
 
-#### [ 105 | DA ] Contact person #4 - Email Address (string)
+#### [ 106 | DE | optional ] Contact person #4 - Email Address (string)
 
 An e-mail address that the contact can be reached at.
 
-#### [ 106 | DB ] Contact person #4 - Lives with student (boolean)
+#### [ 107 | DF ] Contact person #4 - Lives with student (boolean)
 
 `1` if the student lives with this contact person. `0` otherwise.
 
-#### [ 107 | DC  ] Contact person #4- Has custody of the student (boolean)
+#### [ 108 | DG  ] Contact person #4- Has custody of the student (boolean)
 
 `1` if the student lives with this contact person. `0` otherwise.
 
-#### [ 108 | DD ] Contact person #4 - Can receive grade notifications (boolean)
+#### [ 109 | DH ] Contact person #4 - Can receive grade notifications (boolean)
 
 `1` if the contact can receive information about the student's grades and class performance. `0` otherwise.
 
-#### [ 109 | DE ] Contact person #4 - Can receive conduct notifications (boolean)
+#### [ 110 | DI ] Contact person #4 - Can receive conduct notifications (boolean)
 
 `1` if the contact can receive conduct or behavioral notifications. `0` otherwise.
 
-#### [ 110 | DF ] Contact person #4 - Can receive other mailings (boolean)
+#### [ 111 | DJ ] Contact person #4 - Can receive other mailings (boolean)
 
 `1` if the contact can receive other mailings (newsletters, non-sensitive updates, etc). `0` otherwise.
 
-#### [ 111 | DG ] Contact person #4 - Contact person employer name (string)
+#### [ 112 | DK ] Contact person #4 - Can  pickup (boolean)
+
+`1` if the contact can pickup the student from school. `0` otherwise.
+
+#### [ 113 | DL ] Contact person #4 - Contact person employer name (string)
 
 The name of the company/organization that the contact works for.
 
-#### [ 112 | DH ] Contact person #4 - Relationship to student (string)
+#### [ 114 | DM ] Contact person #4 - Relationship to student (string)
 
 The following options are how a contact person might be related to a student:
 
@@ -590,7 +606,7 @@ The following options are how a contact person might be related to a student:
 - STEPMOTHER
 - UNCLE
 
-#### [ 113 | DI | optional ] Contact person #4 - Military status (string)
+#### [ 115 | DN | optional ] Contact person #4 - Military status (string)
 
 This describes the contact person's relationship to the military. There are the following options:
 
@@ -601,6 +617,6 @@ This describes the contact person's relationship to the military. There are the 
 
 If this field is left blank, it can be assumed that the contact person has no known association with a military.
 
-#### [ 114 | DJ ] Contact person #4 - Is legal guardian (boolean)
+#### [ 116 | DO ] Contact person #4 - Is legal guardian (boolean)
 
 `1` if this contact is a legal guardian or `0` if not.
