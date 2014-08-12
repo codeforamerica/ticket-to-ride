@@ -17,6 +17,10 @@ Following the annotation is the name of the field, followed by the type in paren
 
 After the type, there will be a description of the field.
 
+## Example File
+
+An example file with two students in it can be found in [example_export.csv](example_export.csv).
+
 ## Fields
 
 ### Student
@@ -71,11 +75,11 @@ Example:
 
 #### [ 8 | H ] IEP (boolean)
 
-True if the student has an [individualized education program](http://en.wikipedia.org/wiki/Individualized_Education_Program).
+`1` if the student has an [individualized education program](http://en.wikipedia.org/wiki/Individualized_Education_Program). `0` otherwise.
 
 #### [ 9 | I ] 504 Plan (boolean)
 
-True is the student has [special needs](http://kidshealth.org/parent/positive/learning/504-plans.html).
+`1` if the student has [special needs](http://kidshealth.org/parent/positive/learning/504-plans.html). `0` otherwise.
 
 
 #### [ 10 | J ] Graduation year (number)
