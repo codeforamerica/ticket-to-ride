@@ -78,7 +78,7 @@
         </tr>
         <tr>
           <td class="summaryText" colspan="2">
-            A second phone number for <%= @summary_guardian2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_guardian2.main_phone %></span><!-- which <span class="summaryAnswers">does not receive text messages</span>-->.</td>
+            A second phone number for <%= @summary_guardian2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_guardian2.secondary_phone %></span><!-- which <span class="summaryAnswers">does not receive text messages</span>-->.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>
