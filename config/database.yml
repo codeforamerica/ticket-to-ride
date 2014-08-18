@@ -25,25 +25,16 @@
 #   database: db/production.sqlite3
 
 development:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: utf-8
-  database: ticket_to_ride_development
-  host: localhost
-  username: 
-  password: 
+  database: db/development.sqlite3
 
-staging:
+production:
   adapter: postgresql
   encoding: utf-8
-  database: ticket_to_ride_staging
-  host: localhost
-  username: 
-  password: 
+  pool: 5
 
 test:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: utf-8
-  database: ticket_to_ride_test
-  host: localhost
-  username: 
-  password: 
+  database: db/test.sqlite3
