@@ -19,4 +19,9 @@ class AdminController < ApplicationController
     render 'admin_login'
   end
 
+  def show
+    page_id = request.filtered_parameters['id']
+    render page_id
+  end
+
 end
