@@ -8,15 +8,15 @@ class AdminController < ApplicationController
       return central_start
     end
 
-    return login
+    return admin_login
   end
 
   def central_start
-    return 'central_start'
+    render 'central_start'
   end
 
-  def login
-    return 'login'
+  def admin_login
+    render 'admin_login'
   end
 
 end

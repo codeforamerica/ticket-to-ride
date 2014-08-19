@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get 'admin', to: 'admin#index'
   get 'admin/central/start', to: 'admin#central_start'
+  get 'admin/login', to: 'admin#admin_login'
 
   resources :enrollment
 
