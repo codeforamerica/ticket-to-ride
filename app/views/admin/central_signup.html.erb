@@ -1,0 +1,38 @@
+<body class="no-js" id="tech-director-setup-2">
+<main>
+  <div class="site-width">
+    <header>
+      <h1>Setup your account</h1>
+      <p>Create an account and link it with a district, below.</p>
+    </header>
+    <%= form_tag(controller: 'admin', action: 'central_signup', method: 'post') do %>
+      <div class="field">
+        <label for="tech-director-name">Name</label>
+        <input type="text" id="tech-director-name"></input>
+        <%= label_tag 'name', 'Name' %>
+        <%= text_field_tag 'name', '', id: 'tech-director-name' %>
+      </div>
+      <div class="field">
+        <label for="tech-director-email-address">Email address</label>
+        <input type="text" id="tech-director-email-address"></input>
+      </div>
+      <div class="field field-password">
+        <label for="tech-director-password">Password</label>
+        <input type="password" id="tech-director-password"></input>
+      </div>
+      <div class="field field-password">
+        <label for="tech-director-password-confirm">Confirm password</label>
+        <input type="password" id="tech-director-password-confirm"></input>
+      </div>
+      <footer>
+        <button type="submit" class="button-forward">Continue</button>
+      </footer>
+    <% end %>
+  </div>
+</main>
+<footer>
+  <div class="site-width">
+    <h1>Ticket2RIDE</h1>
+  </div>
+</footer>
+</body>
