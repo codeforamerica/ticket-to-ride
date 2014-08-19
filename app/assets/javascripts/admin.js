@@ -3,3 +3,17 @@
 //= require jquery
 //= require custominput.jquery
 //= require select.jquery
+
+$( document ).bind( "enhance", function(){
+    $( "body" ).addClass( "enhanced" );
+    $( "input[type=radio]" ).customInput();
+    $( "input[type=checkbox]" ).customInput();
+    $( "body" ).addClass( "custom-input" );
+
+});
+
+$(document).ready(function(){
+    $('body').removeClass('no-js');
+    $('.is-branch').hide();
+    $( document ).trigger( "enhance" );
+});
