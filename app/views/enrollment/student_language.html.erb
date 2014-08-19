@@ -1,23 +1,3 @@
-<script>
-    var firstLanguage = '<%= @student.first_language %>';
-    var homeLanguage = '<%= @student.home_language %>';
-    var guardianLanguage = '<%= @student.guardian_language %>';
-
-    function isNotEnglish(language) {
-        return language != '' && language.toLowerCase() != 'english';
-    }
-
-    function showHideFormalEnglishTraining() {
-        var isNotEnglishSpeaker = isNotEnglish(firstLanguage) || isNotEnglish(homeLanguage) || isNotEnglish(guardianLanguage);
-        if (isNotEnglishSpeaker) {
-            $('#formal-english-training-question').show();
-        }
-        else {
-            $('#formal-english-training-question').hide();
-        }
-    }
-</script>
-
 <%= render 'enrollment/navigation' %>
 
 <div class="enrollment-form">
@@ -58,21 +38,7 @@
               <%= s.text_field :guardian_language, class: 'enrollment-form-modal-language input-pointer', 'data-toggle'=> 'modal', 'data-target'=> '#guardianLanguageModal', id: 'guardianLanguageSelected', placeholder: 'Choose', readonly: true %>
             </td>
           </tr>
-
-          <tr id="formal-english-training-question">
-            <td class="enrollment-qa-cell">Has <%= @student_gender_pronoun %> received any formal English language instruction
-              (listening, speaking, reading, or writing)?
-            </td>
-            <td class="enrollment-qa-gutter-cell"></td>
-            <td class="enrollment-answer-cell">
-             <div class="btn-group buttons-center" data-toggle="buttons">
-               <label class="btn btn-primary">
-               <%= s.radio_button :had_english_instruction, true %>Yes</label>
-               <label class="btn btn-primary">
-               <%= s.radio_button :had_english_instruction, false %>No</label>
-             </div>
-            </td>
-          </tr>
+Ï
           </table>
           </div>
 
