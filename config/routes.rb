@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   get 'welcome/newport', to: 'welcome#newport', as: :newport_intro
   # get 'enrollment/summary', to: 'enrollment#summary', as: :happy_libs_summary
 
+  get 'admin', to: 'admin#index'
+  get 'admin/central/start', to: 'admin#central_start'
+  get 'admin/login', to: 'admin#admin_login'
+
   resources :enrollment
 
   resources :madlibs
@@ -23,6 +27,8 @@ Rails.application.routes.draw do
   resources :students
 
   resources :schools
+
+  resources :admin
 
   # get 'pages/home' => 'high_voltage/pages#show', id: 'home'
 

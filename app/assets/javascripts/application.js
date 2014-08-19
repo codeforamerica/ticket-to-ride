@@ -19,5 +19,7 @@
 //= require moment
 //= require select2
 //= require bootstrap-slider
-//= require_tree .
+//= require display_logic
+//= require enrollment
+//= require xeditable
 
