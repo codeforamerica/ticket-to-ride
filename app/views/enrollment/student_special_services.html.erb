@@ -9,7 +9,7 @@
     <table>
       <tr><td colspan="2"><span class="instructions">Special Services</span></td></tr>
       <tr>
-        <td class="enrollment-qa-radio-only-question-cell">Was <%= @student.first_name %> receiving special education services at <%= @gender_objective_pronoun %> previous school?</td>
+        <td class="enrollment-qa-radio-only-question-cell">Was <%= @student.first_name %> receiving special education services at <%= @student_gender_objective_pronoun %> previous school?</td>
         <td class="enrollment-qa-gutter-cell"></td>
         <td class="enrollment-qa-radio-only-answer-cell"><div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
@@ -20,7 +20,7 @@
         </td>
       </tr>
       <tr>
-        <td class="enrollment-qa-radio-only-question-cell">Did <%= @gender_pronoun %> have a current Individualized Education Program (IEP) at the previous school?</td>
+        <td class="enrollment-qa-radio-only-question-cell">Did <%= @student_gender_pronoun %> have a current Individualized Education Program (IEP) at the previous school?</td>
         <td class="enrollment-qa-gutter-cell"></td>
         <td class="enrollment-qa-radio-only-answer-cell"><div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
@@ -30,7 +30,7 @@
         </div></td>
       </tr> <!-- this should trigger "Bring copy of IEP" on final screen -->
       <tr>
-        <td class="enrollment-qa-radio-only-question-cell">Did <%= @gender_pronoun %> have a Section 504 Plan at <%= @gender_objective_pronoun %> prior school?</td>
+        <td class="enrollment-qa-radio-only-question-cell">Did <%= @student_gender_pronoun %> have a Section 504 Plan at <%= @student_gender_objective_pronoun %> prior school?</td>
         <td class="enrollment-qa-gutter-cell"></td>
         <td class="enrollment-qa-radio-only-answer-cell"><div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
@@ -40,7 +40,7 @@
         </div></td>
       </tr> <!-- this should trigger "Bring copy of student's Section 504 Plan" on final screen -->
       <tr>
-        <td class="enrollment-qa-radio-only-question-cell">Does <%= @gender_pronoun %> have difficulties that interfere with <%= @gender_objective_pronoun %> ability to go to school or to learn?</td>
+        <td class="enrollment-qa-radio-only-question-cell">Does <%= @student_gender_pronoun %> have difficulties that interfere with <%= @student_gender_objective_pronoun %> ability to go to school or to learn?</td>
         <td class="enrollment-qa-gutter-cell"></td>
         <td class="enrollment-qa-radio-only-answer-cell"><div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
