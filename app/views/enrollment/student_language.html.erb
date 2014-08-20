@@ -1,23 +1,3 @@
-<script>
-    var firstLanguage = '<%= @student.first_language %>';
-    var homeLanguage = '<%= @student.home_language %>';
-    var guardianLanguage = '<%= @student.guardian_language %>';
-
-    function isNotEnglish(language) {
-        return language != '' && language.toLowerCase() != 'english';
-    }
-
-    function showHideFormalEnglishTraining() {
-        var isNotEnglishSpeaker = isNotEnglish(firstLanguage) || isNotEnglish(homeLanguage) || isNotEnglish(guardianLanguage);
-        if (isNotEnglishSpeaker) {
-            $('#formal-english-training-question').show();
-        }
-        else {
-            $('#formal-english-training-question').hide();
-        }
-    }
-</script>
-
 <%= render 'enrollment/navigation' %>
 
 <div class="enrollment-form">
@@ -58,154 +38,139 @@
               <%= s.text_field :guardian_language, class: 'enrollment-form-modal-language input-pointer', 'data-toggle'=> 'modal', 'data-target'=> '#guardianLanguageModal', id: 'guardianLanguageSelected', placeholder: 'Choose', readonly: true %>
             </td>
           </tr>
+        </table>
+    </div>
 
-          <tr id="formal-english-training-question">
-            <td class="enrollment-qa-cell">Has <%= @student_gender_pronoun %> received any formal English language instruction
-              (listening, speaking, reading, or writing)?
-            </td>
-            <td class="enrollment-qa-gutter-cell"></td>
-            <td class="enrollment-answer-cell">
-             <div class="btn-group buttons-center" data-toggle="buttons">
-               <label class="btn btn-primary">
-               <%= s.radio_button :had_english_instruction, true %>Yes</label>
-               <label class="btn btn-primary">
-               <%= s.radio_button :had_english_instruction, false %>No</label>
-             </div>
-            </td>
-          </tr>
-          </table>
+
+    <div class="modal fade" id="firstLanguageModal" tabindex="-1" role="dialog" aria-labelledby="firstLanguageModal" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h4 class="modal-title" id="firstLanguageLabel">Select a language</h4>
           </div>
-
-
-          <div class="modal fade" id="firstLanguageModal" tabindex="-1" role="dialog" aria-labelledby="firstLanguageModal" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                  <h4 class="modal-title" id="firstLanguageLabel">Select a language</h4>
-                </div>
-                <div class="modal-body single-col-modal">
-                  <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_first_language', 'English' %>English
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_first_language', 'Spanish' %>Spanish
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_first_language', 'Portuguese' %>Portuguese
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_first_language', 'Italian' %>Italian
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_first_language', 'French' %>French
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_first_language', 'Mon-Khmer' %>Mon-Khmer
-                    </label><br/>
-                    <%= text_field_tag 'choose_student_first_language', nil, class: 'enrollment-form-input', id: 'choose_student_first_language_input_text', placeholder: 'Other' %>
-                    <br/>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnFirstLanguage">Save
-                    changes
-                  </button>
-                </div>
-              </div>
+          <div class="modal-body single-col-modal">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_first_language', 'English' %>English
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_first_language', 'Spanish' %>Spanish
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_first_language', 'Portuguese' %>Portuguese
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_first_language', 'Italian' %>Italian
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_first_language', 'French' %>French
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_first_language', 'Mon-Khmer' %>Mon-Khmer
+              </label><br/>
+              <%= text_field_tag 'choose_student_first_language', nil, class: 'enrollment-form-input', id: 'choose_student_first_language_input_text', placeholder: 'Other' %>
+              <br/>
             </div>
           </div>
-
-          <div class="modal fade" id="homeLanguageModal" tabindex="-1" role="dialog" aria-labelledby="homeLanguageModal" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                  <h4 class="modal-title" id="homeLanguageLabel">Select a language</h4>
-                </div>
-                <div class="modal-body single-col-modal">
-                  <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_home_language', 'English' %>English
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_home_language', 'Spanish' %>Spanish
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_home_language', 'Portuguese' %>Portuguese
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_home_language', 'Italian' %>Italian
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_home_language', 'French' %>French
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_home_language', 'Mon-Khmer' %>Mon-Khmer
-                    </label><br/>
-                    <%= text_field_tag 'choose_student_home_language', nil, class: 'enrollment-form-input', id: 'choose_student_home_language_input_text', placeholder: 'Other' %>
-                    <br/>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnHomeLanguage">Save
-                    changes
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnFirstLanguage">Save
+              changes
+            </button>
           </div>
-
-          <div class="modal fade" id="guardianLanguageModal" tabindex="-1" role="dialog" aria-labelledby="guardianLanguageModal" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                  <h4 class="modal-title" id="guardianLanguageLabel">Select a language</h4>
-                </div>
-                <div class="modal-body single-col-modal">
-                  <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_guardian_language', 'English' %>English
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_guardian_language', 'Spanish' %>Spanish
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_guardian_language', 'Portuguese' %>Portuguese
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_guardian_language', 'Italian' %>Italian
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_guardian_language', 'French' %>French
-                    </label><br/>
-                    <label class="btn btn-primary">
-                      <%= radio_button_tag 'choose_student_guardian_language', 'Mon-Khmer' %>Mon-Khmer
-                    </label><br/>
-                    <%= text_field_tag 'choose_student_guardian_language', nil, class: 'enrollment-form-input', id: 'choose_student_guardian_language_input_text', placeholder: 'Other' %>
-                    <br/>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                  <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnGuardianLanguage">Save
-                    changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <ul class="pager">
-            <li><%= link_to "Previous", previous_wizard_path %></li>
-            <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
-          </ul>
+        </div>
       </div>
+    </div>
 
-      <% end %>
+    <div class="modal fade" id="homeLanguageModal" tabindex="-1" role="dialog" aria-labelledby="homeLanguageModal" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h4 class="modal-title" id="homeLanguageLabel">Select a language</h4>
+          </div>
+          <div class="modal-body single-col-modal">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_home_language', 'English' %>English
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_home_language', 'Spanish' %>Spanish
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_home_language', 'Portuguese' %>Portuguese
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_home_language', 'Italian' %>Italian
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_home_language', 'French' %>French
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_home_language', 'Mon-Khmer' %>Mon-Khmer
+              </label><br/>
+              <%= text_field_tag 'choose_student_home_language', nil, class: 'enrollment-form-input', id: 'choose_student_home_language_input_text', placeholder: 'Other' %>
+              <br/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnHomeLanguage">Save
+              changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <%= render 'shared/scenery_student' %>
+    <div class="modal fade" id="guardianLanguageModal" tabindex="-1" role="dialog" aria-labelledby="guardianLanguageModal" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h4 class="modal-title" id="guardianLanguageLabel">Select a language</h4>
+          </div>
+          <div class="modal-body single-col-modal">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_guardian_language', 'English' %>English
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_guardian_language', 'Spanish' %>Spanish
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_guardian_language', 'Portuguese' %>Portuguese
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_guardian_language', 'Italian' %>Italian
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_guardian_language', 'French' %>French
+              </label><br/>
+              <label class="btn btn-primary">
+                <%= radio_button_tag 'choose_student_guardian_language', 'Mon-Khmer' %>Mon-Khmer
+              </label><br/>
+              <%= text_field_tag 'choose_student_guardian_language', nil, class: 'enrollment-form-input', id: 'choose_student_guardian_language_input_text', placeholder: 'Other' %>
+              <br/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <button type="button" class="nav-button pull-right" data-dismiss="modal" id="btnGuardianLanguage">Save
+              changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="pager">
+      <li><%= link_to "Previous", previous_wizard_path %></li>
+      <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
+    </ul>
+  </div>
+
+  <% end %>
+
+  <%= render 'shared/scenery_student' %>

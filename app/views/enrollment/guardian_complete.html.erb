@@ -9,9 +9,9 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li class="active instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Review Guardian 1</a></li>
+    <li class="active instructions"><a href="#summaryGuardian1" role="tab" data-toggle="tab">Review <%= @summary_guardian1.first_name %></a></li>
     <% if @summary_guardian2 %>
-        <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review Guardian 2</a></li>
+        <li class="instructions"><a href="#summaryGuardian2" role="tab" data-toggle="tab">Review <%= @summary_guardian2.first_name %></a></li>
     <% end %>
   </ul>
 
@@ -49,7 +49,7 @@
         </tr>
         <% if @summary_guardian2 %>
         <tr>
-          <td class="summaryText" colspan="2">Review <span class="summaryAnswers">Guardian 2</span> by clicking the tab above.</td>
+          <td class="summaryText" colspan="2">Review <span class="summaryAnswers"><%= @summary_guardian2.first_name %></span> by clicking the tab above.</td>
             <td class="summaryEdit"></div>
           </td>
         </tr>
@@ -78,7 +78,7 @@
         </tr>
         <tr>
           <td class="summaryText" colspan="2">
-            A second phone number for <%= @summary_guardian2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_guardian2.main_phone %></span><!-- which <span class="summaryAnswers">does not receive text messages</span>-->.</td>
+            A second phone number for <%= @summary_guardian2.first_name %> is <!--TODO get this from database --><span class="summaryAnswers"><%= @summary_guardian2.secondary_phone %></span><!-- which <span class="summaryAnswers">does not receive text messages</span>-->.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>
