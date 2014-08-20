@@ -437,13 +437,6 @@ class EnrollmentController < ApplicationController
       student.errors.add(:guardian_language, 'Guardian language is a required field')
     end
 
-    # English instruction is only a required question if the student speaks another language
-    if params[:student][:first_language].downcase != 'english' || params[:student][:home_language].downcase != 'english' || params[:student][:guardian_language].downcase != 'english'
-      if param_does_not_exist(:student, :had_english_instruction)
-        student.errors.add(:had_english_instruction, 'Has English Instruction is a required field')
-      end
-    end
-
     if student.errors.size > 0
       retainValuesAndErrors(student, student_params)
       return render_wizard

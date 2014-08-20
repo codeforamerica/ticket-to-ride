@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818203518) do
+ActiveRecord::Schema.define(version: 20140819203117) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -171,7 +171,6 @@ ActiveRecord::Schema.define(version: 20140818203518) do
     t.boolean  "has_learning_difficulties"
     t.string   "home_language"
     t.string   "guardian_language"
-    t.boolean  "had_english_instruction"
     t.string   "prior_school_name"
     t.string   "prior_school_city"
     t.string   "prior_school_state"

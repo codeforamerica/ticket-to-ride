@@ -1,9 +1,9 @@
 <%= render 'enrollment/navigation' %>
     <div class="enrollment-form">
-      <div class="summary_table enableZindex">
+      <div class="summary_table enableZindex_summary">
 
         <ul class="nav nav-tabs" role="tablist">
-          <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Review Student Information</a></li>
+          <li class="active instructions"><a href="#summaryStudent" role="tab" data-toggle="tab">Review <%= @student.first_name %></a></li>
         </ul>
 
       <div class="tab-content">
