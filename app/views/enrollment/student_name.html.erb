@@ -11,8 +11,8 @@
     <table>
       <tr>
         <td>
-          <span>First name:</span><span data-toggle="tooltip" title="Name on birth certificate" id="legal-name-tooltip"><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', placeholder: 'Mary', required: true %></span></td>
-        <td><span>Last name: </span>
+          <span>First name<sup>*</sup></span><span data-toggle="tooltip" title="Name on birth certificate" id="legal-name-tooltip"><%= s.text_field :first_name, class: 'enrollment-form-input', id: 'student_firstname', placeholder: 'Mary', required: true %></span></td>
+        <td><span>Last name<sup>*</sup> </span>
           <span><%= s.text_field :last_name, class: 'enrollment-form-input', id: 'student_lastname', placeholder: 'Williams', required: true %></span>
         </td>
       </tr>
@@ -24,13 +24,13 @@
       </tr>
       <tr>
         <td colspan="2">
-          <span>Birthdate:</span>
+          <span>Birthdate<sup>*</sup></span>
           <span><%= s.date_field :birthday, class: 'enrollment-form-input', id: 'student_birthday', required: true %></span>
         </td>
       </tr>
       <tr>
         <td colspan="2">
-          <span>Birthplace:</span>
+          <span>Birthplace<sup>*</sup></span>
           <span><%= s.text_field :birth_city, class: 'enrollment-form-input city_input', id: 'student_birth_city', placeholder: 'Providence', required: true %></span>,
           
           <span><%= s.text_field :birth_state, class: 'enrollment-form-input', id: 'student_birth_state', placeholder: 'RI' %></span></td>

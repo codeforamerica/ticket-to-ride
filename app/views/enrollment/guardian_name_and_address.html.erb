@@ -35,23 +35,23 @@
       <div class="contact_table enableZindex">
         <table>
           <tr>
-            <td class="row-break"><span>First Name:</span>
+            <td class="row-break"><span>First Name<sup>*</sup></span>
               <span><%= g.text_field :first_name, class: 'enrollment-form-input', id: 'guardian_firstname', placeholder: 'Roger', required: true %></span>
             </td>
             <td>
-              <span>Last Name:</span>
+              <span>Last Name<sup>*</sup></span>
               <span><%= g.text_field :last_name, class: 'enrollment-form-input', id: 'guardian_lastname', placeholder: 'Williams', required: true %></span>
             </td>
           </tr>
 
           <tr>
-            <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>:
-              <%= g.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship' %>
+            <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %><sup>*</sup>
+              <%= g.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose relationship' %>
             </td>
           </tr>
 
           <tr>
-            <td colspan="2">Does <%= @student.first_name %> live with you?
+            <td colspan="2">Does <%= @student.first_name %> live with you?<sup>*</sup>
               <div id="lives-with-student-radio-group" class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
                   <%= g.radio_button :lives_with_student, true, required: true, onchange: 'fillStudentAddress()' %>
@@ -64,19 +64,19 @@
           </tr>
 
           <tr id="guardian1_address">
-            <td class="row-break" colspan="2" id="guardian1_shared_street1"><span>Street address 1:</span>
+            <td class="row-break" colspan="2" id="guardian1_shared_street1"><span>Street address 1<sup>*</sup></span>
               <%= g.text_field :mailing_street_address_1, id: 'contact_person_mailing_street_address_1', placeholder: 'Street address 1', class: 'enrollment-form-input' %>
           </tr>
           <tr>
-            <td colspan="2" id="guardian1_shared_street2"><span>Street address 2:</span>
+            <td colspan="2" id="guardian1_shared_street2"><span>Street address 2 &nbsp;</span>
               <%= g.text_field :mailing_street_address_2, id: 'contact_person_mailing_street_address_2', placeholder: 'Street address 2', class: 'enrollment-form-input' %>
           </tr>
           <tr>
             <td colspan="2" id="guardian1_shared_city">
-              <span>City:</span>
+              <span>City<sup>*</sup></span>
               <%= g.text_field :mailing_city, id: 'contact_person_mailing_city', placeholder: 'City', class: 'enrollment-form-input city_input' %>
               ,
-              <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI', class: 'enrollment-form-input state_input', value: 'RI' %>
+              <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI *', class: 'enrollment-form-input state_input', value: 'RI' %>
               <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input zip_input' %>
             </td>
           </tr>
