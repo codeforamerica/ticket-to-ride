@@ -19,8 +19,8 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li class="active instructions"><a href="#summaryContacts1" role="tab" data-toggle="tab">Contact1</a></li>
-    <li class="instructions"><a href="#summaryContacts2" role="tab" data-toggle="tab">Contact2</a></li>
+    <li class="active instructions"><a href="#summaryContacts1" role="tab" data-toggle="tab"><%= @summary_contact1.first_name %></a></li>
+    <li class="instructions"><a href="#summaryContacts2" role="tab" data-toggle="tab"><%= @summary_contact2.first_name %></a></li>
     <li class="instructions"><a href="#summaryPermissions" role="tab" data-toggle="tab">Permissions</a></li>
   </ul>
 
@@ -44,7 +44,7 @@
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/contact_person_1_contact_info' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2">Review <span class="summaryAnswers">Contact 2</span> by clicking the tab above.</td>
+          <td class="summaryText" colspan="2">Review <span class="summaryAnswers"><%= @summary_contact2.first_name %></span> by clicking the tab above.</td>
             <td class="summaryEdit"></div>
           </td>
         </tr>

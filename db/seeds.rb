@@ -252,7 +252,6 @@ guardian_complete_west_warwick_student = Student.create(
     prior_school_name: 'Lighthouse Montessori',
     prior_school_city: 'West Warwick',
     prior_school_state: 'RI',
-    had_english_instruction: :false,
     previous_grade: grade_pre_k
 )
 
