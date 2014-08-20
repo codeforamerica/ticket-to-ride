@@ -49,6 +49,8 @@ gem 'bootstrap-slider-rails', '1.9.0'
 # Validations for dates
 gem 'validates_timeliness', '3.0.14'
 
+gem 'slim-rails', '2.0.3'
+
 # DEVELOPMENT ONLY
 group :development do
   # Use sqlite3 as the development database

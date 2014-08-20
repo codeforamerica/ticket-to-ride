@@ -1,0 +1,21 @@
+header
+  .site-width
+    h1 Setup your account
+    p Central administrators use a single account to manage registration statewide. Please specify the name, email address, and password for an administrator account.
+.page
+  .site-width
+    form action="central_setup_confirm"
+      .field
+	label for="person-name" Name
+	input#person-name type="text"
+      .field
+	label for="person-email-address" Email address
+	input#person-email-address type="text"
+      .field.field-password
+	label for="person-password" Password
+	input#person-password type="password"
+      .field.field-password
+	label for="person-password-confirm" Confirm password
+	input#person-password-confirm type="password"
+      footer
+	button.button-forward type="submit" Continue
