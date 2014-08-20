@@ -175,7 +175,7 @@ DEPENDENCIES
   sass-rails (= 4.0.3)
   sdoc (= 0.4.0)
   select2-rails (= 3.5.7)
-  slim-rails
+  slim-rails (= 2.1.5)
   spring (= 1.1.3)
   sqlite3 (= 1.3.9)
   tzinfo-data (= 1.2014.5)
