@@ -304,11 +304,6 @@ $(document).ready(function () {
     return results.join(' ');
   };
 
-  $('input[name="contact_person[main_phone"]').keyup(function(){
-    alert('call me maybe');
-  });
-
-
     // Modal Dialog Behavior for Language selection
     getSelectionFromModalForInput('#btnFirstLanguage', 'input[name="choose_student_first_language"]', '#firstLanguageSelected', function(val){firstLanguage = val; }); // TODO - Make this code cleaner
     clearRadioGroupUponTextEntry('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
