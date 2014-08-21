@@ -58,7 +58,7 @@
         <table>
           <div class="guardian1_alt_address">
             <tr>
-              <td class="row-break" colspan="2"><span>Does <%= @guardian_2.first_name %> live with you and <%= @student.first_name %>?</span>
+              <td class="row-break" colspan="2"><span>Does <%= @guardian_2.first_name %> live with you and <%= @student.first_name %>?<sup>*</sup></span>
                 <div class="btn-group pull-right" data-toggle="buttons">
                     <label for="guardian_2_lives_with_yes" class="btn btn-primary" onclick="toggleAddressFields(true)"><input id="guardian_2_lives_with_yes" class="hidden " name="guardian_2_lives_with" type="radio"/>Yes</label>
                     <label for="guardian_2_lives_with_no" class="btn btn-primary" onclick="toggleAddressFields(false)"><input id="guardian_2_lives_with_no" class="hidden" name="guardian_2_lives_with" type="radio"/>No</label>
@@ -66,7 +66,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="2"><span>Street address 1:</span>
+              <td colspan="2"><span>Street address 1<sup>*</sup></span>
                 <span><%= g.text_field :mailing_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Avenue' %></span>
               </td>
             </tr>
@@ -77,7 +77,7 @@
             </tr>
             <tr>
               <td colspan="2">
-                <span>City:</span>
+                <span>City<sup>*</sup></span>
                 <span><%= g.text_field :mailing_city, class: 'enrollment-form-input city_input', placeholder: 'Newport' %></span>,
                 <span><%= g.text_field :mailing_state, class: 'enrollment-form-input state_input', value: 'RI'%></span>
                 <span><%= g.text_field :mailing_zip_code, class: 'enrollment-form-input zip_input', placeholder: '02840' %></span>
@@ -85,7 +85,7 @@
             </tr>
 
             <tr>
-              <td class="row-break"><span>Main phone:</span>
+              <td class="row-break"><span>Main phone<sup>*</sup></span>
                 <span><%= g.telephone_field :main_phone, class: 'enrollment-form-input', placeholder: '401-111-2222', required: true %></span>
               </td>
               <td>

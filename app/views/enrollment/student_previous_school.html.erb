@@ -8,7 +8,7 @@
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
     <table>
-      <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?</span> 
+      <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?<sup>*</sup></span> 
         <div class="btn-group" data-toggle="buttons">
           <% EnrollmentController::GRADES_IN_ORDER.each do |previous_grade| %>
             <label class="btn btn-primary">
