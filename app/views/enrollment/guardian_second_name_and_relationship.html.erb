@@ -8,7 +8,7 @@
     <div>
         <table>
           <tr>
-            <td colspan="2"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?</span> 
+            <td colspan="2"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?<sup>*</sup></span> 
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
                     <input type="radio" name="has_additional_guardian" value="true">Yes</label>
@@ -19,11 +19,11 @@
           </tr>
 
           <tr>
-            <td class="row-break hidden" id="guardian2_first_name"><span>First Name:</span> <span><%= c.text_field :first_name, class: 'enrollment-form-input', id: 'guardian2_firstname', placeholder: 'Alice'%></span></td>
-            <td class="hidden" id="guardian2_last_name"><span>Last Name:</span> <%= c.text_field :last_name, class: 'enrollment-form-input', id: 'guardian2_lastname', placeholder: 'Williams' %></span></td>
+            <td class="row-break hidden" id="guardian2_first_name"><span>First Name<sup>*</sup></span> <span><%= c.text_field :first_name, class: 'enrollment-form-input', id: 'guardian2_firstname', placeholder: 'Alice'%></span></td>
+            <td class="hidden" id="guardian2_last_name"><span>Last Name<sup>*</sup></span> <%= c.text_field :last_name, class: 'enrollment-form-input', id: 'guardian2_lastname', placeholder: 'Williams' %></span></td>
           </tr>
           <tr>
-            <td class="padding-right hidden" colspan="2" id="guardian2_relationship">Individual's relationship to <%= @student.first_name %>:
+            <td class="padding-right hidden" colspan="2" id="guardian2_relationship">Individual's relationship to <%= @student.first_name %><sup>*</sup>
               <%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize relationship_input_narrow', 'data-toggle' => 'modal', 'data-target' => '#guardian1RelationshipModal', id: 'guardian1RelationshipSelected', readonly: true, placeholder: 'Choose'  %>
             </td>
           </tr>

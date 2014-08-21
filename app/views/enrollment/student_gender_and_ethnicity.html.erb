@@ -8,7 +8,7 @@
 
     <table>
       <tr><td class="row-break" colspan="2">
-        <span>Gender:</span> 
+        <span>Gender<sup>*</sup></span> 
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
                 <%= student.radio_button :gender, :female %>Female</label>
@@ -16,7 +16,7 @@
                 <%= student.radio_button :gender, :male %>Male</label>
         </div></td></tr>
       <tr><td class="row-break"><span class="instructions">Ethnicity</span></td></tr>
-      <tr><td colspan="2"><span>Hispanic or Latino descent?</span> 
+      <tr><td colspan="2"><span>Hispanic or Latino descent?<sup>*</sup></span> 
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
                 <%= student.radio_button :is_hispanic, true, presence: { message: "Selection required" } %>Yes</label>
@@ -24,7 +24,7 @@
                 <%= student.radio_button :is_hispanic, false, presence: { message: "Selection required" }%>No</label>
         </div></td></tr>
 
-      <tr><td colspan="2"><span>Race(s)?</span>
+      <tr><td colspan="2"><span>Race(s)?<sup>*</sup></span>
           <div class="btn-group race-check" data-toggle="checkbox">
           <% Race.all.each do |race| %>
 
