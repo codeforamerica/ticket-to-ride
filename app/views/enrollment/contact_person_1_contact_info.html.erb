@@ -10,22 +10,22 @@
     <div id="contact_table" class="enableZindex">
       <table>
         <tr>
-          <td class="row-break"><span>First Name:</span>
+          <td class="row-break"><span>First Name<sup>*</sup></span>
             <span><%= c.text_field :first_name, class: 'enrollment-form-input', placeholder: 'John', required: true %></span>
           </td>
           <td>
-            <span>Last Name:</span>
+            <span>Last Name<sup>*</sup></span>
             <span><%= c.text_field :last_name, class: 'enrollment-form-input', placeholder: 'Lennon', required: true %></span>
           </td>
         </tr>
         <tr>
-          <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %>:
+          <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %><sup>*</sup>
             <%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#contact1RelationshipModal', id: 'contact1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
           </td>
         </tr>
 
             <tr>
-              <td class="row-break"><span>Main phone:</span>
+              <td class="row-break"><span>Main phone<sup>*</sup></span>
                 <span><%= c.telephone_field :main_phone, class: 'enrollment-form-input', placeholder: '401-111-2222', required: true %></span>
               </td>
               <td>
