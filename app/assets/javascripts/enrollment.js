@@ -338,7 +338,7 @@ $(document).ready(function () {
 
     // Auto formatting of phone numbers so guardian doesn't have to type dashes or parentheses
     jQuery(function($){
-       $("input[type='tel'").mask("(999) 999-9999",{placeholder:" "});
+       $("input[type='tel']").mask("999-999-9999",{placeholder:" "});
     });
 
 });
