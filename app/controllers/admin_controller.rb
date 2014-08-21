@@ -1,5 +1,4 @@
 class AdminController < ApplicationController
-  layout 'admin_setup'
 
   def index
     @admins = AdminUser.all
@@ -17,7 +16,8 @@ class AdminController < ApplicationController
   # -----------
 
   def central_setup_welcome
-    render 'central_setup_welcome'
+
+    render 'central_setup_welcome', layout: 'admin'
   end
 
   def central_setup_info
@@ -67,11 +67,11 @@ class AdminController < ApplicationController
     central_admin.active = true
     central_admin.save
 
-    render action: 'central_setup_confirm'
+    render action: 'central_setup_confirm', layout: 'admin_layout'
   end
 
   def central_setup_confirm
-    render 'central_setup_confirm'
+    render 'central_setup_confirm', layout: 'admin_layout'
   end
 
   def central_supplmental_materials
