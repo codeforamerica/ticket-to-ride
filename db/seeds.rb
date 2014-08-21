@@ -184,31 +184,28 @@ west_warwick_high_school = School.create(
     district: west_warwick_district
 )
 
-# AdminUser.create(
-#     username: 'jim',
-#     name: 'Jim M',
-#     email: 'jim@westwarwick.gov',
-#     user_role: :district_admin,
-#     district: west_warwick_district,
-#     active: true
-# )
-#
-# AdminUser.create(
-#     username: 'toni',
-#     name: 'Toni M',
-#     email: 'toni@westwarwick.gov',
-#     user_role: :district_admin,
-#     district: west_warwick_district,
-#     active: true
-# )
-#
-# AdminUser.create(
-#     username: 'ed',
-#     name: 'Ed G',
-#     email: 'ed@ride.ri.gov',
-#     user_role: :central_admin,
-#     active: true
-# )
+AdminUser.create(
+    name: 'Jim M',
+    email: 'jim@westwarwick.ed',
+    user_role: :district_admin,
+    district: west_warwick_district,
+    active: true
+)
+
+AdminUser.create(
+    name: 'Toni M',
+    email: 'toni@westwarwick.ed',
+    user_role: :district_admin,
+    district: west_warwick_district,
+    active: true
+)
+
+AdminUser.create(
+    name: 'Ed G',
+    email: 'ed@ride.ri.gov',
+    user_role: :central_admin,
+    active: true
+)
 
 guardian_complete_west_warwick_student = Student.create(
     first_name: 'Jimmy',

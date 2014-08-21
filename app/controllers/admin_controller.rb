@@ -74,10 +74,44 @@ class AdminController < ApplicationController
     render 'central_setup_confirm'
   end
 
+  def central_supplmental_materials
+    render 'central_supplemental_materials'
+  end
+
   # -----------
   # Authentication/Authorization
   # -----------
   def admin_login
+
+    @errors = {}
+
+    # GET
+    if request.method_symbol == :get
+      render 'admin_login'
+    end
+
+    # POST
+    email = request.POST['email']
+    if email == nil
+      @errors[:email] = 'You must enter an e-mail address'
+      render 'admin_login'
+    end
+    # password = request.POST['password']
+    # if password == nil
+    #   @errors[:password] = 'You must enter a password'
+    #   render 'admin_login'
+    # end
+
+    admin_user = AdminUser.find_by(email: email)
+    if admin_user == nil
+      @errors[:username] = 'Could not find a user with that e-mail address'
+      render 'admin_login'
+    end
+
+    # if admin_user.password == password
+    render action: 'central_supplemental_materials'
+    # end
+
     render 'admin_login'
   end
 
