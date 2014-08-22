@@ -304,7 +304,6 @@ $(document).ready(function () {
     return results.join(' ');
   };
 
-
     // Modal Dialog Behavior for Language selection
     getSelectionFromModalForInput('#btnFirstLanguage', 'input[name="choose_student_first_language"]', '#firstLanguageSelected', function(val){firstLanguage = val; }); // TODO - Make this code cleaner
     clearRadioGroupUponTextEntry('#choose_student_guardian_language_input_text', 'choose_student_guardian_language');
@@ -335,5 +334,11 @@ $(document).ready(function () {
 
     // Shade (mark as checked) all checked radio button labels (radio buttons nested inside label tags)
     $('input[type="radio"]:checked').each(function(){  $(this).parent().addClass('active')  });
+
+
+    // Auto formatting of phone numbers so guardian doesn't have to type dashes or parentheses
+    jQuery(function($){
+       $("input[type='tel']").mask("999-999-9999",{placeholder:" "});
+    });
 
 });
