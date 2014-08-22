@@ -10,9 +10,9 @@
     <table>
       <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?<sup>*</sup></span> 
         <div class="btn-group" data-toggle="buttons">
-          <% EnrollmentController::GRADES_IN_ORDER.each do |previous_grade| %>
+          <% Grades::ALL.each do |grade| %>
             <label class="btn btn-primary">
-                <%= s.radio_button :previous_grade_id, previous_grade.id %><%= t('grade_' + previous_grade.code + '_abbrev') %>
+                <%= s.radio_button :previous_grade, grade %><%= t('grade_' + grade + '_abbrev') %>
             </label>
           <% end %>
         </div></td></tr>

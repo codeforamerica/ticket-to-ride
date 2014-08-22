@@ -7,7 +7,6 @@ class Student < ActiveRecord::Base
   has_many :student_races
   has_many :contact_people
   belongs_to :school
-  belongs_to :previous_grade
 
   # Behavior
   acts_as_birthday :birthday

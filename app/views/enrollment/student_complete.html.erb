@@ -76,6 +76,7 @@
                 <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div>
                 </td>
               </tr>
+              <!-- TODO Move logic for summary screens elsewhere so that the summaries can be reusued at the concluding summary page -->
               <tr>
                 <td class="summaryText" colspan="2"> The last grade   
                   <% if @student.gender == 'male' %>
@@ -83,7 +84,7 @@
                   <% elsif @student.gender == 'female' %>
                     <%= 'she' %>
                   <% end %>
-                    completed was <span class="summaryAnswers"> <%= t('grade_' + @student.previous_grade.code) %></span>.
+                    completed was <span class="summaryAnswers"> <%= t('grade_' + @student.previous_grade) %></span>.
                 </td>
                 <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div>
                 </td>

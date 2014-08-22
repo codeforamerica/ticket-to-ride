@@ -25,6 +25,7 @@
   </ul>
 
   <!-- Tab panes -->
+  <!-- TODO a lot of stuff here isn't actually rendered on the final page (or is removed: such as student race). We should clean this up to speed up processing, unless it gets used for printing, etc. -->
   <div class="tab-content">
 
     <div class="tab-pane active" id="summaryContacts1">
@@ -141,7 +142,7 @@
                     <!-- Let's add/find a function to do comma-ing -->
                     <% @summary_student.student_races.each_with_index  do |r, i| %>
                         <span class="summaryAnswers"><%=t('race_' + r.race)%></span>
-                        <% if (@summary_student.races.size-1) == i %>
+                        <% if (@summary_student.student_races.size-1) == i %>
                             .
                         <% elsif (@summary_student.student_races.size - 2) == i %>
                             <% if @summary_student.student_races.size > 2 %>
@@ -188,7 +189,7 @@
               <% elsif @summary_student.gender == 'female' %>
                 <%= 'she' %>
               <% end %>
-                completed was <span class="summaryAnswers"> <%= t('grade_' + @summary_student.previous_grade.code) %></span>.
+                completed was <span class="summaryAnswers"> <%= t('grade_' + @summary_student.previous_grade) %></span>.
             </td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_previous_school' %></div>
             </td>

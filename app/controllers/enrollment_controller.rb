@@ -60,9 +60,6 @@ class EnrollmentController < ApplicationController
       :permissions
   ]
 
-  # Grades, sorted by order
-  GRADES_IN_ORDER = PreviousGrade.all.sort_by { |g| g.grade_level }
-
   # SHOW
   # This is contains the logic used to prep variables for the
   # views based on the current step in the flow
@@ -457,23 +454,17 @@ class EnrollmentController < ApplicationController
     end
 
     # Last completed grade
-    if param_does_not_exist(:student, :previous_grade_id)
+    if param_does_not_exist(:student, :previous_grade)
       student.errors.add(:previous_grade, 'Previous grade is a required field')
     end
 
-    previous_grade_id = params[:student][:previous_grade_id]
-    previous_grade = nil
-    if previous_grade_id
-      begin
-        previous_grade = PreviousGrade.find(previous_grade_id)
-      rescue
-        student.errors.add(:previous_grade, 'Previous grade has an invalid value')
-      end
+    previous_grade = params[:student][:previous_grade]
+    if !Grades::ALL.include?(previous_grade)
+      student.errors.add(:previous_grade, 'Previous grade has an invalid value')
     end
 
     # Only request previous school information when prior schooling isn't equal to none
-    if previous_grade && previous_grade.code != 'none'
-
+    if previous_grade !=  Grades::NONE
       # Prior school name
       if param_does_not_exist(:student, :prior_school_name)
         student.errors.add(:prior_school_name, 'Prior school name must be filled in')
