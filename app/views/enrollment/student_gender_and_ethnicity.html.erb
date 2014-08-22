@@ -26,11 +26,11 @@
 
       <tr><td colspan="2"><span>Race(s)?<sup>*</sup></span>
           <div class="btn-group race-check" data-toggle="checkbox">
-          <% Race.all.each do |race| %>
+          <% Races::ALL.each do |race| %>
 
               <span data-toggle="tooltip" title="Select all that apply" id="nickname-tooltip">
-                <%= check_box_tag 'student[race_ids][]', race.id, @student.race_ids.include?(race.id), id: dom_id(race), class: 'checkbox' %>
-                <%= label_tag dom_id(race), t('race_' + race.race), class: 'btn btn-primary' %>
+                <%= check_box_tag 'student[race_ids][]', race, does_student_have_race(@student,race), id: "race_#{race}", class: 'checkbox' %>
+                <%= label_tag "race_#{race}", t('race_' + race), class: 'btn btn-primary' %>
               </span>
           <% end %>
         </div>
