@@ -29,7 +29,7 @@
           <% Races::ALL.each do |race| %>
 
               <span data-toggle="tooltip" title="Select all that apply" id="nickname-tooltip">
-                <%= check_box_tag 'student[race_ids][]', race, does_student_have_race(@student,race), id: "race_#{race}", class: 'checkbox' %>
+                <%= check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}", class: 'checkbox' %>
                 <%= label_tag "race_#{race}", t('race_' + race), class: 'btn btn-primary' %>
               </span>
           <% end %>

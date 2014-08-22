@@ -7,6 +7,7 @@ class EnrollmentController < ApplicationController
   include StudentParams
   include StudentRaceParams
   include ContactPersonParams
+  include EnrollmentHelper
 
   # This is the order in which the views get rendered
   steps :student_name,
@@ -389,8 +390,8 @@ class EnrollmentController < ApplicationController
     if param_does_not_exist(:student, :is_hispanic)
       student.errors.add(:is_hispanic, 'Is Hispanic? is a required field')
     end
-    if param_does_not_exist(:student, :race_ids)
-      student.errors.add(:race_ids, 'At least one race needs to be selected')
+    if !params || !params['races'] || !params['races'].any?
+      student.errors.add(:races, 'At least one race needs to be selected')
     end
 
     begin
@@ -405,12 +406,14 @@ class EnrollmentController < ApplicationController
     end
 
 
-    # Add all races to student
-    params[:student][:race_ids].each do |race_id|
+    # Add all races to student, but remove the existing ones first
+    student.student_races.each {|r| r.delete}
+
+    params['races'].each do |race|
       begin
-        StudentRace.create(race_id: race_id, student: @student )
+          StudentRace.create(race: race, student: student )
       rescue
-        student.errors.add(:race_ids, 'Could not assign race')
+        student.errors.add(:race, 'Could not assign race')
         retainValuesAndErrors(student, student_params)
         return render_wizard
       end

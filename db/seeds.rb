@@ -12,12 +12,6 @@
 
 # AVTs
 
-race_black = Race.create(race: 'black')
-race_white = Race.create(race: 'white')
-race_asian = Race.create(race: 'asian')
-race_native_america = Race.create(race:'native_american')
-race_pacific_islander = Race.create(race: 'pacific_islander')
-
 grade_none = PreviousGrade.create(
     code: 'none',
     grade_level: -2,
@@ -256,12 +250,12 @@ guardian_complete_west_warwick_student = Student.create(
 )
 
 StudentRace.create(
-    race_id: race_black.id,
+    race: 'black',
     student_id: guardian_complete_west_warwick_student.id
 )
 
 StudentRace.create(
-    race_id: race_asian.id,
+    race: 'asian',
     student_id: guardian_complete_west_warwick_student.id
 )
 
