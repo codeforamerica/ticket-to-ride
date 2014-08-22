@@ -22,4 +22,5 @@
 //= require display_logic
 //= require enrollment
 //= require xeditable
+//= require maskedinput
 
