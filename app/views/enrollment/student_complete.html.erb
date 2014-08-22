@@ -34,12 +34,12 @@
                     <%= 'She' %>
                     <% end %> is
                         <!-- Let's add/find a function to do comma-ing -->
-                        <% @student.races.each_with_index  do |r, i| %>
+                        <% @student.student_races.each_with_index  do |r, i| %>
                             <span class="summaryAnswers"><%=t('race_' + r.race)%></span>
-                            <% if (@student.races.size-1) == i %>
+                            <% if (@student.student_races.size-1) == i %>
                                 .
-                            <% elsif (@student.races.size - 2) == i %>
-                                <% if @student.races.size > 2 %>
+                            <% elsif (@student.student_races.size - 2) == i %>
+                                <% if @student.student_races.size > 2 %>
                                     ,
                                 <% end %>
                                 and

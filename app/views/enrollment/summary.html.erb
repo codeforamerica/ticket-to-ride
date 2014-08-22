@@ -139,12 +139,12 @@
                 <%= 'She' %>
                 <% end %> is
                     <!-- Let's add/find a function to do comma-ing -->
-                    <% @summary_student.races.each_with_index  do |r, i| %>
+                    <% @summary_student.student_races.each_with_index  do |r, i| %>
                         <span class="summaryAnswers"><%=t('race_' + r.race)%></span>
                         <% if (@summary_student.races.size-1) == i %>
                             .
-                        <% elsif (@summary_student.races.size - 2) == i %>
-                            <% if @summary_student.races.size > 2 %>
+                        <% elsif (@summary_student.student_races.size - 2) == i %>
+                            <% if @summary_student.student_races.size > 2 %>
                                 ,
                             <% end %>
                             and
