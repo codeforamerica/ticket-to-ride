@@ -1,0 +1,64 @@
+// Breakpoints
+  $smallest: 320px;
+  $small: 480px;
+  $medium: 768px;
+  $large: 980px;
+  $x-large: 1200px;
+
+  @mixin screen($size) {
+    @if $size == wide-phone-up {
+      @media only screen and (min-width: $small) { @content; }
+    }
+    @if $size == tablet-up {
+      @media only screen and (min-width: $medium) { @content; }
+    }
+    @else if $size == desktop-up {
+      @media only screen and (min-width: $large) { @content; }
+    }
+    @else if $size == big-desktop {
+      @media only screen and (min-width: $x-large) { @content; }
+    }
+    @else if $size == phone-only {
+      @media only screen and (max-width: $medium - 1) { @content; }
+    }
+    @else if $size == small-phone-only {
+      @media only screen and (max-width: $small - 1) { @content; }
+    }
+    @else if $size == wide-phone-only {
+      @media only screen and (min-width: $small) and (max-width: $medium - 1) { @content; }
+    }
+    @else if $size == tablet-only {
+      @media only screen and (min-width: $medium) and (max-width: $large - 1) { @content; }
+    }
+    @else if $size == desktop-only {
+      @media only screen and (min-width: $large) and (max-width: $x-large - 1) { @content; }
+    }
+    @else if $size == print {
+      @media print { @content; }
+    }
+  } 
+
+// @mixin break($point) {
+//   // $smallest: "(max-width: 320px)";
+//   // $small: "(max-width: 480px)";
+//   // $medium: "(max-width: 720px)";
+//   // $large: "(max-width: 1023px)";
+//   // $largest: "(min-width: 1024px)";
+
+//   @if $point == phone-portrait {
+//     @media #{$smallest} { @content; }
+//   }
+//   @else if $point == phone-landscape {
+//     @media #{$small} { @content; }
+//   }
+//   @else if $point == tablet-portrait {
+//     @media #{$medium} { @content; }
+//   }
+//   @else if $point == tablet-landscape {
+//     @media #{$large} { @content; }
+//   }
+//   @else if $point == desktop {
+//     @media #{$x-large} { @content; }
+//   }
+// }
+

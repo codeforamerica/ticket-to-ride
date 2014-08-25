@@ -1,5 +1,6 @@
 @import "common/variables";
 @import "welcome";
+@import "common/mixins";
 
 div.container-application header {
   position: absolute;
@@ -9,15 +10,18 @@ div.container-application header {
   width: 226px;
 }
 
-// .enrollment-form *{
-//   border: 1px solid green;
-// }
+.enrollment-form{ 
+  @include screen(wide-phone-up) {
+    max-width: 500px;
+    margin: 1em 10% 0 10%;
+    font-size: 120%;
+  }
 
-.enrollment-form{
-  margin: 1em 5% 0 5%;  
-  // padding-left: 5%;
-  max-width: 960px;
-  font-size: 150%;
+  @include screen(tablet-up) {
+    max-width: 960px;
+    margin: 1em 5% 0 5%; 
+    font-size: 150%;
+  }
 }
 
 .enrollment-form .container {
@@ -172,13 +176,6 @@ span.standout {
   color: $paul-mccartney;
   border-bottom: 3px dotted $paul-mccartney;
 }
-
-
-
-// a.editable-click {
-//   color: $yoko-ono;
-//   border-color: $yoko-ono;
-// }
 
 .input-small {
   max-width: 150px;
@@ -484,10 +481,18 @@ button {
 /* ========================== */
 
 .enrollment-navigation {
-  max-width: 960px;
   margin: 1% auto;
   text-align: center;
   color: $ringo-starr;
+
+  @include screen(big-phone-up){
+    max-width: 700px;
+  }
+
+  @include screen(tablet-up) {
+    max-width: 960px;
+  }
+
 }
 
 
@@ -557,6 +562,12 @@ button {
   color: #FFF;
 }
 
+// end navigation
+
+/* ========================== */ 
+/*     Summary pages          */
+/* ========================== */
+
 .summaryText {
   font-size: 75%;
   line-height: 120% !important;
@@ -598,6 +609,8 @@ td.summaryText.section-break {
   line-height: 88%;
 }
 
+// End Summary Pages
+
 div.enrollment-form .field_with_errors {
   display: inline;
 }
@@ -606,7 +619,6 @@ div.enrollment-form .field_with_errors input[type=radio]{
   display: inline;
   display: none;
 }
-
 
 .race-check input[type="checkbox"].checkbox {
     display: none;

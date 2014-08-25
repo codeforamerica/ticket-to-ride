@@ -1,6 +1,18 @@
 @import "common/variables";
+@import "common/mixins";
 
 #scenery_welcome {
+
+    @include screen(wide-phone-up){
+        width: 800px;
+        height: 100%;
+    }
+
+    @include screen(tablet-up){
+        width: 1024px;
+        height: 336.5px;
+    }
+
     .st0{fill:#E4E5E6;}
     .st1{fill:#8D9293;}
     .st2{fill:none;}
