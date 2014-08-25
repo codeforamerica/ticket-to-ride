@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819203117) do
+ActiveRecord::Schema.define(version: 20140822210155) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -88,20 +88,6 @@ ActiveRecord::Schema.define(version: 20140819203117) do
     t.string   "name"
   end
 
-  create_table "previous_grades", force: true do |t|
-    t.string   "code",        null: false
-    t.integer  "grade_level", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "races", force: true do |t|
-    t.string   "race",            null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "student_race_id"
-  end
-
   create_table "schools", force: true do |t|
     t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
@@ -121,7 +107,7 @@ ActiveRecord::Schema.define(version: 20140819203117) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "race_id",    null: false
+    t.string   "race",       null: false
   end
 
   create_table "students", force: true do |t|
@@ -173,7 +159,7 @@ ActiveRecord::Schema.define(version: 20140819203117) do
     t.string   "prior_school_name"
     t.string   "prior_school_city"
     t.string   "prior_school_state"
-    t.integer  "previous_grade_id"
+    t.string   "previous_grade"
   end
 
   create_table "students_contact_people", force: true do |t|

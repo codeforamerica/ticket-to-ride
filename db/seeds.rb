@@ -10,89 +10,6 @@
 #!/bin/env ruby
 # encoding: utf-8
 
-# AVTs
-
-race_black = Race.create(race: 'black')
-race_white = Race.create(race: 'white')
-race_asian = Race.create(race: 'asian')
-race_native_america = Race.create(race:'native_american')
-race_pacific_islander = Race.create(race: 'pacific_islander')
-
-grade_none = PreviousGrade.create(
-    code: 'none',
-    grade_level: -2,
-)
-
-grade_pre_k = PreviousGrade.create(
-    code: 'pre_k',
-    grade_level: -1,
-)
-
-grade_k = PreviousGrade.create(
-    code: 'k',
-    grade_level: 0,
-)
-
-grade1_ = PreviousGrade.create(
-    code: '1',
-    grade_level: 1,
-)
-
-grade_2 = PreviousGrade.create(
-    code: '2',
-    grade_level: 2,
-)
-
-grade_3 = PreviousGrade.create(
-    code: '3',
-    grade_level: 4,
-)
-
-grade_4 = PreviousGrade.create(
-    code: '4',
-    grade_level: 4,
-)
-
-grade_5 = PreviousGrade.create(
-    code: '5',
-    grade_level: 5,
-)
-
-grade_6 = PreviousGrade.create(
-    code: '6',
-    grade_level: 6,
-)
-
-grade_7 = PreviousGrade.create(
-    code: '7',
-    grade_level: 7,
-)
-
-grade_8 = PreviousGrade.create(
-    code: '8',
-    grade_level: 8,
-)
-
-grade_9 = PreviousGrade.create(
-    code: '9',
-    grade_level: 9,
-)
-
-grade_10 = PreviousGrade.create(
-    code: '10',
-    grade_level: 10,
-)
-
-grade_11 = PreviousGrade.create(
-    code: '11',
-    grade_level: 11,
-)
-
-grade_12 = PreviousGrade.create(
-    code: '12',
-    grade_level: 12,
-)
-
 # Central requirements
 
 CustomRequirement.create(
@@ -249,16 +166,16 @@ guardian_complete_west_warwick_student = Student.create(
     prior_school_name: 'Lighthouse Montessori',
     prior_school_city: 'West Warwick',
     prior_school_state: 'RI',
-    previous_grade: grade_pre_k
+    previous_grade: 'pre_k'
 )
 
 StudentRace.create(
-    race_id: race_black.id,
+    race: 'black',
     student_id: guardian_complete_west_warwick_student.id
 )
 
 StudentRace.create(
-    race_id: race_asian.id,
+    race: 'asian',
     student_id: guardian_complete_west_warwick_student.id
 )
 
