@@ -1,4 +1,7 @@
+require 'admin_user_params'
+
 class AdminController < ApplicationController
+  include AdminUserParams
 
   def index
     @admins = AdminUser.all
@@ -12,66 +15,77 @@ class AdminController < ApplicationController
   end
 
   # -----------
+  # Helper Methods
+  # TODO Move these elsewhere so that they can be reused
+  # -----------
+
+  def param_does_not_exist(model_const, field_const)
+    return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
+  end
+
+  def retainValuesAndErrors(obj, param_updater)
+    messages = obj.errors.messages.clone()
+    obj.assign_attributes(param_updater) # Note - this actually saves something to the DB
+    messages.each do |k,v|
+      v.each {|e| obj.errors.add(k,e)}
+    end
+  end
+
+  # -----------
   # Central Admin Setup
   # -----------
 
   def central_setup_welcome
-
-    render 'central_setup_welcome', layout: 'admin'
+    return render 'central_setup_welcome', layout: 'admin_setup'
   end
 
-  def central_setup_info
+  def central_setup_info_get
+    @central_admin = AdminUser.new
+    return render 'central_setup_info', layout: 'admin_setup'
+  end
 
-    @errors = {}
+  def central_setup_info_post
 
-    # GET
-    if request.method_symbol == :get
-      render 'central_setup_info'
+    @central_admin = AdminUser.new(user_role: :central_admin)
+
+    # Were the fields filled out?
+    if param_does_not_exist(:admin_user, :name)
+      @central_admin.errors.add(:name, 'No name was entered')
     end
 
-    # POST
-
-    # Empty checks
-    name = request.POST['name']
-    if name == nil
-      @errors[:name] = 'No name was entered'
+    if param_does_not_exist(:admin_user, :email)
+      @central_admin.errors.add(:email, 'E-mail address was not entered')
     end
 
-    email = request.POST['email']
-    if email == nil
-      @errors[:email] = 'E-mail address was not entered'
+    if param_does_not_exist(:admin_user, :password)
+      @central_admin.errors.add(:password, 'Password was not entered')
     end
 
-    password = request.POST['password']
-    if password == nil
-      @errors[:password] = 'Password was not entered'
+    if param_does_not_exist(:admin_user, :confirm_password)
+      @central_admin.errors.add(:confirm_password, 'The password confirmation was not entered')
     end
 
-    confirm_password = request.POST['confirm_password']
-    if confirm_password == nil
-      @errors[:confirm_password] = 'The password confirmation was not entered'
+    # If there were any errors, send back the same page with error messages
+    retainValuesAndErrors(@central_admin, admin_user_params)
+    if @central_admin.errors.any?
+      return render 'central_setup_info', layout: 'admin_setup'
     end
 
-    if @errors.any?
-      render 'central_setup_info'
+    # TODO Is there a better way to do this check using the model layer?
+    if AdminUser.where(email: @central_admin.email).any?
+      @central_admin.errors.add(:base, 'A user with this e-mail address already exists')
+      return render action: 'central_setup_info', layout: 'admin_setup'
     end
 
-    # Create the object and check validations
-    central_admin = AdminUser.create(name: name, email: email, user_role: :central_admin)
+    # Save the central admin
+    @central_admin.active = true
+    @central_admin.save
 
-    if !central_admin.valid?
-      @errors = central_admin.errors
-      render 'central_setup_info'
-    end
-
-    central_admin.active = true
-    central_admin.save
-
-    render action: 'central_setup_confirm', layout: 'admin_layout'
+    return redirect_to action: :central_setup_confirm
   end
 
   def central_setup_confirm
-    render 'central_setup_confirm', layout: 'admin_layout'
+    render 'central_setup_confirm', layout: 'admin_setup'
   end
 
   def central_supplmental_materials
@@ -87,14 +101,14 @@ class AdminController < ApplicationController
 
     # GET
     if request.method_symbol == :get
-      render 'admin_login'
+      return render 'admin_login'
     end
 
     # POST
     email = request.POST['email']
     if email == nil
       @errors[:email] = 'You must enter an e-mail address'
-      render 'admin_login'
+      return render 'admin_login'
     end
     # password = request.POST['password']
     # if password == nil
@@ -105,19 +119,19 @@ class AdminController < ApplicationController
     admin_user = AdminUser.find_by(email: email)
     if admin_user == nil
       @errors[:username] = 'Could not find a user with that e-mail address'
-      render 'admin_login'
+      return render 'admin_login'
     end
 
     # if admin_user.password == password
-    render action: 'central_supplemental_materials'
+    return render action: 'central_supplemental_materials'
     # end
 
-    render 'admin_login'
+    return render 'admin_login'
   end
 
   def show
     page_id = request.filtered_parameters['id']
-    render page_id
+    return render page_id
   end
 
 end
