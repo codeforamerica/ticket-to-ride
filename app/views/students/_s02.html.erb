@@ -1,0 +1,20 @@
+<div class="madlib">
+
+<a href="#" id="studentFirstName" data-type="text" data-pk="1" placement="top">Dhani</a> 
+was born on 
+<a href="#" id="dob" data-type="date" data-pk="1" data-url="" data-title="Select date" placement="bottom">10/08/2010</a> 
+in 
+<a href="#" id="birthCountry" data-type="text" data-pk="1" placement="top">the United States</a><!-- 
+and emigrated to the United States on {{ emigration date }}-->. 
+<a href="#" id="studentGender" data-type="select" data-pk="1" data-url="" data-title="Student gender"></a> 
+<a href="#" id="hispanicLatino" data-type="select" data-pk="1" data-url="" data-title="Hispanic or Latino?">is not</a> 
+of Hispanic or Latino descent and identifies as 
+<a href="#" id="studentRace" data-type="select" data-pk="1" data-url="" data-title="Student's race"></a>.<br/><br/>
+
+<!-- <a href="#" id="studentFirstName" data-type="text" data-pk="2" placement="top">Dhani</a> is most comfortable speaking in {{ }}. <a href="#" id="studentGender" data-type="select" data-pk="1" data-url="" data-title="Student gender">She</a> also speaks {{ language }}. -->
+</div>
+
+<ul class="pager">
+  <li><%= link_to "Previous", page_path('student/student01') %></li>
+  <li><%= link_to "Next", page_path('student/student03'), :class => "pull-right" %></li>
+</ul>

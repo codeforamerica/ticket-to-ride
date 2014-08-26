@@ -22,6 +22,12 @@ Rails.application.routes.draw do
 
   resources :enrollment
 
+  resources :madlibs
+
+  resources :students
+
+  resources :schools
+
   resources :admin
 
   # get 'pages/home' => 'high_voltage/pages#show', id: 'home'

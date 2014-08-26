@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <td>School name</td>
+    <td>LEA name</td>
+  </tr>
+    <% @schools.each do |school| %>
+  <tr>
+    <td><%= school.name %></td>
+    <td><%= school.lea.name %></td>
+  <% end %>
+  </tr>
+</table>
