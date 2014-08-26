@@ -2,11 +2,12 @@
 
 .welcome { 
 
-  @include screen(wide-phone-up){
+  @include screen(wide-phone-only){
     font-size: 1.2em;
     line-height: 1.6em;
-    padding-left: 10%;
+    padding-left: 15%;
     padding-top: 2%;
+    padding-bottom: 5%;
   }
 
   @include screen(tablet-up){
@@ -24,7 +25,7 @@
 
 .welcome h2 { 
 
-  @include screen(wide-phone-up) {
+  @include screen(wide-phone-only) {
     font-size: 1.4em;
   }
 

@@ -5,7 +5,7 @@
   <div class="instructions">Tell us about <%= @student.first_name %>'s family.</div>
 
 <%= form_for(@guardian_2, url: wizard_path, method: :put, id: 'editable-fields') do |c| %>
-    <div>
+    <div class="contact_table enableZindex">
         <table>
           <tr>
             <td colspan="2"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?<sup>*</sup></span> 
@@ -38,7 +38,7 @@
       </table>
     </div>
 
-    <ul class="pager">
+    <ul class="pager pagerZindex">
       <li><%= link_to "Previous", previous_wizard_path %></li>
       <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>

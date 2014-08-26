@@ -5,6 +5,8 @@
   <%= render 'enrollment/student_errors' %>
 
   <div class="enrollment-qa-table">
+
+    <div class="student_table enableZindex"> 
     <table>
       <tr>
         <td><span class="instructions">Language</span></td>
@@ -39,6 +41,7 @@
             </td>
           </tr>
         </table>
+      </div>
     </div>
 
 
@@ -165,7 +168,7 @@
       </div>
     </div>
 
-    <ul class="pager">
+    <ul class="pager pagerZindex">
       <li><%= link_to "Previous", previous_wizard_path %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>

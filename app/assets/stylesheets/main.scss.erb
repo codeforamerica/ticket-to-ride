@@ -3,7 +3,7 @@
 
 div.container-application{
 
-  @include screen(wide-phone-up) {
+  @include screen(wide-phone-only) {
     padding-left: 100px;
     width: 720px;
   }
@@ -40,10 +40,10 @@ p, h2 {
   -ms-transform:rotate(-4deg); /* IE 9 */
   -webkit-transform:rotate(-4deg); /* Opera, Chrome, and Safari */
 
-  @include screen(wide-phone-up){
-    width: 85.0703125%;
-    height: 85.0703125%;
-    background-size: 85.3632812%;
+  @include screen(wide-phone-only){
+    width: 200px;
+    height: 129px;
+    background-size: 196px;
   }
 
   @include screen(tablet-up){
@@ -59,7 +59,7 @@ p, h2 {
   z-index: 0;
   opacity: .99;
 
-  @include screen(wide-phone-up){
+  @include screen(wide-phone-only){
     left: -60px;
   }
 
@@ -75,8 +75,9 @@ p, h2 {
   z-index: 0;
   opacity: .99;
 
-  @include screen(wide-phone-up){
-    left: -60px;
+  @include screen(wide-phone-only){
+    left: -50px;
+    bottom: 0 !important;
   }
 
   @include screen(tablet-up){

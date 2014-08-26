@@ -3,12 +3,15 @@
 
 #scenery_welcome {
 
-    @include screen(wide-phone-up){
+    @include screen(wide-phone-only){
         width: 800px;
-        height: 100%;
+        position: absolute;
+        bottom: -200px;
+        // height: 100%;
+        // background-color: blue;
     }
 
-    @include screen(tablet-up){
+    @include screen(desktop-up){
         width: 1024px;
         height: 336.5px;
     }

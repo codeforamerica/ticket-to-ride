@@ -7,6 +7,7 @@
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
+  <div class="student_table enableZindex">
     <table>
       <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?<sup>*</sup></span> 
         <div class="btn-group" data-toggle="buttons">
@@ -26,8 +27,9 @@
   <%= s.text_field :prior_school_state, class: 'enrollment-form-input state_input', id: 'student_previous_school_state', placeholder: 'RI' %></span></td>
       </tr>
     </table>
+  </div>
 
-    <ul class="pager">
+    <ul class="pager pagerZindex">
       <li><%= link_to "Previous", previous_wizard_path %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>

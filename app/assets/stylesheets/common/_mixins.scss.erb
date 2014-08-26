@@ -1,7 +1,7 @@
 // Breakpoints
   $smallest: 320px;
   $small: 480px;
-  $medium: 768px;
+  $medium: 780px;
   $large: 980px;
   $x-large: 1200px;
 
@@ -9,7 +9,7 @@
     @if $size == wide-phone-up {
       @media only screen and (min-width: $small) { @content; }
     }
-    @if $size == tablet-up {
+    @else if $size == tablet-up {
       @media only screen and (min-width: $medium) { @content; }
     }
     @else if $size == desktop-up {

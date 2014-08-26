@@ -8,6 +8,8 @@
 
     <%= form_for(@student, url: wizard_path, method: :put, id: 'editable-fields') do |s| %>
 
+    <div class="student_table enableZindex">
+
     <table>
       <tr>
         <td>
@@ -41,8 +43,9 @@
         </td>
       </tr>
     </table>
+  </div>
 
-  <ul class="pager">
+  <ul class="pager pagerZindex">
     <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
   </ul>
   <% end %>

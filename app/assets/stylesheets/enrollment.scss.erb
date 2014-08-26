@@ -11,9 +11,9 @@ div.container-application header {
 }
 
 .enrollment-form{ 
-  @include screen(wide-phone-up) {
+  @include screen(wide-phone-only) {
     max-width: 500px;
-    margin: 1em 10% 0 10%;
+    margin: 1em 15% 0 15%;
     font-size: 120%;
   }
 
@@ -247,7 +247,7 @@ span.standout {
 
 
 /* ========================== */ 
-/*                            */
+/*          Slider            */
 /* ========================== */
 
 
@@ -485,8 +485,9 @@ button {
   text-align: center;
   color: $ringo-starr;
 
-  @include screen(big-phone-up){
-    max-width: 700px;
+  @include screen(wide-phone-only){
+    width: 600px;
+    padding-left: 10%;
   }
 
   @include screen(tablet-up) {
@@ -517,16 +518,24 @@ button {
 .pastCircle {
   display: inline-block;
   border-radius: 50%;
-  min-width: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  max-width: 24px;
   background-color: $dhani-harrison;
+  color: $john-lennon;
   text-align: center;
   font-size: 70%;
-  margin-right: 6px;
-  padding: 5px 3px 0 3px;
-  color: $john-lennon;
+
+  @include screen(tablet-up) {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    padding: 5px 3px 0 3px;
+  }
+
+  @include screen(wide-phone-only){
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    padding: 5px 3px 0 3px;
+  }
 }
 
 .pastCircle a {
@@ -550,16 +559,24 @@ button {
 .futureCircle {
   display: inline-block;
   border-radius: 50%;
-  min-width: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  max-width: 24px;
   background-color: #CCC;
+  color: #FFF;
   text-align: center;
   font-size: 70%;
-  margin-right: 6px;
-  padding: 5px 3px 0 3px;
-  color: #FFF;
+
+  @include screen(tablet-up){
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    padding: 5px 3px 0 3px;
+  }
+
+  @include screen(wide-phone-only){
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    padding: 5px 3px 0 3px;
+  }
 }
 
 // end navigation
@@ -737,30 +754,98 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   margin-top: 2%;
 }
 
-#contact_table {
-  width: 660px;
+/* ========================== */ 
+/*        Student table       */
+/* ========================== */
+
+.student_table {
+  @include screen(wide-phone-only){
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    width: 660px;
+  }
 }
+
+/* ========================== */ 
+/*        Contact table       */
+/* ========================== */
+
+#contact_table {
+
+  @include screen(wide-phone-only){
+    width: 500px;
+  }
+
+  @include screen(tablet-up) {
+    width: 660px;
+  }
+}
+
+/* ========================== */ 
+/*           Z-index          */
+/* ========================== */
 
 .enableZindex {
   z-index: 2;
   position: absolute;
   background: #FFF;
-  min-width: 660px;
-  max-width: 660px;
+
+  @include screen(wide-phone-only){
+    min-width: 500px;
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    min-width: 660px;
+    width: 660px;
+  }
 }
 
 .enableZindex_summary {
   z-index: 2; 
   position: absolute;
-  min-width: 660px;
-  max-width: 660px;
+
+  @include screen(wide-phone-only){
+    min-width: 500px;
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    min-width: 660px;
+    max-width: 660px;
+  }
 }
 
 .pagerZindex {
   z-index:2;
   position: absolute;
-  bottom: 160px;
-  min-width: 660px;
+
+  @include screen(wide-phone-only){
+    width: 500px;
+    top: 400px;
+  }
+
+  @include screen(tablet-up){
+    bottom: 160px;
+    width: 660px;
+  }
+}
+
+// end z-index
+
+label.btn-sms {
+  @include screen(wide-phone-only){
+    font-size: 11px;
+  }
+}
+
+.btn-group {
+
+  @include screen(wide-phone-only){
+    white-space: nowrap;
+  }
 }
 
 .keep-same-width{

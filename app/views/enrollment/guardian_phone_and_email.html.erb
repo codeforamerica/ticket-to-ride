@@ -3,7 +3,7 @@
   <%= render 'enrollment/guardian1_errors' %>
 
   <%= form_for(@guardian_1, url: wizard_path, method: :put) do |g| %>
-
+    <div class="contact_table enableZindex">
       <table>
         <tr>
           <td colspan="2"><span class="instructions">Your contact information</span></td>
@@ -16,9 +16,9 @@
           <td>
             <div class="btn-group pull-right" data-toggle="buttons">
 
-              <label class="btn btn-primary"> <!-- TODO Labels can use the Rails tags and link rather than surrounding the radio elements -->
+              <label class="btn btn-primary btn-sms"> <!-- TODO Labels can use the Rails tags and link rather than surrounding the radio elements -->
                 <%= g.radio_button :main_phone_can_sms, true %>Accepts texts</label>
-              <label class="btn btn-primary">
+              <label class="btn btn-primary btn-sms">
                 <%= g.radio_button :main_phone_can_sms, false %>No texts</label>
             </div>
           </td>
@@ -30,9 +30,9 @@
           </td>
           <td>
             <div class="btn-group pull-right" data-toggle="buttons">
-              <label class="btn btn-primary">
+              <label class="btn btn-primary btn-sms">
                 <%= g.radio_button :secondary_phone_can_sms, true %>Accepts texts</label>
-              <label class="btn btn-primary">
+              <label class="btn btn-primary btn-sms">
                 <%= g.radio_button :secondary_phone_can_sms, false %>No texts</label>
             </div>
           </td>
@@ -58,7 +58,8 @@
         </tr>
 
       </table>
-      <ul class="pager">
+    </div>
+      <ul class="pager pagerZindex">
         <li><%= link_to "Previous", previous_wizard_path %></li>
         <li><%= g.submit 'Next', class: 'nav-button pull-right' %></li>
       </ul>

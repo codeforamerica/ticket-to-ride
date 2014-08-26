@@ -5,7 +5,7 @@
 
   <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
-  <div class="enrollment-qa-table-radio-only">
+  <div class="enrollment-qa-table-radio-only student_table enableZindex">
     <table>
       <tr><td colspan="2"><span class="instructions">Special Services</span></td></tr>
       <tr>
@@ -52,7 +52,7 @@
     </table>
   </div>
 
-    <ul class="pager">
+    <ul class="pager pagerZindex">
       <li><%= link_to "Previous", '/enrollment' %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
