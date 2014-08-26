@@ -99,11 +99,13 @@ class AdminController < ApplicationController
   # Central Admin Supplemental Materials
   # -----------
 
-  def central_supplmental_materials
+  def central_supplemental_materials
     @admin_user = get_logged_in_admin
+    @supplemental_materials = SupplementalMaterial.where(req_type: :central)
 
-
-
+    if @supplemental_materials.none!
+      return render 'central_supplemental_materials_none', layout: 'admin'
+    end
 
     return render 'central_supplemental_materials', layout: 'admin'
   end
@@ -141,7 +143,7 @@ class AdminController < ApplicationController
 
     # if admin_user.password == password
     session[:admin_id] = admin_user.id
-    return render action: 'central_supplemental_materials', layout: 'admin'
+    return redirect_to action: 'central_supplemental_materials'
     # end
   end
 
