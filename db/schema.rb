@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 20140826181129) do
     t.integer "contact_person_id"
   end
 
-  create_table "supplemental_requirements", force: true do |t|
+  create_table "supplemental_material", force: true do |t|
     t.string   "name"
     t.string   "description"
     t.string   "uri"
