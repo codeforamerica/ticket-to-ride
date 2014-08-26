@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822210155) do
+ActiveRecord::Schema.define(version: 20140826181129) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -61,17 +61,6 @@ ActiveRecord::Schema.define(version: 20140822210155) do
     t.string   "work_phone_extension"
     t.string   "work_phone_can_sms"
     t.boolean  "is_guardian"
-  end
-
-  create_table "custom_requirements", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "uri"
-    t.integer  "req_type"
-    t.integer  "district_id"
-    t.integer  "authority_level"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "districts", force: true do |t|
@@ -165,6 +154,17 @@ ActiveRecord::Schema.define(version: 20140822210155) do
   create_table "students_contact_people", force: true do |t|
     t.integer "student_id"
     t.integer "contact_person_id"
+  end
+
+  create_table "supplemental_requirements", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "uri"
+    t.integer  "req_type"
+    t.integer  "district_id"
+    t.integer  "authority_level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "welcome_messages", force: true do |t|
