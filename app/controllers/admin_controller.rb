@@ -8,10 +8,10 @@ class AdminController < ApplicationController
 
     # If there are no admins created, the app was just installed -- setup a central admin
     if @admins.none?
-      return central_start
+      return redirect_to action: :central_setup_welcome
     end
 
-    return admin_login
+    return redirect_to action: :admin_login
   end
 
   # -----------
@@ -29,6 +29,13 @@ class AdminController < ApplicationController
     messages.each do |k,v|
       v.each {|e| obj.errors.add(k,e)}
     end
+  end
+
+  def get_logged_in_admin
+    # TODO error handling
+    admin_id = session[:admin_id]
+    admin_user = AdminUser.find(admin_id)
+    return admin_user
   end
 
   # -----------
@@ -88,8 +95,17 @@ class AdminController < ApplicationController
     render 'central_setup_confirm', layout: 'admin_setup'
   end
 
+  # -----------
+  # Central Admin Supplemental Materials
+  # -----------
+
   def central_supplmental_materials
-    render 'central_supplemental_materials'
+    @admin_user = get_logged_in_admin
+
+
+
+
+    return render 'central_supplemental_materials', layout: 'admin'
   end
 
   # -----------
@@ -98,14 +114,15 @@ class AdminController < ApplicationController
   def admin_login
 
     @errors = {}
+    @admins = AdminUser.all
 
     # GET
     if request.method_symbol == :get
-      return render 'admin_login'
+      return render 'admin_login', layout: 'admin_setup'
     end
 
     # POST
-    email = request.POST['email']
+    email = params['email']
     if email == nil
       @errors[:email] = 'You must enter an e-mail address'
       return render 'admin_login'
@@ -116,17 +133,16 @@ class AdminController < ApplicationController
     #   render 'admin_login'
     # end
 
-    admin_user = AdminUser.find_by(email: email)
+    admin_user = AdminUser.find_by(email: email) #TODO better error handling
     if admin_user == nil
       @errors[:username] = 'Could not find a user with that e-mail address'
-      return render 'admin_login'
+      return render 'admin_login', layout: 'admin_setup'
     end
 
     # if admin_user.password == password
-    return render action: 'central_supplemental_materials'
+    session[:admin_id] = admin_user.id
+    return render action: 'central_supplemental_materials', layout: 'admin'
     # end
-
-    return render 'admin_login'
   end
 
   def show
