@@ -448,14 +448,6 @@ form div {
     text-transform: capitalize;
 }
 
-#student_birth_state {
-  width: 11%;
-}
-
-#student_address1 {
-  width: 17%;
-}
-
 button {
   margin-left: 2%;
 }
@@ -495,7 +487,6 @@ button {
   }
 
 }
-
 
 .enrollment-navigation a {
   color: $yoko-ono;
@@ -578,8 +569,7 @@ button {
     padding: 5px 3px 0 3px;
   }
 }
-
-// end navigation
+/* ===== end navigation ===== */
 
 /* ========================== */ 
 /*     Summary pages          */
@@ -626,7 +616,7 @@ td.summaryText.section-break {
   line-height: 88%;
 }
 
-// End Summary Pages
+/* == end summary pages == */
 
 div.enrollment-form .field_with_errors {
   display: inline;
@@ -672,7 +662,6 @@ div.enrollment-form .field_with_errors input[type=radio]{
     opacity: 0.5;
 }
 
-
 #validation-errors li {
   font-size: 60%;
   color: #FFF;
@@ -709,6 +698,10 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   border-bottom:5px solid $george-harrison;
 }
 
+/* ========================== */ 
+/*     Completed Section      */
+/* ========================== */
+
 .completed-section {
   @extend .welcome;
 }
@@ -724,7 +717,6 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   color: #1697d4;
   line-height: 145%;
   margin-bottom: 8%;
-  // margin-top: -6%;
 }
 
 .completed-section .col-lg-3 {
@@ -736,23 +728,7 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   margin-right: 2%;
 }
 
-.enrollment-modal-select {
-  display: inline;
-  width: 50%;
-  margin-top: -14%;
-}
-
-.enrollment-form .modal-title{
-  font-size: 70%;
-}
-
-.enrollment-form .single-col-modal .btn {
-  margin-bottom: 1%;
-}
-
-.enrollment-form .single-col-modal .enrollment-form-input{
-  margin-top: 2%;
-}
+/* == end completed section == */
 
 /* ========================== */ 
 /*        Student table       */
@@ -833,7 +809,7 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   }
 }
 
-// end z-index
+/* ====== end z-index ===== */
 
 label.btn-sms {
   @include screen(wide-phone-only){
@@ -842,12 +818,28 @@ label.btn-sms {
 }
 
 .btn-group {
-
   @include screen(wide-phone-only){
     white-space: nowrap;
   }
 }
 
+.btn-group-grades label{
+  @include screen(wide-phone-only){
+    font-size: 70%;
+  }
+}
+
+/* ========================== */ 
+/*       input width          */
+/* ========================== */
+
+#student_birth_state {
+  width: 11%;
+}
+
+#student_address1 {
+  width: 17%;
+}
 
 .keep-same-width{
   width: 320px;
@@ -872,12 +864,14 @@ label.btn-sms {
   width: 35%;
 }
 
-td.secondary-phone-cell {
-  white-space: nowrap;
-}
-
 .relationship_input_narrow{
   width: 30%;
+}
+
+/* ===== end input width ==== */
+
+td.secondary-phone-cell {
+  white-space: nowrap;
 }
 
 div.instructions.squish {
