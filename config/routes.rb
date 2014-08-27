@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   get 'admin/central/supplemental_materials', to: 'admin#central_supplemental_materials'
 
+  get 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_get'
+  post 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_post'
 
   resources :enrollment
 
