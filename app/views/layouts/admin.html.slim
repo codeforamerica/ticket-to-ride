@@ -14,6 +14,8 @@ html
         li
           = link_to 'Supplemental Materials'
         li
+          = @admin_user.name
+          | &nbsp;-&nbsp;
           = link_to 'Sign Out'
     main
       = yield
