@@ -1,7 +1,9 @@
 require 'admin_user_params'
+require 'supplemental_materials_param'
 
 class AdminController < ApplicationController
   include AdminUserParams
+  include SupplementalMaterialParams
 
   def index
     @admins = AdminUser.all
@@ -101,13 +103,71 @@ class AdminController < ApplicationController
 
   def central_supplemental_materials
     @admin_user = get_logged_in_admin
-    @supplemental_materials = SupplementalMaterial.where(req_type: :central)
+    @supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
 
-    if @supplemental_materials.none!
+    unless @supplemental_materials.any?
       return render 'central_supplemental_materials_none', layout: 'admin'
     end
 
     return render 'central_supplemental_materials', layout: 'admin'
+  end
+
+  def central_supplemental_materials_add_get
+    @admin_user = get_logged_in_admin
+
+    @supplemental_material = SupplementalMaterial.new
+
+    return render 'central_supplemental_materials_add'
+  end
+
+  def central_supplemental_materials_add_post
+    @admin_user = get_logged_in_admin
+
+    @supplemental_material = SupplementalMaterial.new
+
+    # Check fields to see if they were filled in
+
+    if param_does_not_exist(:supplemental_material, :name)
+      @supplemental_material.errors.add(:name, 'Please enter a <em>Name</em>')
+    end
+
+    if param_does_not_exist(:supplemental_material, :description)
+      @supplemental_material.errors.add(:description, 'Please enter a <em>Description</em>')
+    end
+
+    if !params[:file_upload]
+      if !params[:link_url]
+        @supplemental_material.errors.add(:base, 'Either a <em>File upload</em> or <em>Link URL</em> must be entered')
+      end
+    else params[:file_upload] && params[:link_url] && params[:link_url] != ''
+      @supplemental_material.errors.add(:base, 'Only one of file upload or link URL can be entered, but not both')
+    end
+
+    if param_does_not_exist(:supplemental_material, :is_required)
+      @supplemental_material.errors.add(:is_required, 'Please indicate if the supplemental material is required or not.')
+    end
+
+    # path = File.join('public', 'files', 'supplemental_materials', params[:file_upload].to_s)
+    # File.open(path, 'wb') {|f| f.write(params[:file_upload].read)}
+
+    # Check for errors
+    retainValuesAndErrors(@supplemental_material, supplemental_material_params)
+    if @supplemental_material.errors.any?
+      return render 'central_supplemental_materials_add'
+    end
+
+    # Populate any other fields and save
+    if params[:file_upload]
+      @supplemental_material.req_type = :file
+      @supplemental_material.uri = params[:file_upload].to_s # TODO fix this for file uploads
+    else
+      @supplemental_material.req_type = :url
+      @supplemental_material.uri = params[:link_url]
+    end
+    @supplemental_material.authority_level = :central
+    @supplemental_material.save # TODO more error checking on the save
+
+    return redirect_to action: 'central_supplemental_materials'
   end
 
   # -----------
