@@ -708,11 +708,27 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
 
 .completed-section {
   @extend .welcome;
+  @include screen(wide-phone-only){
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    width: 660px;
+  }
+
 }
 
 .completed-section ul.pager {
+
+  @include screen(wide-phone-only) {
+    width:500px;
+  }
+
+  @include screen(tablet-up){
+    width: 660px;
+  }
   margin-top: 1em;
-  width: 660px;
+
 }
 
 .completed-section .instructions{
@@ -723,7 +739,7 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   margin-bottom: 8%;
 }
 
-.completed-section .col-lg-3 {
+.completed-section .col-md-6 {
   margin-top: 1%;
   margin-bottom: 1%;
 }
@@ -880,4 +896,14 @@ td.secondary-phone-cell {
 
 div.instructions.squish {
   margin-top: -28px !important;
+}
+
+.container {
+  @include screen(wide-phone-only) {
+    width: 500px;
+  }
+
+  @include screen(tablet-up) {
+    width: 660px;
+  }
 }

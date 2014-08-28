@@ -9,6 +9,7 @@
   <!-- TODO: Enable checkboxes to be populated when the back button, etc. is used -->
 
   <%= form_for(@student, url: wizard_path, method: :put) do |c| %>
+  <div class="permissions_table enableZindex">
   <table>
     <tr>
       <td class="row-break minimize-padding" colspan="2">Who may pick up <%= @student.first_name %> from school?</td>
@@ -52,7 +53,8 @@
     </tr>
 
   </table>
-  <ul class="pager">
+</div>
+  <ul class="pager pagerZindex">
     <li><%= link_to "Previous", previous_wizard_path %></li>
     <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
   </ul>
