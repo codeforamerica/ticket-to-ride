@@ -36,15 +36,13 @@
                         <!-- Let's add/find a function to do comma-ing -->
                         <% @student.student_races.each_with_index  do |r, i| %>
                             <span class="summaryAnswers"><%=t('race_' + r.race)%></span>
-                            <% if (@student.student_races.size-1) == i %>
-                                .
+                            <% if (@student.student_races.size-1) == i %>.
                             <% elsif (@student.student_races.size - 2) == i %>
-                                <% if @student.student_races.size > 2 %>
-                                    ,
+                                <% if @student.student_races.size > 2 %>, 
                                 <% end %>
                                 and
                             <% else %>
-                                <%= i %>,
+                              <% i %>, 
                             <% end %>
                         <% end %></td>
                 <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_gender_and_ethnicity' %></div>
