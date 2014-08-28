@@ -357,17 +357,11 @@ input[type=date] {
 }
 
 .enrollment-grid-input {
-  border: 0;
-  color: $paul-mccartney;
-  font-weight: 600;
-  border-bottom: 2px dashed $george-harrison;
-  font-size: 75%;
-  text-align: center;
+  @extend .enrollment-form-input;
   /* line-height: 1.5em; */
-  position: relative;
-  top: -7px;
-  width: 100%;
-  margin: 0 4.5% 0 -17.5%;
+  width: 86%;
+  margin-left: -3%;
+  // margin: 0 4.5% 0 -17.5%;
 }
 
 .enrollment-form-answered {
