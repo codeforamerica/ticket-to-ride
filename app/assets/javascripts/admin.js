@@ -17,3 +17,9 @@ $(document).ready(function(){
     $('.is-branch').hide();
     $( document ).trigger( "enhance" );
 });
+
+function toggleDeleteButton()
+{
+    var disabled = $('#confirm-delete-input-text').val().toLowerCase() != 'delete';
+    $('#confirm-delete-button').attr('disabled', disabled);
+}
