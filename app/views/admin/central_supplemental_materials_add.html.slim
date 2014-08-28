@@ -1,8 +1,8 @@
 header
-  h1 Add supplemental materials
+  h1 Supplemental material
   p
     |  Use the form below to specify application materials that districts must provide
-       parents as they complete their digital application.
+       parents as they complete their application.
 
   - @supplemental_material.errors.each do |field, message|
     ul
@@ -10,8 +10,8 @@ header
         = message
 
 .page
-  / TODO Change the URL to an action
-  = form_for(@supplemental_material, url: '/admin/central/supplemental_materials/add', method: :post, html:{multipart: true}) do |sm|
+  / TODO plusjeff: Change the URL to an action
+  = form_for(@supplemental_material, url: request.original_url, method: :post, html:{multipart: true}) do |sm|
     .field
       = sm.label :name, 'Name'
       = sm.text_field :name
@@ -24,13 +24,17 @@ header
 
     .field
       = label_tag 'file_upload', 'File upload'
+      / TODO plusjeff: Switch to Paperclip to do this later -- this is a placeholder so that UI work can continue
       = file_field_tag 'file_upload'
 
     p OR
 
     .field
       = label_tag 'link_url', 'Link URL'
-      = text_field_tag 'link_url'
+      - if @supplemental_material.req_type == 'url'
+        = text_field_tag 'link_url', @supplemental_material.uri
+      - else
+        = text_field_tag 'link_url'
 
     p Required?
     .field

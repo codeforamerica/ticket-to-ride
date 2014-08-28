@@ -41,13 +41,17 @@ Rails.application.routes.draw do
   get 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_get'
   post 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_post'
 
+
+  get 'admin/central/supplemental_materials/edit/:id', to: 'admin#central_supplemental_materials_edit_get'
+  post 'admin/central/supplemental_materials/edit/:id', to: 'admin#central_supplemental_materials_edit_post'
+
+  get 'admin/central/supplemental_materials/delete/:id', to: 'admin#central_supplemental_materials_delete_get'
+  post 'admin/central/supplemental_materials/delete/:id', to: 'admin#central_supplemental_materials_delete_post'
+
+
   resources :enrollment
 
-  resources :madlibs
-
   resources :students
-
-  resources :schools
 
   resources :admin
 
