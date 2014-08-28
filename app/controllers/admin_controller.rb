@@ -78,7 +78,7 @@ class AdminController < ApplicationController
     # Check for errors
     retainValuesAndErrors(@supplemental_material, supplemental_material_params)
     if @supplemental_material.errors.any?
-      return render 'central_supplemental_materials_add'
+      return render 'central_supplemental_materials_edit'
     end
 
     # Populate any other fields and save
@@ -144,6 +144,7 @@ class AdminController < ApplicationController
     # Save the central admin
     @central_admin.active = true
     @central_admin.save
+    session[:admin_id] = @central_admin.id
 
     return redirect_to action: :central_setup_confirm
   end
@@ -184,7 +185,7 @@ class AdminController < ApplicationController
 
     @supplemental_material = SupplementalMaterial.new
 
-    return render 'central_supplemental_materials_add'
+    return render 'central_supplemental_materials_edit'
   end
 
   def central_supplemental_materials_add_post
@@ -196,7 +197,7 @@ class AdminController < ApplicationController
 
     @supplemental_material = SupplementalMaterial.find(params[:id])
 
-    return render 'central_supplemental_materials_add'
+    return render 'central_supplemental_materials_edit'
   end
 
   def central_supplemental_materials_edit_post
