@@ -167,7 +167,7 @@ DEPENDENCIES
   high_voltage (= 2.1.0)
   jbuilder (= 2.0.7)
   jquery-rails (= 3.1.0)
-  jruby-openssl
+  jruby-openssl (= 0.9.5)
   knockoutjs-rails (= 3.1.0.1)
   momentjs-rails (= 2.6.0)
   pg (= 0.17.1)

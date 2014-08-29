@@ -59,7 +59,7 @@ group :development do
     gem 'activerecord-jdbcsqlite3-adapter', '1.3.9'
 
     # Install Open SSL to provide a security impelementation
-    gem 'jruby-openssl', '0.9.5-java'
+    gem 'jruby-openssl', '0.9.5'
   end
 
   # MRI Ruby
