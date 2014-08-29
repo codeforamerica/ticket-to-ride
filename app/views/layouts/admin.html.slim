@@ -10,9 +10,9 @@ html
       ul
         li Ticket to RIDE
         li
-          = link_to 'Supplemental Materials'
+          = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
         li
-          = link_to 'People', {controller:'admin', action: 'central_supplemental_materials'}
+          = link_to 'People', {controller:'admin', action: 'central_people'}
         li
           = @admin_user.name
           | &nbsp;-&nbsp;

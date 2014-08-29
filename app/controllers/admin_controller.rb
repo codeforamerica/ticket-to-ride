@@ -216,6 +216,72 @@ class AdminController < ApplicationController
     @supplemental_material.delete # TODO more error checking
     return redirect_to action: 'central_supplemental_materials'
   end
+
+  # -----------
+  # Central Admin People
+  # -----------
+
+  def central_people
+    @admin_user = get_logged_in_admin
+
+    @people = AdminUser.where.not(district_id: nil)
+    unless @people.any?
+      return render 'central_people_none'
+    end
+
+    @people = @people.order(:district)
+
+    return render 'central_people'
+  end
+
+  def central_people_add_get
+    @admin_user = get_logged_in_admin
+    @person = AdminUser.new
+
+    return render 'central_people_edit'
+  end
+
+  def central_people_add_post
+    @admin_user = get_logged_in_admin
+
+    @person = AdminUser.new
+
+    # Check to see if all the fields were submitted
+    if param_does_not_exist(:admin_user, :name)
+      @person.errors.add(:name, 'Please enter a name')
+    end
+    if param_does_not_exist(:admin_user, :email)
+      @person.errors.add(:email, 'Please enter an email address')
+    end
+    if !params || params[:district]
+      @person.errors.add(:base, 'Please enter a district name')
+    end
+
+    # Apply the fields and do validations (and send back errors if there are any)
+    retainValuesAndErrors(@person, admin_user_params)
+    if @person.errors.any?
+      return render 'central_people_edit'
+    end
+
+    return redirect_to action: 'central_people'
+  end
+
+  def central_people_edit_get
+    @admin_user = get_logged_in_admin
+  end
+
+  def central_people_edit_post
+    @admin_user = get_logged_in_admin
+  end
+
+  def central_people_delete_get
+    @admin_user = get_logged_in_admin
+  end
+
+  def central_people_delete_post
+    @admin_user = get_logged_in_admin
+  end
+
   # -----------
   # Authentication/Authorization
   # -----------
