@@ -35,8 +35,6 @@ gem 'anjlab-bootstrap-rails', '3.0.0.3', :require => 'bootstrap-rails'
 
 gem 'high_voltage', '2.1.0'
 
-gem 'bootstrap-x-editable-rails', '1.5.1.1'
-
 # Wicked: Used for created wizard-like form progression
 gem 'wicked', '1.0.3'
 
@@ -49,13 +47,26 @@ gem 'bootstrap-slider-rails', '1.9.0'
 # Validations for dates
 gem 'validates_timeliness', '3.0.14'
 
+# For validating e-mail formats
+gem 'validates_email_format_of'
+
 # DEVELOPMENT ONLY
 group :development do
-	# Use jdbcsqlite3 as the database for Active Record when running JRuby
-	gem 'activerecord-jdbcsqlite3-adapter', '1.3.9', platform: :jruby
 
-  # Use sqlite3 as the development database when running C Ruby
-  gem 'sqlite3', '1.3.9', platform: :mri
+  # JRuby install items
+  platform :jruby do
+    # Use jdbcsqlite3 as the database for Active Record when running JRuby
+    gem 'activerecord-jdbcsqlite3-adapter', '1.3.9'
+
+    # Install Open SSL to provide a security impelementation
+    gem 'jruby-openssl', '0.9.5-java'
+  end
+
+  # MRI Ruby
+  platform :mri do
+    # Use sqlite3 as the development database when running C Ruby
+    gem 'sqlite3', '1.3.9'  
+  end
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '1.1.3'
