@@ -4,8 +4,7 @@
 
 These instructions assume the following:
 
-- You are using a UNIX-based OS (Mac, Linux, Solaris, etc.)
-- You have the environment requirements setup. If you're working from Windows, please perform the steps documented in [Developer Setup for Windows](developer_windows_setup.md).
+- You have the [environment requirements](environment.md) setup. 
 
 ## Clone the Project
 
