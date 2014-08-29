@@ -15,12 +15,10 @@
 //= require bootstrap.min
 //= require knockout-3.1.0
 //= require knockout-bootstrap.min
-//= require bootstrap3-editable/bootstrap-editable
 //= require moment
 //= require select2
 //= require bootstrap-slider
 //= require display_logic
 //= require enrollment
-//= require xeditable
 //= require maskedinput
 
