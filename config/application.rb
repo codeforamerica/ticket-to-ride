@@ -6,6 +6,17 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+begin
+    security_class = java.lang.Class.for_name('javax.crypto.JceSecurity')
+    restricted_field = security_class.get_declared_field('isRestricted')
+    restricted_field.accessible = true
+    restricted_field.set nil, false
+rescue ClassNotFoundException => e
+  # Handle Mac Java, etc not having this configuration setting
+  $stderr.print "Java told me: #{e}n"    
+end
+
+
 module TicketToRide
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

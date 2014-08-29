@@ -51,8 +51,11 @@ gem 'validates_timeliness', '3.0.14'
 
 # DEVELOPMENT ONLY
 group :development do
-  # Use sqlite3 as the development database
-  gem 'sqlite3', '1.3.9'
+	# Use jdbcsqlite3 as the database for Active Record when running JRuby
+	gem 'activerecord-jdbcsqlite3-adapter', '1.3.9', platform: :jruby
+
+  # Use sqlite3 as the development database when running C Ruby
+  gem 'sqlite3', '1.3.9', platform: :mri
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '1.1.3'
