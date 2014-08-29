@@ -1,8 +1,8 @@
-# Developer Setup for Windows
+# Developer Setup for JRuby
 
-This is a guide for setting up Ruby and Rails on Windows, such that Ticket to RIDE can be run. While steps shouldn't be different between Windows versions, this has only been tested on Windows 8.1.
+This is a guide for setting up Ticket to RIDE with JRuby.
 
-# NodeJS
+# NodeJS (Windows and Linux)
 
 A JavaScript runtime is needed for Rails and NodeJS is a good, free, and widely used one.
 
