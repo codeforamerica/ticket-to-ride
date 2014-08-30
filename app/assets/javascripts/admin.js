@@ -9,7 +9,6 @@ $( document ).bind( "enhance", function(){
     $( "input[type=radio]" ).customInput();
     $( "input[type=checkbox]" ).customInput();
     $( "body" ).addClass( "custom-input" );
-
 });
 
 $(document).ready(function(){
@@ -17,3 +16,13 @@ $(document).ready(function(){
     $('.is-branch').hide();
     $( document ).trigger( "enhance" );
 });
+
+function toggleDeleteButton() {
+    var disabled = $('#confirm-delete-input-text').val().toLowerCase() != 'delete';
+    $('#confirm-delete-button').attr('disabled', disabled);
+}
+
+function resendInvite(callingElement, personId) {
+    callingElement.innerText = 'Sent again!';
+    // TODO make this do a REST call to the backend to resend the e-mail
+}

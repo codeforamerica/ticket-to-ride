@@ -1,1 +1,26 @@
-=="PEOPLE INDEX"
+header
+  h1 People
+  = link_to 'Add person', '/admin/central/people/add'
+
+  p The following table is comprised of district administrators, users who can setup and maintain
+    the school application process within their district.
+.page
+
+  div
+    span Name
+    span Email
+    span District
+
+  ul
+    - @people.each do |person|
+      li
+        span class='capitalize'
+          = person.name
+        = person.email
+        span class='capitalize'
+          = person.district.name
+        - if person.active
+          = link_to 'Edit', "/admin/central/people/edit/#{person.id}"
+        - else
+          = link_to 'Resend invite', '#', onclick: "resendInvite(this, #{person.id})"
+        = link_to 'Delete', "/admin/central/people/delete/#{person.id}"

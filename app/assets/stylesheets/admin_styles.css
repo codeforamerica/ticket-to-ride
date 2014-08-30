@@ -742,5 +742,9 @@ body.madlib form > footer{ display: none; }
 	padding: 0.4em .2em;
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 
 /* @end */

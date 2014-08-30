@@ -6,6 +6,17 @@ html
     = javascript_include_tag 'admin'
 
   body
+    div#nav-bar
+      ul
+        li Ticket to RIDE
+        li
+          = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
+        li
+          = link_to 'People', {controller:'admin', action: 'central_people'}
+        li
+          = @admin_user.name
+          | &nbsp;-&nbsp;
+          = link_to 'Sign Out'
     main
       = yield
 

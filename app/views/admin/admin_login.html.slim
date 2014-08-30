@@ -1,0 +1,9 @@
+div
+  - @errors.each do |error|
+    = error
+
+= form_tag(controller: 'admin', action: 'admin_login', method: 'post') do
+  .field
+    = label_tag 'Email Address'
+    = select_tag 'email', options_from_collection_for_select(@admins, 'email', 'email')
+  = submit_tag 'Sign In'

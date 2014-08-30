@@ -38,14 +38,35 @@ Rails.application.routes.draw do
 
   get 'admin/central/supplemental_materials', to: 'admin#central_supplemental_materials'
 
+  get 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_get'
+  post 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_post'
+
+  get 'admin/central/supplemental_materials/edit/:id', to: 'admin#central_supplemental_materials_edit_get'
+  post 'admin/central/supplemental_materials/edit/:id', to: 'admin#central_supplemental_materials_edit_post'
+
+  get 'admin/central/supplemental_materials/delete/:id', to: 'admin#central_supplemental_materials_delete_get'
+  post 'admin/central/supplemental_materials/delete/:id', to: 'admin#central_supplemental_materials_delete_post'
+
+
+  # -----------------------
+  # Central Admin People
+  # -----------------------
+
+  get 'admin/central/people', to: 'admin#central_people'
+
+  get 'admin/central/people/add', to: 'admin#central_people_add_get'
+  post 'admin/central/people/add', to: 'admin#central_people_add_post'
+
+  get 'admin/central/people/edit/:id', to: 'admin#central_people_edit_get'
+  post 'admin/central/people/edit/:id', to: 'admin#central_people_edit_post'
+
+  get 'admin/central/people/delete/:id', to: 'admin#central_people_delete_get'
+  post 'admin/central/people/delete/:id', to: 'admin#central_people_delete_post'
+
 
   resources :enrollment
 
-  resources :madlibs
-
   resources :students
-
-  resources :schools
 
   resources :admin
 

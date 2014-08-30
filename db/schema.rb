@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822210155) do
+ActiveRecord::Schema.define(version: 20140829233014) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20140822210155) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
 
   create_table "contact_people", force: true do |t|
     t.string   "relationship"
@@ -63,22 +65,11 @@ ActiveRecord::Schema.define(version: 20140822210155) do
     t.boolean  "is_guardian"
   end
 
-  create_table "custom_requirements", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "uri"
-    t.integer  "req_type"
-    t.integer  "district_id"
-    t.integer  "authority_level"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "districts", force: true do |t|
-    t.string   "mailing_street_address_1",                 null: false
+    t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
-    t.string   "mailing_zip_code",                         null: false
-    t.string   "phone",                                    null: false
+    t.string   "mailing_zip_code"
+    t.string   "phone"
     t.date     "first_day_of_school"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -87,6 +78,8 @@ ActiveRecord::Schema.define(version: 20140822210155) do
     t.string   "mailing_state"
     t.string   "name"
   end
+
+  add_index "districts", ["name"], name: "index_districts_on_name", unique: true
 
   create_table "schools", force: true do |t|
     t.string   "mailing_street_address_1"
@@ -165,6 +158,18 @@ ActiveRecord::Schema.define(version: 20140822210155) do
   create_table "students_contact_people", force: true do |t|
     t.integer "student_id"
     t.integer "contact_person_id"
+  end
+
+  create_table "supplemental_materials", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "uri"
+    t.integer  "req_type"
+    t.integer  "district_id"
+    t.integer  "authority_level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_required"
   end
 
   create_table "welcome_messages", force: true do |t|

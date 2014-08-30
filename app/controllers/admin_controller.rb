@@ -1,17 +1,19 @@
 require 'admin_user_params'
+require 'supplemental_materials_param'
 
 class AdminController < ApplicationController
   include AdminUserParams
+  include SupplementalMaterialParams
 
   def index
     @admins = AdminUser.all
 
     # If there are no admins created, the app was just installed -- setup a central admin
     if @admins.none?
-      return central_start
+      return redirect_to action: :central_setup_welcome
     end
 
-    return admin_login
+    return redirect_to action: :admin_login
   end
 
   # -----------
@@ -27,8 +29,73 @@ class AdminController < ApplicationController
     messages = obj.errors.messages.clone()
     obj.assign_attributes(param_updater) # Note - this actually saves something to the DB
     messages.each do |k,v|
-      v.each {|e| obj.errors.add(k,e)}
+      v.each do |field, message|
+        obj.errors.add(field, message)
+        puts "Message: #{message}"
+      end
     end
+  end
+
+  def get_logged_in_admin
+    # TODO error handling
+    admin_id = session[:admin_id]
+    admin_user = AdminUser.find(admin_id)
+    return admin_user
+  end
+
+  def edit_a_central_supplemental_material(id)
+    @admin_user = get_logged_in_admin
+
+    if id
+      @supplemental_material = SupplementalMaterial.find(id) # TODO plusjeff: Better error checking
+    else
+      @supplemental_material = SupplementalMaterial.new
+    end
+
+    # Check fields to see if they were filled in
+
+    if param_does_not_exist(:supplemental_material, :name)
+      @supplemental_material.errors.add(:name, 'Please enter a <em>Name</em>')
+    end
+
+    if param_does_not_exist(:supplemental_material, :description)
+      @supplemental_material.errors.add(:description, 'Please enter a <em>Description</em>')
+    end
+
+    if !params[:file_upload]
+      if !params[:link_url]
+        @supplemental_material.errors.add(:base, 'Either a <em>File upload</em> or <em>Link URL</em> must be entered')
+      end
+    else params[:file_upload] && params[:link_url] && params[:link_url] != ''
+    @supplemental_material.errors.add(:base, 'Only one of file upload or link URL can be entered, but not both')
+    end
+
+    if param_does_not_exist(:supplemental_material, :is_required)
+      @supplemental_material.errors.add(:is_required, 'Please indicate if the supplemental material is required or not.')
+    end
+
+    # TODO Use Paperclip gem in the future -- comment out for now
+    # path = File.join('public', 'files', 'supplemental_materials', params[:file_upload].to_s)
+    # File.open(path, 'wb') {|f| f.write(params[:file_upload].read)}
+
+    # Check for errors
+    retainValuesAndErrors(@supplemental_material, supplemental_material_params)
+    if @supplemental_material.errors.any?
+      return render 'central_supplemental_materials_edit'
+    end
+
+    # Populate any other fields and save
+    if params[:file_upload]
+      @supplemental_material.req_type = :file
+      @supplemental_material.uri = params[:file_upload].to_s # TODO fix this for file uploads
+    else
+      @supplemental_material.req_type = :url
+      @supplemental_material.uri = params[:link_url]
+    end
+    @supplemental_material.authority_level = :central
+    @supplemental_material.save # TODO more error checking on the save
+
+    return redirect_to action: 'central_supplemental_materials'
   end
 
   # -----------
@@ -80,6 +147,7 @@ class AdminController < ApplicationController
     # Save the central admin
     @central_admin.active = true
     @central_admin.save
+    session[:admin_id] = @central_admin.id
 
     return redirect_to action: :central_setup_confirm
   end
@@ -88,8 +156,182 @@ class AdminController < ApplicationController
     render 'central_setup_confirm', layout: 'admin_setup'
   end
 
-  def central_supplmental_materials
-    render 'central_supplemental_materials'
+  # -----------
+  # Central Admin Supplemental Materials
+  # -----------
+
+  def central_supplemental_materials
+    @admin_user = get_logged_in_admin
+    @supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
+
+    unless @supplemental_materials.any?
+      return render 'central_supplemental_materials_none'
+    end
+
+    # Sort by required and optional
+    @supplemental_materials_required = []
+    @supplemental_materials_optional = []
+
+    @supplemental_materials.each do |sm|
+      if sm.is_required
+        @supplemental_materials_required << sm
+      else
+        @supplemental_materials_optional << sm
+      end
+    end
+
+    return render 'central_supplemental_materials'
+  end
+
+  def central_supplemental_materials_add_get
+    @admin_user = get_logged_in_admin
+
+    @supplemental_material = SupplementalMaterial.new
+
+    return render 'central_supplemental_materials_edit'
+  end
+
+  def central_supplemental_materials_add_post
+    return edit_a_central_supplemental_material(nil)
+  end
+
+  def central_supplemental_materials_edit_get
+    @admin_user = get_logged_in_admin
+
+    @supplemental_material = SupplementalMaterial.find(params[:id])
+
+    return render 'central_supplemental_materials_edit'
+  end
+
+  def central_supplemental_materials_edit_post
+    return edit_a_central_supplemental_material(params[:id])
+  end
+
+  def central_supplemental_materials_delete_get
+    @admin_user = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
+    return render 'central_supplemental_materials_delete'
+  end
+
+  def central_supplemental_materials_delete_post
+    @admin_user = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
+    @supplemental_material.delete # TODO more error checking
+    return redirect_to action: 'central_supplemental_materials'
+  end
+
+  # -----------
+  # Central Admin People
+  # -----------
+
+  def edit_a_person(id)
+    @admin_user = get_logged_in_admin
+
+    if id
+      @person = AdminUser.find(id)
+    else
+      @person = AdminUser.new
+    end
+
+    # Check to see if all the fields were submitted
+    if param_does_not_exist(:admin_user, :name)
+      @person.errors.add(:name, 'Please enter a name')
+    end
+
+    if param_does_not_exist(:admin_user, :email)
+      @person.errors.add(:email, 'Please enter an email address')
+    end
+
+    if !params || !params[:district]
+      @person.errors.add(:base, 'Please enter a district name')
+    end
+    @district_name = params[:district] # populate this for re-display incase there are errors
+
+    # See if there is already someone with this e-mail address
+    if !id && AdminUser.find_by(email: params[:admin_user][:email]) != nil
+      @person.errors.add(:email, 'There is already a user with this email address')
+    end
+
+    # Apply the fields and do validations (and send back errors if there are any)
+    retainValuesAndErrors(@person, admin_user_params)
+    if @person.errors.any?
+      return render 'central_people_edit'
+    end
+
+    # Create or add to a district
+    district = District.find_by(name: @district_name.downcase)
+    if district == nil
+      district = District.create(name: @district_name.downcase)
+    end
+
+    @person.district = district
+    @person.user_role = :district_admin
+    @person.save
+
+    @people = AdminUser.all
+
+    return redirect_to action: 'central_people'
+  end
+
+  def central_people
+    @admin_user = get_logged_in_admin
+
+    @people = AdminUser.where.not(district_id: nil).joins(:district).order('districts.name')
+    unless @people.any?
+      return render 'central_people_none'
+    end
+
+    return render 'central_people'
+  end
+
+  def central_people_add_get
+    @admin_user = get_logged_in_admin
+    @person = AdminUser.new
+    @district_name = nil
+
+    return render 'central_people_edit'
+  end
+
+  def central_people_add_post
+    return edit_a_person(nil)
+  end
+
+  def central_people_edit_get
+    @admin_user = get_logged_in_admin
+    @person = AdminUser.find(params[:id]) # TODO add authority check here
+    @district_name = @person.district.name
+
+    return render 'central_people_edit'
+  end
+
+  def central_people_edit_post
+    id = params[:id] # TODO add authority check here
+    return edit_a_person(id)
+  end
+
+  def central_people_delete_get
+    @admin_user = get_logged_in_admin
+    @person = AdminUser.find(params[:id]) # TODO add authority check here
+    return render 'central_people_delete'
+  end
+
+  def central_people_delete_post
+    @admin_user = get_logged_in_admin
+    @person = AdminUser.find(params[:id]) # TODO add authority check here
+
+    district = @person.district
+
+    @person.delete
+
+    if district.admin_users.count == 0
+      # TODO delete all the students from the district
+      # students = district.students
+      # students.delete
+
+      district.delete
+    end
+
+    return redirect_to action: 'central_people'
   end
 
   # -----------
@@ -98,14 +340,15 @@ class AdminController < ApplicationController
   def admin_login
 
     @errors = {}
+    @admins = AdminUser.all
 
     # GET
     if request.method_symbol == :get
-      return render 'admin_login'
+      return render 'admin_login', layout: 'admin_setup'
     end
 
     # POST
-    email = request.POST['email']
+    email = params['email']
     if email == nil
       @errors[:email] = 'You must enter an e-mail address'
       return render 'admin_login'
@@ -116,17 +359,16 @@ class AdminController < ApplicationController
     #   render 'admin_login'
     # end
 
-    admin_user = AdminUser.find_by(email: email)
+    admin_user = AdminUser.find_by(email: email) #TODO better error handling
     if admin_user == nil
       @errors[:username] = 'Could not find a user with that e-mail address'
-      return render 'admin_login'
+      return render 'admin_login', layout: 'admin_setup'
     end
 
     # if admin_user.password == password
-    return render action: 'central_supplemental_materials'
+    session[:admin_id] = admin_user.id
+    return redirect_to action: 'central_supplemental_materials'
     # end
-
-    return render 'admin_login'
   end
 
   def show

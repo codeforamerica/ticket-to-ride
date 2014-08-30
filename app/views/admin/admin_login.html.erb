@@ -1,4 +1,0 @@
-<%= form_tag(controller: 'admin', action: 'admin_login', method: 'post') do %>
-    <%= select_tag 'admin_username', options_from_collection_for_select(@admins, 'id', 'email') %>
-    <%= submit_tag %>
-<% end %>

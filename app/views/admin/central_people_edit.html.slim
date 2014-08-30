@@ -1,0 +1,26 @@
+header
+  h1 Add a district administrator
+  p This will be someone that can view/edit applications for a school district
+    and add district-level supplemental materials
+
+  ul
+    - @person.errors.each do |field, message|
+      li
+        = message
+
+.page
+  = form_for(@person, url: request.original_url, method: :post, html:{multipart: true}) do |person|
+    .field
+      = person.label :name, 'Name'
+      = person.text_field :name
+    .field
+      = person.label :email, 'Email address'
+      = person.text_field :email
+    .field
+      = label_tag :district, 'District'
+      = text_field_tag :district, @district_name
+    .field
+      = person.label :active, 'Debug: Active'
+      = person.check_box :active
+
+    = person.submit 'Submit'

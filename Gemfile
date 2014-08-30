@@ -49,6 +49,7 @@ gem 'bootstrap-slider-rails', '1.9.0'
 # Validations for dates
 gem 'validates_timeliness', '3.0.14'
 
+# Template engine for Admin screens (per Andrew's recommendation)
 gem 'slim-rails', '2.1.5'
 
 # DEVELOPMENT ONLY
