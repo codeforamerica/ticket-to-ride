@@ -70,8 +70,12 @@ class ContactPerson < ActiveRecord::Base
                                                 allow_nil: true
   }
 
-  validates :email, format: { with: ModelConstants::EMAIL_REGEX,
-                                             message: 'E-mail address was not valid',
-                                             allow_nil: true
-  }
+
+  validates_email_format_of :email, :message => 'E-mail address was not valid', allow_nil: true, allow_blank: true
+  # validates :email, format: { with: ModelConstants::EMAIL_REGEX,
+  #                                            message: 'E-mail address was not valid',
+  #                                            allow_nil: true,
+  #                                            allow_blank: true
+
+  # }
 end

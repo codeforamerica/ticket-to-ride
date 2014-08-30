@@ -1,6 +1,7 @@
 # Developer Setup for Windows
 
-This is a guide for setting up Ruby and Rails on Windows, such that Ticket to RIDE can be run. While steps shouldn't be different between Windows versions, this has only been tested on Windows 8.1.
+This is a guide for setting up Ruby and Rails on Windows, such that Ticket to RIDE can be run.
+Note: The [JRuby instructions](developer_jruby_setup.md) are preferable to these since compatibility is much more reliable.
 
 # NodeJS
 
@@ -18,3 +19,7 @@ A JavaScript runtime is needed for Rails and NodeJS is a good, free, and widely 
 1. `ruby dk.rb init`
 1. `ruby dk.rb install`
 1. `gem install rails`
+
+# Ticket to RIDE
+
+From here, follow the [developer setup](developer_setup.md).
