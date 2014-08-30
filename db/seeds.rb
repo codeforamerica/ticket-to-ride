@@ -102,25 +102,22 @@ west_warwick_high_school = School.create(
 )
 
 AdminUser.create(
-    username: 'jim',
     name: 'Jim M',
-    email: 'jim@westwarwick.gov',
+    email: 'jim@westwarwick.ed',
     user_role: :district_admin,
     district: west_warwick_district,
     active: true
 )
 
 AdminUser.create(
-    username: 'toni',
     name: 'Toni M',
-    email: 'toni@westwarwick.gov',
+    email: 'toni@westwarwick.ed',
     user_role: :district_admin,
     district: west_warwick_district,
     active: true
 )
 
 AdminUser.create(
-    username: 'ed',
     name: 'Ed G',
     email: 'ed@ride.ri.gov',
     user_role: :central_admin,

@@ -17,8 +17,27 @@ Rails.application.routes.draw do
   # get 'enrollment/summary', to: 'enrollment#summary', as: :happy_libs_summary
 
   get 'admin', to: 'admin#index'
-  get 'admin/central/start', to: 'admin#central_start'
+
   get 'admin/login', to: 'admin#admin_login'
+  post 'admin/login', to: 'admin#admin_login'
+
+  # -----------------------
+  # Central Admin Setup
+  # -----------------------
+
+  get 'admin/central/setup', to: 'admin#central_setup_welcome'
+
+  get 'admin/central/setup/info', to: 'admin#central_setup_info_get'
+  post 'admin/central/setup/info', to: 'admin#central_setup_info_post'
+
+  get 'admin/central/setup/confirm', to: 'admin#central_setup_confirm'
+
+  # -----------------------
+  # Central Admin Supplemental Materials
+  # -----------------------
+
+  get 'admin/central/supplemental_materials', to: 'admin#central_supplemental_materials'
+
 
   resources :enrollment
 
