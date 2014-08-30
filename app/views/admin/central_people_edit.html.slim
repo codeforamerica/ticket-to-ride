@@ -18,6 +18,9 @@ header
       = person.text_field :email
     .field
       = label_tag :district, 'District'
-      = text_field_tag :district
+      = text_field_tag :district, @district_name
+    .field
+      = person.label :active, 'Debug: Active'
+      = person.check_box :active
 
     = person.submit 'Submit'

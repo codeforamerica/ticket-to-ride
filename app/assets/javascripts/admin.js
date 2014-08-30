@@ -23,6 +23,6 @@ function toggleDeleteButton() {
 }
 
 function resendInvite(callingElement, personId) {
-    this.innerText = 'Sent again!';
+    callingElement.innerText = 'Sent again!';
     // TODO make this do a REST call to the backend to resend the e-mail
 }

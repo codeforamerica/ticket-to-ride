@@ -29,7 +29,10 @@ class AdminController < ApplicationController
     messages = obj.errors.messages.clone()
     obj.assign_attributes(param_updater) # Note - this actually saves something to the DB
     messages.each do |k,v|
-      v.each {|e| obj.errors.add(k,e)}
+      v.each do |field, message|
+        obj.errors.add(field, message)
+        puts "Message: #{message}"
+      end
     end
   end
 
@@ -221,40 +224,32 @@ class AdminController < ApplicationController
   # Central Admin People
   # -----------
 
-  def central_people
+  def edit_a_person(id)
     @admin_user = get_logged_in_admin
 
-    @people = AdminUser.where.not(district_id: nil)
-    unless @people.any?
-      return render 'central_people_none'
+    if id
+      @person = AdminUser.find(id)
+    else
+      @person = AdminUser.new
     end
-
-    @people = @people.order(:district)
-
-    return render 'central_people'
-  end
-
-  def central_people_add_get
-    @admin_user = get_logged_in_admin
-    @person = AdminUser.new
-
-    return render 'central_people_edit'
-  end
-
-  def central_people_add_post
-    @admin_user = get_logged_in_admin
-
-    @person = AdminUser.new
 
     # Check to see if all the fields were submitted
     if param_does_not_exist(:admin_user, :name)
       @person.errors.add(:name, 'Please enter a name')
     end
+
     if param_does_not_exist(:admin_user, :email)
       @person.errors.add(:email, 'Please enter an email address')
     end
-    if !params || params[:district]
+
+    if !params || !params[:district]
       @person.errors.add(:base, 'Please enter a district name')
+    end
+    @district_name = params[:district] # populate this for re-display incase there are errors
+
+    # See if there is already someone with this e-mail address
+    if !id && AdminUser.find_by(email: params[:admin_user][:email]) != nil
+      @person.errors.add(:email, 'There is already a user with this email address')
     end
 
     # Apply the fields and do validations (and send back errors if there are any)
@@ -263,23 +258,80 @@ class AdminController < ApplicationController
       return render 'central_people_edit'
     end
 
+    # Create or add to a district
+    district = District.find_by(name: @district_name.downcase)
+    if district == nil
+      district = District.create(name: @district_name.downcase)
+    end
+
+    @person.district = district
+    @person.user_role = :district_admin
+    @person.save
+
+    @people = AdminUser.all
+
     return redirect_to action: 'central_people'
+  end
+
+  def central_people
+    @admin_user = get_logged_in_admin
+
+    @people = AdminUser.where.not(district_id: nil).joins(:district).order('districts.name')
+    unless @people.any?
+      return render 'central_people_none'
+    end
+
+    return render 'central_people'
+  end
+
+  def central_people_add_get
+    @admin_user = get_logged_in_admin
+    @person = AdminUser.new
+    @district_name = nil
+
+    return render 'central_people_edit'
+  end
+
+  def central_people_add_post
+    return edit_a_person(nil)
   end
 
   def central_people_edit_get
     @admin_user = get_logged_in_admin
+    @person = AdminUser.find(params[:id]) # TODO add authority check here
+    @district_name = @person.district.name
+
+    return render 'central_people_edit'
   end
 
   def central_people_edit_post
-    @admin_user = get_logged_in_admin
+    id = params[:id] # TODO add authority check here
+    return edit_a_person(id)
   end
 
   def central_people_delete_get
     @admin_user = get_logged_in_admin
+    @person = AdminUser.find(params[:id]) # TODO add authority check here
+    return render 'central_people_delete'
   end
 
   def central_people_delete_post
     @admin_user = get_logged_in_admin
+    @person = AdminUser.find(params[:id]) # TODO add authority check here
+
+    district = @person.district
+
+    @person.delete
+
+    if district.admin_users.count == 0
+      # TODO delete all the students from the district
+      # students = district.students
+      # students.delete
+
+      district.delete
+    end
+
+    return redirect_to action: 'central_people'
   end
 
   # -----------

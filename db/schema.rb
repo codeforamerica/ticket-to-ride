@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826234401) do
+ActiveRecord::Schema.define(version: 20140829233014) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20140826234401) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
 
   create_table "contact_people", force: true do |t|
     t.string   "relationship"
@@ -64,10 +66,10 @@ ActiveRecord::Schema.define(version: 20140826234401) do
   end
 
   create_table "districts", force: true do |t|
-    t.string   "mailing_street_address_1",                 null: false
+    t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
-    t.string   "mailing_zip_code",                         null: false
-    t.string   "phone",                                    null: false
+    t.string   "mailing_zip_code"
+    t.string   "phone"
     t.date     "first_day_of_school"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,6 +78,8 @@ ActiveRecord::Schema.define(version: 20140826234401) do
     t.string   "mailing_state"
     t.string   "name"
   end
+
+  add_index "districts", ["name"], name: "index_districts_on_name", unique: true
 
   create_table "schools", force: true do |t|
     t.string   "mailing_street_address_1"
