@@ -2,9 +2,9 @@
 <div class="enrollment-form">
 <%= render 'enrollment/contact_person_errors' %>
 
-  <h1>Emergency Contact 1</h1>
+  <h1>Emergency Contact - Family member</h1>
 
-  <div class="instructions">Tell us about an adult who can find you in case of an emergency.</div>
+  <div class="instructions">Tell us about a family member whom our school staff may get in touch with if <%= @student.first_name %> has a medical emergency and we are unable to contact you.</div>
 
   <%= form_for(@contact_person, url: wizard_path, method: :put) do |c| %>
     <div id="contact_table" class="enableZindex">
