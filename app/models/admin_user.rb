@@ -6,6 +6,8 @@ class AdminUser < ActiveRecord::Base
   # -- Relationships --
   belongs_to :district
 
+  # accepts_nested_attributes_for :district
+
   # -- Enumerations --
   enum user_role: [:central_admin, :district_admin]
 
@@ -17,8 +19,5 @@ class AdminUser < ActiveRecord::Base
                                    allow_nil: true
   }
 
-  validates :email, format: { with: ModelConstants::EMAIL_REGEX,
-                              message: 'E-mail address was not valid',
-                              allow_nil: true
-  }
+  validates_email_format_of :email, :message => 'E-mail address was not valid', allow_nil: true, allow_blank: true
 end

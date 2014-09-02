@@ -1,9 +1,11 @@
 require 'admin_user_params'
 require 'supplemental_materials_param'
+require 'district_params'
 
 class AdminController < ApplicationController
   include AdminUserParams
   include SupplementalMaterialParams
+  include DistrictParams
 
   def index
     @admins = AdminUser.all
@@ -27,7 +29,7 @@ class AdminController < ApplicationController
 
   def retainValuesAndErrors(obj, param_updater)
     messages = obj.errors.messages.clone()
-    obj.assign_attributes(param_updater) # Note - this actually saves something to the DB
+    obj.assign_attributes(param_updater)
     messages.each do |k,v|
       v.each do |field, message|
         obj.errors.add(field, message)
@@ -38,13 +40,13 @@ class AdminController < ApplicationController
 
   def get_logged_in_admin
     # TODO error handling
-    admin_id = session[:admin_id]
+    admin_id = session[:admin_user_id]
     admin_user = AdminUser.find(admin_id)
     return admin_user
   end
 
   def edit_a_central_supplemental_material(id)
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
 
     if id
       @supplemental_material = SupplementalMaterial.find(id) # TODO plusjeff: Better error checking
@@ -107,47 +109,47 @@ class AdminController < ApplicationController
   end
 
   def central_setup_info_get
-    @central_admin = AdminUser.new
+    @admin = AdminUser.new
     return render 'central_setup_info', layout: 'admin_setup'
   end
 
   def central_setup_info_post
 
-    @central_admin = AdminUser.new(user_role: :central_admin)
+    @admin = AdminUser.new(user_role: :central_admin)
 
     # Were the fields filled out?
     if param_does_not_exist(:admin_user, :name)
-      @central_admin.errors.add(:name, 'No name was entered')
+      @admin.errors.add(:name, 'No name was entered')
     end
 
     if param_does_not_exist(:admin_user, :email)
-      @central_admin.errors.add(:email, 'E-mail address was not entered')
+      @admin.errors.add(:email, 'E-mail address was not entered')
     end
 
     if param_does_not_exist(:admin_user, :password)
-      @central_admin.errors.add(:password, 'Password was not entered')
+      @admin.errors.add(:password, 'Password was not entered')
     end
 
     if param_does_not_exist(:admin_user, :confirm_password)
-      @central_admin.errors.add(:confirm_password, 'The password confirmation was not entered')
+      @admin.errors.add(:confirm_password, 'The password confirmation was not entered')
     end
 
     # If there were any errors, send back the same page with error messages
-    retainValuesAndErrors(@central_admin, admin_user_params)
-    if @central_admin.errors.any?
+    retainValuesAndErrors(@admin, admin_user_params)
+    if @admin.errors.any?
       return render 'central_setup_info', layout: 'admin_setup'
     end
 
     # TODO Is there a better way to do this check using the model layer?
-    if AdminUser.where(email: @central_admin.email).any?
-      @central_admin.errors.add(:base, 'A user with this e-mail address already exists')
+    if AdminUser.where(email: @admin.email).any?
+      @admin.errors.add(:base, 'A user with this e-mail address already exists')
       return render action: 'central_setup_info', layout: 'admin_setup'
     end
 
     # Save the central admin
-    @central_admin.active = true
-    @central_admin.save
-    session[:admin_id] = @central_admin.id
+    @admin.active = true
+    @admin.save
+    session[:admin_user_id] = @admin.id
 
     return redirect_to action: :central_setup_confirm
   end
@@ -161,7 +163,7 @@ class AdminController < ApplicationController
   # -----------
 
   def central_supplemental_materials
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
     @supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
 
     unless @supplemental_materials.any?
@@ -184,7 +186,7 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_add_get
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
 
     @supplemental_material = SupplementalMaterial.new
 
@@ -196,7 +198,7 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_edit_get
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
 
     @supplemental_material = SupplementalMaterial.find(params[:id])
 
@@ -208,13 +210,13 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_delete_get
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
     return render 'central_supplemental_materials_delete'
   end
 
   def central_supplemental_materials_delete_post
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
     @supplemental_material.delete # TODO more error checking
     return redirect_to action: 'central_supplemental_materials'
@@ -225,7 +227,7 @@ class AdminController < ApplicationController
   # -----------
 
   def edit_a_person(id)
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
 
     if id
       @person = AdminUser.find(id)
@@ -274,7 +276,7 @@ class AdminController < ApplicationController
   end
 
   def central_people
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
 
     @people = AdminUser.where.not(district_id: nil).joins(:district).order('districts.name')
     unless @people.any?
@@ -285,7 +287,7 @@ class AdminController < ApplicationController
   end
 
   def central_people_add_get
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
     @person = AdminUser.new
     @district_name = nil
 
@@ -297,7 +299,7 @@ class AdminController < ApplicationController
   end
 
   def central_people_edit_get
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
     @person = AdminUser.find(params[:id]) # TODO add authority check here
     @district_name = @person.district.name
 
@@ -310,13 +312,13 @@ class AdminController < ApplicationController
   end
 
   def central_people_delete_get
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
     @person = AdminUser.find(params[:id]) # TODO add authority check here
     return render 'central_people_delete'
   end
 
   def central_people_delete_post
-    @admin_user = get_logged_in_admin
+    @admin = get_logged_in_admin
     @person = AdminUser.find(params[:id]) # TODO add authority check here
 
     district = @person.district
@@ -338,27 +340,74 @@ class AdminController < ApplicationController
   # District Admin Setup
   # -----------
   def district_setup_get
-    @admin_user = AdminUser.find(params[:admin_user_id]) # TODO error handling on bad ID
+    @admin = AdminUser.find(params[:admin_user_id]) # TODO error handling on bad ID
+    @district = @admin.district
     return render 'district_setup', layout: 'admin_setup'
   end
 
   def district_setup_post
+    @admin = AdminUser.find(params[:admin_user_id]) # TODO error handling on bad ID
+    @district = @admin.district
 
+    # Check to make sure parameters were entered
+    if param_does_not_exist(:admin_user, :name)
+      @admin.errors.add(:name, 'Please enter a name')
+    end
+    if param_does_not_exist(:admin_user, :email)
+      @admin.errors.add(:email, 'Please enter an email address')
+    end
+    if param_does_not_exist(:admin_user, :password)
+      @admin.errors.add(:base, 'Please enter a password') # TODO switch to actual password field
+    end
+    if param_does_not_exist(:admin_user, :confirm_password)
+      @admin.errors.add(:base, 'Please confirm the password') # TODO switch to actual password field
+    end
+    if param_does_not_exist(:district, :mailing_street_address_1)
+      @district.errors.add(:mailing_street_address_1, "Please enter the first line of the district's mailing address")
+    end
+    if param_does_not_exist(:district, :mailing_city)
+      @district.errors.add(:mailing_city, "Please enter the district's mailing city")
+    end
+    if param_does_not_exist(:district, :mailing_state)
+      @district.errors.add(:mailing_state, "Please enter the district's mailing state")
+    end
+    if param_does_not_exist(:district, :mailing_zip_code)
+      @district.errors.add(:mailing_zip_code, "Please enter the district's mailing ZIP code")
+    end
+
+    # If there were any errors, send back the same page with error messages
+    retainValuesAndErrors(@admin, admin_user_params)
+    retainValuesAndErrors(@district, district_params)
+    if @admin.errors.any? || @district.errors.any?
+      return render 'district_setup', layout: 'admin_setup'
+    end
+
+    # Update the fields # TODO Error check
+    @admin.save
+    @district.save
+
+    session[:admin_user_id] = @admin.id
+
+    return redirect_to action: :district_applications
   end
 
   # -----------
   # District Admin Applications
   # -----------
 
-  # def district_applications
-  #   @admin_user = AdminUser.find(session[:admin_id])
-  #   @district = AdminUser.district
-  #
-  #   # TODO add pagination (like getting blocks of 25 to 50 at a time)
-  #   @students = Student.where(district: @district).order(:updated_at)
-  #
-  #   return
-  # end
+  def district_applications
+    @admin = AdminUser.find(session[:admin_user_id])
+    @district = @admin.district
+
+    # TODO add pagination (like getting blocks of 25 to 50 at a time)
+    @students = Student.where(district: @district).order(:updated_at)
+
+    if @students.any?
+      return render 'district_applications'
+    end
+
+    return render 'district_applications_none'
+  end
 
   # -----------
   # Authentication/Authorization
@@ -391,7 +440,7 @@ class AdminController < ApplicationController
       return render 'admin_login', layout: 'admin_setup'
     end
 
-    session[:admin_id] = admin_user.id
+    session[:admin_user_id] = admin_user.id
 
     # TODO some more error checking around the district ID
     if admin_user.user_role == :district_admin

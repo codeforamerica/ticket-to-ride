@@ -9,8 +9,7 @@ html
     div#nav-bar
       ul
         li Ticket to RIDE
-
-        - if @admin_user.user_role == :central_admin
+        - if @admin.user_role == 'central_admin'
           li
             = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
           li
@@ -27,7 +26,7 @@ html
           li
             = link_to 'Sign Out', '/admin/signout'
         li
-          = @admin_user.name
+          = @admin.name
           | &nbsp;-&nbsp;
           = link_to 'Sign Out'
     main

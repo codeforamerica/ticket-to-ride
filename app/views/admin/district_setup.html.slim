@@ -1,30 +1,57 @@
 header
   .site-width
     h1 Setup your account
-    p Central administrators use a single account to manage registration statewide. Please specify the name, email address, and password for an administrator account.
+    p
+      | Ticket to RIDE is a state-wide initiative to standardize kindergarten enrollment. To setup
+      | your district, please create a password and confirm the information below.
   .page
     .header
       ul
-        - @admin_user.errors.each do |field, message|
+        - @admin.errors.each do |field, message|
+          li
+            = message
+        - @district.errors.each do |field, message|
           li
             = message
     .site-width
-      =form_for(@admin_user, url: request.original_url, method: 'post') do |admin_user|
+      = form_for(@admin, url: request.original_url, method: 'post') do |admin|
+        / The District Admin user's info
         .field
-          =label :name, 'Name'
-          =admin_user.text_field :name
+          = admin.label :name, 'Name'
+          = admin.text_field :name
         .field
-          =label :email, 'Email Address'
-          =admin_user.text_field :email
-        - admin_user.fields_for :district, @admin_user.district do |district|
-          .field
-            = label :name, 'District Name'
-            = district.text_field :name
+          = admin.label :email, 'Email Address'
+          = admin.text_field :email
         .field.field-password
-          =label :password, 'Password'
-          =admin_user.password_field :password
+          = admin.label :password, 'Password'
+          = admin.password_field :password
         .field.field-password
-          =label :confirm_password, 'Confirm Password'
-          =admin_user.password_field :confirm_password
+          = admin.label :confirm_password, 'Confirm Password'
+          = admin.password_field :confirm_password
+
+        / The District's info
+        /- fields_for @admin.district do |district|
+        /- fields_for @district do |district|
+        .field
+          = label_tag 'district[name]', 'District Name'
+          = text_field_tag 'district[name]', @district.name, class: 'capitalize'
+        .field
+          = label_tag 'district[mailing_street_address_1]', 'District Mailing Street Address - Line 1'
+          = text_field_tag 'district[mailing_street_address_1]', @district.mailing_street_address_1
+        .field
+          = label_tag 'district[mailing_street_address_2]', 'District Mailing Street Address - Line 2'
+          = text_field_tag 'district[mailing_street_address_2]', @district.mailing_street_address_2
+        .field
+          = label_tag 'district[mailing_city]', 'District Mailing City'
+          = text_field_tag 'district[mailing_city]', @district.mailing_city
+        .field
+          = label_tag 'district[mailing_state]', 'District Mailing State'
+          = text_field_tag 'district[mailing_state]', @district.mailing_state
+        .field
+          = label_tag 'district[mailing_zip_code]', 'District Mailing ZIP Code'
+          = text_field_tag 'district[mailing_zip_code]', @district.mailing_zip_code
+        .field
+          = label_tag 'district[phone]', 'District Phone Number'
+          = text_field_tag 'district[phone]', @district.phone
         footer
-          =admin_user.submit 'Continue', class: 'button-forward'
+          = admin.submit 'Continue', class: 'button-forward'

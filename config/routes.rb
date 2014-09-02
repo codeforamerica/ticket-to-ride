@@ -16,10 +16,17 @@ Rails.application.routes.draw do
   get 'welcome/newport', to: 'welcome#newport', as: :newport_intro
   # get 'enrollment/summary', to: 'enrollment#summary', as: :happy_libs_summary
 
+  # -----------------------
+  # Admin Login
+  # -----------------------
+
   get 'admin', to: 'admin#index'
 
   get 'admin/login', to: 'admin#admin_login'
   post 'admin/login', to: 'admin#admin_login'
+
+  get 'admin/central', to: 'admin#admin_login'
+  get 'admin/district', to: 'admin#admin_login'
 
   # -----------------------
   # Central Admin Setup
@@ -70,6 +77,12 @@ Rails.application.routes.draw do
 
   get 'admin/district/setup/:admin_user_id', to: 'admin#district_setup_get'
   post 'admin/district/setup/:admin_user_id', to: 'admin#district_setup_post'
+
+  # -----------------------
+  # District Admin - View applications
+  # -----------------------
+
+  get 'admin/district/applications', to: 'admin#district_applications'
 
   resources :enrollment
 

@@ -5,11 +5,11 @@ header
 .page
   .header
     ul
-      - @central_admin.errors.each do |field, message|
+      - @admin.errors.each do |field, message|
         li
           = message
   .site-width
-    =form_for(@central_admin, url: '/admin/central/setup/info', method: 'post') do |admin_user|
+    =form_for(@admin, url: '/admin/central/setup/info', method: 'post') do |admin_user|
       .field
       	=label :name, 'Name'
       	=admin_user.text_field :name
