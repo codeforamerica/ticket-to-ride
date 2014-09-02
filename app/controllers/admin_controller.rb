@@ -382,9 +382,14 @@ class AdminController < ApplicationController
       return render 'district_setup', layout: 'admin_setup'
     end
 
-    # Update the fields # TODO Error check
-    @admin.save
-    @district.save
+    # Update the fields
+    begin
+      @admin.save!
+      @district.save!
+    rescue Exception
+      @admin.errors.add(:base, 'Not your fault. Could not save record. Please contact the system administrator.')
+      return render 'district_setup'
+    end
 
     session[:admin_user_id] = @admin.id
 
