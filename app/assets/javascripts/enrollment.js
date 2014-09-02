@@ -258,7 +258,7 @@ $(document).ready(function () {
     };
 
     /**
-     * Registers an click action with element selected by `textInputSelector` to
+     * Registers a click action with element selected by `textInputSelector` to
      * unchecks a clicked radio button from the group with name `radioGroupName`.
      * Additionally, it removes the class `active` from the radio buttons parent
      * `label` element.
