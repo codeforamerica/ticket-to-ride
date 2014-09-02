@@ -9,10 +9,23 @@ html
     div#nav-bar
       ul
         li Ticket to RIDE
-        li
-          = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
-        li
-          = link_to 'People', {controller:'admin', action: 'central_people'}
+
+        - if @admin_user.user_role == :central_admin
+          li
+            = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
+          li
+            = link_to 'People', {controller:'admin', action: 'central_people'}
+        - else
+          li
+            = link_to 'Applications', '/admin/district/applications'
+          li
+            = link_to 'Supplemental Materials', '/admin/district/supplemental_materials'
+          li
+            = link_to 'People', '/admin/district/people'
+          li
+            = link_to 'Export', '/admin/district/export'
+          li
+            = link_to 'Sign Out', '/admin/signout'
         li
           = @admin_user.name
           | &nbsp;-&nbsp;
