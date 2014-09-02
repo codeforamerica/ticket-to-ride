@@ -857,8 +857,16 @@ label.btn-sms {
 }
 
 .keep-same-width{
-  width: 320px;
-  height: 40px
+
+  @include screen(wide-phone-only){
+    width: 240px;
+    margin-top: 2px;
+  }
+
+  @include screen(tablet-up) {
+    width: 320px;
+    height: 40px
+  }
 }
 
 .state_input {
