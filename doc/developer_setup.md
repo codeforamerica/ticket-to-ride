@@ -4,7 +4,7 @@
 
 These instructions assume the following:
 
-- You have the environment requirements setup. If you're working from Windows, please perform the steps documented in [Developer Setup for Windows](developer_windows_setup.md).
+- You have the [environment requirements](environment.md) setup. 
 
 ## Clone the Project
 
@@ -34,7 +34,6 @@ Run the following to create, setup, and populate the database.
 
 ```
 $ rake db:migrate
-$ rake db:seed
 ```
 
 # Database Reset
@@ -44,7 +43,6 @@ If you've been developing and want to clear your database, you can get a clean d
 ```
 $ rake db:drop
 $ rake db:migrate
-$ rake db:seed
 ```
 
 ## Start the server
