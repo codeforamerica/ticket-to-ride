@@ -90,22 +90,22 @@
               </td>
               <td>
                 <div class="btn-group pull-right" data-toggle="buttons">
-                  <label class="btn btn-primary">
+                  <label class="btn btn-primary btn-sms">
                     <%= g.radio_button :main_phone_can_sms, true %>Accepts Texts</label>
-                  <label class="btn btn-primary">
+                  <label class="btn btn-primary btn-sms">
                     <%= g.radio_button :main_phone_can_sms, false %>No Texts</label>
                 </div>
               </td>
             </tr>
             <tr>
-              <td><span>Secondary phone:</span>
+              <td><span>Backup phone:</span>
                 <span><%= g.telephone_field :secondary_phone, class: 'enrollment-form-input', placeholder: '401-111-2222' %></span>
               </td>
               <td>
                 <div class="btn-group pull-right" data-toggle="buttons">
-                  <label class="btn btn-primary">
+                  <label class="btn btn-primary btn-sms">
                     <%= g.radio_button :secondary_phone_can_sms, true %>Accepts Texts</label>
-                  <label class="btn btn-primary">
+                  <label class="btn btn-primary btn-sms">
                     <%= g.radio_button :secondary_phone_can_sms, false %>No Texts</label>
                 </div>
               </td>

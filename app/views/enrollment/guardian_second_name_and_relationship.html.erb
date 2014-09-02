@@ -5,7 +5,7 @@
   <div class="instructions">Tell us about <%= @student.first_name %>'s family.</div>
 
 <%= form_for(@guardian_2, url: wizard_path, method: :put, id: 'editable-fields') do |c| %>
-    <div>
+    <div class="contact_table enableZindex">
         <table>
           <tr>
             <td colspan="2"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?<sup>*</sup></span> 
@@ -38,7 +38,7 @@
       </table>
     </div>
 
-    <ul class="pager">
+    <ul class="pager pagerZindex">
       <li><%= link_to "Previous", previous_wizard_path %></li>
       <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>
@@ -51,7 +51,7 @@
               <h4 class="modal-title" id="firstLanguageLabel">How are you related to <%= @student.first_name %>?</h4>
             </div>
             <div class="modal-body single-col-modal">
-              <div class="btn-group" data-toggle="buttons">
+              <div class="btn-group single-col-btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
                   <%= radio_button_tag 'choose_relationship', :mother, class: 'second' %>Mother
                 </label><br/>
@@ -60,9 +60,10 @@
                 </label><br/>
                 <label class="btn btn-primary">
                   <%= radio_button_tag 'choose_relationship', :guardian, class: 'second' %>Guardian
-                </label><br/>
+                </label>
+              </div>
+              <div class="other-field">
                 <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'choose_relationship_input_text', placeholder: 'Other' %>
-                <br/>
               </div>
             </div>
             <div class="modal-footer">
