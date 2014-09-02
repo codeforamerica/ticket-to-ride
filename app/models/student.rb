@@ -6,7 +6,7 @@ class Student < ActiveRecord::Base
   # Relationships
   has_many :student_races
   has_many :contact_people
-  belongs_to :school
+  belongs_to :district
 
   # Behavior
   acts_as_birthday :birthday

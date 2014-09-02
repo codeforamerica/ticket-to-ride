@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902165458) do
+ActiveRecord::Schema.define(version: 20140902234228) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -81,20 +81,6 @@ ActiveRecord::Schema.define(version: 20140902165458) do
 
   add_index "districts", ["name"], name: "index_districts_on_name", unique: true
 
-  create_table "schools", force: true do |t|
-    t.string   "mailing_street_address_1"
-    t.string   "mailing_street_address_2"
-    t.string   "mailing_zip_code"
-    t.string   "phone"
-    t.integer  "district_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",                   default: false
-    t.string   "mailing_city"
-    t.string   "mailing_state"
-    t.string   "name"
-  end
-
   create_table "student_races", force: true do |t|
     t.integer  "student_id", null: false
     t.boolean  "active"
@@ -122,7 +108,6 @@ ActiveRecord::Schema.define(version: 20140902165458) do
     t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
     t.string   "mailing_zip_code"
-    t.integer  "school_id"
     t.integer  "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -154,6 +139,7 @@ ActiveRecord::Schema.define(version: 20140902165458) do
     t.string   "prior_school_state"
     t.string   "previous_grade"
     t.string   "confirmation_code"
+    t.integer  "district_id"
   end
 
   add_index "students", ["confirmation_code"], name: "index_students_on_confirmation_code", unique: true
