@@ -64,6 +64,13 @@ Rails.application.routes.draw do
   post 'admin/central/people/delete/:id', to: 'admin#central_people_delete_post'
 
 
+  # -----------------------
+  # District Admin Setup
+  # -----------------------
+
+  get 'admin/district/setup/:admin_user_id', to: 'admin#district_setup_get'
+  post 'admin/district/setup/:admin_user_id', to: 'admin#district_setup_post'
+
   resources :enrollment
 
   resources :students

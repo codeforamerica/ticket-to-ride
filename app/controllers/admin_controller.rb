@@ -335,6 +335,32 @@ class AdminController < ApplicationController
   end
 
   # -----------
+  # District Admin Setup
+  # -----------
+  def district_setup_get
+    @admin_user = AdminUser.find(params[:admin_user_id]) # TODO error handling on bad ID
+    return render 'district_setup', layout: 'admin_setup'
+  end
+
+  def district_setup_post
+
+  end
+
+  # -----------
+  # District Admin Applications
+  # -----------
+
+  # def district_applications
+  #   @admin_user = AdminUser.find(session[:admin_id])
+  #   @district = AdminUser.district
+  #
+  #   # TODO add pagination (like getting blocks of 25 to 50 at a time)
+  #   @students = Student.where(district: @district).order(:updated_at)
+  #
+  #   return
+  # end
+
+  # -----------
   # Authentication/Authorization
   # -----------
   def admin_login
@@ -365,10 +391,14 @@ class AdminController < ApplicationController
       return render 'admin_login', layout: 'admin_setup'
     end
 
-    # if admin_user.password == password
     session[:admin_id] = admin_user.id
+
+    # TODO some more error checking around the district ID
+    if admin_user.user_role == :district_admin
+      return redirect_to action: 'district_applications', district_id: admin_user.district_id
+    end
+
     return redirect_to action: 'central_supplemental_materials'
-    # end
   end
 
   def show
