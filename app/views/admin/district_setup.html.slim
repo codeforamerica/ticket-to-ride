@@ -1,0 +1,30 @@
+header
+  .site-width
+    h1 Setup your account
+    p Central administrators use a single account to manage registration statewide. Please specify the name, email address, and password for an administrator account.
+  .page
+    .header
+      ul
+        - @admin_user.errors.each do |field, message|
+          li
+            = message
+    .site-width
+      =form_for(@admin_user, url: request.original_url, method: 'post') do |admin_user|
+        .field
+          =label :name, 'Name'
+          =admin_user.text_field :name
+        .field
+          =label :email, 'Email Address'
+          =admin_user.text_field :email
+        - admin_user.fields_for :district, @admin_user.district do |district|
+          .field
+            = label :name, 'District Name'
+            = district.text_field :name
+        .field.field-password
+          =label :password, 'Password'
+          =admin_user.password_field :password
+        .field.field-password
+          =label :confirm_password, 'Confirm Password'
+          =admin_user.password_field :confirm_password
+        footer
+          =admin_user.submit 'Continue', class: 'button-forward'
