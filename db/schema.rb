@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829233014) do
+ActiveRecord::Schema.define(version: 20140902165458) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -153,7 +153,10 @@ ActiveRecord::Schema.define(version: 20140829233014) do
     t.string   "prior_school_city"
     t.string   "prior_school_state"
     t.string   "previous_grade"
+    t.string   "confirmation_code"
   end
+
+  add_index "students", ["confirmation_code"], name: "index_students_on_confirmation_code", unique: true
 
   create_table "students_contact_people", force: true do |t|
     t.integer "student_id"
