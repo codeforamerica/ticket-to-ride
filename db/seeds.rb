@@ -26,7 +26,6 @@ AdminUser.create(
     active: true
 )
 
-
 # West Warwick School District
 west_warwick_district = District.create(
   name: 'West Warwick Public Schools',
@@ -69,45 +68,30 @@ guardian_complete_west_warwick_student = Student.create(
     middle_name: 'Michael',
     last_name: 'Miller',
     birthday: '2008-01-01',
-    home_language: 'english',
-    guardian_language: 'spanish',
-    school_start_date: '2014-09-01',
+    first_language: 'english',
+    home_language: 'spanish',
     iep: true,
     p504: true,
-    bus_required: true,
     birth_certificate_verified: false,
     residency_verified: false,
-    lunch_provided: true,
     home_street_address_1: '60 Coit Ave',
     home_street_address_2: 'Apt 4',
     home_city: 'West Warwick',
     home_state: 'RI',
     home_zip_code: '02893',
-    mailing_street_address_1: 'P.O. Box 14',
-    mailing_street_address_2: 'Lockbox 18',
-    mailing_city: 'West Warwick',
-    mailing_state: 'RI',
-    mailing_zip_code: '02893',
     gender: :male,
     birth_city: 'West Warwick',
     birth_state: 'RI',
     birth_country: 'USA',
     is_hispanic: false,
-    alt_home_street_address_1: '71 Coit Ave',
-    alt_home_street_address_2: 'Backdoor',
-    alt_home_city: 'West Warwick',
-    alt_home_state: 'RI',
-    alt_home_zip_code: '02893',
-    nickname: 'Jimbo',
-    guardian_complete_time: '2013-06-18',
+    guardian_complete_time: DateTime.now,
     estimated_graduation_year: 2027,
     prior_school_name: 'Lighthouse Montessori',
     prior_school_city: 'West Warwick',
     prior_school_state: 'RI',
     previous_grade: 'pre_k',
     district: west_warwick_district,
-    confirmation_code: 'ABC123',
-    is_processed: false
+    confirmation_code: 'ABC123'
 )
 
 StudentRace.create(

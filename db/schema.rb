@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903164338) do
+ActiveRecord::Schema.define(version: 20140903181153) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -97,51 +97,35 @@ ActiveRecord::Schema.define(version: 20140903164338) do
     t.string   "last_name"
     t.date     "birthday"
     t.string   "first_language"
-    t.date     "school_start_date"
     t.boolean  "iep"
     t.boolean  "p504"
-    t.boolean  "bus_required",               default: false
     t.boolean  "birth_certificate_verified", default: false
     t.boolean  "residency_verified",         default: false
     t.boolean  "lunch_provided",             default: false
     t.string   "home_street_address_1"
     t.string   "home_street_address_2"
     t.string   "home_zip_code"
-    t.string   "mailing_street_address_1"
-    t.string   "mailing_street_address_2"
-    t.string   "mailing_zip_code"
     t.integer  "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "home_city"
-    t.string   "mailing_city"
     t.string   "birth_country"
     t.boolean  "is_hispanic"
-    t.string   "alt_home_street_address_1"
-    t.string   "alt_home_street_address_2"
-    t.string   "alt_home_city"
-    t.string   "alt_home_zip_code"
-    t.string   "alt_home_state"
-    t.string   "nickname"
     t.string   "birth_city"
     t.string   "birth_state"
     t.datetime "guardian_complete_time"
     t.datetime "export_time"
     t.integer  "estimated_graduation_year"
     t.string   "home_state"
-    t.string   "mailing_state"
     t.boolean  "needs_special_services"
-    t.boolean  "is_gifted"
     t.boolean  "has_learning_difficulties"
     t.string   "home_language"
-    t.string   "guardian_language"
     t.string   "prior_school_name"
     t.string   "prior_school_city"
     t.string   "prior_school_state"
     t.string   "previous_grade"
     t.string   "confirmation_code"
     t.integer  "district_id"
-    t.boolean  "is_processed",               default: false
   end
 
   add_index "students", ["confirmation_code"], name: "index_students_on_confirmation_code", unique: true

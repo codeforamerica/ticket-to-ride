@@ -59,10 +59,6 @@ class Student < ActiveRecord::Base
                                       message: 'Home language can only contain letters, spaces, and dashes',
                                       allow_nil: true
   }
-  validates :guardian_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
-                                          message: 'Guardian language can only contain letters, spaces, and dashes',
-                                          allow_nil: true
-  }
 
   # Prior school information
   validates :prior_school_name, format: { with: ModelConstants::LETTERS_NUMBERS_SPACES_AND_DASHES_REGEX,
