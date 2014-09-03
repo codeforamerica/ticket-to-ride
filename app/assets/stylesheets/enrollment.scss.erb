@@ -1,5 +1,6 @@
 @import "common/variables";
 @import "welcome";
+@import "common/mixins";
 
 div.container-application header {
   position: absolute;
@@ -9,15 +10,18 @@ div.container-application header {
   width: 226px;
 }
 
-// .enrollment-form *{
-//   border: 1px solid green;
-// }
+.enrollment-form{ 
+  @include screen(wide-phone-only) {
+    max-width: 500px;
+    margin: 1em 15% 0 15%;
+    font-size: 120%;
+  }
 
-.enrollment-form{
-  margin: 1em 5% 0 5%;  
-  // padding-left: 5%;
-  max-width: 960px;
-  font-size: 150%;
+  @include screen(tablet-up) {
+    max-width: 960px;
+    margin: 1em 5% 0 5%; 
+    font-size: 150%;
+  }
 }
 
 .enrollment-form .container {
@@ -173,13 +177,6 @@ span.standout {
   border-bottom: 3px dotted $paul-mccartney;
 }
 
-
-
-// a.editable-click {
-//   color: $yoko-ono;
-//   border-color: $yoko-ono;
-// }
-
 .input-small {
   max-width: 150px;
 }
@@ -250,7 +247,7 @@ span.standout {
 
 
 /* ========================== */ 
-/*                            */
+/*          Slider            */
 /* ========================== */
 
 
@@ -342,6 +339,7 @@ input[type=date] {
   border-bottom: 2px dashed $george-harrison;
   width: 38%;
   text-align: center;
+  -webkit-appearance: none; // this turns off iOs element rounding
 }
 
 .enrollment-form-input {
@@ -359,17 +357,11 @@ input[type=date] {
 }
 
 .enrollment-grid-input {
-  border: 0;
-  color: $paul-mccartney;
-  font-weight: 600;
-  border-bottom: 2px dashed $george-harrison;
-  font-size: 75%;
-  text-align: center;
+  @extend .enrollment-form-input;
   /* line-height: 1.5em; */
-  position: relative;
-  top: -7px;
-  width: 100%;
-  margin: 0 4.5% 0 -17.5%;
+  width: 86%;
+  margin-left: -3%;
+  // margin: 0 4.5% 0 -17.5%;
 }
 
 .enrollment-form-answered {
@@ -396,20 +388,24 @@ sup {
 
 .enrollment-form-popover {
   border: 0;
-  padding-left: 5%;
-  padding-right: 5%;
   color: $paul-mccartney;
   font-weight: 600;
   border-bottom: 2px dashed $george-harrison;
   margin: 0 1% 0 1%;
-  // width: 100%;
-  // min-width: 200px;
-  // max-width: 200px;
   text-align: center;
   line-height: 1.5em;
-  // position: relative;
   top: 0;
   font-size: 93%;
+
+  @include screen(wide-phone-only) {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  @include screen(tablet-up) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 
 .enrollment-form-modal-language {
@@ -451,14 +447,6 @@ form div {
     text-transform: capitalize;
 }
 
-#student_birth_state {
-  width: 11%;
-}
-
-#student_address1 {
-  width: 17%;
-}
-
 button {
   margin-left: 2%;
 }
@@ -484,12 +472,20 @@ button {
 /* ========================== */
 
 .enrollment-navigation {
-  max-width: 960px;
   margin: 1% auto;
   text-align: center;
   color: $ringo-starr;
-}
 
+  @include screen(wide-phone-only){
+    width: 600px;
+    padding-left: 10%;
+  }
+
+  @include screen(tablet-up) {
+    max-width: 960px;
+  }
+
+}
 
 .enrollment-navigation a {
   color: $yoko-ono;
@@ -512,16 +508,24 @@ button {
 .pastCircle {
   display: inline-block;
   border-radius: 50%;
-  min-width: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  max-width: 24px;
   background-color: $dhani-harrison;
+  color: $john-lennon;
   text-align: center;
   font-size: 70%;
-  margin-right: 6px;
-  padding: 5px 3px 0 3px;
-  color: $john-lennon;
+
+  @include screen(tablet-up) {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    padding: 5px 3px 0 3px;
+  }
+
+  @include screen(wide-phone-only){
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    padding: 5px 3px 0 3px;
+  }
 }
 
 .pastCircle a {
@@ -545,17 +549,30 @@ button {
 .futureCircle {
   display: inline-block;
   border-radius: 50%;
-  min-width: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  max-width: 24px;
   background-color: #CCC;
+  color: #FFF;
   text-align: center;
   font-size: 70%;
-  margin-right: 6px;
-  padding: 5px 3px 0 3px;
-  color: #FFF;
+
+  @include screen(tablet-up){
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    padding: 5px 3px 0 3px;
+  }
+
+  @include screen(wide-phone-only){
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    padding: 5px 3px 0 3px;
+  }
 }
+/* ===== end navigation ===== */
+
+/* ========================== */ 
+/*     Summary pages          */
+/* ========================== */
 
 .summaryText {
   font-size: 75%;
@@ -598,6 +615,8 @@ td.summaryText.section-break {
   line-height: 88%;
 }
 
+/* == end summary pages == */
+
 div.enrollment-form .field_with_errors {
   display: inline;
 }
@@ -606,7 +625,6 @@ div.enrollment-form .field_with_errors input[type=radio]{
   display: inline;
   display: none;
 }
-
 
 .race-check input[type="checkbox"].checkbox {
     display: none;
@@ -642,7 +660,6 @@ div.enrollment-form .field_with_errors input[type=radio]{
 .race-check input[type="checkbox"].checkbox:disabled + label {
     opacity: 0.5;
 }
-
 
 #validation-errors li {
   font-size: 60%;
@@ -680,13 +697,33 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   border-bottom:5px solid $george-harrison;
 }
 
+/* ========================== */ 
+/*     Completed Section      */
+/* ========================== */
+
 .completed-section {
   @extend .welcome;
+  @include screen(wide-phone-only){
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    width: 660px;
+  }
+
 }
 
 .completed-section ul.pager {
+
+  @include screen(wide-phone-only) {
+    width:500px;
+  }
+
+  @include screen(tablet-up){
+    width: 660px;
+  }
   margin-top: 1em;
-  width: 660px;
+
 }
 
 .completed-section .instructions{
@@ -695,10 +732,9 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   color: #1697d4;
   line-height: 145%;
   margin-bottom: 8%;
-  // margin-top: -6%;
 }
 
-.completed-section .col-lg-3 {
+.completed-section .col-md-6 {
   margin-top: 1%;
   margin-bottom: 1%;
 }
@@ -707,53 +743,130 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   margin-right: 2%;
 }
 
-.enrollment-modal-select {
-  display: inline;
-  width: 50%;
-  margin-top: -14%;
+/* == end completed section == */
+
+/* ========================== */ 
+/*        Student table       */
+/* ========================== */
+
+.student_table {
+  @include screen(wide-phone-only){
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    width: 660px;
+  }
 }
 
-.enrollment-form .modal-title{
-  font-size: 70%;
-}
-
-.enrollment-form .single-col-modal .btn {
-  margin-bottom: 1%;
-}
-
-.enrollment-form .single-col-modal .enrollment-form-input{
-  margin-top: 2%;
-}
+/* ========================== */ 
+/*        Contact table       */
+/* ========================== */
 
 #contact_table {
-  width: 660px;
+
+  @include screen(wide-phone-only){
+    width: 500px;
+  }
+
+  @include screen(tablet-up) {
+    width: 660px;
+  }
 }
+
+/* ========================== */ 
+/*           Z-index          */
+/* ========================== */
 
 .enableZindex {
   z-index: 2;
   position: absolute;
   background: #FFF;
-  min-width: 660px;
-  max-width: 660px;
+
+  @include screen(wide-phone-only){
+    min-width: 500px;
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    min-width: 660px;
+    width: 660px;
+  }
 }
 
 .enableZindex_summary {
   z-index: 2; 
   position: absolute;
-  min-width: 660px;
-  max-width: 660px;
+
+  @include screen(wide-phone-only){
+    min-width: 500px;
+    width: 500px;
+  }
+
+  @include screen(tablet-up){
+    min-width: 660px;
+    max-width: 660px;
+  }
 }
 
 .pagerZindex {
   z-index:2;
   position: absolute;
-  bottom: 160px;
-  min-width: 660px;
+
+  @include screen(wide-phone-only){
+    width: 500px;
+    top: 415px;
+  }
+
+  @include screen(tablet-up){
+    bottom: 160px;
+    width: 660px;
+  }
+}
+
+/* ====== end z-index ===== */
+
+label.btn-sms {
+  @include screen(wide-phone-only){
+    font-size: 11px;
+  }
+}
+
+.btn-group {
+  @include screen(wide-phone-only){
+    white-space: nowrap;
+  }
+}
+
+.btn-group-grades label{
+  @include screen(wide-phone-only){
+    font-size: 70%;
+  }
+}
+
+/* ========================== */ 
+/*       input width          */
+/* ========================== */
+
+#student_birth_state {
+  width: 11%;
+}
+
+#student_address1 {
+  width: 17%;
 }
 
 .keep-same-width{
-  width: 320px;
-  height: 40px
+
+  @include screen(wide-phone-only){
+    width: 240px;
+    margin-top: 2px;
+  }
+
+  @include screen(tablet-up) {
+    width: 320px;
+    height: 40px
+  }
 }
 
 .state_input {
@@ -774,14 +887,26 @@ div.enrollment-form .tooltip.bottom .tooltip-arrow{
   width: 35%;
 }
 
-td.secondary-phone-cell {
-  white-space: nowrap;
-}
-
 .relationship_input_narrow{
   width: 30%;
 }
 
+/* ===== end input width ==== */
+
+td.secondary-phone-cell {
+  white-space: nowrap;
+}
+
 div.instructions.squish {
   margin-top: -28px !important;
+}
+
+.container {
+  @include screen(wide-phone-only) {
+    width: 500px;
+  }
+
+  @include screen(tablet-up) {
+    width: 660px;
+  }
 }

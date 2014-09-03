@@ -2,62 +2,57 @@
 <div class="enrollment-form">
 <%= render 'enrollment/contact_person_errors' %>
 
-  <h1>Emergency Contact 1</h1>
+  <h1>Emergency Contact - Family member</h1>
 
-  <div class="instructions">Tell us about an adult who can find you in case of an emergency.</div>
+  <div class="instructions">Tell us about a family member whom our school staff may get in touch with if <%= @student.first_name %> has a medical emergency and we are unable to contact you.</div>
 
   <%= form_for(@contact_person, url: wizard_path, method: :put) do |c| %>
     <div id="contact_table" class="enableZindex">
-      <table>
-        <tr>
-          <td class="row-break"><span>First Name<sup>*</sup></span>
-            <span><%= c.text_field :first_name, class: 'enrollment-form-input', placeholder: 'John', required: true %></span>
-          </td>
-          <td>
-            <span>Last Name<sup>*</sup></span>
-            <span><%= c.text_field :last_name, class: 'enrollment-form-input', placeholder: 'Lennon', required: true %></span>
-          </td>
-        </tr>
-        <tr>
-          <td class="padding-right" colspan="2">Relationship to <%= @student.first_name %><sup>*</sup>
-            <%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#contact1RelationshipModal', id: 'contact1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
-          </td>
-        </tr>
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-md-3 col-sm-4">First Name<sup>*</sup></div>
+          <div class="col-md-3 col-sm-8"><%= c.text_field :first_name, class: 'enrollment-grid-input', placeholder: 'John', required: true %></div>
+          <div class="col-md-3 col-sm-4">Last Name<sup>*</sup></div>
+          <div class="col-md-3 col-sm-8"><%= c.text_field :last_name, class: 'enrollment-grid-input', placeholder: 'Lennon', required: true %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 col-sm-5">Relationship to <%= @student.first_name %><sup>*</sup></div>
+          <div class="col-md-7 col-sm-7"><%= c.text_field :relationship, class: 'enrollment-form-popover input-pointer capitalize', 'data-toggle' => 'modal', 'data-target' => '#contact1RelationshipModal', id: 'contact1RelationshipSelected', readonly: true, placeholder: 'Choose Relationship'  %>
+          </div>
+        </div>
 
-            <tr>
-              <td class="row-break"><span>Main phone<sup>*</sup></span>
-                <span><%= c.telephone_field :main_phone, class: 'enrollment-form-input', placeholder: '401-111-2222', required: true %></span>
-              </td>
-              <td>
-                <div class="btn-group pull-right" data-toggle="buttons">
-                  <label class="btn btn-primary">
-                    <%= c.radio_button :main_phone_can_sms, true %>Accepts Texts</label>
-                  <label class="btn btn-primary">
-                    <%= c.radio_button :main_phone_can_sms, false %>No Texts</label>
-                </div>
-              </td>
-            </tr>
+          <div class="row">
+            <div class="col-md-3 col-sm-12">Main phone<sup>*</sup></div>
+            <div class="col-md-5 col-sm-6"><%= c.telephone_field :main_phone, class: 'enrollment-grid-input', placeholder: '401-111-2222', required: true %></div>
+            <div class="col-md-4 col-sm-4">
+              <div class="btn-group pull-right" data-toggle="buttons">
+                <label class="btn btn-primary">
+                  <%= c.radio_button :main_phone_can_sms, true %>Accepts Texts</label>
+                <label class="btn btn-primary">
+                  <%= c.radio_button :main_phone_can_sms, false %>No Texts</label>
+              </div>
+            </div>
+          </div>
 
-            <tr>
-              <td class="secondary-phone-cell"><span>Secondary phone:</span>
-                <span><%= c.telephone_field :secondary_phone, class: 'enrollment-form-input', placeholder: '401-111-2222' %></span>
-              </td>
-              <td>
-                <div class="btn-group pull-right" data-toggle="buttons">
-                  <label class="btn btn-primary">
-                    <%= c.radio_button :secondary_phone_can_sms, true %>Accepts Texts</label>
-                  <label class="btn btn-primary">
-                    <%= c.radio_button :secondary_phone_can_sms, false %>No Texts</label>
-                </div>
-              </td>
-            </tr>
-        <tr>
-          <td colspan="2"><span>Email address:</span>
-            <span><%= c.email_field :email, class: 'enrollment-form-input', id: 'contact1_email', placeholder: 'john@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></span>
-          </td>
-        </tr>
+          <div class="row">
+            <div class="secondary-phone-cell col-md-4 col-sm-12">Secondary phone:</div>
+            <div class="col-md-4 col-sm-6"><%= c.telephone_field :secondary_phone, class: 'enrollment-grid-input', placeholder: '401-111-2222' %></div>
+            <div class="col-md-4 col-sm-4">
+              <div class="btn-group pull-right" data-toggle="buttons">
+                <label class="btn btn-primary">
+                  <%= c.radio_button :secondary_phone_can_sms, true %>Accepts Texts</label>
+                <label class="btn btn-primary">
+                  <%= c.radio_button :secondary_phone_can_sms, false %>No Texts</label>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">Email address:</div>
+          <div class="col-md-8 col-sm-7"><%= c.email_field :email, class: 'enrollment-grid-input', id: 'contact1_email', placeholder: 'john@email.com', pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %></div>
+        </div>
 
-      </table>
+      </div>
       <ul class="pager">
         <li><%= link_to "Previous", previous_wizard_path %></li>
         <li><%= c.submit 'Next', class: 'nav-button pull-right' %></li>
@@ -72,18 +67,19 @@
               <h4 class="modal-title" id="firstLanguageLabel">How are you related to <%= @student.first_name %>?</h4>
             </div>
             <div class="modal-body single-col-modal">
-              <div class="btn-group" data-toggle="buttons">
+              <div class="btn-group single-col-btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', 'relative', class: 'second' %>Relative
+                  <%= radio_button_tag 'choose_relationship', 'relative' %>Relative
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', 'sibling', class: 'second' %>Sibling
+                  <%= radio_button_tag 'choose_relationship', 'sibling' %>Sibling
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', 'family friend', class: 'second' %>Family Friend
-                </label><br/>
+                  <%= radio_button_tag 'choose_relationship', 'family friend' %>Family Friend
+                </label>
+              </div>
+              <div class="other-field">
                 <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'choose_relationship_input_text', placeholder: 'Other' %>
-                <br/>
               </div>
             </div>
             <div class="modal-footer">

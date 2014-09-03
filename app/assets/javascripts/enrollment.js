@@ -1,5 +1,9 @@
 $(document).ready(function () {
-  $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
+
+  // Show tooltips unless user is on a touch-enabled device
+  if(isTouchDevice()===false) {
+    $("[data-toggle=tooltip]").tooltip({placement: 'bottom'});
+  }
 
   $("[data-toggle=popover]").popover({ 
     html : true, 
@@ -254,7 +258,7 @@ $(document).ready(function () {
     };
 
     /**
-     * Registers an click action with element selected by `textInputSelector` to
+     * Registers a click action with element selected by `textInputSelector` to
      * unchecks a clicked radio button from the group with name `radioGroupName`.
      * Additionally, it removes the class `active` from the radio buttons parent
      * `label` element.
@@ -340,5 +344,10 @@ $(document).ready(function () {
     jQuery(function($){
        $("input[type='tel']").mask("999-999-9999",{placeholder:" "});
     });
+
+    // Disable tooltips on touch-enabled devices otherwise tooltip will interfere with button functionality
+    function isTouchDevice() {
+      return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+    }
 
 });

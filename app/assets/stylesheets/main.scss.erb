@@ -1,12 +1,22 @@
 @import "common/variables";
+@import "common/mixins";
 
 div.container-application{
-	padding-left: 220px;
+
+  @include screen(wide-phone-only) {
+    padding-left: 100px;
+    width: 720px;
+  }
+
+  @include screen(tablet-up){
+    padding-left: 220px;
+    width: 920px; 
+  }
+
 	position: relative;
 	height: 100%;
-	width: 920px; 
 	margin: 0 auto;
-		-webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 
@@ -17,7 +27,6 @@ body, html {
   font-family: $please-please-me;
   font-size: 16px;
   color: $john-lennon;
-  /*width: 100%;*/
 }
 
 p, h2 {
@@ -25,30 +34,58 @@ p, h2 {
 }
 
 .logo {
-  width: 226px;
   background-image: url('/assets/vintage-logo.png');
-  background-size: 229px;
   background-repeat: no-repeat;
-  height: 155px;
   transform:rotate(-4deg);
   -ms-transform:rotate(-4deg); /* IE 9 */
   -webkit-transform:rotate(-4deg); /* Opera, Chrome, and Safari */
+
+  @include screen(wide-phone-only){
+    width: 200px;
+    height: 129px;
+    background-size: 196px;
+  }
+
+  @include screen(tablet-up){
+    width: 226px;
+    height: 155px;
+    background-size: 229px;
+  }
 }
 
 .background {
   position: absolute;
-  bottom: 7px;
-  left: -80px;
+  bottom: 6px;
   z-index: 0;
   opacity: .99;
+
+  @include screen(wide-phone-only){
+    left: -60px;
+  }
+
+  @include screen(tablet-up){
+    left: -80px;
+  }
 }
 
 .background-welcome {
   position: absolute;
   bottom: 0;
-  left: -80px;
   z-index: 0;
   opacity: .99;
+
+  @include screen(wide-phone-only){
+    left: -60px;
+    bottom: 0 !important;
+  }
+
+  @include screen(tablet-up){
+    left: -80px;
+  }
+}
+
+.background-complete {
+  @extend .background-welcome;
 }
 
 a {

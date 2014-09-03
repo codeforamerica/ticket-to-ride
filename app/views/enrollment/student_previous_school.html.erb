@@ -7,9 +7,10 @@
 
 <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
 
+  <div class="student_table enableZindex">
     <table>
       <tr><td colspan="2" class="row-break"><span>What grade level has <%= @student.first_name %> most recently completed?<sup>*</sup></span> 
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group btn-group-grades" data-toggle="buttons">
           <% Grades::ALL.each do |grade| %>
             <label class="btn btn-primary">
                 <%= s.radio_button :previous_grade, grade %><%= t('grade_' + grade + '_abbrev') %>
@@ -22,12 +23,19 @@
       </tr>
 
       <tr>
-        <td colspan="2">Prior school city and state: <span><%= s.text_field :prior_school_city, class: 'enrollment-form-input city_input', id: 'student_previous_school_city', placeholder: 'New Shoreham' %></span>, 
-  <%= s.text_field :prior_school_state, class: 'enrollment-form-input state_input', id: 'student_previous_school_state', placeholder: 'RI' %></span></td>
+        <td colspan="2">Prior school city and state: 
+          <span>
+            <%= s.text_field :prior_school_city, class: 'enrollment-form-input city_input', id: 'student_previous_school_city', placeholder: 'New Shoreham' %>
+          </span>, 
+          <span>
+            <%= s.text_field :prior_school_state, class: 'enrollment-form-input state_input', id: 'student_previous_school_state', placeholder: 'RI' %>
+          </span>
+        </td>
       </tr>
     </table>
+  </div>
 
-    <ul class="pager">
+    <ul class="pager pagerZindex">
       <li><%= link_to "Previous", previous_wizard_path %></li>
       <li><%= s.submit 'Next', class: 'nav-button pull-right' %></li>
     </ul>

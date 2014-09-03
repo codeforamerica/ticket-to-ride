@@ -2,11 +2,10 @@
   <div><p>Congratulations! You've completed the online portion of <%= @student.first_name %>'s school registration.</p>
   </div>
 
-  <div><span class="instructions">Please bring the following documents with you to finalize your application:</div>
-    <div class="container">
-
+  <div><span class="instructions">Please bring the following documents with you to finalize your application:</span></div>
+  <div class="container">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-md-6 col-sm-12">
         <div class="input-group">
           <span class="input-group-addon">
             <!-- <input type="checkbox"> -->
@@ -17,7 +16,7 @@
       </div>
       <!-- /.col-lg-6 -->
 
-      <div class="col-lg-3">
+      <div class="col-md-6 col-sm-12">
         <div class="input-group">
           <span class="input-group-addon">
             <!-- <input type="checkbox"> -->
@@ -30,7 +29,7 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-md-6 col-sm-12">
         <div class="input-group">
           <span class="input-group-addon">
             <!-- <input type="checkbox"> -->
@@ -41,7 +40,7 @@
       </div>
       <!-- /.col-lg-6 -->
 
-      <div class="col-lg-3">
+      <div class="col-md-6 col-sm-12">
         <div class="input-group">
           <span class="input-group-addon">
             <!-- <input type="checkbox"> -->
@@ -53,12 +52,14 @@
       <!-- /.col-lg-6 -->
     </div>
   </div>
-  <div><span class="instructions">Schedule an appointment to bring in your documentation and complete enrollment.</div>
-  <%= form_for(@student, url: wizard_path, method: :put) do |s| %>
-      <ul class="pager">
-        <li><%= link_to 'Schedule', 'https://booknow.appointment-plus.com/6s6hcr14/', class: 'nav-button pull-right' %></li>
-      </ul>
-  <% end %>
+  <div class="">&nbsp;</div>
+  <h3>Next steps</h3>
+  <div><span class="instructions">Schedule an appointment to bring in your documentation and complete enrollment.</span>
+    <ul class="pager">
+      <li><%= link_to 'Schedule', 'https://booknow.appointment-plus.com/6s6hcr14/', target: 'new', class: 'nav-button pull-right' %></li>
+    </ul>
+  </div>
+      
 </div>
 
 <%= render 'shared/scenery_enrollment_complete' %>

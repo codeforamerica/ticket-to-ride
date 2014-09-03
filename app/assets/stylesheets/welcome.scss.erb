@@ -1,15 +1,39 @@
+@import "common/mixins";
+
 .welcome { 
-  padding-left: 3%;
-  padding-top: 1%;
-  font-size: 1.3em; 
-  line-height: 1.6em;
+
+  @include screen(wide-phone-only){
+    font-size: 1.2em;
+    line-height: 1.6em;
+    padding-left: 15%;
+    padding-top: 2%;
+    padding-bottom: 5%;
+  }
+
+  @include screen(tablet-up){
+    padding-left: 3%;
+    padding-top: 1%;
+    font-size: 1.3em; 
+    line-height: 1.6em;
+  }
+
 }
 
 .welcome p {
   padding-top: 2%;
 }
 
-.welcome h2 { font-size: 1.6em; }
+.welcome h2 { 
+
+  @include screen(wide-phone-only) {
+    font-size: 1.4em;
+  }
+
+  @include screen(tablet-up) {
+    font-size: 1.6em;
+  }
+
+}
 
 .begin_enrollment .btn { 
   font-size: 150%; 

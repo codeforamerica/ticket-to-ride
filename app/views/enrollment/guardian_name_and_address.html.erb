@@ -96,18 +96,19 @@
               <h4 class="modal-title" id="firstLanguageLabel">How are you related to <%= @student.first_name %>?</h4>
             </div>
             <div class="modal-body single-col-modal">
-              <div class="btn-group" data-toggle="buttons">
+              <div class="btn-group single-col-btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', :mother, class: 'second' %>Mother
+                  <%= radio_button_tag 'choose_relationship', :mother %>Mother
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', :father, class: 'second' %>Father
+                  <%= radio_button_tag 'choose_relationship', :father %>Father
                 </label><br/>
                 <label class="btn btn-primary">
-                  <%= radio_button_tag 'choose_relationship', :guardian, class: 'second' %>Guardian
-                </label><br/>
+                  <%= radio_button_tag 'choose_relationship', :guardian %>Guardian
+                </label>
+              </div>
+              <div class="other-field">
                 <%= text_field_tag 'choose_relationship', nil, class: 'enrollment-form-input second', id: 'choose_relationship_input_text', placeholder: 'Other' %>
-                <br/>
               </div>
             </div>
             <div class="modal-footer">
