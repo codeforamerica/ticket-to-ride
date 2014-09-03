@@ -7,6 +7,16 @@ class AdminController < ApplicationController
   include SupplementalMaterialParams
   include DistrictParams
 
+  # -----------
+  # Constants
+  # -----------
+
+  APPLICATIONS_PER_PAGE = 25
+
+  # -----------
+  # INDEX
+  # -----------
+
   def index
     @admins = AdminUser.all
 
@@ -400,18 +410,51 @@ class AdminController < ApplicationController
   # District Admin Applications
   # -----------
 
-  def district_applications
+  def show_district_applications(title, is_processed)
     @admin = AdminUser.find(session[:admin_user_id])
     @district = @admin.district
+    @title = title
 
-    # TODO add pagination (like getting blocks of 25 to 50 at a time)
-    @students = Student.where(district: @district).order(:updated_at)
+    # Get students for the admin's district that have completed registration, but not been processed
+    @students = Student.where(district: @district, is_processed: is_processed).order(:updated_at)
+    @students = @students.where.not(confirmation_code: nil)
 
-    if @students.any?
-      return render 'district_applications'
+    # If no student applications completed, render holding page
+    unless @students.any?
+      return render 'district_applications_none'
     end
 
-    return render 'district_applications_none'
+    # Determine which page of students to show
+    @num_pages = @students.count / APPLICATIONS_PER_PAGE
+    if @students.count % APPLICATIONS_PER_PAGE > 0
+      @num_pages += 1
+    end
+
+    @page = 1
+    if params[:page] && params[:page] != ''
+      requested_page = params[:page].to_i
+
+      if requested_page <= @num_pages
+        @page = requested_page
+      end
+    end
+
+    start_index = 0
+    if @page > 1
+      start_index = (APPLICATIONS_PER_PAGE * @page) - 1
+    end
+    @students = @students.slice(start_index, APPLICATIONS_PER_PAGE)
+
+
+    return render 'district_applications'
+  end
+
+  def district_applications_unprocessed
+    return show_district_applications('Applications For Review', false)
+  end
+
+  def district_applications_processed
+    return show_district_applications('Processed Applications', true)
   end
 
   # -----------

@@ -79,10 +79,14 @@ Rails.application.routes.draw do
   post 'admin/district/setup/:admin_user_id', to: 'admin#district_setup_post'
 
   # -----------------------
-  # District Admin - View applications
+  # District Admin - Applications
   # -----------------------
 
-  get 'admin/district/applications', to: 'admin#district_applications'
+  get 'admin/district/applications', to: 'admin#district_applications_unprocessed'
+  get 'admin/district/applications/:page', to: 'admin#district_applications_unprocessed', page: /\d+/
+
+  get 'admin/district/applications/processed', to: 'admin#district_applications_processed'
+  get 'admin/district/applications/processed/:page', to: 'admin#district_applications_processed', page: /\d+/
 
   resources :enrollment
 

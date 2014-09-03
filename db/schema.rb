@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903000215) do
+ActiveRecord::Schema.define(version: 20140903164338) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 20140903000215) do
     t.integer  "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                     default: false
     t.string   "home_city"
     t.string   "mailing_city"
     t.string   "birth_country"
@@ -142,6 +141,7 @@ ActiveRecord::Schema.define(version: 20140903000215) do
     t.string   "previous_grade"
     t.string   "confirmation_code"
     t.integer  "district_id"
+    t.boolean  "is_processed",               default: false
   end
 
   add_index "students", ["confirmation_code"], name: "index_students_on_confirmation_code", unique: true

@@ -1,0 +1,32 @@
+.applications-table
+  .header-row
+    .column Student
+    .column Guardian
+    .column Phone
+    .column Email
+    .column Submitted
+
+  - @students.each do |student|
+    - guardian = student.contact_people[0]
+    .row
+      a href="/admin/district/application/#{student.id}"
+        .column
+          = student.first_name
+          span &nbsp;
+          = student.last_name
+        .column
+          = guardian.first_name
+          span &nbsp;
+          = guardian.last_name
+        .column
+          = guardian.main_phone
+        .column
+          = guardian.email || '(not given)'
+        .column
+          = student.updated_at.localtime.strftime('%F, %H:%M %p')
+
+.applications-pages
+  - @num_pages.times do |page_number|
+    .page-number
+      - pn = page_number + 1
+      = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
