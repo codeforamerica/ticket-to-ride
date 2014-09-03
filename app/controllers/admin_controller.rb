@@ -448,8 +448,8 @@ class AdminController < ApplicationController
     session[:admin_user_id] = admin_user.id
 
     # TODO some more error checking around the district ID
-    if admin_user.user_role == :district_admin
-      return redirect_to action: 'district_applications', district_id: admin_user.district_id
+    if admin_user.user_role == 'district_admin'
+      return redirect_to action: 'district_applications'
     end
 
     return redirect_to action: 'central_supplemental_materials'
