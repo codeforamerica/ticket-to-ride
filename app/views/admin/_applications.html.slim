@@ -5,10 +5,11 @@
     .column Phone
     .column Email
     .column Submitted
+    .column Confirmation
 
   - @students.each do |student|
-    - guardian = student.contact_people[0]
     .row
+      - guardian = student.contact_people[0]
       a href="/admin/district/application/#{student.id}"
         .column
           = student.first_name
@@ -23,7 +24,9 @@
         .column
           = guardian.email || '(not given)'
         .column
-          = student.updated_at.localtime.strftime('%F, %H:%M %p')
+          = student.guardian_complete_time.localtime.strftime('%F, %H:%M %p')
+        .column
+          = student.confirmation_code
 
 .applications-pages
   - @num_pages.times do |page_number|
