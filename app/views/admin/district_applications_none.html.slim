@@ -1,1 +1,10 @@
-span NO APPS
+header
+
+  .page
+    h1 No applications have been submitted yet
+    p Share the following URL on your website to start collecting applications.
+
+    p
+      | http://localhost:3000/
+      / TODO The URL should be calculated/stored elsewhere
+      = @district.name.downcase.gsub(/\s+/, '-')
