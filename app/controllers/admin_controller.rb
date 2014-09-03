@@ -416,7 +416,12 @@ class AdminController < ApplicationController
     @title = title
 
     # Get students for the admin's district that have completed registration, but not been processed
-    @students = Student.where(district: @district, is_processed: is_processed).order(:updated_at)
+    @students = Student.where(district: @district).order(:guardian_complete_time)
+    if is_processed
+      @students = @students.where.not(export_time: nil)
+    else
+      @students = @students.where(export_time: nil)
+    end
     @students = @students.where.not(confirmation_code: nil)
 
     # If no student applications completed, render holding page
@@ -457,6 +462,18 @@ class AdminController < ApplicationController
     return show_district_applications('Processed Applications', true)
   end
 
+  def district_application_detail_get
+    @admin = AdminUser.find(session[:admin_user_id])
+
+    @student = Student.find(params[:student_id]) # TODO Better error checking
+    if @student.district != @admin.district # TODO Better authorization checking
+      return render 'unauthorized'
+    end
+
+
+    return render 'district_application_detail'
+  end
+
   # -----------
   # Authentication/Authorization
   # -----------
@@ -492,7 +509,7 @@ class AdminController < ApplicationController
 
     # TODO some more error checking around the district ID
     if admin_user.user_role == 'district_admin'
-      return redirect_to action: 'district_applications'
+      return redirect_to action: 'district_applications_unprocessed'
     end
 
     return redirect_to action: 'central_supplemental_materials'
