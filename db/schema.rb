@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902234228) do
+ActiveRecord::Schema.define(version: 20140903000215) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20140902234228) do
     t.string   "mailing_city"
     t.string   "mailing_state"
     t.string   "name"
+    t.string   "welcome_message"
+    t.string   "confirmation_message"
   end
 
   add_index "districts", ["name"], name: "index_districts_on_name", unique: true
@@ -159,16 +161,6 @@ ActiveRecord::Schema.define(version: 20140902234228) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_required"
-  end
-
-  create_table "welcome_messages", force: true do |t|
-    t.string   "message",                     null: false
-    t.string   "language"
-    t.integer  "school_id"
-    t.integer  "district_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",      default: false
   end
 
 end
