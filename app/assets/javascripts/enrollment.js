@@ -35,6 +35,12 @@ $(document).ready(function () {
    toggleGuardian2Name(radio);
  });
 
+ // $("#guardian2_lives_with_question input:radio").change(function() {
+ //   var radio = $(this);
+ //   // toggleGuardian2Slider(radio);
+ //   alert(radio);
+ // });
+
   // Change the color of the birthdate field
 
   $("input[type=date]").change(function(){
