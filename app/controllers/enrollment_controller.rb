@@ -260,9 +260,6 @@ class EnrollmentController < ApplicationController
     if param_does_not_exist(:student, :home_language)
       student.errors.add(:home_language, 'Home language is a required field')
     end
-    if param_does_not_exist(:student, :guardian_language)
-      student.errors.add(:guardian_language, 'Guardian language is a required field')
-    end
 
     if student.errors.size > 0
       retainValuesAndErrors(student, student_params)
