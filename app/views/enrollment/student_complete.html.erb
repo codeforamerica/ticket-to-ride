@@ -49,14 +49,14 @@
                 </td>
               </tr>
               <tr>
-                <td class="summaryText" colspan="2"><%= @student.first_name %>'s primary language is <%= @student.home_language.titlecase %>. At home,  
+                <td class="summaryText" colspan="2"><%= @student.first_name %>'s primary language is <span class="summaryAnswers"><%= @student.first_language.titlecase %></span>. At home,
                   <% if @student.gender == 'male' %>
                     <%= 'he' %>
                   <% elsif @student.gender == 'female' %>
                     <%= 'she' %>
                   <% end %>
                   speaks <span class="summaryAnswers">
-                   <%= @student.guardian_language.titlecase %></span>. 
+                   <%= @student.home_language.titlecase %></span>.
                 </td>
                 <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_language' %></div>
                 </td>
