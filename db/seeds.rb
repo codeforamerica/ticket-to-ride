@@ -106,7 +106,6 @@ StudentRace.create(
 
 guardian_complete_west_warwick_guardian = ContactPerson.create(
     first_name: 'Linda',
-    middle_name: 'Belinda',
     last_name: 'Miller',
     mailing_street_address_1: 'P.O. Box 14',
     mailing_street_address_2: 'Lockbox 18',

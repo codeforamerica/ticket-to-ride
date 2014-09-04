@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903181153) do
+ActiveRecord::Schema.define(version: 20140903184314) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20140903181153) do
 
   create_table "contact_people", force: true do |t|
     t.string   "relationship"
-    t.string   "language"
     t.string   "mailing_street_address_1"
     t.string   "mailing_street_address_2"
     t.string   "mailing_zip_code"
@@ -40,17 +39,13 @@ ActiveRecord::Schema.define(version: 20140903181153) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "middle_name"
     t.boolean  "receive_grade_notices"
     t.boolean  "receive_conduct_notices"
     t.boolean  "receive_other_mail"
-    t.boolean  "restricted"
     t.string   "armed_service_branch"
     t.string   "armed_service_rank"
     t.string   "armed_service_duty_station"
     t.boolean  "lives_with_student"
-    t.boolean  "has_custody"
-    t.boolean  "has_court_order"
     t.string   "court_order_description"
     t.integer  "student_id"
     t.string   "main_phone"
