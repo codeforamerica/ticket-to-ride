@@ -28,7 +28,15 @@
             </td>
           </tr>
           <tr>
-            <td colspan="2" class="hidden" id="guardian2_lives_with_question">How often does <%= @student.first_name %> live with this individual?</td>
+            <td class="row-break hidden" colspan="2" id="guardian2_lives_with_question"><span>Do you and <%= @student.first_name %> live with <div id="guardian2_first_name_input"></div>?<sup>*</sup></span>
+              <div class="btn-group pull-right" data-toggle="buttons">
+                  <label for="guardian_2_lives_with_yes" class="btn btn-primary"><input id="guardian_2_lives_with_yes" class="hidden" name="guardian_2_lives_with" type="radio" value="yes"/>Yes</label>
+                  <label for="guardian_2_lives_with_no" class="btn btn-primary"><input id="guardian_2_lives_with_no" class="hidden" name="guardian_2_lives_with" type="radio" value="no"/>No</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="hidden" id="guardian2_lives_with_frequency">How often does <%= @student.first_name %> live with this individual?</td>
           </tr>
           <tr>
             <td class="hidden" id="guardian2_lives_with_slider"><input id="lives_with_g2_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="50" class="pull-right"></td>

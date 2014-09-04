@@ -36,6 +36,12 @@ $(document).ready(function () {
    toggleGuardian2Name(radio);
  });
 
+ // $("#guardian2_lives_with_question input:radio").change(function() {
+ //   var radio = $(this);
+ //   // toggleGuardian2Slider(radio);
+ //   alert(radio);
+ // });
+
   // Change the color of the birthdate field
 
   $("input[type=date]").change(function(){
@@ -70,23 +76,58 @@ $(document).ready(function () {
   // var guardian2_existing = $('input[name="has_additional_guardian"]')
 
   function toggleGuardian2Name(radio){
-    if (radio == 'true') {
+    if ($('#guardian_2_lives_with_yes').val()) {
       $('#guardian2_first_name').removeClass('hidden');
       $('#guardian2_last_name').removeClass('hidden');
       $('#guardian2_relationship').removeClass('hidden');
       $('#guardian2_lives_with_question').removeClass('hidden');
-      $('#guardian2_lives_with_slider').removeClass('hidden');
-      $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
-    } else if (radio == 'false') {
+      
+    } else {
       $('#guardian2_first_name').addClass('hidden');
       $('#guardian2_last_name').addClass('hidden');
       $('#guardian2_relationship').addClass('hidden');
       $('#guardian2_lives_with_question').addClass('hidden');
-      $('#guardian2_lives_with_slider').addClass('hidden');
-      $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
-      $('.slider-result').addClass('hidden');
     }
   };
+
+  /* testing */
+
+$("#guardian2_lives_with_question input:radio").change(function() {
+   // var first_name = $('#guardian2_firstname').val();
+   // alert(first_name);
+   var radio = $(this).val();
+   // alert(radio);
+   // toggleGuardian2Slider(radio);
+ });
+
+function get2ndGuardianFirstName(inputName){
+  $("#btnGuardian1Relationship").click(function(){
+    var first_name = $(inputName).val();
+    $('#guardian2_first_name_input').append(first_name);
+    // return(first_name);
+  });
+}
+
+function toggleGuardian2Slider(radio){
+  if(radio == 'yes') {
+    $('#guardian2_lives_with_frequency').removeClass('hidden');
+    $('#guardian2_lives_with_slider').removeClass('hidden');
+    $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
+  } else if (radio == 'no'){
+    $('#guardian2_lives_with_frequency').removeClass('hidden');
+    $('#guardian2_lives_with_slider').addClass('hidden');
+    $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
+    $('.slider-result').addClass('hidden');
+  }
+};
+
+$('#guardian2_lives_with_question input:radio').change(function() {
+   var radio = $(this).val();
+   toggleGuardian2Slider(radio);
+ });
+
+get2ndGuardianFirstName('#guardian2_firstname');
+  /* end test */
 
   /* end TODO Guardian name and address */
 
@@ -139,8 +180,6 @@ $(document).ready(function () {
    $('#contact2RelationshipSelected').click(function(){
      $('.edit_contact_person').removeClass('edit_contact_person');
    });  
-  
-
   
 
   $( 'a.toggle_error' ).on( "click", function( event ) {
@@ -351,3 +390,18 @@ $(document).ready(function () {
     }
 
 });
+
+// function toggleGuardian2Slider(){
+//   if('#guardian_2_lives_with_yes').val()) {
+//     alert('yes');
+//     // $('#guardian2_lives_with_frequency').removeClass('hidden');
+//     // $('#guardian2_lives_with_slider').removeClass('hidden');
+//     // $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
+//   } else {
+//     alert('no');
+//     // $('#guardian2_lives_with_frequency').removeClass('hidden');
+//     // $('#guardian2_lives_with_slider').addClass('hidden');
+//     // $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
+//     // $('.slider-result').addClass('hidden');
+//   }
+// };
