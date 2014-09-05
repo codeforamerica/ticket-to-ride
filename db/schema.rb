@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905001809) do
+ActiveRecord::Schema.define(version: 20140905185342) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 20140905001809) do
     t.string   "work_phone_can_sms"
     t.boolean  "is_guardian"
     t.string   "armed_service_status"
+    t.string   "home_street_address_1"
+    t.string   "home_street_address_2"
+    t.string   "home_city"
+    t.string   "home_state"
+    t.string   "home_zip_code"
   end
 
   create_table "districts", force: true do |t|
@@ -115,6 +120,11 @@ ActiveRecord::Schema.define(version: 20140905001809) do
     t.string   "previous_grade"
     t.string   "confirmation_code"
     t.integer  "district_id"
+    t.string   "mailing_street_address_1"
+    t.string   "mailing_street_address_2"
+    t.string   "mailing_city"
+    t.string   "mailing_state"
+    t.string   "mailing_zip_code"
   end
 
   add_index "students", ["confirmation_code"], name: "index_students_on_confirmation_code", unique: true
