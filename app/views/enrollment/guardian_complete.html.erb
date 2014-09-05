@@ -25,7 +25,7 @@
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2">You and <%= @student.first_name %> live at <span class="summaryAnswers"><%= @student.home_street_address_1 %> <%= @student.home_street_address_2 %> in <%= @student.home_city %>, <%= @student.home_state %></span>.</td>
+          <td class="summaryText" colspan="2">You and <%= @student.first_name %> live at <span class="summaryAnswers"><%= @summary_guardian1.home_street_address_1 %> <%= @summary_guardian1.home_street_address_2 %> in <%= @summary_guardian1.home_city %>, <%= @student.home_state %></span>.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
