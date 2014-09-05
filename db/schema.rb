@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903184314) do
+ActiveRecord::Schema.define(version: 20140905001809) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140903184314) do
     t.boolean  "can_pickup_child"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                     default: false
+    t.boolean  "active",                   default: false
     t.string   "mailing_city"
     t.string   "mailing_state"
     t.string   "first_name"
@@ -42,22 +42,16 @@ ActiveRecord::Schema.define(version: 20140903184314) do
     t.boolean  "receive_grade_notices"
     t.boolean  "receive_conduct_notices"
     t.boolean  "receive_other_mail"
-    t.string   "armed_service_branch"
-    t.string   "armed_service_rank"
-    t.string   "armed_service_duty_station"
     t.boolean  "lives_with_student"
-    t.string   "court_order_description"
     t.integer  "student_id"
     t.string   "main_phone"
-    t.string   "main_phone_extension"
     t.boolean  "main_phone_can_sms"
     t.string   "secondary_phone"
-    t.string   "secondary_phone_extension"
     t.string   "secondary_phone_can_sms"
     t.string   "work_phone"
-    t.string   "work_phone_extension"
     t.string   "work_phone_can_sms"
     t.boolean  "is_guardian"
+    t.string   "armed_service_status"
   end
 
   create_table "districts", force: true do |t|

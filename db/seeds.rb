@@ -116,15 +116,11 @@ guardian_complete_west_warwick_guardian = ContactPerson.create(
     receive_other_mail: true,
     receive_grade_notices: true,
     receive_conduct_notices: true,
-    restricted: false,
     student: guardian_complete_west_warwick_student,
     active: true,
     relationship: 'mother',
-    language: 'english',
     can_pickup_child: true,
     lives_with_student: true,
-    has_custody: true,
-    has_court_order: false,
     main_phone: '401-111-1111'
 )
 
@@ -146,8 +142,6 @@ guardian2_west_warwick = ContactPerson.create(
     receive_grade_notices: true,
     receive_conduct_notices: true,
     lives_with_student: false,
-    has_custody: false,
-    has_court_order: false,
     main_phone: '401-222-2222'
 )
 
