@@ -1,0 +1,46 @@
+header
+  h1 Supplemental material
+  p
+    |  Use the form below to specify application materials that districts must provide
+       parents as they complete their application.
+
+  - @supplemental_material.errors.each do |field, message|
+    ul
+      li
+        = message
+
+.page
+  / TODO plusjeff: Change the URL to an action
+  = form_for(@supplemental_material, url: request.original_url, method: :post, html:{multipart: true}) do |sm|
+    .field
+      = sm.label :name, 'Name'
+      = sm.text_field :name
+    .field
+      = sm.label :description, 'Description'
+      = sm.text_area :description
+
+    div
+      p A supplemental material can either be an attached file or a link to a web page (but not both). Please provide one.
+
+    .field
+      = label_tag 'file_upload', 'File upload'
+      / TODO plusjeff: Switch to Paperclip to do this later -- this is a placeholder so that UI work can continue
+      = file_field_tag 'file_upload'
+
+    p OR
+
+    .field
+      = label_tag 'link_url', 'Link URL'
+      - if @supplemental_material.req_type == 'url'
+        = text_field_tag 'link_url', @supplemental_material.uri
+      - else
+        = text_field_tag 'link_url'
+
+    p Required?
+    .field
+      = sm.label :is_required_true, 'Yes'
+      = sm.radio_button :is_required, true
+      = sm.label :is_required_false, 'No'
+      = sm.radio_button :is_required, false
+
+    = sm.submit 'Add'

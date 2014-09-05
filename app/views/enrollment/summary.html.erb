@@ -158,14 +158,14 @@
             </td>
           </tr>
           <tr>
-            <td class="summaryText" colspan="2"><%= @summary_student.first_name %>'s primary language is <%= @summary_student.home_language.titlecase %>. At home,  
+            <td class="summaryText" colspan="2"><%= @summary_student.first_name %>'s primary language is <span class="summaryAnswers"><%= @summary_student.first_language.titlecase %></span>. At home,
               <% if @summary_student.gender == 'male' %>
                 <%= 'he' %>
               <% elsif @summary_student.gender == 'female' %>
                 <%= 'she' %>
               <% end %>
               speaks <span class="summaryAnswers">
-               <%= @summary_student.guardian_language.titlecase %></span>. 
+               <%= @summary_student.home_language.titlecase %></span>.
             </td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_language' %></div>
             </td>
@@ -292,7 +292,7 @@
            </td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.mailing_street_address_1 %> <%= @summary_student.mailing_street_address_2 %> in <%= @summary_student.mailing_city %>, <%= @summary_student.mailing_state %> <%= @summary_student.mailing_zip_code %></span>.</td>
+          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.mailing_street_address_1 %> <%= @summary_guardian2.mailing_street_address_2 %> in <%= @summary_guardian2.mailing_city %>, <%= @summary_guardian2.mailing_state %> <%= @summary_guardian2.mailing_zip_code %></span>.</td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>

@@ -1,0 +1,62 @@
+.header
+  .application-id
+    span Confirmation Code:
+    span &nbsp;
+    = @student.confirmation_code
+
+  .application-actions
+    = link_to 'Edit', '#', id: 'application-edit-link', onclick: 'editApplication()'
+    = link_to 'Process', "/admin/application/process/#{@student.id}", id: 'application-process-link'
+    = link_to 'Delete', "/admin/application/delete/#{@student.id}", id: 'application-delete-link'
+
+.page
+
+  = form_for(@student, url: request.original_url, method: 'post', id: 'application-form') do |student|
+
+    / STUDENT INFO
+    section#application-student-info
+      h2 Student information
+
+      .field
+        = student.label :first_name, 'First name'
+        = student.text_field :first_name
+      .field
+        = student.label :middle_name, 'Middle name'
+        = student.text_field :middle_name
+      .field
+        = student.label :last_name, 'Last name'
+        = student.text_field :last_name
+      .field
+        = student.label :birthday, 'Birthday'
+        = student.date_select :birthday
+      .field
+        = student.label :birth_city, 'Birth city'
+        = student.text_field :birth_city
+      .field
+        = student.label :birth_state, 'Birth state/province'
+        = student.text_field :birth_state
+      .field
+        = student.label :birth_country, 'Birth country'
+        = student.text_field :birth_country
+      .field
+        = student.label :first_language, 'First language'
+        = student.text_field :first_language
+      .field
+        = student.label :home_language, 'Home language'
+        = student.text_field :home_language
+      .field
+        = student.label :gender, 'Gender'
+        = student.text_field :gender
+      .field
+        label Races
+      - Races::ALL.each do |race|
+        / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
+        .field
+          = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
+          = label_tag "race_#{race}", t('race_' + race), class: 'btn btn-primary'
+
+
+    section#application-guardian-1-info
+      h2 Guardian #1 information
+
+      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[0], contact_person_number: 0

@@ -9,19 +9,19 @@
 
     function fillStudentAddress() {
 //        var doesContactLiveWithStudent = $("input:radio[name='contact_person[lives_with_student]']").val();
-        $('#contact_person_mailing_street_address_1').val(studentHomeStreetAddress1);
-        $('#contact_person_mailing_street_address_2').val(studentHomeStreetAddress2);
-        $('#contact_person_mailing_city').val(studentHomeCity);
-        $('#contact_person_mailing_state').val(studentState);
-        $('#contact_person_mailing_zip_code').val(studentZipCode);
+        $('#contact_person_home_street_address_1').val(studentHomeStreetAddress1);
+        $('#contact_person_home_street_address_2').val(studentHomeStreetAddress2);
+        $('#contact_person_home_city').val(studentHomeCity);
+        $('#contact_person_home_state').val(studentState);
+        $('#contact_person_home_zip_code').val(studentZipCode);
     }
 
     function clearStudentAddress() {
-        $('#contact_person_mailing_street_address_1').val('');
-        $('#contact_person_mailing_street_address_2').val('');
-        $('#contact_person_mailing_city').val('');
-        $('#contact_person_mailing_state').val('');
-        $('#contact_person_mailing_zip_code').val('');
+        $('#contact_person_home_street_address_1').val('');
+        $('#contact_person_home_street_address_2').val('');
+        $('#contact_person_home_city').val('');
+        $('#contact_person_home_state').val('');
+        $('#contact_person_home_zip_code').val('');
     }
 </script>
 
@@ -65,19 +65,19 @@
 
           <tr id="guardian1_address">
             <td class="row-break" colspan="2" id="guardian1_shared_street1"><span>Street address 1<sup>*</sup></span>
-              <%= g.text_field :mailing_street_address_1, id: 'contact_person_mailing_street_address_1', placeholder: 'Street address 1', class: 'enrollment-form-input' %>
+              <%= g.text_field :home_street_address_1, id: 'contact_person_home_street_address_1', placeholder: 'Street address 1', class: 'enrollment-form-input' %>
           </tr>
           <tr>
             <td colspan="2" id="guardian1_shared_street2"><span>Street address 2 &nbsp;</span>
-              <%= g.text_field :mailing_street_address_2, id: 'contact_person_mailing_street_address_2', placeholder: 'Street address 2', class: 'enrollment-form-input' %>
+              <%= g.text_field :home_street_address_2, id: 'contact_person_home_street_address_2', placeholder: 'Street address 2', class: 'enrollment-form-input' %>
           </tr>
           <tr>
             <td colspan="2" id="guardian1_shared_city">
               <span>City<sup>*</sup></span>
-              <%= g.text_field :mailing_city, id: 'contact_person_mailing_city', placeholder: 'City', class: 'enrollment-form-input city_input' %>
+              <%= g.text_field :home_city, id: 'contact_person_home_city', placeholder: 'City', class: 'enrollment-form-input city_input' %>
               ,
-              <%= g.text_field :mailing_state, id: 'contact_person_mailing_state', placeholder: 'RI *', class: 'enrollment-form-input state_input', value: 'RI' %>
-              <%= g.text_field :mailing_zip_code, id: 'contact_person_mailing_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input zip_input' %>
+              <%= g.text_field :home_state, id: 'contact_person_home_state', placeholder: 'RI *', class: 'enrollment-form-input state_input', value: 'RI' %>
+              <%= g.text_field :home_zip_code, id: 'contact_person_home_zip_code', placeholder: 'Zip Code', class: 'enrollment-form-input zip_input' %>
             </td>
           </tr>
         </table>

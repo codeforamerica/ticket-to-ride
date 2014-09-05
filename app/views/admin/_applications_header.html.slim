@@ -1,0 +1,9 @@
+header
+  h1
+    = @title
+  p
+    | Applications can be collected at:
+    br
+    | http://localhost:3000/
+    / TODO The URL should be calculated/stored elsewhere
+    = @district.name.downcase.gsub(/\s+/, '-')
