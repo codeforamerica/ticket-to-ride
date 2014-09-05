@@ -408,21 +408,21 @@ class EnrollmentController < ApplicationController
     return contact_person
   end
 
-  def validate_contact_person_address(contact_person)
-    if param_does_not_exist(:contact_person, :mailing_street_address_1)
-      contact_person.errors.add(:mailing_street_address_1, 'Mailing street address is a required field')
+  def validate_contact_person_home_address(contact_person)
+    if param_does_not_exist(:contact_person, :home_street_address_1)
+      contact_person.errors.add(:home_street_address_1, 'Home street address is a required field')
     end
 
-    if param_does_not_exist(:contact_person, :mailing_city)
-      contact_person.errors.add(:mailing_city, 'Mailing city is a required field')
+    if param_does_not_exist(:contact_person, :home_city)
+      contact_person.errors.add(:home_city, 'Home city is a required field')
     end
 
-    if param_does_not_exist(:contact_person, :mailing_state)
-      contact_person.errors.add(:mailing_state, 'Mailing state is a required field')
+    if param_does_not_exist(:contact_person, :home_state)
+      contact_person.errors.add(:home_state, 'Home state is a required field')
     end
 
-    if param_does_not_exist(:contact_person, :mailing_zip_code)
-      contact_person.errors.add(:mailing_zip_code, 'Mailing zip code is a required field')
+    if param_does_not_exist(:contact_person, :home_zip_code)
+      contact_person.errors.add(:home_zip_code, 'Home ZIP code is a required field')
     end
 
     return contact_person
@@ -472,7 +472,7 @@ class EnrollmentController < ApplicationController
 
     validate_contact_person_name_and_relationship(contact_person)
 
-    validate_contact_person_address(contact_person)
+    validate_contact_person_home_address(contact_person)
 
     contact_person.is_guardian = true
 
@@ -514,7 +514,7 @@ class EnrollmentController < ApplicationController
       return render_wizard
     end
 
-    validate_contact_person_address(contact_person)
+    validate_contact_person_home_address(contact_person)
     validate_contact_person_phone(contact_person)
     return save_contact_person(contact_person)
   end
