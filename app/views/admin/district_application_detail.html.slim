@@ -1,3 +1,6 @@
+javascript:
+  var areFieldsDisabled = true;
+
 .header
   .application-id
     span Confirmation Code:
@@ -5,13 +8,13 @@
     = @student.confirmation_code
 
   .application-actions
-    = link_to 'Edit', '#', id: 'application-edit-link', onclick: 'editApplication()'
+    = link_to 'Edit', '#', id: 'application-edit-link', onclick: 'areApplicationDetailFieldsDisabled(areFieldsDisabled = !areFieldsDisabled)'
     = link_to 'Process', "/admin/application/process/#{@student.id}", id: 'application-process-link'
     = link_to 'Delete', "/admin/application/delete/#{@student.id}", id: 'application-delete-link'
 
 .page
 
-  = form_for(@student, url: request.original_url, method: 'post', id: 'application-form') do |student|
+  = form_for(@student, url: request.original_url, method: 'post', html:{id: 'application-detail-form'}) do |student|
 
     / STUDENT INFO
     section#application-student-info
@@ -55,8 +58,39 @@
           = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
           = label_tag "race_#{race}", t('race_' + race), class: 'btn btn-primary'
 
+      .field
+        = student.label :previous_grade, 'Previous grade'
+        = student.select :previous_grade, options_for_select(@previous_grade_options)
+
+      .field
+        = student.check_box :p504
+        = student.label :p504, 'Has 504 plan'
+
+      .field
+        = student.check_box :iep
+        = student.label :iep
+
+    - contact_person_number = 0
 
     section#application-guardian-1-info
       h2 Guardian #1 information
+      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+      - contact_person_number += 1
 
-      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[0], contact_person_number: 0
+
+    - if @student.contact_people[contact_person_number].is_guardian
+      section#application-guardian-2-info
+        h2 Guardian #2 information
+        = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+        - contact_person_number += 1
+
+    section#application-contact-person-1-info
+      h2 Contact person #1 information
+      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+      - contact_person_number += 1
+
+    section#application-contact-person-2-info
+      h2 Contact person #2 information
+      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+
+    = student.submit 'Update'

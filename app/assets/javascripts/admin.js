@@ -15,11 +15,20 @@ $(document).ready(function(){
     $('body').removeClass('no-js');
     $('.is-branch').hide();
     $( document ).trigger( "enhance" );
+
+    // Disable all elements in the Application Detail format
+    areApplicationDetailFieldsDisabled(true);
 });
 
 function toggleDeleteButton() {
     var disabled = $('#confirm-delete-input-text').val().toLowerCase() != 'delete';
     $('#confirm-delete-button').attr('disabled', disabled);
+}
+
+function areApplicationDetailFieldsDisabled(areDisabled) {
+    var val = areDisabled ? 'disabled' : '';
+    $('#application-detail-form input').prop('disabled', val);
+    $('#application-detail-form select').prop('disabled', val);
 }
 
 function resendInvite(callingElement, personId) {

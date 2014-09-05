@@ -12,24 +12,45 @@
   = label_tag "#{obj}[relationship]", 'Relationship to child'
   = text_field_tag "#{obj}[relationship]", contact_person.relationship
 
+- if contact_person.is_guardian
+  .field
+    = label_tag "#{obj}[home_street_address_1]", 'Home street address - Line 1'
+    = text_field_tag "#{obj}[home_street_address_1]", contact_person.home_street_address_1
+
+    .field
+      = label_tag "#{obj}[home_street_address_2]", 'Home street address - Line 2'
+      = text_field_tag "#{obj}[home_street_address_2]", contact_person.home_street_address_2
+
+    .field
+      = label_tag "#{obj}[home_city]", 'Home city'
+      = text_field_tag "#{obj}[home_city]", contact_person.home_city
+
+    .field
+      = label_tag "#{obj}[home_state]", 'Home state'
+      = text_field_tag "#{obj}[home_state]", contact_person.home_state
+
+    .field
+      = label_tag "#{obj}[home_zip_code]", 'Home ZIP code'
+      = text_field_tag "#{obj}[home_zip_code]", contact_person.home_zip_code
+
 .field
-  = label_tag "#{obj}[mailing_street_address_1]", 'Street address - Line 1'
+  = label_tag "#{obj}[mailing_street_address_1]", 'Mailing street address - Line 1'
   = text_field_tag "#{obj}[mailing_street_address_1]", contact_person.mailing_street_address_1
 
 .field
-  = label_tag "#{obj}[mailing_street_address_2]", 'Street address - Line 2'
+  = label_tag "#{obj}[mailing_street_address_2]", 'Mailing street address - Line 2'
   = text_field_tag "#{obj}[mailing_street_address_2]", contact_person.mailing_street_address_2
 
 .field
-  = label_tag "#{obj}[mailing_city]", 'City'
+  = label_tag "#{obj}[mailing_city]", 'Mailing city'
   = text_field_tag "#{obj}[mailing_city]", contact_person.mailing_city
 
 .field
-  = label_tag "#{obj}[mailing_state]", 'State'
+  = label_tag "#{obj}[mailing_state]", 'Mailing state'
   = text_field_tag "#{obj}[mailing_state]", contact_person.mailing_state
 
 .field
-  = label_tag "#{obj}[mailing_zip_code]", 'ZIP code'
+  = label_tag "#{obj}[mailing_zip_code]", 'Mailing ZIP code'
   = text_field_tag "#{obj}[mailing_zip_code]", contact_person.mailing_zip_code
 
 .field
@@ -77,6 +98,7 @@
   = check_box_tag "#{obj}[can_pickup_child]", contact_person.can_pickup_child
   = label_tag "#{obj}[can_pickup_child]", 'Can pickup child'
 
-div
-  = label_tag "#{obj}[armed_service_status}", 'Armed Service Status'
-  = select_tag "#{obj}[armed_service_status}", options_for_select(@armed_service_status_options)
+- if contact_person.is_guardian
+  div
+    = label_tag "#{obj}[armed_service_status}", 'Armed Service Status'
+    = select_tag "#{obj}[armed_service_status}", options_for_select(@armed_service_status_options)

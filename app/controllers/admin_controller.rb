@@ -470,6 +470,13 @@ class AdminController < ApplicationController
       return render 'unauthorized'
     end
 
+    # Select box options
+
+    @previous_grade_options = []
+    Grades::ALL.each do |grade|
+      @previous_grade_options << [t("grade_#{grade}"), grade]
+    end
+
     @armed_service_status_options = []
     ArmedServiceStatuses::ALL.each do |status|
       @armed_service_status_options << [t("armed_service_status_#{status}"), status ]
