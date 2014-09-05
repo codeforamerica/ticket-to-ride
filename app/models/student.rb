@@ -6,7 +6,7 @@ class Student < ActiveRecord::Base
   # Relationships
   has_many :student_races
   has_many :contact_people
-  belongs_to :school
+  belongs_to :district
 
   # Behavior
   acts_as_birthday :birthday
@@ -58,10 +58,6 @@ class Student < ActiveRecord::Base
   validates :home_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
                                       message: 'Home language can only contain letters, spaces, and dashes',
                                       allow_nil: true
-  }
-  validates :guardian_language, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
-                                          message: 'Guardian language can only contain letters, spaces, and dashes',
-                                          allow_nil: true
   }
 
   # Prior school information

@@ -31,15 +31,6 @@
               <%= s.text_field :home_language, class: 'enrollment-form-modal-language input-pointer', 'data-toggle'=> 'modal', 'data-target'=> '#homeLanguageModal', id: 'homeLanguageSelected', placeholder: 'Choose', readonly: true %>
             </td>
           </tr>
-
-          <tr>
-            <td class="enrollment-qa-cell">What language do you use most frequently to speak with <%= @student.first_name %>?<sup>*</sup>
-            </td>
-            <td class="enrollment-qa-gutter-cell"></td>
-            <td class="enrollment-answer-cell">
-              <%= s.text_field :guardian_language, class: 'enrollment-form-modal-language input-pointer', 'data-toggle'=> 'modal', 'data-target'=> '#guardianLanguageModal', id: 'guardianLanguageSelected', placeholder: 'Choose', readonly: true %>
-            </td>
-          </tr>
         </table>
       </div>
     </div>

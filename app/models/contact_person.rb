@@ -36,6 +36,29 @@ class ContactPerson < ActiveRecord::Base
                                       allow_nil: true
   }
 
+  # Address validation
+  validates :home_street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
+                                                 message: 'Home street address 1 can only have letters, numbers, dashes, and periods',
+                                                 allow_nil: true
+  }
+  validates :home_street_address_2, format: { with: ModelConstants::STREET_ADDRESS_OPTIONAL_REGEX,
+                                                 message: 'Home street address 2 can only have letters, numbers, dashes, and periods',
+                                                 allow_nil: true
+  }
+  validates :home_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                     message: 'Home city can only contain letters, spaces, and dashes',
+                                     allow_nil: true
+  }
+  validates :home_state, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                                      message: 'Home state can only contain letters, spaces, and dashes',
+                                      allow_nil: true
+  }
+  validates :home_zip_code, format: { with: /\A\d{5}(-\d{4})?\z/,
+                                         message: 'Mailing zip can only contain digits and dashes (example: 23045)',
+                                         allow_nil: true
+  }
+
+
   # Relationship validation
   validates :relationship, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
                                         message: 'Relationship can only contain letters, spaces, and dashes',
@@ -47,27 +70,15 @@ class ContactPerson < ActiveRecord::Base
                                    message: 'Main phone number can only have digits and dashes, and must be 10 digits',
                                    allow_nil: true
   }
-  validates :main_phone_extension, format: { with: ModelConstants::PHONE_EXTENSION_REGEX,
-                                             message: 'Main phone extension can only have digits',
-                                             allow_nil: true
-  }
 
   validates :secondary_phone, format: { with: ModelConstants::PHONE_NUMBER_OPTIONAL_REGEX,
                                    message: 'Secondary phone number can only have digits and dashes, and must be 10 digits',
                                    allow_nil: true
   }
-  validates :secondary_phone_extension, format: { with: ModelConstants::PHONE_EXTENSION_REGEX,
-                                             message: 'Main phone extension can only have digits',
-                                             allow_nil: true
-  }
 
   validates :work_phone, format: { with: ModelConstants::PHONE_NUMBER_OPTIONAL_REGEX,
                                    message: 'Work phone number can only have digits and dashes, and must be 10 digits',
                                    allow_nil: true
-  }
-  validates :work_phone_extension, format: { with: ModelConstants::PHONE_EXTENSION_REGEX,
-                                                message: 'Work phone extension can only have digits',
-                                                allow_nil: true
   }
 
 

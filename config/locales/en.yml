@@ -89,5 +89,9 @@ en:
   grade_12_abbrev: '12'
   grade_12_year: 'Senior'
 
-
+  # Armed service statuses
+  armed_service_status_active: 'Active'
+  armed_service_status_not_active: 'Not active'
+  armed_service_status_civilian: 'Civilian'
+  armed_service_status_foreign: 'Foreign'
 

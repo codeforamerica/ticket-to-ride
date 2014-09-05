@@ -16,17 +16,84 @@ Rails.application.routes.draw do
   get 'welcome/newport', to: 'welcome#newport', as: :newport_intro
   # get 'enrollment/summary', to: 'enrollment#summary', as: :happy_libs_summary
 
+  # -----------------------
+  # Admin Login
+  # -----------------------
+
   get 'admin', to: 'admin#index'
-  get 'admin/central/start', to: 'admin#central_start'
+
   get 'admin/login', to: 'admin#admin_login'
+  post 'admin/login', to: 'admin#admin_login'
+
+  get 'admin/central', to: 'admin#admin_login'
+  get 'admin/district', to: 'admin#admin_login'
+
+  # -----------------------
+  # Central Admin Setup
+  # -----------------------
+
+  get 'admin/central/setup', to: 'admin#central_setup_welcome'
+
+  get 'admin/central/setup/info', to: 'admin#central_setup_info_get'
+  post 'admin/central/setup/info', to: 'admin#central_setup_info_post'
+
+  get 'admin/central/setup/confirm', to: 'admin#central_setup_confirm'
+
+  # -----------------------
+  # Central Admin Supplemental Materials
+  # -----------------------
+
+  get 'admin/central/supplemental_materials', to: 'admin#central_supplemental_materials'
+
+  get 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_get'
+  post 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_post'
+
+  get 'admin/central/supplemental_materials/edit/:id', to: 'admin#central_supplemental_materials_edit_get'
+  post 'admin/central/supplemental_materials/edit/:id', to: 'admin#central_supplemental_materials_edit_post'
+
+  get 'admin/central/supplemental_materials/delete/:id', to: 'admin#central_supplemental_materials_delete_get'
+  post 'admin/central/supplemental_materials/delete/:id', to: 'admin#central_supplemental_materials_delete_post'
+
+
+  # -----------------------
+  # Central Admin People
+  # -----------------------
+
+  get 'admin/central/people', to: 'admin#central_people'
+
+  get 'admin/central/people/add', to: 'admin#central_people_add_get'
+  post 'admin/central/people/add', to: 'admin#central_people_add_post'
+
+  get 'admin/central/people/edit/:id', to: 'admin#central_people_edit_get'
+  post 'admin/central/people/edit/:id', to: 'admin#central_people_edit_post'
+
+  get 'admin/central/people/delete/:id', to: 'admin#central_people_delete_get'
+  post 'admin/central/people/delete/:id', to: 'admin#central_people_delete_post'
+
+
+  # -----------------------
+  # District Admin Setup
+  # -----------------------
+
+  get 'admin/district/setup/:admin_user_id', to: 'admin#district_setup_get'
+  post 'admin/district/setup/:admin_user_id', to: 'admin#district_setup_post'
+
+  # -----------------------
+  # District Admin - Applications
+  # -----------------------
+
+  get 'admin/district/applications', to: 'admin#district_applications_unprocessed'
+  get 'admin/district/applications/:page', to: 'admin#district_applications_unprocessed', page: /\d+/
+
+  get 'admin/district/applications/processed', to: 'admin#district_applications_processed'
+  get 'admin/district/applications/processed/:page', to: 'admin#district_applications_processed', page: /\d+/
+
+  get 'admin/district/application/:student_id', to: 'admin#district_application_detail_get', student_id: /\d+/
+  post 'admin/district/application/:student_id', to: 'admin#district_application_detail_post', student_id: /\d+/
 
   resources :enrollment
 
-  resources :madlibs
-
   resources :students
-
-  resources :schools
 
   resources :admin
 

@@ -110,21 +110,31 @@ The ZIP code in which the student resides.
 
 The first line of the student's mailing address where school mailings can be received via postal mail.
 
+Right now, this will be the same as the primary guardian's equivalent field. 
+
 #### [ 17 | Q ] Student mailing street address - Line 2 (string)
 
 The second line of the student's mailing address where school mailings can be received via postal mail.
+
+Right now, this will be the same as the primary guardian's equivalent field.
 
 #### [ 18 | R ] Student mailing city (string)
 
 The city in which the student can receive postal mail.
 
+Right now, this will be the same as the primary guardian's equivalent field.
+
 #### [ 19 | S ] Student mailing state (string)
 
 The state in which the student can receive postal mail.
 
+Right now, this will be the same as the primary guardian's equivalent field.
+
 #### [ 20 | T ] Student mailing ZIP code (string)
 
 The ZIP code at which students can receive postal mail.
+
+Right now, this will be the same as the primary guardian's equivalent field.
 
 #### [ 21 | U ] Student gender (string)
 
