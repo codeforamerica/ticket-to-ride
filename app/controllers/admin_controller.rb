@@ -447,7 +447,7 @@ class AdminController < ApplicationController
     start_index = 0
     if @page > 1
       start_index = (APPLICATIONS_PER_PAGE * @page) - 1
-    end
+    endNN
     @students = @students.slice(start_index, APPLICATIONS_PER_PAGE)
 
 
@@ -470,6 +470,10 @@ class AdminController < ApplicationController
       return render 'unauthorized'
     end
 
+    @armed_service_status_options = []
+    ArmedServiceStatuses::ALL.each do |status|
+      @armed_service_status_options << [t("armed_service_status_#{status}"), status ]
+    end
 
     return render 'district_application_detail'
   end
