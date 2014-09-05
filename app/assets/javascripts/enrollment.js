@@ -104,7 +104,7 @@ $(document).ready(function () {
       $('#guardian2_lives_with_slider').removeClass('hidden');
       $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
     } else if (radio == 'yes'){
-      $('#guardian2_lives_with_frequency').removeClass('hidden');
+      $('#guardian2_lives_with_frequency').addClass('hidden');
       $('#guardian2_lives_with_slider').addClass('hidden');
       $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
       $('.slider-result').addClass('hidden');
