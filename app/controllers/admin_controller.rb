@@ -447,7 +447,7 @@ class AdminController < ApplicationController
     start_index = 0
     if @page > 1
       start_index = (APPLICATIONS_PER_PAGE * @page) - 1
-    endNN
+    end
     @students = @students.slice(start_index, APPLICATIONS_PER_PAGE)
 
 
