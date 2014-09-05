@@ -99,11 +99,11 @@ $(document).ready(function () {
   // Toggle lives-with-student slider based on answer to question: does guardian 2 live with guardian 1 and student?
 
   function toggleGuardian2Slider(radio){
-    if(radio == 'no') {
+    if(radio == 'false') {
       $('#guardian2_lives_with_frequency').removeClass('hidden');
       $('#guardian2_lives_with_slider').removeClass('hidden');
       $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
-    } else if (radio == 'yes'){
+    } else if (radio == 'true'){
       $('#guardian2_lives_with_frequency').addClass('hidden');
       $('#guardian2_lives_with_slider').addClass('hidden');
       $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
