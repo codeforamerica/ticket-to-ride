@@ -512,11 +512,11 @@ class EnrollmentController < ApplicationController
     end
 
     if params[:contact_person][:lives_with_student] == 'true'
-      contact_person.mailing_street_address_1 = student.home_street_address_1 
-      contact_person.mailing_street_address_2 = student.home_street_address_2 
-      contact_person.mailing_zip_code = student.home_zip_code 
-      contact_person.mailing_city = student.home_city 
-      contact_person.mailing_state = student.home_state
+      contact_person.home_street_address_1 = student.home_street_address_1 
+      contact_person.home_street_address_2 = student.home_street_address_2 
+      contact_person.home_zip_code = student.home_zip_code 
+      contact_person.home_city = student.home_city 
+      contact_person.home_state = student.home_state
     end
 
     return save_and_associate_contact_person(student, contact_person)

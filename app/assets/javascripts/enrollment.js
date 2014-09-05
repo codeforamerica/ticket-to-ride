@@ -71,13 +71,12 @@ $(document).ready(function () {
   };
 
   function toggleGuardian2Name(radio){
-    if ($('#guardian_2_lives_with_yes').val()) {
+    if (radio == 'true') {
       $('#guardian2_first_name').removeClass('hidden');
       $('#guardian2_last_name').removeClass('hidden');
       $('#guardian2_relationship').removeClass('hidden');
       $('#guardian2_lives_with_question').removeClass('hidden');
-      
-    } else {
+    } else if (radio == 'false') {
       $('#guardian2_first_name').addClass('hidden');
       $('#guardian2_last_name').addClass('hidden');
       $('#guardian2_relationship').addClass('hidden');
