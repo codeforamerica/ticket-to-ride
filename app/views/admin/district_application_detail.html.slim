@@ -56,7 +56,7 @@ javascript:
         / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
         .field
           = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
-          = label_tag "race_#{race}", t('race_' + race), class: 'btn btn-primary'
+          = label_tag "race_#{race}", t('race_' + race)
 
       .field
         = student.label :previous_grade, 'Prior grade'
