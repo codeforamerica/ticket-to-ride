@@ -37,6 +37,13 @@ class AdminController < ApplicationController
     return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
   end
 
+  # TODO this method might replace `param_does_not_exist`
+  def missing_param(model_const, field_const, model_obj, error_msg)
+    if !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
+      model_obj.errors.add(error_msg)
+    end
+  end
+
   def retainValuesAndErrors(obj, param_updater)
     messages = obj.errors.messages.clone()
     obj.assign_attributes(param_updater)
@@ -483,6 +490,41 @@ class AdminController < ApplicationController
     end
 
     return render 'district_application_detail'
+  end
+
+  def district_application_detail_post
+
+    # STUDENT FIELDS
+    missing_param(:student, :first_name, @student, 'Student first name is required')
+    missing_param(:student, :last_name, @student, 'Student last name is required')
+    missing_param(:student, :birthday, @student, 'Student birthday is required')
+    missing_param(:student, :birth_city, @student, 'Student birth city is required')
+    missing_param(:student, :birth_state, @student, 'Student birth state is required')
+    missing_param(:student, :birth_country, @student, 'Student birth country is required')
+    missing_param(:student, :first_language, @student, 'Student first language is required')
+    missing_param(:student, :home_language, @student, 'Student home language is required')
+    missing_param(:student, :gender, @student, 'Student gender is required')
+
+    if !params || !params['races'] || !params['races'].any?
+      student.errors.add(:races, 'At least one student race needs to be selected')
+    end
+
+    if params[:student] && params[:student][:prior_grade] && params[:student][:prior_grade] == Grades::NONE
+      missing_param(:student, :prior_school_name, @student, 'Prior school name is required when a prior grade is entered')
+      missing_param(:student, :prior_school_city, @student, 'Prior school city is required when a prior grade is entered')
+      missing_param(:student, :prior_school_state, @student, 'Prior school state is required when a prior grade is entered')
+    end
+
+
+
+    # GUARDIAN #1 FIELDS
+
+    # GUARDIAN #2 FIELDS
+
+    # CONTACT PERSON #1 FIELDS
+
+    # CONTACT PERSON #2 FIELDS
+
   end
 
   # -----------
