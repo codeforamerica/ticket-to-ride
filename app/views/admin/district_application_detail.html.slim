@@ -59,8 +59,20 @@ javascript:
           = label_tag "race_#{race}", t('race_' + race), class: 'btn btn-primary'
 
       .field
-        = student.label :previous_grade, 'Previous grade'
+        = student.label :previous_grade, 'Prior grade'
         = student.select :previous_grade, options_for_select(@previous_grade_options)
+
+      .field
+        = student.label :prior_school_name, 'Prior school name'
+        = student.text_field :prior_school_name
+
+      .field
+        = student.label :prior_school_city, 'Prior school city'
+        = student.text_field :prior_school_city
+
+      .field
+        = student.label :prior_school_state, 'Prior school state'
+        = student.text_field :prior_school_state
 
       .field
         = student.check_box :p504
@@ -70,13 +82,13 @@ javascript:
         = student.check_box :iep
         = student.label :iep
 
+    / CONTACT PEOPLE
     - contact_person_number = 0
 
     section#application-guardian-1-info
       h2 Guardian #1 information
       = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
       - contact_person_number += 1
-
 
     - if @student.contact_people[contact_person_number].is_guardian
       section#application-guardian-2-info
