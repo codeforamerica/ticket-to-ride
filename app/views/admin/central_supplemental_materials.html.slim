@@ -11,12 +11,9 @@ header
   - @supplemental_materials_required.each do |sm|
     ul
       li
-        / TODO Get these to display on the correct lines -- not sure how to do this in Slim
         = sm.name
-        / TODO plusjeff: Check to make sure this is the correct way to define the path (and not with action, etc.)
         = link_to 'Edit', "/admin/central/supplemental_materials/edit/#{sm.id}"
         = link_to 'Delete', "/admin/central/supplemental_materials/delete/#{sm.id}"
-        = sm.description
 
   / Message if there aren't any
   - if @supplemental_materials_required.empty?
@@ -29,11 +26,9 @@ header
   - @supplemental_materials_optional.each do |sm|
     ul
       li
-        / TODO Get these to display on the correct lines -- not sure how to do this in Slim
         = sm.name
         = link_to 'Edit', "/admin/central/supplemental_materials/edit/#{sm.id}"
         = link_to 'Delete', "/admin/central/supplemental_materials/delete/#{sm.id}"
-        = sm.description
 
   / Message if there aren't any
   - if @supplemental_materials_optional.empty?

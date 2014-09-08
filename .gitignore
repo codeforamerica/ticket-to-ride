@@ -24,4 +24,8 @@
 # Ignore .DS_store
 .DS_Store
 
+# Ignore RubyMine IDE files
 /.idea
+
+# Ignore files from Paperclip gem
+/public/system/supplemental_materials/files/*

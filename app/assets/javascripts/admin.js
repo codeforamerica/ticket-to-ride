@@ -26,3 +26,9 @@ function resendInvite(callingElement, personId) {
     callingElement.innerText = 'Sent again!';
     // TODO make this do a REST call to the backend to resend the e-mail
 }
+
+function clearSupplementalMaterialLink() {
+    if( $('#supplemental_material_file').val() != '' ) {
+        $('#supplemental_material_link_url').val('')
+    }
+}

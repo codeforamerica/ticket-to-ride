@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905185342) do
+ActiveRecord::Schema.define(version: 20140908171758) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -137,13 +137,16 @@ ActiveRecord::Schema.define(version: 20140905185342) do
   create_table "supplemental_materials", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.string   "uri"
-    t.integer  "req_type"
+    t.string   "link_url"
     t.integer  "district_id"
     t.integer  "authority_level"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_required"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
 end
