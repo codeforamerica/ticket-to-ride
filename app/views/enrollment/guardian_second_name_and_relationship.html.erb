@@ -8,7 +8,7 @@
     <div class="contact_table enableZindex">
         <table>
           <tr>
-            <td colspan="2"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?<sup>*</sup></span> 
+            <td colspan="2" id="guardian2_exists_question"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?<sup>*</sup></span> 
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
                     <input type="radio" name="has_additional_guardian" value="true">Yes</label>
@@ -36,7 +36,7 @@
             </td>
           </tr>
           <tr>
-            <td colspan="2" class="hidden" id="guardian2_lives_with_frequency">How often does <%= @student.first_name %> live with this individual?</td>
+            <td colspan="2" class="hidden" id="guardian2_lives_with_frequency">How often does <%= @student.first_name %> live with <div id="guardian2_first_name_input2"></div>?</td>
           </tr>
           <tr>
             <td colspan="2" class="hidden" id="guardian2_lives_with_slider">

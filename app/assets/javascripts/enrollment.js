@@ -30,16 +30,10 @@ $(document).ready(function () {
   });      
 
 
- $("form input:radio").change(function() {
-   var radio = $(this).val();
+ $('#guardian2_exists_question input:radio').change(function() {
+   var radio = $(this).val();  
    toggleGuardian2Name(radio);
  });
-
- // $("#guardian2_lives_with_question input:radio").change(function() {
- //   var radio = $(this);
- //   // toggleGuardian2Slider(radio);
- //   alert(radio);
- // });
 
   // Change the color of the birthdate field
 
@@ -90,6 +84,7 @@ $(document).ready(function () {
     $("#btnGuardian1Relationship").click(function(){
       var first_name = $(inputName).val();
       $('#guardian2_first_name_input').append(first_name);
+      $('#guardian2_first_name_input2').append(first_name);
     });
   }
 
@@ -101,12 +96,11 @@ $(document).ready(function () {
     if(radio == 'false') {
       $('#guardian2_lives_with_frequency').removeClass('hidden');
       $('#guardian2_lives_with_slider').removeClass('hidden');
-      $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
+      // $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
     } else if (radio == 'true'){
       $('#guardian2_lives_with_frequency').addClass('hidden');
       $('#guardian2_lives_with_slider').addClass('hidden');
-      $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
-      $('.slider-result').addClass('hidden');
+      // $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
     }
   };
 
