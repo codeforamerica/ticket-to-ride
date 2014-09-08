@@ -67,12 +67,20 @@ class EnrollmentController < ApplicationController
 
     case step
       when :guardian_name_and_address
-        @guardian_1 = ContactPerson.create
+        if session[:guardian_1_id] 
+          @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        else 
+          @guardian_1 = ContactPerson.create
+        end
         session[:guardian_1_id] = @guardian_1.id
       when :guardian_phone_and_email
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
       when :guardian_second_name_and_relationship
-        @guardian_2 = ContactPerson.create
+        if session[:guardian_2_id] 
+          @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+        else 
+          @guardian_2 = ContactPerson.create
+        end
         session[:guardian_2_id] = @guardian_2.id
       when :guardian_second_address_and_contact_info
         @guardian_2 = ContactPerson.find(session[:guardian_2_id])
