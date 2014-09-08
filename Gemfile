@@ -56,6 +56,13 @@ gem 'slim-rails', '2.1.5'
 # DEVELOPMENT ONLY
 group :development do
 
+  # testing
+    # includes RSpec in a wrapper to make it play nicely with Rails
+  gem 'rspec-rails'
+    # replaces Rails' default fixtures for feeding test data to the test suite with more preferable factories
+  gem 'factory_girl_rails'
+    #replaces standard Rails error page with a more useful one
+
   # JRuby install items
   platform :jruby do
     # Use jdbcsqlite3 as the database for Active Record when running JRuby
@@ -85,6 +92,18 @@ group :production do
 
   # Use Postgresql as the deployment database (staging and production)
   gem 'pg', '0.17.1'
+end
+
+# TESTING ONLY
+group :test do
+    # generates names, email addresses, and other placeholders for factories
+  gem 'faker'
+    # makes it easy to programmatically simulate the users' interactions
+  gem 'capybara'
+    #watches the app and tests and runs specs automatically when it detects changes
+  gem 'guard-rspec'
+    # opens the default web browser upon failed integration specs to show what the application is rendering
+  gem 'launchy'
 end
 
 ruby '1.9.3'

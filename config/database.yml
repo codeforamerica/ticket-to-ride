@@ -38,3 +38,5 @@ test:
   adapter: sqlite3
   encoding: utf-8
   database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
