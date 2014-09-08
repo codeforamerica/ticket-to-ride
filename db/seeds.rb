@@ -14,8 +14,7 @@
 SupplementalMaterial.create(
     name: 'Physical Exam',
     description: 'Checkup by a doctor',
-    uri: 'http://www.health.ri.gov/forms/school/Physical.pdf',
-    req_type: :url,
+    link_url: 'http://www.health.ri.gov/forms/school/Physical.pdf',
     authority_level: :central
 )
 
@@ -42,7 +41,7 @@ west_warwick_district = District.create(
 SupplementalMaterial.create(
     name: 'Release Authorization',
     description: 'Permission to release records',
-    req_type: :file,
+    link_url: 'http://fakeurl.com.fakers/release_auth.pdf',
     district: west_warwick_district,
     authority_level: :district
 )
