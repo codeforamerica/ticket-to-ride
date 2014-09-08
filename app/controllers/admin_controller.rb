@@ -66,13 +66,12 @@ class AdminController < ApplicationController
     @admin = get_logged_in_admin
 
     if id
-      @supplemental_material = SupplementalMaterial.find(id) # TODO plusjeff: Better error checking
+      @supplemental_material = SupplementalMaterial.find(id) # TODO Better error checking
     else
       @supplemental_material = SupplementalMaterial.new
     end
 
     # Check fields to see if they were filled in
-
     if param_does_not_exist(:supplemental_material, :name)
       @supplemental_material.errors.add(:name, 'Please enter a <em>Name</em>')
     end
@@ -81,21 +80,23 @@ class AdminController < ApplicationController
       @supplemental_material.errors.add(:description, 'Please enter a <em>Description</em>')
     end
 
-    if !params[:file_upload]
-      if !params[:link_url]
-        @supplemental_material.errors.add(:base, 'Either a <em>File upload</em> or <em>Link URL</em> must be entered')
-      end
-    else params[:file_upload] && params[:link_url] && params[:link_url] != ''
-    @supplemental_material.errors.add(:base, 'Only one of file upload or link URL can be entered, but not both')
+    # Neither a file or link given
+    if param_does_not_exist(:supplemental_material, :file) && param_does_not_exist(:supplemental_material, :link_url)
+      @supplemental_material.errors.add(:base, 'Please add either a file or a link URL to the supplemental material (but not both)')
+    # Both a file and link given, link wins
+    elsif !param_does_not_exist(:supplemental_material, :file) && !param_does_not_exist(:supplemental_material, :link_url)
+      params[:supplemental_material][:file] = nil # both file and link given, link wins
+    # There WAS a link, but new incoming file
+    elsif @supplemental_material.link_url && param_exists(:supplemental_material, :file)
+      @supplemental_material.link_url = nil
+    # There WAS a file, but new incoming link
+    elsif @supplemental_material.file_file_name && param_exists(:supplemental_material, :link_url)
+      @supplemental_material.file = nil
     end
 
     if param_does_not_exist(:supplemental_material, :is_required)
       @supplemental_material.errors.add(:is_required, 'Please indicate if the supplemental material is required or not.')
     end
-
-    # TODO Use Paperclip gem in the future -- comment out for now
-    # path = File.join('public', 'files', 'supplemental_materials', params[:file_upload].to_s)
-    # File.open(path, 'wb') {|f| f.write(params[:file_upload].read)}
 
     # Check for errors
     retainValuesAndErrors(@supplemental_material, supplemental_material_params)
@@ -104,17 +105,14 @@ class AdminController < ApplicationController
     end
 
     # Populate any other fields and save
-    if params[:file_upload]
-      @supplemental_material.req_type = :file
-      @supplemental_material.uri = params[:file_upload].to_s # TODO fix this for file uploads
-    else
-      @supplemental_material.req_type = :url
-      @supplemental_material.uri = params[:link_url]
-    end
     @supplemental_material.authority_level = :central
     @supplemental_material.save # TODO more error checking on the save
 
     return redirect_to action: 'central_supplemental_materials'
+  end
+
+  def param_exists(model_const, field_const)
+    return !param_does_not_exist(model_const, field_const)
   end
 
   # -----------

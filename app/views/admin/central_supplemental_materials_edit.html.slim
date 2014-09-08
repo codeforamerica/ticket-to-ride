@@ -10,7 +10,6 @@ header
         = message
 
 .page
-  / TODO plusjeff: Change the URL to an action
   = form_for(@supplemental_material, url: request.original_url, method: :post, html:{multipart: true}) do |sm|
     .field
       = sm.label :name, 'Name'
@@ -20,21 +19,20 @@ header
       = sm.text_area :description
 
     div
-      p A supplemental material can either be an attached file or a link to a web page (but not both). Please provide one.
+      p A supplemental material can either be an attached file or a link to a web page (but not both). Please provide one. If both are entered, the link will be saved and the file will not.
 
     .field
-      = label_tag 'file_upload', 'File upload'
-      / TODO plusjeff: Switch to Paperclip to do this later -- this is a placeholder so that UI work can continue
-      = file_field_tag 'file_upload'
+      - if @supplemental_material.file_file_name
+        p Current File:
+        = link_to @supplemental_material.file_file_name, @supplemental_material.file.url, target: '_blank'
 
+        p To update/replace the file, use the below:
+      = sm.label :file, 'File upload'
+      = sm.file_field :file, onchange: 'clearSupplementalMaterialLink()'
     p OR
-
     .field
-      = label_tag 'link_url', 'Link URL'
-      - if @supplemental_material.req_type == 'url'
-        = text_field_tag 'link_url', @supplemental_material.uri
-      - else
-        = text_field_tag 'link_url'
+      = sm.label :link_url, 'Link URL'
+      = sm.text_field :link_url
 
     p Required?
     .field
