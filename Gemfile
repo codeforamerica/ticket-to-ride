@@ -60,7 +60,7 @@ group :development do
     # includes RSpec in a wrapper to make it play nicely with Rails
   gem 'rspec-rails'
     # replaces Rails' default fixtures for feeding test data to the test suite with more preferable factories
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', "~> 4.0"
     #replaces standard Rails error page with a more useful one
 
   # JRuby install items

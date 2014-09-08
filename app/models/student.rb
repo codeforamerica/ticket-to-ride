@@ -8,6 +8,11 @@ class Student < ActiveRecord::Base
   has_many :contact_people
   belongs_to :district
 
+  def name
+    n = [self.first_name, self.middle_name, self.last_name].join " "
+    n.split.join(' ')
+  end
+
   # Behavior
   acts_as_birthday :birthday
 

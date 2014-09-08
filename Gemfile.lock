@@ -269,7 +269,7 @@ DEPENDENCIES
   bootstrap-slider-rails (= 1.9.0)
   capybara
   coffee-rails (= 4.0.1)
-  factory_girl_rails
+  factory_girl_rails (~> 4.0)
   faker
   guard-rspec
   high_voltage (= 2.1.0)
