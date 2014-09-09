@@ -6,19 +6,22 @@ describe Student do
     create(:student).should be_valid
   end
   it "is invalid with a first name composed of something other than letters" do 
-    build(:student, first_name: "Mo11y").should_not be_valid
+    expect(Student.new(first_name: "Mol1y")).to be_invalid
   end
   it "is invalid with a last name composed of something other than letters" do
-    build(:student, last_name: "Sm!th").should_not be_valid
+    expect(build(:student, last_name: "Sm!th")).to be_invalid
   end
   it "returns a student's full name as a string" do
     student = create(:student, first_name: "Thom", last_name: "Guertin")
-    student.name.should == "Thom Guertin"
+    expect(student.name).to eq "Thom Guertin"
   end
   it "is invalid if student is older than 21" do
-    build(:student, birthday: "1970-12-01")
+    expect(build(:student, birthday: "1970-12-01")).to be_invalid
   end
   it "is invalid if student is younger than 5" do 
-    build(:student, birthday: "2010-12-01")
+    expect(build(:student, birthday: "2014-12-01")).to be_invalid
+  end
+  it "is valid if student is between 5 and 21 years old" do
+    expect(build(:student, birthday: "2005-08-10")).to be_valid
   end
 end
