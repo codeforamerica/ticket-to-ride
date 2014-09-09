@@ -61,7 +61,10 @@ group :development do
   gem 'rspec-rails'
     # replaces Rails' default fixtures for feeding test data to the test suite with more preferable factories
   gem 'factory_girl_rails', "~> 4.0"
-    #replaces standard Rails error page with a more useful one
+    # task runner for back-end/server-side code used in conjunction with Rake
+  gem 'guard'
+  gem 'guard-rspec'
+
 
   # JRuby install items
   platform :jruby do

@@ -11,5 +11,5 @@ $ rake db:test:prepare
 # Run specs from command line
 
 ```
-$ rspec spec/models/student_spec.rb 
+$ rake spec 
 ```

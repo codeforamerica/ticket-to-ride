@@ -271,6 +271,7 @@ DEPENDENCIES
   coffee-rails (= 4.0.1)
   factory_girl_rails (~> 4.0)
   faker
+  guard
   guard-rspec
   high_voltage (= 2.1.0)
   jbuilder (= 2.0.7)
