@@ -61,10 +61,6 @@ group :development do
   gem 'rspec-rails'
     # replaces Rails' default fixtures for feeding test data to the test suite with more preferable factories
   gem 'factory_girl_rails', "~> 4.0"
-    # task runner for back-end/server-side code used in conjunction with Rake
-  gem 'guard'
-  gem 'guard-rspec'
-
 
   # JRuby install items
   platform :jruby do
@@ -104,6 +100,7 @@ group :test do
     # makes it easy to programmatically simulate the users' interactions
   gem 'capybara'
     #watches the app and tests and runs specs automatically when it detects changes
+  gem 'guard'
   gem 'guard-rspec'
     # opens the default web browser upon failed integration specs to show what the application is rendering
   gem 'launchy'
