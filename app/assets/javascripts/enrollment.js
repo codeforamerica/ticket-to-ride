@@ -30,9 +30,8 @@ $(document).ready(function () {
   });      
 
 
- $("form input:radio").change(function() {
-   var radio = $(this).val();
-   // toggleGuardian1Address(radio);
+ $('#guardian2_exists_question input:radio').change(function() {
+   var radio = $(this).val();  
    toggleGuardian2Name(radio);
  });
 
@@ -65,30 +64,50 @@ $(document).ready(function () {
     }
   };
 
-  // toggleGuardian2Name(guardian2_existing);
-
-  // var guardian2_existing = $('input[name="has_additional_guardian"]')
-
   function toggleGuardian2Name(radio){
     if (radio == 'true') {
       $('#guardian2_first_name').removeClass('hidden');
       $('#guardian2_last_name').removeClass('hidden');
       $('#guardian2_relationship').removeClass('hidden');
       $('#guardian2_lives_with_question').removeClass('hidden');
-      $('#guardian2_lives_with_slider').removeClass('hidden');
-      $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
     } else if (radio == 'false') {
       $('#guardian2_first_name').addClass('hidden');
       $('#guardian2_last_name').addClass('hidden');
       $('#guardian2_relationship').addClass('hidden');
       $('#guardian2_lives_with_question').addClass('hidden');
-      $('#guardian2_lives_with_slider').addClass('hidden');
-      $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
-      $('.slider-result').addClass('hidden');
     }
   };
 
-  /* end TODO Guardian name and address */
+  // Populate Guardian2's name after relationship to student is selected for question about living situation
+
+  function get2ndGuardianFirstName(inputName){
+    $("#btnGuardian1Relationship").click(function(){
+      var first_name = $(inputName).val();
+      $('#guardian2_first_name_input').append(first_name);
+      $('#guardian2_first_name_input2').append(first_name);
+    });
+  }
+
+  get2ndGuardianFirstName('#guardian2_firstname');
+
+  // Toggle lives-with-student slider based on answer to question: does guardian 2 live with guardian 1 and student?
+
+  function toggleGuardian2Slider(radio){
+    if(radio == 'false') {
+      $('#guardian2_lives_with_frequency').removeClass('hidden');
+      $('#guardian2_lives_with_slider').removeClass('hidden');
+      // $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
+    } else if (radio == 'true'){
+      $('#guardian2_lives_with_frequency').addClass('hidden');
+      $('#guardian2_lives_with_slider').addClass('hidden');
+      // $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
+    }
+  };
+
+  $('#guardian2_lives_with_question input:radio').change(function() {
+     var radio = $(this).val();
+     toggleGuardian2Slider(radio);
+   });
 
   getSelectionFromModal('#btnGuardian2Relationship', 'input[name="contact_person[relationship]"]:checked', '#guardian2RelationshipSelected');
 
@@ -139,8 +158,6 @@ $(document).ready(function () {
    $('#contact2RelationshipSelected').click(function(){
      $('.edit_contact_person').removeClass('edit_contact_person');
    });  
-  
-
   
 
   $( 'a.toggle_error' ).on( "click", function( event ) {
@@ -351,3 +368,18 @@ $(document).ready(function () {
     }
 
 });
+
+// function toggleGuardian2Slider(){
+//   if('#guardian_2_lives_with_yes').val()) {
+//     alert('yes');
+//     // $('#guardian2_lives_with_frequency').removeClass('hidden');
+//     // $('#guardian2_lives_with_slider').removeClass('hidden');
+//     // $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
+//   } else {
+//     alert('no');
+//     // $('#guardian2_lives_with_frequency').removeClass('hidden');
+//     // $('#guardian2_lives_with_slider').addClass('hidden');
+//     // $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
+//     // $('.slider-result').addClass('hidden');
+//   }
+// };

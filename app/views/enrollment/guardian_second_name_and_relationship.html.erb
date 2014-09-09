@@ -8,7 +8,7 @@
     <div class="contact_table enableZindex">
         <table>
           <tr>
-            <td colspan="2"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?<sup>*</sup></span> 
+            <td colspan="2" id="guardian2_exists_question"><span>Does <%= @student.first_name %> have another parent, legal guardian or caregiver?<sup>*</sup></span> 
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary">
                     <input type="radio" name="has_additional_guardian" value="true">Yes</label>
@@ -28,12 +28,28 @@
             </td>
           </tr>
           <tr>
-            <td colspan="2" class="hidden" id="guardian2_lives_with_question">How often does <%= @student.first_name %> live with this individual?</td>
+            <td class="row-break hidden" colspan="2" id="guardian2_lives_with_question"><span>Do you and <%= @student.first_name %> live with <div id="guardian2_first_name_input"></div>?<sup>*</sup></span>
+              <div class="btn-group pull-right" data-toggle="buttons">
+                  <label for="guardian_2_lives_with_yes" class="btn btn-primary"><%= c.radio_button :lives_with_student, true, id: 'guardian_2_lives_with_yes', class: 'hidden'%>Yes</label>
+                  <label for="guardian_2_lives_with_no" class="btn btn-primary"><%= c.radio_button :lives_with_student, false, id: 'guardian_2_lives_with_no', class: 'hidden' %>No</label>
+              </div>
+            </td>
           </tr>
           <tr>
-            <td class="hidden" id="guardian2_lives_with_slider"><input id="lives_with_g2_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="50" class="pull-right"></td>
-            <td class="slider-result hidden" id="guardian2_slider_result"><span id="lives_with_g2_val">50</span>%</td>
+            <td colspan="2" class="hidden" id="guardian2_lives_with_frequency">How often does <%= @student.first_name %> live with <div id="guardian2_first_name_input2"></div>?</td>
           </tr>
+          <tr>
+            <td colspan="2" class="hidden" id="guardian2_lives_with_slider">
+            <table>
+              <tr>
+                <td class="slider-level">Never</td>
+                <td class="slider-center"><input id="lives_with_g2_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="50"></td>
+                <td class="slider-result hidden" id="guardian2_slider_result"><span id="lives_with_g2_val">50</span>%</td>
+                <td class="slider-level">Always</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
         </div>
       </table>
     </div>

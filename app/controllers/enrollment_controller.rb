@@ -67,12 +67,20 @@ class EnrollmentController < ApplicationController
 
     case step
       when :guardian_name_and_address
-        @guardian_1 = ContactPerson.create
+        if session[:guardian_1_id] 
+          @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        else 
+          @guardian_1 = ContactPerson.create
+        end
         session[:guardian_1_id] = @guardian_1.id
       when :guardian_phone_and_email
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
       when :guardian_second_name_and_relationship
-        @guardian_2 = ContactPerson.create
+        if session[:guardian_2_id] 
+          @guardian_2 = ContactPerson.find(session[:guardian_2_id])
+        else 
+          @guardian_2 = ContactPerson.create
+        end
         session[:guardian_2_id] = @guardian_2.id
       when :guardian_second_address_and_contact_info
         @guardian_2 = ContactPerson.find(session[:guardian_2_id])
@@ -126,6 +134,8 @@ class EnrollmentController < ApplicationController
       when :guardian_second_name_and_relationship
         @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
         return update_guardian_second_name_and_relationship(@student, @guardian_2)
+      
+
       when :guardian_second_address_and_contact_info
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
         @guardian_2 = ContactPerson.find(session[:guardian_2_id]) # TODO - make a @contact_person variable
@@ -504,6 +514,18 @@ class EnrollmentController < ApplicationController
     validate_contact_person_name_and_relationship(contact_person)
 
     contact_person.is_guardian = true
+
+    if param_does_not_exist(:contact_person, :lives_with_student)
+      contact_person.errors.add(:lives_with_student, 'Please tell us if the second guardian lives with you and the student.')
+    end
+
+    if params[:contact_person][:lives_with_student] == 'true'
+      contact_person.home_street_address_1 = student.home_street_address_1 
+      contact_person.home_street_address_2 = student.home_street_address_2 
+      contact_person.home_zip_code = student.home_zip_code 
+      contact_person.home_city = student.home_city 
+      contact_person.home_state = student.home_state
+    end
 
     return save_and_associate_contact_person(student, contact_person)
   end
