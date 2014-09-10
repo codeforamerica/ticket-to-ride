@@ -106,8 +106,6 @@ guardian_complete_west_warwick_student = Student.create(
     home_language: 'spanish',
     iep: true,
     p504: true,
-    birth_certificate_verified: false,
-    residency_verified: false,
     home_street_address_1: '60 Coit Ave',
     home_street_address_2: 'Apt 4',
     home_city: 'West Warwick',

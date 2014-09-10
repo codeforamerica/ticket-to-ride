@@ -9,8 +9,8 @@ javascript:
 
   .application-actions
     = link_to 'Edit', '#', id: 'application-detail-edit-link', onclick: 'toggleApplicationEditing(areFieldsDisabled = !areFieldsDisabled); $(this).hide();'
-    = link_to 'Process', "/admin/application/process/#{@student.id}", id: 'application-detail-process-link'
-    = link_to 'Delete', "/admin/application/delete/#{@student.id}", id: 'application-detail-delete-link'
+    = link_to 'Process', "/admin/district/application/process/#{@student.id}", id: 'application-detail-process-link'
+    = link_to 'Delete', "/admin/district/application/delete/#{@student.id}", id: 'application-detail-delete-link'
 
   #application-detail-errors
     ul

@@ -520,7 +520,7 @@ class AdminController < ApplicationController
     return render 'district_application_detail'
   end
 
-  def are_errors(model_list)
+  def are_model_errors(model_list)
     model_list.each do |m|
       if m.errors.any?
         return true
@@ -597,7 +597,7 @@ class AdminController < ApplicationController
     params[:contact_person] = nil # Not used after this
 
     # Save if there are no errors
-    unless @student.errors.any? || are_errors(@student.contact_people) || are_errors(@student.student_races)
+    unless @student.errors.any? || are_model_errors(@student.contact_people) || are_model_errors(@student.student_races)
       # Add all races to student, but remove the existing ones first
       @student.student_races.each {|r| r.delete}
 
@@ -635,6 +635,24 @@ class AdminController < ApplicationController
     missing_param("contact_person_#{contact_person_number}", :main_phone, contact_person, "#{contact_person_title}'s phone number is required")
   end
 
+
+  def district_application_process_get
+    @admin = get_logged_in_admin
+    @student = Student.find(params[:student_id]) # TODO better error checking and auth
+
+    central_required = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central], is_required: true)
+    central_optional = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central], is_required: false)
+    district_required = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: @student.district, is_required: true)
+    district_optional = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: @student.district, is_required: false)
+
+    @supplemental_materials_required = central_required.concat(district_required)
+    @supplemental_materials_optional = central_optional.concat(district_optional)
+
+    return render 'district_application_process'
+  end
+
+  def district_application_process_post
+  end
   # -----------
   # Authentication/Authorization
   # -----------
