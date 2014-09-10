@@ -37,8 +37,23 @@ function resendInvite(callingElement, personId) {
     // TODO make this do a REST call to the backend to resend the e-mail
 }
 
-function clearSupplementalMaterialLink() {
+function chooseSupplementalMaterialFile() {
     if( $('#supplemental_material_file').val() != '' ) {
-        $('#supplemental_material_link_url').val('')
+        $('#supplemental_material_link_url').val('');
+        $('#supplemental_material_bring_documentation').attr('checked', false);
+    }
+}
+
+function chooseSupplementalMaterialLink() {
+    if( $('#supplemental_material_link_url').val() != "") {
+        $('#supplemental_material_file').val('');
+        $('#supplemental_material_bring_documentation').attr('checked', false);
+    }
+}
+
+function chooseSupplementalMaterialBringDoc() {
+    if( $('#supplemental_material_bring_documentation').prop('checked') ) {
+        $('#supplemental_material_link_url').val('');
+        $('#supplemental_material_file').val('');
     }
 }

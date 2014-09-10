@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908171758) do
+ActiveRecord::Schema.define(version: 20140910164015) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -93,9 +93,6 @@ ActiveRecord::Schema.define(version: 20140908171758) do
     t.string   "first_language"
     t.boolean  "iep"
     t.boolean  "p504"
-    t.boolean  "birth_certificate_verified", default: false
-    t.boolean  "residency_verified",         default: false
-    t.boolean  "lunch_provided",             default: false
     t.string   "home_street_address_1"
     t.string   "home_street_address_2"
     t.string   "home_zip_code"
@@ -147,6 +144,7 @@ ActiveRecord::Schema.define(version: 20140908171758) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.boolean  "bring_documentation"
   end
 
 end

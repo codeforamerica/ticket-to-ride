@@ -19,7 +19,10 @@ header
       = sm.text_area :description
 
     div
-      p A supplemental material can either be an attached file or a link to a web page (but not both). Please provide one. If both are entered, the link will be saved and the file will not.
+      h2 Type
+      p A supplemental material can either be an attached file, a link or URL, or be documentation that a guardian needs
+        | to bring to the office (example: driver's license). It can only be one of these (i.e. it can't be both
+        | an attached file and a link).
 
     .field
       - if @supplemental_material.file_file_name
@@ -28,11 +31,16 @@ header
 
         p To update/replace the file, use the below:
       = sm.label :file, 'File upload'
-      = sm.file_field :file, onchange: 'clearSupplementalMaterialLink()'
+      = sm.file_field :file, onchange: 'chooseSupplementalMaterialFile()'
     p OR
     .field
       = sm.label :link_url, 'Link URL'
-      = sm.text_field :link_url
+      = sm.text_field :link_url, onchange: 'chooseSupplementalMaterialLink()'
+    p OR
+    .field
+      = sm.check_box :bring_documentation, checked: @supplemental_material.bring_documentation, onchange: 'chooseSupplementalMaterialBringDoc()'
+      / TODO How do we word this so that it's not confusing?
+      = sm.label :bring_documentation, 'Document to be brought (i.e.not a form to be filled out)'
 
     p Required?
     .field

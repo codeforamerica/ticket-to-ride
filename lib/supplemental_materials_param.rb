@@ -5,7 +5,8 @@ module SupplementalMaterialParams
       :description,
       :is_required,
       :file,
-      :link_url
+      :link_url,
+      :bring_documentation
     )
   end
 end

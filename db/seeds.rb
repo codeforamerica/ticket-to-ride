@@ -15,7 +15,32 @@ SupplementalMaterial.create(
     name: 'Physical Exam',
     description: 'Checkup by a doctor',
     link_url: 'http://www.health.ri.gov/forms/school/Physical.pdf',
-    authority_level: :central
+    authority_level: :central,
+    is_required: true
+)
+
+SupplementalMaterial.create(
+    name: 'Free/Reduced Lunch Application',
+    description: 'Anyone on food stamps eligible',
+    link_url: 'http://www.food.ri.gov/forms/lunch.pdf',
+    authority_level: :central,
+    is_required: false
+)
+
+SupplementalMaterial.create(
+    name: 'Birth certificate',
+    description: "A child's proof of birth",
+    bring_documentation: true,
+    authority_level: :central,
+    is_required: true
+)
+
+SupplementalMaterial.create(
+    name: 'Proof of residency',
+    description: "Examples are a current lease, mortgage payment, or utility bill.",
+    bring_documentation: true,
+    authority_level: :central,
+    is_required: true
 )
 
 AdminUser.create(
@@ -43,7 +68,17 @@ SupplementalMaterial.create(
     description: 'Permission to release records',
     link_url: 'http://fakeurl.com.fakers/release_auth.pdf',
     district: west_warwick_district,
-    authority_level: :district
+    authority_level: :district,
+    is_required: true
+)
+
+SupplementalMaterial.create(
+    name: 'Armed Servce Form',
+    description: 'Evidence of being in the armed services',
+    link_url: 'http://fakeurl.com.fakers/military.pdf',
+    district: west_warwick_district,
+    authority_level: :district,
+    is_required: false
 )
 
 AdminUser.create(

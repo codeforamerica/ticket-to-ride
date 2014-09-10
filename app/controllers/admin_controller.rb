@@ -86,19 +86,29 @@ class AdminController < ApplicationController
       @supplemental_material.errors.add(:description, 'Please enter a <em>Description</em>')
     end
 
-    # Neither a file or link given
-    if param_does_not_exist(:supplemental_material, :file) && param_does_not_exist(:supplemental_material, :link_url)
-      @supplemental_material.errors.add(:base, 'Please add either a file or a link URL to the supplemental material (but not both)')
-    # Both a file and link given, link wins
-    elsif !param_does_not_exist(:supplemental_material, :file) && !param_does_not_exist(:supplemental_material, :link_url)
-      params[:supplemental_material][:file] = nil # both file and link given, link wins
-    # There WAS a link, but new incoming file
-    elsif @supplemental_material.link_url && param_exists(:supplemental_material, :file)
-      @supplemental_material.link_url = nil
-    # There WAS a file, but new incoming link
-    elsif @supplemental_material.file_file_name && param_exists(:supplemental_material, :link_url)
-      @supplemental_material.file = nil
+    # TYPE OF SUPPLEMENTAL MATERIAL
+    num_types = 0
+    # Has type: file
+    if !param_does_not_exist(:supplemental_material, :file)
+      num_types += 1
     end
+    # Has type: link
+    if !param_does_not_exist(:supplemental_material, :link_url)
+      num_types += 1
+    end
+    # Has type: bring doc
+    if params && params[:supplemental_material] && params[:supplemental_material][:bring_documentation] && params[:supplemental_material][:bring_documentation] != '' && params[:supplemental_material][:bring_documentation] != 0 && params[:supplemental_material][:bring_documentation] != '0'
+      num_types += 1
+    end
+
+    # No type indicated
+    if num_types == 0
+      @supplemental_material.errors.add(:base, 'Please enter a type')
+    # Multiple types indicated
+    elsif num_types > 1
+      @supplemental_material.errors.add(:base, 'Multiple types were entered. Can only be one of file, link, or brought document')
+    end
+
 
     if param_does_not_exist(:supplemental_material, :is_required)
       @supplemental_material.errors.add(:is_required, 'Please indicate if the supplemental material is required or not.')
@@ -111,6 +121,17 @@ class AdminController < ApplicationController
     end
 
     # Populate any other fields and save
+    if param_exists(:supplemental_material, :file)
+      @supplemental_material.link_url = nil
+      @supplemental_material.bring_documentation = false
+    elsif param_exists(:supplemental_material, :link_url)
+      @supplemental_material.file = nil
+      @supplemental_material.bring_documentation = false
+    else
+      @supplemental_material.file = nil
+      @supplemental_material.link_url = nil
+    end
+
     @supplemental_material.authority_level = :central
     @supplemental_material.save # TODO more error checking on the save
 
@@ -570,10 +591,10 @@ class AdminController < ApplicationController
     retainValuesAndErrors(@student, student_params)
 
     @student.contact_people.each_with_index do |contact_person, index|
-      params[:contact_person] = params["contact_person_#{index}"]
+      params[:contact_person] = params["contact_person_#{index}"] # "artificially" fill param to ease use of assign_attributes
       retainValuesAndErrors(contact_person, contact_person_params)
     end
-    params[:contact_person] = nil
+    params[:contact_person] = nil # Not used after this
 
     # Save if there are no errors
     unless @student.errors.any? || are_errors(@student.contact_people) || are_errors(@student.student_races)
