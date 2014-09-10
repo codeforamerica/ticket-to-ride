@@ -1,11 +1,17 @@
 require 'admin_user_params'
 require 'supplemental_materials_param'
 require 'district_params'
+require 'student_params'
+require 'student_race_params'
+require 'contact_person_params'
 
 class AdminController < ApplicationController
   include AdminUserParams
   include SupplementalMaterialParams
   include DistrictParams
+  include StudentParams
+  include StudentRaceParams
+  include ContactPersonParams
 
   # -----------
   # Constants
@@ -40,7 +46,7 @@ class AdminController < ApplicationController
   # TODO this method might replace `param_does_not_exist`
   def missing_param(model_const, field_const, model_obj, error_msg)
     if !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
-      model_obj.errors.add(error_msg)
+      model_obj.errors.add(field_const, error_msg)
     end
   end
 
@@ -467,15 +473,7 @@ class AdminController < ApplicationController
     return show_district_applications('Processed Applications', true)
   end
 
-  def district_application_detail_get
-    @admin = AdminUser.find(session[:admin_user_id])
-
-    @student = Student.find(params[:student_id]) # TODO Better error checking
-    if @student.district != @admin.district # TODO Better authorization checking
-      return render 'unauthorized'
-    end
-
-    # Select box options
+  def generate_application_detail_select_options
 
     @previous_grade_options = []
     Grades::ALL.each do |grade|
@@ -486,11 +484,36 @@ class AdminController < ApplicationController
     ArmedServiceStatuses::ALL.each do |status|
       @armed_service_status_options << [t("armed_service_status_#{status}"), status ]
     end
+  end
+
+  def district_application_detail_get
+    @admin = AdminUser.find(session[:admin_user_id])
+
+    @student = Student.find(params[:student_id]) # TODO Better error checking
+    if @student.district != @admin.district # TODO Better authorization checking
+      return render 'unauthorized'
+    end
+
+    generate_application_detail_select_options
 
     return render 'district_application_detail'
   end
 
+  def are_errors(model_list)
+    model_list.each do |m|
+      if m.errors.any?
+        return true
+      end
+    end
+
+    return false
+  end
+
+
+
   def district_application_detail_post
+    @admin = AdminUser.find(session[:admin_user_id]) # TODO security check
+    @student = Student.find(params[:student_id]) # TODO error checking
 
     # STUDENT FIELDS
     missing_param(:student, :first_name, @student, 'Student first name is required')
@@ -504,7 +527,7 @@ class AdminController < ApplicationController
     missing_param(:student, :gender, @student, 'Student gender is required')
 
     if !params || !params['races'] || !params['races'].any?
-      student.errors.add(:races, 'At least one student race needs to be selected')
+      @student.errors.add(:base, 'At least one student race needs to be selected')
     end
 
     if params[:student] && params[:student][:prior_grade] && params[:student][:prior_grade] == Grades::NONE
@@ -513,16 +536,82 @@ class AdminController < ApplicationController
       missing_param(:student, :prior_school_state, @student, 'Prior school state is required when a prior grade is entered')
     end
 
-
-
     # GUARDIAN #1 FIELDS
+    guardian_1 = @student.contact_people[0]
+    missing_contact_person_params(guardian_1, 0, 'Guardian #1')
+
 
     # GUARDIAN #2 FIELDS
+    has_second_guardian = @student.contact_people[1].is_guardian
+    if has_second_guardian
+      guardian_2 = @student.contact_people[1]
+      missing_contact_person_params(guardian_2, 1, 'Guardian #2')
+    end
 
     # CONTACT PERSON #1 FIELDS
+    if has_second_guardian
+      contact_person_1_number = 2
+    else
+      contact_person_1_number = 1
+    end
+    contact_person_1 = @student.contact_people[contact_person_1_number]
+    missing_contact_person_params(contact_person_1, contact_person_1_number, 'Contact Person #1')
 
     # CONTACT PERSON #2 FIELDS
+    if has_second_guardian
+      contact_person_2_number = 3
+    else
+      contact_person_2_number = 2
+    end
+    contact_person_2 = @student.contact_people[contact_person_2_number]
+    missing_contact_person_params(contact_person_2, contact_person_2_number, 'Contact Person #2')
 
+    # Do model validations
+    retainValuesAndErrors(@student, student_params)
+
+    @student.contact_people.each_with_index do |contact_person, index|
+      params[:contact_person] = params["contact_person_#{index}"]
+      retainValuesAndErrors(contact_person, contact_person_params)
+    end
+    params[:contact_person] = nil
+
+    # Save if there are no errors
+    unless @student.errors.any? || are_errors(@student.contact_people) || are_errors(@student.student_races)
+      # Add all races to student, but remove the existing ones first
+      @student.student_races.each {|r| r.delete}
+
+      params['races'].each do |race|
+        begin
+          StudentRace.create(race: race, student: @student )
+        rescue
+          @student.errors.add(:race, 'Could not assign race')
+          return render 'district_application_detail'
+        end
+      end
+
+      # Save contact people
+      @student.contact_people.each {|contact_person| contact_person.save}
+
+      # Save student
+      @student.save # TODO error check here
+      @student.reload # refreshes transitive values, like race and contact people
+    end
+
+    # Prep anything for rendering a page
+    generate_application_detail_select_options
+
+    return render 'district_application_detail'
+  end
+
+  def missing_contact_person_params(contact_person, contact_person_number, contact_person_title)
+    missing_param("contact_person_#{contact_person_number}", :first_name, contact_person, "#{contact_person_title}'s first name is required")
+    missing_param("contact_person_#{contact_person_number}", :last_name, contact_person, "#{contact_person_title}'s last name is required")
+    missing_param("contact_person_#{contact_person_number}", :relationship, contact_person, "#{contact_person_title}'s relationship to student is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_street_address_1, contact_person, "#{contact_person_title}'s mailing street address line 1 is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_city, contact_person, "#{contact_person_title}'s mailing city is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_state, contact_person, "#{contact_person_title}'s state is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_zip_code, contact_person, "#{contact_person_title}'s ZIP code is required")
+    missing_param("contact_person_#{contact_person_number}", :main_phone, contact_person, "#{contact_person_title}'s phone number is required")
   end
 
   # -----------

@@ -8,9 +8,17 @@ javascript:
     = @student.confirmation_code
 
   .application-actions
-    = link_to 'Edit', '#', id: 'application-edit-link', onclick: 'areApplicationDetailFieldsDisabled(areFieldsDisabled = !areFieldsDisabled)'
-    = link_to 'Process', "/admin/application/process/#{@student.id}", id: 'application-process-link'
-    = link_to 'Delete', "/admin/application/delete/#{@student.id}", id: 'application-delete-link'
+    = link_to 'Edit', '#', id: 'application-detail-edit-link', onclick: 'toggleApplicationEditing(areFieldsDisabled = !areFieldsDisabled); $(this).hide();'
+    = link_to 'Process', "/admin/application/process/#{@student.id}", id: 'application-detail-process-link'
+    = link_to 'Delete', "/admin/application/delete/#{@student.id}", id: 'application-detail-delete-link'
+
+  #application-detail-errors
+    ul
+      = render 'model_errors', model_obj: @student
+      - @student.contact_people.each do |contact_person|
+        = render 'model_errors', model_obj: contact_person
+      - @student.student_races.each do |race|
+        = render 'model_errors', model_obj: race
 
 .page
 
@@ -31,7 +39,7 @@ javascript:
         = student.text_field :last_name
       .field
         = student.label :birthday, 'Birthday'
-        = student.date_select :birthday
+        = student.date_field :birthday
       .field
         = student.label :birth_city, 'Birth city'
         = student.text_field :birth_city
@@ -105,4 +113,4 @@ javascript:
       h2 Contact person #2 information
       = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
 
-    = student.submit 'Update'
+    = student.submit 'Update', id: 'application-detail-form-submit-button'

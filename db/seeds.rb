@@ -120,7 +120,8 @@ guardian_complete_west_warwick_guardian = ContactPerson.create(
     relationship: 'mother',
     can_pickup_child: true,
     lives_with_student: true,
-    main_phone: '401-111-1111'
+    main_phone: '401-111-1111',
+    is_guardian: true
 )
 
 guardian2_west_warwick = ContactPerson.create(
@@ -141,7 +142,8 @@ guardian2_west_warwick = ContactPerson.create(
     receive_grade_notices: true,
     receive_conduct_notices: true,
     lives_with_student: false,
-    main_phone: '401-222-2222'
+    main_phone: '401-222-2222',
+    is_guardian: true
 )
 
 contact1_west_warwick = ContactPerson.create(

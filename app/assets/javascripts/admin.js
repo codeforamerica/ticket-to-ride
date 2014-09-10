@@ -17,16 +17,17 @@ $(document).ready(function(){
     $( document ).trigger( "enhance" );
 
     // Disable all elements in the Application Detail format
-    areApplicationDetailFieldsDisabled(true);
+    toggleApplicationEditing(true);
 });
+
 
 function toggleDeleteButton() {
     var disabled = $('#confirm-delete-input-text').val().toLowerCase() != 'delete';
     $('#confirm-delete-button').attr('disabled', disabled);
 }
 
-function areApplicationDetailFieldsDisabled(areDisabled) {
-    var val = areDisabled ? 'disabled' : '';
+function toggleApplicationEditing(areFieldsDisabled) {
+    var val = areFieldsDisabled ? 'disabled' : '';
     $('#application-detail-form input').prop('disabled', val);
     $('#application-detail-form select').prop('disabled', val);
 }
