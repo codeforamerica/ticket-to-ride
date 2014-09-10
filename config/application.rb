@@ -37,6 +37,14 @@ module TicketToRide
 
     config.generators do |g|
       g.template_engine :slim
+      g.test_framework :rspec,
+        :fixtures => true, # generates a fixture for each model using Factory Girl
+        :view_specs => false, # skips generating view specs
+        :helper_specs => false, # skips generting specs for the helper files generated with each controller
+        :routing_specs => false, # omits a spec file for routes.rb
+        :controller_specs => true, 
+        :request_specs => true
+      g.fixture_replacement :factory_girl, :dir => "spec/factories" # tells Rails to generate factories instead of fixtures
     end
 
   end
