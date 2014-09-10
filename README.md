@@ -1,5 +1,7 @@
 # Ticket to RIDE
 
+[![Build Status][build_png]][travis]
+
 
 Code Island's in-progress app for K-12 (kindergarten to 12th grade) school registration in Rhode Island.
 
