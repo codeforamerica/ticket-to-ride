@@ -1,14 +1,29 @@
+javascript:
+  $(document).ready(function () {
+    $('input:checkbox').on('change', function(e) {
+      if(areAllCheckboxesChecked()) {
+        $('#application-process-submit').prop('disabled', false);
+      }
+      else {
+        $('#application-process-submit').prop('disabled', true);
+      }
+    })
+  });
+
 .header
+  h1 Process application
 
 .page
 
-  h1 Process application
+  / --- REVIEW APP ---
 
   h2 1. Review application
   p
     | Make sure to review the student's application for errors. You can do this by going&nbsp;
     = link_to 'back to the previous page', "/admin/district/application/#{@student.id}"
     | &nbsp;and making any modifcations.
+
+  / --- SUP MAT ---
 
   h2 2. Confirm receipt of supplemental materials
   p
@@ -45,3 +60,12 @@
       - elsif sm.link_url
         = link_to 'Print', sm.link_url
       = sm.description
+
+  / --- EXPORT ---
+
+  h2 3. Export the application
+
+  p If everything looks good, export the application!
+
+  = form_tag request.original_url, method: 'post' do
+    = submit_tag 'Do it!', id: 'application-process-submit', disabled: true

@@ -4,6 +4,8 @@
 //= require custominput.jquery
 //= require select.jquery
 
+// TODO Rename some of these functions to be clearer which pages they impact
+
 $( document ).bind( "enhance", function(){
     $( "body" ).addClass( "enhanced" );
     $( "input[type=radio]" ).customInput();
@@ -15,9 +17,6 @@ $(document).ready(function(){
     $('body').removeClass('no-js');
     $('.is-branch').hide();
     $( document ).trigger( "enhance" );
-
-    // Disable all elements in the Application Detail format
-    toggleApplicationEditing(true);
 });
 
 
@@ -56,4 +55,16 @@ function chooseSupplementalMaterialBringDoc() {
         $('#supplemental_material_link_url').val('');
         $('#supplemental_material_file').val('');
     }
+}
+
+function areAllCheckboxesChecked() {
+    var allChecked = true;
+
+    $('input:checkbox').each(function(){
+       if( $(this).prop('checked') != true ) {
+           allChecked = false;
+       }
+    });
+
+    return allChecked;
 }

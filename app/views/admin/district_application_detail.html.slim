@@ -1,6 +1,11 @@
 javascript:
   var areFieldsDisabled = true;
 
+  $(document).ready(function () {
+    // Disable all elements in the Application Detail format
+    toggleApplicationEditing(true);
+  });
+
 .header
   .application-id
     span Confirmation Code:
