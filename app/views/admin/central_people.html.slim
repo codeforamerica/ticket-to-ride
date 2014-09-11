@@ -17,8 +17,11 @@ header
         span class='capitalize'
           = person.name
         = person.email
-        span class='capitalize'
-          = person.district.name
+        - if person.user_role != 'central_admin'
+          span class='capitalize'
+            = person.district.name
+        - else
+          span Central Admin
         - if person.active
           = link_to 'Edit', "/admin/central/people/edit/#{person.id}"
         - else

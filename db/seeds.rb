@@ -14,9 +14,33 @@
 SupplementalMaterial.create(
     name: 'Physical Exam',
     description: 'Checkup by a doctor',
-    uri: 'http://www.health.ri.gov/forms/school/Physical.pdf',
-    req_type: :url,
-    authority_level: :central
+    link_url: 'http://www.health.ri.gov/forms/school/Physical.pdf',
+    authority_level: :central,
+    is_required: true
+)
+
+SupplementalMaterial.create(
+    name: 'Free/Reduced Lunch Application',
+    description: 'Anyone on food stamps eligible',
+    link_url: 'http://www.food.ri.gov/forms/lunch.pdf',
+    authority_level: :central,
+    is_required: false
+)
+
+SupplementalMaterial.create(
+    name: 'Birth certificate',
+    description: "A child's proof of birth",
+    bring_documentation: true,
+    authority_level: :central,
+    is_required: true
+)
+
+SupplementalMaterial.create(
+    name: 'Proof of residency',
+    description: "Examples are a current lease, mortgage payment, or utility bill.",
+    bring_documentation: true,
+    authority_level: :central,
+    is_required: true
 )
 
 AdminUser.create(
@@ -29,10 +53,10 @@ AdminUser.create(
 # West Warwick School District
 west_warwick_district = District.create(
   name: 'West Warwick Public Schools',
-  mailing_street_address_1: "10 Harris Ave",
-  mailing_city: 'West Warwick',
-  mailing_state: 'RI',
-  mailing_zip_code: '02984',
+  street_address_1: "10 Harris Ave",
+  city: 'West Warwick',
+  state: 'RI',
+  zip_code: '02984',
   phone: '4018211180',
   active: true,
   welcome_message: "Welcome to West Warwick's registration",
@@ -42,9 +66,19 @@ west_warwick_district = District.create(
 SupplementalMaterial.create(
     name: 'Release Authorization',
     description: 'Permission to release records',
-    req_type: :file,
+    link_url: 'http://fakeurl.com.fakers/release_auth.pdf',
     district: west_warwick_district,
-    authority_level: :district
+    authority_level: :district,
+    is_required: true
+)
+
+SupplementalMaterial.create(
+    name: 'Armed Servce Form',
+    description: 'Evidence of being in the armed services',
+    link_url: 'http://fakeurl.com.fakers/military.pdf',
+    district: west_warwick_district,
+    authority_level: :district,
+    is_required: false
 )
 
 AdminUser.create(
@@ -72,8 +106,6 @@ guardian_complete_west_warwick_student = Student.create(
     home_language: 'spanish',
     iep: true,
     p504: true,
-    birth_certificate_verified: false,
-    residency_verified: false,
     home_street_address_1: '60 Coit Ave',
     home_street_address_2: 'Apt 4',
     home_city: 'West Warwick',
@@ -121,7 +153,8 @@ guardian_complete_west_warwick_guardian = ContactPerson.create(
     relationship: 'mother',
     can_pickup_child: true,
     lives_with_student: true,
-    main_phone: '401-111-1111'
+    main_phone: '401-111-1111',
+    is_guardian: true
 )
 
 guardian2_west_warwick = ContactPerson.create(
@@ -142,7 +175,8 @@ guardian2_west_warwick = ContactPerson.create(
     receive_grade_notices: true,
     receive_conduct_notices: true,
     lives_with_student: false,
-    main_phone: '401-222-2222'
+    main_phone: '401-222-2222',
+    is_guardian: true
 )
 
 contact1_west_warwick = ContactPerson.create(

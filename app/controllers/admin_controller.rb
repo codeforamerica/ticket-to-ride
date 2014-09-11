@@ -1,11 +1,17 @@
 require 'admin_user_params'
 require 'supplemental_materials_param'
 require 'district_params'
+require 'student_params'
+require 'student_race_params'
+require 'contact_person_params'
 
 class AdminController < ApplicationController
   include AdminUserParams
   include SupplementalMaterialParams
   include DistrictParams
+  include StudentParams
+  include StudentRaceParams
+  include ContactPersonParams
 
   # -----------
   # Constants
@@ -37,9 +43,17 @@ class AdminController < ApplicationController
     return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
   end
 
+  # TODO this method might replace `param_does_not_exist`
+  def missing_param(model_const, field_const, model_obj, error_msg)
+    if !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
+      model_obj.errors.add(field_const, error_msg)
+    end
+  end
+
   def retainValuesAndErrors(obj, param_updater)
     messages = obj.errors.messages.clone()
     obj.assign_attributes(param_updater)
+    obj.valid?
     messages.each do |k,v|
       v.each do |field, message|
         obj.errors.add(field, message)
@@ -55,17 +69,16 @@ class AdminController < ApplicationController
     return admin_user
   end
 
-  def edit_a_central_supplemental_material(id)
+  def edit_supplemental_material(id)
     @admin = get_logged_in_admin
 
     if id
-      @supplemental_material = SupplementalMaterial.find(id) # TODO plusjeff: Better error checking
+      @supplemental_material = SupplementalMaterial.find(id) # TODO Better error checking
     else
       @supplemental_material = SupplementalMaterial.new
     end
 
     # Check fields to see if they were filled in
-
     if param_does_not_exist(:supplemental_material, :name)
       @supplemental_material.errors.add(:name, 'Please enter a <em>Name</em>')
     end
@@ -74,40 +87,69 @@ class AdminController < ApplicationController
       @supplemental_material.errors.add(:description, 'Please enter a <em>Description</em>')
     end
 
-    if !params[:file_upload]
-      if !params[:link_url]
-        @supplemental_material.errors.add(:base, 'Either a <em>File upload</em> or <em>Link URL</em> must be entered')
-      end
-    else params[:file_upload] && params[:link_url] && params[:link_url] != ''
-    @supplemental_material.errors.add(:base, 'Only one of file upload or link URL can be entered, but not both')
+    # TYPE OF SUPPLEMENTAL MATERIAL
+    num_types = 0
+    # Has type: file
+    if !param_does_not_exist(:supplemental_material, :file)
+      num_types += 1
     end
+    # Has type: link
+    if !param_does_not_exist(:supplemental_material, :link_url)
+      num_types += 1
+    end
+    # Has type: bring doc
+    if params && params[:supplemental_material] && params[:supplemental_material][:bring_documentation] && params[:supplemental_material][:bring_documentation] != '' && params[:supplemental_material][:bring_documentation] != 0 && params[:supplemental_material][:bring_documentation] != '0'
+      num_types += 1
+    end
+
+    # No type indicated
+    if num_types == 0
+      @supplemental_material.errors.add(:base, 'Please enter a type')
+    # Multiple types indicated
+    elsif num_types > 1
+      @supplemental_material.errors.add(:base, 'Multiple types were entered. Can only be one of file, link, or brought document')
+    end
+
 
     if param_does_not_exist(:supplemental_material, :is_required)
       @supplemental_material.errors.add(:is_required, 'Please indicate if the supplemental material is required or not.')
     end
 
-    # TODO Use Paperclip gem in the future -- comment out for now
-    # path = File.join('public', 'files', 'supplemental_materials', params[:file_upload].to_s)
-    # File.open(path, 'wb') {|f| f.write(params[:file_upload].read)}
-
     # Check for errors
     retainValuesAndErrors(@supplemental_material, supplemental_material_params)
     if @supplemental_material.errors.any?
-      return render 'central_supplemental_materials_edit'
+      return render 'supplemental_materials_edit'
     end
 
     # Populate any other fields and save
-    if params[:file_upload]
-      @supplemental_material.req_type = :file
-      @supplemental_material.uri = params[:file_upload].to_s # TODO fix this for file uploads
+    if param_exists(:supplemental_material, :file)
+      @supplemental_material.link_url = nil
+      @supplemental_material.bring_documentation = false
+    elsif param_exists(:supplemental_material, :link_url)
+      @supplemental_material.file = nil
+      @supplemental_material.bring_documentation = false
     else
-      @supplemental_material.req_type = :url
-      @supplemental_material.uri = params[:link_url]
+      @supplemental_material.file = nil
+      @supplemental_material.link_url = nil
     end
-    @supplemental_material.authority_level = :central
+
+    if @admin.district != nil
+      @supplemental_material.district = @admin.district
+      @supplemental_material.authority_level = :district
+    else
+      @supplemental_material.authority_level = :central
+    end
     @supplemental_material.save # TODO more error checking on the save
 
+    if @supplemental_material.district != nil
+      return redirect_to action: 'district_supplemental_materials'
+    end
+
     return redirect_to action: 'central_supplemental_materials'
+  end
+
+  def param_exists(model_const, field_const)
+    return !param_does_not_exist(model_const, field_const)
   end
 
   # -----------
@@ -174,23 +216,10 @@ class AdminController < ApplicationController
 
   def central_supplemental_materials
     @admin = get_logged_in_admin
+
     @supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
-
-    unless @supplemental_materials.any?
-      return render 'central_supplemental_materials_none'
-    end
-
-    # Sort by required and optional
-    @supplemental_materials_required = []
-    @supplemental_materials_optional = []
-
-    @supplemental_materials.each do |sm|
-      if sm.is_required
-        @supplemental_materials_required << sm
-      else
-        @supplemental_materials_optional << sm
-      end
-    end
+    @supplemental_materials_required = @supplemental_materials.where(is_required: true)
+    @supplemental_materials_optional = @supplemental_materials.where(is_required: false)
 
     return render 'central_supplemental_materials'
   end
@@ -204,25 +233,25 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_add_post
-    return edit_a_central_supplemental_material(nil)
+    @admin = get_logged_in_admin
+    return edit_supplemental_material(nil)
   end
 
   def central_supplemental_materials_edit_get
     @admin = get_logged_in_admin
-
     @supplemental_material = SupplementalMaterial.find(params[:id])
-
     return render 'central_supplemental_materials_edit'
   end
 
   def central_supplemental_materials_edit_post
-    return edit_a_central_supplemental_material(params[:id])
+    @admin = get_logged_in_admin
+    return edit_supplemental_material(params[:id])
   end
 
   def central_supplemental_materials_delete_get
     @admin = get_logged_in_admin
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
-    return render 'central_supplemental_materials_delete'
+    return render 'supplemental_materials_delete'
   end
 
   def central_supplemental_materials_delete_post
@@ -236,7 +265,7 @@ class AdminController < ApplicationController
   # Central Admin People
   # -----------
 
-  def edit_a_person(id)
+  def edit_a_person_as_central(id)
     @admin = get_logged_in_admin
 
     if id
@@ -254,10 +283,12 @@ class AdminController < ApplicationController
       @person.errors.add(:email, 'Please enter an email address')
     end
 
-    if !params || !params[:district]
-      @person.errors.add(:base, 'Please enter a district name')
+    if (@person.user_role != 'central_admin')
+      if !params || !params[:district]
+        @person.errors.add(:base, 'Please enter a district name')
+      end
+      @district_name = params[:district] # populate this for re-display incase there are errors
     end
-    @district_name = params[:district] # populate this for re-display incase there are errors
 
     # See if there is already someone with this e-mail address
     if !id && AdminUser.find_by(email: params[:admin_user][:email]) != nil
@@ -271,13 +302,17 @@ class AdminController < ApplicationController
     end
 
     # Create or add to a district
-    district = District.find_by(name: @district_name.downcase)
-    if district == nil
-      district = District.create(name: @district_name.downcase)
+    if @person.user_role != 'central_admin'
+      district = District.find_by(name: @district_name.downcase)
+      if district == nil
+        district = District.create(name: @district_name.downcase)
+      end
+      @person.district = district
+      @person.user_role = :district_admin
+    else
+      @person.user_role = :central_admin
     end
 
-    @person.district = district
-    @person.user_role = :district_admin
     @person.save
 
     @people = AdminUser.all
@@ -288,7 +323,7 @@ class AdminController < ApplicationController
   def central_people
     @admin = get_logged_in_admin
 
-    @people = AdminUser.where.not(district_id: nil).joins(:district).order('districts.name')
+    @people = AdminUser.all.where.not(id: @admin.id).order(:name)
     unless @people.any?
       return render 'central_people_none'
     end
@@ -305,20 +340,22 @@ class AdminController < ApplicationController
   end
 
   def central_people_add_post
-    return edit_a_person(nil)
+    return edit_a_person_as_central(nil)
   end
 
   def central_people_edit_get
     @admin = get_logged_in_admin
     @person = AdminUser.find(params[:id]) # TODO add authority check here
-    @district_name = @person.district.name
+    if @person.user_role != 'central_admin'
+      @district_name = @person.district.name
+    end
 
     return render 'central_people_edit'
   end
 
   def central_people_edit_post
     id = params[:id] # TODO add authority check here
-    return edit_a_person(id)
+    return edit_a_person_as_central(id)
   end
 
   def central_people_delete_get
@@ -372,17 +409,17 @@ class AdminController < ApplicationController
     if param_does_not_exist(:admin_user, :confirm_password)
       @admin.errors.add(:base, 'Please confirm the password') # TODO switch to actual password field
     end
-    if param_does_not_exist(:district, :mailing_street_address_1)
-      @district.errors.add(:mailing_street_address_1, "Please enter the first line of the district's mailing address")
+    if param_does_not_exist(:district, :street_address_1)
+      @district.errors.add(:street_address_1, "Please enter the first line of the district's  address")
     end
-    if param_does_not_exist(:district, :mailing_city)
-      @district.errors.add(:mailing_city, "Please enter the district's mailing city")
+    if param_does_not_exist(:district, :city)
+      @district.errors.add(:city, "Please enter the district's city")
     end
-    if param_does_not_exist(:district, :mailing_state)
-      @district.errors.add(:mailing_state, "Please enter the district's mailing state")
+    if param_does_not_exist(:district, :state)
+      @district.errors.add(:state, "Please enter the district's  state")
     end
-    if param_does_not_exist(:district, :mailing_zip_code)
-      @district.errors.add(:mailing_zip_code, "Please enter the district's mailing ZIP code")
+    if param_does_not_exist(:district, :zip_code)
+      @district.errors.add(:zip_code, "Please enter the district's ZIP code")
     end
 
     # If there were any errors, send back the same page with error messages
@@ -462,6 +499,19 @@ class AdminController < ApplicationController
     return show_district_applications('Processed Applications', true)
   end
 
+  def generate_application_detail_select_options
+
+    @previous_grade_options = []
+    Grades::ALL.each do |grade|
+      @previous_grade_options << [t("grade_#{grade}"), grade]
+    end
+
+    @armed_service_status_options = []
+    ArmedServiceStatuses::ALL.each do |status|
+      @armed_service_status_options << [t("armed_service_status_#{status}"), status ]
+    end
+  end
+
   def district_application_detail_get
     @admin = AdminUser.find(session[:admin_user_id])
 
@@ -470,12 +520,375 @@ class AdminController < ApplicationController
       return render 'unauthorized'
     end
 
-    @armed_service_status_options = []
-    ArmedServiceStatuses::ALL.each do |status|
-      @armed_service_status_options << [t("armed_service_status_#{status}"), status ]
-    end
+    generate_application_detail_select_options
 
     return render 'district_application_detail'
+  end
+
+  def are_model_errors(model_list)
+    model_list.each do |m|
+      if m.errors.any?
+        return true
+      end
+    end
+
+    return false
+  end
+
+
+  def district_application_detail_post
+    @admin = AdminUser.find(session[:admin_user_id]) # TODO security check
+    @student = Student.find(params[:student_id]) # TODO error checking
+
+    # STUDENT FIELDS
+    missing_param(:student, :first_name, @student, 'Student first name is required')
+    missing_param(:student, :last_name, @student, 'Student last name is required')
+    missing_param(:student, :birthday, @student, 'Student birthday is required')
+    missing_param(:student, :birth_city, @student, 'Student birth city is required')
+    missing_param(:student, :birth_state, @student, 'Student birth state is required')
+    missing_param(:student, :birth_country, @student, 'Student birth country is required')
+    missing_param(:student, :first_language, @student, 'Student first language is required')
+    missing_param(:student, :home_language, @student, 'Student home language is required')
+    missing_param(:student, :gender, @student, 'Student gender is required')
+
+    if !params || !params['races'] || !params['races'].any?
+      @student.errors.add(:base, 'At least one student race needs to be selected')
+    end
+
+    if params[:student] && params[:student][:prior_grade] && params[:student][:prior_grade] == Grades::NONE
+      missing_param(:student, :prior_school_name, @student, 'Prior school name is required when a prior grade is entered')
+      missing_param(:student, :prior_school_city, @student, 'Prior school city is required when a prior grade is entered')
+      missing_param(:student, :prior_school_state, @student, 'Prior school state is required when a prior grade is entered')
+    end
+
+    # GUARDIAN #1 FIELDS
+    guardian_1 = @student.contact_people[0]
+    missing_contact_person_params(guardian_1, 0, 'Guardian #1')
+
+
+    # GUARDIAN #2 FIELDS
+    has_second_guardian = @student.contact_people[1].is_guardian
+    if has_second_guardian
+      guardian_2 = @student.contact_people[1]
+      missing_contact_person_params(guardian_2, 1, 'Guardian #2')
+    end
+
+    # CONTACT PERSON #1 FIELDS
+    if has_second_guardian
+      contact_person_1_number = 2
+    else
+      contact_person_1_number = 1
+    end
+    contact_person_1 = @student.contact_people[contact_person_1_number]
+    missing_contact_person_params(contact_person_1, contact_person_1_number, 'Contact Person #1')
+
+    # CONTACT PERSON #2 FIELDS
+    if has_second_guardian
+      contact_person_2_number = 3
+    else
+      contact_person_2_number = 2
+    end
+    contact_person_2 = @student.contact_people[contact_person_2_number]
+    missing_contact_person_params(contact_person_2, contact_person_2_number, 'Contact Person #2')
+
+    # Do model validations
+    retainValuesAndErrors(@student, student_params)
+
+    @student.contact_people.each_with_index do |contact_person, index|
+      params[:contact_person] = params["contact_person_#{index}"] # "artificially" fill param to ease use of assign_attributes
+      retainValuesAndErrors(contact_person, contact_person_params)
+    end
+    params[:contact_person] = nil # Not used after this
+
+    # Save if there are no errors
+    unless @student.errors.any? || are_model_errors(@student.contact_people) || are_model_errors(@student.student_races)
+      # Add all races to student, but remove the existing ones first
+      @student.student_races.each {|r| r.delete}
+
+      params['races'].each do |race|
+        begin
+          StudentRace.create(race: race, student: @student )
+        rescue
+          @student.errors.add(:race, 'Could not assign race')
+          return render 'district_application_detail'
+        end
+      end
+
+      # Save contact people
+      @student.contact_people.each {|contact_person| contact_person.save}
+
+      # Save student
+      @student.save # TODO error check here
+      @student.reload # refreshes transitive values, like race and contact people
+    end
+
+    # Prep anything for rendering a page
+    generate_application_detail_select_options
+
+    return render 'district_application_detail'
+  end
+
+  def missing_contact_person_params(contact_person, contact_person_number, contact_person_title)
+    missing_param("contact_person_#{contact_person_number}", :first_name, contact_person, "#{contact_person_title}'s first name is required")
+    missing_param("contact_person_#{contact_person_number}", :last_name, contact_person, "#{contact_person_title}'s last name is required")
+    missing_param("contact_person_#{contact_person_number}", :relationship, contact_person, "#{contact_person_title}'s relationship to student is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_street_address_1, contact_person, "#{contact_person_title}'s mailing street address line 1 is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_city, contact_person, "#{contact_person_title}'s mailing city is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_state, contact_person, "#{contact_person_title}'s state is required")
+    missing_param("contact_person_#{contact_person_number}", :mailing_zip_code, contact_person, "#{contact_person_title}'s ZIP code is required")
+    missing_param("contact_person_#{contact_person_number}", :main_phone, contact_person, "#{contact_person_title}'s phone number is required")
+  end
+
+
+  def district_application_process_get
+    @admin = get_logged_in_admin
+    @student = Student.find(params[:student_id]) # TODO better error checking and auth
+
+    central_required = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central], is_required: true)
+    central_optional = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central], is_required: false)
+    district_required = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: @student.district, is_required: true)
+    district_optional = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: @student.district, is_required: false)
+
+    @supplemental_materials_required = central_required.concat(district_required)
+    @supplemental_materials_optional = central_optional.concat(district_optional)
+
+    return render 'district_application_process'
+  end
+
+  def district_application_process_post
+    @admin = get_logged_in_admin
+    @student = Student.find(params[:student_id]) # TODO better error checking and auth
+
+    @student.export_time = DateTime.now
+    @student.save
+
+    return redirect_to action: 'district_applications_unprocessed'
+  end
+
+  # -----------
+  # District Admin - District info
+  # -----------
+
+  def district_info_get
+    @admin = get_logged_in_admin # TODO auth
+    @district = @admin.district
+
+    @saved = false
+    return render 'district_info'
+  end
+
+  def district_info_post
+    @admin = get_logged_in_admin # TODO auth
+    @district = @admin.district
+
+    missing_param(:district, :welcome_message, @district, 'Please enter a welcome message')
+    missing_param(:district, :confirmation_message, @district, 'Please enter a confirmation message')
+    missing_param(:district, :street_address_1, @district, 'Please enter a street address (line 1)')
+    missing_param(:district, :city, @district, 'Please enter a city')
+    missing_param(:district, :state, @district, 'Please enter a state')
+    missing_param(:district, :zip_code, @district, 'Please enter a ZIP code')
+
+    retainValuesAndErrors(@district, district_params)
+
+    unless @district.errors.any?
+      @district.save # TODO more error checking here
+      @saved = true
+    end
+
+    return render 'district_info'
+  end
+
+  # -----------
+  # District Admin - Supplemental Materials
+  # -----------
+
+  def district_supplemental_materials
+    @admin = get_logged_in_admin
+    district = @admin.district
+
+    # District materials
+    @district_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: district)
+    @district_supplemental_materials_required = @district_supplemental_materials.where(is_required: true)
+    @district_supplemental_materials_optional = @district_supplemental_materials.where(is_required: false)
+
+    # Central supplemental materials
+    @central_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
+    @central_supplemental_materials_required = @central_supplemental_materials.where(is_required: true)
+    @central_supplemental_materials_optional = @central_supplemental_materials.where(is_required: false)
+
+    return render 'district_supplemental_materials'
+  end
+
+  def district_supplemental_materials_add_get
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.new
+
+    return render 'supplemental_materials_edit'
+  end
+
+  def district_supplemental_materials_add_post
+    @admin = get_logged_in_admin
+    return edit_supplemental_material(nil)
+  end
+
+  def district_supplemental_materials_edit_get
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id])
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    return render 'supplemental_materials_edit'
+  end
+
+  def district_supplemental_materials_edit_post
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id])
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    return edit_supplemental_material(params[:id])
+  end
+
+  def district_supplemental_materials_delete_get
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    return render 'supplemental_materials_delete'
+  end
+
+  def district_supplemental_materials_delete_post
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    @supplemental_material.delete # TODO more error checking
+    return redirect_to action: 'district_supplemental_materials'
+  end
+
+  # -----------
+  # District admin - people
+  # -----------
+
+  def district_people
+    @admin = get_logged_in_admin
+    district = @admin.district
+
+    @people = AdminUser.where(district: district).where.not(id:@admin.id)
+
+    # get all district admins, except current
+    if @people.empty?
+      return render 'district_people_none'
+    end
+
+    return render 'district_people'
+  end
+
+  def district_people_add_get
+    @admin = get_logged_in_admin
+    @person = AdminUser.new
+
+    return render 'district_people_edit'
+  end
+
+  def district_people_add_post
+    @admin = get_logged_in_admin
+    return edit_a_person_as_district(nil)
+  end
+
+  def district_people_edit_get
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    return render 'district_people_edit'
+  end
+
+  def district_people_edit_post
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    return edit_a_person_as_district(@person.id)
+  end
+
+  def district_people_delete_get
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    return render 'district_people_delete'
+  end
+
+  def district_people_delete_post
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    @person.delete # TODO error check
+
+    return redirect_to action: 'district_people'
+  end
+
+  def edit_a_person_as_district(id)
+    @admin = get_logged_in_admin
+    district = @admin.district
+
+    if id
+      @person = AdminUser.find(id)
+    else
+      @person = AdminUser.new
+    end
+
+    # Check to see if all the fields were submitted
+    if param_does_not_exist(:admin_user, :name)
+      @person.errors.add(:name, 'Please enter a name')
+    end
+
+    if param_does_not_exist(:admin_user, :email)
+      @person.errors.add(:email, 'Please enter an email address')
+    end
+
+    # See if there is already someone with this e-mail address
+    if !id && AdminUser.find_by(email: params[:admin_user][:email]) != nil
+      @person.errors.add(:email, 'There is already a user with this email address')
+    end
+
+    # Apply the fields and do validations (and send back errors if there are any)
+    retainValuesAndErrors(@person, admin_user_params)
+    if @person.errors.any?
+      return render 'central_people_edit'
+    end
+
+    @person.district = district
+    @person.user_role = :district_admin
+    @person.save
+
+    @people = AdminUser.all
+
+    return redirect_to action: 'district_people'
   end
 
   # -----------

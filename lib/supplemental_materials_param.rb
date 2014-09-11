@@ -3,7 +3,10 @@ module SupplementalMaterialParams
     params.require(:supplemental_material).permit(
       :name,
       :description,
-      :is_required
+      :is_required,
+      :file,
+      :link_url,
+      :bring_documentation
     )
   end
 end

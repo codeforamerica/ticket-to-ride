@@ -53,6 +53,8 @@ gem 'validates_email_format_of'
 # Template engine for Admin screens (per Andrew's recommendation)
 gem 'slim-rails', '2.1.5'
 
+gem 'paperclip'
+
 # DEVELOPMENT ONLY
 group :development do
 

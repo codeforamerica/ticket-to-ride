@@ -16,9 +16,10 @@ header
     .field
       = person.label :email, 'Email address'
       = person.text_field :email
-    .field
-      = label_tag :district, 'District'
-      = text_field_tag :district, @district_name
+    - if @person.user_role != 'central_admin'
+      .field
+        = label_tag :district, 'District'
+        = text_field_tag :district, @district_name
     .field
       = person.label :active, 'Debug: Active'
       = person.check_box :active

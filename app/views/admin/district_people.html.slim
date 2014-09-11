@@ -1,0 +1,23 @@
+header
+  h1 People
+  = link_to 'Add person', '/admin/district/people/add'
+
+  p These are people that can view and edit applications for your district.
+.page
+
+  div
+    span Name
+    span Email
+
+  ul
+    - @people.each do |person|
+      li
+        span class='capitalize'
+          = person.name
+        = person.email
+        span class='capitalize'
+        - if person.active
+          = link_to 'Edit', "/admin/district/people/edit/#{person.id}"
+        - else
+          = link_to 'Resend invite', '#', onclick: "resendInvite(this, #{person.id})"
+        = link_to 'Delete', "/admin/district/people/delete/#{person.id}"

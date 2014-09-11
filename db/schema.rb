@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905185342) do
+ActiveRecord::Schema.define(version: 20140911002422) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -60,16 +60,15 @@ ActiveRecord::Schema.define(version: 20140905185342) do
   end
 
   create_table "districts", force: true do |t|
-    t.string   "mailing_street_address_1"
-    t.string   "mailing_street_address_2"
-    t.string   "mailing_zip_code"
+    t.string   "street_address_1"
+    t.string   "street_address_2"
+    t.string   "zip_code"
     t.string   "phone"
-    t.date     "first_day_of_school"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                   default: false
-    t.string   "mailing_city"
-    t.string   "mailing_state"
+    t.boolean  "active",               default: false
+    t.string   "city"
+    t.string   "state"
     t.string   "name"
     t.string   "welcome_message"
     t.string   "confirmation_message"
@@ -93,9 +92,6 @@ ActiveRecord::Schema.define(version: 20140905185342) do
     t.string   "first_language"
     t.boolean  "iep"
     t.boolean  "p504"
-    t.boolean  "birth_certificate_verified", default: false
-    t.boolean  "residency_verified",         default: false
-    t.boolean  "lunch_provided",             default: false
     t.string   "home_street_address_1"
     t.string   "home_street_address_2"
     t.string   "home_zip_code"
@@ -137,13 +133,17 @@ ActiveRecord::Schema.define(version: 20140905185342) do
   create_table "supplemental_materials", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.string   "uri"
-    t.integer  "req_type"
+    t.string   "link_url"
     t.integer  "district_id"
     t.integer  "authority_level"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_required"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.boolean  "bring_documentation"
   end
 
 end
