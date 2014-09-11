@@ -94,6 +94,14 @@ Rails.application.routes.draw do
   get 'admin/district/application/process/:student_id', to: 'admin#district_application_process_get', student_id: /\d+/
   post 'admin/district/application/process/:student_id', to: 'admin#district_application_process_post', student_id: /\d+/
 
+  # -----------------------
+  # District Admin - District info
+  # -----------------------
+
+  get 'admin/district/info', to: 'admin#district_info_get'
+  post 'admin/district/info', to: 'admin#district_info_post'
+
+
   resources :enrollment
 
   resources :students

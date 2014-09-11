@@ -53,6 +53,7 @@ class AdminController < ApplicationController
   def retainValuesAndErrors(obj, param_updater)
     messages = obj.errors.messages.clone()
     obj.assign_attributes(param_updater)
+    obj.valid?
     messages.each do |k,v|
       v.each do |field, message|
         obj.errors.add(field, message)
@@ -531,7 +532,6 @@ class AdminController < ApplicationController
   end
 
 
-
   def district_application_detail_post
     @admin = AdminUser.find(session[:admin_user_id]) # TODO security check
     @student = Student.find(params[:student_id]) # TODO error checking
@@ -660,6 +660,40 @@ class AdminController < ApplicationController
 
     return redirect_to action: 'district_applications_unprocessed'
   end
+
+  # -----------
+  # District Admin - District info
+  # -----------
+
+  def district_info_get
+    @admin = get_logged_in_admin # TODO auth
+    @district = @admin.district
+
+    @saved = false
+    return render 'district_info'
+  end
+
+  def district_info_post
+    @admin = get_logged_in_admin # TODO auth
+    @district = @admin.district
+
+    missing_param(:district, :welcome_message, @district, 'Please enter a welcome message')
+    missing_param(:district, :confirmation_message, @district, 'Please enter a confirmation message')
+    missing_param(:district, :street_address_1, @district, 'Please enter a street address (line 1)')
+    missing_param(:district, :city, @district, 'Please enter a city')
+    missing_param(:district, :state, @district, 'Please enter a state')
+    missing_param(:district, :zip_code, @district, 'Please enter a ZIP code')
+
+    retainValuesAndErrors(@district, district_params)
+
+    unless @district.errors.any?
+      @district.save # TODO more error checking here
+      @saved = true
+    end
+
+    return render 'district_info'
+  end
+
   # -----------
   # Authentication/Authorization
   # -----------
