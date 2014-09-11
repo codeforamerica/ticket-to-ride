@@ -69,7 +69,7 @@ class AdminController < ApplicationController
     return admin_user
   end
 
-  def edit_a_central_supplemental_material(id)
+  def edit_supplemental_material(id)
     @admin = get_logged_in_admin
 
     if id
@@ -118,7 +118,7 @@ class AdminController < ApplicationController
     # Check for errors
     retainValuesAndErrors(@supplemental_material, supplemental_material_params)
     if @supplemental_material.errors.any?
-      return render 'central_supplemental_materials_edit'
+      return render 'supplemental_materials_edit'
     end
 
     # Populate any other fields and save
@@ -133,8 +133,17 @@ class AdminController < ApplicationController
       @supplemental_material.link_url = nil
     end
 
-    @supplemental_material.authority_level = :central
+    if @admin.district != nil
+      @supplemental_material.district = @admin.district
+      @supplemental_material.authority_level = :district
+    else
+      @supplemental_material.authority_level = :central
+    end
     @supplemental_material.save # TODO more error checking on the save
+
+    if @supplemental_material.district != nil
+      return redirect_to action: 'district_supplemental_materials'
+    end
 
     return redirect_to action: 'central_supplemental_materials'
   end
@@ -207,23 +216,10 @@ class AdminController < ApplicationController
 
   def central_supplemental_materials
     @admin = get_logged_in_admin
+
     @supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
-
-    unless @supplemental_materials.any?
-      return render 'central_supplemental_materials_none'
-    end
-
-    # Sort by required and optional
-    @supplemental_materials_required = []
-    @supplemental_materials_optional = []
-
-    @supplemental_materials.each do |sm|
-      if sm.is_required
-        @supplemental_materials_required << sm
-      else
-        @supplemental_materials_optional << sm
-      end
-    end
+    @supplemental_materials_required = @supplemental_materials.where(is_required: true)
+    @supplemental_materials_optional = @supplemental_materials.where(is_required: false)
 
     return render 'central_supplemental_materials'
   end
@@ -237,25 +233,25 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_add_post
-    return edit_a_central_supplemental_material(nil)
+    @admin = get_logged_in_admin
+    return edit_supplemental_material(nil)
   end
 
   def central_supplemental_materials_edit_get
     @admin = get_logged_in_admin
-
     @supplemental_material = SupplementalMaterial.find(params[:id])
-
     return render 'central_supplemental_materials_edit'
   end
 
   def central_supplemental_materials_edit_post
-    return edit_a_central_supplemental_material(params[:id])
+    @admin = get_logged_in_admin
+    return edit_supplemental_material(params[:id])
   end
 
   def central_supplemental_materials_delete_get
     @admin = get_logged_in_admin
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
-    return render 'central_supplemental_materials_delete'
+    return render 'supplemental_materials_delete'
   end
 
   def central_supplemental_materials_delete_post
@@ -692,6 +688,84 @@ class AdminController < ApplicationController
     end
 
     return render 'district_info'
+  end
+
+  # -----------
+  # District Admin - Supplemental Materials
+  # -----------
+
+  def district_supplemental_materials
+    @admin = get_logged_in_admin
+    district = @admin.district
+
+    # District materials
+    @district_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: district)
+    @district_supplemental_materials_required = @district_supplemental_materials.where(is_required: true)
+    @district_supplemental_materials_optional = @district_supplemental_materials.where(is_required: false)
+
+    # Central supplemental materials
+    @central_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
+    @central_supplemental_materials_required = @central_supplemental_materials.where(is_required: true)
+    @central_supplemental_materials_optional = @central_supplemental_materials.where(is_required: false)
+
+    return render 'district_supplemental_materials'
+  end
+
+  def district_supplemental_materials_add_get
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.new
+
+    return render 'supplemental_materials_edit'
+  end
+
+  def district_supplemental_materials_add_post
+    @admin = get_logged_in_admin
+    return edit_supplemental_material(nil)
+  end
+
+  def district_supplemental_materials_edit_get
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id])
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    return render 'supplemental_materials_edit'
+  end
+
+  def district_supplemental_materials_edit_post
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id])
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    return edit_supplemental_material(params[:id])
+  end
+
+  def district_supplemental_materials_delete_get
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    return render 'supplemental_materials_delete'
+  end
+
+  def district_supplemental_materials_delete_post
+    @admin = get_logged_in_admin
+    @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
+
+    if @admin.district != @supplemental_material.district
+      return render 'unauthorized'
+    end
+
+    @supplemental_material.delete # TODO more error checking
+    return redirect_to action: 'district_supplemental_materials'
   end
 
   # -----------

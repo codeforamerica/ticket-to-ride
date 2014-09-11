@@ -1,0 +1,20 @@
+.header
+  h1 Supplemental Materials
+  p
+    | These are materials that guardians need to fill out in additional to the digital forms and/or need to bring
+    | into the office to complete registration.
+
+.page
+
+  h2 District
+  p These are documents that are used for district's registration process.
+  = link_to 'Add one', '/admin/district/supplemental_materials/add'
+
+  = render 'supplemental_materials_table', supplemental_materials: @district_supplemental_materials_required, title: 'required', user_type: 'district', is_editable: true
+  = render 'supplemental_materials_table', supplemental_materials: @district_supplemental_materials_optional, title: 'optional', user_type: 'district', is_editable: true
+
+  h2 Central
+  p These are documents that are used for all districts' registration processes.
+
+  = render 'supplemental_materials_table', supplemental_materials: @central_supplemental_materials_required, title: 'required', user_type: 'central', is_editable: false
+  = render 'supplemental_materials_table', supplemental_materials: @central_supplemental_materials_optional, title: 'optional', user_type: 'central', is_editable: false

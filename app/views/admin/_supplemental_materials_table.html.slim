@@ -1,0 +1,28 @@
+/ Depends on variable `supplemental_materials`, which is a list of SupplementalMaterial objects
+/ Depends on variable `title`, which is a string that describes the kind of supplemental materials (required or optional, etc.))
+/ Depends on variable `user_type`, which is the user type (central or district)
+/ Depends on variable `is_editable`, which determines if links are show to edit or view
+h3
+  = title.capitalize
+
+- if supplemental_materials.empty?
+  p
+    | You have no&nbsp;
+    = title
+    | &nbsp;supplemental materials.&nbsp;
+    - if is_editable
+      = link_to 'Add one', "/admin/#{user_type}/supplemental_materials/add"
+- else
+  - supplemental_materials.each do |sm|
+      ul
+        li
+          = sm.name
+          - if sm.file_file_name
+            = link_to 'View', sm.file.url, target: '_blank'
+          - elsif sm.link_url
+            = link_to 'View', sm.link_url, target: '_blank'
+          - else
+            span Guardian Brings
+          - if is_editable
+            = link_to 'Edit', "/admin/#{user_type}/supplemental_materials/edit/#{sm.id}"
+            = link_to 'Delete', "/admin/#{user_type}/supplemental_materials/delete/#{sm.id}"

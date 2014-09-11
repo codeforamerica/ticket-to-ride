@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   # Central Admin Supplemental Materials
   # -----------------------
 
+  # TODO adjust singular / plural use
+
   get 'admin/central/supplemental_materials', to: 'admin#central_supplemental_materials'
 
   get 'admin/central/supplemental_materials/add', to: 'admin#central_supplemental_materials_add_get'
@@ -58,6 +60,8 @@ Rails.application.routes.draw do
   # -----------------------
   # Central Admin People
   # -----------------------
+
+  # TODO adjust singular / plural use
 
   get 'admin/central/people', to: 'admin#central_people'
 
@@ -100,6 +104,23 @@ Rails.application.routes.draw do
 
   get 'admin/district/info', to: 'admin#district_info_get'
   post 'admin/district/info', to: 'admin#district_info_post'
+
+  # -----------------------
+  # District Admin Supplemental Materials
+  # -----------------------
+
+  # TODO adjust singular / plural use
+
+  get 'admin/district/supplemental_materials', to: 'admin#district_supplemental_materials'
+
+  get 'admin/district/supplemental_materials/add', to: 'admin#district_supplemental_materials_add_get'
+  post 'admin/district/supplemental_materials/add', to: 'admin#district_supplemental_materials_add_post'
+
+  get 'admin/district/supplemental_materials/edit/:id', to: 'admin#district_supplemental_materials_edit_get'
+  post 'admin/district/supplemental_materials/edit/:id', to: 'admin#district_supplemental_materials_edit_post'
+
+  get 'admin/district/supplemental_materials/delete/:id', to: 'admin#district_supplemental_materials_delete_get'
+  post 'admin/district/supplemental_materials/delete/:id', to: 'admin#district_supplemental_materials_delete_post'
 
 
   resources :enrollment

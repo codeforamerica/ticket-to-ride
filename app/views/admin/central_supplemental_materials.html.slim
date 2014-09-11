@@ -3,33 +3,6 @@ header
   = link_to 'Add one', '/admin/central/supplemental_materials/add'
 
 .page
-  h2 Required
 
-  / REQUIRED MATERIALS (list or message saying there aren't any)
-
-  / List
-  - @supplemental_materials_required.each do |sm|
-    ul
-      li
-        = sm.name
-        = link_to 'Edit', "/admin/central/supplemental_materials/edit/#{sm.id}"
-        = link_to 'Delete', "/admin/central/supplemental_materials/delete/#{sm.id}"
-
-  / Message if there aren't any
-  - if @supplemental_materials_required.empty?
-    p No required materials currently exist
-
-  / OPTIONAL MATERIALS (list or message saying there aren't any)
-  h2 Optional
-
-  / List
-  - @supplemental_materials_optional.each do |sm|
-    ul
-      li
-        = sm.name
-        = link_to 'Edit', "/admin/central/supplemental_materials/edit/#{sm.id}"
-        = link_to 'Delete', "/admin/central/supplemental_materials/delete/#{sm.id}"
-
-  / Message if there aren't any
-  - if @supplemental_materials_optional.empty?
-    p No optional materials currently exist
+  = render 'supplemental_materials_table', supplemental_materials: @supplemental_materials_required, title: 'required', user_type: 'central', is_editable: true
+  = render 'supplemental_materials_table', supplemental_materials: @supplemental_materials_optional, title: 'optional', user_type: 'central', is_editable: true
