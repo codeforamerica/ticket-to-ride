@@ -14,6 +14,8 @@ html
             = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
           li
             = link_to 'People', {controller:'admin', action: 'central_people'}
+          li
+            = link_to @admin.name, "/admin/central/people/edit/#{@admin.id}"
         - else
           li
             = link_to 'Applications', '/admin/district/applications'
@@ -25,10 +27,11 @@ html
             = link_to 'People', '/admin/district/people'
           li
             = link_to 'Export', '/admin/district/export'
+          li
+            = link_to @admin.name, "/admin/district/people/edit/#{@admin.id}"
         li
-          = @admin.name
-          | &nbsp;-&nbsp;
-          = link_to 'Sign Out'
+          / TODO actually have solid sign out
+          = link_to 'Sign Out', '/admin'
     main
       = yield
 

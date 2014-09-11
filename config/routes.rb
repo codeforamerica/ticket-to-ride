@@ -122,6 +122,23 @@ Rails.application.routes.draw do
   get 'admin/district/supplemental_materials/delete/:id', to: 'admin#district_supplemental_materials_delete_get'
   post 'admin/district/supplemental_materials/delete/:id', to: 'admin#district_supplemental_materials_delete_post'
 
+  # -----------------------
+  # District People
+  # -----------------------
+
+  # TODO adjust singular / plural use
+
+  get 'admin/district/people', to: 'admin#district_people'
+
+  get 'admin/district/people/add', to: 'admin#district_people_add_get'
+  post 'admin/district/people/add', to: 'admin#district_people_add_post'
+
+  get 'admin/district/people/edit/:id', to: 'admin#district_people_edit_get'
+  post 'admin/district/people/edit/:id', to: 'admin#district_people_edit_post'
+
+  get 'admin/district/people/delete/:id', to: 'admin#district_people_delete_get'
+  post 'admin/district/people/delete/:id', to: 'admin#district_people_delete_post'
+
 
   resources :enrollment
 

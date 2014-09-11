@@ -265,7 +265,7 @@ class AdminController < ApplicationController
   # Central Admin People
   # -----------
 
-  def edit_a_person(id)
+  def edit_a_person_as_central(id)
     @admin = get_logged_in_admin
 
     if id
@@ -334,20 +334,20 @@ class AdminController < ApplicationController
   end
 
   def central_people_add_post
-    return edit_a_person(nil)
+    return edit_a_person_as_central(nil)
   end
 
   def central_people_edit_get
     @admin = get_logged_in_admin
     @person = AdminUser.find(params[:id]) # TODO add authority check here
-    @district_name = @person.district.name
+    @district_name = @person.district.name #TODO add ability to edit a central admin's details
 
     return render 'central_people_edit'
   end
 
   def central_people_edit_post
     id = params[:id] # TODO add authority check here
-    return edit_a_person(id)
+    return edit_a_person_as_central(id)
   end
 
   def central_people_delete_get
@@ -401,17 +401,17 @@ class AdminController < ApplicationController
     if param_does_not_exist(:admin_user, :confirm_password)
       @admin.errors.add(:base, 'Please confirm the password') # TODO switch to actual password field
     end
-    if param_does_not_exist(:district, :mailing_street_address_1)
-      @district.errors.add(:mailing_street_address_1, "Please enter the first line of the district's mailing address")
+    if param_does_not_exist(:district, :street_address_1)
+      @district.errors.add(:street_address_1, "Please enter the first line of the district's  address")
     end
-    if param_does_not_exist(:district, :mailing_city)
-      @district.errors.add(:mailing_city, "Please enter the district's mailing city")
+    if param_does_not_exist(:district, :city)
+      @district.errors.add(:city, "Please enter the district's city")
     end
-    if param_does_not_exist(:district, :mailing_state)
-      @district.errors.add(:mailing_state, "Please enter the district's mailing state")
+    if param_does_not_exist(:district, :state)
+      @district.errors.add(:state, "Please enter the district's  state")
     end
-    if param_does_not_exist(:district, :mailing_zip_code)
-      @district.errors.add(:mailing_zip_code, "Please enter the district's mailing ZIP code")
+    if param_does_not_exist(:district, :zip_code)
+      @district.errors.add(:zip_code, "Please enter the district's ZIP code")
     end
 
     # If there were any errors, send back the same page with error messages
@@ -766,6 +766,121 @@ class AdminController < ApplicationController
 
     @supplemental_material.delete # TODO more error checking
     return redirect_to action: 'district_supplemental_materials'
+  end
+
+  # -----------
+  # District admin - people
+  # -----------
+
+  def district_people
+    @admin = get_logged_in_admin
+    district = @admin.district
+
+    @people = AdminUser.where(district: district).where.not(id:@admin.id)
+
+    # get all district admins, except current
+    if @people.empty?
+      return render 'district_people_none'
+    end
+
+    return render 'district_people'
+  end
+
+  def district_people_add_get
+    @admin = get_logged_in_admin
+    @person = AdminUser.new
+
+    return render 'district_people_edit'
+  end
+
+  def district_people_add_post
+    @admin = get_logged_in_admin
+    return edit_a_person_as_district(nil)
+  end
+
+  def district_people_edit_get
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    return render 'district_people_edit'
+  end
+
+  def district_people_edit_post
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    return edit_a_person_as_district(@person.id)
+  end
+
+  def district_people_delete_get
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    return render 'district_people_delete'
+  end
+
+  def district_people_delete_post
+    @admin = get_logged_in_admin
+    @person = AdminUser.find(params[:id])
+
+    if @admin.district != @person.district
+      return render 'unauthorized'
+    end
+
+    @person.delete # TODO error check
+
+    return redirect_to action: 'district_people'
+  end
+
+  def edit_a_person_as_district(id)
+    @admin = get_logged_in_admin
+    district = @admin.district
+
+    if id
+      @person = AdminUser.find(id)
+    else
+      @person = AdminUser.new
+    end
+
+    # Check to see if all the fields were submitted
+    if param_does_not_exist(:admin_user, :name)
+      @person.errors.add(:name, 'Please enter a name')
+    end
+
+    if param_does_not_exist(:admin_user, :email)
+      @person.errors.add(:email, 'Please enter an email address')
+    end
+
+    # See if there is already someone with this e-mail address
+    if !id && AdminUser.find_by(email: params[:admin_user][:email]) != nil
+      @person.errors.add(:email, 'There is already a user with this email address')
+    end
+
+    # Apply the fields and do validations (and send back errors if there are any)
+    retainValuesAndErrors(@person, admin_user_params)
+    if @person.errors.any?
+      return render 'central_people_edit'
+    end
+
+    @person.district = district
+    @person.user_role = :district_admin
+    @person.save
+
+    @people = AdminUser.all
+
+    return redirect_to action: 'district_people'
   end
 
   # -----------

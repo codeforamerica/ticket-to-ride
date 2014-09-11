@@ -1,0 +1,20 @@
+header
+  h1
+    | Are you sure you want to delete
+    = @person.name
+    | ?
+.page
+
+  p
+    | Deleting&nbsp;
+    = @person.name
+    | 's account will remove their access to the district. To confirm this action please type
+    em delete
+    | below.
+
+  .field
+    label
+      | Confirm deletion
+    input type="text" id="confirm-delete-input-text" onkeyup="toggleDeleteButton()"
+    = form_tag(request.original_url, method: 'post')
+      = submit_tag 'Delete this district admin', id: 'confirm-delete-button', disabled: true
