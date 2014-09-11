@@ -652,6 +652,13 @@ class AdminController < ApplicationController
   end
 
   def district_application_process_post
+    @admin = get_logged_in_admin
+    @student = Student.find(params[:student_id]) # TODO better error checking and auth
+
+    @student.export_time = DateTime.now
+    @student.save
+
+    return redirect_to action: 'district_applications_unprocessed'
   end
   # -----------
   # Authentication/Authorization
