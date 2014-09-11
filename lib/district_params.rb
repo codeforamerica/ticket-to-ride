@@ -9,7 +9,9 @@ module DistrictParams
       :mailing_zip_code,
       :phone,
       :first_day_of_school,
-      :active
+      :active,
+      :welcome_message,
+      :confirmation_message
     )
   end
 end

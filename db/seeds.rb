@@ -53,10 +53,10 @@ AdminUser.create(
 # West Warwick School District
 west_warwick_district = District.create(
   name: 'West Warwick Public Schools',
-  mailing_street_address_1: "10 Harris Ave",
-  mailing_city: 'West Warwick',
-  mailing_state: 'RI',
-  mailing_zip_code: '02984',
+  street_address_1: "10 Harris Ave",
+  city: 'West Warwick',
+  state: 'RI',
+  zip_code: '02984',
   phone: '4018211180',
   active: true,
   welcome_message: "Welcome to West Warwick's registration",

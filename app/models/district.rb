@@ -3,23 +3,23 @@ class District < ActiveRecord::Base
   has_many :supplemental_materials
 
   # District Mailing Address Validations
-  validates :mailing_street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
+  validates :street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
                                               message: 'Mailing street address 1 can only have letters, numbers, dashes, and periods',
                                               allow_nil: true
   }
-  validates :mailing_street_address_2, format: { with: ModelConstants::STREET_ADDRESS_OPTIONAL_REGEX,
+  validates :street_address_2, format: { with: ModelConstants::STREET_ADDRESS_OPTIONAL_REGEX,
                                               message: 'Mailing street address 2 can only have letters, numbers, dashes, and periods',
                                               allow_nil: true
   }
-  validates :mailing_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+  validates :city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
                                   message: 'Mailing city can only contain letters, spaces, and dashes',
                                   allow_nil: true
   }
-  validates :mailing_state, format: { with: ModelConstants::STATE_REGEX,
+  validates :state, format: { with: ModelConstants::STATE_REGEX,
                                    message: 'Mailing state can only contain two letters',
                                    allow_nil: true
   }
-  validates :mailing_zip_code, format: { with: ModelConstants::ZIP_CODE_REGEX,
+  validates :zip_code, format: { with: ModelConstants::ZIP_CODE_REGEX,
                                       message: 'Zip code can only contain digits and dashes (example: 20930)',
                                       allow_nil: true
   }
