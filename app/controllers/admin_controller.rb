@@ -283,10 +283,12 @@ class AdminController < ApplicationController
       @person.errors.add(:email, 'Please enter an email address')
     end
 
-    if !params || !params[:district]
-      @person.errors.add(:base, 'Please enter a district name')
+    if (@person.user_role != 'central_admin')
+      if !params || !params[:district]
+        @person.errors.add(:base, 'Please enter a district name')
+      end
+      @district_name = params[:district] # populate this for re-display incase there are errors
     end
-    @district_name = params[:district] # populate this for re-display incase there are errors
 
     # See if there is already someone with this e-mail address
     if !id && AdminUser.find_by(email: params[:admin_user][:email]) != nil
@@ -300,13 +302,17 @@ class AdminController < ApplicationController
     end
 
     # Create or add to a district
-    district = District.find_by(name: @district_name.downcase)
-    if district == nil
-      district = District.create(name: @district_name.downcase)
+    if @person.user_role != 'central_admin'
+      district = District.find_by(name: @district_name.downcase)
+      if district == nil
+        district = District.create(name: @district_name.downcase)
+      end
+      @person.district = district
+      @person.user_role = :district_admin
+    else
+      @person.user_role = :central_admin
     end
 
-    @person.district = district
-    @person.user_role = :district_admin
     @person.save
 
     @people = AdminUser.all
@@ -317,7 +323,7 @@ class AdminController < ApplicationController
   def central_people
     @admin = get_logged_in_admin
 
-    @people = AdminUser.where.not(district_id: nil).joins(:district).order('districts.name')
+    @people = AdminUser.all.where.not(id: @admin.id).order(:name)
     unless @people.any?
       return render 'central_people_none'
     end
@@ -340,7 +346,9 @@ class AdminController < ApplicationController
   def central_people_edit_get
     @admin = get_logged_in_admin
     @person = AdminUser.find(params[:id]) # TODO add authority check here
-    @district_name = @person.district.name #TODO add ability to edit a central admin's details
+    if @person.user_role != 'central_admin'
+      @district_name = @person.district.name
+    end
 
     return render 'central_people_edit'
   end
