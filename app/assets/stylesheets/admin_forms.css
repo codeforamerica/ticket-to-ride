@@ -577,7 +577,7 @@ div.field.field-school.field-checkbox input{
 	position: absolute;
 	top: 0.5rem;
 	left: 0.5rem;
-	/*font-size: 1.2rem;*/ /* precompile error */
+	font-size: 1.2rem; 
 	margin: 0;
 }
 

@@ -252,7 +252,7 @@ div.question h1{
 
 
 
-@media screen and (min-width: 40em) { div.question h1{ font-size: 1.rem; } }
+@media screen and (min-width: 40em) { div.question h1{ font-size: 1rem; } }
 
 div.question h1 + p.note{
 	margin-bottom: 1.2rem;
