@@ -1,50 +1,49 @@
-.header
-  h1 District info
-
-  - if @saved
-    p Saved!!!
-
-  ul
-    - @district.errors.each do |field, message|
-      li
-        = message
-
+header
+  .site-width
+    h1 District info
+    - if @saved
+      p Saved!!!
+    ul
+      - @district.errors.each do |field, message|
+        li
+          = message
 .page
-  = form_for @district, url: request.original_url, method: 'post' do |district|
+  .site-width
 
-    h2 Welcome message
-    p This is the message the guardians will see before they begin their application.
-    = district.text_area :welcome_message
+    = form_for @district, url: request.original_url, method: 'post' do |district|
+      .field
+        h2 Welcome message
+        p.note This is the message the guardians will see before they begin their application.
+        = district.text_area :welcome_message
+      .field
+        h2 Confirmation message
+        p.note
+          | This is the message that guardians will see after completing their application.
+          | This is the place to describe what the next steps are (i.e. which office to visit,
+          | contact people to call, etc.).
+        = district.text_area :confirmation_message
 
-    h2 Confirmation message
-    p
-      | This is the message that guardians will see after completing their application.
-      | This is the place to describe what the next steps are (i.e. which office to visit,
-      | contact people to call, etc.).
-    = district.text_area :confirmation_message
+      h2 Contact info
 
-    h2 Contact info
+      fieldset.fieldset-address
+        legend=="Where can guardians visit or call to get more help?"
+        .field.field-street
+          = district.label :street_address_1, 'Street address - Line 1'
+          = district.text_field :street_address_1
+        .field.field-street
+          = district.label :street_address_2, 'Street address - Line 2'
+          = district.text_field :street_address_2
 
-    p
-      | Where can guardians visit or call to get more help?
+        .field.field-city
+          = district.label :city, 'City'
+          = district.text_field :city
 
-    .field
-      = district.label :street_address_1, 'Street address - Line 1'
-      = district.text_field :street_address_1
-    .field
-      = district.label :street_address_2, 'Street address - Line 2'
-      = district.text_field :street_address_2
+        .field.field-state
+          = district.label :state, 'State'
+          = district.text_field :state
 
-    .field
-      = district.label :city, 'City'
-      = district.text_field :city
+        .field.field-zip
+          = district.label :zip_code, 'ZIP Code'
+          = district.text_field :zip_code
 
-    .field
-      = district.label :state, 'State'
-      = district.text_field :state
-
-    .field
-      = district.label :zip_code, 'ZIP Code'
-      = district.text_field :zip_code
-
-    = district.submit 'Update info'
+      = district.submit 'Update info', :class => "button"

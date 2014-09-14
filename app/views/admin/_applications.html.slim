@@ -1,31 +1,32 @@
-.applications-table
-  .header-row
-    .column Student
-    .column Guardian
-    .column Phone
-    .column Email
-    .column Submitted
-    .column Confirmation
-
+table.table-applications
+  thead
+    .header-row
+      td.table-applications-col-student Student
+      td.table-applications-col-guardian Guardian
+      td.table-applications-col-phone Phone
+      td.table-applications-col-email Email
+      td.table-applications-col-submitted Submitted
+      td.table-applications-col-confirmation Confirmation
+  tbody
   - @students.each do |student|
-    .row
+    tr.row
       - guardian = student.contact_people[0]
       a href="/admin/district/application/#{student.id}"
-        .column
+        td.table-applications-col-student
           = student.first_name
           span &nbsp;
           = student.last_name
-        .column
+        td.table-applications-col-guardian
           = guardian.first_name
           span &nbsp;
           = guardian.last_name
-        .column
+        td.table-applications-col-phone
           = guardian.main_phone
-        .column
+        td.table-applications-col-email
           = guardian.email || '(not given)'
-        .column
+        td.table-applications-col-submitted
           = student.guardian_complete_time.localtime.strftime('%F, %H:%M %p')
-        .column
+        td.table-applications-col-confirmation
           = student.confirmation_code
 
 .applications-pages
@@ -33,3 +34,6 @@
     .page-number
       - pn = page_number + 1
       = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
+  = link_to 'For Review', '/admin/district/applications'
+  = link_to 'Show recently processed applications', '/admin/district/applications/processed'
+  =="Delete all applications"
