@@ -512,7 +512,7 @@ class AdminController < ApplicationController
     end
   end
 
-  def district_application_detail_get
+  def district_view_application(page)
     @admin = AdminUser.find(session[:admin_user_id])
 
     @student = Student.find(params[:student_id]) # TODO Better error checking
@@ -537,9 +537,18 @@ class AdminController < ApplicationController
 
     generate_application_detail_select_options
 
-    return render 'district_application_detail'
+    return render page
   end
 
+  def district_application_detail_get
+    return district_view_application('district_application_detail')
+  end
+
+  def district_application_edit_get
+    return district_view_application('district_application_edit')
+  end
+
+  # TODO cleanup - move this somewhere more relevant
   def are_model_errors(model_list)
     model_list.each do |m|
       if m.errors.any?
@@ -551,7 +560,7 @@ class AdminController < ApplicationController
   end
 
 
-  def district_application_detail_post
+  def district_application_edit_post
     @admin = AdminUser.find(session[:admin_user_id]) # TODO security check
     @student = Student.find(params[:student_id]) # TODO error checking
 

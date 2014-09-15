@@ -25,12 +25,6 @@ function toggleDeleteButton() {
     $('#confirm-delete-button').attr('disabled', disabled);
 }
 
-function toggleApplicationEditing(areFieldsDisabled) {
-    var val = areFieldsDisabled ? 'disabled' : '';
-    $('#application-detail-form input').prop('disabled', val);
-    $('#application-detail-form select').prop('disabled', val);
-}
-
 function resendInvite(callingElement, personId) {
     callingElement.innerText = 'Sent again!';
     // TODO make this do a REST call to the backend to resend the e-mail
