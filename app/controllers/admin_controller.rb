@@ -534,7 +534,6 @@ class AdminController < ApplicationController
       end
     end
 
-
     generate_application_detail_select_options
 
     return render page
@@ -625,7 +624,10 @@ class AdminController < ApplicationController
     params[:contact_person] = nil # Not used after this
 
     # Save if there are no errors
-    unless @student.errors.any? || are_model_errors(@student.contact_people) || are_model_errors(@student.student_races)
+    if @student.errors.any? || are_model_errors(@student.contact_people) || are_model_errors(@student.student_races)
+      generate_application_detail_select_options
+      return render 'district_application_edit'
+    else
       # Add all races to student, but remove the existing ones first
       @student.student_races.each {|r| r.delete}
 
@@ -634,7 +636,8 @@ class AdminController < ApplicationController
           StudentRace.create(race: race, student: @student )
         rescue
           @student.errors.add(:race, 'Could not assign race')
-          return render 'district_application_detail'
+          generate_application_detail_select_options
+          return render 'district_application_edit'
         end
       end
 
@@ -646,10 +649,7 @@ class AdminController < ApplicationController
       @student.reload # refreshes transitive values, like race and contact people
     end
 
-    # Prep anything for rendering a page
-    generate_application_detail_select_options
-
-    return render 'district_application_detail'
+    return redirect_to "/admin/district/application/#{@student.id}"
   end
 
   def missing_contact_person_params(contact_person, contact_person_number, contact_person_title)
@@ -661,6 +661,13 @@ class AdminController < ApplicationController
     missing_param("contact_person_#{contact_person_number}", :mailing_state, contact_person, "#{contact_person_title}'s state is required")
     missing_param("contact_person_#{contact_person_number}", :mailing_zip_code, contact_person, "#{contact_person_title}'s ZIP code is required")
     missing_param("contact_person_#{contact_person_number}", :main_phone, contact_person, "#{contact_person_title}'s phone number is required")
+
+    if contact_person.is_guardian
+      missing_param("contact_person_#{contact_person_number}", :home_street_address_1, contact_person, "#{contact_person_title}'s mailing street address line 1 is required")
+      missing_param("contact_person_#{contact_person_number}", :home_city, contact_person, "#{contact_person_title}'s mailing city is required")
+      missing_param("contact_person_#{contact_person_number}", :home_state, contact_person, "#{contact_person_title}'s state is required")
+      missing_param("contact_person_#{contact_person_number}", :home_zip_code, contact_person, "#{contact_person_title}'s ZIP code is required")
+    end
   end
 
 

@@ -181,7 +181,12 @@ guardian2_west_warwick = ContactPerson.create(
     receive_conduct_notices: true,
     lives_with_student: false,
     main_phone: '401-222-2222',
-    is_guardian: true
+    is_guardian: true,
+    home_street_address_1: '95 Factory St',
+    home_street_address_2: 'Back door',
+    home_city: 'West Warwick',
+    home_state: 'RI',
+    home_zip_code: '02893',
 )
 
 contact1_west_warwick = ContactPerson.create(
