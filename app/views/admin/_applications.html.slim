@@ -11,23 +11,22 @@ table.table-applications
   - @students.each do |student|
     tr.row
       - guardian = student.contact_people[0]
-      a href="/admin/district/application/#{student.id}"
-        td.table-applications-col-student
-          = student.first_name
-          span &nbsp;
-          = student.last_name
-        td.table-applications-col-guardian
-          = guardian.first_name
-          span &nbsp;
-          = guardian.last_name
-        td.table-applications-col-phone
-          = guardian.main_phone
-        td.table-applications-col-email
-          = guardian.email || '(not given)'
-        td.table-applications-col-submitted
-          = student.guardian_complete_time.localtime.strftime('%F, %H:%M %p')
-        td.table-applications-col-confirmation
-          = student.confirmation_code
+      - link_url = "/admin/district/application/#{student.id}"
+      td.table-applications-col-student
+        = link_to "#{student.first_name} #{student.last_name}", link_url
+      td.table-applications-col-guardian
+        = link_to "#{guardian.first_name} #{guardian.last_name}", link_url
+      td.table-applications-col-phone
+        = link_to guardian.main_phone, link_url
+      td.table-applications-col-email
+        - if guardian.email
+          = link_to guardian.email, link_url
+        - else
+          span '(not given)'
+      td.table-applications-col-submitted
+        = link_to student.guardian_complete_time.localtime.strftime('%F, %H:%M %p'), link_url
+      td.table-applications-col-confirmation
+        = link_to student.confirmation_code, link_url
 
 .applications-pages
   - @num_pages.times do |page_number|
