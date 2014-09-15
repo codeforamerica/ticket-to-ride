@@ -108,10 +108,10 @@ header
       h2 Language survey
       dl
         dt
-          | Language most frequently used by parent
-        dd
-          = @student.home_language.capitalize
-        dt
-          | Language learned first by child
+          | First language
         dd
           = @student.first_language.capitalize
+        dt
+          | Home language
+        dd
+          = @student.home_language.capitalize
