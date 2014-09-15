@@ -1,13 +1,5 @@
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
-/* @override http://preklottery.local/stylesheets/ride.css */
-
-/* @override http://preklottery.local/stylesheets/ride.css */
-
-/* @override http://preklottery.local/stylesheets/ride.css */
-
-/* @override http://preklottery.local/stylesheets/ride.css */
-
 /* @group bootstrap */
 
 body{
@@ -16,7 +8,7 @@ body{
 	font-size: 18px;
 }
 
-@media screen and (min-width: 48em){ html, body{ font-size: 24px; } }
+@media screen and (min-width: 48em){ html, body{ font-size: 20px; } }
 
 a{
 	color: #1f7ab8;
@@ -30,6 +22,7 @@ a:hover{
 p{
 	line-height: 1.4em;
 	margin-bottom: 1em;
+	max-width: 30em;
 }
 
 strong{ font-weight: 600; }
@@ -61,7 +54,6 @@ div.site-width::after{
 /* @group header */
 
 header#header{ 
-	font-family: "Titillium Web", Trebuchet MS;
 	font-size: 0.9rem;
 	margin-bottom: 0.35rem;
 	position: relative;
@@ -77,7 +69,15 @@ header#header a{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	line-height: 2.4rem;
 }
+
+header#header h1{
+	font-family: "Titillium Web", Trebuchet MS;
+	font-weight: 700;	
+	display: none;
+}
+
 
 body[class^="applications-"] header a.applications,
 body[class^="people-"] header a.people,
@@ -87,11 +87,9 @@ body[class="settings"] header a.settings{
 }
 
 header#header a{
-	float: left;
 	color: inherit;
-	text-align: center;
 	white-space: nowrap;
-	line-height: 2.4rem;
+	margin-right: 2em;
 }
 
 header#header a:hover{color: #fff;}
@@ -133,7 +131,7 @@ header#header nav.nav-secondary a.schools::before{ content: "schools"; }
 header#header nav.nav-secondary a.settings::before{ content: "settings"; }
 @media screen and (min-width: 28em){
 	header#header{ 
-		margin-bottom: 1.8rem;
+		margin-bottom: 1.4rem;
 	}
 	
 	header#header nav.nav-secondary{
@@ -165,20 +163,21 @@ header#header nav.nav-secondary a.settings::before{ content: "settings"; }
 /* @group main */
 
 body main header{
-	font-family: "Titillium Web", Trebuchet MS;
-	font-size: 1.6rem;
-	font-weight: 100;
-	line-height: 1.33em;
-	color: #333;
 	margin-bottom: 1em;
+	color: #333;
 }
 
-body main header h1{
+body main h1{
 	display: inline-block;
 	vertical-align: middle;
 	width: auto;
 	margin-right: 0.2rem;
+	margin-bottom: 0.2em;
 	color: #206180;
+	font-family: "Titillium Web", Trebuchet MS;
+	font-weight: 100;
+	line-height: 1.33em;
+	font-size: 2em;
 }
 
 body main header h1+.button-forward{
@@ -186,10 +185,20 @@ body main header h1+.button-forward{
 	margin-top: 0.125em;
 }
 
+body main h2{
+	font-size: 1.1em;
+	font-weight: 700;
+	color: #ac540b;
+	margin-bottom: 0.8em;
+}
 
-main header .custom-select,
-main header select,
-main header span{
+body main p{
+	font-size: 0.9em;
+}
+
+main header > .custom-select,
+main header > select,
+main header > span{
 	font-family: "Titillium Web", Trebuchet MS !important;
 	font-size: 1.6rem;
 	font-weight: 100;
@@ -304,6 +313,19 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 /* @end */
 
 /* @group views */
+
+/* @group District info */
+
+#edit_district_1 textarea,
+#edit_district_1 .field-zip{
+	margin-bottom: 1em;
+}
+
+#edit_district_1 fieldset legend{
+	margin-bottom: 0.6em;
+}
+
+/* @end */
 
 /* @group Delete, New */
 
@@ -734,6 +756,100 @@ body[class^=settings] main .page legend{
 
 /* @group shared */
 
+/* @group supplemental material */
+
+article.supplemental-material{
+	font-size: 0.8em;
+}
+article.supplemental-material h1{
+	font: inherit;
+	font-weight: 600;	
+	color: inherit;
+	margin-bottom: 0.4em;
+}
+
+article.supplemental-material{
+	padding-top: 0.8em;
+	margin-bottom: 0.8em;
+	border-top: 0.2em solid #f8f8f8;
+	padding-right: 4em;
+		-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	max-width: 36em;
+	position: relative;
+}
+
+article.supplemental-material:hover{
+	border-top-color: #e3e3e3;
+}
+article.supplemental-material+h2{
+	margin-top: 2em;
+}
+
+article.supplemental-material p{
+	margin-bottom: 0;
+	
+}
+
+article.supplemental-material a,
+article.supplemental-material span.badge{
+	position: absolute;
+	right: 0;
+	top: 0.5em;
+	color: grey;
+  	font-weight: 600;
+  	line-height: 1.8em;
+  	padding: 0 0.4rem 0;
+  	display: inline-block;
+  	border-radius: 0.15rem;
+  	text-decoration: none;
+  	font-size: 0.7rem;
+  	border: 0.125rem solid #eee;
+}
+
+
+article.supplemental-material:hover a.delete{ color: #ed2551; }
+article.supplemental-material:hover a.edit{ color: #009253; }
+article.supplemental-material:hover a.delete:hover{ border-color: #ed2551; }
+article.supplemental-material:hover a.edit:hover{ border-color: #009253; }
+
+article.supplemental-material a.edit{
+	right: 5.2em;
+}
+
+/* @end */
+
+/* @group boilerplate */
+
+.boilerplate{
+	background: #155755;
+	color: white;
+	max-width: 30em;
+	padding: 0.7em 1em 1em;
+	-moz-border-radius: 0.4em;
+	border-radius: 0.4em;
+}
+
+.boilerplate h1{
+	color: white;
+}
+
+.boilerplate p{ font-size: 0.9em; }
+
+.boilerplate code{
+	background: #0c3840;
+	display: block;
+	padding: 0.6em;
+	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
+	font-family: monaco;
+	font-size: 0.8em;
+	margin-left: -0.2em;
+}
+
+/* @end */
+
 .notice {
 	background: #ffeead;
 	color: #4b2d06;
@@ -758,14 +874,14 @@ body[class^=settings] main .page legend{
 	margin-bottom: 0.4em;
 }
 
-nav{ clear: both; }
+footer nav{ clear: both; }
 
-nav ul{
+footer nav ul{
 	border-top: 0.2rem solid #eee;	
 	padding-top: 1.4rem;
 }
 
-nav ul li{
+footer nav ul li{
 	margin-bottom: 0.7rem;
 	list-style-type: none;
 }

@@ -12,7 +12,7 @@ header
     .boilerplate
       h1 Schools applications go here.
       p=="We can&rsquo;t show you any completed school applications because they don&rsquo;t yet exist! Share the following URL to get started (or just try it out yourself):"
-      span     
+      code     
         | http://localhost:3000/
         / TODO The URL should be calculated/stored elsewhere
         = @district.name.downcase.gsub(/\s+/, '-')

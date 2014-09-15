@@ -1,6 +1,9 @@
+/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
+
 /* @override http://ticket2ride.local/stylesheets/forms.css */
 
 /* @override http://preklottery.local/stylesheets/forms.css */
+
 
 @font-face {
 	font-family: 'icomoon';
@@ -333,11 +336,10 @@ div.field.field-select:hover select{ cursor: pointer; }
 
 /* @end */
 
-
-
 textarea{
   width: 100%;
   min-height: 6rem;
+  max-width: 30em;
 }
 
 div.field{ 

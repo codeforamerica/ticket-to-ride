@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20140911002422) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
-    t.string   "username",                    null: false
     t.string   "email",                       null: false
     t.integer  "user_role",                   null: false
     t.boolean  "active",      default: false

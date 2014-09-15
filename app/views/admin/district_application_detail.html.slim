@@ -6,13 +6,9 @@ javascript:
     toggleApplicationEditing(true);
   });
 
-.header
-  .application-id
-    span Confirmation Code:
-    span &nbsp;
-    = @student.confirmation_code
-
-  .application-actions
+header
+  .site-width
+    h1=="Application ##{@student.confirmation_code}"
     = link_to 'Edit', '#', id: 'application-detail-edit-link', onclick: 'toggleApplicationEditing(areFieldsDisabled = !areFieldsDisabled); $(this).hide();'
     = link_to 'Process', "/admin/district/application/process/#{@student.id}", id: 'application-detail-process-link'
     = link_to 'Delete', "/admin/district/application/delete/#{@student.id}", id: 'application-detail-delete-link'
@@ -26,96 +22,103 @@ javascript:
         = render 'model_errors', model_obj: race
 
 .page
-
-  = form_for(@student, url: request.original_url, method: 'post', html:{id: 'application-detail-form'}) do |student|
-
-    / STUDENT INFO
-    section#application-student-info
+  div.site-width
       h2 Student information
+      dl
+        dt 
+          | Full Name
+        dd
+          = @student.first_name
+          = " "
+          = @student.middle_name
+          = " "
+          = @student.last_name
+        dt
+          | Gender
+        dd
+          = @student.gender.capitalize
+        dt
+          | Date of birth
+        dd
+          = @student.birth_city
+        dt
+          | Country of Birth
+        dd
+          = @student.birth_country
+        dt
+          | Ethnicity
+        dd
+          - if @student.is_hispanic?
+            = "Is Latino or Hispanic"
+          - else
+            = "Is not Latino or Hispanic"
+        dt
+          | Race(s)
+        dd
+          - @student.student_races.each do |race|
+            = t "race_#{race.race}"
+            =" "
+        dt
+          | Home address
+        dd.adr
+          .street-address
+            = @student.home_street_address_1
+            - if !@student.home_street_address_2.blank?
+              br
+              = @student.home_street_address_2
+          span.locality
+            = @student.home_city
+          span.region
+            = @student.home_state
+          span.postal-code
+            = @student.home_zip_code 
+      dl
+        dt
+          |  Has an 
+          abbr title="Individualized Education Plan" IEP
+          | ?
+        dd
+          = @student.iep ? "Yes" : "No"
+        dt
+          |  Had a 504 Plan?
+        dd
+          = @student.p504 ? "Yes" : "No"
+        dt 
+          |  Previously attended a 
+          abbr title="Rhode Island" RI
+          |  School?
+        dd
+          - if @student.previous_grade == "none"
+           = "No"
+          - else
+           = "Yes"
+        dt
+          | Previously attended
+        dd
+          = @student.prior_school_name
+        dt
+          | Previously completed
+        dd
+          = t "grade_#{@student.previous_grade}"
 
-      .field
-        = student.label :first_name, 'First name'
-        = student.text_field :first_name
-      .field
-        = student.label :middle_name, 'Middle name'
-        = student.text_field :middle_name
-      .field
-        = student.label :last_name, 'Last name'
-        = student.text_field :last_name
-      .field
-        = student.label :birthday, 'Birthday'
-        = student.date_field :birthday
-      .field
-        = student.label :birth_city, 'Birth city'
-        = student.text_field :birth_city
-      .field
-        = student.label :birth_state, 'Birth state/province'
-        = student.text_field :birth_state
-      .field
-        = student.label :birth_country, 'Birth country'
-        = student.text_field :birth_country
-      .field
-        = student.label :first_language, 'First language'
-        = student.text_field :first_language
-      .field
-        = student.label :home_language, 'Home language'
-        = student.text_field :home_language
-      .field
-        = student.label :gender, 'Gender'
-        = student.text_field :gender
-      .field
-        label Races
-      - Races::ALL.each do |race|
-        / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
-        .field
-          = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
-          = label_tag "race_#{race}", t('race_' + race)
+      - 
+      h2 Guardian information
+      - @guardians.each_with_index do |contact_person, index|
+        = render 'admin/application_contact_person', contact_person: contact_person, contact_person_number: index
 
-      .field
-        = student.label :previous_grade, 'Prior grade'
-        = student.select :previous_grade, options_for_select(@previous_grade_options)
+      h2 Contact information
 
-      .field
-        = student.label :prior_school_name, 'Prior school name'
-        = student.text_field :prior_school_name
+      - @contact_people.each_with_index do |contact_person, index|
+        = render 'admin/application_contact_person', contact_person: contact_person, contact_person_number: index
 
-      .field
-        = student.label :prior_school_city, 'Prior school city'
-        = student.text_field :prior_school_city
 
-      .field
-        = student.label :prior_school_state, 'Prior school state'
-        = student.text_field :prior_school_state
-
-      .field
-        = student.check_box :p504
-        = student.label :p504, 'Has 504 plan'
-
-      .field
-        = student.check_box :iep
-        = student.label :iep
-
-    / CONTACT PEOPLE
-    - contact_person_number = 0
-
-    section#application-guardian-1-info
-      h2 Guardian #1 information
-      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
-      - contact_person_number += 1
-
-    - if @student.contact_people[contact_person_number].is_guardian
-      section#application-guardian-2-info
-        h2 Guardian #2 information
-        = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
-        - contact_person_number += 1
-
-    section#application-contact-person-1-info
-      h2 Contact person #1 information
-      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
-      - contact_person_number += 1
-
-    section#application-contact-person-2-info
-      h2 Contact person #2 information
-      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
-
-    = student.submit 'Update', id: 'application-detail-form-submit-button'
+      h2 Language survey
+      dl
+        dt
+          | Language most frequently used by parent
+        dd
+          = @student.home_language.capitalize
+        dt
+          | Language learned first by child
+        dd
+          = @student.first_language.capitalize

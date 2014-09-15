@@ -520,6 +520,21 @@ class AdminController < ApplicationController
       return render 'unauthorized'
     end
 
+    @guardians = []
+    @student.contact_people.each do |c|
+      if c.is_guardian
+        @guardians << c
+      end
+    end
+
+    @contact_people = []
+    @student.contact_people.each do |c|
+      unless c.is_guardian
+        @contact_people << c
+      end
+    end
+
+
     generate_application_detail_select_options
 
     return render 'district_application_detail'
