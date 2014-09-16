@@ -632,10 +632,10 @@ class AdminController < ApplicationController
     missing_param("contact_person_#{contact_person_number}", :first_name, contact_person, "#{contact_person_title}'s first name is required")
     missing_param("contact_person_#{contact_person_number}", :last_name, contact_person, "#{contact_person_title}'s last name is required")
     missing_param("contact_person_#{contact_person_number}", :relationship, contact_person, "#{contact_person_title}'s relationship to student is required")
-    missing_param("contact_person_#{contact_person_number}", :mailing_street_address_1, contact_person, "#{contact_person_title}'s mailing street address line 1 is required")
-    missing_param("contact_person_#{contact_person_number}", :mailing_city, contact_person, "#{contact_person_title}'s mailing city is required")
-    missing_param("contact_person_#{contact_person_number}", :mailing_state, contact_person, "#{contact_person_title}'s state is required")
-    missing_param("contact_person_#{contact_person_number}", :mailing_zip_code, contact_person, "#{contact_person_title}'s ZIP code is required")
+    missing_param("contact_person_#{contact_person_number}", :street_address_1, contact_person, "#{contact_person_title}'s mailing street address line 1 is required")
+    missing_param("contact_person_#{contact_person_number}", :city, contact_person, "#{contact_person_title}'s mailing city is required")
+    missing_param("contact_person_#{contact_person_number}", :state, contact_person, "#{contact_person_title}'s state is required")
+    missing_param("contact_person_#{contact_person_number}", :zip_code, contact_person, "#{contact_person_title}'s ZIP code is required")
     missing_param("contact_person_#{contact_person_number}", :main_phone, contact_person, "#{contact_person_title}'s phone number is required")
   end
 

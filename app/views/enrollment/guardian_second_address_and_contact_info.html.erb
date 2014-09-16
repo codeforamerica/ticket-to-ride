@@ -1,37 +1,37 @@
 <script>
-    var guardian_1_street_address_1 = '<%= @guardian_1.home_street_address_1 %>';
-    var guardian_1_street_address_2 = '<%= @guardian_1.home_street_address_2 %>';
-    var guardian_1_city = '<%= @guardian_1.home_city %>';
-    var guardian_1_state = '<%= @guardian_1.home_state %>';
-    var guardian_1_zip_code = '<%= @guardian_1.home_zip_code %>';
+    var guardian_1_street_address_1 = '<%= @guardian_1.street_address_1 %>';
+    var guardian_1_street_address_2 = '<%= @guardian_1.street_address_2 %>';
+    var guardian_1_city = '<%= @guardian_1.city %>';
+    var guardian_1_state = '<%= @guardian_1.state %>';
+    var guardian_1_zip_code = '<%= @guardian_1.zip_code %>';
 
 
     function fillGuardian1Address() {
-        $('#contact_person_home_street_address_1').val(guardian_1_street_address_1);
-        $('#contact_person_home_street_address_2').val(guardian_1_street_address_2);
-        $('#contact_person_home_city').val(guardian_1_city);
-        $('#contact_person_home_state').val(guardian_1_state);
-        $('#contact_person_home_zip_code').val(guardian_1_zip_code);
+        $('#contact_person_street_address_1').val(guardian_1_street_address_1);
+        $('#contact_person_street_address_2').val(guardian_1_street_address_2);
+        $('#contact_person_city').val(guardian_1_city);
+        $('#contact_person_state').val(guardian_1_state);
+        $('#contact_person_zip_code').val(guardian_1_zip_code);
 
         makeAddressFieldsReadonly(true);
     };
 
     function clearGuardian1Address() {
-        $('#contact_person_home_street_address_1').val('');
-        $('#contact_person_home_street_address_2').val('');
-        $('#contact_person_home_city').val('');
-        $('#contact_person_home_state').val('RI');
-        $('#contact_person_home_zip_code').val('');
+        $('#contact_person_street_address_1').val('');
+        $('#contact_person_street_address_2').val('');
+        $('#contact_person_city').val('');
+        $('#contact_person_state').val('RI');
+        $('#contact_person_zip_code').val('');
 
         makeAddressFieldsReadonly(false);
     };
 
     function makeAddressFieldsReadonly(isReadOnly) {
-        $('#contact_person_home_street_address_1').prop('readonly', isReadOnly);
-        $('#contact_person_home_street_address_2').prop('readonly', isReadOnly);
-        $('#contact_person_home_city').prop('readonly', isReadOnly);
-        $('#contact_person_home_state').prop('readonly', isReadOnly);
-        $('#contact_person_home_zip_code').prop('readonly', isReadOnly);
+        $('#contact_person_street_address_1').prop('readonly', isReadOnly);
+        $('#contact_person_street_address_2').prop('readonly', isReadOnly);
+        $('#contact_person_city').prop('readonly', isReadOnly);
+        $('#contact_person_state').prop('readonly', isReadOnly);
+        $('#contact_person_zip_code').prop('readonly', isReadOnly);
     };
 
     function toggleAddressFields(guardian2LivesWith) {
@@ -59,20 +59,20 @@
           <div class="guardian1_alt_address">
             <tr>
               <td colspan="2"><span>Street address 1<sup>*</sup></span>
-                <span><%= g.text_field :home_street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Avenue' %></span>
+                <span><%= g.text_field :street_address_1, class: 'enrollment-form-input', placeholder: '456 Newport Avenue' %></span>
               </td>
             </tr>
             <tr>
               <td class="row-break" colspan="2"><span>Street address 2:</span>
-                <span><%= g.text_field :home_street_address_2, class: 'enrollment-form-input', placeholder: 'Apt 8C' %></span>
+                <span><%= g.text_field :street_address_2, class: 'enrollment-form-input', placeholder: 'Apt 8C' %></span>
               </td>
             </tr>
             <tr>
               <td colspan="2">
                 <span>City<sup>*</sup></span>
-                <span><%= g.text_field :home_city, class: 'enrollment-form-input city_input', placeholder: 'Newport' %></span>,
-                <span><%= g.text_field :home_state, class: 'enrollment-form-input state_input', value: 'RI'%></span>
-                <span><%= g.text_field :home_zip_code, class: 'enrollment-form-input zip_input', placeholder: '02840' %></span>
+                <span><%= g.text_field :city, class: 'enrollment-form-input city_input', placeholder: 'Newport' %></span>,
+                <span><%= g.text_field :state, class: 'enrollment-form-input state_input', value: 'RI'%></span>
+                <span><%= g.text_field :zip_code, class: 'enrollment-form-input zip_input', placeholder: '02840' %></span>
               </td>
             </tr>
 

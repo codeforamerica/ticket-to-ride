@@ -134,7 +134,7 @@
               <tr>
                 <td class="summaryText" colspan="2">  
                     <%= @student.first_name %> lives at
-                  <span class="summaryAnswers"><%= @student.home_street_address_1 %> <%= @student.home_street_address_2 %> in <%= @student.home_city %>, <%= @student.home_state %></span>.
+                  <span class="summaryAnswers"><%= @student.street_address_1 %> <%= @student.street_address_2 %> in <%= @student.city %>, <%= @student.state %></span>.
                 </td>
                 <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_address' %></div>
                 </td>

@@ -12,6 +12,6 @@ describe ContactPerson do
     build(:contact_person, last_name: "Sm!th").should_not be_valid
   end
   it "is invalid if home zipcode is composed of something other than numbers" do
-    build(:contact_person, home_zip_code: "5ftt3s")
+    build(:contact_person, zip_code: "5ftt3s")
   end
 end

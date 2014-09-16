@@ -242,7 +242,7 @@
           <tr>
             <td class="summaryText" colspan="2">  
                 <%= @summary_student.first_name %> lives at
-              <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.
+              <span class="summaryAnswers"><%= @summary_student.street_address_1 %> <%= @summary_student.street_address_2 %> in <%= @summary_student.city %>, <%= @summary_student.state %></span>.
             </td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/student_address' %></div>
             </td>
@@ -256,7 +256,7 @@
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2">You and <%= @summary_student.first_name %> live at <span class="summaryAnswers"><%= @summary_student.home_street_address_1 %> <%= @summary_student.home_street_address_2 %> in <%= @summary_student.home_city %>, <%= @summary_student.home_state %></span>.</td>
+          <td class="summaryText" colspan="2">You and <%= @summary_student.first_name %> live at <span class="summaryAnswers"><%= @summary_student.street_address_1 %> <%= @summary_student.street_address_2 %> in <%= @summary_student.city %>, <%= @summary_student.state %></span>.</td>
           <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_name_and_address' %></div></td>
         </tr>
         <tr>
@@ -292,7 +292,7 @@
            </td>
         </tr>
         <tr>
-          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.mailing_street_address_1 %> <%= @summary_guardian2.mailing_street_address_2 %> in <%= @summary_guardian2.mailing_city %>, <%= @summary_guardian2.mailing_state %> <%= @summary_guardian2.mailing_zip_code %></span>.</td>
+          <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %> lives at <span class="summaryAnswers"><%= @summary_guardian2.street_address_1 %> <%= @summary_guardian2.street_address_2 %> in <%= @summary_guardian2.city %>, <%= @summary_guardian2.state %> <%= @summary_guardian2.zip_code %></span>.</td>
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
         <tr>
