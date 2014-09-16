@@ -1,114 +1,135 @@
-.header
-  .application-id
-    span Confirmation Code:
-    span &nbsp;
-    = @student.confirmation_code
+= form_for(@student, url: request.original_url, method: 'post', html:{id: 'application-detail-form'}) do |student|
+  header.header-toolbar
+    .site-width
+      h1=="Application ##{@student.confirmation_code}"
+      - url_root = '/admin/district/application'
+      = student.submit 'Update', id: 'application-detail-form-submit-button', class: "button-action"
+      = link_to 'Process', "#{url_root}/process/process/#{@student.id}", id: 'application-detail-process-link'
+      = link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link'
+      #application-detail-errors
+        ul
+          = render 'model_errors', model_obj: @student
+          - @student.contact_people.each do |contact_person|
+            = render 'model_errors', model_obj: contact_person
+          - @student.student_races.each do |race|
+            = render 'model_errors', model_obj: race
 
-  .application-actions
-    - url_root = '/admin/district/application'
-    = link_to 'View', "#{url_root}/#{@student.id}", id: 'application-detail-edit-link'
-    = link_to 'Process', "#{url_root}/process/process/#{@student.id}", id: 'application-detail-process-link'
-    = link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link'
-
-  #application-detail-errors
-    ul
-      = render 'model_errors', model_obj: @student
-      - @student.contact_people.each do |contact_person|
-        = render 'model_errors', model_obj: contact_person
-      - @student.student_races.each do |race|
-        = render 'model_errors', model_obj: race
-
-.page
-
-  = form_for(@student, url: request.original_url, method: 'post', html:{id: 'application-detail-form'}) do |student|
-
-    / STUDENT INFO
-    section#application-student-info
-      h2 Student information
-
-      .field
-        = student.label :first_name, 'First name'
-        = student.text_field :first_name
-      .field
-        = student.label :middle_name, 'Middle name'
-        = student.text_field :middle_name
-      .field
-        = student.label :last_name, 'Last name'
-        = student.text_field :last_name
-      .field
-        = student.label :birthday, 'Birthday'
-        = student.date_field :birthday
-      .field
-        = student.label :birth_city, 'Birth city'
-        = student.text_field :birth_city
-      .field
-        = student.label :birth_state, 'Birth state/province'
-        = student.text_field :birth_state
-      .field
-        = student.label :birth_country, 'Birth country'
-        = student.text_field :birth_country
-      .field
-        = student.label :first_language, 'First language'
-        = student.text_field :first_language
-      .field
-        = student.label :home_language, 'Home language'
-        = student.text_field :home_language
-      .field
-        = student.label :gender, 'Gender'
-        = student.text_field :gender
-      .field
-        label Races
-      - Races::ALL.each do |race|
-        / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
+  .page
+    .site-width
+      / STUDENT INFO
+      section#application-student-info
+        h2 Student information
+        fieldset.fieldset-name
+          legend Full name
+          .field
+            = student.label :first_name, 'First'
+            = student.text_field :first_name
+          .field
+            = student.label :middle_name, 'Middle'
+            = student.text_field :middle_name
+          .field
+            = student.label :last_name, 'Last'
+            = student.text_field :last_name
+        fieldset
+          legend Gender
+          .field.field-radiobutton
+            = student.label :gender, 'Male'
+            = student.radio_button :gender, "Male"
+          .field.field-radiobutton
+            = student.label :gender, 'Female'
+            = student.radio_button :gender, "Female"
+        .field.field-small
+          = student.label :birthday, 'Date of birth'
+          = student.date_field :birthday
         .field
-          = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
-          = label_tag "race_#{race}", t('race_' + race)
+          = student.label :birth_country, 'Country of birth'
+          = student.text_field :birth_country
+        fieldset
+          legend Is this student Hispanic or Latino?
+          .field.field-radiobutton
+            input type="radio"
+            label Yes
+          .field.field-radiobutton
+            input type="radio"
+            label No
+        fieldset
+          legend Races
+          - Races::ALL.each do |race|
+            / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
+            .field.field-checkbox
+              = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
+              = label_tag "race_#{race}", t('race_' + race)
 
-      .field
-        = student.label :previous_grade, 'Prior grade'
-        = student.select :previous_grade, options_for_select(@previous_grade_options)
+        fieldset.fieldset-address
+          legend Home address
+          .field.field-street
+            = student.label :home_street_address_1, 'Street address 1'
+            = student.text_field :home_street_address_1
+          .field.field-street
+            = student.label :home_street_address_2, 'Street address 2'
+            = student.text_field :home_street_address_2
+          .field.field-city
+            = student.label :home_city, 'City'
+            = student.text_field :home_city
+          .field.field-state
+            = student.label :home_state, 'State'
+            = student.text_field :home_state
+          .field.field-zip
+            = student.label :home_zip_code, 'Zip'
+            = student.text_field :home_zip_code
 
-      .field
-        = student.label :prior_school_name, 'Prior school name'
-        = student.text_field :prior_school_name
+        .field
+          = student.label :previous_grade, 'Prior grade'
+          = student.select :previous_grade, options_for_select(@previous_grade_options)
 
-      .field
-        = student.label :prior_school_city, 'Prior school city'
-        = student.text_field :prior_school_city
+        .field
+          = student.label :prior_school_name, 'Prior school name'
+          = student.text_field :prior_school_name
 
-      .field
-        = student.label :prior_school_state, 'Prior school state'
-        = student.text_field :prior_school_state
+        .field
+          = student.label :prior_school_city, 'Prior school city'
+          = student.text_field :prior_school_city
 
-      .field
-        = student.check_box :p504
-        = student.label :p504, 'Has 504 plan'
+        .field
+          = student.label :prior_school_state, 'Prior school state'
+          = student.text_field :prior_school_state
 
-      .field
-        = student.check_box :iep
-        = student.label :iep
+        fieldset
+          legend Does this student have a 504 plan?
+          .field.field-radiobutton
+            = student.check_box :p504
+            = student.label :p504, 'Yes'
+          .field.field-radiobutton
+            = student.check_box :p504
+            = student.label :p504, 'No'
+        fieldset
+          legend Does this student have an IEP?
+          .field.field-radiobutton
+            = student.check_box :iep
+            = student.label :iep, "Yes"
+          .field.field-radiobutton
+            = student.check_box :iep
+            = student.label :iep, "No"
 
-    / CONTACT PEOPLE
-    - contact_person_number = 0
+      / CONTACT PEOPLE
+      - contact_person_number = 0
 
-    section#application-guardian-1-info
-      h2 Guardian #1 information
-      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
-      - contact_person_number += 1
-
-    - if @student.contact_people[contact_person_number].is_guardian
-      section#application-guardian-2-info
-        h2 Guardian #2 information
-        = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+      section#application-guardian-1-info
+        h2 Guardian #1 information
+        = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
         - contact_person_number += 1
 
-    section#application-contact-person-1-info
-      h2 Contact person #1 information
-      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
-      - contact_person_number += 1
+      - if @student.contact_people[contact_person_number].is_guardian
+        section#application-guardian-2-info
+          h2 Guardian #2 information
+          = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+          - contact_person_number += 1
 
-    section#application-contact-person-2-info
-      h2 Contact person #2 information
-      = render 'admin/application_contact_person_detail', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+      section#application-contact-person-1-info
+        h2 Contact person #1 information
+        = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+        - contact_person_number += 1
 
-    = student.submit 'Update', id: 'application-detail-form-submit-button'
+      section#application-contact-person-2-info
+        h2 Contact person #2 information
+        = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number

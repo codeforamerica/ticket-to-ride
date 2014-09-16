@@ -26,7 +26,8 @@ jQuery.fn.customInput = function(){
       })
       .trigger('updateState')
       .click(function(){
-        $('input[name='+ $(this).attr('name') +']').trigger('updateState');
+        escapedName = $(this).attr('name').replace(/(:|\.|\[|\])/g,'\\$1');
+        $('input[name='+ escapedName +']').trigger('updateState');
       })
       .focus(function(){
         label.addClass('focus');

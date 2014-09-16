@@ -2,7 +2,7 @@ header
   .site-width
     h1 District info
     - if @saved
-      p Saved!!!
+      .notice=="Saved!"
     ul
       - @district.errors.each do |field, message|
         li

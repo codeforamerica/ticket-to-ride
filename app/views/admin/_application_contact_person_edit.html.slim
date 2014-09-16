@@ -1,0 +1,109 @@
+/ assumes use of `contact_person` and `contact_person_number` variables
+
+- obj = "contact_person_#{contact_person_number}"
+fieldset.fieldset-name
+  legend Full name
+  .field
+    = label_tag "#{obj}[first_name]", 'First'
+    = text_field_tag "#{obj}[first_name]", contact_person.first_name
+  .field
+    = label_tag "#{obj}[last_name]", 'Last'
+    = text_field_tag "#{obj}[last_name]", contact_person.last_name
+.field
+  = label_tag "#{obj}[relationship]", 'Relationship to child'
+  = text_field_tag "#{obj}[relationship]", contact_person.relationship
+
+- if contact_person.is_guardian
+  fieldset.fieldset-address
+    legend Home address
+    .field.field-street
+      = label_tag "#{obj}[home_street_address_1]", 'Street address 1'
+      = text_field_tag "#{obj}[home_street_address_1]", contact_person.home_street_address_1
+    .field.field-street
+      = label_tag "#{obj}[home_street_address_2]", 'Street address 2'
+      = text_field_tag "#{obj}[home_street_address_2]", contact_person.home_street_address_2
+    .field.field-city
+      = label_tag "#{obj}[home_city]", 'City'
+      = text_field_tag "#{obj}[home_city]", contact_person.home_city
+    .field.field-state
+      = label_tag "#{obj}[home_state]", 'State'
+      = text_field_tag "#{obj}[home_state]", contact_person.home_state
+    .field.field-zip
+      = label_tag "#{obj}[home_zip_code]", 'ZIP'
+      = text_field_tag "#{obj}[home_zip_code]", contact_person.home_zip_code
+fieldset.fieldset-address
+  legend Mailing address
+  .field.field-street
+    = label_tag "#{obj}[mailing_street_address_1]", 'Street address 1'
+    = text_field_tag "#{obj}[mailing_street_address_1]", contact_person.mailing_street_address_1
+  .field.field-street
+    = label_tag "#{obj}[mailing_street_address_2]", 'Street address 2'
+    = text_field_tag "#{obj}[mailing_street_address_2]", contact_person.mailing_street_address_2
+  .field.field-city
+    = label_tag "#{obj}[mailing_city]", 'City'
+    = text_field_tag "#{obj}[mailing_city]", contact_person.mailing_city
+  .field.field-state
+    = label_tag "#{obj}[mailing_state]", 'State'
+    = text_field_tag "#{obj}[mailing_state]", contact_person.mailing_state
+  .field.field-zip
+    = label_tag "#{obj}[mailing_zip_code]", 'ZIP'
+    = text_field_tag "#{obj}[mailing_zip_code]", contact_person.mailing_zip_code
+
+fieldset.fieldset-phone
+  legend Phone #1
+  .field
+    = label_tag "#{obj}[main_phone]", 'Number'
+    = text_field_tag "#{obj}[main_phone]", contact_person.main_phone
+  .field.field-checkbox
+    = check_box_tag "#{obj}[main_phone_can_sms]"
+    = label_tag "#{obj}[main_phone_can_sms]", 'Receives text messages'
+
+fieldset.fieldset-phone
+  legend Phone #2
+  .field
+    = label_tag "#{obj}[secondary_phone]", 'Number'
+    = text_field_tag "#{obj}[secondary_phone]", contact_person.secondary_phone
+  .field.field-checkbox
+    = check_box_tag "#{obj}[secondary_phone_can_sms]"
+    = label_tag "#{obj}[secondary_phone_can_sms]", 'Receives text messages'
+
+fieldset.fieldset-phone
+  legend Work phone
+  .field
+    = label_tag "#{obj}[work_phone]", 'Number'
+    = text_field_tag "#{obj}[work_phone]", contact_person.work_phone
+  .field.field-checkbox
+    = check_box_tag "#{obj}[work_phone_can_sms]"
+    = label_tag "#{obj}[work_phone_can_sms]", 'Receives text messages'
+
+.field.field-medium
+  = label_tag "#{obj}[email]", 'Email address'
+  = text_field_tag "#{obj}[email]", contact_person.email
+
+fieldset
+  legend Permissions
+
+  .field.field-checkbox
+    = check_box_tag "#{obj}[lives_with_student]", contact_person.lives_with_student
+    = label_tag "#{obj}[lives_with_student]", 'Lives with student'
+
+  .field.field-checkbox
+    = check_box_tag "#{obj}[receive_grade_notices]", contact_person.receive_grade_notices
+    = label_tag "#{obj}[receive_grade_notices]", 'Receive grade notifications'
+
+  .field.field-checkbox
+    = check_box_tag "#{obj}[receive_conduct_notices]", contact_person.receive_conduct_notices
+    = label_tag "#{obj}[receive_conduct_notices]", 'Receive conduct notices'
+
+  .field.field-checkbox
+    = check_box_tag "#{obj}[receive_other_mail]", contact_person.receive_other_mail
+    = label_tag "#{obj}[receive_other_mail]", 'Receive other mail'
+
+  .field.field-checkbox
+    = check_box_tag "#{obj}[can_pickup_child]", contact_person.can_pickup_child
+    = label_tag "#{obj}[can_pickup_child]", 'Can pickup child'
+
+- if contact_person.is_guardian
+  .field
+    = label_tag "#{obj}[armed_service_status}", 'Armed Service Status'
+    = select_tag "#{obj}[armed_service_status}", options_for_select(@armed_service_status_options)

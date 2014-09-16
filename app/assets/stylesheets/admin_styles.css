@@ -8,7 +8,7 @@ body{
 	font-size: 18px;
 }
 
-@media screen and (min-width: 48em){ html, body{ font-size: 20px; } }
+@media screen and (min-width: 48em){ html, body{ font-size: 24px; } }
 
 a{
 	color: #1f7ab8;
@@ -54,12 +54,15 @@ div.site-width::after{
 /* @group header */
 
 header#header{ 
+	font-family: "Titillium Web", Trebuchet MS;
 	font-size: 0.9rem;
 	margin-bottom: 0.35rem;
 	position: relative;
 	color: #c1b6c2;
 	background: #442b49;
 	overflow: hidden;
+	height: 2.4rem;
+	line-height: 2.4rem;
 }
 
 header#header h1,
@@ -69,11 +72,9 @@ header#header a{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	line-height: 2.4rem;
 }
 
 header#header h1{
-	font-family: "Titillium Web", Trebuchet MS;
 	font-weight: 700;	
 	display: none;
 }
@@ -129,39 +130,14 @@ header#header nav a.sign-out::before{
 header#header nav.nav-secondary a.people::before{ content: "people"; }
 header#header nav.nav-secondary a.schools::before{ content: "schools"; }
 header#header nav.nav-secondary a.settings::before{ content: "settings"; }
-@media screen and (min-width: 28em){
-	header#header{ 
-		margin-bottom: 1.4rem;
-	}
-	
-	header#header nav.nav-secondary{
-		margin-right: -0.2em;
-	}
-	
-	header#header nav.nav-secondary a.people,
-	header#header nav.nav-secondary a.schools,
-	header#header nav.nav-secondary a.settings,
-	header#header nav.nav-secondary a.sign-out{ 
-		width: auto;
-		padding: 0 1em;
-	}
-	
-	header#header nav a.people span,
-	header#header nav a.schools span,
-	header#header nav a.settings span,
-	header#header nav a.sign-out span{ display: inline;  }
-	
-	header#header nav a.people::before,
-	header#header nav a.schools::before,
-	header#header nav a.settings::before,
-	header#header nav a.sign-out::before{ display: none; }
-
-}
 
 /* @end */
 
 /* @group main */
 
+body main{
+	margin-bottom: 2em;
+}
 body main header{
 	margin-bottom: 1em;
 	color: #333;
@@ -189,6 +165,12 @@ body main h2{
 	font-size: 1.1em;
 	font-weight: 700;
 	color: #ac540b;
+	margin-bottom: 0.8em;
+}
+
+body main h3{
+	font-size: 0.9em;
+	font-weight: 600;
 	margin-bottom: 0.8em;
 }
 
@@ -575,11 +557,7 @@ body[class^=applications] main .page h1{
 
 /* @group Application show, Application edit */
 
-.applications-show header#header,
-.applications-edit header#header{ margin-bottom: 0; }
-
-.applications-show main header,
-.applications-edit main header{
+header.header-toolbar{
 	font-size: 0.9rem;
 	line-height: 1.4em;
 	font-weight: 600;
@@ -587,11 +565,12 @@ body[class^=applications] main .page h1{
 	background: #545da9;
 	position: relative;
 	margin-bottom: 1.4rem;
+	margin-top: -0.4rem;
 }
 
-.applications-show main header h1,
-.applications-edit main header h1{
-	font-weight: normal;
+header.header-toolbar h1{
+	font-weight: 700;
+	font-size: 1em;
 	line-height: 2.4rem;
 	color: white;
 }
@@ -602,10 +581,8 @@ body[class^=applications] main .page h1{
 	margin-top: 1.4rem;
 }
 
-.applications-show main header a,
-.applications-edit main header a,
-.applications-show main header button,
-.applications-edit main header button{
+header.header-toolbar a,
+header.header-toolbar button{
 	position: absolute;
 	left: auto;
 	right: 0.5rem;
@@ -622,24 +599,22 @@ body[class^=applications] main .page h1{
 	color: inherit;
 }
 
-.applications-show main header a:hover,
-.applications-edit main header a:hover,
-.applications-show main header button:hover,
-.applications-edit main header button:hover{
-	color: white;
-}
+header.header-toolbar a:hover,
+header.header-toolbar button:hover{ color: white; }
 
-main form header button:active{
+header.header-toolbar button:active{
 	color: #9daace;
 	background: #162649;
 }
 
-main form header button.button-edit{
+header.header-toolbar .edit,
+header.header-toolbar .save{
 	right: 5rem;
 }
 
-main form header button.button-save{
-	right: 5rem;
+header.header-toolbar .delete{
+	right: 9em;
+	
 }
 
 fieldset#guardian-relationship{ max-width: 26rem;}

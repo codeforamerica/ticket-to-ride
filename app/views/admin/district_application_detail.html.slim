@@ -1,10 +1,10 @@
-header
+header.header-toolbar
   .site-width
     h1=="Application ##{@student.confirmation_code}"
     - url_root = '/admin/district/application'
-    = link_to 'Edit', "#{url_root}/edit/#{@student.id}", id: 'application-detail-edit-link'
-    = link_to 'Process', "#{url_root}/process/process/#{@student.id}", id: 'application-detail-process-link'
-    = link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link'
+    = link_to 'Edit', "#{url_root}/edit/#{@student.id}", class: 'edit'
+    = link_to 'Process', "#{url_root}/process/process/#{@student.id}", class: 'process'
+    = link_to 'Delete', "#{url_root}/delete/#{@student.id}", class: 'delete'
 
   #application-detail-errors
     ul
@@ -65,7 +65,6 @@ header
             = @student.home_state
           span.postal-code
             = @student.home_zip_code 
-      dl
         dt
           |  Has an 
           abbr title="Individualized Education Plan" IEP

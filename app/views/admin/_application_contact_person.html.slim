@@ -2,9 +2,10 @@
 
 - obj = "contact_person_#{contact_person_number}"
 
-h2 
-  =contact_person.is_guardian ? "Guardian" : "Contact"
-  =contact_person_number + 1
+h3 
+  = contact_person.is_guardian ? "Guardian" : "Contact"
+  = " #"
+  = contact_person_number + 1
 
 dl
   dt 
