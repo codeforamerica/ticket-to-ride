@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911002422) do
+ActiveRecord::Schema.define(version: 20140916173708) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -27,15 +27,10 @@ ActiveRecord::Schema.define(version: 20140911002422) do
 
   create_table "contact_people", force: true do |t|
     t.string   "relationship"
-    t.string   "mailing_street_address_1"
-    t.string   "mailing_street_address_2"
-    t.string   "mailing_zip_code"
     t.boolean  "can_pickup_child"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                   default: false
-    t.string   "mailing_city"
-    t.string   "mailing_state"
+    t.boolean  "active",                  default: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -52,11 +47,11 @@ ActiveRecord::Schema.define(version: 20140911002422) do
     t.string   "work_phone_can_sms"
     t.boolean  "is_guardian"
     t.string   "armed_service_status"
-    t.string   "home_street_address_1"
-    t.string   "home_street_address_2"
-    t.string   "home_city"
-    t.string   "home_state"
-    t.string   "home_zip_code"
+    t.string   "street_address_1"
+    t.string   "street_address_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
   end
 
   create_table "districts", force: true do |t|
@@ -92,13 +87,13 @@ ActiveRecord::Schema.define(version: 20140911002422) do
     t.string   "first_language"
     t.boolean  "iep"
     t.boolean  "p504"
-    t.string   "home_street_address_1"
-    t.string   "home_street_address_2"
-    t.string   "home_zip_code"
+    t.string   "street_address_1"
+    t.string   "street_address_2"
+    t.string   "zip_code"
     t.integer  "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "home_city"
+    t.string   "city"
     t.string   "birth_country"
     t.boolean  "is_hispanic"
     t.string   "birth_city"
@@ -106,7 +101,7 @@ ActiveRecord::Schema.define(version: 20140911002422) do
     t.datetime "guardian_complete_time"
     t.datetime "export_time"
     t.integer  "estimated_graduation_year"
-    t.string   "home_state"
+    t.string   "state"
     t.boolean  "needs_special_services"
     t.boolean  "has_learning_difficulties"
     t.string   "home_language"
@@ -116,11 +111,6 @@ ActiveRecord::Schema.define(version: 20140911002422) do
     t.string   "previous_grade"
     t.string   "confirmation_code"
     t.integer  "district_id"
-    t.string   "mailing_street_address_1"
-    t.string   "mailing_street_address_2"
-    t.string   "mailing_city"
-    t.string   "mailing_state"
-    t.string   "mailing_zip_code"
   end
 
   add_index "students", ["confirmation_code"], name: "index_students_on_confirmation_code", unique: true
