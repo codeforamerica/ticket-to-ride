@@ -32,7 +32,3 @@ currently slated for JRuby 1.7.15.
 # Ticket to RIDE
 
 From here, follow the [developer setup](developer_setup.md).
-
-# Known Issues
-
-While the application runs smoothly on JRuby, there is a current issue with unit test detection using it. This means that running `rake spec` will detect no unit tests.
