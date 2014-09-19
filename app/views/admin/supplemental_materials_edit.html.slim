@@ -40,10 +40,12 @@
       fieldset
         legend Is this material required to process registration?
         .field.field-radiobutton
-          = sm.label :is_required_true, 'Yes'
-          = sm.radio_button :is_required, true
+          = sm.label :is_required_true, 'Yes' do
+            = sm.radio_button :is_required, true
+            == "Yes"
         .field.field-radiobutton
-          = sm.label :is_required_false, 'No'
-          = sm.radio_button :is_required, false
+          = sm.label :is_required_false, 'No' do
+            = sm.radio_button :is_required, false
+            == "No"
       footer
         = sm.submit 'Add', :class => "button-action"

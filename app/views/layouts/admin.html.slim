@@ -8,24 +8,25 @@ html
 
     = javascript_include_tag 'admin'
 
-  body
+  body class="#{@body_class ? @body_class : ''}"
     header#header
       .site-width
         h1 Ticket to RIDE
-        nav
+        nav.nav-primary
           - if @admin.user_role == 'central_admin'
             = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
             = link_to 'People', {controller:'admin', action: 'central_people'}
             = link_to @admin.name, "/admin/central/people/edit/#{@admin.id}"
           - else
-            = link_to 'Applications', '/admin/district/applications'
-            = link_to 'District info', '/admin/district/info'
-            = link_to 'Supplemental Materials', '/admin/district/supplemental_materials'
-            = link_to 'People', '/admin/district/people'
-            = link_to 'Export', '/admin/district/export'
-            = link_to @admin.name, "/admin/district/people/edit/#{@admin.id}"
+            = link_to 'Applications', '/admin/district/applications', class: "applications"
+            = link_to 'District info', '/admin/district/info', class: "district"
+            = link_to 'Supplemental Materials', '/admin/district/supplemental_materials', class: "supplemental-materials"
+            = link_to 'People', '/admin/district/people', class: "people"
+            = link_to 'Export', '/admin/district/export', class: "export"
+        nav.nav-secondary
+            = link_to @admin.name, "/admin/district/people/edit/#{@admin.id}", class: "user"
             / TODO actually have solid sign out
-            = link_to 'Sign Out', '/admin'
+            = link_to 'Sign Out', '/admin', class: "sign-out"
     main
       = yield
 

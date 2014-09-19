@@ -1,12 +1,6 @@
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
-/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
-
-/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
-
 /* @group bootstrap */
-
-
 
 body{
 	color: #555;
@@ -80,6 +74,18 @@ header#header a{
 	box-sizing: border-box;
 }
 
+header#header nav.nav-primary{
+	margin-left: -0.8em;
+}
+
+header#header nav.nav-secondary{
+	float: right;
+}
+
+header#header a{
+	padding: 0 0.8em;
+}
+
 header#header h1{
 	font-weight: 700;	
 	display: none;
@@ -87,55 +93,20 @@ header#header h1{
 
 
 body[class^="applications-"] header a.applications,
-body[class^="people-"] header a.people,
-body[class^="schools-"] header a.schools,
+body[class^="district"] header a.district,
+body[class^="supplemental-materials"] header a.supplemental-materials,
+body[class^="people"] header a.people,
 body[class="settings"] header a.settings{
 	color: #fff !important;
+	background: #2c1d30;
 }
 
 header#header a{
 	color: inherit;
 	white-space: nowrap;
-	margin-right: 2em;
 }
 
 header#header a:hover{color: #fff;}
-
-header#header nav a.people span,
-header#header nav a.schools span,
-header#header nav a.settings span,
-header#header nav a.sign-out span{ display: none;  }
-
-header#header nav a.people::before,
-header#header nav a.schools::before,
-header#header nav a.settings::before,
-header#header nav a.sign-out::before{ 
-	text-decoration: none;
-	content: "signout";
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 0.8rem;
-	/* Enable Ligatures ================ */
-	-webkit-font-feature-settings: "liga";
-	-moz-font-feature-settings: "liga=1";
-	-moz-font-feature-settings: "liga";
-	-ms-font-feature-settings: "liga" 1;
-	-o-font-feature-settings: "liga";
-	font-feature-settings: "liga";
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	position: relative;
-	top: 0.2em;
-}
-
-header#header nav.nav-secondary a.people::before{ content: "people"; }
-header#header nav.nav-secondary a.schools::before{ content: "schools"; }
-header#header nav.nav-secondary a.settings::before{ content: "settings"; }
 
 /* @end */
 
@@ -159,12 +130,14 @@ body main h1{
 	font-family: "Titillium Web", Trebuchet MS;
 	font-weight: 100;
 	line-height: 1.33em;
-	font-size: 2.4em;
+	font-size: 2.1em;
 }
 
-body main header h1+.button-forward{
+body main header h1+.button-forward,
+body main header h1+.button-action{
 	vertical-align: middle;
 	margin-top: 0.125em;
+	margin-left: 0.4em;
 }
 
 body main header h1+p,
@@ -173,7 +146,7 @@ body main header h1+a+p{
 }
 
 body main h2{
-	font-size: 1.1em;
+	font-size: 1em;
 	font-weight: 700;
 	color: #ac540b;
 	margin-bottom: 0.4em;
@@ -572,24 +545,18 @@ body[class^=applications] main .page h1{
 
 nav.misc{
 	font-size: 0.9em;
-	float: right;
 }
 
 nav.misc a.delete{
 	color: red;
 }
 
-nav.misc a{
-	margin-left: 1em;
-	line-height: 1.4em;
-}
 
 /* @end */
 
 /* @group Application show, Application edit */
 
 header.header-toolbar{
-	font-size: 0.9rem;
 	line-height: 1.4em;
 	font-weight: 600;
 	color: #b5c6eb;
@@ -600,10 +567,10 @@ header.header-toolbar{
 }
 
 header.header-toolbar h1{
-	font-weight: 700;
-	font-size: 1em;
+	font-size: inherit;
 	line-height: 2.4rem;
 	color: white;
+	margin: 0;
 }
 
 header.header-toolbar h1 a,
@@ -651,12 +618,50 @@ header.header-toolbar a.edit{
 }
 
 header.header-toolbar a.delete{
-	right: 9em;
-	
+	right: 9em;	
 }
 
-fieldset#guardian-relationship{ max-width: 26rem;}
-fieldset#guardian-relationship legend{ font-weight: normal; }
+dd span.none{
+	color: #ccc;
+}
+dd ul li{ display: inline; list-style-type: none; }
+dd ul li::after{ content: ", "; }
+dd ul li:last-of-type::after{ content: ""; }
+
+dd.tel span.badge span{
+	text-transform: uppercase;
+	font-size: 11px;
+	float: right;
+	color: #aaa;
+}
+
+dd.tel span.badge::after{
+	speak: none;
+	font-family: "icomoon";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "sms";
+	margin-left: 0.4em;
+	font-size: 0.9rem;
+	margin-top: -0.2rem;
+	display: inline-block;
+	vertical-align: middle;
+}
 
 
 
@@ -789,6 +794,31 @@ article.supplemental-material h1{
 	margin-bottom: 0.4em;
 }
 
+article.supplemental-material h1 a:after{
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: optimize-legibility;
+	-moz-osx-font-smoothing: optimize-legibility;
+	content: "newtab";
+	margin-left: 0.2em;
+	font-size: 0.75rem;
+	margin-top: 0.2rem;
+}
+
 article.supplemental-material{
 	padding-top: 0.8em;
 	margin-bottom: 0.8em;
@@ -813,7 +843,8 @@ article.supplemental-material p{
 	
 }
 
-article.supplemental-material a,
+article.supplemental-material a.edit,
+article.supplemental-material a.delete,
 article.supplemental-material span.badge{
 	position: absolute;
 	right: 0;
@@ -829,7 +860,8 @@ article.supplemental-material span.badge{
   	border: 0.125rem solid #eee;
 }
 
-article.supplemental-material span.badge::before{
+.supplemental-materials span.badge::before,
+.supplemental-materials span.mandated::before{
 	text-decoration: none;
 	content: "lock";
 	font-family: 'icomoon';
@@ -850,7 +882,12 @@ article.supplemental-material span.badge::before{
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	margin-right: 0.4em;
-	
+}
+
+.supplemental-materials span.mandated::before{
+	margin-right: 0.2em;
+	margin-left: 0.2em;
+	color: #555;
 }
 
 
@@ -870,7 +907,6 @@ article.supplemental-material a.edit{
 .boilerplate{
 	background: #155755;
 	color: white;
-	max-width: 30em;
 	padding: 0.7em 1em 1em;
 	-moz-border-radius: 0.4em;
 	border-radius: 0.4em;
@@ -881,7 +917,8 @@ article.supplemental-material a.edit{
 }
 
 .boilerplate p{ 
-	font-size: 1.1em; 
+	font-size: 0.9em; 
+	margin-bottom: 0;
 }
 
 .boilerplate code{
@@ -893,6 +930,7 @@ article.supplemental-material a.edit{
 	font-family: monaco;
 	font-size: 0.9em;
 	margin-left: -0.2em;
+	margin-top: 1em;
 }
 
 .boilerplate a{
@@ -900,11 +938,7 @@ article.supplemental-material a.edit{
 	border-color: #ffedb0;
 }
 
-.boilerplate a.button-action{
-	font-size: 1.1em;
-	height: 2em;
-	line-height: 2em;
-}
+
 
 .boilerplate a:hover{
 	color: #fff7d8;
@@ -950,6 +984,11 @@ article.supplemental-material a.edit{
 	font-size: 1em;
 	font-weight: 600;
 	margin-top: 0.2em;
+	margin-bottom: 0.2em !important;
+}
+
+.notice ul{
+	margin-left: 1.4em;
 }
 
 .notice form{
@@ -963,13 +1002,31 @@ footer nav ul{
 	padding-top: 1.4rem;
 }
 
+footer div.url{
+	background: #fafafa;
+	color: #555;
+	padding: 0.6em;
+	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
+	margin-top: 1em;
+	font-size: 0.9em;
+	clear: both;
+	border: 0.08em solid #eee;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+footer div code{
+	font-family: monaco;
+	font-size: 0.9em;
+}
 footer nav ul li{
 	margin-bottom: 0.7rem;
 	list-style-type: none;
 }
 
-a.export,
-a.import{
+footer a.export,
+footer a.import{
 	display: inline-block;
 	vertical-align: middle;
 	position: relative;
@@ -979,8 +1036,8 @@ a.import{
 }
 
 
-a.export::before,
-a.import::before{
+footer nav a.export::before,
+footer nav a.import::before{
 	text-decoration: none;
 	content: "excel";
 	font-family: 'icomoon';

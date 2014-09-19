@@ -11,61 +11,62 @@ javascript:
   });
 
 .header
-  h1 Process application
+  .site-width
+    h1 Process application
 
 .page
+  .site-width
+    / --- REVIEW APP ---
 
-  / --- REVIEW APP ---
+    h2 1. Review application
+    p
+      | Make sure to review the student's application for errors. You can do this by going&nbsp;
+      = link_to 'back to the previous page', "/admin/district/application/#{@student.id}", target: "_blank"
+      | &nbsp;and making any modifcations.
 
-  h2 1. Review application
-  p
-    | Make sure to review the student's application for errors. You can do this by going&nbsp;
-    = link_to 'back to the previous page', "/admin/district/application/#{@student.id}"
-    | &nbsp;and making any modifcations.
+    / --- SUP MAT ---
 
-  / --- SUP MAT ---
+    h2 2. Confirm receipt of supplemental materials
+    p
+      | Supplemental materials are documents provided to guardians as they complete their digital
+      | applications. Confirm receipt of documents marked as required by checking the boxes below.
+      | Verbally confirm that guardians have been apprised of non-required supplemental materials.
 
-  h2 2. Confirm receipt of supplemental materials
-  p
-    | Supplemental materials are documents provided to guardians as they complete their digital
-    | applications. Confirm receipt of documents marked as required by checking the boxes below.
-    | Verbally confirm that guardians have been apprised of non-required supplemental materials.
+    h3
+      | Applicants&nbsp;
+      em must
+      | &nbsp;submit
 
-  h3
-    | Applicants&nbsp;
-    em must
-    | &nbsp;submit
+    #application-process-required
+      - @supplemental_materials_required.each do |sm|
+        div
+          = check_box_tag sm.id, checked: false
+          = label_tag sm.id, sm.name
+          - if sm.file_file_name
+            = link_to 'Print', sm.file.url, target: "_blank"
+          - elsif sm.link_url
+            = link_to 'Print', sm.link_url, target: "_blank"
+          = sm.description
 
-  #application-process-required
-    - @supplemental_materials_required.each do |sm|
-      div
-        = check_box_tag sm.id, checked: false
+    h3
+      | Applicants can&nbsp;
+      em optionally
+      | &nbsp;submit
+
+    #application-process-optional
+      - @supplemental_materials_optional.each do |sm|
         = label_tag sm.id, sm.name
         - if sm.file_file_name
-          = link_to 'Print', sm.file.url, target: "_blank"
+          = link_to 'Print', sm.file.url
         - elsif sm.link_url
-          = link_to 'Print', sm.link_url, target: "_blank"
+          = link_to 'Print', sm.link_url
         = sm.description
 
-  h3
-    | Applicants can&nbsp;
-    em optionally
-    | &nbsp;submit
+    / --- EXPORT ---
 
-  #application-process-optional
-    - @supplemental_materials_optional.each do |sm|
-      = label_tag sm.id, sm.name
-      - if sm.file_file_name
-        = link_to 'Print', sm.file.url
-      - elsif sm.link_url
-        = link_to 'Print', sm.link_url
-      = sm.description
+    h2 3. Export the application
 
-  / --- EXPORT ---
+    p If everything looks good, export the application!
 
-  h2 3. Export the application
-
-  p If everything looks good, export the application!
-
-  = form_tag request.original_url, method: 'post' do
-    = submit_tag 'Do it!', id: 'application-process-submit', disabled: true
+    = form_tag request.original_url, method: 'post' do
+      = submit_tag 'Do it!', id: 'application-process-submit', disabled: true

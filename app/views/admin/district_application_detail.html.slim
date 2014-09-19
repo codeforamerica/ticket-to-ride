@@ -3,7 +3,7 @@ header.header-toolbar
     h1=="Application ##{@student.confirmation_code}"
     - url_root = '/admin/district/application'
     = link_to 'Edit', "#{url_root}/edit/#{@student.id}", class: 'edit'
-    = link_to 'Process', "#{url_root}/process/process/#{@student.id}", class: 'process'
+    = link_to 'Process', "#{url_root}/process/#{@student.id}", class: 'process'
 
   #application-detail-errors
     ul
@@ -32,10 +32,14 @@ header.header-toolbar
         dt
           | Date of birth
         dd
-          = @student.birth_city
+          = @student.birthday
         dt
-          | Country of Birth
+          | Birth location
         dd
+          = @student.birth_city
+          == " "
+          = @student.birth_state
+          == " "
           = @student.birth_country
         dt
           | Ethnicity
@@ -47,9 +51,17 @@ header.header-toolbar
         dt
           | Race(s)
         dd
-          - @student.student_races.each do |race|
-            = t "race_#{race.race}"
-            =" "
+          ul
+            - @student.student_races.each do |race|
+              li= t "race_#{race.race}"
+        dt
+          | First language
+        dd
+          = @student.first_language.capitalize
+        dt
+          | Home language
+        dd
+          = @student.home_language.capitalize
         dt
           | Home address
         dd.adr
@@ -62,6 +74,7 @@ header.header-toolbar
             = @student.home_city
           span.region
             = @student.home_state
+            == " "
           span.postal-code
             = @student.home_zip_code 
         dt
@@ -103,13 +116,3 @@ header.header-toolbar
         = render 'admin/application_contact_person', contact_person: contact_person, contact_person_number: index
 
 
-      h2 Languages
-      dl
-        dt
-          | First language
-        dd
-          = @student.first_language.capitalize
-        dt
-          | Home language
-        dd
-          = @student.home_language.capitalize

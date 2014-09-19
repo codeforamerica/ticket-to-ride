@@ -8,15 +8,17 @@
       = student.submit 'Save', id: 'application-detail-form-submit-button', class: "save"
   .page
     .site-width
-      / - if model_errors
+      - if @are_errors
         #application-detail-errors.notice
+          h1 Please correct the following errors:
           ul
             = render 'model_errors', model_obj: @student
             - @student.contact_people.each do |contact_person|
               = render 'model_errors', model_obj: contact_person
             - @student.student_races.each do |race|
               = render 'model_errors', model_obj: race
-
+      - if @was_saved
+        =="Jesus!"
       / STUDENT INFO
       section#application-student-info
         h2 Student information
@@ -34,32 +36,55 @@
         fieldset
           legend Gender
           .field.field-radiobutton
-            = student.label :gender, 'Male'
-            = student.radio_button :gender, "Male", required: "true"
+            = student.label :gender_male do
+              = student.radio_button :gender, "male", required: "true"
+              == "Male"
           .field.field-radiobutton
-            = student.label :gender, 'Female'
-            = student.radio_button :gender, "Female"
+            = student.label :gender_female do
+              = student.radio_button :gender, "female"
+              == "Female"
         .field.field-width-medium
           = student.label :birthday, 'Date of birth', required: "true"
           = student.date_field :birthday
-        .field.field-width-medium
-          = student.label :birth_country, 'Country of birth', required: "true"
-          = student.text_field :birth_country
+        fieldset.fieldset-address
+          legend=="Birth location"
+          .field.field-city
+            = student.label :birth_city, 'City', required: "true"
+            = student.text_field :birth_city
+          .field.field-state
+            = student.label :birth_state, 'State', required: "true"
+            = student.text_field :birth_state
+          .field.field-zip
+            = student.label :birth_country, 'Country', required: "true"
+            = student.text_field :birth_country
         fieldset
           legend Is this student Hispanic or Latino?
           .field.field-radiobutton
-            input type="radio" required="required"
-            label Yes
+            = student.label :is_hispanic_true do
+              = student.radio_button :is_hispanic, true, required: "true"
+              == " "
+              == "Yes"
           .field.field-radiobutton
-            input type="radio"
-            label No
+            = student.label :is_hispanic_false do
+              = student.radio_button :is_hispanic, false
+              == " "
+              == "No"
         fieldset
           legend Races
+          p.note Select one or more
           - Races::ALL.each do |race|
             / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
             .field.field-checkbox
-              = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}", required: "true"
-              = label_tag "race_#{race}", t('race_' + race)
+              = label_tag "race_#{race}"  do
+                = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
+                = " "
+                = t('race_' + race)
+        .field.field-width-small
+          = student.label :first_language,  "What is this student's first language?"
+          = student.text_field :first_language
+        .field.field-width-small
+          = student.label :home_language,  "What is this student's home language?"
+          = student.text_field :home_language
 
         fieldset.fieldset-address
           legend Home address
@@ -98,20 +123,23 @@
         fieldset
           legend Does this student have a 504 plan?
           .field.field-radiobutton
-            = student.check_box :p504, required: "true"
-            = student.label :p504, 'Yes'
+            = student.label :p504_true do
+              = student.radio_button :p504, true, required: "true"
+              == "Yes"
           .field.field-radiobutton
-            = student.check_box :p504
-            = student.label :p504, 'No'
+            = student.label :p504_false do
+              = student.radio_button :p504, false
+              == "No"
         fieldset
           legend Does this student have an IEP?
           .field.field-radiobutton
-            = student.check_box :iep, required: "true"
-            = student.label :iep, "Yes"
+            = student.label :iep_true do
+              = student.radio_button :iep, true, required: "true"
+              == "Yes"
           .field.field-radiobutton
-            = student.check_box :iep
-            = student.label :iep, "No"
-
+            = student.label :iep_false do
+              = student.radio_button :iep, false
+              == "No"
       / CONTACT PEOPLE
       - contact_person_number = 0
 

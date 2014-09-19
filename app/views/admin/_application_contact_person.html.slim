@@ -32,6 +32,7 @@ dl
         = contact_person.home_city
       span.region
         = contact_person.home_state
+        == " "
       span.postal-code
         = contact_person.home_zip_code
   dt
@@ -46,26 +47,39 @@ dl
       = contact_person.mailing_city
     span.region
       = contact_person.mailing_state
+      == " "
     span.postal-code
       = contact_person.mailing_zip_code
   dt
     | Phone
   dd.tel
-    = contact_person.main_phone
-    - if contact_person.main_phone_can_sms
-      span.badge= "Receives text messages"
+    - unless contact_person.main_phone.blank?
+      = contact_person.main_phone
+      - if contact_person.main_phone_can_sms
+        span.badge title="Receives text messages"
+          span= "Receives text messages"
+    - else
+       span.none=="None"
   dt
     | Secondary phone
   dd.tel
-    = contact_person.secondary_phone ? contact_person.secondary_phone : "None"
-    - if contact_person.secondary_phone_can_sms
-      span.badge= "Receives text messages"
+    - unless contact_person.secondary_phone.blank?
+      = contact_person.secondary_phone
+      - if contact_person.secondary_phone_can_sms
+        span.badge title="Receives text messages"
+          span= "Receives text messages"
+    - else
+       span.none=="None"
   dt
     | Work phone
   dd.tel
-    = contact_person.work_phone ? contact_person.work_phone : "None"
-    - if contact_person.work_phone_can_sms
-      span.badge= "Receives text messages"
+    - unless contact_person.work_phone.blank?
+      = contact_person.work_phone
+      - if contact_person.work_phone_can_sms
+        span.badge title="Receives text messages"
+          span= "Receives text messages"
+    - else
+       span.none=="None"
   dt
     | Email address
   dd.email
@@ -80,9 +94,13 @@ dl
     - if !contact_person.receive_grade_notices && !contact_person.receive_conduct_notices && !contact_person.receive_other_mail
       = "None"
     - else
-      = contact_person.receive_grade_notices ? "Grade notifications " : ""
-      = contact_person.receive_conduct_notices ? "Conduct notifications " : ""
-      = contact_person.receive_other_mail ? "Other mail " : ""
+      ul
+        - if contact_person.receive_grade_notices
+          li=="Grade notifications"
+        - if contact_person.receive_conduct_notices
+          li=="Conduct notifications"
+        - if contact_person.receive_other_mail
+          li=="Other mail"
   dt
     | Can pickup?
   dd

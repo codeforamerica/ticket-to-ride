@@ -447,24 +447,24 @@ class AdminController < ApplicationController
   # District Admin Applications
   # -----------
 
-  def show_district_applications(title, is_processed)
+  def show_district_applications(is_processed)
     @admin = AdminUser.find(session[:admin_user_id])
     @district = @admin.district
-    @title = title
+    @is_processed = is_processed
 
     # Get students for the admin's district that have completed registration, but not been processed
     @students = Student.where(district: @district).order(:guardian_complete_time)
-    if is_processed
-      @students = @students.where.not(export_time: nil)
-    else
-      @students = @students.where(export_time: nil)
-    end
-    @students = @students.where.not(confirmation_code: nil)
+    
+    @students_processed = @students.where.not(export_time: nil).where.not(confirmation_code: nil)
+    @students_unprocessed = @students.where(export_time: nil).where.not(confirmation_code: nil)
 
-    # If no student applications completed, render holding page
-    unless @students.any?
-      return render 'district_applications_none'
+    if is_processed
+      @students = @students_processed
+    else
+      @students = @students_unprocessed
     end
+    @students = @students.where.not(confirmation_code: nil) # Only applications that have completely gone through the guardian flow
+
 
     # Determine which page of students to show
     @num_pages = @students.count / APPLICATIONS_PER_PAGE
@@ -492,11 +492,13 @@ class AdminController < ApplicationController
   end
 
   def district_applications_unprocessed
-    return show_district_applications('Applications For Review', false)
+    @body_class = 'applications'
+    return show_district_applications(false)
   end
 
   def district_applications_processed
-    return show_district_applications('Processed Applications', true)
+    @body_class = 'applications'
+    return show_district_applications(true)
   end
 
   def generate_application_detail_select_options
@@ -561,7 +563,9 @@ class AdminController < ApplicationController
 
   def district_application_edit_post
     @admin = AdminUser.find(session[:admin_user_id]) # TODO security check
+    @body_class = 'applications'
     @student = Student.find(params[:student_id]) # TODO error checking
+    @are_errors = false
 
     # STUDENT FIELDS
     missing_param(:student, :first_name, @student, 'Student first name is required')
@@ -626,6 +630,7 @@ class AdminController < ApplicationController
     # Save if there are no errors
     if @student.errors.any? || are_model_errors(@student.contact_people) || are_model_errors(@student.student_races)
       generate_application_detail_select_options
+      @are_errors = true
       return render 'district_application_edit'
     else
       # Add all races to student, but remove the existing ones first
@@ -637,6 +642,7 @@ class AdminController < ApplicationController
         rescue
           @student.errors.add(:race, 'Could not assign race')
           generate_application_detail_select_options
+          @are_errors = true
           return render 'district_application_edit'
         end
       end
@@ -649,6 +655,7 @@ class AdminController < ApplicationController
       @student.reload # refreshes transitive values, like race and contact people
     end
 
+    @was_saved = true
     return redirect_to "/admin/district/application/#{@student.id}"
   end
 
@@ -701,6 +708,7 @@ class AdminController < ApplicationController
   # -----------
 
   def district_info_get
+    @body_class = 'district'
     @admin = get_logged_in_admin # TODO auth
     @district = @admin.district
 
@@ -709,6 +717,7 @@ class AdminController < ApplicationController
   end
 
   def district_info_post
+    @body_class = 'district'
     @admin = get_logged_in_admin # TODO auth
     @district = @admin.district
 
@@ -734,23 +743,28 @@ class AdminController < ApplicationController
   # -----------
 
   def district_supplemental_materials
+    @body_class = 'supplemental-materials'
     @admin = get_logged_in_admin
     district = @admin.district
 
-    # District materials
-    @district_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: district)
-    @district_supplemental_materials_required = @district_supplemental_materials.where(is_required: true)
-    @district_supplemental_materials_optional = @district_supplemental_materials.where(is_required: false)
+    # Get materials based on required or not
+    district_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:district], district: district)
+    district_supplemental_materials_required = district_supplemental_materials.where(is_required: true)
+    district_supplemental_materials_optional = district_supplemental_materials.where(is_required: false)
 
     # Central supplemental materials
-    @central_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
-    @central_supplemental_materials_required = @central_supplemental_materials.where(is_required: true)
-    @central_supplemental_materials_optional = @central_supplemental_materials.where(is_required: false)
+    central_supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
+    central_supplemental_materials_required = central_supplemental_materials.where(is_required: true)
+    central_supplemental_materials_optional = central_supplemental_materials.where(is_required: false)
 
+    # Sort by required or not
+    @supplemental_materials_required = district_supplemental_materials_required + central_supplemental_materials_required
+    @supplemental_materials_optional = district_supplemental_materials_optional + central_supplemental_materials_optional
     return render 'district_supplemental_materials'
   end
 
   def district_supplemental_materials_add_get
+    @body_class = 'supplemental-materials'
     @admin = get_logged_in_admin
     @supplemental_material = SupplementalMaterial.new
 
@@ -759,11 +773,13 @@ class AdminController < ApplicationController
 
   def district_supplemental_materials_add_post
     @admin = get_logged_in_admin
+    @body_class = 'supplemental-materials'
     return edit_supplemental_material(nil)
   end
 
   def district_supplemental_materials_edit_get
     @admin = get_logged_in_admin
+    @body_class = 'supplemental-materials'
     @supplemental_material = SupplementalMaterial.find(params[:id])
 
     if @admin.district != @supplemental_material.district
@@ -775,6 +791,7 @@ class AdminController < ApplicationController
 
   def district_supplemental_materials_edit_post
     @admin = get_logged_in_admin
+    @body_class = 'supplemental-materials'
     @supplemental_material = SupplementalMaterial.find(params[:id])
 
     if @admin.district != @supplemental_material.district
@@ -786,6 +803,7 @@ class AdminController < ApplicationController
 
   def district_supplemental_materials_delete_get
     @admin = get_logged_in_admin
+    @body_class = 'supplemental-materials'
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
 
     if @admin.district != @supplemental_material.district
@@ -797,6 +815,7 @@ class AdminController < ApplicationController
 
   def district_supplemental_materials_delete_post
     @admin = get_logged_in_admin
+    @body_class = 'supplemental-materials'
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
 
     if @admin.district != @supplemental_material.district
@@ -813,6 +832,7 @@ class AdminController < ApplicationController
 
   def district_people
     @admin = get_logged_in_admin
+    @body_class = 'people'
     district = @admin.district
 
     @people = AdminUser.where(district: district).where.not(id:@admin.id)
@@ -827,6 +847,7 @@ class AdminController < ApplicationController
 
   def district_people_add_get
     @admin = get_logged_in_admin
+    @body_class = 'people'
     @person = AdminUser.new
 
     return render 'district_people_edit'
@@ -834,11 +855,13 @@ class AdminController < ApplicationController
 
   def district_people_add_post
     @admin = get_logged_in_admin
+    @body_class = 'people'
     return edit_a_person_as_district(nil)
   end
 
   def district_people_edit_get
     @admin = get_logged_in_admin
+    @body_class = 'people'
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district
@@ -850,6 +873,7 @@ class AdminController < ApplicationController
 
   def district_people_edit_post
     @admin = get_logged_in_admin
+    @body_class = 'people'
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district
@@ -861,6 +885,7 @@ class AdminController < ApplicationController
 
   def district_people_delete_get
     @admin = get_logged_in_admin
+    @body_class = 'people'
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district
@@ -872,6 +897,7 @@ class AdminController < ApplicationController
 
   def district_people_delete_post
     @admin = get_logged_in_admin
+    @body_class = 'people'
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district
@@ -885,6 +911,7 @@ class AdminController < ApplicationController
 
   def edit_a_person_as_district(id)
     @admin = get_logged_in_admin
+    @body_class = 'people'
     district = @admin.district
 
     if id

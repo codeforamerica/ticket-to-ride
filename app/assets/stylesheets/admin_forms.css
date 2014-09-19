@@ -2,16 +2,19 @@
 
 /* @override http://localhost:3000/assets/admin_forms.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
+
+
 
 @font-face {
 	font-family: 'icomoon';
-	src:url('/assets/icomoon.eot?-oxgncu');
-	src:url('/assets/icomoon.eot?#iefix-oxgncu') format('embedded-opentype'),
-		url('/assets/icomoon.woff?-oxgncu') format('woff'),
-		url('/assets/icomoon.ttf?-oxgncu') format('truetype'),
-		url('/assets/icomoon.svg?-oxgncu#icomoon') format('svg');
 	font-weight: normal;
-	font-style: normal;
+	font-style: normal;	
+	src:url('/assets/icomoon.eot?msuchc');
+	src:url('/assets/icomoon.eot?#iefixmsuchc') format('embedded-opentype'),
+		url('/assets/icomoon.woff?msuchc') format('woff'),
+		url('/assets/icomoon.ttf?msuchc') format('truetype'),
+		url('/assets/icomoon.svg?msuchc#icomoon') format('svg');
 }
 
 /* @group Forms */
@@ -274,14 +277,14 @@ div.field.field-select:hover select{ cursor: pointer; }
 .custom-input div.field.field-radiobutton label::after { border-radius: 100%; }
 
 .custom-input div.field.field-radiobutton label::before{
-	width: 0.7em;
-	height: 0.7em;
-	left: 0.95em;
-	margin-top: -0.35em;
-	margin-left: -0.35em;
-	border-color: white;
 	background: #555;
+	border-color: #555;
+	z-index: 2;
 	opacity: 0;
+	content: "•";
+	text-align: center;
+	line-height: 0.67em;
+	color: white;
 }
 .custom-input div.field.field-checkbox label.checked::before{
 	font-family: 'icomoon';
@@ -303,18 +306,22 @@ div.field.field-select:hover select{ cursor: pointer; }
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	content: "tick";
-	font-size: 0.6em;
-	width: 0.8em;
+	font-size: 0.55em;
+	width: 0.8rem;
 	text-align: center;
-	height: 0.8em;
+	height: 0.8rem;
 	position: absolute;
-	left: 1.1em;
+	left: 0.45rem;
 	bottom: 50%;
-	margin-bottom: -0.45em;
 	border: none;
-	color: #333;
+	color: #fff;
+	z-index: 2;
 }
 
+.custom-input div.field.field-checkbox label.checked::after{
+	background: #555;
+	border-color: #555;
+}
 
 .custom-input div.field.field-checkbox label.focus,
 .custom-input div.field.field-checkbox label.focus::before,
@@ -610,52 +617,26 @@ button{
 	cursor: pointer;
 }
 
-.button{
-  background: white;
-  border: 1px solid #aaa;
-  color: inherit;
-  font: inherit;
-  line-height: 1rem;
-  padding: 0.37rem 1.2rem 0.4rem;
-  min-height: 2rem;
-  border-radius: 0.2rem;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 0.8rem;
-  -webkit-appearance: none;
-  background-color: #fff;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#eee));
-	background: -moz-linear-gradient(#fff, #eee);
-	position: relative;
-	left: -0.1em;
-}
-
-.button:hover{ 
-	-moz-box-shadow:  0 1px 0 rgba(0,0,0,0.1);
-	box-shadow: 0 1px 0 rgba(0,0,0,0.1);
-}
-
+.button,
 .button-action,
 .button-forward{ 
   color: #009253;
   font-weight: 600;
-  line-height: 1.4rem;
+  line-height: 1.8rem;
   padding: 0 0.7rem 0;
   display: inline-block;
   vertical-align: middle;
-  min-height: 1.4rem;
+  min-height: 1.8rem;
   border-radius: 0.2rem;
   text-decoration: none;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   border: 0.125rem solid #009253;
 	box-shadow: none !important;
 	cursor: pointer;
 	background: none;
 }
 
+.button:hover,
 .button-action:hover,
 .button-forward:hover{
 	background: #009253;
@@ -663,11 +644,9 @@ button{
 }
 
 .button:active{
-	-moz-box-shadow:  0 1px 0 rgba(0,0,0,0);
-	box-shadow: inset 0 1px 0 rgba(0,0,0,0.08);
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#eee));
-	background: -moz-linear-gradient(#fff, #eee);
 	color: #888;
+	border-color: #888;
+	background: none;
 }
 
 button.backward{

@@ -3,45 +3,17 @@ header
     h1 Supplemental Materials
     = link_to "Add one", "/admin/district/supplemental_materials/add", :class=> "button-action"
     p
-      | The following materials are provided to guardians as they complete their digital applications. Those marked with a     lock icon are mandated by RIDE.
+      == "The following materials are provided to guardians as they complete their digital applications. Those marked with a"
+      span.mandated lock icon
+      == " are mandated by RIDE."
 
 .page
   .site-width
+
     h2 Applicants must submit
-    article.supplemental-material
-      h1 
-        | Photo 
-        abbr title="Identification" ID
-      span.badge Mandatory
-      p
-        |  This includes: a state-issued
-        abbr title="Identification" ID
-        |  card, a driver&rsquo;s license, or a 
-        abbr title="United States" U.S.
-        |  passport.
-    article.supplemental-material
-      h1 
-        | Over-the-counter medication form 
-      p
-        |  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      a.edit href="#" Edit
-      a.delete href="#" Delete
+    - @supplemental_materials_required.each do |supplemental_material|
+      = render 'supplemental_material',  supplemental_material: supplemental_material
+
     h2 Applicants may optionally submit
-    article.supplemental-material
-      h1 
-        | Immunization record 
-      span.badge Mandatory
-      p
-        |  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-    / h2 District
-    / p=="These are documents that are used for district&rsquo;s registration process."
-
-    / = render 'supplemental_materials_table', supplemental_materials: @district_supplemental_materials_required, title: 'required', user_type: 'district', is_editable: true
-    / = render 'supplemental_materials_table', supplemental_materials: @district_supplemental_materials_optional, title: 'optional', user_type: 'district', is_editable: true
-
-    / h2 Central
-    / p These are documents that are used for all districts' registration processes.
-
-    / = render 'supplemental_materials_table', supplemental_materials: @central_supplemental_materials_required, title: 'required', user_type: 'central', is_editable: false
-    / = render 'supplemental_materials_table', supplemental_materials: @central_supplemental_materials_optional, title: 'optional', user_type: 'central', is_editable: false
+    - @supplemental_materials_optional.each do |supplemental_material|
+      = render 'supplemental_material',  supplemental_material: supplemental_material
