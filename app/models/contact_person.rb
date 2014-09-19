@@ -15,47 +15,25 @@ class ContactPerson < ActiveRecord::Base
   }
   
   # Address validation
-  validates :mailing_street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
-                                              message: 'Home street address 1 can only have letters, numbers, dashes, and periods',
-                                              allow_nil: true
-  }
-  validates :mailing_street_address_2, format: { with: ModelConstants::STREET_ADDRESS_OPTIONAL_REGEX,
-                                              message: 'Home street address 2 can only have letters, numbers, dashes, and periods',
-                                              allow_nil: true
-  }
-  validates :mailing_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
-                                  message: 'Home city can only contain letters, spaces, and dashes',
-                                  allow_nil: true
-  }
-  validates :mailing_state, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
-                                   message: 'Home state can only contain letters, spaces, and dashes',
-                                   allow_nil: true
-  }
-  validates :mailing_zip_code, format: { with: /\A\d{5}(-\d{4})?\z/,
-                                      message: 'Mailing zip can only contain digits and dashes (example: 23045)',
-                                      allow_nil: true
-  }
-
-  # Address validation
-  validates :home_street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
-                                                 message: 'Home street address 1 can only have letters, numbers, dashes, and periods',
-                                                 allow_nil: true
-  }
-  validates :home_street_address_2, format: { with: ModelConstants::STREET_ADDRESS_OPTIONAL_REGEX,
-                                                 message: 'Home street address 2 can only have letters, numbers, dashes, and periods',
-                                                 allow_nil: true
-  }
-  validates :home_city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
-                                     message: 'Home city can only contain letters, spaces, and dashes',
-                                     allow_nil: true
-  }
-  validates :home_state, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
-                                      message: 'Home state can only contain letters, spaces, and dashes',
-                                      allow_nil: true
-  }
-  validates :home_zip_code, format: { with: /\A\d{5}(-\d{4})?\z/,
-                                         message: 'Mailing zip can only contain digits and dashes (example: 23045)',
+  validates :street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
+                                         message: 'Street address 1 can only have letters, numbers, dashes, and periods',
                                          allow_nil: true
+  }
+  validates :street_address_2, format: { with: ModelConstants::STREET_ADDRESS_OPTIONAL_REGEX,
+                                         message: 'Street address 2 can only have letters, numbers, dashes, and periods',
+                                         allow_nil: true
+  }
+  validates :city, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                             message: 'City can only contain letters, spaces, and dashes',
+                             allow_nil: true
+  }
+  validates :state, format: { with: ModelConstants::LETTERS_SPACES_AND_DASHES_REGEX,
+                              message: 'State can only contain letters, spaces, and dashes',
+                              allow_nil: true
+  }
+  validates :zip_code, format: { with: /\A\d{5}(-\d{4})?\z/,
+                                 message: 'Zip code can only contain digits and dashes (example: 20930)',
+                                 allow_nil: true
   }
 
 

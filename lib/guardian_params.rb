@@ -4,9 +4,11 @@ module GuardianParams
         :first_name,
         :middle_name,
         :last_name,
-        :mailing_street_address_1,
-        :mailing_street_address_2,
-        :mailing_zip_code,
+        :street_address_1,
+        :street_address_2,
+        :state,
+        :city,
+        :zip_code,
         :cell_phone,
         :alt_phone,
         :alt_phone_type,
@@ -16,13 +18,8 @@ module GuardianParams
         :receive_postal_mail,
         :receive_grade_notices,
         :receive_conduct_notices,
-        :restricted,
-        :armed_service_branch,
-        :armed_service_rank,
-        :armed_service_duty_station,
+        :armed_service_status,
         :student_id,
-        :mailing_city,
         :lives_with_student
-    )
   end
 end

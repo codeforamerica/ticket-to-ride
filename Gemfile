@@ -73,8 +73,8 @@ group :development do
     gem 'jruby-openssl', '0.9.5'
   end
 
-  # MRI Ruby
-  platform :mri do
+  # MRI Ruby or Windows Ruby
+  platform :mri, :mingw do
     # Use sqlite3 as the development database when running C Ruby
     gem 'sqlite3', '1.3.9'  
   end
