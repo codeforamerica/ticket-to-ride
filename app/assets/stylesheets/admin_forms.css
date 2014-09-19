@@ -2,19 +2,14 @@
 
 /* @override http://localhost:3000/assets/admin_forms.css?body=1 */
 
-/* @override http://ticket2ride.local/stylesheets/forms.css */
-
-/* @override http://preklottery.local/stylesheets/forms.css */
-
-
 
 @font-face {
 	font-family: 'icomoon';
-	src:url('/assets/icomoon.eot?-paa2pl');
-	src:url('/assets/icomoon.eot?#iefix-paa2pl') format('embedded-opentype'),
-		url('/assets/icomoon.woff?-paa2pl') format('woff'),
-		url('/assets/icomoon.ttf?-paa2pl') format('truetype'),
-		url('/assets/icomoon.svg?-paa2pl#icomoon') format('svg');
+	src:url('/assets/icomoon.eot?-oxgncu');
+	src:url('/assets/icomoon.eot?#iefix-oxgncu') format('embedded-opentype'),
+		url('/assets/icomoon.woff?-oxgncu') format('woff'),
+		url('/assets/icomoon.ttf?-oxgncu') format('truetype'),
+		url('/assets/icomoon.svg?-oxgncu#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,7 +18,10 @@
 
 /* @group footer */
 
-form footer{ padding-top: 1.4rem; }
+form footer{ 
+	padding-top: 1.4rem; 
+	clear: both;
+}
 
 form footer a{
 	float: right;
@@ -255,32 +253,33 @@ div.field.field-select:hover select{ cursor: pointer; }
   content: "";
   position: absolute;
   margin: 0;
-  left: 0.6rem;
+  left: 0.6em;
   top: 50%;
-  margin-top: -0.4rem;
+  margin-top: -0.4em;
   z-index: 1;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.8em;
+  height: 0.8em;
   -webkit-appearance: none;
   -moz-appearance: none;
   outline: none;
-  border: 0.08rem solid #aaa;
-  -moz-border-radius: 0.1rem;
-  border-radius: 0.1rem;
+  border: 0.08em solid #aaa;
+  -moz-border-radius: 0.1em;
+  border-radius: 0.1em;
 }
 
 .custom-input div.field.field-radiobutton label::before,
 .custom-input div.field.field-radiobutton label::after { border-radius: 100%; }
 
 .custom-input div.field.field-radiobutton label::before{
-	width: 0.5rem;
-	height: 0.5rem;
-	left: 0.75rem;
-	margin-top: -0.25rem;
-	border: none;
+	width: 0.7em;
+	height: 0.7em;
+	left: 0.95em;
+	margin-top: -0.35em;
+	margin-left: -0.35em;
+	border-color: white;
 	background: #555;
 	opacity: 0;
 }
@@ -291,7 +290,7 @@ div.field.field-select:hover select{ cursor: pointer; }
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
-	line-height: 0.8rem;
+	line-height: 0.8em;
 	/* Enable Ligatures ================ */
 	-webkit-font-feature-settings: "liga";
 	-moz-font-feature-settings: "liga=1";
@@ -304,15 +303,14 @@ div.field.field-select:hover select{ cursor: pointer; }
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	content: "tick";
-	font-size: 0.6rem;
-	width: 0.8rem;
+	font-size: 0.6em;
+	width: 0.8em;
 	text-align: center;
-	height: 0.8rem;
+	height: 0.8em;
 	position: absolute;
-	left: 1rem;
-	margin-left: -0.4rem;
+	left: 1.1em;
 	bottom: 50%;
-	margin-bottom: -0.45rem;
+	margin-bottom: -0.45em;
 	border: none;
 	color: #333;
 }
@@ -344,7 +342,7 @@ div.field.field-select:hover select{ cursor: pointer; }
 textarea{
   width: 100%;
   min-height: 6rem;
-  max-width: 30em;
+  max-width: 28em;
 }
 
 div.field{ 
@@ -398,26 +396,27 @@ fieldset legend{
 
 @media screen and (min-width: 24em) {	
 	div.field label{ margin-bottom: 0.7em; }
-
 }
 
 div.field-size{ width: 4em; }
 div.field-size label{ white-space: nowrap; }
 
 fieldset.fieldset-schools legend{ display: none; }
-fieldset.fieldset-name{ margin-bottom: 1em; }
+fieldset.fieldset-name,
+fieldset.fieldset-phone{ margin-bottom: 1em; }
 fieldset.fieldset-name div.field{ width: 8.4rem; }
 fieldset.fieldset-name div.field input{ width: 8rem; }
 fieldset.fieldset-address div.field.field-city input{ width: 8rem; }
 fieldset.fieldset-address div.field.field-state{ width: 2.6rem;}
 fieldset.fieldset-address div.field.field-zip input{ width: 4rem; }
 
-div.field.field-width-small input{ width: 4rem; }
+div.field.field-width-small input,
+div.field.field-width-small textarea{ width: 4rem; }
 
 div.field-select input,
 div.field-phone-number input,
 div.field-width-medium input[type=text],
-div.field-width-medium input[type=text],
+div.field-width-medium input[type=date],
 div.field-width-medium select,
 div.field-width-medium.custom-select .btn-select{ 
 	width: 8rem; 
@@ -437,8 +436,12 @@ div.field-width-large select,
 div.field-width-large.custom-select .btn-select{
 	max-width: 16.4rem;
 }
-	
+
+div.field-width-x-large input{ max-width: 28em;}
+div.field-width-x-large.is-optional input{ max-width: 26.5em;}
+
 fieldset.fieldset-date-range div.field,
+fieldset.fieldset-phone div.field-number,
 fieldset.fieldset-address div.field.field-city,
 fieldset.fieldset-address div.field.field-state,
 fieldset.fieldset-address div.field.field-zip{
@@ -458,7 +461,8 @@ fieldset.fieldset-address div.field.field-street label,
 fieldset.fieldset-address div.field.field-city label,
 fieldset.fieldset-address div.field.field-state label,
 fieldset.fieldset-address div.field.field-zip label,
-fieldset.fieldset-date-range div.field label{
+fieldset.fieldset-date-range div.field label,
+fieldset.fieldset-phone div.field-number label{
 	position: absolute;
 	bottom: 0;
 	margin: 0;
@@ -531,6 +535,7 @@ fieldset.fieldset-address div.field.field-state.field-select div::after{
 	fieldset .field{ padding-left: 0; }
 
 	fieldset.fieldset-name div.field,
+	fieldset.fieldset-phone div.field,
 	fieldset.fieldset-date-range div.field.field-date{
 		float: left;
 		overflow: hidden;
@@ -648,7 +653,6 @@ button{
   border: 0.125rem solid #009253;
 	box-shadow: none !important;
 	cursor: pointer;
-	margin: 0 0.2rem;
 	background: none;
 }
 

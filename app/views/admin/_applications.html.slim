@@ -28,11 +28,11 @@ table.table-applications
       td.table-applications-col-confirmation
         = link_to student.confirmation_code, link_url
 
-.applications-pages
+nav.pagination
   - @num_pages.times do |page_number|
     .page-number
       - pn = page_number + 1
       = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
-  = link_to 'For Review', '/admin/district/applications'
+nav.misc
   = link_to 'Show recently processed applications', '/admin/district/applications/processed'
-  =="Delete all applications"
+  a href="#" class="delete" Delete all applications

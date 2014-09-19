@@ -1,52 +1,49 @@
-header
-  h1 Supplemental material
-  p
-    |  Use the form below to specify application materials that
-    |  parents must bring as they complete their application.
+= form_for(@supplemental_material, url: request.original_url, method: :post, html:{multipart: true}) do |sm|
+  header
+    .site-width
+      h1 Add a Supplemental material
+      p
+        |  Use the form below to specify materials that parents might
+        |  bring as they complete their applications in person.
 
-  - @supplemental_material.errors.each do |field, message|
-    ul
-      li
-        = message
+      - @supplemental_material.errors.each do |field, message|
+        ul
+          li
+            = message
 
-.page
-  = form_for(@supplemental_material, url: request.original_url, method: :post, html:{multipart: true}) do |sm|
-    .field
-      = sm.label :name, 'Name'
-      = sm.text_field :name
-    .field
-      = sm.label :description, 'Description'
-      = sm.text_area :description
+  .page
+    .site-width
+      .field.field-width-x-large
+        = sm.label :name, 'Name'
+        = sm.text_field :name, required: "true"
+      .field
+        = sm.label :description, 'Description'
+        = sm.text_area :description, required: "true"
 
-    div
-      h2 Type
-      p A supplemental material can either be an attached file, a link or URL, or be documentation that a guardian needs
-        | to bring to the office (example: driver's license). It can only be one of these (i.e. it can't be both
-        | an attached file and a link).
+      fieldset
+        legend File
+        p If necessary, a supplemental material can point to either an attached file or a link. If a supplemental material is simply a directive (e.g. Driver&rsquo;s license), this field can be left blank.
 
-    .field
-      - if @supplemental_material.file_file_name
-        p Current File:
-        = link_to @supplemental_material.file_file_name, @supplemental_material.file.url, target: '_blank'
+      .field.is-optional
+        - if @supplemental_material.file_file_name
+          p Current File:
+          = link_to @supplemental_material.file_file_name, @supplemental_material.file.url, target: '_blank'
 
-        p To update/replace the file, use the below:
-      = sm.label :file, 'File upload'
-      = sm.file_field :file, onchange: 'chooseSupplementalMaterialFile()'
-    p OR
-    .field
-      = sm.label :link_url, 'Link URL'
-      = sm.text_field :link_url, onchange: 'chooseSupplementalMaterialLink()'
-    p OR
-    .field
-      = sm.check_box :bring_documentation, checked: @supplemental_material.bring_documentation, onchange: 'chooseSupplementalMaterialBringDoc()'
-      / TODO How do we word this so that it's not confusing?
-      = sm.label :bring_documentation, 'Document to be brought (i.e.not a form to be filled out)'
+          p To update/replace the file, use the below:
+        = sm.label :file, 'File upload'
+        = sm.file_field :file
+      span Or
+      .field.field-width-x-large.is-optional
+        = sm.label :link_url, 'Link URL'
+        = sm.text_field :link_url, placeholder: "http://"
 
-    p Required?
-    .field
-      = sm.label :is_required_true, 'Yes'
-      = sm.radio_button :is_required, true
-      = sm.label :is_required_false, 'No'
-      = sm.radio_button :is_required, false
-
-    = sm.submit 'Add'
+      fieldset
+        legend Is this material required to process registration?
+        .field.field-radiobutton
+          = sm.label :is_required_true, 'Yes'
+          = sm.radio_button :is_required, true
+        .field.field-radiobutton
+          = sm.label :is_required_false, 'No'
+          = sm.radio_button :is_required, false
+      footer
+        = sm.submit 'Add', :class => "button-action"

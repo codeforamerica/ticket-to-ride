@@ -14,14 +14,14 @@ header
       .field
         h2 Welcome message
         p.note This is the message the guardians will see before they begin their application.
-        = district.text_area :welcome_message
+        = district.text_area :welcome_message, required: "true"
       .field
         h2 Confirmation message
         p.note
           | This is the message that guardians will see after completing their application.
           | This is the place to describe what the next steps are (i.e. which office to visit,
           | contact people to call, etc.).
-        = district.text_area :confirmation_message
+        = district.text_area :confirmation_message, required: "true"
 
       h2 Contact info
 
@@ -29,21 +29,21 @@ header
         legend=="Where can guardians visit or call to get more help?"
         .field.field-street
           = district.label :street_address_1, 'Street address - Line 1'
-          = district.text_field :street_address_1
+          = district.text_field :street_address_1, required: "true"
         .field.field-street
           = district.label :street_address_2, 'Street address - Line 2'
           = district.text_field :street_address_2
 
         .field.field-city
           = district.label :city, 'City'
-          = district.text_field :city
+          = district.text_field :city, required: "true"
 
         .field.field-state
           = district.label :state, 'State'
-          = district.text_field :state
+          = district.text_field :state, required: "true"
 
         .field.field-zip
           = district.label :zip_code, 'ZIP Code'
-          = district.text_field :zip_code
+          = district.text_field :zip_code, required: "true"
 
       = district.submit 'Update info', :class => "button"

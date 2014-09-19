@@ -1,21 +1,22 @@
 = form_for(@student, url: request.original_url, method: 'post', html:{id: 'application-detail-form'}) do |student|
   header.header-toolbar
     .site-width
-      h1=="Application ##{@student.confirmation_code}"
+      h1
+        a href="/admin/district/application/#{@student.id}"
+          =="Application ##{@student.confirmation_code}"
       - url_root = '/admin/district/application'
-      = student.submit 'Update', id: 'application-detail-form-submit-button', class: "button-action"
-      = link_to 'Process', "#{url_root}/process/process/#{@student.id}", id: 'application-detail-process-link'
-      = link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link'
-      #application-detail-errors
-        ul
-          = render 'model_errors', model_obj: @student
-          - @student.contact_people.each do |contact_person|
-            = render 'model_errors', model_obj: contact_person
-          - @student.student_races.each do |race|
-            = render 'model_errors', model_obj: race
-
+      = student.submit 'Save', id: 'application-detail-form-submit-button', class: "save"
   .page
     .site-width
+      / - if model_errors
+        #application-detail-errors.notice
+          ul
+            = render 'model_errors', model_obj: @student
+            - @student.contact_people.each do |contact_person|
+              = render 'model_errors', model_obj: contact_person
+            - @student.student_races.each do |race|
+              = render 'model_errors', model_obj: race
+
       / STUDENT INFO
       section#application-student-info
         h2 Student information
@@ -23,31 +24,31 @@
           legend Full name
           .field
             = student.label :first_name, 'First'
-            = student.text_field :first_name
+            = student.text_field :first_name, required: "true"
           .field
             = student.label :middle_name, 'Middle'
             = student.text_field :middle_name
           .field
             = student.label :last_name, 'Last'
-            = student.text_field :last_name
+            = student.text_field :last_name, required: "true"
         fieldset
           legend Gender
           .field.field-radiobutton
             = student.label :gender, 'Male'
-            = student.radio_button :gender, "Male"
+            = student.radio_button :gender, "Male", required: "true"
           .field.field-radiobutton
             = student.label :gender, 'Female'
             = student.radio_button :gender, "Female"
-        .field.field-small
-          = student.label :birthday, 'Date of birth'
+        .field.field-width-medium
+          = student.label :birthday, 'Date of birth', required: "true"
           = student.date_field :birthday
-        .field
-          = student.label :birth_country, 'Country of birth'
+        .field.field-width-medium
+          = student.label :birth_country, 'Country of birth', required: "true"
           = student.text_field :birth_country
         fieldset
           legend Is this student Hispanic or Latino?
           .field.field-radiobutton
-            input type="radio"
+            input type="radio" required="required"
             label Yes
           .field.field-radiobutton
             input type="radio"
@@ -57,47 +58,47 @@
           - Races::ALL.each do |race|
             / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
             .field.field-checkbox
-              = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
+              = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}", required: "true"
               = label_tag "race_#{race}", t('race_' + race)
 
         fieldset.fieldset-address
           legend Home address
           .field.field-street
             = student.label :home_street_address_1, 'Street address 1'
-            = student.text_field :home_street_address_1
+            = student.text_field :home_street_address_1, required: "true"
           .field.field-street
             = student.label :home_street_address_2, 'Street address 2'
             = student.text_field :home_street_address_2
           .field.field-city
             = student.label :home_city, 'City'
-            = student.text_field :home_city
+            = student.text_field :home_city, required: "true"
           .field.field-state
             = student.label :home_state, 'State'
-            = student.text_field :home_state
+            = student.text_field :home_state, required: "true"
           .field.field-zip
             = student.label :home_zip_code, 'Zip'
-            = student.text_field :home_zip_code
+            = student.text_field :home_zip_code, required: "true"
 
-        .field
+        .field.field-width-large
           = student.label :previous_grade, 'Prior grade'
           = student.select :previous_grade, options_for_select(@previous_grade_options)
 
-        .field
+        .field.field-width-large
           = student.label :prior_school_name, 'Prior school name'
           = student.text_field :prior_school_name
 
-        .field
+        .field.field-width-medium
           = student.label :prior_school_city, 'Prior school city'
           = student.text_field :prior_school_city
 
-        .field
+        .field.field-width-small
           = student.label :prior_school_state, 'Prior school state'
           = student.text_field :prior_school_state
 
         fieldset
           legend Does this student have a 504 plan?
           .field.field-radiobutton
-            = student.check_box :p504
+            = student.check_box :p504, required: "true"
             = student.label :p504, 'Yes'
           .field.field-radiobutton
             = student.check_box :p504
@@ -105,7 +106,7 @@
         fieldset
           legend Does this student have an IEP?
           .field.field-radiobutton
-            = student.check_box :iep
+            = student.check_box :iep, required: "true"
             = student.label :iep, "Yes"
           .field.field-radiobutton
             = student.check_box :iep
@@ -133,3 +134,5 @@
       section#application-contact-person-2-info
         h2 Contact person #2 information
         = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+      footer
+        = link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link'

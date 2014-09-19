@@ -4,7 +4,6 @@ header.header-toolbar
     - url_root = '/admin/district/application'
     = link_to 'Edit', "#{url_root}/edit/#{@student.id}", class: 'edit'
     = link_to 'Process', "#{url_root}/process/process/#{@student.id}", class: 'process'
-    = link_to 'Delete', "#{url_root}/delete/#{@student.id}", class: 'delete'
 
   #application-detail-errors
     ul
