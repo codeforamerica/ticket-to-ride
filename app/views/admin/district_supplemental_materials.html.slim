@@ -12,8 +12,8 @@ header
 
     h2 Applicants must submit
     - @supplemental_materials_required.each do |supplemental_material|
-      = render 'supplemental_material',  supplemental_material: supplemental_material
+      = render 'supplemental_material',  supplemental_material: supplemental_material, is_central: false
 
     h2 Applicants may optionally submit
     - @supplemental_materials_optional.each do |supplemental_material|
-      = render 'supplemental_material',  supplemental_material: supplemental_material
+      = render 'supplemental_material',  supplemental_material: supplemental_material, is_central: false
