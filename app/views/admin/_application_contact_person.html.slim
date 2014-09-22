@@ -21,35 +21,20 @@ dl
 
   - if contact_person.is_guardian
     dt
-      | Home address
+      | Address
     dd.adr
       .street-address
-        = contact_person.home_street_address_1
-        - if !contact_person.home_street_address_2.blank?
+        = contact_person.street_address_1
+        - if !contact_person.street_address_2.blank?
           br
-          = contact_person.home_street_address_2
+          = contact_person.street_address_2
       span.locality
-        = contact_person.home_city
+        = contact_person.city
       span.region
-        = contact_person.home_state
+        = contact_person.state
         == " "
       span.postal-code
-        = contact_person.home_zip_code
-  dt
-    | Mailing address
-  dd.adr
-    .street-address
-      = contact_person.mailing_street_address_1
-      - if !contact_person.mailing_street_address_2.blank?
-        br
-        = contact_person.mailing_street_address_2
-    span.locality
-      = contact_person.mailing_city
-    span.region
-      = contact_person.mailing_state
-      == " "
-    span.postal-code
-      = contact_person.mailing_zip_code
+        = contact_person.zip_code
   dt
     | Phone
   dd.tel

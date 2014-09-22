@@ -87,22 +87,22 @@
           = student.text_field :home_language
 
         fieldset.fieldset-address
-          legend Home address
+          legend Address
           .field.field-street
-            = student.label :home_street_address_1, 'Street address 1'
-            = student.text_field :home_street_address_1, required: "true"
+            = student.label :street_address_1, 'Street address 1'
+            = student.text_field :street_address_1, required: "true"
           .field.field-street
-            = student.label :home_street_address_2, 'Street address 2'
-            = student.text_field :home_street_address_2
+            = student.label :street_address_2, 'Street address 2'
+            = student.text_field :street_address_2
           .field.field-city
-            = student.label :home_city, 'City'
-            = student.text_field :home_city, required: "true"
+            = student.label :city, 'City'
+            = student.text_field :city, required: "true"
           .field.field-state
-            = student.label :home_state, 'State'
-            = student.text_field :home_state, required: "true"
+            = student.label :state, 'State'
+            = student.text_field :state, required: "true"
           .field.field-zip
-            = student.label :home_zip_code, 'Zip'
-            = student.text_field :home_zip_code, required: "true"
+            = student.label :zip_code, 'Zip'
+            = student.text_field :zip_code, required: "true"
 
         .field.field-width-large
           = student.label :previous_grade, 'Prior grade'

@@ -15,40 +15,22 @@ fieldset.fieldset-name
 
 - if contact_person.is_guardian
   fieldset.fieldset-address
-    legend Home address
+    legend Address
     .field.field-street
-      = label_tag "#{obj}[home_street_address_1]", 'Street address 1'
-      = text_field_tag "#{obj}[home_street_address_1]", contact_person.home_street_address_1, required: "true"
+      = label_tag "#{obj}[street_address_1]", 'Street address 1'
+      = text_field_tag "#{obj}[street_address_1]", contact_person.street_address_1, required: "true"
     .field.field-street
-      = label_tag "#{obj}[home_street_address_2]", 'Street address 2'
-      = text_field_tag "#{obj}[home_street_address_2]", contact_person.home_street_address_2
+      = label_tag "#{obj}[street_address_2]", 'Street address 2'
+      = text_field_tag "#{obj}[street_address_2]", contact_person.street_address_2
     .field.field-city
-      = label_tag "#{obj}[home_city]", 'City'
-      = text_field_tag "#{obj}[home_city]", contact_person.home_city, required: "true"
+      = label_tag "#{obj}[city]", 'City'
+      = text_field_tag "#{obj}[city]", contact_person.city, required: "true"
     .field.field-state
-      = label_tag "#{obj}[home_state]", 'State'
-      = text_field_tag "#{obj}[home_state]", contact_person.home_state, required: "true"
+      = label_tag "#{obj}[state]", 'State'
+      = text_field_tag "#{obj}[state]", contact_person.state, required: "true"
     .field.field-zip
-      = label_tag "#{obj}[home_zip_code]", 'ZIP'
-      = text_field_tag "#{obj}[home_zip_code]", contact_person.home_zip_code, required: "true"
-fieldset.fieldset-address
-  legend Mailing address
-  .field.field-street
-    = label_tag "#{obj}[mailing_street_address_1]", 'Street address 1'
-    = text_field_tag "#{obj}[mailing_street_address_1]", contact_person.mailing_street_address_1, required: "true"
-  .field.field-street
-    = label_tag "#{obj}[mailing_street_address_2]", 'Street address 2'
-    = text_field_tag "#{obj}[mailing_street_address_2]", contact_person.mailing_street_address_2
-  .field.field-city
-    = label_tag "#{obj}[mailing_city]", 'City'
-    = text_field_tag "#{obj}[mailing_city]", contact_person.mailing_city, required: "true"
-  .field.field-state
-    = label_tag "#{obj}[mailing_state]", 'State'
-    = text_field_tag "#{obj}[mailing_state]", contact_person.mailing_state, required: "true"
-  .field.field-zip
-    = label_tag "#{obj}[mailing_zip_code]", 'ZIP'
-    = text_field_tag "#{obj}[mailing_zip_code]", contact_person.mailing_zip_code, required: "true"
-
+      = label_tag "#{obj}[zip_code]", 'ZIP'
+      = text_field_tag "#{obj}[zip_code]", contact_person.zip_code, required: "true"
 fieldset.fieldset-phone
   legend Phone #1
   .field.field-number

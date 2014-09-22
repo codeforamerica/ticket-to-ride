@@ -63,20 +63,20 @@ header.header-toolbar
         dd
           = @student.home_language.capitalize
         dt
-          | Home address
+          | Address
         dd.adr
           .street-address
-            = @student.home_street_address_1
-            - if !@student.home_street_address_2.blank?
+            = @student.street_address_1
+            - if !@student.street_address_2.blank?
               br
-              = @student.home_street_address_2
+              = @student.street_address_2
           span.locality
-            = @student.home_city
+            = @student.city
           span.region
-            = @student.home_state
+            = @student.state
             == " "
           span.postal-code
-            = @student.home_zip_code 
+            = @student.zip_code
         dt
           |  Has an 
           abbr title="Individualized Education Plan" IEP
