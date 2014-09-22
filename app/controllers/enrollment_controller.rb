@@ -370,17 +370,17 @@ class EnrollmentController < ApplicationController
       return render_wizard
     end
 
-    if param_does_not_exist(:student, :home_street_address_1)
-      student.errors.add(:home_street_address_1, 'Home street address 1 is a required field')
+    if param_does_not_exist(:student, :street_address_1)
+      student.errors.add(:street_address_1, 'Street address 1 is a required field')
     end
-    if param_does_not_exist(:student, :home_city)
-      student.errors.add(:home_city, 'Home city is a required field')
+    if param_does_not_exist(:student, :city)
+      student.errors.add(:city, 'City is a required field')
     end
-    # if param_does_not_exist(:student, :home_state)
-    #   student.errors.add(:home_state, 'Home state is a required field')
+    # if param_does_not_exist(:student, :state)
+    #   student.errors.add(:state, 'State is a required field')
     # end
-    if param_does_not_exist(:student, :home_zip_code)
-      student.errors.add(:home_zip_code, 'Home zip code is a required field')
+    if param_does_not_exist(:student, :zip_code)
+      student.errors.add(:zip_code, 'ZIP code is a required field')
     end
 
     if student.errors.size > 0
@@ -389,7 +389,7 @@ class EnrollmentController < ApplicationController
     end
 
     # TODO: Later have this fillable on the form
-    student.home_state = 'RI'
+    student.state = 'RI'
 
     # Save the student
     student.update_attributes(student_params)
@@ -419,20 +419,20 @@ class EnrollmentController < ApplicationController
   end
 
   def validate_contact_person_home_address(contact_person)
-    if param_does_not_exist(:contact_person, :home_street_address_1)
-      contact_person.errors.add(:home_street_address_1, 'Home street address is a required field')
+    if param_does_not_exist(:contact_person, :street_address_1)
+      contact_person.errors.add(:street_address_1, 'Street address is a required field')
     end
 
-    if param_does_not_exist(:contact_person, :home_city)
-      contact_person.errors.add(:home_city, 'Home city is a required field')
+    if param_does_not_exist(:contact_person, :city)
+      contact_person.errors.add(:city, 'City is a required field')
     end
 
-    if param_does_not_exist(:contact_person, :home_state)
-      contact_person.errors.add(:home_state, 'Home state is a required field')
+    if param_does_not_exist(:contact_person, :state)
+      contact_person.errors.add(:state, 'State is a required field')
     end
 
-    if param_does_not_exist(:contact_person, :home_zip_code)
-      contact_person.errors.add(:home_zip_code, 'Home ZIP code is a required field')
+    if param_does_not_exist(:contact_person, :zip_code)
+      contact_person.errors.add(:zip_code, 'ZIP code is a required field')
     end
 
     return contact_person
@@ -520,11 +520,11 @@ class EnrollmentController < ApplicationController
     end
 
     if params[:contact_person][:lives_with_student] == 'true'
-      contact_person.home_street_address_1 = student.home_street_address_1 
-      contact_person.home_street_address_2 = student.home_street_address_2 
-      contact_person.home_zip_code = student.home_zip_code 
-      contact_person.home_city = student.home_city 
-      contact_person.home_state = student.home_state
+      contact_person.street_address_1 = student.street_address_1
+      contact_person.street_address_2 = student.street_address_2
+      contact_person.zip_code = student.zip_code
+      contact_person.city = student.city
+      contact_person.state = student.state
     end
 
     return save_and_associate_contact_person(student, contact_person)

@@ -47,7 +47,7 @@ $(document).ready(function () {
 
   function toggleGuardian1Address(radio){
     if (radio == 'true'){
-      $('#guardian1_mailing_street_address_1').val('<%= @student.home_street_address1  %>')
+      $('#guardian1_street_address_1').val('<%= @student.street_address1  %>')
       $('#guardian1_shared_street1').removeClass('hidden');
       $('#guardian1_shared_street2').removeClass('hidden');
       $('#guardian1_shared_city').removeClass('hidden');

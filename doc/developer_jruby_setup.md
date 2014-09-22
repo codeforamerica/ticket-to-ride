@@ -1,7 +1,6 @@
 # Developer Setup for JRuby
 
-This is a guide for setting up Ticket to RIDE with JRuby. This will work on any OS, 
-but is highly recommended for Windows developers.
+This is a guide for setting up Ticket to RIDE with JRuby. This will work on any OS.
 
 # JRuby (UNIX, Mac, Linux)
 
@@ -9,11 +8,11 @@ If you have RVM, issue the following command:
 
 `rvm install jruby`
 
-If not download and install from [JRuby.org](http://jruby.org).
+If not download and install from [JRuby.org](http://jruby.org). Following this, switch to jruby as your Ruby installation.
 
 # JRuby (Windows)
 
-1. Download [JRuby](http://jruby.org). Choose the `exe(x64)+jre` for 64-bit Windows and `exe+jre` for 32-bit Windows
+1. Download [JRuby](http://jruby.org).
 1. Install JRuby and make sure to check the option that says to configure `PATH`
 1. Open a new command prompt and run `jruby -v` to confirm installation
 

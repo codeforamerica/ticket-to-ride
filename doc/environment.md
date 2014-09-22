@@ -8,8 +8,7 @@ This includes software prerequisites for running Ticket to RIDE.
 
 # Windows
 
-If you're working from Windows, please perform the steps documented in [Developer Setup for JRuby (recommended)](developer_jruby_setup.md))
-or [Developer Setup for Windows](developer_windows_setup.md).
+If you're working from Windows, please perform the steps documented in [Developer Setup for Windows](developer_windows_setup.md) (recommended) or [Developer Setup for JRuby](developer_jruby_setup.md)).
 
 # Staging / Production
 
