@@ -7,31 +7,11 @@ header
 
 .page
   .site-width
+
     h2 Applicants must submit
-    article.supplemental-material
-      h1 
-        | Photo 
-        abbr title="Identification" ID
-      span.badge Mandatory
-      p
-        |  This includes: a state-issued
-        abbr title="Identification" ID
-        |  card, a driver&rsquo;s license, or a 
-        abbr title="United States" U.S.
-        |  passport.
-    article.supplemental-material
-      h1 
-        | Over-the-counter medication form 
-      p
-        |  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      a.edit href="#" Edit
-      a.delete href="#" Delete
+    - @supplemental_materials_required.each do |supplemental_material|
+      = render 'supplemental_material',  supplemental_material: supplemental_material
+
     h2 Applicants may optionally submit
-    article.supplemental-material
-      h1 
-        | Immunization record 
-      span.badge Mandatory
-      p
-        |  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    = render 'supplemental_materials_table', supplemental_materials: @supplemental_materials_required, title: 'required', user_type: 'central', is_editable: true
-    = render 'supplemental_materials_table', supplemental_materials: @supplemental_materials_optional, title: 'optional', user_type: 'central', is_editable: true
+    - @supplemental_materials_optional.each do |supplemental_material|
+      = render 'supplemental_material',  supplemental_material: supplemental_material

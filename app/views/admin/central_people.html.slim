@@ -17,14 +17,15 @@ header
           tr
             td.table-people-col-name
               = person.name
+            td.table-people-col-email
+              = person.email
+
+            td.table-people-col-school
               - if person.user_role != 'central_admin'
                   = person.district.name.capitalize
               - else
                 span Central Admin
-            td.table-people-col-email
-              = person.email
 
-            td.table-people-col-school=="School"
             td.table-people-col-actions
               - if person.active
                 = link_to 'Edit', "/admin/central/people/edit/#{person.id}"
