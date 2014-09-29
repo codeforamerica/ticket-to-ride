@@ -51,14 +51,19 @@ class AdminController < ApplicationController
   end
 
   def retainValuesAndErrors(obj, param_updater)
-    messages = obj.errors.messages.clone()
+    # Copy existing error messages
+    error_messages = {}
+    obj.errors.each do |field, message|
+      error_messages[field] = message
+    end
+
+    # Do model validation on incoming arguments (this clears existing errror messages)
     obj.assign_attributes(param_updater)
     obj.valid?
-    messages.each do |k,v|
-      v.each do |field, message|
-        obj.errors.add(field, message)
-        puts "Message: #{message}"
-      end
+
+    # Repopulate the old error messages
+    error_messages.each do |field, message|
+      obj.errors.add(field, message)
     end
   end
 
