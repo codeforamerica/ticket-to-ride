@@ -1,6 +1,9 @@
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
+
 /* @group bootstrap */
+
 
 body{
 	color: #555;
@@ -286,6 +289,14 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 
 /* @group views */
 
+/* @group application-process */
+
+.application-process fieldset legend{
+	font-weight: 600;
+}
+
+/* @end */
+
 /* @group District info */
 
 #edit_district_1 textarea,
@@ -442,21 +453,20 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 /* @end */
 
 /* @group people-index */
-
-body[class^=people] main header{ margin-bottom: 1rem; }
 	
-.people-index table.table-people td{
+.people table.table-people td{
 	padding: 0.5em 0;
 	
 }
-.people-index td.table-people-col-actions{ text-align: right; }
-.people-index td.table-people-col-actions a,
-.people-index td.table-people-col-actions form,
-.people-index td.table-people-col-actions button{
+.people td.table-people-col-actions{ text-align: right; }
+.people td.table-people-col-actions a,
+.people td.table-people-col-actions form,
+.people td.table-people-col-actions button{
 	color: #1f7ab8;
 	text-decoration: none;
 	display: inline;
 	padding: 0;
+
 }
 
 .people-index td.table-people-col-actions button{
@@ -469,13 +479,13 @@ body[class^=people] main header{ margin-bottom: 1rem; }
 	background: none;	
 }
 
-.people-index td.table-people-col-actions a:hover,
-.people-index td.table-people-col-actions button:hover{
+.people td.table-people-col-actions a:hover,
+.people td.table-people-col-actions button:hover{
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-.people-index td.table-people-col-actions .button-delete{
+.people td.table-people-col-actions .delete{
 	color: #ff4823;
 	margin-left: 0.4rem;	
 }
@@ -547,9 +557,6 @@ nav.misc{
 	font-size: 0.9em;
 }
 
-nav.misc a.delete{
-	color: red;
-}
 
 
 /* @end */
@@ -784,14 +791,58 @@ body[class^=settings] main .page legend{
 
 /* @group supplemental material */
 
-article.supplemental-material{
+.supplemental-material{
 	font-size: 0.8em;
 }
-article.supplemental-material h1{
+
+.field.field-checkbox.supplemental-material{
+	float: none;
+	max-width: 28em;
+}
+
+.field.field-checkbox.supplemental-material{
+	position: relative;
+}
+
+.field.field-checkbox.supplemental-material::after{
+	content: "";
+	display: block;
+	position: absolute;
+	background: #eee;
+	top: 0.08em;
+	left: 0.08em;
+	bottom: 0.08em;
+	width: 2em;
+	-moz-border-radius: 0.3em 0 0 0.3em;
+	border-radius: 0.3em 0 0 0.3em;
+}
+
+.field.field-checkbox.supplemental-material label{
+	padding-left: 3em;
+}
+
+.field.field-checkbox.supplemental-material a{
+	position: absolute;
+	left: 100%;
+	margin-left: 1em;
+	top: 0;
+}
+
+.field.field-checkbox.supplemental-material p{
+	margin: 0;
+}
+
+article.supplemental-material h1,
+.field.supplemental-material span{
 	font: inherit;
 	font-weight: 600;	
 	color: inherit;
 	margin-bottom: 0.4em;
+	display: block;
+}
+
+.field.supplemental-material span{
+	margin-bottom: 0.2em;
 }
 
 article.supplemental-material h1 a:after{
@@ -841,6 +892,7 @@ article.supplemental-material+h2{
 article.supplemental-material p{
 	margin-bottom: 0;
 	
+
 }
 
 article.supplemental-material a.edit,
@@ -936,6 +988,7 @@ article.supplemental-material a.edit{
 .boilerplate a{
 	color: #ffedb0;
 	border-color: #ffedb0;
+	margin-top: 1em;
 }
 
 
@@ -966,6 +1019,9 @@ article.supplemental-material a.edit{
 	margin-bottom: 1.4em;
 }
 
+a.delete{ color: red; }
+a.delete:hover{ color: #c2382c; }
+
 .notice {
 	background: #ffeead;
 	color: #4b2d06;
@@ -995,7 +1051,12 @@ article.supplemental-material a.edit{
 	margin-bottom: 0.4em;
 }
 
-footer nav{ clear: both; }
+footer nav,
+footer nav a{
+	line-height: 1.7em;
+	margin-right: 1em;
+
+ }
 
 footer nav ul{
 	border-top: 0.2rem solid #eee;	
@@ -1003,17 +1064,14 @@ footer nav ul{
 }
 
 footer div.url{
-	background: #fafafa;
-	color: #555;
+	color: #888;
 	padding: 0.6em;
 	-moz-border-radius: 0.2em;
 	border-radius: 0.2em;
 	margin-top: 1em;
 	font-size: 0.9em;
 	clear: both;
-	border: 0.08em solid #eee;
-	display: inline-block;
-	vertical-align: middle;
+	border-top: 0.12em solid #eee;
 }
 
 footer div code{

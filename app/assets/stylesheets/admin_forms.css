@@ -4,6 +4,9 @@
 
 /* @override http://localhost:3000/assets/admin_forms.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
+
+
 
 
 @font-face {
@@ -313,6 +316,7 @@ div.field.field-select:hover select{ cursor: pointer; }
 	position: absolute;
 	left: 0.45rem;
 	bottom: 50%;
+	margin-top: -0.45em !important;
 	border: none;
 	color: #fff;
 	z-index: 2;
@@ -634,6 +638,14 @@ button{
 	box-shadow: none !important;
 	cursor: pointer;
 	background: none;
+}
+
+input[disabled],
+input[disabled]:hover{
+	color: #888;
+	border-color: #888;
+	background: none;
+	cursor: default;
 }
 
 .button:hover,

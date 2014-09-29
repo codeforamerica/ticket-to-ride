@@ -29,22 +29,26 @@
         td.table-applications-col-confirmation
           = link_to student.confirmation_code, link_url
 
-  footer
-    nav.pagination
-      - @num_pages.times do |page_number|
-        .page-number
-          - pn = page_number + 1
-          = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
-    nav.misc
-      - if @students_processed.any? && @is_processed == false
-        = link_to 'Show recently processed', ' /admin/district/applications/processed'
-      - if @students_unprocessed.any? && @is_processed == true
-        = link_to 'Show unprocessed', ' /admin/district/applications'
+footer
+  nav.pagination
+    - @num_pages.times do |page_number|
+      .page-number
+	- pn = page_number + 1
+	= link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
+  nav.misc
+    - if @is_processed == false
+      = link_to 'Show recently processed', ' /admin/district/applications/processed'
+    - if @is_processed == true
+      = link_to 'Show unprocessed', ' /admin/district/applications'
+    - if @students_unprocessed.any? && @is_processed == false
+      a href="#" class="delete" Delete all applications
+    - if @students_processed.any? && @is_processed == true
       a href="#" class="delete" Delete all applications
 
-    - unless @students.empty?
-      div.url
-        =="Applications can be collected at: "
-        code
-          | http://localhost:3000/
-          = @district.name.downcase.gsub(/\s+/, '-')
+
+  - unless @students.empty?
+    div.url
+      =="Applications can be collected at: "
+      code
+	| http://localhost:3000/
+	= @district.name.downcase.gsub(/\s+/, '-')

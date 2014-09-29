@@ -163,4 +163,4 @@
         h2 Contact person #2 information
         = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
       footer
-        = link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link'
+	= link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link', class: "delete"

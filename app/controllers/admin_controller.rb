@@ -673,6 +673,7 @@ class AdminController < ApplicationController
 
   def district_application_process_get
     @admin = get_logged_in_admin
+    @body_class = "application-process"
     @student = Student.find(params[:student_id]) # TODO better error checking and auth
 
     central_required = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central], is_required: true)
@@ -688,6 +689,7 @@ class AdminController < ApplicationController
 
   def district_application_process_post
     @admin = get_logged_in_admin
+    @body_class = "application-process"
     @student = Student.find(params[:student_id]) # TODO better error checking and auth
 
     @student.export_time = DateTime.now

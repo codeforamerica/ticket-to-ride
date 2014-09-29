@@ -4,11 +4,12 @@
       h1 Add a district administrator
       p This will be someone that can view/edit applications for a school district
         and add district-level supplemental materials
-
-      ul
-        - @person.errors.each do |field, message|
-          li
-            = message
+      - if !@person.errors.empty?
+	.notice
+	  ul
+	    - @person.errors.each do |field, message|
+	      li
+		= message
 
   .page
     .site-width
