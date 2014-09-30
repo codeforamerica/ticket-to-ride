@@ -1,21 +1,23 @@
 / Depends on variable `supplemental_material`, which is a single SupplementalMaterial object
 / Depends on variable `is_central`, which is true if the user this is displayed for is a central admin
+/ Depends on variable `is_editable`, which defines whether the material should have edit links or not
 
 article.supplemental-material
   h1 
-    - if !supplemental_material.file.name || !supplemental_material.link_url 
+    - if supplemental_material.file_file_name || supplemental_material.link_url 
       - sm_href = ''
-      - if supplemental_material.file.name
+      - if supplemental_material.file_file_name
         - sm_href = supplemental_material.file.url
       - else
         - sm_href = supplemental_material.link_url
       = link_to supplemental_material.name, sm_href, target: "_blank" 
     - else
       = supplemental_material.name
-  - if supplemental_material.authority_level == "central" && !is_central
-    span.badge title="This material is mandated by the state" Mandatory
-  - else
-    = link_to 'Edit', "/admin/district/supplemental_materials/edit/#{supplemental_material.id}", class: 'edit'
-    = link_to 'Delete', "/admin/district/supplemental_materials/delete/#{supplemental_material.id}", class: 'delete'
+  - if is_editable
+    - if supplemental_material.authority_level == "central" && !is_central
+      span.badge title="This material is mandated by the state" Mandatory
+    - else
+      = link_to 'Edit', "/admin/district/supplemental_materials/edit/#{supplemental_material.id}", class: 'edit'
+      = link_to 'Delete', "/admin/district/supplemental_materials/delete/#{supplemental_material.id}", class: 'delete'
   - if !supplemental_material.description || !supplemental_material.description.blank?
     p= supplemental_material.description

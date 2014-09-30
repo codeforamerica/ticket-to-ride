@@ -1,15 +1,3 @@
-javascript:
-  $(document).ready(function () {
-    $('input:checkbox').on('change', function(e) {
-      if(areAllCheckboxesChecked()) {
-        $('#application-process-submit').prop('disabled', false);
-      }
-      else {
-        $('#application-process-submit').prop('disabled', true);
-      }
-    })
-  });
-
 header
   .site-width
     h1 Process application
@@ -32,33 +20,23 @@ header
 
     fieldset#application-process-required
       legend Applicants must submit
-      - @supplemental_materials_required.each do |sm|
-	.field.field-checkbox.supplemental-material
-	  = label_tag sm.id, sm.name do
-	    = check_box_tag sm.id, checked: false
-	    span= sm.name
-	    p= sm.description
-          - if sm.file_file_name
-            = link_to 'Print', sm.file.url, target: "_blank"
-          - elsif sm.link_url
-            = link_to 'Print', sm.link_url, target: "_blank"
+      - @supplemental_materials_required.each do |supplemental_material|
+        = render 'supplemental_material',
+          supplemental_material: supplemental_material,
+          is_central: false,
+          is_editable: false
 
     fieldset#application-process-optional
       legend
-	=="Applicants can&nbsp;"
-	em optionally
-	=="&nbsp;submit"
+      	=="Applicants can&nbsp;"
+      	em optionally
+      	=="&nbsp;submit"
 
-      - @supplemental_materials_optional.each do |sm|
-	.field.field-checkbox.supplemental-material
-	  = label_tag sm.id, sm.name do
-	    = check_box_tag sm.id, checked: false
-	    span= sm.name
-	    p= sm.description
-	  - if sm.file_file_name
-	    = link_to 'Print', sm.file.url, target: "_blank"
-	  - elsif sm.link_url
-	    = link_to 'Print', sm.link_url, target: "_blank"
+      - @supplemental_materials_optional.each do |supplemental_material|
+        = render 'supplemental_material',
+          supplemental_material: supplemental_material,
+          is_central: false,
+          is_editable: false
 
     / --- EXPORT ---
 
@@ -67,4 +45,4 @@ header
     p If everything looks good, export the application!
 
     = form_tag request.original_url, method: 'post' do
-      = submit_tag 'Do it!', id: 'application-process-submit', disabled: true, class: "button-action"
+      = submit_tag 'Do it!', id: 'application-process-submit', class: "button-action"

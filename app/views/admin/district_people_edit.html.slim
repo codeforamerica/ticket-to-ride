@@ -5,11 +5,10 @@
       p This will be someone that can view/edit applications for a your district
         and add district-level supplemental materials
       - if !@person.errors.empty?
-	.notice
-	  ul
-	    - @person.errors.each do |field, message|
-	      li
-		= message
+    	.notice
+    	  ul
+    	    - @person.errors.each do |field, message|
+    	      li= message
   .page
     .site-width
       .field.field-width-large
