@@ -2,7 +2,10 @@
 
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
+
 /* @group bootstrap */
+
 
 
 body{
@@ -239,6 +242,12 @@ table thead td span{ display: none; }
 
 table td.table-applications-col-submitted{ display: none; }
 table tr:last-of-type td{ border-bottom: none; }
+
+
+table a,
+table td{
+	vertical-align: middle;
+}
 
 table a,
 table thead td{

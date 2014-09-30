@@ -64,20 +64,21 @@
 
       // Append check icons to `.label-text` elements
       if ( !cbr.isRadio ) {
-	cbr.applyCheckIcons();
+	      cbr.applyCheckIcons();
       }
 
       cbr.$element.bind( "change init", function(){
-	cbr.toggleCheck();
+	      cbr.toggleCheck();
       });
 
       cbr.parent.bind( "click", function(){
-	cbr.change();
+	      cbr.change();
+        return false;
       });
 
       // radio button picker - only the checked option is shown; when clicked, it displays the rest of the list
       if( cbr.hasPicker && cbr.hasPicker() ){
-	cbr.initPicker();
+	      cbr.initPicker();
       }
 
       // set default state

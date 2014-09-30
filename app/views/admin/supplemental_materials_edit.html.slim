@@ -6,10 +6,12 @@
         |  Use the form below to specify materials that parents might
         |  bring as they complete their applications in person.
 
-      - @supplemental_material.errors.each do |field, message|
-        ul
-          li
-            = message
+      - if !@supplemental_material.errors.blank?
+        .notice
+          ul      
+            - @supplemental_material.errors.each do |field, message|
+              li
+                = message
 
   .page
     .site-width
@@ -45,7 +47,7 @@
             == "Yes"
         .field.field-radiobutton
           = sm.label :is_required_false, 'No' do
-            = sm.radio_button :is_required, false
+            = sm.radio_button :is_required, false, checked: "checked"
             == "No"
       footer
         = sm.submit 'Add', :class => "button-action"

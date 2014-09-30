@@ -234,7 +234,7 @@ class AdminController < ApplicationController
 
     @supplemental_material = SupplementalMaterial.new
 
-    return render 'central_supplemental_materials_edit'
+    return render 'supplemental_materials_edit'
   end
 
   def central_supplemental_materials_add_post
@@ -245,7 +245,7 @@ class AdminController < ApplicationController
   def central_supplemental_materials_edit_get
     @admin = get_logged_in_admin
     @supplemental_material = SupplementalMaterial.find(params[:id])
-    return render 'central_supplemental_materials_edit'
+    return render 'supplemental_materials_edit'
   end
 
   def central_supplemental_materials_edit_post
