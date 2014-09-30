@@ -13,24 +13,23 @@ fieldset.fieldset-name
   = label_tag "#{obj}[relationship]", 'Relationship to child'
   = text_field_tag "#{obj}[relationship]", contact_person.relationship, required: "true"
 
-- if contact_person.is_guardian
-  fieldset.fieldset-address
-    legend Address
-    .field.field-street
-      = label_tag "#{obj}[street_address_1]", 'Street address 1'
-      = text_field_tag "#{obj}[street_address_1]", contact_person.street_address_1, required: "true"
-    .field.field-street
-      = label_tag "#{obj}[street_address_2]", 'Street address 2'
-      = text_field_tag "#{obj}[street_address_2]", contact_person.street_address_2
-    .field.field-city
-      = label_tag "#{obj}[city]", 'City'
-      = text_field_tag "#{obj}[city]", contact_person.city, required: "true"
-    .field.field-state
-      = label_tag "#{obj}[state]", 'State'
-      = text_field_tag "#{obj}[state]", contact_person.state, required: "true"
-    .field.field-zip
-      = label_tag "#{obj}[zip_code]", 'ZIP'
-      = text_field_tag "#{obj}[zip_code]", contact_person.zip_code, required: "true"
+fieldset.fieldset-address
+  legend Address
+  .field.field-street
+    = label_tag "#{obj}[street_address_1]", 'Street address 1'
+    = text_field_tag "#{obj}[street_address_1]", contact_person.street_address_1, required: "true"
+  .field.field-street
+    = label_tag "#{obj}[street_address_2]", 'Street address 2'
+    = text_field_tag "#{obj}[street_address_2]", contact_person.street_address_2
+  .field.field-city
+    = label_tag "#{obj}[city]", 'City'
+    = text_field_tag "#{obj}[city]", contact_person.city, required: "true"
+  .field.field-state
+    = label_tag "#{obj}[state]", 'State'
+    = text_field_tag "#{obj}[state]", contact_person.state, required: "true"
+  .field.field-zip
+    = label_tag "#{obj}[zip_code]", 'ZIP'
+    = text_field_tag "#{obj}[zip_code]", contact_person.zip_code, required: "true"
 fieldset.fieldset-phone
   legend Phone #1
   .field.field-number

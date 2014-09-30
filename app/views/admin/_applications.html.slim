@@ -33,8 +33,8 @@ footer
   nav.pagination
     - @num_pages.times do |page_number|
       .page-number
-	- pn = page_number + 1
-	= link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
+	      - pn = page_number + 1
+	      = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
   nav.misc
     - if @is_processed == false
       = link_to 'Show recently processed', ' /admin/district/applications/processed'

@@ -35,9 +35,7 @@ form footer a{
 	margin-top: 0.67rem;
 }
 
-form footer a:hover{
-	color: #555;
-}
+form footer a:hover{ color: #555; }
 
 /* @end */
 
@@ -82,9 +80,7 @@ input[type=email]:focus,
 input[type=password]:focus,
 input[type=date]:focus,
 select:focus,
-textarea:focus{
-	border-color: #00a1c2;
-}
+textarea:focus{ border-color: #00a1c2; }
 
 input[type=checkbox],
 input[type=radio]{
@@ -93,7 +89,6 @@ input[type=radio]{
 	position: relative;
 	top: -0.15rem;
 }
-
 
 div.field.field-checkbox,
 div.field.field-radiobutton{
@@ -193,7 +188,7 @@ div.field.field-select:hover select{ cursor: pointer; }
   outline: none;
   height: 2rem;
   line-height: 1.1rem;
-    -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -moz-border-radius: 0.2rem;
@@ -201,16 +196,16 @@ div.field.field-select:hover select{ cursor: pointer; }
   -webkit-box-shadow: none;
   box-shadow: none;
   width: 100%;
-	background: #fafafa;
-	box-shadow: inset 0.08rem 0.08rem 0 rgba(0,0,0,0.05);
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  background: #fafafa;
+  box-shadow: inset 0.08rem 0.08rem 0 rgba(0,0,0,0.05);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .custom-select .btn-select {
-	position: relative;
-	display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .btn-select.btn-focus{ border-color: #00a1c2; }
@@ -237,8 +232,8 @@ div.field.field-select:hover select{ cursor: pointer; }
 
 /* @group Custom checkbox / radio */
 
-.custom-input div.field-checkbox input,
-.custom-input div.field-radiobutton input {
+.enhanced div.field-checkbox input,
+.enhanced div.field-radiobutton input {
 	position: absolute;
 	z-index: -9999;
 	outline: none;
@@ -246,16 +241,16 @@ div.field.field-select:hover select{ cursor: pointer; }
 	left: -9999em;
 }
 
-.custom-input div.field-checkbox label,
-.custom-input div.field-radiobutton label{
+.enhanced div.field-checkbox label,
+.enhanced div.field-radiobutton label{
 	padding-left: 2rem;
 	position: relative;
 }
 
-.custom-input div.field.field-checkbox label::before,
-.custom-input div.field.field-checkbox label::after,
-.custom-input div.field.field-radiobutton label::before,
-.custom-input div.field.field-radiobutton label::after{
+.enhanced div.field.field-checkbox label::before,
+.enhanced div.field.field-checkbox label::after,
+.enhanced div.field.field-radiobutton label::before,
+.enhanced div.field.field-radiobutton label::after{
   content: "";
   position: absolute;
   margin: 0;
@@ -276,10 +271,10 @@ div.field.field-select:hover select{ cursor: pointer; }
   border-radius: 0.1em;
 }
 
-.custom-input div.field.field-radiobutton label::before,
-.custom-input div.field.field-radiobutton label::after { border-radius: 100%; }
+.enhanced div.field.field-radiobutton label::before,
+.enhanced div.field.field-radiobutton label::after { border-radius: 100%; }
 
-.custom-input div.field.field-radiobutton label::before{
+.enhanced div.field.field-radiobutton label::before{
 	background: #555;
 	border-color: #555;
 	z-index: 2;
@@ -289,7 +284,7 @@ div.field.field-select:hover select{ cursor: pointer; }
 	line-height: 0.67em;
 	color: white;
 }
-.custom-input div.field.field-checkbox label.checked::before{
+.enhanced div.field.field-checkbox label.checked::before{
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -322,31 +317,28 @@ div.field.field-select:hover select{ cursor: pointer; }
 	z-index: 2;
 }
 
-.custom-input div.field.field-checkbox label.checked::after{
+.enhanced div.field.field-checkbox label.checked::after{
 	background: #555;
 	border-color: #555;
 }
 
-.custom-input div.field.field-checkbox label.focus,
-.custom-input div.field.field-checkbox label.focus::before,
-.custom-input div.field.field-checkbox label.focus::after,
-.custom-input div.field.field-checkbox label.checkedFocus,
-.custom-input div.field.field-checkbox label.checkedFocus::after,
-.custom-input div.field.field-radiobutton label.focus,
-.custom-input div.field.field-radiobutton label.focus::before,
-.custom-input div.field.field-radiobutton label.focus::after,
-.custom-input div.field.field-radiobutton label.checkedFocus,
-.custom-input div.field.field-radiobutton label.checkedFocus::before,
-.custom-input div.field.field-radiobutton label.checkedFocus::after{
+.enhanced div.field.field-checkbox label.focus,
+.enhanced div.field.field-checkbox label.focus::before,
+.enhanced div.field.field-checkbox label.focus::after,
+.enhanced div.field.field-checkbox label.checkedFocus,
+.enhanced div.field.field-checkbox label.checkedFocus::after,
+.enhanced div.field.field-radiobutton label.focus,
+.enhanced div.field.field-radiobutton label.focus::before,
+.enhanced div.field.field-radiobutton label.focus::after,
+.enhanced div.field.field-radiobutton label.checkedFocus,
+.enhanced div.field.field-radiobutton label.checkedFocus::before,
+.enhanced div.field.field-radiobutton label.checkedFocus::after{
 	border-color: #00a1c2;
 	color: #00a1c2;
 }
 
-.custom-input div.field.field-radiobutton label.focus::before{
-	background: #00a1c2;
-}
-
-.custom-input div.field.field-radiobutton .checked::before{ opacity: 1;	}
+.enhanced div.field.field-radiobutton label.focus::before{ background: #00a1c2; }
+.enhanced div.field.field-radiobutton .checked::before{ opacity: 1;	}
 
 /* @end */
 

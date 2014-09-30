@@ -492,7 +492,6 @@ class AdminController < ApplicationController
     end
     @students = @students.slice(start_index, APPLICATIONS_PER_PAGE)
 
-
     return render 'district_applications'
   end
 
