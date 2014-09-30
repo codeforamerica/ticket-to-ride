@@ -802,7 +802,7 @@ class AdminController < ApplicationController
 
   def district_supplemental_materials_delete_get
     @admin = get_logged_in_admin
-    @body_class = 'supplemental-materials'
+    @body_class = 'supplemental-materials-delete'
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
 
     if @admin.district != @supplemental_material.district
@@ -846,7 +846,7 @@ class AdminController < ApplicationController
 
   def district_people_add_get
     @admin = get_logged_in_admin
-    @body_class = 'people'
+    @body_class = 'people-new'
     @person = AdminUser.new
 
     return render 'district_people_edit'
@@ -854,13 +854,13 @@ class AdminController < ApplicationController
 
   def district_people_add_post
     @admin = get_logged_in_admin
-    @body_class = 'people'
+    @body_class = 'people-new'
     return edit_a_person_as_district(nil)
   end
 
   def district_people_edit_get
     @admin = get_logged_in_admin
-    @body_class = 'people'
+    @body_class = 'people-new'
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district
@@ -872,7 +872,7 @@ class AdminController < ApplicationController
 
   def district_people_edit_post
     @admin = get_logged_in_admin
-    @body_class = 'people'
+    @body_class = 'people-new'
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district
@@ -884,7 +884,7 @@ class AdminController < ApplicationController
 
   def district_people_delete_get
     @admin = get_logged_in_admin
-    @body_class = 'people'
+    @body_class = 'people-delete'
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district

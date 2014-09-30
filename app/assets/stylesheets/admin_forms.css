@@ -6,6 +6,9 @@
 
 /* @override http://localhost:3000/assets/admin_forms.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
+
+
 
 
 
@@ -291,7 +294,7 @@ div.field.field-select:hover select{ cursor: pointer; }
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
-	line-height: 0.8em;
+	line-height: 0.8rem;
 	/* Enable Ligatures ================ */
 	-webkit-font-feature-settings: "liga";
 	-moz-font-feature-settings: "liga=1";
@@ -309,9 +312,9 @@ div.field.field-select:hover select{ cursor: pointer; }
 	text-align: center;
 	height: 0.8rem;
 	position: absolute;
-	left: 0.45rem;
+	left: 0.475rem;
 	bottom: 50%;
-	margin-top: -0.45em !important;
+	margin-top: -0.4rem !important;
 	border: none;
 	color: #fff;
 	z-index: 2;

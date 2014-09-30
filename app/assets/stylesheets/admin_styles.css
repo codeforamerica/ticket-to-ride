@@ -4,7 +4,10 @@
 
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
+
 /* @group bootstrap */
+
 
 
 
@@ -135,7 +138,7 @@ body main h1{
 	color: #206180;
 	font-family: "Titillium Web", Trebuchet MS;
 	font-weight: 100;
-	line-height: 1.33em;
+	line-height: 1.2em;
 	font-size: 2.1em;
 }
 
@@ -324,17 +327,23 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 .schools-delete,
 .schools-new,
 .applications-delete,
+.supplemental-materials-delete,
+.people-delete,
 .people-new{ background: #eee; }
 
 .schools-delete main .site-width,
 .schools-new main .site-width,
 .applications-delete main .site-width,
+.supplemental-materials-delete main .site-width,
+.people-delete main .site-width,
 .people-new main .site-width{ padding: 0; }
 
 .schools-delete main,
 .schools-new main,
 .applications-delete main,
-.people-new main{
+.supplemental-materials-delete main,
+.people-new main,
+.people-delete main{
 	border-bottom: none;
 	border: 0.2rem solid #ff514d;
 	max-width: 24rem;
@@ -351,14 +360,17 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 	.schools-delete main,
 	.schools-new main,
 	.applications-delete main,
-	.people-new main{
-	padding: 1.4rem;
+	.supplemental-materials-delete main,
+	.people-new main,
+	.people-delete main{
+		padding: 1.4rem;
 	}
 }
 
 .schools-new main h1,
 .schools-delete main h1,
-.applications-delete main h1{
+.applications-delete main h1,
+.people-delete main h1{
 	margin-bottom: 0;
 }
 
@@ -367,12 +379,19 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 	border-color: #009253;
 }
 
+.supplemental-materials-delete main p{
+	line-height: 1.5em;
+	
+}
+
 @media screen && (min-width: 24em){
 	
 	.schools-delete main,
 	.schools-new main,
 	.applications-delete main,
-	.people-new main{
+	.supplemental-materials-delete main,
+	.people-new main,
+	.people-delete main{
 		padding: 1.4em;
 		max-width: 28em;
 	}
