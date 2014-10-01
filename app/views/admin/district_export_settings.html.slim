@@ -1,37 +1,31 @@
-form
+= form_for(@district, url: request.original_url, method: :post) do |district|
   header
     .site-width
       h1 Export settings
-      = link_to "Export now", "", :class=> "button-action"
-      p== "Use the following form to configure automated exports of reviewed applications from Ticket to RIDE to an SFTP server."
+      = link_to 'Export now', "", class: 'button-action'
+      p Use the following form to configure automated exports of reviewed applications from Ticket to RIDE to an SFTP server.
 
   .page
     .site-width
       h2 Frequency
       p Automatically export reviewed applications from Ticket to RIDE
       .field.field-select
-        label Export frequency
-        select
-          option Twice daily
-          option Daily
-          option Weekly
-          option Monthly
-          option Never
+        = district.label :export_frequency
+        = district.select :export_frequency, options: @export_frequency_options
 
       fieldset
         legend Server settings
         .field
-          label Server
-          input
+          = district.label :sftp_url, 'Server Address'
+          = district.text_field :sftp_url
         .field
-          label User name
-          input
+          = district.label :sftp_username, 'User Name'
+          = district.text_field :sftp_username
         .field
-          label Password
-          input type="password"
+          = district.label :sftp_password, 'Password'
+          = district.text_field :sftp_password
         .field
-          label Remote path
-          input
+          = district.label :sftp_path, 'Server Path'
+          = district.text_field :sftp_path
       footer
-        button.button-action type="submit"
-        | Save
+        = district.submit 'Save'

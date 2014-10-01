@@ -949,6 +949,24 @@ class AdminController < ApplicationController
   end
 
   # -----------
+  # District Admin - Export Settings
+  # -----------
+
+  def export_settings_get
+    @admin = get_logged_in_admin
+    @district = @admin.district
+    # TODO - Add authorization code here
+
+    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]]
+
+    return render 'district_export_settings'
+  end
+
+  def export_settings_post
+
+  end
+
+  # -----------
   # Authentication/Authorization
   # -----------
   def admin_login
