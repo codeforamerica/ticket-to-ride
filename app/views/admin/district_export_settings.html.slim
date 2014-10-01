@@ -1,0 +1,37 @@
+form
+  header
+    .site-width
+      h1 Export settings
+      = link_to "Export now", "", :class=> "button-action"
+      p== "Use the following form to configure automated exports of reviewed applications from Ticket to RIDE to an SFTP server."
+
+  .page
+    .site-width
+      h2 Frequency
+      p Automatically export reviewed applications from Ticket to RIDE
+      .field.field-select
+        label Export frequency
+        select
+          option Twice daily
+          option Daily
+          option Weekly
+          option Monthly
+          option Never
+
+      fieldset
+        legend Server settings
+        .field
+          label Server
+          input
+        .field
+          label User name
+          input
+        .field
+          label Password
+          input type="password"
+        .field
+          label Remote path
+          input
+      footer
+        button.button-action type="submit"
+        | Save
