@@ -1,6 +1,13 @@
+require 'encryptor'
+
 class District < ActiveRecord::Base
   has_many :admin_users
   has_many :supplemental_materials
+
+  # -- Enumerations --
+  enum export_frequency: [:daily, :hourly]
+
+  # -- Validations --
 
   # District Mailing Address Validations
   validates :street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
@@ -29,4 +36,14 @@ class District < ActiveRecord::Base
                                    message: 'Phone number can only have digits and dashes, and must be 10 digits',
                                    allow_nil: true
   }
+
+  # -- Handlers for Password --
+  def sftp_password
+    Encryptor.decrypt(self.sftp_password_hash)
+  end
+
+  def sftp_password=(password)
+    self.sftp_password_hash = Encryptor.encrypt(password)
+  end
+
 end

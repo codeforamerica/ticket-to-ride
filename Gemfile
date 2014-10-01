@@ -53,7 +53,11 @@ gem 'validates_email_format_of'
 # Template engine for Admin screens (per Andrew's recommendation)
 gem 'slim-rails', '2.1.5'
 
+# For attaching supplemental materials
 gem 'paperclip'
+
+# For storing district SFTP passwords
+gem 'bcrypt', '3.1.7'
 
 # DEVELOPMENT ONLY
 group :development do
