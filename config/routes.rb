@@ -141,6 +141,12 @@ Rails.application.routes.draw do
   get 'admin/district/people/delete/:id', to: 'admin#district_people_delete_get'
   post 'admin/district/people/delete/:id', to: 'admin#district_people_delete_post'
 
+  # -----------------------
+  # District - Export Settings
+  # -----------------------
+  get 'admin/district/export', to: 'admin#export_settings_get'
+  post 'admin/district/export', to: 'admin#export_settings_post'
+
 
   resources :enrollment
 
