@@ -17,7 +17,11 @@ article.supplemental-material
     - if supplemental_material.authority_level == "central" && !is_central
       span.badge title="This material is mandated by the state" Mandatory
     - else
-      = link_to 'Edit', "/admin/district/supplemental_materials/edit/#{supplemental_material.id}", class: 'edit'
-      = link_to 'Delete', "/admin/district/supplemental_materials/delete/#{supplemental_material.id}", class: 'delete'
+      - if is_central
+        = link_to 'Edit', "/admin/central/supplemental_materials/edit/#{supplemental_material.id}", class: 'edit'
+        = link_to 'Delete', "/admin/central/supplemental_materials/delete/#{supplemental_material.id}", class: 'delete'
+      - else
+        = link_to 'Edit', "/admin/district/supplemental_materials/edit/#{supplemental_material.id}", class: 'edit'
+        = link_to 'Delete', "/admin/district/supplemental_materials/delete/#{supplemental_material.id}", class: 'delete'
   - if !supplemental_material.description || !supplemental_material.description.blank?
     p= supplemental_material.description
