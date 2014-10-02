@@ -45,7 +45,7 @@ gem 'tzinfo-data', '1.2014.5'
 gem 'bootstrap-slider-rails', '1.9.0'
 
 # Validations for dates
-gem 'validates_timeliness', '3.0.14'
+gem 'jc-validates_timeliness', '3.1.1'
 
 # For validating e-mail formats
 gem 'validates_email_format_of'
