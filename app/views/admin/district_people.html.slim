@@ -15,12 +15,19 @@ header
         - @people.each do |person|
           tr
             td.table-people-col-name
-              = person.name
+              - if person.active
+                = link_to person.name, "/admin/district/people/edit/#{person.id}"
+              - else
+                = person.name
             td.table-people-col-email
-              = person.email
+              - if person.active
+                = link_to person.email, "/admin/district/people/edit/#{person.id}"
+              - else
+                = person.email
             td.table-people-col-actions
               - if person.active
-            		= link_to 'Edit', "/admin/district/people/edit/#{person.id}"
-              - else
+                = link_to 'Edit', "/admin/district/people/edit/#{person.id}"
+              -else
                 = link_to 'Resend invite', '#', onclick: "resendInvite(this, #{person.id})"
+
       	      = link_to 'Delete', "/admin/district/people/delete/#{person.id}", class: "delete"

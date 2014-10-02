@@ -865,6 +865,9 @@ class AdminController < ApplicationController
   def district_people_add_get
     @admin = get_logged_in_admin
     @body_class = 'people-new'
+    @title = 'Add a district administrator'
+    @button_title = 'Add'
+
     @person = AdminUser.new
 
     return render 'district_people_edit'
@@ -873,12 +876,18 @@ class AdminController < ApplicationController
   def district_people_add_post
     @admin = get_logged_in_admin
     @body_class = 'people-new'
+    @title = 'Add a district administrator'
+    @button_title = 'Add'
+
     return edit_a_person_as_district(nil)
   end
 
   def district_people_edit_get
     @admin = get_logged_in_admin
     @body_class = 'people-new'
+    @title = 'Edit district administrator'
+    @button_title = 'Edit'
+
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district
@@ -891,6 +900,9 @@ class AdminController < ApplicationController
   def district_people_edit_post
     @admin = get_logged_in_admin
     @body_class = 'people-new'
+    @title = 'Edit district administrator'
+    @button_title = 'Edit'
+
     @person = AdminUser.find(params[:id])
 
     if @admin.district != @person.district

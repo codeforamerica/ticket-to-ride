@@ -1,7 +1,7 @@
 = form_for(@person, url: request.original_url, method: :post, html:{multipart: true}) do |person|
   header
     .site-width
-      h1 Add a district administrator
+      h1= @title
       p This will be someone that can view/edit applications for a your district
         and add district-level supplemental materials
       - if !@person.errors.empty?
@@ -21,4 +21,4 @@
         = person.label :active, 'Debug: Active'
         = person.check_box :active
       footer
-        = person.submit 'Submit', class: "button-action"
+        = person.submit @button_title, class: "button-action"
