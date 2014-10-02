@@ -10,7 +10,12 @@ module DistrictParams
       :phone,
       :active,
       :welcome_message,
-      :confirmation_message
+      :confirmation_message,
+      :sftp_url,
+      :sftp_username,
+      :sftp_password,
+      :sftp_path,
+      :export_frequency
     )
   end
 end
