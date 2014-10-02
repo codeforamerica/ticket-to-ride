@@ -852,7 +852,7 @@ class AdminController < ApplicationController
     @body_class = 'people'
     district = @admin.district
 
-    @people = AdminUser.where(district: district).where.not(id:@admin.id)
+    @people = AdminUser.where(district: district)
 
     # get all district admins, except current
     if @people.empty?
