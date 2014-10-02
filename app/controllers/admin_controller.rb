@@ -257,12 +257,14 @@ class AdminController < ApplicationController
 
   def central_supplemental_materials_delete_get
     @admin = get_logged_in_admin
+    @body_class = "supplemental-materials-delete"
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
     return render 'supplemental_materials_delete'
   end
 
   def central_supplemental_materials_delete_post
     @admin = get_logged_in_admin
+    @body_class = "supplemental-materials-delete"
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
     @supplemental_material.delete # TODO more error checking
     return redirect_to action: 'central_supplemental_materials'

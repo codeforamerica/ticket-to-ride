@@ -1,5 +1,7 @@
 /* @override http://localhost:3000/assets/admin_forms.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
+
 @font-face {
 	font-family: 'icomoon';
 	font-weight: normal;
@@ -118,10 +120,16 @@ input[type=email][disabled],
 input[type=password][disabled],
 input[type=date][disabled],
 select[disabled],
-textarea[disabled]{
-	background: #f3f3f3;
-	color: #555;
+textarea[disabled],
+button[disabled],
+input[disabled],
+input[disabled]:hover{
+	background: none;
+	color: #aaa;
+	border-color: #eee;
+	cursor: default;
 }
+
 
 select{ 
 	position: relative; 
@@ -625,13 +633,7 @@ button{
 	background: none;
 }
 
-input[disabled],
-input[disabled]:hover{
-	color: #888;
-	border-color: #888;
-	background: none;
-	cursor: default;
-}
+
 
 .button:hover,
 .button-action:hover,
