@@ -337,6 +337,11 @@ class AdminController < ApplicationController
   end
 
   def central_people_add_get
+    # Display variables
+    @body_class = 'people-new'
+    @title = 'Add a new district administrator'
+    @button_title = 'Add'
+
     @admin = get_logged_in_admin
     @person = AdminUser.new
     @district_name = nil
@@ -345,10 +350,18 @@ class AdminController < ApplicationController
   end
 
   def central_people_add_post
+    @body_class = 'people-new'
+    @title = 'Add a district administrator'
+    @button_title = 'Add'
+
     return edit_a_person_as_central(nil)
   end
 
   def central_people_edit_get
+    @body_class = 'people-edit'
+    @title = 'Edit district administrator'
+    @button_title = 'Edit'
+
     @admin = get_logged_in_admin
     @person = AdminUser.find(params[:id]) # TODO add authority check here
     if @person.user_role != 'central_admin'
@@ -360,6 +373,11 @@ class AdminController < ApplicationController
 
   def central_people_edit_post
     id = params[:id] # TODO add authority check here
+
+    @body_class = 'people-edit'
+    @title = 'Edit district administrator'
+    @button_title = 'Edit'
+
     return edit_a_person_as_central(id)
   end
 
@@ -963,7 +981,47 @@ class AdminController < ApplicationController
   end
 
   def export_settings_post
+    # TODO - Disable logging on password on send
+    @admin = get_logged_in_admin
+    @district = @admin.district
+    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
 
+    # Check for missing params
+    missing_param(:district, :export_frequency, @district, 'Export frequency must be entered')
+    missing_param(:district, :sftp_url, @district, 'Server address must be entered')
+    missing_param(:district, :sftp_username, @district, 'User name must be entered')
+    missing_param(:district, :sftp_password, @district, 'Password must be entered')
+    missing_param(:district, :sftp_password_confirm, @district, 'Confirm password must be entered')
+    missing_param(:district, :sftp_path, @district, 'Server path must be entered')
+
+    # Do validations
+    # TODO make the default export frequency never
+
+    password = params[:district][:sftp_password]
+    password_confirm = params[:district][:sftp_password_confirm]
+    if password && password_confirm && (password != password_confirm)
+      @district.errors.add(:password, 'Password and password confirmation do not match')
+    end
+
+    retainValuesAndErrors(@district, district_params)
+    if @district.errors.any?
+      return render 'district_export_settings'
+    end
+
+    # Save
+
+    @notice = 'Changes saved'
+    return render 'district_export_settings'
+  end
+
+  def export_processed_now
+    @admin = get_logged_in_admin
+    @district = @admin.district
+    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
+    @notice = 'Processed applications have been exported'
+
+
+    return render 'district_export_settings'
   end
 
   # -----------
