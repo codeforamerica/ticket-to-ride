@@ -1,17 +1,5 @@
 /* @override http://localhost:3000/assets/admin_forms.css?body=1 */
 
-/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
-
-/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
-
-/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
-
-/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
-
-
-
-
-
 @font-face {
 	font-family: 'icomoon';
 	font-weight: normal;
@@ -422,6 +410,7 @@ div.field.field-width-small textarea{ width: 4rem; }
 div.field-select input,
 div.field-phone-number input,
 div.field-width-medium input[type=text],
+div.field-width-medium input[type=password],
 div.field-width-medium input[type=date],
 div.field-width-medium select,
 div.field-width-medium.custom-select .btn-select{ 
@@ -632,6 +621,7 @@ button{
   border: 0.125rem solid #009253;
 	box-shadow: none !important;
 	cursor: pointer;
+	margin: 0;
 	background: none;
 }
 

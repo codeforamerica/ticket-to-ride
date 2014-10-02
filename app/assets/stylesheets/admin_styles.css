@@ -1,15 +1,6 @@
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
-/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
-
-/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
-
-/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
-
 /* @group bootstrap */
-
-
-
 
 body{
 	color: #555;
@@ -149,16 +140,11 @@ body main header h1+.button-action{
 	margin-left: 0.4em;
 }
 
-body main header h1+p,
-body main header h1+a+p{
-	font-size: 1.1em;
-}
-
 body main h2{
 	font-size: 1em;
 	font-weight: 700;
 	color: #ac540b;
-	margin-bottom: 0.4em;
+	margin-bottom: 0.6em;
 }
 
 body main h3{
@@ -292,14 +278,70 @@ table .sort-desc a::after{
   margin-top: -0.12rem;
 }
 
+table .table-people-col-actions{
+	width: 8rem;
+}
 table .table-people-col-actions a{ display: inline-block; }
 table .table-people-col-actions a:hover{ text-decoration: underline; }
-table.table-applications tbody tr:hover a{ background: #fff2c0; }
+table.table-people tbody tr:hover,
+table.table-applications tbody tr:hover{ background: #fff2c0; }
 
 
 /* @end */
 
 /* @group views */
+
+/* @group export */
+
+.export .field-select label{
+	position: absolute;
+	left: -9999em;
+}
+
+.export fieldset legend{
+	font-size: 1em;
+	font-weight: 700;
+	color: #ac540b;
+	margin-bottom: 0.4em;
+
+}
+
+.export fieldset .field{
+	padding-bottom: 1.4em;
+}
+
+.export fieldset .field label{
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	font-size: 0.7rem;
+	color: #888;
+}
+
+
+/* @end */
+
+/* @group Setup */
+
+.admin-setup{
+	padding-top: 4em;
+}
+
+.admin-setup main{
+	width: 30em;
+	margin: 0 auto;
+	border: 0.2em solid #e3e3e3;
+	padding-top: 1em;
+	padding-bottom: 1.4em;
+	border-radius: 0.5em;
+}
+
+.admin-setup .button-forward{
+	margin-top: 1em;
+
+}
+
+/* @end */
 
 /* @group application-process */
 
@@ -329,13 +371,15 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 .applications-delete,
 .supplemental-materials-delete,
 .people-delete,
-.people-new{ background: #eee; }
+.people-new,
+.people-edit{ background: #eee; }
 
 .schools-delete main .site-width,
 .schools-new main .site-width,
 .applications-delete main .site-width,
 .supplemental-materials-delete main .site-width,
 .people-delete main .site-width,
+.people-edit main .site-width,
 .people-new main .site-width{ padding: 0; }
 
 .schools-delete main,
@@ -343,6 +387,7 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 .applications-delete main,
 .supplemental-materials-delete main,
 .people-new main,
+.people-edit main,
 .people-delete main{
 	border-bottom: none;
 	border: 0.2rem solid #ff514d;
@@ -362,6 +407,7 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 	.applications-delete main,
 	.supplemental-materials-delete main,
 	.people-new main,
+	.people-edit main,
 	.people-delete main{
 		padding: 1.4rem;
 	}
@@ -375,6 +421,7 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 }
 
 .people-new main,
+.people-edit main,
 .schools-new main{
 	border-color: #009253;
 }
@@ -703,6 +750,10 @@ dd.tel span.badge::after{
 /* @end */
 
 /* @group Sign in */
+
+.sign-in header{
+	text-align: center;
+}
 
 .sign-in h1{ 
 	text-align: center; 

@@ -1,23 +1,14 @@
-header
-  / TODO How to get Slim to put the Rails variable on the same line? Slim throws error if the line is indented below the h1 tag
-  h1 Are you sure you want to delete
-  = @person.name
-  span ?
+= form_tag("/admin/central/people/delete/#{@person.id}", method: 'post')
+  header
+    .site-width
+      h1= "Are you sure you want to delete #{@person.name}?"
   .page
+    .site-width
+      p== "Deleting #{@person.name}&rsquo;s account will remove their access to their district. If this is the last administrator assigned to this district, deleting this account will remove this district, any associated accounts, any supplemental materials, as well as any previously submitted application data. To confirm this action please type &lsquo;delete&rsquo; below."
 
-    p
-      | Deleting
-      = @person.name
-      | 's account will remove their access to their district. If this is the last district administrator
-      | assigned to this district, deleting this account will remove this district, any associated accounts,
-      | any supplemental materials, as well as any previously submitted application data. To confirm this action
-      | please type
-      em delete
-      | below.
+      .field.field-width-small
+	label
+	  | Confirm deletion
+	input type="text" id="confirm-delete-input-text" onkeyup="toggleDeleteButton()"
 
-    .field
-      label
-        | Confirm deletion
-      input type="text" id="confirm-delete-input-text" onkeyup="toggleDeleteButton()"
-      = form_tag("/admin/central/people/delete/#{@person.id}", method: 'post')
-        = submit_tag 'Delete this district admin', id: 'confirm-delete-button', disabled: true
+      = submit_tag 'Delete this district admin', id: 'confirm-delete-button', disabled: true, class: "button"

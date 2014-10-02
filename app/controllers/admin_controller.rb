@@ -85,11 +85,11 @@ class AdminController < ApplicationController
 
     # Check fields to see if they were filled in
     if param_does_not_exist(:supplemental_material, :name)
-      @supplemental_material.errors.add(:name, 'Please enter a <em>Name</em>')
+      @supplemental_material.errors.add(:name, 'Please enter a Name')
     end
 
     if param_does_not_exist(:supplemental_material, :description)
-      @supplemental_material.errors.add(:description, 'Please enter a <em>Description</em>')
+      @supplemental_material.errors.add(:description, 'Please enter a Description')
     end
 
     # TYPE OF SUPPLEMENTAL MATERIAL
@@ -106,15 +106,6 @@ class AdminController < ApplicationController
     if params && params[:supplemental_material] && params[:supplemental_material][:bring_documentation] && params[:supplemental_material][:bring_documentation] != '' && params[:supplemental_material][:bring_documentation] != 0 && params[:supplemental_material][:bring_documentation] != '0'
       num_types += 1
     end
-
-    # No type indicated
-    if num_types == 0
-      @supplemental_material.errors.add(:base, 'Please enter a type')
-    # Multiple types indicated
-    elsif num_types > 1
-      @supplemental_material.errors.add(:base, 'Multiple types were entered. Can only be one of file, link, or brought document')
-    end
-
 
     if param_does_not_exist(:supplemental_material, :is_required)
       @supplemental_material.errors.add(:is_required, 'Please indicate if the supplemental material is required or not.')
@@ -162,17 +153,19 @@ class AdminController < ApplicationController
   # -----------
 
   def central_setup_welcome
+    @body_class = "admin-setup admin-setup-1"
     return render 'central_setup_welcome', layout: 'admin_setup'
   end
 
   def central_setup_info_get
     @admin = AdminUser.new
+    @body_class = "admin-setup admin-setup-2"
     return render 'central_setup_info', layout: 'admin_setup'
   end
 
   def central_setup_info_post
-
     @admin = AdminUser.new(user_role: :central_admin)
+    @body_class = "admin-setup admin-setup-2"
 
     # Were the fields filled out?
     if param_does_not_exist(:admin_user, :name)
@@ -212,6 +205,7 @@ class AdminController < ApplicationController
   end
 
   def central_setup_confirm
+    @body_class = "admin-setup admin-setup-3"
     render 'central_setup_confirm', layout: 'admin_setup'
   end
 
@@ -339,7 +333,7 @@ class AdminController < ApplicationController
   def central_people_add_get
     # Display variables
     @body_class = 'people-new'
-    @title = 'Add a new district administrator'
+    @title = 'Add a district administrator'
     @button_title = 'Add'
 
     @admin = get_logged_in_admin
@@ -383,12 +377,14 @@ class AdminController < ApplicationController
 
   def central_people_delete_get
     @admin = get_logged_in_admin
+    @body_class = "people-delete"
     @person = AdminUser.find(params[:id]) # TODO add authority check here
     return render 'central_people_delete'
   end
 
   def central_people_delete_post
     @admin = get_logged_in_admin
+    @body_class = "people-delete"
     @person = AdminUser.find(params[:id]) # TODO add authority check here
 
     district = @person.district
@@ -984,6 +980,7 @@ class AdminController < ApplicationController
 
   def export_settings_get
     @admin = get_logged_in_admin
+    @body_class = "export"
     @district = @admin.district
     # TODO - Add authorization code here
 
