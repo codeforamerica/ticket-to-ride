@@ -225,6 +225,8 @@ class AdminController < ApplicationController
 
   def central_supplemental_materials_add_get
     @admin = get_logged_in_admin
+    @title                 = 'Add a supplemental material'
+    @button_title          = 'Add'
 
     @supplemental_material = SupplementalMaterial.new
 
@@ -233,17 +235,23 @@ class AdminController < ApplicationController
 
   def central_supplemental_materials_add_post
     @admin = get_logged_in_admin
+    @title                 = 'Add a supplemental material'
+    @button_title          = 'Add'
     return edit_supplemental_material(nil)
   end
 
   def central_supplemental_materials_edit_get
     @admin = get_logged_in_admin
+    @title                 = 'Edit supplemental material'
+    @button_title          = 'Edit'
     @supplemental_material = SupplementalMaterial.find(params[:id])
     return render 'supplemental_materials_edit'
   end
 
   def central_supplemental_materials_edit_post
     @admin = get_logged_in_admin
+    @title                 = 'Edit supplemental material'
+    @button_title          = 'Edit'
     return edit_supplemental_material(params[:id])
   end
 
@@ -771,14 +779,17 @@ class AdminController < ApplicationController
     central_supplemental_materials_optional = central_supplemental_materials.where(is_required: false)
 
     # Sort by required or not
+    @supplemental_materials = district_supplemental_materials + central_supplemental_materials
     @supplemental_materials_required = district_supplemental_materials_required + central_supplemental_materials_required
     @supplemental_materials_optional = district_supplemental_materials_optional + central_supplemental_materials_optional
     return render 'district_supplemental_materials'
   end
 
   def district_supplemental_materials_add_get
-    @body_class = 'supplemental-materials'
-    @admin = get_logged_in_admin
+    @body_class            = 'supplemental-materials'
+    @title                 = 'Add a supplemental material'
+    @button_title          = 'Add'
+    @admin                 = get_logged_in_admin
     @supplemental_material = SupplementalMaterial.new
 
     return render 'supplemental_materials_edit'
@@ -786,6 +797,8 @@ class AdminController < ApplicationController
 
   def district_supplemental_materials_add_post
     @admin = get_logged_in_admin
+    @title                 = 'Add a supplemental material'
+    @button_title          = 'Add'
     @body_class = 'supplemental-materials'
     return edit_supplemental_material(nil)
   end
@@ -793,6 +806,8 @@ class AdminController < ApplicationController
   def district_supplemental_materials_edit_get
     @admin = get_logged_in_admin
     @body_class = 'supplemental-materials'
+    @title                 = 'Edit supplemental material'
+    @button_title          = 'Edit'
     @supplemental_material = SupplementalMaterial.find(params[:id])
 
     if @admin.district != @supplemental_material.district
@@ -805,6 +820,8 @@ class AdminController < ApplicationController
   def district_supplemental_materials_edit_post
     @admin = get_logged_in_admin
     @body_class = 'supplemental-materials'
+    @title                 = 'Edit supplemental material'
+    @button_title          = 'Edit'
     @supplemental_material = SupplementalMaterial.find(params[:id])
 
     if @admin.district != @supplemental_material.district

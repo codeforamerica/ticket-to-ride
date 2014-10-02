@@ -1,7 +1,7 @@
 = form_for(@supplemental_material, url: request.original_url, method: :post, html:{multipart: true}) do |sm|
   header
     .site-width
-      h1 Add a Supplemental material
+      h1=@title
       p
         |  Use the form below to specify materials that parents might
         |  bring as they complete their applications in person.
@@ -50,4 +50,4 @@
             = sm.radio_button :is_required, false, checked: "checked"
             == "No"
       footer
-        = sm.submit 'Submit', :class => "button-action"
+        = sm.submit @button_title, :class => "button-action"
