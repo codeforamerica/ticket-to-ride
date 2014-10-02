@@ -147,6 +147,8 @@ Rails.application.routes.draw do
   get 'admin/district/export', to: 'admin#export_settings_get'
   post 'admin/district/export', to: 'admin#export_settings_post'
 
+  get 'admin/district/export/now', to: 'admin#export_processed_now'
+
 
   resources :enrollment
 
