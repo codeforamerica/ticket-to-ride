@@ -16,7 +16,6 @@ html
           - if @admin.user_role == 'central_admin'
             = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
             = link_to 'People', {controller:'admin', action: 'central_people'}
-            = link_to @admin.name, "/admin/central/people/edit/#{@admin.id}"
           - else
             = link_to 'Applications', '/admin/district/applications', class: "applications"
             = link_to 'District info', '/admin/district/info', class: "district"
@@ -24,9 +23,12 @@ html
             = link_to 'People', '/admin/district/people', class: "people"
             = link_to 'Export', '/admin/district/export', class: "export"
         nav.nav-secondary
+          - if @admin.user_role == 'central_admin'
+            = link_to @admin.name, "/admin/central/people/edit/#{@admin.id}"
+          - else
             = link_to @admin.name, "/admin/district/people/edit/#{@admin.id}", class: "user"
-            / TODO actually have solid sign out
-            = link_to 'Sign Out', '/admin', class: "sign-out"
+          / TODO actually have solid sign out
+          = link_to 'Sign Out', '/admin', class: "sign-out"
     main
       = yield
 

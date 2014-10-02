@@ -4,28 +4,39 @@
       h1 Export settings
       = link_to 'Export now', "", class: 'button-action'
       p Use the following form to configure automated exports of reviewed applications from Ticket to RIDE to an SFTP server.
+      - if !@district.errors.empty?
+          .notice
+            ul
+              - @district.errors.each do |field, message|
+                li= message
+      - if @notice
+        .notice
+          p @notice
 
   .page
     .site-width
       h2 Frequency
       p Automatically export reviewed applications from Ticket to RIDE
-      .field.field-select
+      .field.field-select.field-width-medium
         = district.label :export_frequency
         = district.select :export_frequency, options: @export_frequency_options
 
       fieldset
         legend Server settings
-        .field
+        .field.field-width-large
           = district.label :sftp_url, 'Server Address'
           = district.text_field :sftp_url
-        .field
-          = district.label :sftp_username, 'User Name'
-          = district.text_field :sftp_username
-        .field
-          = district.label :sftp_password, 'Password'
-          = district.text_field :sftp_password
-        .field
+        .field.field-width-large
           = district.label :sftp_path, 'Server Path'
           = district.text_field :sftp_path
+        .field.field-width-large
+          = district.label :sftp_username, 'User Name'
+          = district.text_field :sftp_username
+        .field.field-width-large
+          = district.label :sftp_password, 'Password'
+          = district.password_field :sftp_password
+        .field.field-width-large
+          = district.label :sftp_password_confirm, 'Confirm Password'
+          = district.password_field :sftp_password_confirm
       footer
-        = district.submit 'Save'
+        = district.submit 'Save', class: 'button'
