@@ -37,6 +37,23 @@ class District < ActiveRecord::Base
                                    allow_nil: true
   }
 
+  # SFTP fields
+
+  validates :sftp_url, format: {with: /\Asftp:\/\/.+/,
+                                message: 'Server address must start with "sftp://"',
+                                allow_nil: true
+  }
+
+  # validates :sftp_url, format: {with: /[!@]?/,
+  #                               message: 'Server address cannot contain @ symbols',
+  #                               allow_nil: true
+  # }
+
+  validates :sftp_path, format: {with: /[!@:\|]/,
+                                 message: 'Server path cannot have the following symbols: @, :, |',
+                                 allow_nil: true
+  }
+
   # -- Handlers for Password --
   def sftp_password
     Encryptor.decrypt(self.sftp_password_hash)
