@@ -12,15 +12,29 @@ header
 
     = form_for @district, url: request.original_url, method: 'post' do |district|
       .field
+        h2 Welcome title
+        p.note This is the title of the welcome page that guardians will see before they being their application.
+        = district.text_field :welcome_title, required: "true"
+      .field
         h2 Welcome message
-        p.note This is the message the guardians will see before they begin their application.
+        p.note This a welcome letter that guardians will see before they begin their application.
         = district.text_area :welcome_message, required: "true"
       .field
+        h2 Welcomer name
+        p.note This is the name of the person that the welcome message is from.
+        = district.text_field :welcomer_name
+      .field
+        h2 Welcomer title
+        p.note This is the title of the person that the welcome message is from.
+        = district.text_field :welcomer_title
+
+      .field
+        h2 Confirmation title
+        p.note This is the title of the confirmation page that guardians will see after completing their applications.
+        = district.text_field :confirmation_title, required: "true"
+      .field
         h2 Confirmation message
-        p.note
-          | This is the message that guardians will see after completing their application.
-          | This is the place to describe what the next steps are (i.e. which office to visit,
-          | contact people to call, etc.).
+        p.note This is the message that guardians will see after completing their application.
         = district.text_area :confirmation_message, required: "true"
 
       h2 Contact info

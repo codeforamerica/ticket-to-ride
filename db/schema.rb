@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930214450) do
+ActiveRecord::Schema.define(version: 20141003000222) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20140930214450) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",               default: false
+    t.boolean  "active",                          default: false
     t.string   "city"
     t.string   "state"
     t.string   "name"
@@ -72,6 +72,11 @@ ActiveRecord::Schema.define(version: 20140930214450) do
     t.string   "sftp_username"
     t.string   "sftp_password_hash"
     t.integer  "export_frequency"
+    t.string   "welcome_title"
+    t.string   "welcomer_name"
+    t.string   "welcomer_title"
+    t.string   "confirmation_title"
+    t.string   "confirmation_next_steps_message"
   end
 
   add_index "districts", ["name"], name: "index_districts_on_name", unique: true
