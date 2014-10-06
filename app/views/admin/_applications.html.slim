@@ -37,14 +37,9 @@ footer
 	      = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
   nav.misc
     - if @is_processed == false
-      = link_to 'Show recently processed', ' /admin/district/applications/processed'
+      = link_to 'Show processed', ' /admin/district/applications/processed'
     - if @is_processed == true
       = link_to 'Show unprocessed', ' /admin/district/applications'
-    - if @students_unprocessed.any? && @is_processed == false
-      a href="#" class="delete" Delete all applications
-    - if @students_processed.any? && @is_processed == true
-      a href="#" class="delete" Delete all applications
-
 
   - unless @students.empty?
     div.url
