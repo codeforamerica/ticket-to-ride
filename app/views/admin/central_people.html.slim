@@ -23,22 +23,18 @@ header
               a href="/admin/central/people/edit/#{person.id}"
                 = person.email 
             td.table-people-col-school
-
-	      - if person.active
-
-		- if person.user_role != 'central_admin'
-		  a href="/admin/central/people/edit/#{person.id}"
-		    = person.district.name.capitalize
-		- else
-		  a href="/admin/central/people/edit/#{person.id}"
-		    = "Central Admin"
+              - if person.active
+                - if person.user_role != 'central_admin'
+                  =link_to person.district.name.capitalize, "/admin/central/people/edit/#{person.id}"
+                - else
+                  = link_to 'Central Admin',"/admin/central/people/edit/#{person.id}"
 
               - else
+                - if person.user_role != 'central_admin'
+                  = person.district.name.capitalize
+                - else
+                  span "Central Admin"
 
-		- if person.user_role != 'central_admin'
-		  = person.district.name.capitalize
-		- else
-		  = "Central Admin"
 
             td.table-people-col-actions
               - if person.active
