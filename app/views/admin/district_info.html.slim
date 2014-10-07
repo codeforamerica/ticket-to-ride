@@ -9,59 +9,55 @@ header
           = message
 .page
   .site-width
-
     = form_for @district, url: request.original_url, method: 'post' do |district|
       h2 Welcome letter
       p Welcome letters are shown to families before they begin the application process.
       fieldset.fieldset.fieldset-letter
-	legend Welcome message
-	.field.field-letter-title
-	  label for="#{:welcome_title}"
-	    | Subject
-	  = district.text_field :welcome_title, required: "true", :'aria-describedby' => "#{:welcome_title}-description", placeholder: "Welcome to school!"
-	  p id="#{:welcome_title}-description"
-	    | This is the title of the welcome letter.
-
-	.field.field-letter-body
-	  label for="#{:welcome_message}"
-	    | Body
-	  = district.text_area :welcome_message, required: "true", :'aria-describedby' => "#{:welcome_message}-description", rows: "8",placeholder: "Joining a new school is a very exciting time in a family's life. You are the first role model and teacher for your child. It is important for us to work together during your child's school years so that your child reaches his or her maximum potential and becomes a successful, contributing member of our community..."
-	  p id="#{:welcome_message}-description"
-	    | This is the body of the welcome letter.
-
-	span Sincerely,
-	.field.field-letter-welcomer
-	  label for="#{:welcomer_name}"
-	    | Name
-	  = district.text_field :welcomer_name, required: "true", :'aria-describedby' => "#{:welcomer_name}-description", placeholder: "Debra Doe"
-	  p id="#{:welcomer_name}-description"
-	    | This is the name of the person from whom the welcome message is "sent."
-	.field.field-letter-welcomer-title
-	  label for="#{:welcomer_title}"
-	    | Title
-	  = district.text_field :welcomer_title, required: "true", :'aria-describedby' => "#{:welcomer_title}-description", placeholder: "Superintendent"
-	  p id="#{:welcomer_title}-description"
-	    | This is the title of the person from whom the welcome message is "sent."
+        legend Welcome message
+        .field.field-letter-title
+          label for="#{:welcome_title}"
+            | Subject
+          = district.text_field :welcome_title, required: "true", :'aria-describedby' => "#{:welcome_title}-description", placeholder: "Welcome to school!"
+          p id="#{:welcome_title}-description"
+            | This is the title of the welcome letter.
+        .field.field-letter-body
+          label for="#{:welcome_message}"
+            | Body
+          = district.text_area :welcome_message, required: "true", :'aria-describedby' => "#{:welcome_message}-description", rows: "8",placeholder: "Joining a new school is a very exciting time in a family's life. You are the first role model and teacher for your child. It is important for us to work together during your child's school years so that your child reaches his or her maximum potential and becomes a successful, contributing member of our community..."
+          p id="#{:welcome_message}-description"
+            | This is the body of the welcome letter.
+        span Sincerely,
+        .field.field-letter-welcomer
+          label for="#{:welcomer_name}"
+            | Name
+          = district.text_field :welcomer_name, required: "true", :'aria-describedby' => "#{:welcomer_name}-description", placeholder: "Debra Doe"
+          p id="#{:welcomer_name}-description"
+            | This is the name of the person from whom the welcome message is "sent."
+        .field.field-letter-welcomer-title
+          label for="#{:welcomer_title}"
+            | Title
+          = district.text_field :welcomer_title, required: "true", :'aria-describedby' => "#{:welcomer_title}-description", placeholder: "Superintendent"
+          p id="#{:welcomer_title}-description"
+            | This is the title of the person from whom the welcome message is "sent."
 
       h2 Confirmation letter
       p Confirmation letters are shown to families after they complete their application online.
       fieldset.fieldset.fieldset-letter
-	legend Confirmation letter
-	.field
-	  label for="#{:confirmation_title}"
-	    | Subject
-	  = district.text_field :confirmation_title, required: "true", :'aria-describedby' => "#{:confirmation_title}-description", placeholder: "Superintendent"
-	  p id="#{:confirmation_title}-description"
-	    | This is the title of the confirmation page that guardians will see after completing their applications.
-	.field
-	  label for="#{:confirmation_message}"
-	    | Body
-	  = district.text_area :confirmation_message, required: "true"
-	  p id="#{:confirmation_message}-description"
-	    | This is the message that guardians will see after completing their application.
+        legend Confirmation letter
+        .field
+          label for="#{:confirmation_title}"
+            | Subject
+          = district.text_field :confirmation_title, required: "true", :'aria-describedby' => "#{:confirmation_title}-description", placeholder: "Superintendent"
+          p id="#{:confirmation_title}-description"
+            | This is the title of the confirmation page that guardians will see after completing their applications.
+        .field
+          label for="#{:confirmation_message}"
+            | Body
+          = district.text_area :confirmation_message, required: "true"
+          p id="#{:confirmation_message}-description"
+            | This is the message that guardians will see after completing their application.
 
       h2 Contact info
-
       fieldset.fieldset-address
         legend=="Where can guardians visit or call to get more help?"
         .field.field-street
