@@ -86,11 +86,11 @@ class ApplicationController < ActionController::Base
   end
 
   def are_central_admins?
-    return AdminUser.where(user_role: :central_admin).any?
+    return AdminUser.where(user_role: AdminUser.user_roles[:central_admin]).any?
   end
 
   def are_district_admins?
-    return AdminUser.where(user_role: :district_admin).any?
+    return AdminUser.where(user_role: AdminUser.user_roles[:district_admin]).any?
   end
 
   def district_names

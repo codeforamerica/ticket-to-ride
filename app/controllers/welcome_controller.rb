@@ -3,8 +3,14 @@ class WelcomeController < ApplicationController
 	def index
     reset_session
 
-    if !are_admins?
-      redirect_to '/admin/central/setup'
+    if !are_central_admins?
+      return redirect_to '/admin/central/setup'
     end
+
+    if !are_district_admins?
+      return render 'no_districts'
+    end
+
+    return 'index'
 	end
 end
