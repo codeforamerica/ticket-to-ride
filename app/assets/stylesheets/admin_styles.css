@@ -1,6 +1,9 @@
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
+
 /* @group bootstrap */
+
 
 body{
 	color: #555;
@@ -141,7 +144,7 @@ body main header h1+.button-action{
 }
 
 body main h2{
-	font-size: 1em;
+	font-size: 1rem;
 	font-weight: 700;
 	color: #ac540b;
 	margin-bottom: 0.6em;
@@ -353,14 +356,84 @@ table.table-applications tbody tr:hover{ background: #fff2c0; }
 
 /* @group District info */
 
+.district fieldset.fieldset.fieldset-letter{
+	border: 0.1em solid #eee;
+	padding: 2rem;
+	padding-top: 1.4rem;
+	margin-right: 14rem;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
+	margin-top: 1em;
+}
+
+.district fieldset.fieldset.fieldset-letter legend{ position: absolute; left: -9999em;}
+
+.district fieldset.fieldset.fieldset-letter div.field{
+	position: relative;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field label{
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field input,
+.district fieldset.fieldset.fieldset-letter div.field textarea{
+	margin: 0 !important;
+	width: 100% !important;
+	max-width: none;
+	line-height: 1.4em;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field textarea{
+}
+
+.district fieldset.fieldset.fieldset-letter div.field textarea{
+	height: 10em;
+}
+
+.district fieldset.fieldset.fieldset-letter span{
+	display: block;
+	margin-bottom: 0.8em;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field p{
+	position: absolute;
+	top: 1.4rem;
+	left: 100%;
+	width: 12rem;
+	margin-left: 4rem;
+	opacity: 0;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field.field-letter-welcomer p,
+.district fieldset.fieldset.fieldset-letter div.field.field-letter-welcomer-title p{
+	margin-left: 18rem;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field input:focus+p,
+.district fieldset.fieldset.fieldset-letter div.field textarea:focus+p{
+	opacity: 1;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field.field-letter-welcomer,
+.district fieldset.fieldset.fieldset-letter div.field.field-letter-welcomer-title{
+	width: 13em;
+}
+
+.district fieldset.fieldset.fieldset-letter div.field.field-letter-welcomer-title{
+	margin-bottom: 0;
+}
+
 #edit_district_1 textarea,
 #edit_district_1 .field-zip{
 	margin-bottom: 1em;
 }
 
-#edit_district_1 fieldset legend{
-	margin-bottom: 0.6em;
-}
+
 
 /* @end */
 
