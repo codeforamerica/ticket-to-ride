@@ -16,13 +16,6 @@ header
         - @people.each do |person|
           tr
             td.table-people-col-name
-              a href="/admin/central/people/edit/#{person.id}"
-                = person.name 
-  
-            td.table-people-col-email
-              a href="/admin/central/people/edit/#{person.id}"
-                = person.email 
-            td.table-people-col-school
               - if person.active
                 - if person.user_role != 'central_admin'
                   =link_to person.district.name.capitalize, "/admin/central/people/edit/#{person.id}"
@@ -34,7 +27,6 @@ header
                   = person.district.name.capitalize
                 - else
                   span "Central Admin"
-
 
             td.table-people-col-actions
               - if person.active
