@@ -50,7 +50,7 @@ class AdminController < ApplicationController
     end
   end
 
-  def retainValuesAndErrors(obj, param_updater)
+  def retain_values_and_errors(obj, param_updater)
     # Copy existing error messages
     error_messages = {}
     obj.errors.each do |field, message|
@@ -112,7 +112,7 @@ class AdminController < ApplicationController
     end
 
     # Check for errors
-    retainValuesAndErrors(@supplemental_material, supplemental_material_params)
+    retain_values_and_errors(@supplemental_material, supplemental_material_params)
     if @supplemental_material.errors.any?
       return render 'supplemental_materials_edit'
     end
@@ -185,7 +185,7 @@ class AdminController < ApplicationController
     end
 
     # If there were any errors, send back the same page with error messages
-    retainValuesAndErrors(@admin, admin_user_params)
+    retain_values_and_errors(@admin, admin_user_params)
     if @admin.errors.any?
       return render 'central_setup_info', layout: 'admin_setup'
     end
@@ -305,7 +305,7 @@ class AdminController < ApplicationController
     end
 
     # Apply the fields and do validations (and send back errors if there are any)
-    retainValuesAndErrors(@person, admin_user_params)
+    retain_values_and_errors(@person, admin_user_params)
     if @person.errors.any?
       return render 'central_people_edit'
     end
@@ -452,8 +452,8 @@ class AdminController < ApplicationController
     end
 
     # If there were any errors, send back the same page with error messages
-    retainValuesAndErrors(@admin, admin_user_params)
-    retainValuesAndErrors(@district, district_params)
+    retain_values_and_errors(@admin, admin_user_params)
+    retain_values_and_errors(@district, district_params)
     if @admin.errors.any? || @district.errors.any?
       return render 'district_setup', layout: 'admin_setup'
     end
@@ -647,11 +647,11 @@ class AdminController < ApplicationController
     missing_contact_person_params(contact_person_2, contact_person_2_number, 'Contact Person #2')
 
     # Do model validations
-    retainValuesAndErrors(@student, student_params)
+    retain_values_and_errors(@student, student_params)
 
     @student.contact_people.each_with_index do |contact_person, index|
       params[:contact_person] = params["contact_person_#{index}"] # "artificially" fill param to ease use of assign_attributes
-      retainValuesAndErrors(contact_person, contact_person_params)
+      retain_values_and_errors(contact_person, contact_person_params)
     end
     params[:contact_person] = nil # Not used after this
 
@@ -751,7 +751,7 @@ class AdminController < ApplicationController
     missing_param(:district, :state, @district, 'Please enter a state')
     missing_param(:district, :zip_code, @district, 'Please enter a ZIP code')
 
-    retainValuesAndErrors(@district, district_params)
+    retain_values_and_errors(@district, district_params)
 
     unless @district.errors.any?
       @district.save # TODO more error checking here
@@ -979,7 +979,7 @@ class AdminController < ApplicationController
     end
 
     # Apply the fields and do validations (and send back errors if there are any)
-    retainValuesAndErrors(@person, admin_user_params)
+    retain_values_and_errors(@person, admin_user_params)
     if @person.errors.any?
       return render 'central_people_edit'
     end
@@ -1031,7 +1031,7 @@ class AdminController < ApplicationController
       @district.errors.add(:password, 'Password and password confirmation do not match')
     end
 
-    retainValuesAndErrors(@district, district_params)
+    retain_values_and_errors(@district, district_params)
     if @district.errors.any?
       return render 'district_export_settings'
     end
