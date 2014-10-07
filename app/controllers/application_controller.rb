@@ -80,4 +80,26 @@ class ApplicationController < ActionController::Base
 
     return false
   end
+
+  def are_admins?
+    return AdminUser.any?
+  end
+
+  def are_central_admins?
+    return AdminUser.where(user_role: :central_admin).any?
+  end
+
+  def are_district_admins?
+    return AdminUser.where(user_role: :district_admin).any?
+  end
+
+  def district_names
+    district_names = []
+    District.all.each do |district|
+      district_names << district.name.capitalize
+    end
+
+    return district_names
+  end
+
 end
