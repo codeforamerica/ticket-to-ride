@@ -43,7 +43,6 @@ footer
 
   - unless @students.empty?
     div.url
-      =="Applications can be collected at: "
-      code
-      	| http://localhost:3000/
-      	= @district.name.downcase.gsub(/\s+/, '-')
+      - guardian_url = "#{root_url}district/#{@district.url}"
+      | Applications can be collected at:&nbsp;
+      = link_to guardian_url, guardian_url, target: '_blank'
