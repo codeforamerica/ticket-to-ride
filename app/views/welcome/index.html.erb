@@ -1,11 +1,11 @@
 <div class="welcome">
-  <h2>Welcome to Ticket to RIDE</h2>
-  <p>It's an exciting step to be registering your child for school!</p>
+  <h2>Welcome to Ticket to RIDE!</h2>
+  <p>This site will help you register your child for school. Quite exciting!</p>
   <p>To start, choose your school district.</p>
   <div class="enrollment-form">
     <%= form_tag(request.original_url, method: :post) %>
       <%= select_tag 'district_url', options_from_collection_for_select(District.all, 'url', 'name') %>
-      <%= submit_tag 'Begin registration', class: 'nav-button'%>
+      <%= submit_tag 'Begin registration', class: 'btn btn-success pull-right'%>
   </div>
 </div>
 
