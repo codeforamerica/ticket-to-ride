@@ -9,6 +9,12 @@ class District < ActiveRecord::Base
 
   # -- Validations --
 
+  # District name
+  validates :name, format: { with: ModelConstants::LETTERS_NUMBERS_SPACES_AND_DASHES_REGEX,
+                            message: 'District name can only have letters, numbers, spaces, and dashes',
+                            allow_nil: true
+  }
+
   # District Mailing Address Validations
   validates :street_address_1, format: { with: ModelConstants::STREET_ADDRESS_REGEX,
                                               message: 'Street address 1 can only have letters, numbers, dashes, and periods',
@@ -54,13 +60,24 @@ class District < ActiveRecord::Base
                                  allow_nil: true
   }
 
-  # -- Handlers for Password --
+  # District URL
+  validates :url, format: {with: ModelConstants::LETTERS_NUMBERS_SPACES_AND_DASHES_REGEX,
+                           message: 'URL can only have letters ',
+                           allow_nil: true
+  }
+
+  # -- Handlers for Properties --
   def sftp_password
     Encryptor.decrypt(self.sftp_password_hash)
   end
 
   def sftp_password=(password)
     self.sftp_password_hash = Encryptor.encrypt(password)
+  end
+
+  def name=(new_name)
+    write_attribute(:name, new_name)
+    self.url = self.name.gsub(/\s+/, '-').downcase
   end
 
 end

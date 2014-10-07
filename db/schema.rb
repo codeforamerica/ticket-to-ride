@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003000222) do
+ActiveRecord::Schema.define(version: 20141007200725) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20141003000222) do
     t.string   "welcomer_title"
     t.string   "confirmation_title"
     t.string   "confirmation_next_steps_message"
+    t.string   "url"
   end
 
   add_index "districts", ["name"], name: "index_districts_on_name", unique: true
