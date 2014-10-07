@@ -77,7 +77,11 @@ class District < ActiveRecord::Base
 
   def name=(new_name)
     write_attribute(:name, new_name)
-    self.url = self.name.gsub(/\s+/, '-').downcase
+    self.url = make_url(new_name)
+  end
+
+  def make_url(name)
+    return name.gsub(/\s+/, '-').downcase
   end
 
 end

@@ -1,0 +1,14 @@
+<div class="welcome">
+  <h2><%=@district.welcome_title%></h2>
+  <div><%=raw @district.welcome_message.gsub(/\n/,'<br/>')%></div>
+  <p>Sincerely,<br/>
+  <%=@district.welcomer_name%>, <%=@district.welcomer_title%></p>
+</div>
+
+<div class="begin_enrollment">
+  <%= button_to "Begin registration", '/enrollment', :method => "get", :class => "btn btn-success pull-right" %>
+</div>
+
+<%= render 'shared/scenery_welcome' %>
+
+

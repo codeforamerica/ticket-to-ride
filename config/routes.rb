@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root :to => 'welcome#index'
+  root :to => 'welcome#choose_district'
+
+  get '/', to: 'welcome#choose_district'
+  post '/', to: 'welcome#welcome'
+  get 'district/:district_url', to: 'welcome#welcome'
+
+  get '/enrollment/district/:district_url', to: 'enrollment#show', district_url: /[a-z0-9\-]+/i
 
   # root :to => 'intro#index'
 

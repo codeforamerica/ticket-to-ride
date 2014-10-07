@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
 
-	def index
+	def choose_district
     reset_session
 
     if !are_central_admins?
@@ -11,6 +11,22 @@ class WelcomeController < ApplicationController
       return render 'no_districts'
     end
 
-    return 'index'
-	end
+    @district_names = []
+    District.all.each do |district|
+      @district_names << district.name.capitalize
+    end
+
+    return render 'index'
+  end
+
+  def welcome
+    @district = District.where( url: params['district_url']).first
+
+    if @district == nil
+      return redirect_to action: :choose_district
+    end
+
+    session[:district_id] = @district.id
+    return render 'welcome'
+  end
 end
