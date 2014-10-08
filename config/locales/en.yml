@@ -95,3 +95,12 @@ en:
   armed_service_status_civilian: 'Civilian'
   armed_service_status_foreign: 'Foreign'
 
+  # Birthday translation for missing date
+  activerecord:
+    errors:
+      models:
+        student:
+          attributes:
+            birthday:
+              invalid_date: 'Birthday is either missing or is in an incorrect format. Enter mm/dd/yyyy.'
+
