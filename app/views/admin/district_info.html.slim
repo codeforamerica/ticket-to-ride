@@ -79,4 +79,8 @@ header
           = district.label :zip_code, 'ZIP Code'
           = district.text_field :zip_code, required: "true"
 
+        .field.field-phone
+          = district.label :phone, 'Phone'
+          = district.text_field :phone, required: "true"
+
       = district.submit 'Update info', :class => "button"
