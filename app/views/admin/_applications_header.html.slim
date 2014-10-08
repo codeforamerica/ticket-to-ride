@@ -11,10 +11,8 @@
           ==" and manually process an application." 
         - else 
           =="applications school applications because they don&rsquo;t yet exist! Share the following URL to get started (or just try it out yourself):"
-          code     
-            | http://localhost:3000/
-            / TODO The URL should be calculated/stored elsewhere
-            = @district.name.downcase.gsub(/\s+/, '-')
+          code
+            = "#{root_url}district/#{@district.url}"
 
 - else
   h1= @is_processed ? "Processed applications " : "Applications"
