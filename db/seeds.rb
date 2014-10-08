@@ -58,6 +58,7 @@ west_warwick_district = District.create(
   state: 'RI',
   zip_code: '02984',
   phone: '4018211180',
+  email: 'ww@ww.edu',
   active: true,
   welcome_title: 'Welcome to West Warwick Public Schools!',
   welcome_message: "Dear parents,\nWe're so incredibly excited to have your child join our schools. West Warwick is among the finest districts in the entire universe and any human or non-human child is deeply valued.\nThis site will help us get to know you and your child better. We're team, you and us. In order to work together best we'll need to know a little bit about your child, but also those involved in your child's life (such as you).",

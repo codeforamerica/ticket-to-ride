@@ -750,6 +750,8 @@ class AdminController < ApplicationController
     missing_param(:district, :city, @district, 'Please enter a city')
     missing_param(:district, :state, @district, 'Please enter a state')
     missing_param(:district, :zip_code, @district, 'Please enter a ZIP code')
+    missing_param(:district, :phone, @district, 'Please enter a phone number')
+    missing_param(:district, :email, @district, 'Please enter an email address')
 
     retain_values_and_errors(@district, district_params)
 

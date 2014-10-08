@@ -83,4 +83,8 @@ header
           = district.label :phone, 'Phone'
           = district.text_field :phone, required: "true"
 
+        .field.field-email
+          = district.label :email, 'Email'
+          = district.text_field :email, required: "true"
+
       = district.submit 'Update info', :class => "button"

@@ -43,6 +43,9 @@ class District < ActiveRecord::Base
                                    allow_nil: true
   }
 
+  # Email
+  validates_email_format_of :email, :message => 'E-mail address was not valid', allow_nil: true, allow_blank: true
+
   # SFTP fields
 
   validates :sftp_url, format: {with: /\Asftp:\/\/.+/,
