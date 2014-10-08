@@ -47,13 +47,13 @@ header
         .field
           label for="#{:confirmation_title}"
             | Subject
-          = district.text_field :confirmation_title, required: "true", :'aria-describedby' => "#{:confirmation_title}-description", placeholder: "Superintendent"
+          = district.text_field :confirmation_title, required: "true", :'aria-describedby' => "#{:confirmation_title}-description", placeholder: "Thanks for registering!"
           p id="#{:confirmation_title}-description"
             | This is the title of the confirmation page that guardians will see after completing their applications.
         .field
           label for="#{:confirmation_message}"
             | Body
-          = district.text_area :confirmation_message, required: "true"
+          = district.text_area :confirmation_message, required: "true", placeholder: "Please visit our school at your earliest convenience."
           p id="#{:confirmation_message}-description"
             | This is the message that guardians will see after completing their application.
 
