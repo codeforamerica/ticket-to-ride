@@ -13,6 +13,67 @@ class AdminController < ApplicationController
   include StudentRaceParams
   include ContactPersonParams
 
+
+  before_action :authenticate_admin_user!
+  skip_before_action :authenticate_admin_user!,
+                     only: [
+                         :index,
+                         :central_setup_welcome,
+                         :central_setup_info_get,
+                         :central_setup_info_post,
+                         :central_setup_confirm,
+                         :district_setup_get,
+                         :district_setup_post,
+                     ]
+
+  before_action :is_admin_user_central,
+                only: [
+                    :central_supplemental_materials,
+                    :central_supplemental_materials_add_get,
+                    :central_supplemental_materials_add_post,
+                    :central_supplemental_materials_edit_get,
+                    :central_supplemental_materials_edit_post,
+                    :central_supplemental_materials_delete_get,
+                    :central_people,
+                    :central_people_add_get,
+                    :central_people_add_post,
+                    :central_people_edit_get,
+                    :central_people_edit_post,
+                    :central_people_delete_get,
+                    :central_people_delete_post
+                ]
+
+  before_action :is_admin_user_district,
+                only: [
+                    :district_applications_unprocessed,
+                    :district_applications_processed,
+                    :district_view_application,
+                    :district_application_detail_get,
+                    :district_application_edit_get,
+                    :district_application_edit_post,
+                    :district_application_process_get,
+                    :district_application_process_post,
+                    :district_info_get,
+                    :district_info_post,
+                    :district_supplemental_materials,
+                    :district_supplemental_materials_add_get,
+                    :district_supplemental_materials_add_post,
+                    :district_supplemental_materials_edit_get,
+                    :district_supplemental_materials_edit_post,
+                    :district_supplemental_materials_delete_get,
+                    :district_supplemental_materials_delete_post,
+                    :district_people,
+                    :district_people_add_get,
+                    :district_people_add_post,
+                    :district_people_edit_get,
+                    :district_people_edit_post,
+                    :district_people_delete_get,
+                    :district_people_delete_post,
+                    :export_settings_get,
+                    :export_settings_post,
+                    :export_processed_now
+                ]
+
   # -----------
   # Constants
   # -----------
@@ -31,13 +92,27 @@ class AdminController < ApplicationController
       return redirect_to action: :central_setup_welcome
     end
 
-    return redirect_to action: :admin_login
+    return redirect_to '/admin_users/sign_in'
   end
 
   # -----------
   # Helper Methods
   # TODO Move these elsewhere so that they can be reused
   # -----------
+
+  def is_admin_user_central
+    if !admin_user_signed_in? || current_admin_user.user_role != 'central_admin'
+      reset_session
+      return redirect_to '/admin_users/sign_in'
+    end
+  end
+
+  def is_admin_user_district
+    if !admin_user_signed_in? || current_admin_user.user_role != 'district_admin'
+      reset_session
+      return redirect_to '/admin_users/sign_in'
+    end
+  end
 
   def param_does_not_exist(model_const, field_const)
     return !params || !params[model_const] || !params[model_const][field_const] || params[model_const][field_const] == ''
@@ -214,7 +289,7 @@ class AdminController < ApplicationController
   # -----------
 
   def central_supplemental_materials
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
 
     @supplemental_materials = SupplementalMaterial.where(authority_level: SupplementalMaterial.authority_levels[:central])
     @supplemental_materials_required = @supplemental_materials.where(is_required: true)
@@ -449,6 +524,9 @@ class AdminController < ApplicationController
     end
     if param_does_not_exist(:district, :zip_code)
       @district.errors.add(:zip_code, "Please enter the district's ZIP code")
+    end
+    if param_does_not_exist(:distrct, :email)
+      @district.errors.add(:email, "Please enter the district's email address")
     end
 
     # If there were any errors, send back the same page with error messages
@@ -1057,47 +1135,5 @@ class AdminController < ApplicationController
   # -----------
   # Authentication/Authorization
   # -----------
-  def admin_login
-
-    @errors = {}
-    @admins = AdminUser.all
-
-    # GET
-    if request.method_symbol == :get
-      return render 'admin_login', layout: 'admin_setup'
-    end
-
-    # POST
-    email = params['email']
-    if email == nil
-      @errors[:email] = 'You must enter an e-mail address'
-      return render 'admin_login'
-    end
-    # password = request.POST['password']
-    # if password == nil
-    #   @errors[:password] = 'You must enter a password'
-    #   render 'admin_login'
-    # end
-
-    admin_user = AdminUser.find_by(email: email) #TODO better error handling
-    if admin_user == nil
-      @errors[:username] = 'Could not find a user with that e-mail address'
-      return render 'admin_login', layout: 'admin_setup'
-    end
-
-    session[:admin_user_id] = admin_user.id
-
-    # TODO some more error checking around the district ID
-    if admin_user.user_role == 'district_admin'
-      return redirect_to action: 'district_applications_unprocessed'
-    end
-
-    return redirect_to action: 'central_supplemental_materials'
-  end
-
-  def show
-    page_id = request.filtered_parameters['id']
-    return render page_id
-  end
 
 end
