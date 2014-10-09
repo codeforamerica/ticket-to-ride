@@ -54,10 +54,10 @@ gem 'validates_email_format_of'
 gem 'slim-rails', '2.1.5'
 
 # For attaching supplemental materials
-gem 'paperclip'
+gem 'paperclip', '4.2.0'
 
 # For authentication
-gem 'devise'
+gem 'devise', '3.3.0'
 
 # DEVELOPMENT ONLY
 group :development do

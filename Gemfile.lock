@@ -289,7 +289,7 @@ DEPENDENCIES
   bootstrap-slider-rails (= 1.9.0)
   capybara
   coffee-rails (= 4.0.1)
-  devise
+  devise (= 3.3.0)
   factory_girl_rails (~> 4.0)
   faker
   guard
@@ -302,7 +302,7 @@ DEPENDENCIES
   knockoutjs-rails (= 3.1.0.1)
   launchy
   momentjs-rails (= 2.6.0)
-  paperclip
+  paperclip (= 4.2.0)
   pg (= 0.17.1)
   rails (= 4.1.1)
   rails_12factor (= 0.0.2)
