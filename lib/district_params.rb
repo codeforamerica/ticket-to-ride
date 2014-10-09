@@ -15,7 +15,8 @@ module DistrictParams
       :sftp_username,
       :sftp_password,
       :sftp_path,
-      :export_frequency
+      :export_frequency,
+      :email
     )
   end
 end
