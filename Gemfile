@@ -56,6 +56,9 @@ gem 'slim-rails', '2.1.5'
 # For attaching supplemental materials
 gem 'paperclip'
 
+# For authentication
+gem 'devise'
+
 # DEVELOPMENT ONLY
 group :development do
 
