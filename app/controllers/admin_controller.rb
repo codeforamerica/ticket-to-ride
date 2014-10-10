@@ -142,15 +142,8 @@ class AdminController < ApplicationController
     end
   end
 
-  def get_logged_in_admin
-    # TODO error handling
-    admin_id = session[:admin_user_id]
-    admin_user = AdminUser.find(admin_id)
-    return admin_user
-  end
-
   def edit_supplemental_material(id)
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
 
     if id
       @supplemental_material = SupplementalMaterial.find(id) # TODO Better error checking
@@ -299,7 +292,7 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_add_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @title                 = 'Add a supplemental material'
     @button_title          = 'Add'
 
@@ -309,14 +302,14 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_add_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @title                 = 'Add a supplemental material'
     @button_title          = 'Add'
     return edit_supplemental_material(nil)
   end
 
   def central_supplemental_materials_edit_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @title                 = 'Edit supplemental material'
     @button_title          = 'Edit'
     @supplemental_material = SupplementalMaterial.find(params[:id])
@@ -324,21 +317,21 @@ class AdminController < ApplicationController
   end
 
   def central_supplemental_materials_edit_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @title                 = 'Edit supplemental material'
     @button_title          = 'Edit'
     return edit_supplemental_material(params[:id])
   end
 
   def central_supplemental_materials_delete_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = "supplemental-materials-delete"
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
     return render 'supplemental_materials_delete'
   end
 
   def central_supplemental_materials_delete_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = "supplemental-materials-delete"
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
     @supplemental_material.delete # TODO more error checking
@@ -350,7 +343,7 @@ class AdminController < ApplicationController
   # -----------
 
   def edit_a_person_as_central(id)
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
 
     if id
       @person = AdminUser.find(id)
@@ -405,7 +398,7 @@ class AdminController < ApplicationController
   end
 
   def central_people
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
 
     @people = AdminUser.all.where.not(id: @admin.id).order(:name)
     unless @people.any?
@@ -421,7 +414,7 @@ class AdminController < ApplicationController
     @title = 'Add a district administrator'
     @button_title = 'Add'
 
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @person = AdminUser.new
     @district_name = nil
 
@@ -441,7 +434,7 @@ class AdminController < ApplicationController
     @title = 'Edit district administrator'
     @button_title = 'Edit'
 
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @person = AdminUser.find(params[:id]) # TODO add authority check here
     if @person.user_role != 'central_admin'
       @district_name = @person.district.name
@@ -461,14 +454,14 @@ class AdminController < ApplicationController
   end
 
   def central_people_delete_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = "people-delete"
     @person = AdminUser.find(params[:id]) # TODO add authority check here
     return render 'central_people_delete'
   end
 
   def central_people_delete_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = "people-delete"
     @person = AdminUser.find(params[:id]) # TODO add authority check here
 
@@ -778,7 +771,7 @@ class AdminController < ApplicationController
 
 
   def district_application_process_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = "application-process"
     @student = Student.find(params[:student_id]) # TODO better error checking and auth
 
@@ -794,7 +787,7 @@ class AdminController < ApplicationController
   end
 
   def district_application_process_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = "application-process"
     @student = Student.find(params[:student_id]) # TODO better error checking and auth
 
@@ -810,7 +803,7 @@ class AdminController < ApplicationController
 
   def district_info_get
     @body_class = 'district'
-    @admin = get_logged_in_admin # TODO auth
+    @admin = current_admin_user # TODO auth
     @district = @admin.district
 
     @saved = false
@@ -819,7 +812,7 @@ class AdminController < ApplicationController
 
   def district_info_post
     @body_class = 'district'
-    @admin = get_logged_in_admin # TODO auth
+    @admin = current_admin_user # TODO auth
     @district = @admin.district
 
     missing_param(:district, :welcome_message, @district, 'Please enter a welcome message')
@@ -847,7 +840,7 @@ class AdminController < ApplicationController
 
   def district_supplemental_materials
     @body_class = 'supplemental-materials'
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     district = @admin.district
 
     # Get materials based on required or not
@@ -871,14 +864,14 @@ class AdminController < ApplicationController
     @body_class            = 'supplemental-materials'
     @title                 = 'Add a supplemental material'
     @button_title          = 'Add'
-    @admin                 = get_logged_in_admin
+    @admin                 = current_admin_user
     @supplemental_material = SupplementalMaterial.new
 
     return render 'supplemental_materials_edit'
   end
 
   def district_supplemental_materials_add_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @title                 = 'Add a supplemental material'
     @button_title          = 'Add'
     @body_class = 'supplemental-materials'
@@ -886,7 +879,7 @@ class AdminController < ApplicationController
   end
 
   def district_supplemental_materials_edit_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'supplemental-materials'
     @title                 = 'Edit supplemental material'
     @button_title          = 'Edit'
@@ -900,7 +893,7 @@ class AdminController < ApplicationController
   end
 
   def district_supplemental_materials_edit_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'supplemental-materials'
     @title                 = 'Edit supplemental material'
     @button_title          = 'Edit'
@@ -914,7 +907,7 @@ class AdminController < ApplicationController
   end
 
   def district_supplemental_materials_delete_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'supplemental-materials-delete'
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
 
@@ -926,7 +919,7 @@ class AdminController < ApplicationController
   end
 
   def district_supplemental_materials_delete_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'supplemental-materials'
     @supplemental_material = SupplementalMaterial.find(params[:id]) # TODO Better error checking
 
@@ -943,7 +936,7 @@ class AdminController < ApplicationController
   # -----------
 
   def district_people
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people'
     district = @admin.district
 
@@ -958,7 +951,7 @@ class AdminController < ApplicationController
   end
 
   def district_people_add_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people-new'
     @title = 'Add a district administrator'
     @button_title = 'Add'
@@ -969,7 +962,7 @@ class AdminController < ApplicationController
   end
 
   def district_people_add_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people-new'
     @title = 'Add a district administrator'
     @button_title = 'Add'
@@ -978,7 +971,7 @@ class AdminController < ApplicationController
   end
 
   def district_people_edit_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people-new'
     @title = 'Edit district administrator'
     @button_title = 'Edit'
@@ -993,7 +986,7 @@ class AdminController < ApplicationController
   end
 
   def district_people_edit_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people-new'
     @title = 'Edit district administrator'
     @button_title = 'Edit'
@@ -1008,7 +1001,7 @@ class AdminController < ApplicationController
   end
 
   def district_people_delete_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people-delete'
     @person = AdminUser.find(params[:id])
 
@@ -1020,7 +1013,7 @@ class AdminController < ApplicationController
   end
 
   def district_people_delete_post
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people'
     @person = AdminUser.find(params[:id])
 
@@ -1034,7 +1027,7 @@ class AdminController < ApplicationController
   end
 
   def edit_a_person_as_district(id)
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = 'people'
     district = @admin.district
 
@@ -1078,7 +1071,7 @@ class AdminController < ApplicationController
   # -----------
 
   def export_settings_get
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @body_class = "export"
     @district = @admin.district
     # TODO - Add authorization code here
@@ -1090,7 +1083,7 @@ class AdminController < ApplicationController
 
   def export_settings_post
     # TODO - Disable logging on password on send
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @district = @admin.district
     @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
 
@@ -1123,7 +1116,7 @@ class AdminController < ApplicationController
   end
 
   def export_processed_now
-    @admin = get_logged_in_admin
+    @admin = current_admin_user
     @district = @admin.district
     @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
     @notice = 'Processed applications have been exported'
