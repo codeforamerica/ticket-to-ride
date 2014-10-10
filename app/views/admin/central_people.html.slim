@@ -16,6 +16,10 @@ header
         - @people.each do |person|
           tr
             td.table-people-col-name
+              = person.name
+            td.table-people-col-name
+              = person.email
+            td.table-people-col-name
               - if person.active
                 - if person.user_role != 'central_admin'
                   =link_to person.district.name.capitalize, "/admin/central/people/edit/#{person.id}"
