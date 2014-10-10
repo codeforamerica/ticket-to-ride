@@ -21,7 +21,7 @@ header
         =label :password, 'Password'
         =admin_user.password_field :password
       .field.field-password.field-width-medium
-        =label :confirm_password, 'Confirm Password'
-        =admin_user.password_field :confirm_password
+        =label :password_confirmation, 'Confirm Password'
+        =admin_user.password_field :password_confirm
       footer
 	    =admin_user.submit 'Continue', class: 'button'

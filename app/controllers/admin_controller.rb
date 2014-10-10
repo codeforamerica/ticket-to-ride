@@ -4,6 +4,7 @@ require 'district_params'
 require 'student_params'
 require 'student_race_params'
 require 'contact_person_params'
+require 'securerandom' # For generating district admin temp passwords
 
 class AdminController < ApplicationController
   include AdminUserParams
@@ -248,12 +249,21 @@ class AdminController < ApplicationController
       @admin.errors.add(:password, 'Password was not entered')
     end
 
-    if param_does_not_exist(:admin_user, :confirm_password)
-      @admin.errors.add(:confirm_password, 'The password confirmation was not entered')
+    if param_does_not_exist(:admin_user, :password_confirmation)
+      @admin.errors.add(:password_confirmation, 'The password confirmation was not entered')
     end
 
+    if params[:admin_user][:password] != params[:admin_user][:password_confirmation]
+      @admin.errors.add(:password, 'The passwords do not match')
+      return render 'central_setup_info', layout: 'admin_setup'
+    end
+
+
     # If there were any errors, send back the same page with error messages
+    @admin.password = params[:admin_user][:password]
+    @admin.password = params[:admin_user][:password]
     retain_values_and_errors(@admin, admin_user_params)
+
     if @admin.errors.any?
       return render 'central_setup_info', layout: 'admin_setup'
     end
@@ -266,7 +276,12 @@ class AdminController < ApplicationController
 
     # Save the central admin
     @admin.active = true
-    @admin.save
+    begin
+      @admin.save
+    rescue
+      @admin.errors.add(:base, 'There was an error and the user could not be registered. Talk to an admin.')
+      return render 'central_setup_info', layout: 'admin_setup'
+    end
     session[:admin_user_id] = @admin.id
 
     return redirect_to action: :central_setup_confirm
@@ -373,6 +388,12 @@ class AdminController < ApplicationController
     end
 
     # Apply the fields and do validations (and send back errors if there are any)
+    if id == nil
+      temp_password = SecureRandom.hex
+      @person.password = temp_password
+      @person.password_confirmation = temp_password
+    end
+
     retain_values_and_errors(@person, admin_user_params)
     if @person.errors.any?
       return render 'central_people_edit'
@@ -501,10 +522,10 @@ class AdminController < ApplicationController
       @admin.errors.add(:email, 'Please enter an email address')
     end
     if param_does_not_exist(:admin_user, :password)
-      @admin.errors.add(:base, 'Please enter a password') # TODO switch to actual password field
+      @admin.errors.add(:password, 'Please enter a password') # TODO switch to actual password field
     end
-    if param_does_not_exist(:admin_user, :confirm_password)
-      @admin.errors.add(:base, 'Please confirm the password') # TODO switch to actual password field
+    if param_does_not_exist(:admin_user, :password_confirmation)
+      @admin.errors.add(:password_confirmation, 'Please confirm the password') # TODO switch to actual password field
     end
     if param_does_not_exist(:district, :street_address_1)
       @district.errors.add(:street_address_1, "Please enter the first line of the district's  address")
@@ -1099,8 +1120,8 @@ class AdminController < ApplicationController
     # TODO make the default export frequency never
 
     password = params[:district][:sftp_password]
-    password_confirm = params[:district][:sftp_password_confirm]
-    if password && password_confirm && (password != password_confirm)
+    password_confirmation = params[:district][:sftp_password_confirmation]
+    if password && password_confirmation && (password != password_confirmation)
       @district.errors.add(:password, 'Password and password confirmation do not match')
     end
 
