@@ -58,8 +58,10 @@ header
             | This is the message that guardians will see after completing their application.
 
       h2 Contact info
+      p Where can guardians visit or call to get more help?
+
       fieldset.fieldset-address
-        legend=="Where can guardians visit or call to get more help?"
+        legend Address
         .field.field-street
           = district.label :street_address_1, 'Street address - Line 1'
           = district.text_field :street_address_1, required: "true"
@@ -79,12 +81,12 @@ header
           = district.label :zip_code, 'ZIP Code'
           = district.text_field :zip_code, required: "true"
 
-        .field.field-phone
-          = district.label :phone, 'Phone'
-          = district.text_field :phone, required: "true"
+      .field.field-phone.field-width-medium
+        = district.label :phone, 'Phone'
+        = district.text_field :phone, required: "true"
 
-        .field.field-email
-          = district.label :email, 'Email'
-          = district.text_field :email, required: "true"
-
-      = district.submit 'Update info', :class => "button"
+      .field.field-email.field-width-large
+        = district.label :email, 'Email'
+        = district.text_field :email, required: "true"
+      footer
+        = district.submit 'Update info', :class => "button"
