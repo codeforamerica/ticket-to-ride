@@ -5,7 +5,7 @@ class District < ActiveRecord::Base
   has_many :supplemental_materials
 
   # -- Enumerations --
-  enum export_frequency: [:export_twice_daily, :daily, :never ]
+  enum export_frequency: [:export_automatically, :export_twice_daily, :export_daily, :export_never ]
 
   # -- Validations --
 

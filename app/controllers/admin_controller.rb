@@ -1005,7 +1005,7 @@ class AdminController < ApplicationController
     @district = @admin.district
     # TODO - Add authorization code here
 
-    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]]
+    @export_frequency_options = [['Automatically', :export_automatically],['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
 
     return render 'district_export_settings'
   end
@@ -1014,7 +1014,7 @@ class AdminController < ApplicationController
     # TODO - Disable logging on password on send
     @admin = get_logged_in_admin
     @district = @admin.district
-    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
+    @export_frequency_options = [['Automatically', :export_automatically],['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
 
     # Check for missing params
     missing_param(:district, :export_frequency, @district, 'Export frequency must be entered')
@@ -1047,7 +1047,7 @@ class AdminController < ApplicationController
   def export_processed_now
     @admin = get_logged_in_admin
     @district = @admin.district
-    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
+    @export_frequency_options = [['Automatically', :export_automatically],['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
     @notice = 'Processed applications have been exported'
 
 
