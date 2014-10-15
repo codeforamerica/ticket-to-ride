@@ -744,7 +744,12 @@ class AdminController < ApplicationController
     @admin = get_logged_in_admin # TODO auth
     @district = @admin.district
 
+    missing_param(:district, :name, @district, 'Please enter a name for the district')
+    missing_param(:district, :welcome_title, @district, 'Please enter a welcome subject')
     missing_param(:district, :welcome_message, @district, 'Please enter a welcome message')
+    missing_param(:district, :welcomer_name, @district, 'Please enter a welcome person name')
+    missing_param(:district, :welcomer_title, @district, 'Please enter a welcome person title')
+    missing_param(:district, :confirmation_title, @district, 'Please enter a confirmation subject')
     missing_param(:district, :confirmation_message, @district, 'Please enter a confirmation message')
     missing_param(:district, :street_address_1, @district, 'Please enter a street address (line 1)')
     missing_param(:district, :city, @district, 'Please enter a city')
