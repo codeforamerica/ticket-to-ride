@@ -11,8 +11,10 @@ header
 .page
   .site-width
     = form_for @district, url: request.original_url, method: 'post' do |district|
-      h2 District name
-      = district.text_field :name, placeholder: 'Rhode Island Public Schools', required: true
+      h2#district-name-label District name
+      p#district-name-description=="Changing your district&rsquo;s name also changes the URL at which you collect applications."
+      .field.field-width-large
+        = district.text_field :name, placeholder: 'Rhode Island Public Schools', required: true, :'aria-labelledby' => "district-name-label", :'aria-describedby' => "district-name-description"
       h2 Welcome letter
       p Welcome letters are shown to families before they begin the application process. Remember to be warm and friendly! This is your first interaction with guardians.
       fieldset.fieldset.fieldset-letter
