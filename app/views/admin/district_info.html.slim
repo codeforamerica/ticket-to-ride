@@ -3,10 +3,11 @@ header
     h1 District info
     - if @saved
       .notice=="Saved!"
-    ul
-      - @district.errors.each do |field, message|
-        li
-          = message
+    - unless @district.errors.blank?
+      ul
+        - @district.errors.each do |field, message|
+          li
+            = message
 .page
   .site-width
     = form_for @district, url: request.original_url, method: 'post' do |district|
