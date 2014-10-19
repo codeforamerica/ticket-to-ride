@@ -1,0 +1,166 @@
+= form_for(@student, url: request.original_url, method: 'post', html:{id: 'application-detail-form'}) do |student|
+  header.header-toolbar
+    .site-width
+      h1
+        a href="/admin/district/application/#{@student.id}"
+          =="Application ##{@student.confirmation_code}"
+      - url_root = '/admin/district/application'
+      = student.submit 'Save', id: 'application-detail-form-submit-button', class: "save"
+  .page
+    .site-width
+      - if @are_errors
+        #application-detail-errors.notice
+          h1 Please correct the following errors:
+          ul
+            = render 'model_errors', model_obj: @student
+            - @student.contact_people.each do |contact_person|
+              = render 'model_errors', model_obj: contact_person
+            - @student.student_races.each do |race|
+              = render 'model_errors', model_obj: race
+      - if @was_saved
+	      == "Updated!"
+      / STUDENT INFO
+      section#application-student-info
+        h2 Student information
+        fieldset.fieldset-name
+          legend Full name
+          .field
+            = student.label :first_name, 'First'
+            = student.text_field :first_name, required: "true"
+          .field
+            = student.label :middle_name, 'Middle'
+            = student.text_field :middle_name
+          .field
+            = student.label :last_name, 'Last'
+            = student.text_field :last_name, required: "true"
+        fieldset
+          legend Gender
+          .field.field-radiobutton
+            = student.label :gender_male do
+              = student.radio_button :gender, "male", required: "true"
+              == "Male"
+          .field.field-radiobutton
+            = student.label :gender_female do
+              = student.radio_button :gender, "female"
+              == "Female"
+        .field.field-width-large
+          = student.label :birthday, 'Date of birth', required: "true"
+          = student.date_field :birthday
+        fieldset.fieldset-address
+          legend=="Birth location"
+          .field.field-city
+            = student.label :birth_city, 'City', required: "true"
+            = student.text_field :birth_city
+          .field.field-state
+            = student.label :birth_state, 'State', required: "true"
+            = student.text_field :birth_state
+          .field.field-zip
+            = student.label :birth_country, 'Country', required: "true"
+            = student.text_field :birth_country
+        fieldset
+          legend Is this student Hispanic or Latino?
+          .field.field-radiobutton
+            = student.label :is_hispanic_true do
+              = student.radio_button :is_hispanic, true, required: "true"
+              == " "
+              == "Yes"
+          .field.field-radiobutton
+            = student.label :is_hispanic_false do
+              = student.radio_button :is_hispanic, false
+              == " "
+              == "No"
+        fieldset
+          legend Races
+          p.note Select one or more
+          - Races::ALL.each do |race|
+            / TODO Should use .field-checkbox, but the style currently hides the checkboxes for some reason
+            .field.field-checkbox
+              = label_tag "race_#{race}"  do
+                = check_box_tag 'races[]', race, does_student_have_race(@student,race), id: "race_#{race}"
+                = " "
+                = t('race_' + race)
+        .field.field-width-small
+          = student.label :first_language,  "What is this student's first language?"
+          = student.text_field :first_language
+        .field.field-width-small
+          = student.label :home_language,  "What is this student's home language?"
+          = student.text_field :home_language
+
+        fieldset.fieldset-address
+          legend Address
+          .field.field-street
+            = student.label :street_address_1, 'Street address 1'
+            = student.text_field :street_address_1, required: "true"
+          .field.field-street
+            = student.label :street_address_2, 'Street address 2'
+            = student.text_field :street_address_2
+          .field.field-city
+            = student.label :city, 'City'
+            = student.text_field :city, required: "true"
+          .field.field-state
+            = student.label :state, 'State'
+            = student.text_field :state, required: "true"
+          .field.field-zip
+            = student.label :zip_code, 'Zip'
+            = student.text_field :zip_code, required: "true"
+
+        .field.field-width-large
+          = student.label :previous_grade, 'Prior grade'
+          = student.select :previous_grade, options_for_select(@previous_grade_options)
+
+        .field.field-width-large
+          = student.label :prior_school_name, 'Prior school name'
+          = student.text_field :prior_school_name
+
+        .field.field-width-medium
+          = student.label :prior_school_city, 'Prior school city'
+          = student.text_field :prior_school_city
+
+        .field.field-width-small
+          = student.label :prior_school_state, 'Prior school state'
+          = student.text_field :prior_school_state
+
+        fieldset
+          legend Does this student have a 504 plan?
+          .field.field-radiobutton
+            = student.label :p504_true do
+              = student.radio_button :p504, true, required: "true"
+              == "Yes"
+          .field.field-radiobutton
+            = student.label :p504_false do
+              = student.radio_button :p504, false
+              == "No"
+        fieldset
+          legend Does this student have an IEP?
+          .field.field-radiobutton
+            = student.label :iep_true do
+              = student.radio_button :iep, true, required: "true"
+              == "Yes"
+          .field.field-radiobutton
+            = student.label :iep_false do
+              = student.radio_button :iep, false
+              == "No"
+      / CONTACT PEOPLE
+      - contact_person_number = 0
+
+      section#application-guardian-1-info
+        h2 Guardian #1 information
+        = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+        - contact_person_number += 1
+
+      - if @student.contact_people[contact_person_number].is_guardian
+        section#application-guardian-2-info
+          h2 Guardian #2 information
+          = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+          - contact_person_number += 1
+
+      section#application-contact-person-1-info
+        h2 Contact person #1 information
+        = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+        - contact_person_number += 1
+
+      section#application-contact-person-2-info
+        h2 Contact person #2 information
+        = render 'admin/application_contact_person_edit', contact_person: @student.contact_people[contact_person_number], contact_person_number: contact_person_number
+      footer
+      	= link_to 'Delete', "#{url_root}/delete/#{@student.id}", id: 'application-detail-delete-link', class: "delete"

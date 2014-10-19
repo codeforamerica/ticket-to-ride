@@ -1,15 +1,12 @@
 <div class="welcome">
-  <h2>Welcome to the Newport Public Schools.</h2> 
-  <p>Joining a new school is a very exciting time in a family’s life.</p>
-  <p>The influence and power family has on a good quality education is often underestimated. You are the first role model and teacher for your child. The time and support you invest during this year and the years to come will last a lifetime. That is why it is important for us to work together over the course of your child’s school years to ensure that your child can reach his or her maximum potential and become a successful, contributing member of our society, and make us a more vibrant and stronger community in the future.</p>
-  <p>We look forward to partnering with you and your child as we embark on this very special journey. We welcome your input. Please know our doors are always open.</p>
-  <p>Sincerely,<br/>
-  Colleen B. Jermain<br/>
-  Superintendent of Schools</p>
-</div>
-
-<div class="begin_enrollment">
-  <%= button_to "Begin registration", '/enrollment', :method => "get", :class => "btn btn-success pull-right" %>
+  <h2>Welcome to Ticket to RIDE!</h2>
+  <p>This site will help you register your child for school. Quite exciting!</p>
+  <p>To start, choose your school district.</p>
+  <div class="enrollment-form">
+    <%= form_tag(request.original_url, method: :post) %>
+      <%= select_tag 'district_url', options_from_collection_for_select(District.all, 'url', 'name') %>
+      <%= submit_tag 'Begin registration', class: 'btn btn-success pull-right'%>
+  </div>
 </div>
 
 <%= render 'shared/scenery_welcome' %>

@@ -1,20 +1,30 @@
-.header
-  h1 Supplemental Materials
-  p
-    | These are materials that guardians need to fill out in additional to the digital forms and/or need to bring
-    | into the office to complete registration.
+- if @supplemental_materials.any?
 
-.page
+  header
+    .site-width
+      h1 Supplemental materials
+      = link_to "Add one", "/admin/district/supplemental_materials/add", :class=> "button-action"
+      p
+        == "The following materials are provided to guardians as they complete their digital applications. Those marked with a"
+        span.mandated lock icon
+        == " are mandated by RIDE."
 
-  h2 District
-  p These are documents that are used for district's registration process.
-  = link_to 'Add one', '/admin/district/supplemental_materials/add'
-
-  = render 'supplemental_materials_table', supplemental_materials: @district_supplemental_materials_required, title: 'required', user_type: 'district', is_editable: true
-  = render 'supplemental_materials_table', supplemental_materials: @district_supplemental_materials_optional, title: 'optional', user_type: 'district', is_editable: true
-
-  h2 Central
-  p These are documents that are used for all districts' registration processes.
-
-  = render 'supplemental_materials_table', supplemental_materials: @central_supplemental_materials_required, title: 'required', user_type: 'central', is_editable: false
-  = render 'supplemental_materials_table', supplemental_materials: @central_supplemental_materials_optional, title: 'optional', user_type: 'central', is_editable: false
+  .page
+    .site-width
+      - if @supplemental_materials.any?
+        h2 Applicants must submit
+        - @supplemental_materials_required.each do |supplemental_material|
+          = render 'supplemental_material',  supplemental_material: supplemental_material, is_central: false,
+            is_editable: true
+      - if @supplemental_materials_optional.any?
+        h2 Applicants may optionally submit
+        - @supplemental_materials_optional.each do |supplemental_material|
+          = render 'supplemental_material',  supplemental_material: supplemental_material, is_central: false,
+            is_editable: true
+- else
+  .page
+    .site-width
+      .boilerplate
+        h1== "Supplemental materials go here."
+        p== "Supplemental materials are those provided to guardians as they complete their digital applications. Districts can add materials unique to their school system."
+        = link_to "Add the first supplemental material", "/admin/central/supplemental_materials/add", :class=> "button-action"

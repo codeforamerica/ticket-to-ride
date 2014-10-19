@@ -1,29 +1,36 @@
 header
-  h1 People
-  = link_to 'Add person', '/admin/central/people/add'
-
-  p The following table is comprised of district administrators, users who can setup and maintain
-    the school application process within their district.
+  .site-width
+    h1 People
+    = link_to 'Add person', '/admin/central/people/add', class: "button-action"
+    p The following table is comprised of district administrators, users who can setup and maintain the school application process within their district.
 .page
+  .site-width
+    table.table-people
+      thead
+        tr
+          td.table-people-col-name=="Name"
+          td.table-people-col-email=="Email"
+          td.table-people-col-school=="School"
+          td.table-people-col-actions=="Action"
+      tbody
+        - @people.each do |person|
+          tr
+            td.table-people-col-name
+              - if person.active
+                - if person.user_role != 'central_admin'
+                  =link_to person.district.name.capitalize, "/admin/central/people/edit/#{person.id}"
+                - else
+                  = link_to 'Central Admin',"/admin/central/people/edit/#{person.id}"
 
-  div
-    span Name
-    span Email
-    span District
+              - else
+                - if person.user_role != 'central_admin'
+                  = person.district.name.capitalize
+                - else
+                  span "Central Admin"
 
-  ul
-    - @people.each do |person|
-      li
-        span class='capitalize'
-          = person.name
-        = person.email
-        - if person.user_role != 'central_admin'
-          span class='capitalize'
-            = person.district.name
-        - else
-          span Central Admin
-        - if person.active
-          = link_to 'Edit', "/admin/central/people/edit/#{person.id}"
-        - else
-          = link_to 'Resend invite', '#', onclick: "resendInvite(this, #{person.id})"
-        = link_to 'Delete', "/admin/central/people/delete/#{person.id}"
+            td.table-people-col-actions
+              - if person.active
+                = link_to 'Edit', "/admin/central/people/edit/#{person.id}"
+              - else
+                = link_to 'Resend invite', '#', onclick: "resendInvite(this, #{person.id})"
+              = link_to 'Delete', "/admin/central/people/delete/#{person.id}", class: "delete"

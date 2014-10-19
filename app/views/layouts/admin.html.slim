@@ -3,35 +3,32 @@ html
   head
     title=="Admin for Ticket to RIDE"
     = stylesheet_link_tag 'admin', media: 'all'
+    link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'
+    link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,700' rel='stylesheet' type='text/css'
+
     = javascript_include_tag 'admin'
 
-  body
-    div#nav-bar
-      ul
-        li Ticket to RIDE
-        - if @admin.user_role == 'central_admin'
-          li
+  body class="#{@body_class ? @body_class : ''}"
+    header#header
+      .site-width
+        h1 Ticket to RIDE
+        nav.nav-primary
+          - if @admin.user_role == 'central_admin'
             = link_to 'Supplemental Materials', {controller:'admin', action: 'central_supplemental_materials'}
-          li
             = link_to 'People', {controller:'admin', action: 'central_people'}
-          li
+          - else
+            = link_to 'Applications', '/admin/district/applications', class: "applications"
+            = link_to 'District info', '/admin/district/info', class: "district"
+            = link_to 'Supplemental Materials', '/admin/district/supplemental_materials', class: "supplemental-materials"
+            = link_to 'People', '/admin/district/people', class: "people"
+            = link_to 'Export', '/admin/district/export', class: "export"
+        nav.nav-secondary
+          - if @admin.user_role == 'central_admin'
             = link_to @admin.name, "/admin/central/people/edit/#{@admin.id}"
-        - else
-          li
-            = link_to 'Applications', '/admin/district/applications'
-          li
-            = link_to 'District info', '/admin/district/info'
-          li
-            = link_to 'Supplemental Materials', '/admin/district/supplemental_materials'
-          li
-            = link_to 'People', '/admin/district/people'
-          li
-            = link_to 'Export', '/admin/district/export'
-          li
-            = link_to @admin.name, "/admin/district/people/edit/#{@admin.id}"
-        li
+          - else
+            = link_to @admin.name, "/admin/district/people/edit/#{@admin.id}", class: "user"
           / TODO actually have solid sign out
-          = link_to 'Sign Out', '/admin'
+          = link_to 'Sign Out', '/admin', class: "sign-out"
     main
       = yield
 

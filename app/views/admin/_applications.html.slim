@@ -1,35 +1,48 @@
-.applications-table
-  .header-row
-    .column Student
-    .column Guardian
-    .column Phone
-    .column Email
-    .column Submitted
-    .column Confirmation
+- if !@students.empty?
+  table.table-applications
+    thead
+      .header-row
+        td.table-applications-col-student Student
+        td.table-applications-col-guardian Guardian
+        td.table-applications-col-phone Phone
+        td.table-applications-col-email Email
+        td.table-applications-col-submitted Submitted
+        td.table-applications-col-confirmation Confirmation
+    tbody
+    - @students.each do |student|
+      tr.row
+        - guardian = student.contact_people[0]
+        - link_url = "/admin/district/application/#{student.id}"
+        td.table-applications-col-student
+          = link_to "#{student.first_name} #{student.last_name}", link_url
+        td.table-applications-col-guardian
+          = link_to "#{guardian.first_name} #{guardian.last_name}", link_url
+        td.table-applications-col-phone
+          = link_to guardian.main_phone, link_url
+        td.table-applications-col-email
+          - if guardian.email
+            = link_to guardian.email, link_url
+          - else
+            span '(not given)'
+        td.table-applications-col-submitted
+          = link_to student.guardian_complete_time.localtime.strftime('%F, %H:%M %p'), link_url
+        td.table-applications-col-confirmation
+          = link_to student.confirmation_code, link_url
 
-  - @students.each do |student|
-    .row
-      - guardian = student.contact_people[0]
-      a href="/admin/district/application/#{student.id}"
-        .column
-          = student.first_name
-          span &nbsp;
-          = student.last_name
-        .column
-          = guardian.first_name
-          span &nbsp;
-          = guardian.last_name
-        .column
-          = guardian.main_phone
-        .column
-          = guardian.email || '(not given)'
-        .column
-          = student.guardian_complete_time.localtime.strftime('%F, %H:%M %p')
-        .column
-          = student.confirmation_code
+footer
+  nav.pagination
+    - @num_pages.times do |page_number|
+      .page-number
+	      - pn = page_number + 1
+	      = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
+  nav.misc
+    - if @is_processed == false
+      = link_to 'Show processed', ' /admin/district/applications/processed'
+    - if @is_processed == true
+      = link_to 'Show unprocessed', ' /admin/district/applications'
 
-.applications-pages
-  - @num_pages.times do |page_number|
-    .page-number
-      - pn = page_number + 1
-      = link_to page_number + 1, "/admin/district/applications/#{page_number + 1}"
+  - unless @students.empty?
+    div.url
+      - guardian_url = "#{root_url}district/#{@district.url}"
+      | Applications can be collected at:&nbsp;
+      = link_to guardian_url, guardian_url, target: '_blank'

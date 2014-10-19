@@ -1,0 +1,102 @@
+/ assumes use of `contact_person` and `contact_person_number` variables
+
+- obj = "contact_person_#{contact_person_number}"
+
+h3 
+  = contact_person.is_guardian ? "Guardian" : "Contact"
+  = " #"
+  = contact_person_number + 1
+
+dl
+  dt 
+    | Full name
+  dd 
+    = contact_person.first_name
+    = " "
+    = contact_person.last_name
+  dt
+    | Relationship
+  dd
+    = contact_person.relationship.capitalize
+
+  - if contact_person.is_guardian
+    dt
+      | Address
+    dd.adr
+      .street-address
+        = contact_person.street_address_1
+        - if !contact_person.street_address_2.blank?
+          br
+          = contact_person.street_address_2
+      span.locality
+        = contact_person.city
+      span.region
+        = contact_person.state
+        == " "
+      span.postal-code
+        = contact_person.zip_code
+  dt
+    | Phone
+  dd.tel
+    - unless contact_person.main_phone.blank?
+      = contact_person.main_phone
+      - if contact_person.main_phone_can_sms
+        span.badge title="Receives text messages"
+          span= "Receives text messages"
+    - else
+       span.none=="None"
+  dt
+    | Secondary phone
+  dd.tel
+    - unless contact_person.secondary_phone.blank?
+      = contact_person.secondary_phone
+      - if contact_person.secondary_phone_can_sms
+        span.badge title="Receives text messages"
+          span= "Receives text messages"
+    - else
+       span.none=="None"
+  dt
+    | Work phone
+  dd.tel
+    - unless contact_person.work_phone.blank?
+      = contact_person.work_phone
+      - if contact_person.work_phone_can_sms
+        span.badge title="Receives text messages"
+          span= "Receives text messages"
+    - else
+       span.none=="None"
+  dt
+    | Email address
+  dd.email
+    - if contact_person.email
+      = contact_person.email
+    - else
+      = "None"
+
+  dt
+    | Receives
+  dd
+    - if !contact_person.receive_grade_notices && !contact_person.receive_conduct_notices && !contact_person.receive_other_mail
+      = "None"
+    - else
+      ul
+        - if contact_person.receive_grade_notices
+          li=="Grade notifications"
+        - if contact_person.receive_conduct_notices
+          li=="Conduct notifications"
+        - if contact_person.receive_other_mail
+          li=="Other mail"
+  dt
+    | Can pickup?
+  dd
+    = contact_person.can_pickup_child ? "Yes" : "No"
+  dt
+    | Lives with student?
+  dd
+    = contact_person.lives_with_student ? "Yes" : "No"
+
+  - if contact_person.is_guardian
+    dt
+      | Armed Service Status
+    dd
+      = t "armed_service_status_#{contact_person.armed_service_status}"

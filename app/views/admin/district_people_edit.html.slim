@@ -1,23 +1,24 @@
-header
-  h1 Add a district administrator
-  p This will be someone that can view/edit applications for a your district
-    and add district-level supplemental materials
-
-  ul
-    - @person.errors.each do |field, message|
-      li
-        = message
-
-.page
-  = form_for(@person, url: request.original_url, method: :post, html:{multipart: true}) do |person|
-    .field
-      = person.label :name, 'Name'
-      = person.text_field :name
-    .field
-      = person.label :email, 'Email address'
-      = person.text_field :email
-    .field
-      = person.label :active, 'Debug: Active'
-      = person.check_box :active
-
-    = person.submit 'Submit'
+= form_for(@person, url: request.original_url, method: :post, html:{multipart: true}) do |person|
+  header
+    .site-width
+      h1= @title
+      p This will be someone that can view/edit applications for a your district
+        and add district-level supplemental materials
+      - if !@person.errors.empty?
+    	.notice
+    	  ul
+    	    - @person.errors.each do |field, message|
+    	      li= message
+  .page
+    .site-width
+      .field.field-width-large
+        = person.label :name, 'Name'
+        = person.text_field :name
+      .field.field-width-large
+        = person.label :email, 'Email address'
+        = person.text_field :email
+      .field.field-checkbox
+        = person.label :active, 'Debug: Active'
+        = person.check_box :active
+      footer
+        = person.submit @button_title, class: "button-action"

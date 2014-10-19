@@ -49,9 +49,9 @@ class EnrollmentController < ApplicationController
   def show
 
     # Clear the session on the first step, otherwise, load the Student
-    if step == steps[0]
-      reset_session
-      @student = Student.create
+    if step == steps[0] && session[:student_id] == nil
+      district = District.find(session[:district_id])
+      @student = Student.create(district: district)
       session[:student_id] = @student.id
     else
       @student = Student.find(session[:student_id])
