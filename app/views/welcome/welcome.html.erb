@@ -1,6 +1,6 @@
 <div class="welcome">
   <h2><%=@district.welcome_title%></h2>
-  <div><%=raw @district.welcome_message.gsub(/\n/,'<br/>')%></div>
+  <div class="welcome-message"><%=raw @district.welcome_message.gsub(/\n/,'<br/>')%></div>
   <p>Sincerely,<br/>
   <%=@district.welcomer_name%>, <%=@district.welcomer_title%></p>
 </div>
