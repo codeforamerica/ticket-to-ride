@@ -836,7 +836,12 @@ class AdminController < ApplicationController
     @admin = current_admin_user # TODO auth
     @district = @admin.district
 
+    missing_param(:district, :name, @district, 'Please enter a name for the district')
+    missing_param(:district, :welcome_title, @district, 'Please enter a welcome subject')
     missing_param(:district, :welcome_message, @district, 'Please enter a welcome message')
+    missing_param(:district, :welcomer_name, @district, 'Please enter a welcome person name')
+    missing_param(:district, :welcomer_title, @district, 'Please enter a welcome person title')
+    missing_param(:district, :confirmation_title, @district, 'Please enter a confirmation subject')
     missing_param(:district, :confirmation_message, @district, 'Please enter a confirmation message')
     missing_param(:district, :street_address_1, @district, 'Please enter a street address (line 1)')
     missing_param(:district, :city, @district, 'Please enter a city')
@@ -1097,7 +1102,7 @@ class AdminController < ApplicationController
     @district = @admin.district
     # TODO - Add authorization code here
 
-    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]]
+    @export_frequency_options = [['Automatically', :export_automatically],['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
 
     return render 'district_export_settings'
   end
@@ -1106,7 +1111,7 @@ class AdminController < ApplicationController
     # TODO - Disable logging on password on send
     @admin = current_admin_user
     @district = @admin.district
-    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
+    @export_frequency_options = [['Automatically', :export_automatically],['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
 
     # Check for missing params
     missing_param(:district, :export_frequency, @district, 'Export frequency must be entered')
@@ -1139,7 +1144,7 @@ class AdminController < ApplicationController
   def export_processed_now
     @admin = current_admin_user
     @district = @admin.district
-    @export_frequency_options = [['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
+    @export_frequency_options = [['Automatically', :export_automatically],['Twice Daily', :export_twice_daily], ['Daily', :export_daily], ['Never', :export_never]] # TODO - Move this to a common place
     @notice = 'Processed applications have been exported'
 
 

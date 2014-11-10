@@ -52,6 +52,23 @@ AdminUser.create(
     active: true
 )
 
+# Newport School District
+newport_district = District.create(
+  name: 'Newport Public Schools',
+  street_address_1: "35 Dexter Street",
+  city: 'Newport',
+  state: 'RI',
+  zip_code: '02840',
+  phone: '4018421900',
+  email: 'np@nps.edu',
+  active: true,
+  welcome_title: 'Welcome to the Newport Public Schools!',
+  welcome_message: "Joining a new school is a very exciting time in a family's life.\nYou are the first role model and teacher for your child. It is important for us to work together during your child's school years so that your child reaches his or her maximum potential and becomes a successful, contributing member of our community.\nWe look forward to partnering with you and your child as we embark on this very special journey. We welcome your input. Please know our doors are always open.",
+  welcomer_name: 'Colleen B. Jermain',
+  welcomer_title: 'Superintendent of Schools',
+  confirmation_message: "You're confirmed!"
+)
+
 # West Warwick School District
 west_warwick_district = District.create(
   name: 'West Warwick Public Schools',

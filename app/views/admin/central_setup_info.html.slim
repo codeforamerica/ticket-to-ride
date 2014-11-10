@@ -4,16 +4,16 @@ header
     p Central administrators use a single account to manage registration statewide. Please specify the name, email address, and password for an administrator account.
     - unless @admin.errors.blank?
       .notice
-	ul
-	  - @admin.errors.each do |field, message|
-	    li
-	      = message
+        ul
+          - @admin.errors.each do |field, message|
+            li
+              = message
 .page
   .site-width
     =form_for(@admin, url: '/admin/central/setup/info', method: 'post') do |admin_user|
       .field.field-width-large
-      	=label :name, 'Name'
-      	=admin_user.text_field :name
+        =label :name, 'Name'
+        =admin_user.text_field :name
       .field.field-width-large
         =label :email, 'Email Address'
         =admin_user.text_field :email
@@ -24,4 +24,4 @@ header
         =label :password_confirmation, 'Confirm Password'
         =admin_user.password_field :password_confirm
       footer
-	    =admin_user.submit 'Continue', class: 'button'
+      =admin_user.submit 'Continue', class: 'button'
