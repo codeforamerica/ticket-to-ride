@@ -93,7 +93,17 @@ class AdminController < ApplicationController
       return redirect_to action: :central_setup_welcome
     end
 
-    return redirect_to '/admin_users/sign_in'
+    return redirect_to action: :login
+  end
+
+  def login
+    if is_admin_user_central?
+      return redirect_to action: :central_supplemental_materials
+    elsif is_admin_user_district?
+      return redirect_to action: :district_supplemental_materials
+    end
+
+    return redirect_to '/'
   end
 
   # -----------
@@ -108,11 +118,19 @@ class AdminController < ApplicationController
     end
   end
 
+  def is_admin_user_central?
+    return admin_user_signed_in? && current_admin_user.user_role == 'central_admin'
+  end
+
   def is_admin_user_district
     if !admin_user_signed_in? || current_admin_user.user_role != 'district_admin'
       reset_session
       return redirect_to '/admin_users/sign_in'
     end
+  end
+
+  def is_admin_user_district?
+    return admin_user_signed_in? && current_admin_user.user_role == 'district_admin'
   end
 
   def param_does_not_exist(model_const, field_const)
@@ -261,7 +279,7 @@ class AdminController < ApplicationController
 
     # If there were any errors, send back the same page with error messages
     @admin.password = params[:admin_user][:password]
-    @admin.password = params[:admin_user][:password]
+    @admin.password_confirmation = params[:admin_user][:password_confirmation]
     retain_values_and_errors(@admin, admin_user_params)
 
     if @admin.errors.any?
@@ -385,6 +403,13 @@ class AdminController < ApplicationController
     # See if there is already someone with this e-mail address
     if !id && AdminUser.find_by(email: params[:admin_user][:email]) != nil
       @person.errors.add(:email, 'There is already a user with this email address')
+    end
+
+    # Provide ability to change the password if the user is editing their own page
+    if id == session[:admin_user_id] && params[:admin_user][:password] != nil && params[:admin_user][:password_confirmation] != nil
+      if params[:admin_user][:password] != params[:admin_user][:password_confirmation]
+        @person.errors.add(:password, 'Password and password confirmation do not match')
+      end
     end
 
     # Apply the fields and do validations (and send back errors if there are any)

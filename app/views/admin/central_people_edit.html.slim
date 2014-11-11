@@ -22,6 +22,13 @@
         .field.field-width-large
           = label_tag :district, 'District'
           = text_field_tag :district, @district_name
+      - if @person.id == session[:admin_user_id]
+        .field.field-width-large
+          = person.label :password, 'Password'
+          = person.password_field :password
+        .field.field-width-large
+          = person.label :password_confirmation, 'Password Confirmation'
+          = person.password_field :password_confirmation
       .field.field-checkbox
         = person.label :active, 'Debug: Active'
         = person.check_box :active
