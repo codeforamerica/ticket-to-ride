@@ -415,13 +415,16 @@ class AdminController < ApplicationController
       end
     end
 
-    # Apply the fields and do validations (and send back errors if there are any)
+    # Generate a temporary password if a new district admin is being created
     if id == nil
       temp_password = SecureRandom.hex
       @person.password = temp_password
       @person.password_confirmation = temp_password
+
+      # TODO Send an e-mail to the new district admin
     end
 
+    # Apply the fields and do validations (and send back errors if there are any)
     retain_values_and_errors(@person, admin_user_params)
     if @person.errors.any?
       return render 'central_people_edit'
