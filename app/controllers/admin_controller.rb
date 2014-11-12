@@ -419,8 +419,6 @@ class AdminController < ApplicationController
       temp_password = SecureRandom.hex
       @person.password = temp_password
       @person.password_confirmation = temp_password
-
-      # TODO Send an e-mail to the new district admin
     end
 
     # Apply the fields and do validations (and send back errors if there are any)
@@ -439,6 +437,10 @@ class AdminController < ApplicationController
       @person.user_role = :district_admin
     else
       @person.user_role = :central_admin
+    end
+
+    if temp_password != nil
+      DistrictAdminMailer.account_created(@person, temp_password).deliver
     end
 
     @person.save
