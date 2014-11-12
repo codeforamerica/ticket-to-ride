@@ -33,8 +33,5 @@ header
                   span "Central Admin"
 
             td.table-people-col-actions
-              - if person.active
-                = link_to 'Edit', "/admin/central/people/edit/#{person.id}"
-              - else
-                = link_to 'Resend invite', '#', onclick: "resendInvite(this, #{person.id})"
+              = link_to 'Edit', "/admin/central/people/edit/#{person.id}"
               = link_to 'Delete', "/admin/central/people/delete/#{person.id}", class: "delete"
