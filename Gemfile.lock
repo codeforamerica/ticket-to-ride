@@ -37,6 +37,8 @@ GEM
       railties (>= 3.0)
       sass (>= 3.2)
     arel (5.0.1.20140414130214)
+    bcrypt (3.1.7)
+    bcrypt (3.1.7-java)
     bcrypt (3.1.7-x86-mingw32)
     birthday (0.3.1)
       activerecord
@@ -118,6 +120,8 @@ GEM
     launchy (2.4.2-java)
       addressable (~> 2.3)
       spoon (~> 0.0.1)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     listen (2.7.11)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -301,12 +305,13 @@ DEPENDENCIES
   jruby-openssl (= 0.9.5)
   knockoutjs-rails (= 3.1.0.1)
   launchy
+  letter_opener (= 1.2.0)
   momentjs-rails (= 2.6.0)
   paperclip (= 4.2.0)
   pg (= 0.17.1)
   rails (= 4.1.1)
   rails_12factor (= 0.0.2)
-  rspec-rails
+  rspec-rails (= 3.1.0)
   sass-rails (= 4.0.3)
   sdoc (= 0.4.0)
   select2-rails (= 3.5.7)

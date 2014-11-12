@@ -64,9 +64,13 @@ group :development do
 
   # testing
     # includes RSpec in a wrapper to make it play nicely with Rails
-  gem 'rspec-rails'
-    # replaces Rails' default fixtures for feeding test data to the test suite with more preferable factories
+  gem 'rspec-rails', '3.1.0'
+
+  # replaces Rails' default fixtures for feeding test data to the test suite with more preferable factories
   gem 'factory_girl_rails', "~> 4.0"
+
+  # For receiving e-mails during development (password reset, etc)
+  gem 'letter_opener', '1.2.0'
 
   # JRuby install items
   platform :jruby do
