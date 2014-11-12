@@ -15,15 +15,10 @@ header
         - @people.each do |person|
           tr
             td.table-people-col-name
-              - if person.active
-                = link_to person.name, "/admin/district/people/edit/#{person.id}"
-              - else
-                = person.name
+              = link_to person.name, "/admin/district/people/edit/#{person.id}"
             td.table-people-col-email
-              - if person.active
-                = link_to person.email, "/admin/district/people/edit/#{person.id}"
-              - else
-                = person.email
+              = link_to person.email, "/admin/district/people/edit/#{person.id}"
+              = person.email
             td.table-people-col-actions
               = link_to 'Edit', "/admin/district/people/edit/#{person.id}"
       	      = link_to 'Delete', "/admin/district/people/delete/#{person.id}", class: "delete"

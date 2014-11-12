@@ -24,8 +24,5 @@
         .field.field-width-large
           = person.label :password_confirmation
           = person.password_field :password_confirmation
-      .field.field-checkbox
-        = person.label :active, 'Debug: Active'
-        = person.check_box :active
       footer
         = person.submit @button_title, class: "button-action"

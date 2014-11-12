@@ -100,7 +100,7 @@ class AdminController < ApplicationController
     if is_admin_user_central?
       return redirect_to action: :central_supplemental_materials
     elsif is_admin_user_district?
-      return redirect_to action: :district_applications
+      return redirect_to action: :district_applications_unprocessed
     end
 
     return redirect_to '/'
@@ -293,7 +293,6 @@ class AdminController < ApplicationController
     end
 
     # Save the central admin
-    @admin.active = true
     begin
       @admin.save
     rescue

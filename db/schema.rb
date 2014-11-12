@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015170449) do
+ActiveRecord::Schema.define(version: 20141112192826) do
 
   create_table "admin_users", force: true do |t|
     t.string   "name"
-    t.string   "email",                                  null: false
-    t.integer  "user_role",                              null: false
-    t.boolean  "active",                 default: false
+    t.string   "email",                               null: false
+    t.integer  "user_role",                           null: false
     t.integer  "district_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
