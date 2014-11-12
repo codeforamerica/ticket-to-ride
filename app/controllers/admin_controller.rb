@@ -100,7 +100,7 @@ class AdminController < ApplicationController
     if is_admin_user_central?
       return redirect_to action: :central_supplemental_materials
     elsif is_admin_user_district?
-      return redirect_to action: :district_supplemental_materials
+      return redirect_to action: :district_applications
     end
 
     return redirect_to '/'
@@ -300,7 +300,6 @@ class AdminController < ApplicationController
       @admin.errors.add(:base, 'There was an error and the user could not be registered. Talk to an admin.')
       return render 'central_setup_info', layout: 'admin_setup'
     end
-    session[:admin_user_id] = @admin.id
 
     return redirect_to action: :central_setup_confirm
   end
@@ -590,8 +589,6 @@ class AdminController < ApplicationController
       return render 'district_setup'
     end
 
-    session[:admin_user_id] = @admin.id
-
     return redirect_to action: :district_applications
   end
 
@@ -600,7 +597,7 @@ class AdminController < ApplicationController
   # -----------
 
   def show_district_applications(is_processed)
-    @admin = AdminUser.find(session[:admin_user_id])
+    @admin = AdminUser.find(current_admin_user.id)
     @district = @admin.district
     @is_processed = is_processed
 
@@ -666,7 +663,7 @@ class AdminController < ApplicationController
   end
 
   def district_view_application(page)
-    @admin = AdminUser.find(session[:admin_user_id])
+    @admin = AdminUser.find(current_admin_user.id)
 
     @student = Student.find(params[:student_id]) # TODO Better error checking
     if @student.district != @admin.district # TODO Better authorization checking
@@ -713,7 +710,7 @@ class AdminController < ApplicationController
 
 
   def district_application_edit_post
-    @admin = AdminUser.find(session[:admin_user_id]) # TODO security check
+    @admin = AdminUser.find(current_admin_user.id) # TODO security check
     @body_class = 'applications'
     @student = Student.find(params[:student_id]) # TODO error checking
     @are_errors = false
