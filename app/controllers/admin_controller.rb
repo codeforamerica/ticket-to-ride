@@ -406,9 +406,12 @@ class AdminController < ApplicationController
     end
 
     # Provide ability to change the password if the user is editing their own page
-    if id == session[:admin_user_id] && params[:admin_user][:password] != nil && params[:admin_user][:password_confirmation] != nil
+    if Integer(id) == current_admin_user.id && params[:admin_user][:password] != nil && params[:admin_user][:password_confirmation] != nil
       if params[:admin_user][:password] != params[:admin_user][:password_confirmation]
         @person.errors.add(:password, 'Password and password confirmation do not match')
+      else
+        @person.password = params[:admin_user][:password]
+        @person.password_confirmation = params[:admin_user][:password_confirmation]
       end
     end
 

@@ -7,7 +7,7 @@ header
         ul
           - @admin.errors.each do |field, message|
             li
-              = message
+              = "#{field.capitalize} #{message}"
 .page
   .site-width
     =form_for(@admin, url: '/admin/central/setup/info', method: 'post') do |admin_user|
