@@ -21,7 +21,10 @@
       - if @person.user_role != 'central_admin'
         .field.field-width-large
           = label_tag :district, 'District'
-          = @district_name
+          - if @person.id == nil
+            = text_field_tag :district
+          - else
+            = @district_name.titleize
       - if @person.id == current_admin_user.id
         .field.field-width-large
           = person.label :password, 'Password'
