@@ -1174,7 +1174,7 @@ article.supplemental-material a.edit{
 a.delete{ color: red; }
 a.delete:hover{ color: #c2382c; }
 
-.notice {
+.notice, #error_explanation {
 	background: #ffeead;
 	color: #4b2d06;
 	line-height: 1.4rem;
@@ -1187,6 +1187,10 @@ a.delete:hover{ color: #c2382c; }
 	position: relative;
 }
 
+#error_explanation h2 {
+    display: none;
+}
+
 .notice h1{
 	color: #b2400c !important;
 	font-size: 1em;
@@ -1195,7 +1199,7 @@ a.delete:hover{ color: #c2382c; }
 	margin-bottom: 0.2em !important;
 }
 
-.notice ul{
+.notice ul, #error_explanation ul{
 	margin-left: 1.4em;
 }
 
