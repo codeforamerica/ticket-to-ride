@@ -240,17 +240,29 @@ class AdminController < ApplicationController
   # -----------
 
   def central_setup_welcome
+    if are_central_admins?
+      return redirect_to action: :login
+    end
+
     @body_class = "admin-setup admin-setup-1"
     return render 'central_setup_welcome', layout: 'admin_setup'
   end
 
   def central_setup_info_get
+    if are_central_admins?
+      return redirect_to action: :login
+    end
+
     @admin = AdminUser.new
     @body_class = "admin-setup admin-setup-2"
     return render 'central_setup_info', layout: 'admin_setup'
   end
 
   def central_setup_info_post
+    if are_central_admins?
+      return redirect_to action: :login
+    end
+
     @admin = AdminUser.new(user_role: :central_admin)
     @body_class = "admin-setup admin-setup-2"
 
@@ -304,6 +316,10 @@ class AdminController < ApplicationController
   end
 
   def central_setup_confirm
+    if are_central_admins?
+      return redirect_to action: :login
+    end
+
     @body_class = "admin-setup admin-setup-3"
     render 'central_setup_confirm', layout: 'admin_setup'
   end
