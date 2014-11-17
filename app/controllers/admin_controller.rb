@@ -439,6 +439,8 @@ end
       temp_password = SecureRandom.hex
       @person.password = temp_password
       @person.password_confirmation = temp_password
+    else
+      @district_name = @person.district.name
     end
 
     # Apply the fields and do validations (and send back errors if there are any)
