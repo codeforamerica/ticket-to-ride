@@ -49,7 +49,6 @@ AdminUser.create(
     password: 'password',
     password_confirmation: 'password',
     user_role: :central_admin,
-    active: true
 )
 
 # Newport School District
@@ -111,7 +110,6 @@ AdminUser.create(
     password_confirmation: 'password',
     user_role: :district_admin,
     district: west_warwick_district,
-    active: true
 )
 
 AdminUser.create(
@@ -121,7 +119,6 @@ AdminUser.create(
     password_confirmation: 'password',
     user_role: :district_admin,
     district: west_warwick_district,
-    active: true
 )
 
 guardian_complete_west_warwick_student = Student.create(
