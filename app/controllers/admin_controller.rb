@@ -100,7 +100,11 @@ class AdminController < ApplicationController
     if is_admin_user_central?
       return redirect_to action: :central_supplemental_materials
     elsif is_admin_user_district?
-      return redirect_to action: :district_applications_unprocessed
+      if current_admin_user.district.welcome_title == nil
+        return redirect_to action: :district_info_get
+      else
+        return redirect_to action: :district_applications_unprocessed
+      end
     end
 
     return redirect_to '/'
