@@ -115,6 +115,3 @@ group :test do
     # opens the default web browser upon failed integration specs to show what the application is rendering
   gem 'launchy'
 end
-
-ruby '1.9.3'
-
