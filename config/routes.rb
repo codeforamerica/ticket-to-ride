@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'admin/login', to: 'admin#login'
   get 'admin/central', to: 'admin#login'
   get 'admin/district', to: 'admin#login'
+  get 'admin/signout', to: 'admin#signout'
 
   # -----------------------
   # Central Admin Setup

@@ -106,6 +106,11 @@ class AdminController < ApplicationController
     return redirect_to '/'
   end
 
+  def signout
+    reset_session
+    return redirect_to action: :login
+end
+
   # -----------
   # Helper Methods
   # TODO Move these elsewhere so that they can be reused
