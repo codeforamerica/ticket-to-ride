@@ -443,7 +443,7 @@ end
       temp_password = SecureRandom.hex
       @person.password = temp_password
       @person.password_confirmation = temp_password
-    else
+    elsif current_admin_user.user_role != 'central_admin'
       @district_name = @person.district.name
     end
 
