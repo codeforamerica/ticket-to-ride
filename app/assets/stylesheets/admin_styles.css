@@ -2,13 +2,17 @@
 
 /* @override http://localhost:3000/assets/admin_styles.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_styles.css?body=1 */
+
 /* @group bootstrap */
+
 
 
 body{
 	color: #555;
 	font-family: "Noto sans", "Lucida Grande", Lucida, Verdana, sans-serif;
 	font-size: 18px;
+	min-width: 24rem;
 }
 
 @media screen and (min-width: 48em){ html, body{ font-size: 20px; } }
@@ -331,10 +335,10 @@ table.table-applications tbody tr:hover{ background: #fff2c0; }
 }
 
 .admin-setup main{
-	width: 30em;
+	width: 20rem;
 	margin: 0 auto;
 	border: 0.2em solid #e3e3e3;
-	padding-top: 1em;
+	padding: 1em;
 	padding-bottom: 1.4em;
 	border-radius: 0.5em;
 }
@@ -474,7 +478,7 @@ table.table-applications tbody tr:hover{ background: #fff2c0; }
 }
 
 
-@media screen && (min-width: 24em){	
+@media (min-width: 24rem){	
 	.schools-delete main,
 	.schools-new main,
 	.applications-delete main,
@@ -504,7 +508,7 @@ table.table-applications tbody tr:hover{ background: #fff2c0; }
 	
 }
 
-@media screen && (min-width: 24em){
+@media (min-width: 24em){
 	
 	.schools-delete main,
 	.schools-new main,
@@ -513,7 +517,7 @@ table.table-applications tbody tr:hover{ background: #fff2c0; }
 	.people-new main,
 	.people-delete main{
 		padding: 1.4em;
-		max-width: 28em;
+		max-width: 28rem;
 	}
 }
 
