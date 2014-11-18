@@ -1,106 +1,106 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '4.0.3'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '2.5.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '4.0.1'
+gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '3.1.0'
+gem 'jquery-rails'
 
 # Moment JS (needed for X-Editable combodate fields)
-gem 'momentjs-rails', '2.6.0'
+gem 'momentjs-rails'
 
 # select2 JS library (needed for X-Editable select2 fields)
-gem 'select2-rails', '3.5.7'
+gem 'select2-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.0.7'
+gem 'jbuilder'
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '0.4.0',          group: :doc
+gem 'sdoc',          group: :doc
 
-gem 'birthday', '0.3.1'
+gem 'birthday'
 
-gem 'knockoutjs-rails', '3.1.0.1'
+gem 'knockoutjs-rails'
 
-gem 'anjlab-bootstrap-rails', '3.0.0.3', :require => 'bootstrap-rails'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails'
 
-gem 'high_voltage', '2.1.0'
+gem 'high_voltage'
 
 # Wicked: Used for created wizard-like form progression
-gem 'wicked', '1.0.3'
+gem 'wicked'
 
 # Added for Windows timezone support
-gem 'tzinfo-data', '1.2014.5'
+gem 'tzinfo-data'
 
 # Used for Bootstrap Slider
-gem 'bootstrap-slider-rails', '1.9.0'
+gem 'bootstrap-slider-rails'
 
 # Validations for dates
-gem 'jc-validates_timeliness', '3.1.1'
+gem 'jc-validates_timeliness'
 
 # For validating e-mail formats
 gem 'validates_email_format_of'
 
 # Template engine for Admin screens (per Andrew's recommendation)
-gem 'slim-rails', '2.1.5'
+gem 'slim-rails'
 
 # For attaching supplemental materials
-gem 'paperclip', '4.2.0'
+gem 'paperclip'
 
 # For authentication
-gem 'devise', '3.3.0'
+gem 'devise'
 
 # DEVELOPMENT ONLY
 group :development do
 
   # testing
     # includes RSpec in a wrapper to make it play nicely with Rails
-  gem 'rspec-rails', '3.1.0'
+  gem 'rspec-rails'
 
   # replaces Rails' default fixtures for feeding test data to the test suite with more preferable factories
-  gem 'factory_girl_rails', "~> 4.0"
+  gem 'factory_girl_rails'
 
   # For receiving e-mails during development (password reset, etc)
-  gem 'letter_opener', '1.2.0'
+  gem 'letter_opener'
 
   # JRuby install items
   platform :jruby do
     # Use jdbcsqlite3 as the database for Active Record when running JRuby
-    gem 'activerecord-jdbcsqlite3-adapter', '1.3.9'
+    gem 'activerecord-jdbcsqlite3-adapter'
 
     # Install Open SSL to provide a security impelementation
-    gem 'jruby-openssl', '0.9.5'
+    gem 'jruby-openssl'
   end
 
   # MRI Ruby or Windows Ruby
-  platform :mri, :mingw do
+  platform :mri, :mingw, :x64_mingw do
     # Use sqlite3 as the development database when running C Ruby
-    gem 'sqlite3', '1.3.9'  
+    gem 'sqlite3'
   end
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '1.1.3'
+  gem 'spring'
 end
 
 # PRODUCTION ONLY
 group :production do
   # For Heroku static asset serving and logging
-  gem 'rails_12factor', '0.0.2'
+  gem 'rails_12factor'
 
   # Production grade web server
-  gem 'unicorn', '4.8.3'
+  gem 'unicorn'
 
   # Use Postgresql as the deployment database (staging and production)
-  gem 'pg', '0.17.1'
+  gem 'pg'
 end
 
 # TESTING ONLY
