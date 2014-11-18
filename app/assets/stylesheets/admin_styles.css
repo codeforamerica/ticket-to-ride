@@ -99,10 +99,11 @@ header#header h1{
 }
 
 
-body[class^="applications-"] header a.applications,
+body[class^="applications"] header a.applications,
 body[class^="district"] header a.district,
 body[class^="supplemental-materials"] header a.supplemental-materials,
 body[class^="people"] header a.people,
+body[class^="export"] header a.export,
 body[class="settings"] header a.settings{
 	color: #fff !important;
 	background: #2c1d30;
