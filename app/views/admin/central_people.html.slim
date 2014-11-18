@@ -23,7 +23,7 @@ header
               - if person.user_role != 'central_admin'
                 = person.district.name.capitalize
               - else
-                span "Central Admin"
+                span Central Admin
 
             td.table-people-col-actions
               = link_to 'Edit', "/admin/central/people/edit/#{person.id}"

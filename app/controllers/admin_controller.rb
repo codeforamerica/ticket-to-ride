@@ -121,7 +121,7 @@ end
   # -----------
 
   def create_blank_district(name)
-    district = District.create(name: @district_name.downcase)
+    district = District.create(name: @district_name)
     # district.welcome_title = "Welcome Title Goes Here"
     # district.welcome_message = "Welcome Message Goes Here"
     # district.welcomer_name = "Welcomer Name Goes Here"
@@ -427,8 +427,8 @@ end
     end
 
     if (@person.user_role != 'central_admin')
-      if !params || !params[:district]
-        @person.errors.add(:base, 'Please enter a district name')
+      if (!params || !params[:district]) && @person.district == nil
+        @person.errors.add(:district, 'Please enter a district name')
       end
       @district_name = params[:district] # populate this for re-display incase there are errors
     end
@@ -453,26 +453,29 @@ end
       temp_password = SecureRandom.hex
       @person.password = temp_password
       @person.password_confirmation = temp_password
-    elsif current_admin_user.user_role != 'central_admin'
+    elsif current_admin_user.user_role == 'district_admin'
       @district_name = @person.district.name
     end
 
     # Apply the fields and do validations (and send back errors if there are any)
     retain_values_and_errors(@person, admin_user_params)
     if @person.errors.any?
+      if @person.user_role == 'district_admin'
+        @district_name = @person.district.name
+      end
       return render 'central_people_edit'
     end
 
-    # Create or add to a district
+    # Create or add to a district, and assign role type
     if @person.user_role != 'central_admin'
-      district = District.find_by(name: @district_name)
-      if district == nil
-        district = create_blank_district(@district_name)
+      if @person.district == nil
+        district = District.find_by(name: @district_name)
+        if district == nil
+          district = create_blank_district(@district_name)
+        end
+        @person.district = district
+        @person.user_role = :district_admin
       end
-      @person.district = district
-      @person.user_role = :district_admin
-    else
-      @person.user_role = :central_admin
     end
 
     if temp_password != nil
@@ -525,7 +528,7 @@ end
 
     @admin = current_admin_user
     @person = AdminUser.find(params[:id]) # TODO add authority check here
-    if @person.user_role != 'central_admin'
+    if @person.user_role == 'district_admin'
       @district_name = @person.district.name
     end
 
