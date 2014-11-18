@@ -53,5 +53,8 @@ header
         .field
           = label_tag 'district[phone]', 'District Phone Number'
           = text_field_tag 'district[phone]', @district.phone
+        .field
+          = label_tag 'district[phone]', 'District Email Address'
+          = text_field_tag 'district[email]', @district.email
         footer
           = admin.submit 'Continue', class: 'button-forward'

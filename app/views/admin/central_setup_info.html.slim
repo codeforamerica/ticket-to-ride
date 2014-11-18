@@ -7,7 +7,7 @@ header
         ul
           - @admin.errors.each do |field, message|
             li
-              = message
+              = "#{field.capitalize} #{message}"
 .page
   .site-width
     =form_for(@admin, url: '/admin/central/setup/info', method: 'post') do |admin_user|
@@ -21,7 +21,7 @@ header
         =label :password, 'Password'
         =admin_user.password_field :password
       .field.field-password.field-width-medium
-        =label :confirm_password, 'Confirm Password'
-        =admin_user.password_field :confirm_password
+        =label :password_confirmation, 'Confirm Password'
+        =admin_user.password_field :password_confirmation
       footer
       =admin_user.submit 'Continue', class: 'button'

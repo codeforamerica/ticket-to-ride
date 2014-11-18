@@ -26,6 +26,10 @@ class WelcomeController < ApplicationController
       return redirect_to action: :choose_district
     end
 
+    if @district.welcome_title == nil # TODO Make this check more exhaustive
+      return render 'welcome_config'
+    end
+
     session[:district_id] = @district.id
     return render 'welcome'
   end

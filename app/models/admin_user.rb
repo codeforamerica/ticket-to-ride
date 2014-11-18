@@ -3,6 +3,13 @@
 class AdminUser < ActiveRecord::Base
   include ModelConstants
 
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable,
+         :recoverable,
+         :rememberable,
+         :validatable
+
   # -- Relationships --
   belongs_to :district
 

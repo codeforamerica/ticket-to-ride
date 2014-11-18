@@ -27,8 +27,7 @@ html
             = link_to @admin.name, "/admin/central/people/edit/#{@admin.id}"
           - else
             = link_to @admin.name, "/admin/district/people/edit/#{@admin.id}", class: "user"
-          / TODO actually have solid sign out
-          = link_to 'Sign Out', '/admin', class: "sign-out"
+          = link_to 'Sign Out', '/admin/signout', class: "sign-out"
     main
       = yield
 

@@ -46,8 +46,9 @@ SupplementalMaterial.create(
 AdminUser.create(
     name: 'Ed G',
     email: 'ed@ride.ri.gov',
+    password: 'password',
+    password_confirmation: 'password',
     user_role: :central_admin,
-    active: true
 )
 
 # Newport School District
@@ -105,17 +106,19 @@ SupplementalMaterial.create(
 AdminUser.create(
     name: 'Jim M',
     email: 'jim@westwarwick.ed',
+    password: 'password',
+    password_confirmation: 'password',
     user_role: :district_admin,
     district: west_warwick_district,
-    active: true
 )
 
 AdminUser.create(
     name: 'Toni M',
     email: 'toni@westwarwick.ed',
+    password: 'password',
+    password_confirmation: 'password',
     user_role: :district_admin,
     district: west_warwick_district,
-    active: true
 )
 
 guardian_complete_west_warwick_student = Student.create(

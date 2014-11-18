@@ -3,7 +3,8 @@ module AdminUserParams
     params.require(:admin_user).permit(
       :name,
       :email,
-      :active
+      :district,
+      :district_id
     )
   end
 end

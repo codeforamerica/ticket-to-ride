@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admin_users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -22,11 +23,10 @@ Rails.application.routes.draw do
 
   get 'admin', to: 'admin#index'
 
-  get 'admin/login', to: 'admin#admin_login'
-  post 'admin/login', to: 'admin#admin_login'
-
-  get 'admin/central', to: 'admin#admin_login'
-  get 'admin/district', to: 'admin#admin_login'
+  get 'admin/login', to: 'admin#login'
+  get 'admin/central', to: 'admin#login'
+  get 'admin/district', to: 'admin#login'
+  get 'admin/signout', to: 'admin#signout'
 
   # -----------------------
   # Central Admin Setup

@@ -2,6 +2,9 @@
 
 /* @override http://localhost:3000/assets/admin_forms.css?body=1 */
 
+/* @override http://localhost:3000/assets/admin_forms.css?body=1 */
+
+
 @font-face {
 	font-family: 'icomoon';
 	font-weight: normal;
@@ -47,7 +50,7 @@ input[type=password],
 input[type=date],
 select,
 textarea{
-  border: 0.1em solid #ccc;
+  border: 1px solid #ccc;
   font: inherit;  
   font-size: 0.9rem;
   padding: 0.4rem 0.33rem 0.33rem;
@@ -99,7 +102,7 @@ div.field.field-radiobutton label{
   min-height: 2em;
   line-height: 1.2rem;
   position: relative;
-  border: 0.1em solid #ccc;
+  border: 1px solid #ccc;
   font-weight: normal;
   color: #777;
   margin-bottom: 0;
@@ -265,7 +268,7 @@ div.field.field-select:hover select{ cursor: pointer; }
   -webkit-appearance: none;
   -moz-appearance: none;
   outline: none;
-  border: 0.08em solid #aaa;
+  border: 1px solid #aaa;
   -moz-border-radius: 0.1em;
   border-radius: 0.1em;
 }
@@ -626,7 +629,7 @@ button{
   border-radius: 0.2rem;
   text-decoration: none;
   font-size: 0.8rem;
-  border: 0.125rem solid #009253;
+  border: 2px solid #009253;
 	box-shadow: none !important;
 	cursor: pointer;
 	margin: 0;
