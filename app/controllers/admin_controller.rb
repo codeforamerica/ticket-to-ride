@@ -120,6 +120,16 @@ end
   # TODO Move these elsewhere so that they can be reused
   # -----------
 
+  def create_blank_district(name)
+    district = District.create(name: @district_name.downcase)
+    # district.welcome_title = "Welcome Title Goes Here"
+    # district.welcome_message = "Welcome Message Goes Here"
+    # district.welcomer_name = "Welcomer Name Goes Here"
+    # district.welcomer_title = "Welcomer Title Goes Here"
+    # district.save
+    return district
+  end
+
   def is_admin_user_central
     if !admin_user_signed_in? || current_admin_user.user_role != 'central_admin'
       reset_session
@@ -455,9 +465,9 @@ end
 
     # Create or add to a district
     if @person.user_role != 'central_admin'
-      district = District.find_by(name: @district_name.downcase)
+      district = District.find_by(name: @district_name)
       if district == nil
-        district = District.create(name: @district_name.downcase)
+        district = create_blank_district(@district_name)
       end
       @person.district = district
       @person.user_role = :district_admin
