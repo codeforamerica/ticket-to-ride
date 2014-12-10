@@ -48,6 +48,13 @@
             <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div>
           </td>
         </tr>
+        <% if (@summary_guardian1.armed_service_status != nil) %>
+            <tr>
+              <td class="summaryText" colspan="2">Your armed service status is <span class="summaryAnswers"><%= @summary_guardian1.armed_service_status %></span>.</td>
+              <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div>
+              </td>
+            </tr>
+        <% end %>
         <% if @summary_guardian2 %>
         <tr>
           <td class="summaryText" colspan="2">Review <span class="summaryAnswers"><%= @summary_guardian2.first_name %></span> by clicking the tab above.</td>
@@ -86,6 +93,13 @@
           <td class="summaryText" colspan="2"><%= @summary_guardian2.first_name %>'s email is <span class="summaryAnswers"><%= @summary_guardian2.email %></span>.</td>
           <td class="summaryEdit"> <div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_second_address_and_contact_info' %></div></td>
         </tr>
+        <% if (@summary_guardian2.armed_service_status != nil) %>
+            <tr>
+              <td class="summaryText" colspan="2">Your armed service status is <span class="summaryAnswers"><%= @summary_guardian2.armed_service_status %></span>.</td>
+              <td class="summaryEdit"><div class="summaryEditBtn pull-right"><%= link_to "edit", '/enrollment/guardian_phone_and_email' %></div>
+              </td>
+            </tr>
+        <% end %>
       </table>
     </div>
     <% end %>

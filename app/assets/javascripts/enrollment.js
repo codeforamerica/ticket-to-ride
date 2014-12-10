@@ -70,11 +70,13 @@ $(document).ready(function () {
       $('#guardian2_last_name').removeClass('hidden');
       $('#guardian2_relationship').removeClass('hidden');
       $('#guardian2_lives_with_question').removeClass('hidden');
+        $('#guardian2_armed_service_status').removeClass('hidden'); // TODO Refactor to use class instead of ID
     } else if (radio == 'false') {
       $('#guardian2_first_name').addClass('hidden');
       $('#guardian2_last_name').addClass('hidden');
       $('#guardian2_relationship').addClass('hidden');
       $('#guardian2_lives_with_question').addClass('hidden');
+        $('#guardian2_armed_service_status').addClass('hidden'); // TODO Refactor to use class instead of ID
     }
   };
 
@@ -90,19 +92,6 @@ $(document).ready(function () {
 
   get2ndGuardianFirstName('#guardian2_firstname');
 
-  // Toggle lives-with-student slider based on answer to question: does guardian 2 live with guardian 1 and student?
-
-  function toggleGuardian2Slider(radio){
-    if(radio == 'false') {
-      $('#guardian2_lives_with_frequency').removeClass('hidden');
-      $('#guardian2_lives_with_slider').removeClass('hidden');
-      // $('#guardian2_lives_guardian2_slider_result').removeClass('hidden');
-    } else if (radio == 'true'){
-      $('#guardian2_lives_with_frequency').addClass('hidden');
-      $('#guardian2_lives_with_slider').addClass('hidden');
-      // $('#guardian2_lives_guardian2_slider_result').addClass('hidden');
-    }
-  };
 
   $('#guardian2_lives_with_question input:radio').change(function() {
      var radio = $(this).val();

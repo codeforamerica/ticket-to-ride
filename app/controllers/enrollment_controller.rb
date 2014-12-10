@@ -75,6 +75,7 @@ class EnrollmentController < ApplicationController
         session[:guardian_1_id] = @guardian_1.id
       when :guardian_phone_and_email
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
+        @armed_service_status_options = get_armed_service_status
       when :guardian_second_name_and_relationship
         if session[:guardian_2_id] 
           @guardian_2 = ContactPerson.find(session[:guardian_2_id])
@@ -82,6 +83,7 @@ class EnrollmentController < ApplicationController
           @guardian_2 = ContactPerson.create
         end
         session[:guardian_2_id] = @guardian_2.id
+        @armed_service_status_options = get_armed_service_status
       when :guardian_second_address_and_contact_info
         @guardian_2 = ContactPerson.find(session[:guardian_2_id])
         @guardian_1 = ContactPerson.find(session[:guardian_1_id])
@@ -452,6 +454,7 @@ class EnrollmentController < ApplicationController
   def save_contact_person(contact_person)
     if contact_person.errors.size > 0
       retainValuesAndErrors(contact_person, contact_person_params)
+      @armed_service_status_options = get_armed_service_status # Needed for guardian screens
       return render_wizard
     end
 
@@ -578,5 +581,15 @@ class EnrollmentController < ApplicationController
 
     return render_wizard student
   end
+
+  def get_armed_service_status
+    @armed_service_status_options = []
+    ArmedServiceStatuses::ALL.each do |status|
+      @armed_service_status_options << [t("armed_service_status_#{status}"), status ]
+    end
+
+    return @armed_service_status_options
+  end
+
 
 end

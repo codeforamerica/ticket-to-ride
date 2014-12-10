@@ -57,8 +57,9 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2"><span>Armed service status:</span>
-            <%= g.select options_for_select(@armed_service_status_options)
+          <td colspan="2">
+            <span>Armed service status:</span>
+            <%= g.select :armed_service_status, options_for_select(@armed_service_status_options, selected: @guardian_1.armed_service_status), {include_blank: true } %>
           </td>
         </tr>
 
