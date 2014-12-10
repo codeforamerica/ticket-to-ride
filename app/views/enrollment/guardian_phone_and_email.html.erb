@@ -56,6 +56,12 @@
             <span><%= g.email_field :email, class: 'enrollment-form-input', id: 'guardian_email', placeholder: 'abc@email.com' %></span>
           </td>
         </tr>
+        <tr>
+          <td colspan="2">
+            <span>Armed service status:</span>
+            <%= g.select :armed_service_status, options_for_select(@armed_service_status_options, selected: @guardian_1.armed_service_status), {include_blank: true } %>
+          </td>
+        </tr>
 
       </table>
     </div>

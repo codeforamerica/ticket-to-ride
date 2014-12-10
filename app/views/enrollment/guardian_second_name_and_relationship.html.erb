@@ -28,7 +28,7 @@
             </td>
           </tr>
           <tr>
-            <td class="row-break hidden" colspan="2" id="guardian2_lives_with_question"><span>Do you and <%= @student.first_name %> live with <div id="guardian2_first_name_input"></div>?<sup>*</sup></span>
+            <td class="row-break hidden" colspan="2" id="guardian2_lives_with_question"><span>Do you and <%= @student.first_name %> live with them?<sup>*</sup></span>
               <div class="btn-group pull-right" data-toggle="buttons">
                   <label for="guardian_2_lives_with_yes" class="btn btn-primary"><%= c.radio_button :lives_with_student, true, id: 'guardian_2_lives_with_yes', class: 'hidden'%>Yes</label>
                   <label for="guardian_2_lives_with_no" class="btn btn-primary"><%= c.radio_button :lives_with_student, false, id: 'guardian_2_lives_with_no', class: 'hidden' %>No</label>
@@ -36,21 +36,11 @@
             </td>
           </tr>
           <tr>
-            <td colspan="2" class="hidden" id="guardian2_lives_with_frequency">How often does <%= @student.first_name %> live with <div id="guardian2_first_name_input2"></div>?</td>
+            <td class="row-break hidden" colspan="2" id="guardian2_armed_service_status">
+              <span>Armed service status:</span>
+              <%= c.select :armed_service_status, options_for_select(@armed_service_status_options, selected: @guardian_2.armed_service_status), {include_blank: true } %>
+            </td>
           </tr>
-          <tr>
-            <td colspan="2" class="hidden" id="guardian2_lives_with_slider">
-            <table>
-              <tr>
-                <td class="slider-level">Never</td>
-                <td class="slider-center"><input id="lives_with_g2_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="50"></td>
-                <td class="slider-result hidden" id="guardian2_slider_result"><span id="lives_with_g2_val">50</span>%</td>
-                <td class="slider-level">Always</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        </div>
       </table>
     </div>
 
